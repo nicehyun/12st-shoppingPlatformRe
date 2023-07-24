@@ -1,3 +1,5 @@
+"use client"
+
 import "tailwindcss/tailwind.css"
 import PromotionEl from "../Atoms/PromotionEl"
 
@@ -6,7 +8,7 @@ const PromotionBar = () => {
     "before:absolute before:top-0 before:bottom-0 brfore:content-[''] before:w-px before:h-3.5 before:bg-lightGray before:my-auto before:-mx-5"
 
   return (
-    <ul className="flex items-center justify-center bg-black text-white dark:bg-white dark:text-black px-7 h-10">
+    <ul className="flex items-center justify-center bg-black text-white dark:bg-white dark:text-black px-7 h-10 sm:h-14 md:h-14">
       <PromotionEl
         classnames="mr-10"
         content="[ 신규가입 ] 15% 할인쿠폰"

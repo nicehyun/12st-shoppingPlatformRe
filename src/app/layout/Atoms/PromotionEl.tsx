@@ -21,7 +21,9 @@ const PromotionEl = ({
   const afterText = content.slice(highlightedTextEnd)
 
   return (
-    <li className={`relative ${classnames} text-sm font-bold cursor-pointer`}>
+    <li
+      className={`relative ${classnames} text-sm font-bold cursor-pointer whitespace-pre-wrap`}
+    >
       {beforeText}
       <span className="text-red-400">{highlightedText}</span>
       {afterText}
