@@ -15,9 +15,10 @@ const ThemeSwitcher = () => {
   }
 
   return (
-    <div>
+    <div className="bg-blue-500">
       <p>now theme : {theme}</p>
       <button onClick={() => setTheme("light")}>light mode</button>
+      <br />
       <button onClick={() => setTheme("dark")}>dark mode</button>
     </div>
   )

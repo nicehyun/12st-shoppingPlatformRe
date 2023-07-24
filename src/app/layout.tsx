@@ -3,6 +3,7 @@ import "./globals.css"
 import { Noto_Sans_KR, Roboto } from "next/font/google"
 import Providers from "./Providers"
 import ThemeSwitcher from "./ThemeSwitcher"
+import Header from "./layout/Organisms/Header"
 
 const roboto = Roboto({
   weight: ["400", "700"],
@@ -24,9 +25,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko" className={roboto.className}>
-      <body>
+      <body className="bg-white text-black dark:text-white dark:bg-black">
         <Providers>
           <ThemeSwitcher />
+
+          <Header />
           {children}
         </Providers>
       </body>

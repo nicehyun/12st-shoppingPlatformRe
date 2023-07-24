@@ -1,9 +1,32 @@
 interface IPromotionEl {
+  classnames?: string
   content: string
+  highlightedTextStart: number
+  highlightedTextEnd: number
 }
 
-const PromotionEl = ({ content }: IPromotionEl) => {
-  return <li>{content}</li>
+const PromotionEl = ({
+  classnames,
+  content,
+  highlightedTextStart,
+  highlightedTextEnd,
+}: IPromotionEl) => {
+  const beforeText = content.slice(0, highlightedTextStart)
+
+  const highlightedText = content.slice(
+    highlightedTextStart,
+    highlightedTextEnd
+  )
+
+  const afterText = content.slice(highlightedTextEnd)
+
+  return (
+    <li className={`relative ${classnames} text-sm font-bold cursor-pointer`}>
+      {beforeText}
+      <span className="text-red-400">{highlightedText}</span>
+      {afterText}
+    </li>
+  )
 }
 
 export default PromotionEl
