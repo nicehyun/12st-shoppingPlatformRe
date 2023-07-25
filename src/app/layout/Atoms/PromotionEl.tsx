@@ -1,12 +1,13 @@
 interface IPromotionEl {
-  classnames?: string
+  classNames?: string
   content: string
   highlightedTextStart: number
   highlightedTextEnd: number
+  onClick?: () => void
 }
 
 const PromotionEl = ({
-  classnames,
+  classNames,
   content,
   highlightedTextStart,
   highlightedTextEnd,
@@ -21,12 +22,10 @@ const PromotionEl = ({
   const afterText = content.slice(highlightedTextEnd)
 
   return (
-    <li
-      className={`relative ${classnames} text-sm font-bold cursor-pointer whitespace-pre-wrap`}
-    >
+    <li className={`relative ${classNames} font-bold cursor-pointer text-xs`}>
       {beforeText}
       <span className="text-red-400">{highlightedText}</span>
-      {afterText}
+      <span>{afterText}</span>
     </li>
   )
 }
