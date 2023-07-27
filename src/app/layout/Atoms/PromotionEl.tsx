@@ -1,3 +1,5 @@
+import { highlightSplitText } from "@/common/utils/text"
+
 interface IPromotionEl {
   classNames?: string
   content: string
@@ -12,20 +14,17 @@ const PromotionEl = ({
   highlightedTextStart,
   highlightedTextEnd,
 }: IPromotionEl) => {
-  const beforeText = content.slice(0, highlightedTextStart)
-
-  const highlightedText = content.slice(
+  const { afterText, beforeText, highlightedText } = highlightSplitText(
+    content,
     highlightedTextStart,
     highlightedTextEnd
   )
 
-  const afterText = content.slice(highlightedTextEnd)
-
   return (
     <li className={`relative ${classNames} font-bold cursor-pointer text-xs`}>
       {beforeText}
-      <span className="text-red-400">{highlightedText}</span>
-      <span>{afterText}</span>
+      <span className="text-lightRed">{highlightedText}</span>
+      {afterText}
     </li>
   )
 }

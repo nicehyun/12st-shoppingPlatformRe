@@ -8,7 +8,7 @@ interface IPromotionButton {
 const PromotionButton = ({ onShow }: IPromotionButton) => {
   return (
     <IconButton onClick={onShow}>
-      <RiCoupon3Line className="text-red-400 text-base" />
+      <RiCoupon3Line className="text-lightRed text-base" />
       <span className="text-xs ml-3 text-white dark:text-black font-bold">
         프로모션
       </span>

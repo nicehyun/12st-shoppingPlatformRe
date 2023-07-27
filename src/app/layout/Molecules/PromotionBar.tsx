@@ -4,12 +4,12 @@ import { useState } from "react"
 import "tailwindcss/tailwind.css"
 import PromotionButton from "../Atoms/PromotionButton"
 import PromotionEl from "../Atoms/PromotionEl"
-import PromotionDropDown from "./PromotionDropDown"
+import PromotionModal from "../Organisms/PromotionModal"
 
 const PromotionBar = () => {
-  const [isShowPromotionBar, setIsShowPromotionBar] = useState(false)
+  const [isShowPromotionModal, setIsShowPromotionModal] = useState(false)
 
-  const promotionElvirtualClass =
+  const promotionElVirtualClass =
     "before:absolute before:top-0 before:bottom-0 brfore:content-[''] before:w-px before:h-3.5 before:bg-lightGray before:my-auto before:-mx-5"
 
   return (
@@ -23,27 +23,28 @@ const PromotionBar = () => {
         />
 
         <PromotionEl
-          classNames={`${promotionElvirtualClass} mr-10`}
+          classNames={`${promotionElVirtualClass} mr-10`}
           content="[ 삼성카드 ] 14만원 캐시백 프로모션"
           highlightedTextStart={9}
           highlightedTextEnd={14}
         />
 
         <PromotionEl
-          classNames={`${promotionElvirtualClass}`}
-          content="[ 카카오페이 ] 5 / 8 / 20이상 결제시 3천/4천/1만 즉시 할인 할인쿠폰"
+          classNames={`${promotionElVirtualClass}`}
+          content="[ 카카오페이 ] 5 / 8 / 20이상 결제시 3천/4천/1만 즉시 할인"
           highlightedTextStart={27}
           highlightedTextEnd={35}
         />
       </ul>
 
-      <div className="bg-black dark:bg-white hidden sm:block md:block text-center">
-        <PromotionButton onShow={() => setIsShowPromotionBar(true)} />
-        <PromotionDropDown
-          isShow={isShowPromotionBar}
-          onHide={() => setIsShowPromotionBar(false)}
-        />
+      <div className="bg-black dark:bg-white hidden sm:block md:block text-center relative">
+        <PromotionButton onShow={() => setIsShowPromotionModal(true)} />
       </div>
+
+      <PromotionModal
+        isShow={isShowPromotionModal}
+        onHide={() => setIsShowPromotionModal(false)}
+      />
     </>
   )
 }
