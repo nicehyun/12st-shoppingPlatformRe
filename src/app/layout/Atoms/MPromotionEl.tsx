@@ -22,7 +22,7 @@ const MPromotionEl = ({
   )
   return (
     <div
-      className={`${classNames} w-80 h-[120px] bg-no-repeat  bg-center bg-cover rounded-lg relative cursor-pointer border-[1px] border-black`}
+      className={`${classNames} w-80 h-[120px] bg-no-repeat  bg-center bg-cover rounded-lg relative cursor-pointer border-[1px] border-black shadow dark:shadow-whiteShadow`}
       style={{ backgroundImage: "url('/ticket.png')" }}
     >
       <span className="absolute top-2 right-24 text-sm text-lightRed font-bold">
@@ -38,4 +38,3 @@ const MPromotionEl = ({
 }
 
 export default MPromotionEl
-// [ 카카오페이 ] 5 / 8 / 20이상 결제시 3천/4천/1만 즉시 할인 할인쿠폰
