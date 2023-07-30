@@ -4,6 +4,7 @@ import { Roboto } from "next/font/google"
 import Providers from "./Providers"
 import ThemeSwitcher from "./ThemeSwitcher"
 import Header from "./layout/Organisms/Header"
+import MNavgation from "./layout/Organisms/MNavgation"
 
 const roboto = Roboto({
   weight: ["400", "700"],
@@ -25,6 +26,8 @@ export default function RootLayout({
 
           <Header />
           {children}
+
+          <MNavgation />
         </Providers>
       </body>
     </html>
