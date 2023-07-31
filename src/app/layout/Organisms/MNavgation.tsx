@@ -25,6 +25,7 @@ const MNavgation = () => {
 
   return (
     <BottomNavigation
+      className="xl:hidden"
       showLabels
       sx={{
         width: "100%",

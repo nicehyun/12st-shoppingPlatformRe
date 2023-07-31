@@ -1,6 +1,8 @@
 "use client"
 import { ThemeProvider } from "next-themes"
+import { Provider as ReduxProvider } from "react-redux"
 import React, { useEffect, useState } from "react"
+import store from "./redux/store"
 
 interface IProviders {
   children: React.ReactNode
@@ -17,7 +19,11 @@ const Providers = ({ children }: IProviders) => {
     return <>{children}</>
   }
 
-  return <ThemeProvider attribute="class">{children}</ThemeProvider>
+  return (
+    <ReduxProvider store={store}>
+      <ThemeProvider attribute="class">{children}</ThemeProvider>
+    </ReduxProvider>
+  )
 }
 
 export default Providers

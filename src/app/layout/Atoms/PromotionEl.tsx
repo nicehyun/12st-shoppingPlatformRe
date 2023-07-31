@@ -21,7 +21,9 @@ const PromotionEl = ({
   )
 
   return (
-    <li className={`relative ${classNames} font-bold cursor-pointer text-xs`}>
+    <li
+      className={`relative ${classNames} font-bold cursor-pointer text-xs lg:text-[10px]`}
+    >
       {beforeText}
       <span className="text-lightRed">{highlightedText}</span>
       {afterText}

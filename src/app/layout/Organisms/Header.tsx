@@ -1,11 +1,27 @@
-import React from "react"
+"use client"
+
+import React, { useState } from "react"
+import HeaderLogo from "../Atoms/HeaderLogo"
+import HeaderController from "../Molecules/HeaderController"
 import PromotionBar from "../Molecules/PromotionBar"
 
 const Header = () => {
+  const [isShowPromotion, setIsShowPromotion] = useState(true)
+
   return (
-    <>
-      <PromotionBar />
-    </>
+    <header
+      className={`fixed w-full z-10 headerLayout ${
+        isShowPromotion ? "h-[100px]" : "h-[132px]"
+      }`}
+    >
+      <PromotionBar
+        isShowPromotion={isShowPromotion}
+        onShowPromotion={() => setIsShowPromotion(true)}
+        onHidePromotion={() => setIsShowPromotion(false)}
+      />
+      <HeaderLogo isShowPromotion={isShowPromotion} />
+      <HeaderController isShowPromotion={isShowPromotion} />
+    </header>
   )
 }
 
