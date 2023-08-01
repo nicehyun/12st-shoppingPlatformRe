@@ -5,56 +5,17 @@ import { FiLogIn, FiLogOut } from "react-icons/fi"
 import { useEffect, useRef } from "react"
 import { setupAnimationTransform } from "@/common/utils/animation"
 import { manageRefArray } from "@/common/utils/refArray"
+import SearchButton from "../Atoms/SearchButton"
+import HeaderCartButton from "../Atoms/HeaderCartButton"
 
 interface IHeaderController {
   isShowPromotion: boolean
 }
 
 const HeaderController = ({ isShowPromotion }: IHeaderController) => {
-  const headerControllerIconRef = useRef<HTMLButtonElement[]>([])
-  const headerControllerTitleRef = useRef<HTMLButtonElement[]>([])
-
-  useEffect(() => {
-    if (!isShowPromotion) {
-      setupAnimationTransform(
-        headerControllerTitleRef,
-        "X",
-        30,
-        0,
-        "block",
-        "hidden"
-      )
-      setupAnimationTransform(
-        headerControllerIconRef,
-        "X",
-        28,
-        1,
-        "block",
-        "visible"
-      )
-    } else {
-      setupAnimationTransform(
-        headerControllerTitleRef,
-        "X",
-        -8,
-        1,
-        "block",
-        "visible"
-      )
-      setupAnimationTransform(
-        headerControllerIconRef,
-        "X",
-        30,
-        0,
-        "block",
-        "hidden"
-      )
-    }
-  }, [isShowPromotion])
-
   return (
     <div
-      className={`absolute right-10
+      className={`absolute right-[5px]
       ${isShowPromotion ? "top-[20px]" : "top-[52px]"}
       `}
       style={{
@@ -65,23 +26,29 @@ const HeaderController = ({ isShowPromotion }: IHeaderController) => {
         <HeaderControllerEl
           title="MY PAGE"
           icon={<FaUserTag />}
-          titleRef={manageRefArray(1, headerControllerTitleRef)}
-          iconRef={manageRefArray(1, headerControllerIconRef)}
+          isShowPromotion={isShowPromotion}
         />
         <HeaderControllerEl
           title="MY LIKE"
-          titleRef={manageRefArray(2, headerControllerTitleRef)}
-          iconRef={manageRefArray(2, headerControllerIconRef)}
           icon={<FaHeart />}
+          isShowPromotion={isShowPromotion}
           classNames="before:headerController"
         />
+
+        <li className="relative before:headerController">
+          <HeaderCartButton />
+        </li>
+
         <HeaderControllerEl
           title="LOGIN"
-          titleRef={manageRefArray(3, headerControllerTitleRef)}
-          iconRef={manageRefArray(3, headerControllerIconRef)}
           icon={<FiLogIn />}
+          isShowPromotion={isShowPromotion}
           classNames="before:headerController"
         />
+
+        <li className="relative cursor-pointer w-[100px] before:headerController">
+          <SearchButton />
+        </li>
       </ul>
     </div>
   )

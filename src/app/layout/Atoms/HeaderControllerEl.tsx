@@ -2,30 +2,35 @@ import { ReactNode } from "react"
 
 interface IHeaderControllerEl {
   classNames?: string
-  title: string
+  title?: string
   icon: ReactNode
-  titleRef: (refEl: HTMLButtonElement) => void
-  iconRef: (refEl: HTMLButtonElement) => void
+  isShowPromotion: boolean
 }
 
 const HeaderControllerEl = ({
   classNames,
   title,
   icon,
-  iconRef,
-  titleRef,
+  isShowPromotion,
 }: IHeaderControllerEl) => {
   return (
-    <li
-      className={`relative ${classNames} flex items-center cursor-pointer`}
-      style={{
-        transition: "0.5s",
-      }}
-    >
-      <button className="inset-0" ref={iconRef}>
+    <li className={`relative ${classNames} cursor-pointer  w-[100px]`}>
+      <button
+        className={`absolute ${
+          isShowPromotion
+            ? "visible opacity-100"
+            : "invisible opacity-0 -translate-x-6"
+        } flexCenter inset-0 hover:text-lightRed transition-5`}
+      >
         {icon}
       </button>
-      <button ref={titleRef} className="text-[13px]">
+      <button
+        className={`absolute ${
+          !isShowPromotion
+            ? "visible opacity-100"
+            : "invisible opacity-0 translate-x-6"
+        } flexCenter inset-0 text-[13px] hover:text-lightRed transition-5`}
+      >
         {title}
       </button>
     </li>
