@@ -29,15 +29,6 @@
     justify-content: center;
   }
 
-  .headerLayout {
-    position: fixed;
-    width: 100%;
-    z-index: 10;
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid;
-    transition: 0.5s;
-  }
-
   .headerController {
     position: absolute;
     content: "";
@@ -46,6 +37,12 @@
     background-color: #e5e5e5;
     top: 50%;
     transform: translateY(-50%);
+  }
+
+  .footer-platform-info__el {
+    margin-right: 10px;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
   }
 }
 

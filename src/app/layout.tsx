@@ -5,6 +5,7 @@ import Providers from "./Providers"
 import ThemeSwitcher from "./ThemeSwitcher"
 import Header from "./layout/Organisms/Header"
 import MNavgation from "./layout/Organisms/MNavgation"
+import Footer from "./layout/Organisms/Footer"
 
 const roboto = Roboto({
   weight: ["400", "700"],
@@ -28,6 +29,8 @@ export default function RootLayout({
           {children}
 
           <MNavgation />
+
+          <Footer />
         </Providers>
       </body>
     </html>
