@@ -16,12 +16,7 @@ const PromotionBar = ({
   onShowPromotion,
   onHidePromotion,
 }: IPromotionBar) => {
-  const promotionRef = useRef<HTMLDivElement>(null)
-
-  console.log(`isShowPromotion : ${isShowPromotion}`)
-
   const handlePromotionVisibility = () => {
-    console.log(window.scrollY > 30)
     return window.scrollY > 30 ? onHidePromotion() : onShowPromotion()
   }
 

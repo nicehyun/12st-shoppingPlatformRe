@@ -14,7 +14,9 @@ const HeaderControllerEl = ({
   isShowPromotion,
 }: IHeaderControllerEl) => {
   return (
-    <li className={`relative ${classNames} cursor-pointer  w-[100px]`}>
+    <li
+      className={`relative ${classNames} cursor-pointer  w-[100px] sm:w-[60px] md:w-[80px]`}
+    >
       <button
         className={`absolute ${
           !isShowPromotion

@@ -15,24 +15,22 @@ const HeaderController = ({ isShowPromotion }: IHeaderController) => {
       className={`absolute right-[5px]
       ${isShowPromotion ? "top-[52px]" : "top-[20px]"}
       `}
-      style={{
-        transition: "0.2s",
-      }}
     >
       <ul className="flex">
         <HeaderControllerEl
           title="MY PAGE"
           icon={<FaUserTag />}
           isShowPromotion={isShowPromotion}
+          classNames="hidden xl:block"
         />
         <HeaderControllerEl
           title="MY LIKE"
           icon={<FaHeart />}
           isShowPromotion={isShowPromotion}
-          classNames="before:headerController"
+          classNames="before:headerController hidden xl:block"
         />
 
-        <li className="relative before:headerController">
+        <li className="relative xl:before:headerController">
           <HeaderCartButton />
         </li>
 
@@ -43,7 +41,7 @@ const HeaderController = ({ isShowPromotion }: IHeaderController) => {
           classNames="before:headerController"
         />
 
-        <li className="relative cursor-pointer w-[100px] before:headerController">
+        <li className="relative cursor-pointer w-[100px] sm:w-[60px] md:w-[80px] before:headerController">
           <SearchButton />
         </li>
       </ul>

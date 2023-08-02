@@ -22,7 +22,7 @@ const MPromotionEl = ({
   )
   return (
     <div
-      className={`${classNames} w-80 h-[120px] bg-no-repeat  bg-center bg-cover rounded-lg relative cursor-pointer border-[1px] border-black shadow dark:shadow-whiteShadow`}
+      className={`${classNames} w-80 h-[120px] bg-no-repeat  bg-center bg-cover rounded-lg relative cursor-pointer border-[1px] border-black`}
       style={{ backgroundImage: "url('/ticket.png')" }}
     >
       <span className="absolute top-2 right-24 text-sm text-lightRed font-bold">
