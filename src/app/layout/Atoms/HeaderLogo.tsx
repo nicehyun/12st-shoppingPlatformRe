@@ -6,7 +6,7 @@ const HeaderLogo = ({ isShowPromotion }: IHeaderLogo) => {
   return (
     <div
       className={`absolute left-10
-    ${isShowPromotion ? "top-[40px]" : "top-[72px]"}
+    ${isShowPromotion ? "top-[72px]" : "top-[40px]"}
     `}
       style={{
         transition: "0.2s",

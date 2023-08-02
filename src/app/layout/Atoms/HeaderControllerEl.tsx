@@ -17,7 +17,7 @@ const HeaderControllerEl = ({
     <li className={`relative ${classNames} cursor-pointer  w-[100px]`}>
       <button
         className={`absolute ${
-          isShowPromotion
+          !isShowPromotion
             ? "visible opacity-100"
             : "invisible opacity-0 -translate-x-6"
         } flexCenter inset-0 hover:text-lightRed transition-5`}
@@ -26,7 +26,7 @@ const HeaderControllerEl = ({
       </button>
       <button
         className={`absolute ${
-          !isShowPromotion
+          isShowPromotion
             ? "visible opacity-100"
             : "invisible opacity-0 translate-x-6"
         } flexCenter inset-0 text-[13px] hover:text-lightRed transition-5`}

@@ -2,9 +2,6 @@ import HeaderControllerEl from "../Atoms/HeaderControllerEl"
 
 import { FaUserTag, FaHeart } from "react-icons/fa"
 import { FiLogIn, FiLogOut } from "react-icons/fi"
-import { useEffect, useRef } from "react"
-import { setupAnimationTransform } from "@/common/utils/animation"
-import { manageRefArray } from "@/common/utils/refArray"
 import SearchButton from "../Atoms/SearchButton"
 import HeaderCartButton from "../Atoms/HeaderCartButton"
 
@@ -16,7 +13,7 @@ const HeaderController = ({ isShowPromotion }: IHeaderController) => {
   return (
     <div
       className={`absolute right-[5px]
-      ${isShowPromotion ? "top-[20px]" : "top-[52px]"}
+      ${isShowPromotion ? "top-[52px]" : "top-[20px]"}
       `}
       style={{
         transition: "0.2s",

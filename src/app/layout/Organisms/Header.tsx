@@ -10,9 +10,10 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed w-full z-10 headerLayout ${
-        isShowPromotion ? "h-[100px]" : "h-[132px]"
-      }`}
+      className={`fixed w-full z-10 headerLayout 
+      ${isShowPromotion ? "h-[132px]" : "h-[100px]"}
+      
+      `}
     >
       <PromotionBar
         isShowPromotion={isShowPromotion}

@@ -5,8 +5,6 @@ import PromotionEl from "../Atoms/PromotionEl"
 import PromotionModal from "../Organisms/PromotionModal"
 import { throttle } from "lodash"
 
-import { setupAnimationTransform } from "@/common/utils/animation"
-
 interface IPromotionBar {
   isShowPromotion: boolean
   onShowPromotion: () => void
@@ -15,13 +13,16 @@ interface IPromotionBar {
 
 const PromotionBar = ({
   isShowPromotion,
-  onHidePromotion,
   onShowPromotion,
+  onHidePromotion,
 }: IPromotionBar) => {
   const promotionRef = useRef<HTMLDivElement>(null)
 
+  console.log(`isShowPromotion : ${isShowPromotion}`)
+
   const handlePromotionVisibility = () => {
-    return window.scrollY > 30 ? onShowPromotion() : onHidePromotion()
+    console.log(window.scrollY > 30)
+    return window.scrollY > 30 ? onHidePromotion() : onShowPromotion()
   }
 
   const handleScroll = throttle(handlePromotionVisibility, 100)
@@ -31,15 +32,7 @@ const PromotionBar = ({
     return () => {
       window.removeEventListener("scroll", handleScroll)
     }
-  }, [])
-
-  useEffect(() => {
-    if (isShowPromotion) {
-      setupAnimationTransform(promotionRef, "Y", -100, 1, "block", "visible")
-    } else {
-      setupAnimationTransform(promotionRef, "Y", 0, 1, "block", "visible")
-    }
-  }, [isShowPromotion])
+  }, [handleScroll])
 
   const [isShowPromotionModal, setIsShowPromotionModal] = useState(false)
 
@@ -48,7 +41,13 @@ const PromotionBar = ({
 
   return (
     <>
-      <div ref={promotionRef}>
+      <div
+        className={`${
+          isShowPromotion
+            ? "opacity-100 visible translate-y-0"
+            : "opacity-0 invisible translate-y-[-100px]"
+        } transition-3`}
+      >
         <ul className="flexCenter bg-black text-white dark:bg-white dark:text-black px-7 h-10 sm:hidden md:hidden">
           <PromotionEl
             classNames="mr-10"

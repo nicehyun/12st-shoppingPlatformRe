@@ -20,9 +20,9 @@ const Providers = ({ children }: IProviders) => {
   }
 
   return (
-    <ReduxProvider store={store}>
-      <ThemeProvider attribute="class">{children}</ThemeProvider>
-    </ReduxProvider>
+    // <ReduxProvider store={store}>
+    <ThemeProvider attribute="class">{children}</ThemeProvider>
+    // </ReduxProvider>
   )
 }
 
