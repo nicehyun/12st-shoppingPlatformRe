@@ -9,12 +9,14 @@ interface IPromotionBar {
   isShowPromotion: boolean
   onShowPromotion: () => void
   onHidePromotion: () => void
+  onShowPromotionModal: () => void
 }
 
 const PromotionBar = ({
   isShowPromotion,
   onShowPromotion,
   onHidePromotion,
+  onShowPromotionModal,
 }: IPromotionBar) => {
   const handlePromotionVisibility = () => {
     return window.scrollY > 30 ? onHidePromotion() : onShowPromotion()
@@ -28,8 +30,6 @@ const PromotionBar = ({
       window.removeEventListener("scroll", handleScroll)
     }
   }, [handleScroll])
-
-  const [isShowPromotionModal, setIsShowPromotionModal] = useState(false)
 
   const promotionElVirtualClass =
     "before:absolute before:top-0 before:bottom-0 brfore:content-[''] before:w-px before:h-3.5 before:bg-lightGray before:my-auto before:-mx-5"
@@ -67,14 +67,9 @@ const PromotionBar = ({
         </ul>
 
         <div className="bg-black dark:bg-white hidden sm:block md:block text-center relative">
-          <PromotionButton onShow={() => setIsShowPromotionModal(true)} />
+          <PromotionButton onShow={onShowPromotionModal} />
         </div>
       </div>
-
-      <PromotionModal
-        isShow={isShowPromotionModal}
-        onHide={() => setIsShowPromotionModal(false)}
-      />
     </>
   )
 }

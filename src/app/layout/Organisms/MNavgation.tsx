@@ -15,6 +15,7 @@ import {
   BiUser,
   BiSolidUser,
 } from "react-icons/bi"
+import CategoryDrawer from "./CategoryDrawer"
 
 const MNavgation = () => {
   const [selectedMenu, setselectedMenu] = useState("home")
@@ -24,172 +25,176 @@ const MNavgation = () => {
   }
 
   return (
-    <BottomNavigation
-      className="xl:hidden"
-      showLabels
-      sx={{
-        width: "100%",
-        height: 40,
-        backdropFilter: "blur(16px)",
-        backgroundColor: "rgba(240, 240, 240, 0.4)",
-        position: "fixed",
-        bottom: 0,
-      }}
-      value={selectedMenu}
-      onChange={handleChange}
-    >
-      <BottomNavigationAction
-        label={
-          <span
-            className={`text-[4px] absolute inset-x-px ${
-              selectedMenu === "home"
-                ? "bottom-0 opacity-100"
-                : "bottom-0 transform -translate-y-1/2 opacity-0"
-            }`}
-            style={{
-              transition: "transform 0.3s ease",
-            }}
-          >
-            HOME
-          </span>
-        }
-        value="home"
-        icon={
-          selectedMenu === "home" ? (
-            <AiFillHome className="transform translate-y-[-4px]" />
-          ) : (
-            <AiOutlineHome />
-          )
-        }
+    <>
+      <BottomNavigation
+        className="xl:hidden"
+        showLabels
         sx={{
-          position: "relative",
-          "&.Mui-selected": {
-            color: "#ff4e0a",
-          },
+          width: "100%",
+          height: 40,
+          backdropFilter: "blur(16px)",
+          backgroundColor: "rgba(240, 240, 240, 0.4)",
+          position: "fixed",
+          bottom: 0,
         }}
-      />
-      <BottomNavigationAction
-        label={
-          <span
-            className={`text-[8px] absolute inset-x-px ${
-              selectedMenu === "categories"
-                ? "bottom-0 opacity-100"
-                : "bottom-0 transform -translate-y-1/2 opacity-0"
-            }`}
-            style={{
-              transition: "transform 0.3s ease",
-            }}
-          >
-            CATEGORIES
-          </span>
-        }
-        value="categories"
-        icon={
-          selectedMenu === "categories" ? (
-            <BiSolidCategory className="transform translate-y-[-4px]" />
-          ) : (
-            <BiCategory />
-          )
-        }
-        sx={{
-          position: "relative",
-          "&.Mui-selected": {
-            color: "#ff4e0a",
-          },
-        }}
-      />
+        value={selectedMenu}
+        onChange={handleChange}
+      >
+        <BottomNavigationAction
+          label={
+            <span
+              className={`text-[4px] absolute inset-x-px ${
+                selectedMenu === "home"
+                  ? "bottom-0 opacity-100"
+                  : "bottom-0 transform -translate-y-1/2 opacity-0"
+              }`}
+              style={{
+                transition: "transform 0.3s ease",
+              }}
+            >
+              HOME
+            </span>
+          }
+          value="home"
+          icon={
+            selectedMenu === "home" ? (
+              <AiFillHome className="transform translate-y-[-4px]" />
+            ) : (
+              <AiOutlineHome />
+            )
+          }
+          sx={{
+            position: "relative",
+            "&.Mui-selected": {
+              color: "#ff4e0a",
+            },
+          }}
+        />
+        <BottomNavigationAction
+          label={
+            <span
+              className={`text-[8px] absolute inset-x-px ${
+                selectedMenu === "categories"
+                  ? "bottom-0 opacity-100"
+                  : "bottom-0 transform -translate-y-1/2 opacity-0"
+              }`}
+              style={{
+                transition: "transform 0.3s ease",
+              }}
+            >
+              CATEGORIES
+            </span>
+          }
+          value="categories"
+          icon={
+            selectedMenu === "categories" ? (
+              <BiSolidCategory className="transform translate-y-[-4px]" />
+            ) : (
+              <BiCategory />
+            )
+          }
+          sx={{
+            position: "relative",
+            "&.Mui-selected": {
+              color: "#ff4e0a",
+            },
+          }}
+        />
 
-      <BottomNavigationAction
-        label={
-          <span
-            className={`text-[8px] absolute inset-x-px ${
-              selectedMenu === "search"
-                ? "bottom-0 opacity-100"
-                : "bottom-0 transform -translate-y-1/2 opacity-0"
-            }`}
-            style={{
-              transition: "transform 0.3s ease",
-            }}
-          >
-            SEARCH
-          </span>
-        }
-        value="search"
-        icon={
-          selectedMenu === "search" ? (
-            <BiSolidSearch className="transform translate-y-[-4px]" />
-          ) : (
-            <BiSearch />
-          )
-        }
-        sx={{
-          position: "relative",
-          "&.Mui-selected": {
-            color: "#ff4e0a",
-          },
-        }}
-      />
-      <BottomNavigationAction
-        label={
-          <span
-            className={`text-[8px] absolute inset-x-px ${
-              selectedMenu === "like"
-                ? "bottom-0 opacity-100"
-                : "bottom-0 transform -translate-y-1/2 opacity-0"
-            }`}
-            style={{
-              transition: "transform 0.3s ease",
-            }}
-          >
-            LIKE
-          </span>
-        }
-        value="like"
-        icon={
-          selectedMenu === "like" ? (
-            <BiSolidHeart className="transform translate-y-[-4px]" />
-          ) : (
-            <BiHeart />
-          )
-        }
-        sx={{
-          position: "relative",
-          "&.Mui-selected": {
-            color: "#ff4e0a",
-          },
-        }}
-      />
-      <BottomNavigationAction
-        label={
-          <span
-            className={`text-[8px] absolute inset-x-px ${
-              selectedMenu === "my"
-                ? "bottom-0 opacity-100"
-                : "bottom-0 transform -translate-y-1/2 opacity-0"
-            }`}
-            style={{
-              transition: "transform 0.3s ease",
-            }}
-          >
-            MY
-          </span>
-        }
-        value="my"
-        icon={
-          selectedMenu === "my" ? (
-            <BiSolidUser className="transform translate-y-[-4px]" />
-          ) : (
-            <BiUser />
-          )
-        }
-        sx={{
-          position: "relative",
-          "&.Mui-selected": {
-            color: "#ff4e0a",
-          },
-        }}
-      />
-    </BottomNavigation>
+        <BottomNavigationAction
+          label={
+            <span
+              className={`text-[8px] absolute inset-x-px ${
+                selectedMenu === "search"
+                  ? "bottom-0 opacity-100"
+                  : "bottom-0 transform -translate-y-1/2 opacity-0"
+              }`}
+              style={{
+                transition: "transform 0.3s ease",
+              }}
+            >
+              SEARCH
+            </span>
+          }
+          value="search"
+          icon={
+            selectedMenu === "search" ? (
+              <BiSolidSearch className="transform translate-y-[-4px]" />
+            ) : (
+              <BiSearch />
+            )
+          }
+          sx={{
+            position: "relative",
+            "&.Mui-selected": {
+              color: "#ff4e0a",
+            },
+          }}
+        />
+        <BottomNavigationAction
+          label={
+            <span
+              className={`text-[8px] absolute inset-x-px ${
+                selectedMenu === "like"
+                  ? "bottom-0 opacity-100"
+                  : "bottom-0 transform -translate-y-1/2 opacity-0"
+              }`}
+              style={{
+                transition: "transform 0.3s ease",
+              }}
+            >
+              LIKE
+            </span>
+          }
+          value="like"
+          icon={
+            selectedMenu === "like" ? (
+              <BiSolidHeart className="transform translate-y-[-4px]" />
+            ) : (
+              <BiHeart />
+            )
+          }
+          sx={{
+            position: "relative",
+            "&.Mui-selected": {
+              color: "#ff4e0a",
+            },
+          }}
+        />
+        <BottomNavigationAction
+          label={
+            <span
+              className={`text-[8px] absolute inset-x-px ${
+                selectedMenu === "my"
+                  ? "bottom-0 opacity-100"
+                  : "bottom-0 transform -translate-y-1/2 opacity-0"
+              }`}
+              style={{
+                transition: "transform 0.3s ease",
+              }}
+            >
+              MY
+            </span>
+          }
+          value="my"
+          icon={
+            selectedMenu === "my" ? (
+              <BiSolidUser className="transform translate-y-[-4px]" />
+            ) : (
+              <BiUser />
+            )
+          }
+          sx={{
+            position: "relative",
+            "&.Mui-selected": {
+              color: "#ff4e0a",
+            },
+          }}
+        />
+      </BottomNavigation>
+
+      <CategoryDrawer />
+    </>
   )
 }
 

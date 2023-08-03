@@ -7,9 +7,13 @@ import HeaderCartButton from "../Atoms/HeaderCartButton"
 
 interface IHeaderController {
   isShowPromotion: boolean
+  onShowSearchDialog: () => void
 }
 
-const HeaderController = ({ isShowPromotion }: IHeaderController) => {
+const HeaderController = ({
+  isShowPromotion,
+  onShowSearchDialog,
+}: IHeaderController) => {
   return (
     <div
       className={`absolute right-[5px]
@@ -42,7 +46,7 @@ const HeaderController = ({ isShowPromotion }: IHeaderController) => {
         />
 
         <li className="relative cursor-pointer w-[100px] sm:w-[60px] md:w-[80px] before:headerController">
-          <SearchButton />
+          <SearchButton onClick={onShowSearchDialog} />
         </li>
       </ul>
     </div>

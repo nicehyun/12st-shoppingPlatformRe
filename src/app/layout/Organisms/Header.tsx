@@ -4,9 +4,13 @@ import { useState } from "react"
 import HeaderLogo from "../Atoms/HeaderLogo"
 import HeaderController from "../Molecules/HeaderController"
 import PromotionBar from "../Molecules/PromotionBar"
+import PromotionModal from "./PromotionModal"
+import SearchDialog from "./SearchDialog"
 
 const Header = () => {
   const [isShowPromotion, setIsShowPromotion] = useState(true)
+  const [isShowSearchDialog, setIsShowSearchDialog] = useState(false)
+  const [isShowPromotionModal, setIsShowPromotionModal] = useState(false)
 
   return (
     <header
@@ -18,9 +22,23 @@ const Header = () => {
         isShowPromotion={isShowPromotion}
         onShowPromotion={() => setIsShowPromotion(true)}
         onHidePromotion={() => setIsShowPromotion(false)}
+        onShowPromotionModal={() => setIsShowPromotionModal(true)}
       />
       <HeaderLogo isShowPromotion={isShowPromotion} />
-      <HeaderController isShowPromotion={isShowPromotion} />
+      <HeaderController
+        isShowPromotion={isShowPromotion}
+        onShowSearchDialog={() => setIsShowSearchDialog(true)}
+      />
+
+      <PromotionModal
+        isShow={isShowPromotionModal}
+        onHide={() => setIsShowPromotionModal(false)}
+      />
+
+      <SearchDialog
+        isShow={isShowSearchDialog}
+        onHide={() => setIsShowSearchDialog(false)}
+      />
     </header>
   )
 }
