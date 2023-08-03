@@ -13,8 +13,6 @@ import InboxIcon from "@mui/icons-material/MoveToInbox"
 import MailIcon from "@mui/icons-material/Mail"
 import { useState } from "react"
 
-type Anchor = "top" | "left" | "bottom" | "right"
-
 export default function CategoryDrawer() {
   const [isShowCatrgoryDrawer, setIsShowCategoryDrawer] = useState(false)
 
@@ -67,7 +65,7 @@ export default function CategoryDrawer() {
   )
 
   return (
-    <Drawer anchor={"left"} open={true} onClose={toggleDrawer(false)}>
+    <Drawer anchor={"left"} open={false} onClose={toggleDrawer(false)}>
       {list()}
     </Drawer>
   )
