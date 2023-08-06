@@ -1,8 +1,8 @@
 import "tailwindcss/tailwind.css"
-import { useEffect, useRef, useState } from "react"
-import PromotionButton from "../Atoms/PromotionButton"
-import PromotionEl from "../Atoms/PromotionEl"
-import PromotionModal from "../Organisms/PromotionModal"
+import { useEffect } from "react"
+import PromotionButton from "./PromotionButton"
+import PromotionEl from "./PromotionEl"
+
 import { throttle } from "lodash"
 
 interface IPromotionBar {

@@ -1,5 +1,5 @@
 import React from "react"
-import FooterPlatformInfoEl from "../Atoms/FooterPlatformInfoEl"
+import FooterPlatformInfoEl from "./FooterPlatformInfoEl"
 
 const Footer = () => {
   return (

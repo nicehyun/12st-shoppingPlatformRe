@@ -1,16 +1,16 @@
 "use client"
 
 import { useState } from "react"
-import HeaderLogo from "../Atoms/HeaderLogo"
-import HeaderController from "../Molecules/HeaderController"
-import PromotionBar from "../Molecules/PromotionBar"
+import HeaderLogo from "./HeaderLogo"
+import HeaderController from "./HeaderController"
+import PromotionBar from "./PromotionBar"
 import PromotionModal from "./PromotionModal"
 import SearchDialog from "./SearchDialog"
 
 const Header = () => {
   const [isShowPromotion, setIsShowPromotion] = useState(true)
-  const [isShowSearchDialog, setIsShowSearchDialog] = useState(false)
   const [isShowPromotionModal, setIsShowPromotionModal] = useState(false)
+  const [isShowSearchDialog, setIsShowSearchDialog] = useState(false)
 
   return (
     <header

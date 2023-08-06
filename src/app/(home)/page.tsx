@@ -1,4 +1,4 @@
-import PromotionBar from "../layout/Molecules/PromotionBar"
+import PromotionBar from "../layout/views/PromotionBar"
 
 export default function Home() {
   return (

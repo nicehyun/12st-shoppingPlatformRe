@@ -1,9 +1,9 @@
-import HeaderControllerEl from "../Atoms/HeaderControllerEl"
+import HeaderControllerEl from "./HeaderControllerEl"
 
 import { FaUserTag, FaHeart } from "react-icons/fa"
 import { FiLogIn, FiLogOut } from "react-icons/fi"
-import SearchButton from "../Atoms/SearchButton"
-import HeaderCartButton from "../Atoms/HeaderCartButton"
+import SearchButton from "./SearchButton"
+import HeaderCartButton from "./HeaderCartButton"
 
 interface IHeaderController {
   isShowPromotion: boolean

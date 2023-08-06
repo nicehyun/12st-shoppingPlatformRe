@@ -5,7 +5,7 @@ import DialogContent from "@mui/material/DialogContent"
 import DialogTitle from "@mui/material/DialogTitle"
 import Slide from "@mui/material/Slide"
 import { TransitionProps } from "@mui/material/transitions"
-import MPromotionEl from "../Atoms/MPromotionEl"
+import MPromotionEl from "./MPromotionEl"
 import { forwardRef } from "react"
 
 interface IPromotionModal {
