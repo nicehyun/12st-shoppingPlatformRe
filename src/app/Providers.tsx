@@ -2,7 +2,7 @@
 import { ThemeProvider } from "next-themes"
 import { Provider as ReduxProvider } from "react-redux"
 import React, { useEffect, useState } from "react"
-import store from "./redux/store"
+import store from "../redux/store"
 
 import {
   Hydrate,

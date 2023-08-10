@@ -1,6 +1,6 @@
-import { Products } from "@/app/common/types/product"
-import Button from "@/app/common/views/Button"
-import ProductCard from "@/app/common/views/ProductCard"
+import { Products } from "@/common/types/product"
+import Button from "@/common/views/Button"
+import ProductCard from "@/common/views/ProductCard"
 import Image, { StaticImageData } from "next/image"
 import { ReactNode } from "react"
 

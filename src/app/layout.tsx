@@ -3,9 +3,10 @@ import "./globals.css"
 import { Roboto } from "next/font/google"
 import Providers from "./Providers"
 import ThemeSwitcher from "./ThemeSwitcher"
-import Header from "./layout/views/Header"
-import MNavgation from "./layout/views/MNavgation"
-import Footer from "./layout/views/Footer"
+
+import MNavgation from "../features/layout/views/MNavgation"
+import Header from "@/features/layout/views/Header"
+import Footer from "@/features/layout/views/Footer"
 
 const roboto = Roboto({
   weight: ["400", "700"],

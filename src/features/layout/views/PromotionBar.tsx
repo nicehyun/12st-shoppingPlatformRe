@@ -1,9 +1,10 @@
 import "tailwindcss/tailwind.css"
 import { useEffect } from "react"
-import PromotionButton from "./PromotionButton"
+
 import PromotionEl from "./PromotionEl"
 
 import { throttle } from "lodash"
+import PromotionButton from "./PromotionButton"
 
 interface IPromotionBar {
   isShowPromotion: boolean
