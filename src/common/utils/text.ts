@@ -29,11 +29,20 @@ export const highlightSplitText = (
     afterText,
   }
 }
-
+// TODO : truncateText 수정하기
 export const truncateText = (text: string, maxLength: number) => {
-  if (maxLength <= 0 || maxLength > text.length) return text
+  if (
+    maxLength <= 0 ||
+    maxLength >= text.length ||
+    text.length <= maxLength + 3
+  )
+    return text
 
   if (text.length > maxLength) {
     return text.slice(0, maxLength - 3) + "..."
   }
+}
+
+export const sliceText = (text: string, endIndex: number) => {
+  return text.slice(0, endIndex)
 }

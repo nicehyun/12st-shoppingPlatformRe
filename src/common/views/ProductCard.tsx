@@ -9,7 +9,7 @@ import IconButton from "@mui/material/IconButton"
 import Typography from "@mui/material/Typography"
 import { BiCommentDetail, BiHeart, BiSolidHeart } from "react-icons/bi"
 import { BsFillCartDashFill, BsFillCartPlusFill } from "react-icons/bs"
-import { truncateText } from "../utils/text"
+import { sliceText, truncateText } from "../utils/text"
 import { Product } from "../types/product"
 
 interface IProductCard {
@@ -43,22 +43,27 @@ const ProductCard = ({ productInfo }: IProductCard) => {
               height: "20px",
               backgroundColor: "#fff",
               marginRight: "0px",
+              borderRadius: 0,
             }}
             aria-label={productBrandInfo}
           >
             <Typography variant="body1" sx={{ fontSize: "4px" }}>
-              {productBrandInfo}
+              {sliceText(productBrandInfo, 4)}
             </Typography>
           </Avatar>
         }
-        title={truncateText(name, 30)}
+        title={<span>{truncateText(name, 30)}</span>}
         titleTypographyProps={{
           fontSize: "11px",
-          height: "32px",
         }}
-        sx={{ padding: "3px" }}
+        sx={{ padding: "3px", height: "38px" }}
       />
-      <CardMedia component="img" height="194" image={image} alt={name} />
+      <CardMedia
+        component="img"
+        image={image}
+        alt={name}
+        className="h-[194px]"
+      />
       <CardContent className="relative h-[50px]">
         <Typography
           variant="body2"
