@@ -1,4 +1,4 @@
-import { Products } from "@/common/types/product"
+import { Product, Products } from "@/common/types/product"
 import Button from "@/common/views/Button"
 import ProductCard from "@/common/views/ProductCard"
 import Image, { StaticImageData } from "next/image"
@@ -6,7 +6,7 @@ import { ReactNode } from "react"
 
 interface IHomeProductsSection {
   children?: ReactNode
-  products?: Products
+  products: Products
   sectionTitle: string
   sectionImage: StaticImageData
   onMoreClick: () => void
@@ -31,31 +31,12 @@ const HomeProductsSection = ({
         {/* <button onClick={onMoreClick}>+ 더보기</button> */}
       </div>
 
-      {/* {products?.map((product, key) => (
-          //TODO : PRODUCT 컴포넌트 생성후 넣기
-          // <Product key={key} productInfo={product} />
-          <div key={key}>ad</div>
-        ))} */}
-
       <ul className={`flex flex-wrap justify-center`}>
-        <li className="px-[4px] mb-[10px]">
-          <ProductCard />
-        </li>
-        <li className="px-[4px] ">
-          <ProductCard />
-        </li>
-        <li className="px-[4px] ">
-          <ProductCard />
-        </li>
-        <li className="px-[4px] ">
-          <ProductCard />
-        </li>
-        <li className="px-[4px] ">
-          <ProductCard />
-        </li>
-        <li className="px-[4px] ">
-          <ProductCard />
-        </li>
+        {products.map((product: Product) => (
+          <li className="px-[4px] mb-[10px]" key={product.id}>
+            <ProductCard productInfo={product} />
+          </li>
+        ))}
       </ul>
     </section>
   )

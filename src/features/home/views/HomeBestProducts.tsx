@@ -2,18 +2,14 @@
 
 import HomeProductsSection from "./HomeProductsSection"
 import bestImage from "/public/images/best.png"
-import { useQuery } from "@tanstack/react-query"
-import getBestSellingProducts from "../models/bestProducts"
+import { useBestSellingProducts } from "../hooks/useBestSellingProducts"
 
 const HomeBestProducts = () => {
-  const { data } = useQuery({
-    queryKey: ["bestProducts"],
-    queryFn: getBestSellingProducts,
-  })
+  const { products } = useBestSellingProducts()
 
-  console.log(data)
   return (
     <HomeProductsSection
+      products={products ?? []}
       onMoreClick={() => {}}
       sectionImage={bestImage}
       sectionTitle="12st BEST"

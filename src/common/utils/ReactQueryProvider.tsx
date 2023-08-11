@@ -5,6 +5,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query"
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { ReactNode, useState } from "react"
 
 interface IReactQueryProvider {
@@ -25,6 +26,7 @@ const ReactQueryProvider = ({ children }: IReactQueryProvider) => {
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate>{children}</Hydrate>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )
 }

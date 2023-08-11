@@ -10,9 +10,29 @@ import Typography from "@mui/material/Typography"
 import { BiCommentDetail, BiHeart, BiSolidHeart } from "react-icons/bi"
 import { BsFillCartDashFill, BsFillCartPlusFill } from "react-icons/bs"
 import { truncateText } from "../utils/text"
+import { Product } from "../types/product"
 
-// TODO : 상품 좋아요 했을 경우 꽉찬 하트, 리뷰 위에 숫자 표시
-const ProductCard = () => {
+interface IProductCard {
+  productInfo: Product
+}
+
+// TODO : 아이콘 옆에  reviewCount,  sellCount 표시
+const ProductCard = ({ productInfo }: IProductCard) => {
+  const {
+    brand,
+    maker,
+    mallName,
+    name,
+    image,
+    price,
+    discount,
+    discountedPrice,
+    reviewCount,
+    sellCount,
+  } = productInfo
+
+  const productBrandInfo = brand || maker || mallName
+
   return (
     <Card className="max-w-[194px]">
       <CardHeader
@@ -24,29 +44,21 @@ const ProductCard = () => {
               backgroundColor: "#fff",
               marginRight: "0px",
             }}
-            aria-label="아디다스"
+            aria-label={productBrandInfo}
           >
             <Typography variant="body1" sx={{ fontSize: "4px" }}>
-              아디다스
+              {productBrandInfo}
             </Typography>
           </Avatar>
         }
-        title={truncateText(
-          "아디다스 남녀공용 오리지널 아디컬러 클래식 삼선 나그랑 반팔티 5컬러",
-          30
-        )}
+        title={truncateText(name, 30)}
         titleTypographyProps={{
           fontSize: "11px",
           height: "32px",
         }}
         sx={{ padding: "3px" }}
       />
-      <CardMedia
-        component="img"
-        height="194"
-        image="https://shopping-phinf.pstatic.net/main_8633497/86334978739.jpg"
-        alt="title"
-      />
+      <CardMedia component="img" height="194" image={image} alt={name} />
       <CardContent className="relative h-[50px]">
         <Typography
           variant="body2"
@@ -54,7 +66,7 @@ const ProductCard = () => {
           sx={{ textDecoration: "line-through", fontSize: 14 }}
           className="absolute left-[16px] bottom-[20px] "
         >
-          46600
+          {price}
         </Typography>
         <Typography
           variant="body2"
@@ -62,7 +74,7 @@ const ProductCard = () => {
           sx={{ fontWeight: 700, fontSize: 16 }}
           className="absolute left-[16px]s bottom-0"
         >
-          18%
+          {discount}%
         </Typography>
         <Typography
           variant="body2"
@@ -70,7 +82,7 @@ const ProductCard = () => {
           sx={{ fontWeight: 700, fontSize: 20 }}
           className="absolute right-[16px] bottom-[-3px]"
         >
-          38212
+          {discountedPrice}
         </Typography>
       </CardContent>
 

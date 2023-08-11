@@ -1,4 +1,9 @@
 "use client"
 
-import { Hydrate as HydrateOnClient } from "@tanstack/react-query"
-export default HydrateOnClient
+import { Hydrate as RQHydrate, HydrateProps } from "@tanstack/react-query"
+
+function Hydrate(props: HydrateProps) {
+  return <RQHydrate {...props} />
+}
+
+export default Hydrate

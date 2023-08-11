@@ -1,3 +1,4 @@
+import { Product, Products } from "@/common/types/product"
 import firebaseApp from "@/firebase/config"
 import {
   getFirestore,
@@ -10,19 +11,23 @@ import {
 
 const db = getFirestore(firebaseApp)
 
-export default async function getBestSellingProducts(): Promise<any[]> {
+export const getBestSellingProducts = async (): Promise<Products> => {
   try {
     const productsRef = collection(db, "products")
-    const q = query(productsRef, orderBy("sellCount", "desc"), limit(6))
+    const bestSellingQuery = query(
+      productsRef,
+      orderBy("sellCount", "desc"),
+      limit(100)
+    )
 
-    const querySnapshot = await getDocs(q)
+    const querySnapshot = await getDocs(bestSellingQuery)
 
-    const topSellingProducts: any = []
+    const bestSellingProducts: Products = []
     querySnapshot.forEach((doc) => {
-      topSellingProducts.push(doc.data())
+      bestSellingProducts.push(doc.data() as Product)
     })
 
-    return topSellingProducts
+    return bestSellingProducts
   } catch (error) {
     console.error("Error fetching top selling products:", error)
     throw error
