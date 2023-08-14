@@ -5,11 +5,12 @@ import CardContent from "@mui/material/CardContent"
 import CardActions from "@mui/material/CardActions"
 
 import Avatar from "@mui/material/Avatar"
-import IconButton from "@mui/material/IconButton"
+
 import Typography from "@mui/material/Typography"
-import { BiCommentDetail, BiHeart, BiSolidHeart } from "react-icons/bi"
+import { BiCommentDetail } from "react-icons/bi"
+import { MdOutlineSell } from "react-icons/md"
 import { BsFillCartDashFill, BsFillCartPlusFill } from "react-icons/bs"
-import { sliceText, truncateText } from "../utils/text"
+import { numberToLocaleString, sliceText, truncateText } from "../utils/text"
 import { Product } from "../types/product"
 
 interface IProductCard {
@@ -34,7 +35,7 @@ const ProductCard = ({ productInfo }: IProductCard) => {
   const productBrandInfo = brand || maker || mallName
 
   return (
-    <Card className="max-w-[194px]">
+    <Card className="w-[194px]">
       <CardHeader
         avatar={
           <Avatar
@@ -48,11 +49,10 @@ const ProductCard = ({ productInfo }: IProductCard) => {
             aria-label={productBrandInfo}
           >
             <Typography variant="body1" sx={{ fontSize: "4px" }}>
-              {sliceText(productBrandInfo, 4)}
+              {productBrandInfo}
             </Typography>
           </Avatar>
         }
-        title={<span>{truncateText(name, 30)}</span>}
         titleTypographyProps={{
           fontSize: "11px",
         }}
@@ -64,43 +64,53 @@ const ProductCard = ({ productInfo }: IProductCard) => {
         alt={name}
         className="h-[194px]"
       />
-      <CardContent className="relative h-[50px]">
+      <CardContent className="relative h-[90px]">
+        <Typography
+          variant="h3"
+          sx={{ fontSize: 14 }}
+          className="absolute left-[8px] right-[8px] top-[5px] text-black"
+        >
+          {truncateText(name, 30)}
+        </Typography>
+
         <Typography
           variant="body2"
           color="#d2d2d2"
           sx={{ textDecoration: "line-through", fontSize: 14 }}
-          className="absolute left-[16px] bottom-[20px] "
+          className="absolute left-[8px] bottom-[20px]"
         >
-          {price}
+          {numberToLocaleString(price)}
         </Typography>
         <Typography
           variant="body2"
           color="#ff4e0a"
           sx={{ fontWeight: 700, fontSize: 16 }}
-          className="absolute left-[16px]s bottom-0"
+          className="absolute left-[8px] bottom-0"
         >
           {discount}%
         </Typography>
         <Typography
           variant="body2"
           color="#333"
-          sx={{ fontWeight: 700, fontSize: 20 }}
-          className="absolute right-[16px] bottom-[-3px]"
+          sx={{ fontWeight: 700, fontSize: 18 }}
+          className="absolute right-[8px] bottom-[-3px]"
         >
-          {discountedPrice}
+          {numberToLocaleString(discountedPrice)}
         </Typography>
       </CardContent>
 
-      <CardActions disableSpacing className="relative ">
-        <button className="text-[18px] mr-[12px]">
-          <BiHeart />
+      <CardActions disableSpacing className="relative">
+        <button className="text-[18px] mr-[12px] flexCenter">
+          <MdOutlineSell />
+          <span className="text-[2px]">{sellCount}</span>
         </button>
 
-        <button className="text-[18px]">
+        <button className="text-[18px] flexCenter">
           <BiCommentDetail />
+          <span className="text-[2px]">{reviewCount}</span>
         </button>
 
-        <button className="text-[18px] absolute right-[16px]">
+        <button className="text-[18px] absolute right-[8px]">
           <BsFillCartDashFill />
         </button>
       </CardActions>
