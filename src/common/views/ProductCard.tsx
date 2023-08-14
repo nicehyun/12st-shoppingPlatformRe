@@ -17,7 +17,6 @@ interface IProductCard {
   productInfo: Product
 }
 
-// TODO : 아이콘 옆에  reviewCount,  sellCount 표시
 const ProductCard = ({ productInfo }: IProductCard) => {
   const {
     brand,
