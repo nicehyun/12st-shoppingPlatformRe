@@ -19,7 +19,7 @@ const HomeProductsSection = ({
   onMoreClick,
 }: IHomeProductsSection) => {
   return (
-    <section>
+    <section className="mb-[80px]">
       <div className="relative flex items-center mb-[30px] border-b-[1px] pb-[28px]">
         <Image
           src={sectionImage}
@@ -27,8 +27,11 @@ const HomeProductsSection = ({
           className="w-[50px] h-[50px] mr-[10px] dark:filter dark:invert"
         />
         <h3 className="font-bold text-[22px]">{sectionTitle}</h3>
-        {/* <Button onClick={() => onMoreClick} content="+ 더보기" /> */}
-        {/* <button onClick={onMoreClick}>+ 더보기</button> */}
+        <Button
+          onClick={onMoreClick}
+          content="+ 더보기"
+          classNames="absolute right-0"
+        />
       </div>
 
       <ul className={`flex flex-wrap justify-center`}>
