@@ -5,6 +5,7 @@ interface IHeaderControllerEl {
   title?: string
   icon: ReactNode
   isShowPromotion: boolean
+  onClick: () => void
 }
 
 const HeaderControllerEl = ({
@@ -12,12 +13,14 @@ const HeaderControllerEl = ({
   title,
   icon,
   isShowPromotion,
+  onClick,
 }: IHeaderControllerEl) => {
   return (
     <li
       className={`relative ${classNames} cursor-pointer  w-[100px] sm:w-[60px] md:w-[80px]`}
     >
       <button
+        onClick={onClick}
         className={`absolute ${
           !isShowPromotion
             ? "visible opacity-100"
@@ -27,6 +30,7 @@ const HeaderControllerEl = ({
         {icon}
       </button>
       <button
+        onClick={onClick}
         className={`absolute ${
           isShowPromotion
             ? "visible opacity-100"
