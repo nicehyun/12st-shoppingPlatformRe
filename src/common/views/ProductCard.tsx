@@ -42,19 +42,22 @@ const ProductCard = ({ productInfo }: IProductCard) => {
               color: "#ff4e0a",
               height: "20px",
               backgroundColor: "#fff",
-              marginRight: "0px",
               borderRadius: 0,
+              display: "inline-block",
+              width: "100%",
             }}
             aria-label={productBrandInfo}
           >
-            <Typography variant="body1" sx={{ fontSize: "4px" }}>
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: "4px",
+              }}
+            >
               {productBrandInfo}
             </Typography>
           </Avatar>
         }
-        titleTypographyProps={{
-          fontSize: "11px",
-        }}
         sx={{ padding: "3px", height: "38px" }}
       />
       <CardMedia
