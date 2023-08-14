@@ -1,3 +1,4 @@
+import Button from "@/common/views/Button"
 import { ReactNode } from "react"
 
 interface IHeaderControllerEl {
@@ -19,26 +20,24 @@ const HeaderControllerEl = ({
     <li
       className={`relative ${classNames} cursor-pointer  w-[100px] sm:w-[60px] md:w-[80px]`}
     >
-      <button
+      <Button
         onClick={onClick}
-        className={`absolute ${
+        classNames={`absolute ${
           !isShowPromotion
             ? "visible opacity-100"
             : "invisible opacity-0 -translate-x-6"
         } flexCenter inset-0 hover:text-lightRed transition-5`}
-      >
-        {icon}
-      </button>
-      <button
+        content={icon}
+      />
+      <Button
         onClick={onClick}
-        className={`absolute ${
+        classNames={`absolute ${
           isShowPromotion
             ? "visible opacity-100"
             : "invisible opacity-0 translate-x-6"
         } flexCenter inset-0 text-[13px] hover:text-lightRed transition-5`}
-      >
-        {title}
-      </button>
+        content={title}
+      />
     </li>
   )
 }

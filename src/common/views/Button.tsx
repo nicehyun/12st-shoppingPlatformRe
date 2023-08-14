@@ -1,9 +1,13 @@
 "use client"
+
+import { CSSProperties, ReactNode } from "react"
+
 interface IButton {
   onClick: () => void
   type?: "button" | "submit"
-  content: string
+  content: string | ReactNode
   classNames?: string
+  style?: CSSProperties
 }
 
 const Button = ({ content, onClick, type = "button", classNames }: IButton) => {

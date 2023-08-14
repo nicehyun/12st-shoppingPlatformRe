@@ -15,7 +15,7 @@ const HeaderController = ({
   isShowPromotion,
   onShowSearchDialog,
 }: IHeaderController) => {
-  const { routeTo, pathname, searchParams } = useNavigations()
+  const { routeTo } = useNavigations()
 
   return (
     <div
