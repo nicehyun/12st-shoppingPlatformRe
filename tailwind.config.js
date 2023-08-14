@@ -15,6 +15,7 @@ module.exports = {
       lightRed: "#ff4e0a",
       border: "#d2d2d2",
       lightGray: "#ccc",
+      gray: "#5d5d5d",
     },
     screens: {
       sm: { max: "479px" },

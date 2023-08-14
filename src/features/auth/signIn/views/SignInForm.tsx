@@ -2,7 +2,7 @@ import SignInInput from "./SignInInput"
 
 const SignInForm = () => {
   return (
-    <form className="flexCenter flex-col">
+    <form className="flexCenter flex-col mb-[50px]">
       <h2 className="w-[400px] text-center text-[20px] font-bold mb-[30px] pb-[30px] border-b-[3px] border-black dark:border-white tracking-[20px]">
         로그인
       </h2>
@@ -11,7 +11,7 @@ const SignInForm = () => {
 
       <button
         type="submit"
-        className="w-[400px] text-[14px] tracking-[8px] h-[50px] border-lightRed border-[1px] bg-lightRed"
+        className="w-[400px] text-[14px] tracking-[8px] h-[50px] border-lightRed border-[1px] bg-lightRed text-white"
       >
         {/* {isLoginLoading ? (
           <LoadingView spinnerSize="20px" isFrame={false} />
