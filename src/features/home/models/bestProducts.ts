@@ -24,7 +24,14 @@ export const getBestSellingProducts = async (): Promise<Products> => {
 
     const bestSellingProducts: Products = []
     querySnapshot.forEach((doc) => {
-      bestSellingProducts.push(doc.data() as Product)
+      const productData = doc.data() as Product
+      const truncatedDiscountedPrice =
+        Math.floor(productData.discountedPrice / 10) * 10
+      const productWithTruncatedPrice: Product = {
+        ...productData,
+        discountedPrice: truncatedDiscountedPrice,
+      }
+      bestSellingProducts.push(productWithTruncatedPrice)
     })
 
     return bestSellingProducts
