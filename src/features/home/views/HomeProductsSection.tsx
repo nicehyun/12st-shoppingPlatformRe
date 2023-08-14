@@ -32,7 +32,7 @@ const HomeProductsSection = ({
       </div>
 
       <ul className={`flex flex-wrap justify-center`}>
-        {products.map((product: Product) => (
+        {products.slice(0, 6).map((product: Product) => (
           <li className="px-[4px] mb-[10px]" key={product.id}>
             <ProductCard productInfo={product} />
           </li>
