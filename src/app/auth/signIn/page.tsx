@@ -1,5 +1,12 @@
+import PageLayout from "@/common/views/PageLayout"
+import SignInForm from "@/features/auth/signIn/views/SignInForm"
+
 const SignInPage = () => {
-  return <div>로그인</div>
+  return (
+    <PageLayout>
+      <SignInForm />
+    </PageLayout>
+  )
 }
 
 export default SignInPage
