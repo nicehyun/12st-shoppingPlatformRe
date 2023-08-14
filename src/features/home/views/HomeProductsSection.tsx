@@ -20,11 +20,11 @@ const HomeProductsSection = ({
 }: IHomeProductsSection) => {
   return (
     <section>
-      <div className="relative flex items-center mb-[30px] border-b-[1px] border-blackk pb-20">
+      <div className="relative flex items-center mb-[30px] border-b-[1px] pb-[28px]">
         <Image
           src={sectionImage}
           alt={sectionTitle}
-          className="w-[50px] h-[50px] mr-[10px]"
+          className="w-[50px] h-[50px] mr-[10px] dark:filter dark:invert"
         />
         <h3 className="font-bold text-[22px]">{sectionTitle}</h3>
         {/* <Button onClick={() => onMoreClick} content="+ 더보기" /> */}
