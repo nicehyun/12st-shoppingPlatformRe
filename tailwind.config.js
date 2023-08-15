@@ -16,6 +16,7 @@ module.exports = {
       border: "#d2d2d2",
       lightGray: "#ccc",
       gray: "#5d5d5d",
+      error: "#D43639",
     },
     screens: {
       sm: { max: "479px" },

@@ -33,7 +33,7 @@ const PromotionBar = ({
   }, [handleScroll])
 
   const promotionElVirtualClass =
-    "before:absolute before:top-0 before:bottom-0 brfore:content-[''] before:w-px before:h-3.5 before:bg-lightGray before:my-auto before:-mx-5"
+    "before:absolute before:top-0 before:bottom-0 before:content-[''] before:w-px before:h-3.5 before:bg-lightGray before:my-auto before:-mx-5"
 
   return (
     <>

@@ -1,11 +1,7 @@
-import { ReactNode } from "react"
-
-interface ISignUpForm {
-  children: ReactNode
-}
+import SIgnUpUserInfo from "./SIgnUpUserInfo"
 
 // TODO : isLoading 처리
-const SignUpForm = ({ children }: ISignUpForm) => {
+const SignUpForm = () => {
   return (
     <form className="">
       <h2 className="text-[28px] font-bold mb-[40px] text-center border-black dark:border-white tracking-[20px]">
@@ -15,7 +11,7 @@ const SignUpForm = ({ children }: ISignUpForm) => {
         <span className="text-lightRed mr-[5px]">*</span>필수입력사항
       </h3>
 
-      <div>{children}</div>
+      <SIgnUpUserInfo />
 
       <div className="flexCenter">
         <button className="rounded-[5px] w-[400px] text-[14px] mt-[50px] bg-black dark:bg-white text-white dark:text-black py-[14px] tracking-[5px]">
@@ -24,7 +20,7 @@ const SignUpForm = ({ children }: ISignUpForm) => {
           ) : (
             "가입하기"
           )} */}
-          회원기입
+          회원가입
         </button>
       </div>
     </form>

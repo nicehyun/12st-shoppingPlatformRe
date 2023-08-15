@@ -29,6 +29,7 @@
     justify-content: center;
   }
 
+  /* TODO : 공통 가상클래스 | 생성자로 수정하기 */
   .headerController {
     position: absolute;
     content: "";
@@ -55,4 +56,10 @@ body {
 input {
   outline: none;
   border: 1px solid rgb(180, 180, 180);
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
