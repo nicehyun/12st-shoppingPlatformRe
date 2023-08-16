@@ -2,7 +2,7 @@ import SIgnUpClauseEl from "./SIgnUpClauseEl"
 
 const SIgnUpClause = () => {
   return (
-    <div className="flex border-t-[1px] border-lightBlack px-[10px] py-[20px]">
+    <div className="flex md:flex-col sm:flex-col border-t-[1px] border-lightBlack px-[10px] py-[20px]">
       <h3 className="text-[16px] pt-[18px] font-bold tracking-[1.5px] mr-[80px]">
         12st 이용약관 동의
       </h3>

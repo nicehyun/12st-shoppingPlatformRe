@@ -4,7 +4,7 @@ interface ISignUpBirthInput {
 
 const SignUpBirthInput = ({ onKeyPress }: ISignUpBirthInput) => {
   return (
-    <div className="flex-grow max-w-[400px] h-[38px] flexCenter items-center border-border border-[1px] rounded-[5px] px-[15px]">
+    <div className="flex-grow max-w-[400px] md:w-[300px] h-[38px] flexCenter items-center border-border border-[1px] rounded-[5px] px-[15px]">
       <input
         type="number"
         placeholder="YYYY"
@@ -14,7 +14,7 @@ const SignUpBirthInput = ({ onKeyPress }: ISignUpBirthInput) => {
         // onChange={userInput.birthYear.handleValueChange}
         // onBlur={userInput.birthYear.handleInputBlur}
         onKeyPress={onKeyPress}
-        className="w-[96px] h-[34px] border-none pr-[11px] pb-[1px] pl-[15px] bg-transparent text-center placeholder:text-border"
+        className="w-[96px] md:w-[60px] h-[34px] border-none pr-[11px] pb-[1px] pl-[15px] bg-transparent text-center placeholder:text-border"
       />
       <span className="text-border">/</span>
       <input
@@ -26,7 +26,7 @@ const SignUpBirthInput = ({ onKeyPress }: ISignUpBirthInput) => {
         // onChange={userInput.birthMonth.handleValueChange}
         // onBlur={userInput.birthMonth.handleInputBlur}
         onKeyPress={onKeyPress}
-        className="w-[96px] h-[34px] border-none pr-[11px] pb-[1px] pl-[15px] bg-transparent text-center placeholder:text-border"
+        className="w-[96px] md:w-[60px] h-[34px] border-none pr-[11px] pb-[1px] pl-[15px] bg-transparent text-center placeholder:text-border"
       />
       <span className="text-border">/</span>
       <input
@@ -38,7 +38,7 @@ const SignUpBirthInput = ({ onKeyPress }: ISignUpBirthInput) => {
         // onChange={userInput.birthDay.handleValueChange}
         // onBlur={userInput.birthDay.handleInputBlur}
         onKeyPress={onKeyPress}
-        className="w-[96px] h-[34px] border-none pr-[11px] pb-[1px] pl-[15px] bg-transparent text-center placeholder:text-border"
+        className="w-[96px] md:w-[60px] h-[34px] border-none pr-[11px] pb-[1px] pl-[15px] bg-transparent text-center placeholder:text-border"
       />
     </div>
   )

@@ -19,7 +19,7 @@ const SignUpSideButton = ({
       type="button"
       onClick={onClick}
       disabled={isDisabled}
-      className={`${classNames} w-[110px] h-[38px] rounded-[5px] border-[1px] tracking-[1.5px] text-[12px] dark:bg-lightRed border-lightRed dark:text-white cursor-pointer disabled:dark:bg-lightGray disabled:text-lightGray  disabled:dark:text-white disabled:border-border disabled:cursor-not-allowed`}
+      className={`${classNames} w-[110px] md:w-[80px] h-[38px] rounded-[5px] border-[1px] tracking-[1.5px] text-[12px] dark:bg-lightRed border-lightRed dark:text-white cursor-pointer disabled:dark:bg-lightGray disabled:text-lightGray  disabled:dark:text-white disabled:border-border disabled:cursor-not-allowed`}
     >
       {content}
     </button>

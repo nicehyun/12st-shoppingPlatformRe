@@ -31,7 +31,9 @@ const Input = ({
   children,
 }: IInput) => {
   return (
-    <div className={`${classNames} relative h-[38px] max-w-[400px]`}>
+    <div
+      className={`${classNames} relative h-[38px] max-w-[400px] md:max-w-[400px] sm:-[250px]`}
+    >
       <input
         type={type}
         name={name}

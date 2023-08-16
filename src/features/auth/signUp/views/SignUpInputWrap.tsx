@@ -62,7 +62,7 @@ const SignUpInputWrap = ({
       >
         <label
           htmlFor={htmlFor}
-          className="inline-block w-[139px] font-bold bg-lightRed"
+          className="inline-block w-[139px] md:w-[89px] sm:w-[50px] font-bold bg-lightRed"
         >
           {labelText}
           <span className="text-lightRed ml-[5px]">*</span>
