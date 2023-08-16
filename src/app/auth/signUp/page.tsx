@@ -1,12 +1,14 @@
 import PageLayout from "@/common/views/PageLayout"
+import SIgnUpClause from "@/features/auth/signUp/views/SIgnUpClause"
 import SignUpForm from "@/features/auth/signUp/views/SignUpForm"
-import SIgnUpUserInfo from "@/features/auth/signUp/views/SIgnUpUserInfo"
 import React from "react"
 
 const SignUpPage = () => {
   return (
     <PageLayout>
-      <SignUpForm />
+      <SignUpForm>
+        <SIgnUpClause />
+      </SignUpForm>
     </PageLayout>
   )
 }

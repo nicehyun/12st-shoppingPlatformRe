@@ -8,7 +8,7 @@ import SignUpBirthInput from "./SignUpBirthInput"
 
 const SIgnUpUserInfo = () => {
   return (
-    <div>
+    <div className="pb-[40px]">
       <SignUpInputWrap
         htmlFor="email"
         userInputComponent={

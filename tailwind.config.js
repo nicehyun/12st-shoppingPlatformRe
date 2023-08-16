@@ -10,6 +10,7 @@ module.exports = {
   theme: {
     colors: {
       transparent: "transparent",
+      lightBlack: "#777",
       black: "#333",
       white: "#fff",
       lightRed: "#ff4e0a",
