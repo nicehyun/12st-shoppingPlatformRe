@@ -28,7 +28,7 @@ const ThemeSwich = () => {
   }
 
   return (
-    <span className="absolute inline-block bottom-[10px] right-[26px] w-[60px] h-[30px] bg-border rounded-full">
+    <span className="absolute inline-block top-[0px] left-[0px] w-[60px] h-[30px] bg-border rounded-full">
       <button
         onClick={toggleTheme}
         className={`flexCenter w-[22px] h-[22px] text-[10px] border-[1px] bg-white border-lightBlack text-lightBlack p-[2px] rounded-full transform -translate-y-1/2 absolute top-1/2 transition-3 ${

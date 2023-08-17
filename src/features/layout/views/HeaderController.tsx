@@ -2,19 +2,14 @@ import HeaderControllerEl from "./HeaderControllerEl"
 
 import { FaUserTag, FaHeart } from "react-icons/fa"
 import { FiLogIn, FiLogOut } from "react-icons/fi"
-import SearchButton from "./SearchButton"
 import HeaderCartButton from "./HeaderCartButton"
 import { ROUTE, useNavigations } from "@/common/hooks/useNavigations"
 
 interface IHeaderController {
   isShowPromotion: boolean
-  onShowSearchDialog: () => void
 }
 
-const HeaderController = ({
-  isShowPromotion,
-  onShowSearchDialog,
-}: IHeaderController) => {
+const HeaderController = ({ isShowPromotion }: IHeaderController) => {
   const { routeTo } = useNavigations()
 
   return (
@@ -48,9 +43,6 @@ const HeaderController = ({
           classNames="before:vertical-divider"
           onClick={() => routeTo(ROUTE.SIGNIN)}
         />
-        <li className="relative cursor-pointer w-[100px] sm:w-[60px] md:w-[80px] before:vertical-divider">
-          <SearchButton onClick={onShowSearchDialog} />
-        </li>
       </ul>
     </div>
   )

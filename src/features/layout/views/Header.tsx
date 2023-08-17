@@ -5,8 +5,8 @@ import HeaderLogo from "./HeaderLogo"
 import HeaderController from "./HeaderController"
 import PromotionBar from "./PromotionBar"
 import MPromotionModal from "./mobile/MPromotionModal"
-import SearchDialog from "./SearchDialog"
 import ThemeSwich from "./ThemeSwich"
+import SearchButton from "./SearchButton"
 
 const Header = () => {
   const [isShowPromotion, setIsShowPromotion] = useState(true)
@@ -26,21 +26,15 @@ const Header = () => {
         onShowPromotionModal={() => setIsShowPromotionModal(true)}
       />
       <HeaderLogo isShowPromotion={isShowPromotion} />
-      <HeaderController
-        isShowPromotion={isShowPromotion}
-        onShowSearchDialog={() => setIsShowSearchDialog(true)}
-      />
+      <HeaderController isShowPromotion={isShowPromotion} />
 
       <ThemeSwich />
+
+      <SearchButton onClick={() => setIsShowSearchDialog(true)} />
 
       <MPromotionModal
         isShow={isShowPromotionModal}
         onHide={() => setIsShowPromotionModal(false)}
-      />
-
-      <SearchDialog
-        isShow={isShowSearchDialog}
-        onHide={() => setIsShowSearchDialog(false)}
       />
     </header>
   )
