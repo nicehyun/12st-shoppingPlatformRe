@@ -18,7 +18,7 @@ const HeaderControllerEl = ({
 }: IHeaderControllerEl) => {
   return (
     <li
-      className={`relative ${classNames} cursor-pointer  w-[100px] sm:w-[60px] md:w-[80px]`}
+      className={`relative ${classNames} cursor-pointer  w-[100px] sm:w-[60px] md:w-[80px] `}
     >
       <Button
         onClick={onClick}
@@ -26,7 +26,7 @@ const HeaderControllerEl = ({
           !isShowPromotion
             ? "visible opacity-100"
             : "invisible opacity-0 -translate-x-6"
-        } flexCenter inset-0 hover:text-lightRed transition-5`}
+        } flexCenter inset-0 hover:text-lightRed transition-5 sm:text-[14px] md:text-[14px]`}
         content={icon}
       />
       <Button
@@ -35,7 +35,7 @@ const HeaderControllerEl = ({
           isShowPromotion
             ? "visible opacity-100"
             : "invisible opacity-0 translate-x-6"
-        } flexCenter inset-0 text-[13px] hover:text-lightRed transition-5`}
+        } flexCenter inset-0 text-[12px] hover:text-lightRed transition-5`}
         content={title}
       />
     </li>

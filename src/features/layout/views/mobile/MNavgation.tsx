@@ -105,36 +105,6 @@ const MNavgation = () => {
           label={
             <span
               className={`text-[8px] absolute inset-x-px ${
-                selectedMenu === "search"
-                  ? "bottom-0 opacity-100"
-                  : "bottom-0 transform -translate-y-1/2 opacity-0"
-              }`}
-              style={{
-                transition: "transform 0.3s ease",
-              }}
-            >
-              SEARCH
-            </span>
-          }
-          value="search"
-          icon={
-            selectedMenu === "search" ? (
-              <BiSolidSearch className="transform translate-y-[-4px]" />
-            ) : (
-              <BiSearch />
-            )
-          }
-          sx={{
-            position: "relative",
-            "&.Mui-selected": {
-              color: "#ff4e0a",
-            },
-          }}
-        />
-        <BottomNavigationAction
-          label={
-            <span
-              className={`text-[8px] absolute inset-x-px ${
                 selectedMenu === "like"
                   ? "bottom-0 opacity-100"
                   : "bottom-0 transform -translate-y-1/2 opacity-0"
