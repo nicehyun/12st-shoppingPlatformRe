@@ -82,6 +82,7 @@ export default function Stage({
           color="inherit"
           disabled={activeStep === 0}
           onClick={handleBack}
+          className="ml-[-18px]"
         >
           <AiOutlineArrowLeft className="text-border text-[20px]" />
         </Button>
