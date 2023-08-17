@@ -24,8 +24,6 @@ export default function RootLayout({
     <html lang="ko" className={roboto.className}>
       <body className="bg-white text-black dark:text-white dark:bg-black">
         <Providers>
-          <ThemeSwitcher />
-
           <Header />
           {children}
 

@@ -6,6 +6,7 @@ import HeaderController from "./HeaderController"
 import PromotionBar from "./PromotionBar"
 import PromotionModal from "./PromotionModal"
 import SearchDialog from "./SearchDialog"
+import ThemeSwich from "./ThemeSwich"
 
 const Header = () => {
   const [isShowPromotion, setIsShowPromotion] = useState(true)
@@ -29,6 +30,8 @@ const Header = () => {
         isShowPromotion={isShowPromotion}
         onShowSearchDialog={() => setIsShowSearchDialog(true)}
       />
+
+      <ThemeSwich />
 
       <PromotionModal
         isShow={isShowPromotionModal}
