@@ -8,7 +8,7 @@ interface ISignUpForm {
 // TODO : isLoading 처리
 const SignUpForm = ({ children }: ISignUpForm) => {
   return (
-    <form className="max-w-[800px] mx-auto">
+    <form className="sm:hidden md:hidden max-w-[800px] mx-auto">
       <h2 className="text-[28px] font-bold mb-[40px] text-center border-black dark:border-white tracking-[20px]">
         회원가입
       </h2>

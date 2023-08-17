@@ -14,6 +14,7 @@ interface ISignUpVerificationInput {
   isLoading?: boolean
   onClick?: () => void
   isDisabledButton: boolean
+  classNames?: string
 }
 
 // TODO : 버튼 disabled 할지 모달로 피드백 할지 고민하기
@@ -23,6 +24,7 @@ const SignUpVerificationInput = ({
   isLoading,
   isDisabledButton,
   onClick,
+  classNames,
 }: ISignUpVerificationInput) => {
   let inputType: InputType = "text",
     placeholder = "",
@@ -55,7 +57,7 @@ const SignUpVerificationInput = ({
   }
 
   return (
-    <>
+    <div className={`${classNames} flex flex-grow`}>
       <Input
         type={inputType}
         name={type}
@@ -87,7 +89,7 @@ const SignUpVerificationInput = ({
           )
         }
       />
-    </>
+    </div>
   )
 }
 

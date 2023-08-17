@@ -7,7 +7,7 @@ interface ISignUpInput {
   classNames?: string
 }
 
-const SignUpInput = ({ type }: ISignUpInput) => {
+const SignUpInput = ({ type, classNames }: ISignUpInput) => {
   let inputType: InputType = "text",
     placeholder = ""
 
@@ -32,7 +32,7 @@ const SignUpInput = ({ type }: ISignUpInput) => {
       name={type}
       id={type}
       placeholder={placeholder}
-      classNames="flex-grow"
+      classNames={`${classNames} flex-grow`}
     />
   )
 }

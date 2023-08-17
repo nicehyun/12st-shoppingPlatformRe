@@ -13,7 +13,7 @@ const SignUpAddressInput = () => {
           classNames="mb-[10px] w-full"
         />
 
-        <SignUpSideButton content="재검색" classNames="ml-[10px]" />
+        <SignUpSideButton content="검색" classNames="ml-[10px]" />
       </div>
 
       <Input

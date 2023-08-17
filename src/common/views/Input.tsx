@@ -31,14 +31,12 @@ const Input = ({
   children,
 }: IInput) => {
   return (
-    <div
-      className={`${classNames} relative h-[38px] max-w-[400px] md:max-w-[400px] sm:-[250px]`}
-    >
+    <div className={`${classNames} relative h-[38px] max-w-[400px]`}>
       <input
         type={type}
         name={name}
         id={id}
-        className={`px-[10px] h-full w-full rounded-[5px] ${
+        className={`px-[10px] h-full w-full rounded-[5px] placeholder:text-[14px] ${
           isReadOnly && "cursor-default"
         }`}
         placeholder={placeholder}
