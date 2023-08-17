@@ -30,7 +30,7 @@ const HomeProductsSection = ({
         <Button
           onClick={onMoreClick}
           content="+ 더보기"
-          classNames="absolute right-0"
+          classNames="absolute right-0 text-[12px] hover:text-lightRed transition-3"
         />
       </div>
 
