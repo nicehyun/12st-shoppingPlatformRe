@@ -5,7 +5,7 @@ const SignInController = () => {
   return (
     <div className="flexCenter flex-col">
       <Link
-        className="border-[1px] border-black dark:border-white rounded-[12px] flexCenter text-[14px] tracking-[1.5px] mb-5 w-[400px] h-[50px]"
+        className="bg-white text-black border-[1px] border-black dark:border-white rounded-[12px] flexCenter text-[14px] tracking-[1.5px] mb-5 w-[400px] h-[50px]"
         href={ROUTE.SIGNUP}
       >
         간편 회원가입
