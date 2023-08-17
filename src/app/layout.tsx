@@ -4,7 +4,7 @@ import { Roboto } from "next/font/google"
 import Providers from "../common/utils/Providers"
 import ThemeSwitcher from "../common/utils/ThemeSwitcher"
 
-import MNavgation from "../features/layout/views/MNavgation"
+import MNavgation from "../features/layout/views/mobile/MNavgation"
 import Header from "@/features/layout/views/Header"
 import Footer from "@/features/layout/views/Footer"
 

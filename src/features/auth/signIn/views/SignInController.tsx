@@ -13,7 +13,7 @@ const SignInController = () => {
 
       <div className="w-[400px] text-center text-gray dark:text-lightGray text-[12px]">
         <Link
-          className="relative mr-[10px] after:headerController after:mx-[10px]"
+          className="relative mr-[10px] after:vertical-divider after:mx-[10px]"
           href={ROUTE.FIND_EMAIL}
         >
           이메일 찾기

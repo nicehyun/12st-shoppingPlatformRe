@@ -4,7 +4,7 @@ import { useState } from "react"
 import HeaderLogo from "./HeaderLogo"
 import HeaderController from "./HeaderController"
 import PromotionBar from "./PromotionBar"
-import PromotionModal from "./PromotionModal"
+import MPromotionModal from "./mobile/MPromotionModal"
 import SearchDialog from "./SearchDialog"
 import ThemeSwich from "./ThemeSwich"
 
@@ -33,7 +33,7 @@ const Header = () => {
 
       <ThemeSwich />
 
-      <PromotionModal
+      <MPromotionModal
         isShow={isShowPromotionModal}
         onHide={() => setIsShowPromotionModal(false)}
       />

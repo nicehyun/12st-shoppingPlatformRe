@@ -29,8 +29,7 @@
     justify-content: center;
   }
 
-  /* TODO : 공통 가상클래스 | 생성자로 수정하기 */
-  .headerController {
+  .vertical-divider {
     position: absolute;
     content: "";
     width: 1px;

@@ -1,4 +1,3 @@
-import "tailwindcss/tailwind.css"
 import { useEffect } from "react"
 
 import PromotionEl from "./PromotionEl"
@@ -32,9 +31,6 @@ const PromotionBar = ({
     }
   }, [handleScroll])
 
-  const promotionElVirtualClass =
-    "before:absolute before:top-0 before:bottom-0 before:content-[''] before:w-px before:h-3.5 before:bg-lightGray before:my-auto before:-mx-5"
-
   return (
     <>
       <div
@@ -53,14 +49,14 @@ const PromotionBar = ({
           />
 
           <PromotionEl
-            classNames={`${promotionElVirtualClass} mr-10`}
+            classNames="before:vertical-divider before:-mx-5 mr-10"
             content="[ 삼성카드 ] 14만원 캐시백 프로모션"
             highlightedTextStart={9}
             highlightedTextEnd={14}
           />
 
           <PromotionEl
-            classNames={`${promotionElVirtualClass}`}
+            classNames="before:vertical-divider before:-mx-5"
             content="[ 카카오페이 ] 5 / 8 / 20이상 결제시 3천/4천/1만 즉시 할인"
             highlightedTextStart={27}
             highlightedTextEnd={35}

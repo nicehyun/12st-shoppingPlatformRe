@@ -35,20 +35,20 @@ const HeaderController = ({
           title="MY LIKE"
           icon={<FaHeart />}
           isShowPromotion={isShowPromotion}
-          classNames="before:headerController hidden xl:block"
+          classNames="before:vertical-divider hidden xl:block"
           onClick={() => {}}
         />
-        <li className="relative xl:before:headerController">
+        <li className="relative xl:before:vertical-divider">
           <HeaderCartButton />
         </li>
         <HeaderControllerEl
           title="LOGIN"
           icon={<FiLogIn />}
           isShowPromotion={isShowPromotion}
-          classNames="before:headerController"
+          classNames="before:vertical-divider"
           onClick={() => routeTo(ROUTE.SIGNIN)}
         />
-        <li className="relative cursor-pointer w-[100px] sm:w-[60px] md:w-[80px] before:headerController">
+        <li className="relative cursor-pointer w-[100px] sm:w-[60px] md:w-[80px] before:vertical-divider">
           <SearchButton onClick={onShowSearchDialog} />
         </li>
       </ul>

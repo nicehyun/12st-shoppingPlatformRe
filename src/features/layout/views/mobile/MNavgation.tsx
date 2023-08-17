@@ -15,7 +15,7 @@ import {
   BiUser,
   BiSolidUser,
 } from "react-icons/bi"
-import CategoryDrawer from "./CategoryDrawer"
+import CategoryDrawer from "../CategoryDrawer"
 
 const MNavgation = () => {
   const [selectedMenu, setselectedMenu] = useState("home")

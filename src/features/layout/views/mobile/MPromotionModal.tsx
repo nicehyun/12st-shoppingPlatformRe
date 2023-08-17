@@ -8,7 +8,7 @@ import { TransitionProps } from "@mui/material/transitions"
 import MPromotionEl from "./MPromotionEl"
 import { forwardRef } from "react"
 
-interface IPromotionModal {
+interface IMPromotionModal {
   isShow: boolean
   onHide: () => void
 }
@@ -22,7 +22,7 @@ const Transition = forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />
 })
 
-export default function PromotionModal({ isShow, onHide }: IPromotionModal) {
+export default function MPromotionModal({ isShow, onHide }: IMPromotionModal) {
   const handleClose = () => {
     onHide()
   }

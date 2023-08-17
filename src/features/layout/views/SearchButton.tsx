@@ -7,7 +7,7 @@ interface ISearchButton {
 const SearchButton = ({ onClick }: ISearchButton) => {
   return (
     <button
-      className="w-full h-full flexCenter inset-0 hover:text-lightRed transition-3"
+      className="w-full h-full flexCenter inset-0 hover:text-lightRed"
       onClick={onClick}
     >
       <FiSearch />
