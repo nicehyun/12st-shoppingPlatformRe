@@ -1,5 +1,5 @@
 import Input from "@/common/views/Input"
-import SignUpSideButton from "@/common/views/SignUpSideButton"
+import SignUpSideButton from "@/features/auth/signUp/views/SignUpSideButton"
 
 const SignUpAddressInput = () => {
   return (

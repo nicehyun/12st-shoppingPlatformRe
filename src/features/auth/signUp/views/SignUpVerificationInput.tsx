@@ -1,7 +1,7 @@
 "use client"
 
 import Input, { InputType } from "@/common/views/Input"
-import SignUpSideButton from "@/common/views/SignUpSideButton"
+import SignUpSideButton from "@/features/auth/signUp/views/SignUpSideButton"
 import Timer from "@/common/views/TImer"
 
 type UserInputType = "email" | "phone" | "verificationPhone"

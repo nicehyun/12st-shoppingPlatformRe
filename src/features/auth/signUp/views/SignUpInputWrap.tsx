@@ -60,10 +60,7 @@ const SignUpInputWrap = ({
       <div
         className={`${classNames} relative mt-[18px] flex items-center text-[14px]`}
       >
-        <label
-          htmlFor={htmlFor}
-          className="inline-block w-[139px] font-bold bg-lightRed"
-        >
+        <label htmlFor={htmlFor} className="inline-block w-[139px] font-bold">
           {labelText}
           <span className="text-lightRed ml-[5px]">*</span>
         </label>

@@ -13,7 +13,6 @@ const SignUpSideButton = ({
   onClick,
   isDisabled,
 }: ISignUpSideButton) => {
-  console.log(isDisabled)
   return (
     <button
       type="button"
