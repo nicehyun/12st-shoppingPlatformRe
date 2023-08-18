@@ -1,4 +1,5 @@
-import ReactQueryProvider from "./ReactQueryProvider"
+import ReduxProvider from "@/redux/utils/ReduxProvider"
+import ReactQueryProvider from "../../reactQuery/utils/ReactQueryProvider"
 import Themeprovider from "./ThemeProvider"
 
 interface IProviders {
@@ -8,7 +9,9 @@ interface IProviders {
 const Providers = ({ children }: IProviders) => {
   return (
     <ReactQueryProvider>
-      <Themeprovider>{children}</Themeprovider>
+      <ReduxProvider>
+        <Themeprovider>{children}</Themeprovider>
+      </ReduxProvider>
     </ReactQueryProvider>
   )
 }

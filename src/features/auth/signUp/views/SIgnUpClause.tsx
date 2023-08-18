@@ -1,6 +1,30 @@
+"use client"
+
+import { seletSignUpClauseState } from "@/redux/features/signUpSlice"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { useState } from "react"
 import SignUpClauseEl from "./SIgnUpClauseEl"
 
+type Clause = "term" | "privacy" | "marketing"
+
+type SelectedClause = {
+  clause: Clause
+  title: string
+  description: string
+}
+
 const SignUpClause = () => {
+  const [isAllAgree, setIsAllAgree] = useState(false)
+  const clauseState = useAppSelector(seletSignUpClauseState)
+  const [isShowClauseModal, setIsShowClauseModal] = useState(false)
+  const [selectedClause, setSelectedClasuse] = useState<SelectedClause | null>(
+    null
+  )
+
+  const dispatch = useAppDispatch()
+
+  console.log(clauseState)
+
   return (
     <div className="flex md:flex-col sm:flex-col lg:border-t-[1px] lg:border-lightBlack xl:border-t-[1px] xl:border-lightBlack px-[10px] py-[20px]">
       <h3 className="text-[16px] pt-[18px] font-bold tracking-[1.5px] mr-[80px] sm:mb-[50px] md:mb-[50px]">
