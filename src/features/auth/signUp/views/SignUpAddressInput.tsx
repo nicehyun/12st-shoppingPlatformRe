@@ -18,8 +18,8 @@ const SignUpAddressInput = () => {
 
       <Input
         type="text"
-        name="address"
-        id="address"
+        name="additionalAddress"
+        id="additionalAddress"
         placeholder="나머지 주소를 입력해주세요"
       />
     </div>
