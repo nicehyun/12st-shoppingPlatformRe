@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { RootState } from "../types/store"
+import { checkToAllAgreeClause } from "../utils/clause"
 
 export type Clause = {
+  all: boolean
   age: boolean
   term: boolean
   privacy: boolean
@@ -20,7 +22,13 @@ type InitialSignUpState = {
 }
 
 const initialSignUpState: InitialSignUpState = {
-  clause: { age: false, marketing: false, privacy: false, term: false },
+  clause: {
+    all: false,
+    age: false,
+    marketing: false,
+    privacy: false,
+    term: false,
+  },
   check: { email: false, phone: false, address: false },
 }
 
@@ -30,28 +38,52 @@ const signUpSlice = createSlice({
   reducers: {
     toggleAgreeToAgeClause(state) {
       state.clause.age = !state.clause.age
+
+      if (checkToAllAgreeClause(state.clause)) state.clause.all = true
+      if (!checkToAllAgreeClause(state.clause)) state.clause.all = false
     },
     toggleAgreeToTermClause(state) {
       state.clause.term = !state.clause.term
+
+      if (checkToAllAgreeClause(state.clause)) state.clause.all = true
+      if (!checkToAllAgreeClause(state.clause)) state.clause.all = false
     },
     toggleAgreeToPrivacyClause(state) {
       state.clause.privacy = !state.clause.privacy
+
+      if (checkToAllAgreeClause(state.clause)) state.clause.all = true
+      if (!checkToAllAgreeClause(state.clause)) state.clause.all = false
     },
-    toggleAgreeToMarketinClause(state) {
+    toggleAgreeToMarketingClause(state) {
       state.clause.marketing = !state.clause.marketing
+
+      if (checkToAllAgreeClause(state.clause)) state.clause.all = true
+      if (!checkToAllAgreeClause(state.clause)) state.clause.all = false
     },
-    agreeToAllClause(state) {
-      state.clause.age = true
-      state.clause.term = true
-      state.clause.privacy = true
-      state.clause.marketing = true
-    },
-    disagreeToAllClause(state) {
+    toggleAgreeToAllClause(state) {
+      state.clause.all = !state.clause.all
+
+      if (state.clause.all) {
+        state.clause.age = true
+        state.clause.term = true
+        state.clause.privacy = true
+        state.clause.marketing = true
+        return
+      }
+
       state.clause.age = false
       state.clause.term = false
       state.clause.privacy = false
       state.clause.marketing = false
     },
+    resetAgree(state) {
+      state.clause.all = false
+      state.clause.age = false
+      state.clause.term = false
+      state.clause.privacy = false
+      state.clause.marketing = false
+    },
+
     duplicateToEmail(state) {
       state.check.email = true
     },
@@ -80,21 +112,21 @@ const signUpSlice = createSlice({
 })
 
 export const {
-  agreeToAllClause,
-  disagreeToAllClause,
+  toggleAgreeToAllClause,
   toggleAgreeToAgeClause,
-  toggleAgreeToMarketinClause,
+  toggleAgreeToMarketingClause,
   toggleAgreeToPrivacyClause,
   toggleAgreeToTermClause,
-  //   duplicateToEmail,
+  resetAgree,
+  duplicateToEmail,
   //   verifyToPhone,
   //   registrateToAddress,
-  //   resetEmailDuplication,
+  resetEmailDuplication,
   //   resetSignUpState,
   //   resetSignUpPhoneCheck,
 } = signUpSlice.actions
 
 export const seletSignUpClauseState = (state: RootState) => state.signUp.clause
-// export const selectSignUpCheckState = (state: RootState) => state.signUp.check
+export const selectSignUpCheckState = (state: RootState) => state.signUp.check
 
 export default signUpSlice.reducer

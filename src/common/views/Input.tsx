@@ -1,4 +1,4 @@
-import { ReactNode } from "react"
+import { ChangeEvent, ReactNode } from "react"
 
 export type InputType = "checkbox" | "text" | "password" | "number" | "tel"
 
@@ -10,11 +10,13 @@ interface IInput {
   classNames?: string
   placeholder?: string
   value?: string
-  onChange?: () => {}
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void
+  onBlur?: () => void
   isReadOnly?: boolean
   maxLength?: number
   minLength?: number
   children?: ReactNode
+  isShowFeedback?: boolean
 }
 
 const Input = ({
@@ -29,6 +31,8 @@ const Input = ({
   maxLength,
   minLength,
   children,
+  onBlur,
+  isShowFeedback,
 }: IInput) => {
   return (
     <div className={`${classNames} relative h-[38px] max-w-[400px]`}>
@@ -36,15 +40,16 @@ const Input = ({
         type={type}
         name={name}
         id={id}
-        className={`px-[10px] h-full w-full rounded-[5px] placeholder:text-[14px] ${
+        className={`px-[10px] h-full w-full rounded-[5px] placeholder:text-[14px] blur-lightRed  ${
           isReadOnly && "cursor-default"
-        }`}
+        } ${isShowFeedback && "border-error"}`}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
         readOnly={isReadOnly}
         maxLength={maxLength}
         minLength={minLength}
+        onBlur={onBlur}
       />
       {children}
     </div>

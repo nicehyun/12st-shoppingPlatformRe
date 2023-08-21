@@ -15,6 +15,7 @@ export interface IStage {
   stageContents: ReactNode[]
   firstButtonText: string
   finishButtonText: string
+  disabledNextButton: boolean[]
 }
 
 export default function Stage({
@@ -22,6 +23,7 @@ export default function Stage({
   stages,
   firstButtonText,
   finishButtonText,
+  disabledNextButton,
 }: IStage) {
   const [activeStep, setActiveStep] = useState(0)
 
@@ -90,7 +92,8 @@ export default function Stage({
         <Box sx={{ flex: "1 1 auto" }} />
         <Button
           onClick={handleNext}
-          className="text-white bg-lightRed md:text-[12px] sm:text-[10px] hover:border-lightRed border-[1px] dark:hover:bg-white hover:text-lightRed"
+          className="text-white bg-lightRed md:text-[12px] sm:text-[10px] hover:border-lightRed border-[1px] disabled:bg-border disabled:text-lightBlack dark:hover:bg-white hover:text-lightRed"
+          disabled={disabledNextButton[activeStep]}
         >
           {activeStep === stages.length
             ? finishButtonText

@@ -1,6 +1,14 @@
+"use client"
+
 import Stage, { IStage } from "@/common/views/Stage"
+import {
+  selectSignUpCheckState,
+  seletSignUpClauseState,
+} from "@/redux/features/signUpSlice"
+import { useAppSelector } from "@/redux/hooks"
 import SignUpClause from "../SIgnUpClause"
 import MSignUpAddressInput from "./MSignUpAddressInput"
+
 import MSignUpBirthInput from "./MSignUpBirthInput"
 import MSignUpEmailInput from "./MSignUpEmailInput"
 import MSignUpGenderInput from "./MSignUpGenderInput"
@@ -8,6 +16,9 @@ import MSignUpPasswordInput from "./MSignUpPasswordInput"
 import MSignUpPhoneVerificationInput from "./MSignUpPhoneVerificationInput"
 
 const MSignUpForm = () => {
+  const { age, privacy, term } = useAppSelector(seletSignUpClauseState)
+  const { email, address, phone } = useAppSelector(selectSignUpCheckState)
+
   const stageProps: IStage = {
     stages: [
       "약관동의",
@@ -29,6 +40,7 @@ const MSignUpForm = () => {
     ],
     firstButtonText: "동의하고 가입하기",
     finishButtonText: "회원가입",
+    disabledNextButton: [!age || !privacy || !term, !email],
   }
   return (
     <form className="lg:hidden xl:hidden w-[400px] mx-auto h-[500px]">

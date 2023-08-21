@@ -1,29 +1,30 @@
 "use client"
 
-import { seletSignUpClauseState } from "@/redux/features/signUpSlice"
+import {
+  toggleAgreeToAllClause,
+  seletSignUpClauseState,
+  toggleAgreeToAgeClause,
+  toggleAgreeToMarketingClause,
+  toggleAgreeToPrivacyClause,
+  toggleAgreeToTermClause,
+} from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { useState } from "react"
 import SignUpClauseEl from "./SIgnUpClauseEl"
 
-type Clause = "term" | "privacy" | "marketing"
+// type Clause = "term" | "privacy" | "marketing"
 
-type SelectedClause = {
-  clause: Clause
-  title: string
-  description: string
-}
+// type SelectedClause = {
+//   clause: Clause
+//   title: string
+//   description: string
+// }
 
 const SignUpClause = () => {
-  const [isAllAgree, setIsAllAgree] = useState(false)
-  const clauseState = useAppSelector(seletSignUpClauseState)
-  const [isShowClauseModal, setIsShowClauseModal] = useState(false)
-  const [selectedClause, setSelectedClasuse] = useState<SelectedClause | null>(
-    null
+  const { age, marketing, privacy, term, all } = useAppSelector(
+    seletSignUpClauseState
   )
 
   const dispatch = useAppDispatch()
-
-  console.log(clauseState)
 
   return (
     <div className="flex md:flex-col sm:flex-col lg:border-t-[1px] lg:border-lightBlack xl:border-t-[1px] xl:border-lightBlack px-[10px] py-[20px]">
@@ -36,57 +37,65 @@ const SignUpClause = () => {
           clauseType="all"
           label="모두 동의 (선택 정보 포함)"
           isClause={false}
-          isRequired={false}
           classNames="border-b-[1px] border-lightBlack"
-          isChecked={true}
+          isChecked={all}
           peer="peer/all"
           peerChecked={{
             borderColor: "peer-checked/all:after:border-lightRed",
           }}
+          onClickClause={() => dispatch(toggleAgreeToAllClause())}
         />
 
         <SignUpClauseEl
           clauseType="age"
           label="만 14세 이상입니다"
           isClause={false}
-          isChecked={true}
+          isChecked={age}
+          isRequired={true}
           peer="peer/age"
           peerChecked={{
             borderColor: "peer-checked/age:after:border-lightRed",
           }}
+          onClickClause={() => dispatch(toggleAgreeToAgeClause())}
         />
 
         <SignUpClauseEl
           clauseType="term"
           label="이용약관 동의"
           isClause={true}
-          isChecked={true}
+          isChecked={term}
+          isRequired={true}
           peer="peer/term"
           peerChecked={{
             borderColor: "peer-checked/term:after:border-lightRed",
           }}
+          onClickClause={() => dispatch(toggleAgreeToTermClause())}
         />
 
         <SignUpClauseEl
           clauseType="privacy"
           label="개인정보 수집 및 이용 동의"
           isClause={true}
-          isChecked={true}
+          isChecked={privacy}
+          isRequired={true}
           peer="peer/privacy"
           peerChecked={{
             borderColor: "peer-checked/privacy:after:border-lightRed",
           }}
+          onClickClause={() => dispatch(toggleAgreeToPrivacyClause())}
         />
 
         <SignUpClauseEl
           clauseType="marketing"
           label="광고성 정보 수신 및 마케팅 활용 동의"
           isClause={true}
-          isChecked={true}
+          isChecked={marketing}
+          isRequired={false}
           peer="peer/marketing"
           peerChecked={{
             borderColor: "peer-checked/marketing:after:border-lightRed",
           }}
+          onClickClause={() => dispatch(toggleAgreeToMarketingClause())}
         />
       </div>
     </div>

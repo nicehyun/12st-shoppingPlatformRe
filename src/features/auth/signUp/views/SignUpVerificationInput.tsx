@@ -3,6 +3,7 @@
 import Input, { InputType } from "@/common/views/Input"
 import SignUpSideButton from "@/features/auth/signUp/views/SignUpSideButton"
 import Timer from "@/common/views/TImer"
+import { ChangeEvent } from "react"
 
 type UserInputType = "email" | "phone" | "verificationPhone"
 
@@ -12,9 +13,13 @@ interface ISignUpVerificationInput {
   type: UserInputType
   isChecked?: boolean
   isLoading?: boolean
-  onClick?: () => void
+  inputValue: string
+  onChangeInputValue: (event: ChangeEvent<HTMLInputElement>) => void
+  onClickVerificationButton: () => void
+  onBlurInput: () => void
   isDisabledButton: boolean
   classNames?: string
+  isShowFeedback: boolean
 }
 
 // TODO : 버튼 disabled 할지 모달로 피드백 할지 고민하기
@@ -23,8 +28,12 @@ const SignUpVerificationInput = ({
   isChecked,
   isLoading,
   isDisabledButton,
-  onClick,
+  inputValue,
+  onChangeInputValue,
+  onClickVerificationButton,
+  onBlurInput,
   classNames,
+  isShowFeedback,
 }: ISignUpVerificationInput) => {
   let inputType: InputType = "text",
     placeholder = "",
@@ -64,7 +73,11 @@ const SignUpVerificationInput = ({
         id={type}
         placeholder={placeholder}
         classNames="flex-grow"
-        maxLength={6}
+        maxLength={type === "verificationPhone" ? 6 : undefined}
+        value={inputValue}
+        onChange={onChangeInputValue}
+        onBlur={onBlurInput}
+        isShowFeedback={isShowFeedback}
       >
         {type === "verificationPhone" && (
           <Timer
@@ -77,7 +90,7 @@ const SignUpVerificationInput = ({
 
       <SignUpSideButton
         classNames={`ml-[10px]`}
-        onClick={onClick}
+        onClick={onClickVerificationButton}
         isDisabled={isDisabledButton}
         content={
           isLoading ? (
