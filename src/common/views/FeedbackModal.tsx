@@ -42,7 +42,10 @@ export default function FeedbackModal() {
       aria-describedby="alert-dialog-slide-description"
     >
       <DialogContent>
-        <DialogContentText id="alert-dialog-slide-description">
+        <DialogContentText
+          id="alert-dialog-slide-description"
+          className="text-black text-[14px]"
+        >
           {modalContent}
         </DialogContentText>
       </DialogContent>
