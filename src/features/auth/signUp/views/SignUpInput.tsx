@@ -48,6 +48,7 @@ const SignUpInput = ({
       value={inputValue}
       onBlur={onBlurInput}
       onChange={onChangeInputValue}
+      isShowFeedback={isShowFeedback}
     />
   )
 }

@@ -12,15 +12,20 @@ import {
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { ChangeEvent, useEffect } from "react"
 import useEmailDuplicateCheckMutaion from "../../hooks/useEmailDuplicateMutation"
-import { useSignUpUserInput } from "../../hooks/useSignUpUserInput"
-import { emailValidator } from "../../utils/validation"
+import {
+  useSignUpUserInput,
+  useSignUpUserInputWithRePassword,
+} from "../../hooks/useSignUpUserInput"
+import { emailValidator, passwordValidator } from "../../utils/validation"
 import SignUpClause from "../SIgnUpClause"
 import MSignUpAddressInput from "./MSignUpAddressInput"
 
 import MSignUpBirthInput from "./MSignUpBirthInput"
 import MSignUpEmailInput, { IMSignUpEmailInput } from "./MSignUpEmailInput"
 import MSignUpGenderInput from "./MSignUpGenderInput"
-import MSignUpPasswordInput from "./MSignUpPasswordInput"
+import MSignUpPasswordInput, {
+  IMSignUpPasswordInput,
+} from "./MSignUpPasswordInput"
 import MSignUpPhoneVerificationInput from "./MSignUpPhoneVerificationInput"
 
 const MSignUpForm = () => {
@@ -41,6 +46,24 @@ const MSignUpForm = () => {
     hasError: hasErrorEmail,
     reset: emailInputReset,
   } = useSignUpUserInput(emailValidator)
+
+  const {
+    value: passwordInputValue,
+    handleValueChange: handlePasswordInputValueChange,
+    handleInputBlur: handlePasswordInputBlur,
+    isValid: isPasswordValid,
+    hasError: hasErrorPassword,
+    reset: passwordInputReset,
+  } = useSignUpUserInput(passwordValidator)
+
+  const {
+    value: repasswordInputValue,
+    handleValueChange: handleRepasswordInputValueChange,
+    handleInputBlur: handleRepasswordInputBlur,
+    isValid: isRepasswordValid,
+    hasError: hasErrorRepassword,
+    reset: repasswordInputReset,
+  } = useSignUpUserInputWithRePassword(passwordInputValue)
 
   const {
     isLoading: isEmailDuplicateCheckLoading,
@@ -76,6 +99,22 @@ const MSignUpForm = () => {
     onCheckEmailDuplicate: handleEmailDuplicateCheck,
   }
 
+  const mSignUpPasswordInputProps: IMSignUpPasswordInput = {
+    password: {
+      inputValue: passwordInputValue,
+      hasError: hasErrorPassword,
+      onBlurInput: handlePasswordInputBlur,
+      onChangeInputValue: handlePasswordInputValueChange,
+    },
+
+    repassword: {
+      inputValue: repasswordInputValue,
+      hasError: hasErrorRepassword,
+      onBlurInput: handleRepasswordInputBlur,
+      onChangeInputValue: handleRepasswordInputValueChange,
+    },
+  }
+
   const stageProps: IStage = {
     stages: [
       "약관동의",
@@ -89,7 +128,7 @@ const MSignUpForm = () => {
     stageContents: [
       <SignUpClause key="clause" />,
       <MSignUpEmailInput key="email" {...mSignUpEmailInputProps} />,
-      <MSignUpPasswordInput key="password" />,
+      <MSignUpPasswordInput key="password" {...mSignUpPasswordInputProps} />,
       <MSignUpPhoneVerificationInput key="phone" />,
       <MSignUpAddressInput key="address" />,
       <MSignUpGenderInput key="gender" />,
@@ -97,7 +136,11 @@ const MSignUpForm = () => {
     ],
     firstButtonText: "동의하고 가입하기",
     finishButtonText: "회원가입",
-    disabledNextButton: [!age || !privacy || !term, !email],
+    disabledNextButton: [
+      !age || !privacy || !term,
+      !isEmailValid || !email,
+      !isPasswordValid || !isRepasswordValid,
+    ],
   }
 
   useEffect(() => {

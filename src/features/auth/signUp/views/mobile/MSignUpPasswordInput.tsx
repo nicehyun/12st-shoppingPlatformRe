@@ -1,38 +1,51 @@
-import {
-  useSignUpUserInput,
-  useSignUpUserInputWithRePassword,
-} from "../../hooks/useSignUpUserInput"
-import { passwordValidator } from "../../utils/validation"
+import { ChangeEvent } from "react"
+
 import SignUpFeedback from "../SignUpFeedback"
 import SignUpInput from "../SignUpInput"
 import MSignUpInputLayout from "./MSignUpInputLayout"
 
-const MSignUpPasswordInput = () => {
-  const {
-    value: passwordInputValue,
-    handleValueChange: handlePasswordInputValueChange,
-    handleInputBlur: handlePasswordInputBlur,
-    isValid: isPasswordValid,
-    hasError: hasErrorPassword,
-    reset: passwordInputReset,
-  } = useSignUpUserInput(passwordValidator)
+export interface IMSignUpPasswordInput {
+  password: {
+    inputValue: string
 
+    onChangeInputValue: (event: ChangeEvent<HTMLInputElement>) => void
+    onBlurInput: () => void
+    hasError: boolean
+  }
+
+  repassword: {
+    inputValue: string
+
+    onChangeInputValue: (event: ChangeEvent<HTMLInputElement>) => void
+    onBlurInput: () => void
+    hasError: boolean
+  }
+}
+
+const MSignUpPasswordInput = ({
+  password,
+  repassword,
+}: IMSignUpPasswordInput) => {
   const {
-    value: rePasswordInputValue,
-    handleValueChange: handleRePasswordInputValueChange,
-    handleInputBlur: handleRePasswordInputBlur,
-    isValid: isRePasswordValid,
-    hasError: hasErrorRePassword,
-    reset: rePasswordInputReset,
-  } = useSignUpUserInputWithRePassword(passwordInputValue)
+    inputValue: passwordInputValue,
+    onChangeInputValue: onChangePasswordInputValue,
+    onBlurInput: onBlurPasswordInput,
+    hasError: hasErrorPassword,
+  } = password
+  const {
+    inputValue: repasswordInputValue,
+    onChangeInputValue: onChangeRepasswordInputValue,
+    onBlurInput: onBlurRepasswordInput,
+    hasError: hasErrorRepassword,
+  } = repassword
 
   return (
     <MSignUpInputLayout headingText="로그인에 사용할 비밀번호를 입력해주세요">
       <SignUpInput
         type="password"
         inputValue={passwordInputValue}
-        onChangeInputValue={handlePasswordInputValueChange}
-        onBlurInput={handlePasswordInputBlur}
+        onChangeInputValue={onChangePasswordInputValue}
+        onBlurInput={onBlurPasswordInput}
         isShowFeedback={hasErrorPassword}
       />
       {hasErrorPassword && (
@@ -45,12 +58,12 @@ const MSignUpPasswordInput = () => {
       <SignUpInput
         type="repassword"
         classNames="mt-[10px]"
-        inputValue={rePasswordInputValue}
-        onChangeInputValue={handleRePasswordInputValueChange}
-        onBlurInput={handleRePasswordInputBlur}
-        isShowFeedback={hasErrorRePassword}
+        inputValue={repasswordInputValue}
+        onChangeInputValue={onChangeRepasswordInputValue}
+        onBlurInput={onBlurRepasswordInput}
+        isShowFeedback={hasErrorRepassword}
       />
-      {hasErrorRePassword && (
+      {hasErrorRepassword && (
         <SignUpFeedback
           classNames="ml-[0px]"
           content="비밀번호가 일치하지 않습니다."
