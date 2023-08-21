@@ -1,5 +1,8 @@
+"use client"
+
 import Input, { InputType } from "@/common/views/Input"
-import { ChangeEvent } from "react"
+import PasswordToggleIcon from "@/common/views/PasswordToggleIcon"
+import { ChangeEvent, useState } from "react"
 
 type UserInputType = "password" | "repassword" | "name"
 
@@ -20,6 +23,18 @@ const SignUpInput = ({
   onBlurInput,
   onChangeInputValue,
 }: ISignUpInput) => {
+  const [isShowPassword, setIsShowPassword] = useState(false)
+  console.log(isShowPassword)
+
+  const handleShowPassword = () => {
+    console.log("ter")
+    setIsShowPassword(true)
+  }
+
+  const handleHidePassword = () => {
+    setIsShowPassword(false)
+  }
+
   let inputType: InputType = "text",
     placeholder = ""
 
@@ -38,18 +53,27 @@ const SignUpInput = ({
     default:
       break
   }
+
   return (
     <Input
-      type={inputType}
+      type={isShowPassword ? "text" : inputType}
       name={type}
       id={type}
       placeholder={placeholder}
-      classNames={`${classNames} flex-grow`}
+      classNames={`${classNames} flex-grow w-full`}
       value={inputValue}
       onBlur={onBlurInput}
       onChange={onChangeInputValue}
       isShowFeedback={isShowFeedback}
-    />
+    >
+      {(type === "password" || type === "repassword") && (
+        <PasswordToggleIcon
+          isShowPassword={isShowPassword}
+          onShowPassword={handleShowPassword}
+          onHidePassword={handleHidePassword}
+        />
+      )}
+    </Input>
   )
 }
 

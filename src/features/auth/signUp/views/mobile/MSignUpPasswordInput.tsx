@@ -48,6 +48,7 @@ const MSignUpPasswordInput = ({
         onBlurInput={onBlurPasswordInput}
         isShowFeedback={hasErrorPassword}
       />
+
       {hasErrorPassword && (
         <SignUpFeedback
           classNames="ml-[0px]"
