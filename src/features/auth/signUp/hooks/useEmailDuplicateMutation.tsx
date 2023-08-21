@@ -1,4 +1,4 @@
-import { emailDuplicateCheck } from "@/firebase/auth/signUp"
+import { emailDuplicateCheck } from "@/firebase/firestore/signUp"
 
 import { useMutation } from "@tanstack/react-query"
 

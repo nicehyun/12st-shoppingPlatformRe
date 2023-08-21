@@ -1,5 +1,5 @@
 import firebaseApp from "../config"
-// TODO : 디렉토리 변경
+
 import { doc, getDoc, getFirestore } from "firebase/firestore"
 
 const db = getFirestore(firebaseApp)
