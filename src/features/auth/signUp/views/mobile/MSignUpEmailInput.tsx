@@ -5,7 +5,7 @@ import {
   selectSignUpCheckState,
 } from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { ChangeEvent } from "react"
+import { ChangeEvent, useEffect } from "react"
 import useEmailDuplicateCheckMutaion from "../../hooks/useEmailDuplicateMutation"
 import { useSignUpUserInput } from "../../hooks/useSignUpUserInput"
 import { emailValidator } from "../../utils/validation"
@@ -52,6 +52,10 @@ const MSignUpEmailInput = () => {
     dispatch(duplicateToEmail())
     showFeedbackModalWithContent("시용 가능한 이메일입니다.")
   }
+
+  useEffect(() => {
+    emailInputReset()
+  }, [emailInputReset])
 
   return (
     <MSignUpInputLayout headingText="로그인에 사용할 이메일을 입력해주세요">
