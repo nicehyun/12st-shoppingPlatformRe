@@ -1,13 +1,25 @@
 import Input, { InputType } from "@/common/views/Input"
+import { ChangeEvent } from "react"
 
 type UserInputType = "password" | "repassword" | "name"
 
 interface ISignUpInput {
   type: UserInputType
   classNames?: string
+  inputValue: string
+  onChangeInputValue: (event: ChangeEvent<HTMLInputElement>) => void
+  onBlurInput: () => void
+  isShowFeedback: boolean
 }
 
-const SignUpInput = ({ type, classNames }: ISignUpInput) => {
+const SignUpInput = ({
+  type,
+  classNames,
+  inputValue,
+  isShowFeedback,
+  onBlurInput,
+  onChangeInputValue,
+}: ISignUpInput) => {
   let inputType: InputType = "text",
     placeholder = ""
 
@@ -33,6 +45,9 @@ const SignUpInput = ({ type, classNames }: ISignUpInput) => {
       id={type}
       placeholder={placeholder}
       classNames={`${classNames} flex-grow`}
+      value={inputValue}
+      onBlur={onBlurInput}
+      onChange={onChangeInputValue}
     />
   )
 }
