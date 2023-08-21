@@ -10,13 +10,18 @@ import {
   seletSignUpClauseState,
 } from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { ChangeEvent, useEffect } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
 import useEmailDuplicateCheckMutaion from "../../hooks/useEmailDuplicateMutation"
+import useRequestVerificationMutation from "../../hooks/useRequestVerificationMutation"
 import {
   useSignUpUserInput,
   useSignUpUserInputWithRePassword,
 } from "../../hooks/useSignUpUserInput"
-import { emailValidator, passwordValidator } from "../../utils/validation"
+import {
+  emailValidator,
+  passwordValidator,
+  phoneValidator,
+} from "../../utils/validation"
 import SignUpClause from "../SIgnUpClause"
 import MSignUpAddressInput from "./MSignUpAddressInput"
 
@@ -26,7 +31,9 @@ import MSignUpGenderInput from "./MSignUpGenderInput"
 import MSignUpPasswordInput, {
   IMSignUpPasswordInput,
 } from "./MSignUpPasswordInput"
-import MSignUpPhoneVerificationInput from "./MSignUpPhoneVerificationInput"
+import MSignUpPhoneVerificationInput, {
+  IMSignUpPhoneVerificationInput,
+} from "./MSignUpPhoneVerificationInput"
 
 const MSignUpForm = () => {
   const dispatch = useAppDispatch()
@@ -37,6 +44,8 @@ const MSignUpForm = () => {
 
   const { age, privacy, term } = useAppSelector(seletSignUpClauseState)
   const { email, address, phone } = useAppSelector(selectSignUpCheckState)
+
+  const [isShowVerificationInput, setIsShowVerificationInput] = useState(false)
 
   const {
     value: emailInputValue,
@@ -64,6 +73,30 @@ const MSignUpForm = () => {
     hasError: hasErrorRepassword,
     reset: repasswordInputReset,
   } = useSignUpUserInputWithRePassword(passwordInputValue)
+
+  const {
+    value: phoneInputValue,
+    handleValueChange: handlePhoneInputValueChange,
+    handleInputBlur: handlePhoneInputBlur,
+    isValid: isPhoneValid,
+    hasError: hasErrorPhone,
+    reset: phoneInputReset,
+  } = useSignUpUserInput(phoneValidator)
+
+  const {
+    isLoading: isRequestVerificationLoading,
+    mutateAsync: requestVerificationMutateAsync,
+  } = useRequestVerificationMutation(phoneInputValue)
+
+  const handleRequestPhoneVerification = async () => {
+    if (!isPhoneValid || phone) return
+
+    await requestVerificationMutateAsync()
+
+    showFeedbackModalWithContent("인증 번호가 발송되었습니다.")
+
+    setIsShowVerificationInput(true)
+  }
 
   const {
     isLoading: isEmailDuplicateCheckLoading,
@@ -115,6 +148,18 @@ const MSignUpForm = () => {
     },
   }
 
+  const mSignUpPhoneVerificationInputProps: IMSignUpPhoneVerificationInput = {
+    phone: {
+      inputValue: phoneInputValue,
+      hasError: hasErrorPhone,
+      isLoading: isRequestVerificationLoading,
+      onBlurInput: handlePhoneInputBlur,
+      onChangeInputValue: handlePhoneInputValueChange,
+      onClickVerificationButton: handleRequestPhoneVerification,
+    },
+    // verificationPhone: {},
+  }
+
   const stageProps: IStage = {
     stages: [
       "약관동의",
@@ -129,7 +174,10 @@ const MSignUpForm = () => {
       <SignUpClause key="clause" />,
       <MSignUpEmailInput key="email" {...mSignUpEmailInputProps} />,
       <MSignUpPasswordInput key="password" {...mSignUpPasswordInputProps} />,
-      <MSignUpPhoneVerificationInput key="phone" />,
+      <MSignUpPhoneVerificationInput
+        key="phone"
+        {...mSignUpPhoneVerificationInputProps}
+      />,
       <MSignUpAddressInput key="address" />,
       <MSignUpGenderInput key="gender" />,
       <MSignUpBirthInput key="birth" />,

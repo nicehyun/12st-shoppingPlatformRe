@@ -7,7 +7,6 @@ import MSignUpInputLayout from "./MSignUpInputLayout"
 export interface IMSignUpPasswordInput {
   password: {
     inputValue: string
-
     onChangeInputValue: (event: ChangeEvent<HTMLInputElement>) => void
     onBlurInput: () => void
     hasError: boolean
@@ -15,7 +14,6 @@ export interface IMSignUpPasswordInput {
 
   repassword: {
     inputValue: string
-
     onChangeInputValue: (event: ChangeEvent<HTMLInputElement>) => void
     onBlurInput: () => void
     hasError: boolean

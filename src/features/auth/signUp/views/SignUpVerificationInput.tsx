@@ -49,7 +49,7 @@ const SignUpVerificationInput = ({
       break
     case "phone":
       inputType = "tel"
-      placeholder = "숫자만 입력해주세요"
+      placeholder = "휴대폰 번호는 숫자만 입력해주세요"
       preVerificationButtonText = "인증하기"
       verifiedButtonContent = "인증완료"
       break
