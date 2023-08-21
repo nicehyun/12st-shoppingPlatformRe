@@ -24,10 +24,8 @@ const SignUpInput = ({
   onChangeInputValue,
 }: ISignUpInput) => {
   const [isShowPassword, setIsShowPassword] = useState(false)
-  console.log(isShowPassword)
 
   const handleShowPassword = () => {
-    console.log("ter")
     setIsShowPassword(true)
   }
 

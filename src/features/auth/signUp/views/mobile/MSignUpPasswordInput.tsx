@@ -51,7 +51,7 @@ const MSignUpPasswordInput = ({
 
       {hasErrorPassword && (
         <SignUpFeedback
-          classNames="ml-[0px]"
+          classNames="ml-[-0px]"
           content="영문, 숫자와 공백을 제외한 특수문자를 포함한 8~20자리를 입력해주세요."
         />
       )}
@@ -66,7 +66,7 @@ const MSignUpPasswordInput = ({
       />
       {hasErrorRepassword && (
         <SignUpFeedback
-          classNames="ml-[0px]"
+          classNames="ml-[-0px]"
           content="비밀번호가 일치하지 않습니다."
         />
       )}

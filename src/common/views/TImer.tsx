@@ -42,7 +42,7 @@ const Timer = ({
 
   return (
     <span
-      className={`absolute ${position.right} ${position.left} ${position.top} ${position.bottom} text-lightRed`}
+      className={`absolute ${position.right} ${position.left} ${position.top} ${position.bottom} text-lightRed text-[14px]`}
     >
       {formatTime(time)}
     </span>
