@@ -2,10 +2,12 @@
 
 import Stage, { IStage } from "@/common/views/Stage"
 import {
+  resetSignUpState,
   selectSignUpCheckState,
   seletSignUpClauseState,
 } from "@/redux/features/signUpSlice"
-import { useAppSelector } from "@/redux/hooks"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { useEffect } from "react"
 import SignUpClause from "../SIgnUpClause"
 import MSignUpAddressInput from "./MSignUpAddressInput"
 
@@ -16,6 +18,8 @@ import MSignUpPasswordInput from "./MSignUpPasswordInput"
 import MSignUpPhoneVerificationInput from "./MSignUpPhoneVerificationInput"
 
 const MSignUpForm = () => {
+  const dispatch = useAppDispatch()
+
   const { age, privacy, term } = useAppSelector(seletSignUpClauseState)
   const { email, address, phone } = useAppSelector(selectSignUpCheckState)
 
@@ -42,6 +46,11 @@ const MSignUpForm = () => {
     finishButtonText: "회원가입",
     disabledNextButton: [!age || !privacy || !term, !email],
   }
+
+  useEffect(() => {
+    dispatch(resetSignUpState())
+  }, [dispatch])
+
   return (
     <form className="lg:hidden xl:hidden w-[400px] mx-auto h-[500px]">
       <h2 className="mb-[20px] text-[20px] font-bold text-center">회원가입</h2>

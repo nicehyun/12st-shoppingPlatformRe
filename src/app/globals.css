@@ -44,6 +44,24 @@
     color: rgba(255, 255, 255, 0.8);
     cursor: pointer;
   }
+
+  .loading {
+    display: inline-block;
+    border: 5px solid rgba(3, 3, 3, 0.2);
+    border-radius: 50%;
+    border-top-color: #ff4e0a;
+    animation: spin 1s ease-in-out infinite;
+    -webkit-animation: spin 1s ease-in-out infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 }
 
 body {

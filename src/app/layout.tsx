@@ -2,11 +2,11 @@ import "./globals.css"
 
 import { Roboto } from "next/font/google"
 import Providers from "../common/utils/Providers"
-import ThemeSwitcher from "../common/utils/ThemeSwitcher"
 
 import MNavgation from "../features/layout/views/mobile/MNavgation"
 import Header from "@/features/layout/views/Header"
 import Footer from "@/features/layout/views/Footer"
+import FeedbackModal from "@/common/views/FeedbackModal"
 
 const roboto = Roboto({
   weight: ["400", "700"],
@@ -28,6 +28,8 @@ export default function RootLayout({
           {children}
 
           <MNavgation />
+
+          <FeedbackModal />
 
           <Footer />
         </Providers>

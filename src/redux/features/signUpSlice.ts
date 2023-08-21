@@ -10,7 +10,7 @@ export type Clause = {
   marketing: boolean
 }
 
-export type DuplicateCheck = {
+export type verifivationCheck = {
   email: boolean
   phone: boolean
   address: boolean
@@ -18,7 +18,7 @@ export type DuplicateCheck = {
 
 type InitialSignUpState = {
   clause: Clause
-  check: DuplicateCheck
+  check: verifivationCheck
 }
 
 const initialSignUpState: InitialSignUpState = {
@@ -119,10 +119,10 @@ export const {
   toggleAgreeToTermClause,
   resetAgree,
   duplicateToEmail,
-  //   verifyToPhone,
+  // verifyToPhone,
   //   registrateToAddress,
   resetEmailDuplication,
-  //   resetSignUpState,
+  resetSignUpState,
   //   resetSignUpPhoneCheck,
 } = signUpSlice.actions
 

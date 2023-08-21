@@ -4,6 +4,7 @@ import Input, { InputType } from "@/common/views/Input"
 import SignUpSideButton from "@/features/auth/signUp/views/SignUpSideButton"
 import Timer from "@/common/views/TImer"
 import { ChangeEvent } from "react"
+import Loading from "@/common/views/Loading"
 
 type UserInputType = "email" | "phone" | "verificationPhone"
 
@@ -12,7 +13,7 @@ type UserInputType = "email" | "phone" | "verificationPhone"
 interface ISignUpVerificationInput {
   type: UserInputType
   isChecked?: boolean
-  isLoading?: boolean
+  isLoading: boolean
   inputValue: string
   onChangeInputValue: (event: ChangeEvent<HTMLInputElement>) => void
   onClickVerificationButton: () => void
@@ -62,7 +63,7 @@ const SignUpVerificationInput = ({
       break
   }
   const test = () => {
-    console.log(test)
+    console.log("test")
   }
 
   return (
@@ -94,7 +95,10 @@ const SignUpVerificationInput = ({
         isDisabled={isDisabledButton}
         content={
           isLoading ? (
-            <span>로딩</span>
+            <Loading
+              spinnerSize={{ height: "h-[20px]", width: "w-[20px]" }}
+              isFrame={false}
+            />
           ) : isChecked ? (
             verifiedButtonContent
           ) : (

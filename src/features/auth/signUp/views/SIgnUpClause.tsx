@@ -11,14 +11,6 @@ import {
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import SignUpClauseEl from "./SIgnUpClauseEl"
 
-// type Clause = "term" | "privacy" | "marketing"
-
-// type SelectedClause = {
-//   clause: Clause
-//   title: string
-//   description: string
-// }
-
 const SignUpClause = () => {
   const { age, marketing, privacy, term, all } = useAppSelector(
     seletSignUpClauseState
