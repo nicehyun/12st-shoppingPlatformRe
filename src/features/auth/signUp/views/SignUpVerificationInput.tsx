@@ -17,10 +17,11 @@ interface ISignUpVerificationInput {
   inputValue: string
   onChangeInputValue: (event: ChangeEvent<HTMLInputElement>) => void
   onClickVerificationButton: () => void
-  onBlurInput: () => void
+  onBlurInput?: () => void
   isDisabledButton: boolean
   classNames?: string
-  isShowFeedback: boolean
+  isShowFeedback?: boolean
+  isReadOnly?: boolean
 }
 
 // TODO : 버튼 disabled 할지 모달로 피드백 할지 고민하기
@@ -35,6 +36,7 @@ const SignUpVerificationInput = ({
   onBlurInput,
   classNames,
   isShowFeedback,
+  isReadOnly,
 }: ISignUpVerificationInput) => {
   let inputType: InputType = "text",
     placeholder = "",
@@ -55,7 +57,7 @@ const SignUpVerificationInput = ({
       break
 
     case "verificationPhone":
-      placeholder = "인증번호를 입력해주세요"
+      placeholder = "인증번호 6자리를 입력해주세요"
       preVerificationButtonText = "인증"
       verifiedButtonContent = "인증"
       break
@@ -79,6 +81,7 @@ const SignUpVerificationInput = ({
         onChange={onChangeInputValue}
         onBlur={onBlurInput}
         isShowFeedback={isShowFeedback}
+        isReadOnly={isReadOnly}
       >
         {type === "verificationPhone" && (
           <Timer

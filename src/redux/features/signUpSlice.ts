@@ -119,7 +119,7 @@ export const {
   toggleAgreeToTermClause,
   resetAgree,
   duplicateToEmail,
-  // verifyToPhone,
+  verifyToPhone,
   //   registrateToAddress,
   resetEmailDuplication,
   resetSignUpState,

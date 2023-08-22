@@ -8,11 +8,13 @@ import {
   resetSignUpState,
   selectSignUpCheckState,
   seletSignUpClauseState,
+  verifyToPhone,
 } from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { ChangeEvent, useEffect, useState } from "react"
 import useEmailDuplicateCheckMutaion from "../../hooks/useEmailDuplicateMutation"
 import useRequestVerificationMutation from "../../hooks/useRequestVerificationMutation"
+import useSendVerificationCodeMutation from "../../hooks/useSendVerificationCodeMutation"
 import {
   useSignUpUserInput,
   useSignUpUserInputWithRePassword,
@@ -46,6 +48,7 @@ const MSignUpForm = () => {
   const { email, address, phone } = useAppSelector(selectSignUpCheckState)
 
   const [isShowVerificationInput, setIsShowVerificationInput] = useState(false)
+  const [verificationCode, setVerificationCode] = useState("")
 
   const {
     value: emailInputValue,
@@ -121,6 +124,26 @@ const MSignUpForm = () => {
     showFeedbackModalWithContent("시용 가능한 이메일입니다.")
   }
 
+  const handleVerification = async () => {
+    const isVerificationValidAsync = await sendVerificationCodeMutateAsync()
+
+    if (!isVerificationValidAsync) {
+      showFeedbackModalWithContent("인증 번호가 틀렸습니다.")
+
+      return
+    }
+
+    showFeedbackModalWithContent("본인인증이 완료되었습니다.")
+
+    setIsShowVerificationInput(false)
+    dispatch(verifyToPhone())
+  }
+
+  const {
+    isLoading: isSendVerificationCodeLoading,
+    mutateAsync: sendVerificationCodeMutateAsync,
+  } = useSendVerificationCodeMutation(phoneInputValue, verificationCode)
+
   const mSignUpEmailInputProps: IMSignUpEmailInput = {
     emailInputValue,
     hasErrorEmail,
@@ -155,9 +178,16 @@ const MSignUpForm = () => {
       isLoading: isRequestVerificationLoading,
       onBlurInput: handlePhoneInputBlur,
       onChangeInputValue: handlePhoneInputValueChange,
-      onClickVerificationButton: handleRequestPhoneVerification,
+      onRequestVerificate: handleRequestPhoneVerification,
     },
-    // verificationPhone: {},
+    verificationPhone: {
+      isShowVerificationInput,
+      inputValue: verificationCode,
+      onChangeInputValue: (event) => setVerificationCode(event.target.value),
+      onResponseVerificate: handleVerification,
+      isLoading: isSendVerificationCodeLoading,
+      isSuccessVerification: phone,
+    },
   }
 
   const stageProps: IStage = {

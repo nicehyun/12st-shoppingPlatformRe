@@ -11,7 +11,7 @@ export interface IMSignUpEmailInput {
   onChangeEmailInputValue: (event: ChangeEvent<HTMLInputElement>) => void
   onBlurEmailInput: () => void
   hasErrorEmail: boolean
-  onCheckEmailDuplicate: () => void
+  onCheckEmailDuplicate: () => Promise<void>
 }
 
 const MSignUpEmailInput = ({
