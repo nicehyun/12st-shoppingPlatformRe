@@ -84,7 +84,7 @@ const signUpSlice = createSlice({
       state.clause.marketing = false
     },
 
-    duplicateToEmail(state) {
+    checkToEmailDuplication(state) {
       state.check.email = true
     },
     verifyToPhone(state) {
@@ -118,7 +118,7 @@ export const {
   toggleAgreeToPrivacyClause,
   toggleAgreeToTermClause,
   resetAgree,
-  duplicateToEmail,
+  checkToEmailDuplication,
   verifyToPhone,
   enterToAddress,
   resetEmailDuplication,

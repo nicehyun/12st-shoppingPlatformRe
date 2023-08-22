@@ -3,16 +3,14 @@
 import Stage, { IStage } from "@/common/views/Stage"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
 import {
-  duplicateToEmail,
-  resetEmailDuplication,
   resetSignUpState,
   selectSignUpCheckState,
   seletSignUpClauseState,
   verifyToPhone,
 } from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { ChangeEvent, useEffect, useState } from "react"
-import useEmailDuplicateCheckMutaion from "../../hooks/useEmailDuplicateMutation"
+import { useEffect, useState } from "react"
+
 import useRequestVerificationMutation from "../../hooks/useRequestVerificationMutation"
 import useSendVerificationCodeMutation from "../../hooks/useSendVerificationCodeMutation"
 import {
@@ -21,7 +19,6 @@ import {
 } from "../../hooks/useSignUpUserInput"
 import {
   additionalAddressValidator,
-  emailValidator,
   passwordValidator,
   phoneValidator,
 } from "../../utils/validation"
@@ -31,7 +28,7 @@ import MSignUpAddressInput, {
 } from "./MSignUpAddressInput"
 
 import MSignUpBirthInput from "./MSignUpBirthInput"
-import MSignUpEmailInput, { IMSignUpEmailInput } from "./MSignUpEmailInput"
+import MSignUpEmailInput from "./MSignUpEmailInput"
 import MSignUpGenderInput from "./MSignUpGenderInput"
 import MSignUpPasswordInput, {
   IMSignUpPasswordInput,
@@ -50,6 +47,8 @@ const MSignUpForm = () => {
   const { age, privacy, term } = useAppSelector(seletSignUpClauseState)
   const { email, address, phone } = useAppSelector(selectSignUpCheckState)
 
+  console.log(`email check : ${email}`)
+
   const [isShowVerificationInput, setIsShowVerificationInput] = useState(false)
   const [verificationCode, setVerificationCode] = useState("")
 
@@ -61,15 +60,6 @@ const MSignUpForm = () => {
     hasError: hasErrorAdditionalAddress,
     reset: additionalAddressInputReset,
   } = useSignUpUserInput(additionalAddressValidator)
-
-  const {
-    value: emailInputValue,
-    handleValueChange: handleEmailInputValueChange,
-    handleInputBlur: handleEmailInputBlur,
-    isValid: isEmailValid,
-    hasError: hasErrorEmail,
-    reset: emailInputReset,
-  } = useSignUpUserInput(emailValidator)
 
   const {
     value: passwordInputValue,
@@ -113,29 +103,6 @@ const MSignUpForm = () => {
     setIsShowVerificationInput(true)
   }
 
-  const {
-    isLoading: isEmailDuplicateCheckLoading,
-    mutateAsync: emailDuplicateCheckMutateAsync,
-  } = useEmailDuplicateCheckMutaion(emailInputValue)
-
-  const handleEmailInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch(resetEmailDuplication())
-
-    handleEmailInputValueChange(event)
-  }
-
-  const handleEmailDuplicateCheck = async () => {
-    const isExistedEmail = await emailDuplicateCheckMutateAsync()
-
-    if (isExistedEmail) {
-      showFeedbackModalWithContent("사용할 수 없는 이메일입니다.")
-      return
-    }
-
-    dispatch(duplicateToEmail())
-    showFeedbackModalWithContent("시용 가능한 이메일입니다.")
-  }
-
   const handleVerification = async () => {
     const isVerificationValidAsync = await sendVerificationCodeMutateAsync()
 
@@ -156,6 +123,7 @@ const MSignUpForm = () => {
 
     const formData = new FormData(event.currentTarget)
 
+    console.log(`email :  ${formData.get("email")}`)
     console.log(`year :  ${formData.get("birthYear")}`)
   }
 
@@ -163,17 +131,6 @@ const MSignUpForm = () => {
     isLoading: isSendVerificationCodeLoading,
     mutateAsync: sendVerificationCodeMutateAsync,
   } = useSendVerificationCodeMutation(phoneInputValue, verificationCode)
-
-  const mSignUpEmailInputProps: IMSignUpEmailInput = {
-    emailInputValue,
-    hasErrorEmail,
-    isCheckedEmail: email,
-    isEmailDuplicateCheckLoading,
-    isEmailValid,
-    onBlurEmailInput: handleEmailInputBlur,
-    onChangeEmailInputValue: handleEmailInputChange,
-    onCheckEmailDuplicate: handleEmailDuplicateCheck,
-  }
 
   const mSignUpPhoneVerificationInputProps: IMSignUpPhoneVerificationInput = {
     phone: {
@@ -231,7 +188,7 @@ const MSignUpForm = () => {
     ],
     stageContents: [
       <SignUpClause key="clause" />,
-      <MSignUpEmailInput key="email" {...mSignUpEmailInputProps} />,
+      <MSignUpEmailInput key="email" />,
       <MSignUpPasswordInput key="password" {...mSignUpPasswordInputProps} />,
       <MSignUpPhoneVerificationInput
         key="phone"
@@ -244,11 +201,11 @@ const MSignUpForm = () => {
     firstButtonText: "동의하고 가입하기",
     finishButtonText: "회원가입",
     disabledNextButton: [
-      !age || !privacy || !term,
-      !isEmailValid || !email,
-      !isPasswordValid || !isRepasswordValid,
-      !isPhoneValid || !phone,
-      !isAdditionalAddressValid,
+      // !age || !privacy || !term,
+      // !isEmailValid || !email,
+      // !isPasswordValid || !isRepasswordValid,
+      // !isPhoneValid || !phone,
+      // !isAdditionalAddressValid,
     ],
   }
 
