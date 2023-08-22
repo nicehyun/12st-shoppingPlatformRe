@@ -90,7 +90,7 @@ const signUpSlice = createSlice({
     verifyToPhone(state) {
       state.check.phone = true
     },
-    registrateToAddress(state) {
+    enterToAddress(state) {
       state.check.address = true
     },
     resetEmailDuplication(state) {
@@ -120,7 +120,7 @@ export const {
   resetAgree,
   duplicateToEmail,
   verifyToPhone,
-  //   registrateToAddress,
+  enterToAddress,
   resetEmailDuplication,
   resetSignUpState,
   //   resetSignUpPhoneCheck,

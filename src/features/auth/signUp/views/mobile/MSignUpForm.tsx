@@ -20,12 +20,15 @@ import {
   useSignUpUserInputWithRePassword,
 } from "../../hooks/useSignUpUserInput"
 import {
+  additionalAddressValidator,
   emailValidator,
   passwordValidator,
   phoneValidator,
 } from "../../utils/validation"
 import SignUpClause from "../SIgnUpClause"
-import MSignUpAddressInput from "./MSignUpAddressInput"
+import MSignUpAddressInput, {
+  IMSignUpAddressInput,
+} from "./MSignUpAddressInput"
 
 import MSignUpBirthInput from "./MSignUpBirthInput"
 import MSignUpEmailInput, { IMSignUpEmailInput } from "./MSignUpEmailInput"
@@ -49,6 +52,15 @@ const MSignUpForm = () => {
 
   const [isShowVerificationInput, setIsShowVerificationInput] = useState(false)
   const [verificationCode, setVerificationCode] = useState("")
+
+  const {
+    value: additionalAddressInputValue,
+    handleValueChange: handleAdditionalAddressInputValueChange,
+    handleInputBlur: handleAdditionalAddressInputBlur,
+    isValid: isAdditionalAddressValid,
+    hasError: hasErrorAdditionalAddress,
+    reset: additionalAddressInputReset,
+  } = useSignUpUserInput(additionalAddressValidator)
 
   const {
     value: emailInputValue,
@@ -190,6 +202,15 @@ const MSignUpForm = () => {
     },
   }
 
+  const mSignUpAddressInputProps: IMSignUpAddressInput = {
+    additionalAddressInputValue,
+    hasErrorAdditionalAddress,
+    onBlurAdditionalAddressInput: handleAdditionalAddressInputBlur,
+    onChangeAdditionalAddressInputValue:
+      handleAdditionalAddressInputValueChange,
+    reset: additionalAddressInputReset,
+  }
+
   const stageProps: IStage = {
     stages: [
       "약관동의",
@@ -208,7 +229,7 @@ const MSignUpForm = () => {
         key="phone"
         {...mSignUpPhoneVerificationInputProps}
       />,
-      <MSignUpAddressInput key="address" />,
+      <MSignUpAddressInput key="address" {...mSignUpAddressInputProps} />,
       <MSignUpGenderInput key="gender" />,
       <MSignUpBirthInput key="birth" />,
     ],
@@ -218,6 +239,8 @@ const MSignUpForm = () => {
       !age || !privacy || !term,
       !isEmailValid || !email,
       !isPasswordValid || !isRepasswordValid,
+      !isPhoneValid || !phone,
+      !isAdditionalAddressValid,
     ],
   }
 
