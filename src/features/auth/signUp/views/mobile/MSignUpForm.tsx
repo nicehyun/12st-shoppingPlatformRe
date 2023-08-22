@@ -151,6 +151,14 @@ const MSignUpForm = () => {
     dispatch(verifyToPhone())
   }
 
+  const handletestSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    const formData = new FormData(event.currentTarget)
+
+    console.log(`year :  ${formData.get("birthYear")}`)
+  }
+
   const {
     isLoading: isSendVerificationCodeLoading,
     mutateAsync: sendVerificationCodeMutateAsync,
@@ -165,22 +173,6 @@ const MSignUpForm = () => {
     onBlurEmailInput: handleEmailInputBlur,
     onChangeEmailInputValue: handleEmailInputChange,
     onCheckEmailDuplicate: handleEmailDuplicateCheck,
-  }
-
-  const mSignUpPasswordInputProps: IMSignUpPasswordInput = {
-    password: {
-      inputValue: passwordInputValue,
-      hasError: hasErrorPassword,
-      onBlurInput: handlePasswordInputBlur,
-      onChangeInputValue: handlePasswordInputValueChange,
-    },
-
-    repassword: {
-      inputValue: repasswordInputValue,
-      hasError: hasErrorRepassword,
-      onBlurInput: handleRepasswordInputBlur,
-      onChangeInputValue: handleRepasswordInputValueChange,
-    },
   }
 
   const mSignUpPhoneVerificationInputProps: IMSignUpPhoneVerificationInput = {
@@ -209,6 +201,22 @@ const MSignUpForm = () => {
     onChangeAdditionalAddressInputValue:
       handleAdditionalAddressInputValueChange,
     reset: additionalAddressInputReset,
+  }
+
+  const mSignUpPasswordInputProps: IMSignUpPasswordInput = {
+    password: {
+      inputValue: passwordInputValue,
+      hasError: hasErrorPassword,
+      onBlurInput: handlePasswordInputBlur,
+      onChangeInputValue: handlePasswordInputValueChange,
+    },
+
+    repassword: {
+      inputValue: repasswordInputValue,
+      hasError: hasErrorRepassword,
+      onBlurInput: handleRepasswordInputBlur,
+      onChangeInputValue: handleRepasswordInputValueChange,
+    },
   }
 
   const stageProps: IStage = {
@@ -249,10 +257,14 @@ const MSignUpForm = () => {
   }, [dispatch])
 
   return (
-    <form className="lg:hidden xl:hidden w-[400px] mx-auto h-[500px]">
+    <form
+      onSubmit={handletestSubmit}
+      className="lg:hidden xl:hidden w-[400px] mx-auto h-[500px]"
+    >
       <h2 className="mb-[20px] text-[20px] font-bold text-center">회원가입</h2>
 
       <Stage {...stageProps} />
+      <button>테스트 회원가입 버튼</button>
     </form>
   )
 }

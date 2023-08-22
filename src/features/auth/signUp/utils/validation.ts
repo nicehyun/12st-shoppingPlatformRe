@@ -1,5 +1,7 @@
 export type InputValidator = (value: string) => boolean
 
+export type DayInputValidator = (month: string, day: string) => boolean
+
 export const emailValidator: InputValidator = (value) => {
   const emailExp = /[\w]+@[\w]+\.[a-zA-Z]+/
 
@@ -25,7 +27,15 @@ export const phoneValidator: InputValidator = (value) => {
 
 export const birthYearValidator: InputValidator = (value) => {
   const birthYearRegex = /^(19|20)\d{2}$/
-  return birthYearRegex.test(value)
+  const currentYear = new Date().getFullYear()
+
+  if (birthYearRegex.test(value)) {
+    if (+value <= currentYear) {
+      return true
+    }
+  }
+
+  return false
 }
 
 export const birthMonthValidator: InputValidator = (value) => {
@@ -33,9 +43,35 @@ export const birthMonthValidator: InputValidator = (value) => {
   return birthMonthRegex.test(value)
 }
 
-export const birthDayValidator: InputValidator = (value) => {
-  const birthDayRegex = /^(0[1-9]|[1-2]\d|3[0-1])$/
-  return birthDayRegex.test(value)
+export const birthDayValidatorWithMonth = (month: string) => {
+  const parsedMonth = +month
+
+  const maxDaysByMonth: Record<number, number> = {
+    1: 31,
+    2: 28,
+    3: 31,
+    4: 30,
+    5: 31,
+    6: 30,
+    7: 31,
+    8: 31,
+    9: 30,
+    10: 31,
+    11: 30,
+    12: 31,
+  }
+
+  const birthDayValidator = (day: string) => {
+    const parsedDay = +day
+
+    if (parsedDay >= 1 && parsedDay <= maxDaysByMonth[parsedMonth]) {
+      return true
+    }
+
+    return false
+  }
+
+  return birthDayValidator
 }
 
 export const additionalAddressValidator: InputValidator = (value) => {

@@ -25,7 +25,7 @@ export default function Stage({
   finishButtonText,
   disabledNextButton,
 }: IStage) {
-  const [activeStep, setActiveStep] = useState(4)
+  const [activeStep, setActiveStep] = useState(6)
 
   const isShowStageContent = (stage: number, activeStage: number) => {
     return stage === activeStage
@@ -78,7 +78,9 @@ export default function Stage({
         })}
       </Stepper>
 
-      {stageContents[activeStep]}
+      {/* {stageContents[activeStep]} */}
+
+      {stageContents.map((stageContent)=>)}
       <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
         <Button
           color="inherit"
