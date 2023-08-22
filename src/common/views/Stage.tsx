@@ -25,7 +25,7 @@ export default function Stage({
   finishButtonText,
   disabledNextButton,
 }: IStage) {
-  const [activeStep, setActiveStep] = useState(6)
+  const [activeStep, setActiveStep] = useState(0)
 
   const isShowStageContent = (stage: number, activeStage: number) => {
     return stage === activeStage
@@ -78,9 +78,14 @@ export default function Stage({
         })}
       </Stepper>
 
-      {/* {stageContents[activeStep]} */}
-
-      {stageContents.map((stageContent)=>)}
+      {stageContents.map((stageContent, index) => (
+        <div
+          className={`${index !== activeStep && "opacity-0 hidden"}`}
+          key={index}
+        >
+          {stageContent}
+        </div>
+      ))}
       <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
         <Button
           color="inherit"
