@@ -7,20 +7,23 @@ import { enterToAddress } from "@/redux/features/signUpSlice"
 import { useAppDispatch } from "@/redux/hooks"
 import { useState } from "react"
 import { Address } from "react-daum-postcode"
-import { IMSignUpAddressInput } from "./mobile/MSignUpAddressInput"
+import { useSignUpUserInput } from "../hooks/useSignUpUserInput"
+import { additionalAddressValidator } from "../utils/validation"
+
 import SignUpFeedback from "./SignUpFeedback"
 
-const SignUpAddressInput = ({
-  additionalAddressInputValue,
-  hasErrorAdditionalAddress,
-  onBlurAdditionalAddressInput,
-  onChangeAdditionalAddressInputValue,
-  reset,
-}: IMSignUpAddressInput) => {
+const SignUpAddressInput = () => {
   const dispatch = useAppDispatch()
 
   const [isShowPostCodeModal, setIsShowPostCodeModal] = useState(false)
   const [addressValue, setAddressValue] = useState("")
+
+  const {
+    value: additionalAddressInputValue,
+    handleValueChange: handleAdditionalAddressInputValueChange,
+    handleInputBlur: handleAdditionalAddressInputBlur,
+    hasError: hasErrorAdditionalAddress,
+  } = useSignUpUserInput(additionalAddressValidator)
 
   const handleAddressSearch = (address: Address) => {
     dispatch(enterToAddress())
@@ -54,9 +57,9 @@ const SignUpAddressInput = ({
           id="additionalAddress"
           placeholder="나머지 주소를 입력해주세요"
           value={additionalAddressInputValue}
-          onBlur={onBlurAdditionalAddressInput}
+          onBlur={handleAdditionalAddressInputBlur}
           isShowFeedback={hasErrorAdditionalAddress}
-          onChange={onChangeAdditionalAddressInputValue}
+          onChange={handleAdditionalAddressInputValueChange}
         />
       </div>
       {hasErrorAdditionalAddress && (

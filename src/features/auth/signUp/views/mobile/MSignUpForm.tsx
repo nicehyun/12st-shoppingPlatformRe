@@ -1,22 +1,17 @@
 "use client"
 
 import Stage, { IStage } from "@/common/views/Stage"
-import { showFeedbackModal } from "@/redux/features/modalSlice"
+
 import {
   resetSignUpState,
   selectSignUpCheckState,
   seletSignUpClauseState,
-  verifyToPhone,
 } from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { useEffect } from "react"
 
-import { useSignUpUserInput } from "../../hooks/useSignUpUserInput"
-import { additionalAddressValidator } from "../../utils/validation"
 import SignUpClause from "../SIgnUpClause"
-import MSignUpAddressInput, {
-  IMSignUpAddressInput,
-} from "./MSignUpAddressInput"
+import MSignUpAddressInput from "./MSignUpAddressInput"
 
 import MSignUpBirthInput from "./MSignUpBirthInput"
 import MSignUpEmailInput from "./MSignUpEmailInput"
@@ -32,15 +27,7 @@ const MSignUpForm = () => {
 
   console.log(`email check : ${email}`)
   console.log(`phone check : ${phone}`)
-
-  const {
-    value: additionalAddressInputValue,
-    handleValueChange: handleAdditionalAddressInputValueChange,
-    handleInputBlur: handleAdditionalAddressInputBlur,
-    isValid: isAdditionalAddressValid,
-    hasError: hasErrorAdditionalAddress,
-    reset: additionalAddressInputReset,
-  } = useSignUpUserInput(additionalAddressValidator)
+  console.log(`address check : ${address}`)
 
   const handletestSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -49,16 +36,10 @@ const MSignUpForm = () => {
 
     console.log(`email :  ${formData.get("email")}`)
     console.log(`password :  ${formData.get("password")}`)
+    console.log(`address :  ${formData.get("address")}`)
+    console.log(`additionalAddress :  ${formData.get("additionalAddress")}`)
+    console.log(`gender :  ${formData.get("gender")}`)
     console.log(`year :  ${formData.get("birthYear")}`)
-  }
-
-  const mSignUpAddressInputProps: IMSignUpAddressInput = {
-    additionalAddressInputValue,
-    hasErrorAdditionalAddress,
-    onBlurAdditionalAddressInput: handleAdditionalAddressInputBlur,
-    onChangeAdditionalAddressInputValue:
-      handleAdditionalAddressInputValueChange,
-    reset: additionalAddressInputReset,
   }
 
   const stageProps: IStage = {
@@ -76,7 +57,7 @@ const MSignUpForm = () => {
       <MSignUpEmailInput key="email" />,
       <MSignUpPasswordInput key="password" />,
       <MSignUpPhoneVerificationInput key="phone" />,
-      <MSignUpAddressInput key="address" {...mSignUpAddressInputProps} />,
+      <MSignUpAddressInput key="address" />,
       <MSignUpGenderInput key="gender" />,
       <MSignUpBirthInput key="birth" />,
     ],
