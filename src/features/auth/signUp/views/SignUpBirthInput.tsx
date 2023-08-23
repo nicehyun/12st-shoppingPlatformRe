@@ -2,6 +2,7 @@
 
 import { ChangeEvent } from "react"
 import { useSignUpUserInput } from "../hooks/useSignUpUserInput"
+import { Mobile } from "../types/mobile"
 import {
   birthDayValidatorWithMonth,
   birthMonthValidator,
@@ -10,7 +11,7 @@ import {
 import SignUpFeedback from "./SignUpFeedback"
 
 // TODO : Valid => 글로벌 처리, ㅑnputReset 제거
-const SignUpBirthInput = () => {
+const SignUpBirthInput = ({ isMobile }: Mobile) => {
   const {
     value: yearInputValue,
     handleValueChange: handleYearInputValueChange,
@@ -68,6 +69,7 @@ const SignUpBirthInput = () => {
           type="number"
           placeholder="YYYY"
           maxLength={4}
+          id={isMobile ? "m-birthYear" : "birthYear"}
           name="birthYear"
           value={yearInputValue}
           onChange={(event) =>
@@ -81,6 +83,7 @@ const SignUpBirthInput = () => {
           type="number"
           placeholder="MM"
           maxLength={2}
+          id={isMobile ? "m-birthMonth" : "birthMonth"}
           name="birthMonth"
           value={monthInputValue}
           onChange={(event) =>
@@ -95,6 +98,7 @@ const SignUpBirthInput = () => {
           placeholder="DD"
           maxLength={2}
           name="birthDay"
+          id={isMobile ? "m-birthDay" : "birthDay"}
           value={dayInputValue}
           onChange={(event) =>
             handleBirthInputMaxLength(event, handleDayInputValueChange, 2)

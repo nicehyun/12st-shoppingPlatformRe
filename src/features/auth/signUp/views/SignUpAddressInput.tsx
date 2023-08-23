@@ -12,7 +12,11 @@ import { additionalAddressValidator } from "../utils/validation"
 
 import SignUpFeedback from "./SignUpFeedback"
 
-const SignUpAddressInput = () => {
+interface ISignUpAddressInput {
+  isMobile: boolean
+}
+
+const SignUpAddressInput = ({ isMobile }: ISignUpAddressInput) => {
   const dispatch = useAppDispatch()
 
   const [isShowPostCodeModal, setIsShowPostCodeModal] = useState(false)
@@ -38,7 +42,7 @@ const SignUpAddressInput = () => {
           <Input
             type="text"
             name="address"
-            id="address"
+            id={`${isMobile ? "m-address" : "address"}`}
             isReadOnly={true}
             classNames="mb-[10px] w-full"
             value={addressValue}
@@ -54,7 +58,7 @@ const SignUpAddressInput = () => {
         <Input
           type="text"
           name="additionalAddress"
-          id="additionalAddress"
+          id={`${isMobile ? "m-additionalAddress" : "additionalAddress"}`}
           placeholder="나머지 주소를 입력해주세요"
           value={additionalAddressInputValue}
           onBlur={handleAdditionalAddressInputBlur}

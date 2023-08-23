@@ -4,12 +4,13 @@ import {
   useSignUpUserInput,
   useSignUpUserInputWithRePassword,
 } from "../hooks/useSignUpUserInput"
+import { Mobile } from "../types/mobile"
 import { passwordValidator } from "../utils/validation"
 import SignUpFeedback from "./SignUpFeedback"
 import SignUpInput from "./SignUpInput"
 
 // TODO : isPasswordValid 글로벌로 변경하기
-const SignUpPasswordInput = () => {
+const SignUpPasswordInput = ({ isMobile }: Mobile) => {
   const {
     value: passwordInputValue,
     handleValueChange: handlePasswordInputValueChange,
@@ -32,6 +33,7 @@ const SignUpPasswordInput = () => {
         onChangeInputValue={handlePasswordInputValueChange}
         onBlurInput={handlePasswordInputBlur}
         isShowFeedback={hasErrorPassword}
+        isMobile={isMobile}
       />
 
       {hasErrorPassword && (
@@ -48,6 +50,7 @@ const SignUpPasswordInput = () => {
         onChangeInputValue={handleRepasswordInputValueChange}
         onBlurInput={handleRepasswordInputBlur}
         isShowFeedback={hasErrorRepassword}
+        isMobile={isMobile}
       />
       {hasErrorRepassword && (
         <SignUpFeedback

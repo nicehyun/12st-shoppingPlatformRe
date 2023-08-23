@@ -1,8 +1,7 @@
 import SignUpAddressInput from "./SignUpAddressInput"
-import SignUpVerificationInput from "./SignUpVerificationInput"
-import SignUpFeedback from "./SignUpFeedback"
+
 import SignUpGenderInput from "./SignUpGenderInput"
-import SignUpInput from "./SignUpInput"
+
 import SignUpInputWrap from "./SignUpInputWrap"
 import SignUpBirthInput from "./SignUpBirthInput"
 import SignUpEmailInput from "./SignUpEmailInput"
@@ -14,11 +13,11 @@ const SIgnUpUserInfo = () => {
     <div className="pb-[40px]">
       <SignUpInputWrap
         htmlFor="email"
-        userInputComponent={<SignUpEmailInput />}
+        userInputComponent={<SignUpEmailInput isMobile={false} />}
       />
       <SignUpInputWrap
         htmlFor="password"
-        userInputComponent={<SignUpPasswordInput />}
+        userInputComponent={<SignUpPasswordInput isMobile={false} />}
       />
 
       {/* <SignUpInputWrap
@@ -29,12 +28,12 @@ const SIgnUpUserInfo = () => {
 
       <SignUpInputWrap
         htmlFor="phone"
-        userInputComponent={<SignUpPhoneVerificationInput />}
+        userInputComponent={<SignUpPhoneVerificationInput isMobile={false} />}
       />
 
       <SignUpInputWrap
         htmlFor="address"
-        userInputComponent={<SignUpAddressInput />}
+        userInputComponent={<SignUpAddressInput isMobile={false} />}
       />
 
       <SignUpInputWrap
@@ -44,7 +43,7 @@ const SIgnUpUserInfo = () => {
 
       <SignUpInputWrap
         htmlFor="birth"
-        userInputComponent={<SignUpBirthInput />}
+        userInputComponent={<SignUpBirthInput isMobile={false} />}
       />
     </div>
   )

@@ -10,11 +10,12 @@ import { useFeedbackModal } from "../hooks/useFeedbackModal"
 import useRequestVerificationMutation from "../hooks/useRequestVerificationMutation"
 import useSendVerificationCodeMutation from "../hooks/useSendVerificationCodeMutation"
 import { useSignUpUserInput } from "../hooks/useSignUpUserInput"
+import { Mobile } from "../types/mobile"
 import { phoneValidator } from "../utils/validation"
 import SignUpFeedback from "./SignUpFeedback"
 import SignUpVerificationInput from "./SignUpVerificationInput"
 
-const SignUpPhoneVerificationInput = () => {
+const SignUpPhoneVerificationInput = ({ isMobile }: Mobile) => {
   const dispatch = useAppDispatch()
 
   const { showFeedbackModalWithContent } = useFeedbackModal()
@@ -87,6 +88,7 @@ const SignUpPhoneVerificationInput = () => {
         onClickVerificationButton={handlePhoneVerificationRequest}
         isLoading={isRequestVerificationLoading}
         isReadOnly={isShowVerificationCodeInput || isCheckedPhoneVerification}
+        isMobile={isMobile}
       />
       {hasErrorPhone && (
         <SignUpFeedback
@@ -104,6 +106,7 @@ const SignUpPhoneVerificationInput = () => {
           }
           onClickVerificationButton={handlePhoneVerificationCodeSend}
           isLoading={isSendVerificationCodeLoading}
+          isMobile={isMobile}
         />
       )}
     </>
