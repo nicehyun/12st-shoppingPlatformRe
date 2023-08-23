@@ -1,66 +1,92 @@
-import { ChangeEvent } from "react"
+import {
+  selectSignUpCheckState,
+  verifyToPhone,
+} from "@/redux/features/signUpSlice"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { useState } from "react"
+import { useFeedbackModal } from "../../hooks/useFeedbackModal"
+import useRequestVerificationMutation from "../../hooks/useRequestVerificationMutation"
+import useSendVerificationCodeMutation from "../../hooks/useSendVerificationCodeMutation"
+import { useSignUpUserInput } from "../../hooks/useSignUpUserInput"
+import { phoneValidator } from "../../utils/validation"
 
 import SignUpFeedback from "../SignUpFeedback"
 import SignUpVerificationInput from "../SignUpVerificationInput"
 import MSignUpInputLayout from "./MSignUpInputLayout"
 
-export interface IMSignUpPhoneVerificationInput {
-  phone: {
-    inputValue: string
-    onChangeInputValue: (event: ChangeEvent<HTMLInputElement>) => void
-    onBlurInput: () => void
-    hasError: boolean
-    onRequestVerificate: () => Promise<void>
-    isLoading: boolean
-  }
-  verificationPhone: {
-    isShowVerificationInput: boolean
-    inputValue: string
-    onChangeInputValue: (event: ChangeEvent<HTMLInputElement>) => void
-    onResponseVerificate: () => Promise<void>
-    isLoading: boolean
-    isSuccessVerification: boolean
-  }
-}
+const MSignUpPhoneVerificationInput = () => {
+  const dispatch = useAppDispatch()
 
-const MSignUpPhoneVerificationInput = ({
-  phone,
-  verificationPhone,
-}: IMSignUpPhoneVerificationInput) => {
+  const { showFeedbackModalWithContent } = useFeedbackModal()
+  const [isShowVerificationCodeInput, setIsShowVerificationCodeInput] =
+    useState(false)
+  const [verificationCode, setVerificationCode] = useState("")
+
+  const { phone: isCheckedPhoneVerification } = useAppSelector(
+    selectSignUpCheckState
+  )
+
   const {
-    inputValue: phoneInputValue,
-    onChangeInputValue: onChangePhoneInputValue,
-    onBlurInput: onBlurPhoneInput,
+    value: phoneInputValue,
+    handleValueChange: handlePhoneInputValueChange,
+    handleInputBlur: handlePhoneInputBlur,
+    isValid: isPhoneValid,
     hasError: hasErrorPhone,
-    onRequestVerificate: onClickRequestVerificate,
-    isLoading: isLoadingPhone,
-  } = phone
+  } = useSignUpUserInput(phoneValidator)
 
   const {
-    isShowVerificationInput,
-    inputValue: verificationPhoneInputValue,
-    onChangeInputValue: onChangeVerificationPhoneInputValue,
-    onResponseVerificate: onClickResponseVerificate,
-    isLoading: isLoadingVerificationPhone,
-    isSuccessVerification,
-  } = verificationPhone
+    isLoading: isRequestVerificationLoading,
+    mutateAsync: requestVerificationMutateAsync,
+  } = useRequestVerificationMutation(phoneInputValue)
+
+  const {
+    isLoading: isSendVerificationCodeLoading,
+    mutateAsync: sendVerificationCodeMutateAsync,
+  } = useSendVerificationCodeMutation(phoneInputValue, verificationCode)
+
+  const handlePhoneVerificationRequest = async () => {
+    if (!isPhoneValid || isCheckedPhoneVerification) return
+
+    await requestVerificationMutateAsync()
+
+    showFeedbackModalWithContent("인증 번호가 발송되었습니다.")
+
+    setIsShowVerificationCodeInput(true)
+  }
+
+  const handlePhoneVerificationCodeSend = async () => {
+    const isVerificationValidAsync = await sendVerificationCodeMutateAsync()
+
+    if (!isVerificationValidAsync) {
+      showFeedbackModalWithContent("인증 번호가 틀렸습니다.")
+
+      return
+    }
+
+    showFeedbackModalWithContent("본인인증이 완료되었습니다.")
+
+    setIsShowVerificationCodeInput(false)
+    dispatch(verifyToPhone())
+  }
 
   return (
     <MSignUpInputLayout headingText="본인인증을 진행해주세요">
       <div id="recaptcha-container"></div>
       <SignUpVerificationInput
         isDisabledButton={
-          hasErrorPhone || isShowVerificationInput || isSuccessVerification
+          hasErrorPhone ||
+          isShowVerificationCodeInput ||
+          isCheckedPhoneVerification
         }
         type="phone"
         classNames="mb-[5px]"
         inputValue={phoneInputValue}
         isShowFeedback={hasErrorPhone}
-        onBlurInput={onBlurPhoneInput}
-        onChangeInputValue={onChangePhoneInputValue}
-        onClickVerificationButton={onClickRequestVerificate}
-        isLoading={isLoadingPhone}
-        isReadOnly={isShowVerificationInput || isSuccessVerification}
+        onBlurInput={handlePhoneInputBlur}
+        onChangeInputValue={handlePhoneInputValueChange}
+        onClickVerificationButton={handlePhoneVerificationRequest}
+        isLoading={isRequestVerificationLoading}
+        isReadOnly={isShowVerificationCodeInput || isCheckedPhoneVerification}
       />
       {hasErrorPhone && (
         <SignUpFeedback
@@ -68,14 +94,16 @@ const MSignUpPhoneVerificationInput = ({
           content="유효한 휴대폰 번호가 아닙니다."
         />
       )}
-      {isShowVerificationInput && (
+      {isShowVerificationCodeInput && (
         <SignUpVerificationInput
-          isDisabledButton={verificationPhoneInputValue.length !== 6}
+          isDisabledButton={verificationCode.length !== 6}
           type="verificationPhone"
-          inputValue={verificationPhoneInputValue}
-          onChangeInputValue={onChangeVerificationPhoneInputValue}
-          onClickVerificationButton={onClickResponseVerificate}
-          isLoading={isLoadingVerificationPhone}
+          inputValue={verificationCode}
+          onChangeInputValue={(event) =>
+            setVerificationCode(event.target.value)
+          }
+          onClickVerificationButton={handlePhoneVerificationCodeSend}
+          isLoading={isSendVerificationCodeLoading}
         />
       )}
     </MSignUpInputLayout>

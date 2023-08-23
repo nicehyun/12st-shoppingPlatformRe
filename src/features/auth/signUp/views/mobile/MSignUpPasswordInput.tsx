@@ -9,6 +9,7 @@ import SignUpFeedback from "../SignUpFeedback"
 import SignUpInput from "../SignUpInput"
 import MSignUpInputLayout from "./MSignUpInputLayout"
 
+// TODO : isPasswordValid 글로벌로 변경하기
 const MSignUpPasswordInput = () => {
   const {
     value: passwordInputValue,
