@@ -1,5 +1,8 @@
 "use client"
 
+import { validatePassword } from "@/redux/features/signUpSlice"
+import { useAppDispatch } from "@/redux/hooks"
+import { useEffect } from "react"
 import {
   useSignUpUserInput,
   useSignUpUserInputWithRePassword,
@@ -11,11 +14,14 @@ import SignUpInput from "./SignUpInput"
 
 // TODO : isPasswordValid 글로벌로 변경하기
 const SignUpPasswordInput = ({ isMobile }: Mobile) => {
+  const dispatch = useAppDispatch()
+
   const {
     value: passwordInputValue,
     handleValueChange: handlePasswordInputValueChange,
     handleInputBlur: handlePasswordInputBlur,
     hasError: hasErrorPassword,
+    isValid: isPasswordValid,
   } = useSignUpUserInput(passwordValidator)
 
   const {
@@ -23,7 +29,15 @@ const SignUpPasswordInput = ({ isMobile }: Mobile) => {
     handleValueChange: handleRepasswordInputValueChange,
     handleInputBlur: handleRepasswordInputBlur,
     hasError: hasErrorRepassword,
+    isValid: isRepasswordValid,
   } = useSignUpUserInputWithRePassword(passwordInputValue)
+
+  useEffect(() => {
+    if (isPasswordValid && isRepasswordValid) {
+      dispatch(validatePassword())
+      return
+    }
+  }, [isPasswordValid, isRepasswordValid, dispatch])
 
   return (
     <>

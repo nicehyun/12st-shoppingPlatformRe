@@ -1,6 +1,8 @@
 "use client"
 
-import { ChangeEvent } from "react"
+import { validateBirth } from "@/redux/features/signUpSlice"
+import { useAppDispatch } from "@/redux/hooks"
+import { ChangeEvent, useEffect } from "react"
 import { useSignUpUserInput } from "../hooks/useSignUpUserInput"
 import { Mobile } from "../types/mobile"
 import {
@@ -12,11 +14,13 @@ import SignUpFeedback from "./SignUpFeedback"
 
 // TODO : Valid => 글로벌 처리, ㅑnputReset 제거
 const SignUpBirthInput = ({ isMobile }: Mobile) => {
+  const dispatch = useAppDispatch()
+
   const {
     value: yearInputValue,
     handleValueChange: handleYearInputValueChange,
     handleInputBlur: handleYearInputBlur,
-
+    isValid: isYearValid,
     hasError: hasErrorYear,
   } = useSignUpUserInput(birthYearValidator)
 
@@ -24,7 +28,7 @@ const SignUpBirthInput = ({ isMobile }: Mobile) => {
     value: monthInputValue,
     handleValueChange: handleMonthInputValueChange,
     handleInputBlur: handleMonthInputBlur,
-
+    isValid: isMonthValid,
     hasError: hasErrorMonth,
   } = useSignUpUserInput(birthMonthValidator)
 
@@ -34,7 +38,7 @@ const SignUpBirthInput = ({ isMobile }: Mobile) => {
     value: dayInputValue,
     handleValueChange: handleDayInputValueChange,
     handleInputBlur: handleDayInputBlur,
-
+    isValid: isDayValid,
     hasError: hasErrorDay,
   } = useSignUpUserInput(birthDayValidator)
 
@@ -57,6 +61,13 @@ const SignUpBirthInput = ({ isMobile }: Mobile) => {
     : ""
 
   const isBirthInputFeedback = hasErrorYear || hasErrorMonth || hasErrorDay
+
+  useEffect(() => {
+    if (isYearValid && isMonthValid && isDayValid) {
+      dispatch(validateBirth())
+      return
+    }
+  }, [isYearValid, isMonthValid, isDayValid, dispatch])
 
   return (
     <>

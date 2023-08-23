@@ -5,7 +5,7 @@ import PostCodeModal from "@/common/views/PostCodeModal"
 import SignUpSideButton from "@/features/auth/signUp/views/SignUpSideButton"
 import { enterToAddress } from "@/redux/features/signUpSlice"
 import { useAppDispatch } from "@/redux/hooks"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Address } from "react-daum-postcode"
 import { useSignUpUserInput } from "../hooks/useSignUpUserInput"
 import { additionalAddressValidator } from "../utils/validation"
@@ -27,13 +27,22 @@ const SignUpAddressInput = ({ isMobile }: ISignUpAddressInput) => {
     handleValueChange: handleAdditionalAddressInputValueChange,
     handleInputBlur: handleAdditionalAddressInputBlur,
     hasError: hasErrorAdditionalAddress,
+    isValid: isValidAdditionalAddress,
   } = useSignUpUserInput(additionalAddressValidator)
 
   const handleAddressSearch = (address: Address) => {
-    dispatch(enterToAddress())
     setAddressValue(address.address)
     setIsShowPostCodeModal(false)
   }
+
+  useEffect(() => {
+    if (!addressValue) return
+
+    if (isValidAdditionalAddress) {
+      dispatch(enterToAddress())
+      return
+    }
+  }, [addressValue, isValidAdditionalAddress, dispatch])
 
   return (
     <>

@@ -5,6 +5,7 @@ import Stage, { IStage } from "@/common/views/Stage"
 import {
   resetSignUpState,
   selectSignUpCheckState,
+  selectSignUpIsValidState,
   seletSignUpClauseState,
 } from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
@@ -20,19 +21,27 @@ import MSignUpGenderInput from "./MSignUpGenderInput"
 import MSignUpPasswordInput from "./MSignUpPasswordInput"
 import MSignUpPhoneVerificationInput from "./MSignUpPhoneVerificationInput"
 
+// TODO : firebase 트래픽 초과 - email, phone 값 확인하기
 const MSignUpForm = () => {
   const dispatch = useAppDispatch()
 
   const { age, privacy, term } = useAppSelector(seletSignUpClauseState)
   const { email, address, phone } = useAppSelector(selectSignUpCheckState)
+  const { password: isPasswordValid, birth: isBirthValid } = useAppSelector(
+    selectSignUpIsValidState
+  )
 
-  console.log(age)
-  console.log(privacy)
-  console.log(term)
+  // console.log(age)
+  // console.log(privacy)
+  // console.log(term)
 
   // console.log(`email check : ${email}`)
   // console.log(`phone check : ${phone}`)
   // console.log(`address check : ${address}`)
+
+  console.log(`password check : ${isPasswordValid}`)
+  console.log(`address check : ${isPasswordValid}`)
+  console.log(`password check : ${isPasswordValid}`)
 
   const handletestSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -69,11 +78,15 @@ const MSignUpForm = () => {
     firstButtonText: "동의하고 가입하기",
     finishButtonText: "회원가입",
     disabledNextButton: [
-      // !age || !privacy || !term,
-      // !isEmailValid || !email,
-      // !isPasswordValid || !isRepasswordValid,
-      // !isPhoneValid || !phone,
-      // !isAdditionalAddressValid,
+      !age || !privacy || !term,
+      // !email,
+      false,
+      !isPasswordValid,
+      // !phone,
+      false,
+      !address,
+      false,
+      !isBirthValid,
     ],
   }
 
