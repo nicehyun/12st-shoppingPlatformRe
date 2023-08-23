@@ -5,64 +5,46 @@ import SignUpGenderInput from "./SignUpGenderInput"
 import SignUpInput from "./SignUpInput"
 import SignUpInputWrap from "./SignUpInputWrap"
 import SignUpBirthInput from "./SignUpBirthInput"
+import SignUpEmailInput from "./SignUpEmailInput"
+import SignUpPasswordInput from "./SignUpPasswordInput"
+import SignUpPhoneVerificationInput from "./SignUpPhoneVerificationInput"
 
 const SIgnUpUserInfo = () => {
   return (
     <div className="pb-[40px]">
       <SignUpInputWrap
         htmlFor="email"
-        userInputComponent={
-          <SignUpVerificationInput type="email" isDisabledButton={true} />
-        }
-        feedbackComponent={<SignUpFeedback />}
+        userInputComponent={<SignUpEmailInput />}
       />
       <SignUpInputWrap
         htmlFor="password"
-        userInputComponent={<SignUpInput type="password" />}
-        feedbackComponent={<SignUpFeedback />}
+        userInputComponent={<SignUpPasswordInput />}
       />
-      <SignUpInputWrap
-        htmlFor="repassword"
-        userInputComponent={<SignUpInput type="repassword" />}
-        feedbackComponent={<SignUpFeedback />}
-      />
-      <SignUpInputWrap
+
+      {/* <SignUpInputWrap
         htmlFor="name"
         userInputComponent={<SignUpInput type="name" />}
-        feedbackComponent={<SignUpFeedback />}
-      />
+
+      /> */}
+
       <SignUpInputWrap
         htmlFor="phone"
-        userInputComponent={
-          <SignUpVerificationInput type="phone" isDisabledButton={false} />
-        }
-        feedbackComponent={<SignUpFeedback />}
-      />
-      <SignUpInputWrap
-        htmlFor="verificationPhone"
-        userInputComponent={
-          <SignUpVerificationInput
-            type="verificationPhone"
-            isDisabledButton={false}
-          />
-        }
+        userInputComponent={<SignUpPhoneVerificationInput />}
       />
 
       <SignUpInputWrap
         htmlFor="address"
         userInputComponent={<SignUpAddressInput />}
-        feedbackComponent={<SignUpFeedback />}
       />
 
       <SignUpInputWrap
         htmlFor="gender"
-        userInputComponent={<SignUpGenderInput />}
+        userInputComponent={<SignUpGenderInput isMobile={false} />}
       />
 
       <SignUpInputWrap
         htmlFor="birth"
         userInputComponent={<SignUpBirthInput />}
-        feedbackComponent={<SignUpFeedback />}
       />
     </div>
   )

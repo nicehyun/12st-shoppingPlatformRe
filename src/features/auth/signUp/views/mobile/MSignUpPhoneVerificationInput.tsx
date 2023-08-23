@@ -11,6 +11,7 @@ import { useSignUpUserInput } from "../../hooks/useSignUpUserInput"
 import { phoneValidator } from "../../utils/validation"
 
 import SignUpFeedback from "../SignUpFeedback"
+import SignUpPhoneVerificationInput from "../SignUpPhoneVerificationInput"
 import SignUpVerificationInput from "../SignUpVerificationInput"
 import MSignUpInputLayout from "./MSignUpInputLayout"
 
@@ -71,41 +72,7 @@ const MSignUpPhoneVerificationInput = () => {
 
   return (
     <MSignUpInputLayout headingText="본인인증을 진행해주세요">
-      <div id="recaptcha-container"></div>
-      <SignUpVerificationInput
-        isDisabledButton={
-          hasErrorPhone ||
-          isShowVerificationCodeInput ||
-          isCheckedPhoneVerification
-        }
-        type="phone"
-        classNames="mb-[5px]"
-        inputValue={phoneInputValue}
-        isShowFeedback={hasErrorPhone}
-        onBlurInput={handlePhoneInputBlur}
-        onChangeInputValue={handlePhoneInputValueChange}
-        onClickVerificationButton={handlePhoneVerificationRequest}
-        isLoading={isRequestVerificationLoading}
-        isReadOnly={isShowVerificationCodeInput || isCheckedPhoneVerification}
-      />
-      {hasErrorPhone && (
-        <SignUpFeedback
-          classNames="ml-0"
-          content="유효한 휴대폰 번호가 아닙니다."
-        />
-      )}
-      {isShowVerificationCodeInput && (
-        <SignUpVerificationInput
-          isDisabledButton={verificationCode.length !== 6}
-          type="verificationPhone"
-          inputValue={verificationCode}
-          onChangeInputValue={(event) =>
-            setVerificationCode(event.target.value)
-          }
-          onClickVerificationButton={handlePhoneVerificationCodeSend}
-          isLoading={isSendVerificationCodeLoading}
-        />
-      )}
+      <SignUpPhoneVerificationInput />
     </MSignUpInputLayout>
   )
 }

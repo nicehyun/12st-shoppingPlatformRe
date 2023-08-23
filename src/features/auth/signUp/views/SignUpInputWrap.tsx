@@ -14,7 +14,6 @@ type UserInputType =
 interface ISignUpInputWrap {
   htmlFor: UserInputType
   userInputComponent: ReactNode
-  feedbackComponent?: ReactNode
   classNames?: string
 }
 
@@ -22,7 +21,6 @@ const SignUpInputWrap = ({
   htmlFor,
   classNames,
   userInputComponent,
-  feedbackComponent,
 }: ISignUpInputWrap) => {
   let labelText = ""
 
@@ -57,17 +55,17 @@ const SignUpInputWrap = ({
 
   return (
     <>
-      <div
-        className={`${classNames} relative mt-[18px] flex items-center text-[14px]`}
-      >
-        <label htmlFor={htmlFor} className="inline-block w-[139px] font-bold">
+      <div className={`${classNames} relative mt-[18px] flex  text-[14px]`}>
+        <label
+          htmlFor={htmlFor}
+          className="inline-block w-[139px] font-bold mt-[10px]"
+        >
           {labelText}
           <span className="text-lightRed ml-[5px]">*</span>
         </label>
-        {userInputComponent}
-      </div>
 
-      {feedbackComponent}
+        <div className="flex flex-col w-full">{userInputComponent}</div>
+      </div>
     </>
   )
 }
