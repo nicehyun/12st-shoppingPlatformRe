@@ -10,7 +10,7 @@ export enum ROUTE {
   FIND_EMAIL = "/auth/find/email",
   FIND_PASSWORD = "/auth/find/password",
 }
-// TODO : 커스텀 useRouter 만들기
+
 export const useNavigations = () => {
   const { push, replace } = useRouter()
   const pathname = usePathname()

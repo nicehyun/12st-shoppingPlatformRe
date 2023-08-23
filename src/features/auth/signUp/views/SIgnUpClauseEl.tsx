@@ -31,8 +31,6 @@ const SignUpClauseEl = ({
     return ""
   }
 
-  // TODO : checked 설정하기
-
   return (
     <div
       className={`${classNames} relative p-[8px] flex items-center max-w-[400px]`}
@@ -43,6 +41,7 @@ const SignUpClauseEl = ({
           checked={isChecked}
           name={clauseType}
           className={`checked: mr-[10px] overflow-hidden absolute top-[2px] left-[2px] w-[1px] h-[1px] border-none bg-transparent z-10 appearance-none ${peer}`}
+          readOnly
         />
 
         <label

@@ -26,9 +26,13 @@ const MSignUpForm = () => {
   const { age, privacy, term } = useAppSelector(seletSignUpClauseState)
   const { email, address, phone } = useAppSelector(selectSignUpCheckState)
 
-  console.log(`email check : ${email}`)
-  console.log(`phone check : ${phone}`)
-  console.log(`address check : ${address}`)
+  console.log(age)
+  console.log(privacy)
+  console.log(term)
+
+  // console.log(`email check : ${email}`)
+  // console.log(`phone check : ${phone}`)
+  // console.log(`address check : ${address}`)
 
   const handletestSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
