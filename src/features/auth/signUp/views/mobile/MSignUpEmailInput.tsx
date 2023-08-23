@@ -13,6 +13,7 @@ import SignUpFeedback from "../SignUpFeedback"
 import SignUpVerificationInput from "../SignUpVerificationInput"
 import MSignUpInputLayout from "./MSignUpInputLayout"
 
+// TODO : isEmailValid 글로벌로 변경하기
 const MSignUpEmailInput = () => {
   const dispatch = useAppDispatch()
   const { email: isCheckedEmailDuplication } = useAppSelector(

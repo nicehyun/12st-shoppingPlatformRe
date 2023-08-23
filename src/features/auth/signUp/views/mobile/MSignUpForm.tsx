@@ -13,13 +13,9 @@ import { useEffect, useState } from "react"
 
 import useRequestVerificationMutation from "../../hooks/useRequestVerificationMutation"
 import useSendVerificationCodeMutation from "../../hooks/useSendVerificationCodeMutation"
-import {
-  useSignUpUserInput,
-  useSignUpUserInputWithRePassword,
-} from "../../hooks/useSignUpUserInput"
+import { useSignUpUserInput } from "../../hooks/useSignUpUserInput"
 import {
   additionalAddressValidator,
-  passwordValidator,
   phoneValidator,
 } from "../../utils/validation"
 import SignUpClause from "../SIgnUpClause"
@@ -30,9 +26,7 @@ import MSignUpAddressInput, {
 import MSignUpBirthInput from "./MSignUpBirthInput"
 import MSignUpEmailInput from "./MSignUpEmailInput"
 import MSignUpGenderInput from "./MSignUpGenderInput"
-import MSignUpPasswordInput, {
-  IMSignUpPasswordInput,
-} from "./MSignUpPasswordInput"
+import MSignUpPasswordInput from "./MSignUpPasswordInput"
 import MSignUpPhoneVerificationInput, {
   IMSignUpPhoneVerificationInput,
 } from "./MSignUpPhoneVerificationInput"
@@ -60,24 +54,6 @@ const MSignUpForm = () => {
     hasError: hasErrorAdditionalAddress,
     reset: additionalAddressInputReset,
   } = useSignUpUserInput(additionalAddressValidator)
-
-  const {
-    value: passwordInputValue,
-    handleValueChange: handlePasswordInputValueChange,
-    handleInputBlur: handlePasswordInputBlur,
-    isValid: isPasswordValid,
-    hasError: hasErrorPassword,
-    reset: passwordInputReset,
-  } = useSignUpUserInput(passwordValidator)
-
-  const {
-    value: repasswordInputValue,
-    handleValueChange: handleRepasswordInputValueChange,
-    handleInputBlur: handleRepasswordInputBlur,
-    isValid: isRepasswordValid,
-    hasError: hasErrorRepassword,
-    reset: repasswordInputReset,
-  } = useSignUpUserInputWithRePassword(passwordInputValue)
 
   const {
     value: phoneInputValue,
@@ -124,6 +100,7 @@ const MSignUpForm = () => {
     const formData = new FormData(event.currentTarget)
 
     console.log(`email :  ${formData.get("email")}`)
+    console.log(`password :  ${formData.get("password")}`)
     console.log(`year :  ${formData.get("birthYear")}`)
   }
 
@@ -160,22 +137,6 @@ const MSignUpForm = () => {
     reset: additionalAddressInputReset,
   }
 
-  const mSignUpPasswordInputProps: IMSignUpPasswordInput = {
-    password: {
-      inputValue: passwordInputValue,
-      hasError: hasErrorPassword,
-      onBlurInput: handlePasswordInputBlur,
-      onChangeInputValue: handlePasswordInputValueChange,
-    },
-
-    repassword: {
-      inputValue: repasswordInputValue,
-      hasError: hasErrorRepassword,
-      onBlurInput: handleRepasswordInputBlur,
-      onChangeInputValue: handleRepasswordInputValueChange,
-    },
-  }
-
   const stageProps: IStage = {
     stages: [
       "약관동의",
@@ -189,7 +150,7 @@ const MSignUpForm = () => {
     stageContents: [
       <SignUpClause key="clause" />,
       <MSignUpEmailInput key="email" />,
-      <MSignUpPasswordInput key="password" {...mSignUpPasswordInputProps} />,
+      <MSignUpPasswordInput key="password" />,
       <MSignUpPhoneVerificationInput
         key="phone"
         {...mSignUpPhoneVerificationInputProps}
