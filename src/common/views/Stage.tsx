@@ -25,7 +25,7 @@ export default function Stage({
   finishButtonText,
   disabledNextButton,
 }: IStage) {
-  const [activeStep, setActiveStep] = useState(4)
+  const [activeStep, setActiveStep] = useState(5)
 
   const isShowStageContent = (stage: number, activeStage: number) => {
     return stage === activeStage

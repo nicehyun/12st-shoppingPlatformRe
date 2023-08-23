@@ -1,12 +1,8 @@
-import { ReactNode } from "react"
+import SignUpClause from "./SIgnUpClause"
 import SIgnUpUserInfo from "./SIgnUpUserInfo"
 
-interface ISignUpForm {
-  children: ReactNode
-}
-
 // TODO : isLoading 처리
-const SignUpForm = ({ children }: ISignUpForm) => {
+const SignUpForm = () => {
   return (
     <form className="sm:hidden md:hidden max-w-[800px] mx-auto">
       <h2 className="text-[28px] font-bold mb-[40px] text-center border-black dark:border-white tracking-[20px]">
@@ -18,7 +14,7 @@ const SignUpForm = ({ children }: ISignUpForm) => {
 
       <SIgnUpUserInfo />
 
-      {children}
+      <SignUpClause />
 
       <div className="flexCenter">
         <button className="rounded-[5px] w-[400px] text-[14px] mt-[50px] bg-black dark:bg-white text-white dark:text-black py-[14px] tracking-[5px]">

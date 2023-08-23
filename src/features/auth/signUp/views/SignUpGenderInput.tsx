@@ -4,7 +4,11 @@ import { Gender } from "@/common/types/user"
 import RadioInput from "@/common/views/RadioInput"
 import { ChangeEvent, KeyboardEvent, useState } from "react"
 
-const SignUpGenderInput = () => {
+interface ISignUpGenderInput {
+  isMobile: boolean
+}
+
+const SignUpGenderInput = ({ isMobile }: ISignUpGenderInput) => {
   const [gender, setGender] = useState<Gender>("none")
 
   const handleGenderSelect = (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +30,7 @@ const SignUpGenderInput = () => {
         onKeyPress={handleKeyPress}
         defaultValue="male"
         checked={gender === "male"}
-        id="gender-male"
+        id={`${isMobile ? "m-gender-male" : "gender-male"}`}
         name="gender"
         label="남자"
         peer="peer/male"
@@ -41,7 +45,7 @@ const SignUpGenderInput = () => {
         onKeyPress={handleKeyPress}
         defaultValue="female"
         checked={gender === "female"}
-        id="gender-female"
+        id={`${isMobile ? "m-gender-female" : "gender-female"}`}
         name="gender"
         label="여자"
         peer="peer/female"
@@ -55,7 +59,7 @@ const SignUpGenderInput = () => {
         onKeyPress={handleKeyPress}
         defaultValue="none"
         checked={gender === "none"}
-        id="gender-none"
+        id={`${isMobile ? "m-gender-none" : "gender-none"}`}
         name="gender"
         label="선택안함"
         peer="peer/none"
