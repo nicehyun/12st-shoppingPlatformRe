@@ -40,31 +40,12 @@ const MSignUpForm = () => {
   const { isLoading: isSignUpLoading, mutateAsync: signUpMutateAsync } =
     useSignUpMutation()
 
-  // console.log(age)
-  // console.log(privacy)
-  // console.log(term)
-  // console.log(marketing)
-
-  console.log(`email check : ${email}`)
-  console.log(`phone check : ${phone}`)
-  console.log(`address check : ${address}`)
-
-  console.log(`password check : ${isPasswordValid}`)
-  console.log(`birth check : ${isBirthValid}`)
-
   const handleSignUpSubmit = async (
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault()
 
     const formData = new FormData(event.currentTarget)
-
-    console.log(`email :  ${formData.get("email")}`)
-    console.log(`password :  ${formData.get("password")}`)
-    console.log(`address :  ${formData.get("address")}`)
-    console.log(`additionalAddress :  ${formData.get("additionalAddress")}`)
-    console.log(`gender :  ${formData.get("gender")}`)
-    console.log(`year :  ${formData.get("birthYear")}`)
 
     // TODO : Name 수정하기
     const userInfo: UserInfo = {
@@ -129,6 +110,7 @@ const MSignUpForm = () => {
       !address,
       false,
       !isBirthValid,
+      isSignUpLoading,
     ],
   }
 

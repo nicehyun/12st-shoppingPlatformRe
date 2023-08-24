@@ -15,7 +15,6 @@ import { emailValidator } from "../utils/validation"
 import SignUpFeedback from "./SignUpFeedback"
 import SignUpVerificationInput from "./SignUpVerificationInput"
 
-// TODO : isEmailValid 글로벌로 변경하기
 const SignUpEmailInput = ({ isMobile }: Mobile) => {
   const dispatch = useAppDispatch()
   const { email: isCheckedEmailDuplication } = useAppSelector(

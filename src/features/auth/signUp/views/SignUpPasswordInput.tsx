@@ -12,7 +12,6 @@ import { passwordValidator } from "../utils/validation"
 import SignUpFeedback from "./SignUpFeedback"
 import SignUpInput from "./SignUpInput"
 
-// TODO : isPasswordValid 글로벌로 변경하기
 const SignUpPasswordInput = ({ isMobile }: Mobile) => {
   const dispatch = useAppDispatch()
 

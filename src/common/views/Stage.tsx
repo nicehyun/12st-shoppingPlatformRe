@@ -25,7 +25,7 @@ export default function Stage({
   finishButtonText,
   disabledNextButton,
 }: IStage) {
-  const [activeStep, setActiveStep] = useState(0)
+  const [activeStep, setActiveStep] = useState(5)
 
   const isShowStageContent = (stage: number, activeStage: number) => {
     return stage === activeStage
@@ -97,11 +97,10 @@ export default function Stage({
         </Button>
 
         <Box sx={{ flex: "1 1 auto" }} />
-        <Button
+        <button
           type={activeStep === stages.length ? "submit" : "button"}
           onClick={activeStep === stages.length ? () => {} : handleNext}
-          sx={{ bgcolor: "#ff4e0a", color: "#fff" }}
-          className="text-white bg-lightRed md:text-[12px] sm:text-[10px] hover:border-lightRed border-[1px] disabled:bg-border disabled:text-lightBlack dark:hover:bg-white hover:text-lightRed"
+          className="rounded-[5px] px-[16px] text-lightRed bg-white border-[1px] border-lightRed md:text-[12px] sm:text-[10px] hover:bg-lightRed hover:text-white disabled:bg-border disabled:text-lightBlack dark:bg-black dark:text-white dark:hover:bg-lightRed tracking-[3px]"
           disabled={disabledNextButton[activeStep]}
         >
           {activeStep === stages.length
@@ -109,7 +108,7 @@ export default function Stage({
             : activeStep === 0
             ? firstButtonText
             : "다음"}
-        </Button>
+        </button>
       </Box>
     </Box>
   )

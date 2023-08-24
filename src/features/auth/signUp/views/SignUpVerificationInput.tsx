@@ -25,7 +25,6 @@ interface ISignUpVerificationInput {
   isReadOnly?: boolean
 }
 
-// TODO : 버튼 disabled 할지 모달로 피드백 할지 고민하기
 const SignUpVerificationInput = ({
   type,
   isChecked,

@@ -12,7 +12,6 @@ import {
 } from "../utils/validation"
 import SignUpFeedback from "./SignUpFeedback"
 
-// TODO : Valid => 글로벌 처리, ㅑnputReset 제거
 const SignUpBirthInput = ({ isMobile }: Mobile) => {
   const dispatch = useAppDispatch()
 
