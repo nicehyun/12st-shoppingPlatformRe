@@ -2,7 +2,9 @@
 
 import { Gender } from "@/common/types/user"
 import RadioInput from "@/common/views/RadioInput"
-import { ChangeEvent, KeyboardEvent, useState } from "react"
+import { selectSignUpActiveStepState } from "@/redux/features/signUpSlice"
+import { useAppSelector } from "@/redux/hooks"
+import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react"
 
 interface ISignUpGenderInput {
   isMobile: boolean
@@ -10,6 +12,7 @@ interface ISignUpGenderInput {
 
 const SignUpGenderInput = ({ isMobile }: ISignUpGenderInput) => {
   const [gender, setGender] = useState<Gender>("none")
+  const selectSignUpActiveStep = useAppSelector(selectSignUpActiveStepState)
 
   const handleGenderSelect = (e: ChangeEvent<HTMLInputElement>) => {
     const selectedGender = e.target.value as Gender
@@ -22,6 +25,13 @@ const SignUpGenderInput = ({ isMobile }: ISignUpGenderInput) => {
       event.preventDefault()
     }
   }
+
+  useEffect(() => {
+    if (selectSignUpActiveStep === 0) {
+      setGender("none")
+      return
+    }
+  }, [selectSignUpActiveStep])
 
   return (
     <span className="relative inline-block">
