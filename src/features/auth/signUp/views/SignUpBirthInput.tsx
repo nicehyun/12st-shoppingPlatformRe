@@ -1,7 +1,10 @@
 "use client"
 
-import { validateBirth } from "@/redux/features/signUpSlice"
-import { useAppDispatch } from "@/redux/hooks"
+import {
+  selectSignUpActiveStepState,
+  validateBirth,
+} from "@/redux/features/signUpSlice"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { ChangeEvent, useEffect } from "react"
 import { useSignUpUserInput } from "../hooks/useSignUpUserInput"
 import { Mobile } from "../types/mobile"
@@ -14,6 +17,7 @@ import SignUpFeedback from "./SignUpFeedback"
 
 const SignUpBirthInput = ({ isMobile }: Mobile) => {
   const dispatch = useAppDispatch()
+  const selectSignUpActiveStep = useAppSelector(selectSignUpActiveStepState)
 
   const {
     value: yearInputValue,
@@ -21,6 +25,7 @@ const SignUpBirthInput = ({ isMobile }: Mobile) => {
     handleInputBlur: handleYearInputBlur,
     isValid: isYearValid,
     hasError: hasErrorYear,
+    reset: resetBirthYear,
   } = useSignUpUserInput(birthYearValidator)
 
   const {
@@ -29,6 +34,7 @@ const SignUpBirthInput = ({ isMobile }: Mobile) => {
     handleInputBlur: handleMonthInputBlur,
     isValid: isMonthValid,
     hasError: hasErrorMonth,
+    reset: resetBirthMonth,
   } = useSignUpUserInput(birthMonthValidator)
 
   const birthDayValidator = birthDayValidatorWithMonth(monthInputValue)
@@ -39,6 +45,7 @@ const SignUpBirthInput = ({ isMobile }: Mobile) => {
     handleInputBlur: handleDayInputBlur,
     isValid: isDayValid,
     hasError: hasErrorDay,
+    reset: resetBirthDay,
   } = useSignUpUserInput(birthDayValidator)
 
   const handleBirthInputMaxLength = (
@@ -67,6 +74,15 @@ const SignUpBirthInput = ({ isMobile }: Mobile) => {
       return
     }
   }, [isYearValid, isMonthValid, isDayValid, dispatch])
+
+  useEffect(() => {
+    if (selectSignUpActiveStep === 0) {
+      resetBirthYear()
+      resetBirthMonth()
+      resetBirthDay()
+      return
+    }
+  }, [selectSignUpActiveStep])
 
   return (
     <>

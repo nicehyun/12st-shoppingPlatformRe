@@ -41,7 +41,6 @@ const MSignUpForm = () => {
   )
 
   const selectSignUpActiveStep = useAppSelector(selectSignUpActiveStepState)
-  console.log(selectSignUpActiveStep)
 
   const { isLoading: isSignUpLoading, mutateAsync: signUpMutateAsync } =
     useSignUpMutation()
