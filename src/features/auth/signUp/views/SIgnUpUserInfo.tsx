@@ -7,6 +7,7 @@ import SignUpBirthInput from "./SignUpBirthInput"
 import SignUpEmailInput from "./SignUpEmailInput"
 import SignUpPasswordInput from "./SignUpPasswordInput"
 import SignUpPhoneVerificationInput from "./SignUpPhoneVerificationInput"
+import SignUpNameInput from "./SignUpNameInput"
 
 const SIgnUpUserInfo = () => {
   return (
@@ -20,11 +21,10 @@ const SIgnUpUserInfo = () => {
         userInputComponent={<SignUpPasswordInput isMobile={false} />}
       />
 
-      {/* <SignUpInputWrap
+      <SignUpInputWrap
         htmlFor="name"
-        userInputComponent={<SignUpInput type="name" />}
-
-      /> */}
+        userInputComponent={<SignUpNameInput isMobile={false} />}
+      />
 
       <SignUpInputWrap
         htmlFor="phone"

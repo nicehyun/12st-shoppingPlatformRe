@@ -57,7 +57,6 @@ const MSignUpForm = () => {
 
     const formData = new FormData(event.currentTarget)
 
-    // TODO : Name 수정하기
     const userInfo: UserInfo = {
       email: formData.get("email") as string,
       password: formData.get("password") as string,
