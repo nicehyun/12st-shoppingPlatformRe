@@ -1,4 +1,5 @@
 import {
+  resetNameValid,
   selectSignUpActiveStepState,
   validateName,
 } from "@/redux/features/signUpSlice"
@@ -31,6 +32,8 @@ const SignUpNameInput = ({ isMobile }: Mobile) => {
   }, [selectSignUpActiveStep])
 
   useEffect(() => {
+    dispatch(resetNameValid())
+
     if (isNameValid) {
       dispatch(validateName())
       return

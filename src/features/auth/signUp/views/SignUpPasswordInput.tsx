@@ -1,6 +1,7 @@
 "use client"
 
 import {
+  resetPasswordValid,
   selectSignUpActiveStepState,
   validatePassword,
 } from "@/redux/features/signUpSlice"
@@ -38,6 +39,8 @@ const SignUpPasswordInput = ({ isMobile }: Mobile) => {
   } = useSignUpUserInputWithRePassword(passwordInputValue)
 
   useEffect(() => {
+    dispatch(resetPasswordValid())
+
     if (isPasswordValid && isRepasswordValid) {
       dispatch(validatePassword())
       return

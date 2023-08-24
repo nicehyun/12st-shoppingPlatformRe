@@ -5,6 +5,7 @@ import PostCodeModal from "@/common/views/PostCodeModal"
 import SignUpSideButton from "@/features/auth/signUp/views/SignUpSideButton"
 import {
   enterToAddress,
+  resetSignUpAddressCheck,
   selectSignUpActiveStepState,
 } from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
@@ -41,6 +42,8 @@ const SignUpAddressInput = ({ isMobile }: ISignUpAddressInput) => {
   }
 
   useEffect(() => {
+    dispatch(resetSignUpAddressCheck())
+
     if (!addtionalAddressValue) return
 
     if (isValidAdditionalAddress) {

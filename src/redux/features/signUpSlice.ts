@@ -106,9 +106,6 @@ const signUpSlice = createSlice({
     resetEmailDuplication(state) {
       state.check.email = false
     },
-    resetBirthValid(state) {
-      state.isValid.birth = false
-    },
     resetSignUpState(state) {
       state.clause.all = false
       state.clause.age = false
@@ -125,6 +122,9 @@ const signUpSlice = createSlice({
     resetSignUpPhoneCheck(state) {
       state.check.phone = false
     },
+    resetSignUpAddressCheck(state) {
+      state.check.address = false
+    },
     validatePassword(state) {
       state.isValid.password = true
     },
@@ -134,14 +134,14 @@ const signUpSlice = createSlice({
     validateName(state) {
       state.isValid.name = true
     },
-    resetValidatePassword(state) {
-      state.isValid.password = false
-    },
-    resetValidateBirth(state) {
+    resetBirthValid(state) {
       state.isValid.birth = false
     },
-    resetValidateName(state) {
+    resetNameValid(state) {
       state.isValid.name = false
+    },
+    resetPasswordValid(state) {
+      state.isValid.password = false
     },
     nextStep(state) {
       state.activeStep = state.activeStep + 1
@@ -165,15 +165,15 @@ export const {
   resetEmailDuplication,
   resetSignUpState,
   resetSignUpPhoneCheck,
+  resetSignUpAddressCheck,
   validatePassword,
   validateBirth,
   validateName,
-  resetValidatePassword,
-  resetValidateBirth,
-  resetValidateName,
+  resetPasswordValid,
+  resetBirthValid,
+  resetNameValid,
   nextStep,
   resetStep,
-  resetBirthValid,
 } = signUpSlice.actions
 
 export const seletSignUpClauseState = (state: RootState) => state.signUp.clause
