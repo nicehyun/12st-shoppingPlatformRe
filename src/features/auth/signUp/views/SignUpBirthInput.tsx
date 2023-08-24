@@ -77,7 +77,6 @@ const SignUpBirthInput = ({ isMobile }: Mobile) => {
       return
     }
   }, [isYearValid, isMonthValid, isDayValid, dispatch])
-  console.log(isDayValid)
 
   useEffect(() => {
     if (selectSignUpActiveStep === 0) {

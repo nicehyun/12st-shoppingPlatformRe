@@ -9,6 +9,7 @@ import StepLabel from "@mui/material/StepLabel"
 import Button from "@mui/material/Button"
 import Typography from "@mui/material/Typography"
 import { ReactNode } from "react"
+import Loading from "./Loading"
 
 export interface IStage {
   activeStep: number
@@ -19,6 +20,7 @@ export interface IStage {
   disabledNextButton: boolean[]
   onClickBackButton: () => void
   onClickNextButton: () => void
+  isFinishLoading?: boolean
 }
 
 export default function Stage({
@@ -30,6 +32,7 @@ export default function Stage({
   disabledNextButton,
   onClickBackButton,
   onClickNextButton,
+  isFinishLoading = false,
 }: IStage) {
   const isShowStageContent = (stage: number, activeStage: number) => {
     return stage === activeStage
@@ -40,6 +43,30 @@ export default function Stage({
 
     onClickNextButton()
   }
+
+  let buttonContent: string | ReactNode
+
+  switch (activeStep) {
+    case stages.length - 1:
+      buttonContent = finishButtonText
+
+      if (isFinishLoading) {
+        buttonContent = (
+          <Loading
+            spinnerSize={{ height: "h-[20px]", width: "w-[20px]" }}
+            isFrame={false}
+          />
+        )
+      }
+      break
+    case 0:
+      buttonContent = firstButtonText
+      break
+    default:
+      buttonContent = "다음"
+      break
+  }
+
   return (
     <Box sx={{ width: "100%" }}>
       <Stepper activeStep={activeStep}>
@@ -103,14 +130,16 @@ export default function Stage({
           onClick={
             activeStep === stages.length - 1 ? () => {} : handleNextButton
           }
-          className="rounded-[5px] px-[16px] text-lightRed bg-white border-[1px] border-lightRed md:text-[12px] sm:text-[10px] hover:bg-lightRed hover:text-white disabled:bg-border disabled:border-border disabled:text-lightBlack dark:bg-black dark:text-white dark:hover:bg-lightRed tracking-[3px]"
+          className="min-w-[57px] rounded-[5px] px-[16px] text-lightRed bg-white border-[1px] border-lightRed md:text-[12px] sm:text-[10px] hover:bg-lightRed hover:text-white disabled:bg-border disabled:border-border disabled:text-lightBlack dark:bg-black dark:text-white dark:hover:bg-lightRed tracking-[3px]"
           disabled={disabledNextButton[activeStep]}
         >
-          {activeStep === stages.length - 1
+          {/* {activeStep === stages.length - 1
             ? finishButtonText
             : activeStep === 0
             ? firstButtonText
-            : "다음"}
+            : "다음"} */}
+
+          {buttonContent}
         </button>
       </Box>
     </Box>
