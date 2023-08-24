@@ -102,8 +102,7 @@ const MSignUpForm = () => {
     finishButtonText: "회원가입",
     disabledNextButton: [
       !age || !privacy || !term,
-      // !email,
-      false,
+      !email,
       !isPasswordValid,
       // !phone,
       false,
@@ -112,8 +111,8 @@ const MSignUpForm = () => {
       !isBirthValid,
       isSignUpLoading,
     ],
+    onClickBackButton: () => dispatch(resetSignUpState()),
   }
-  console.log(isBirthValid)
 
   useEffect(() => {
     dispatch(resetSignUpState())

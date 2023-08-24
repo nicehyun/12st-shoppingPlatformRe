@@ -16,6 +16,7 @@ export interface IStage {
   firstButtonText: string
   finishButtonText: string
   disabledNextButton: boolean[]
+  onClickBackButton: () => void
 }
 
 export default function Stage({
@@ -24,6 +25,7 @@ export default function Stage({
   firstButtonText,
   finishButtonText,
   disabledNextButton,
+  onClickBackButton,
 }: IStage) {
   const [activeStep, setActiveStep] = useState(0)
 
@@ -36,7 +38,8 @@ export default function Stage({
   }
 
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1)
+    setActiveStep(0)
+    onClickBackButton()
   }
 
   return (

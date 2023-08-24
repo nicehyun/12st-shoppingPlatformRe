@@ -104,6 +104,7 @@ const signUpSlice = createSlice({
       state.check.email = false
     },
     resetSignUpState(state) {
+      state.clause.all = false
       state.clause.age = false
       state.clause.term = false
       state.clause.privacy = false

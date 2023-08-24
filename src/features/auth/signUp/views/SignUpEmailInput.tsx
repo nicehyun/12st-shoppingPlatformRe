@@ -6,7 +6,7 @@ import {
   selectSignUpCheckState,
 } from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { ChangeEvent } from "react"
+import { ChangeEvent, useEffect } from "react"
 import { useEmailDuplicationCheckMutaion } from "../hooks/useEmailDuplicationCheckMutaion"
 import { useFeedbackModal } from "../hooks/useFeedbackModal"
 import { useSignUpUserInput } from "../hooks/useSignUpUserInput"
@@ -29,6 +29,7 @@ const SignUpEmailInput = ({ isMobile }: Mobile) => {
     handleInputBlur: handleEmailInputBlur,
     hasError: hasErrorEmail,
     isValid: isEmailValid,
+    reset,
   } = useSignUpUserInput(emailValidator)
 
   const {
@@ -53,6 +54,7 @@ const SignUpEmailInput = ({ isMobile }: Mobile) => {
     dispatch(checkToEmailDuplication())
     showFeedbackModalWithContent("시용 가능한 이메일입니다.")
   }
+
   return (
     <>
       <SignUpVerificationInput
