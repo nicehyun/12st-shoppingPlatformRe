@@ -2,6 +2,7 @@
 
 import { ROUTE, useNavigations } from "@/common/hooks/useNavigations"
 import { Gender, UserInfo } from "@/common/types/user"
+import Loading from "@/common/views/Loading"
 import {
   resetSignUpState,
   resetStep,
@@ -48,49 +49,49 @@ const SignUpForm = () => {
   ) => {
     event.preventDefault()
 
-    if (!isEmailCheck) {
-      showFeedbackModalWithContent("이메일 중복 체크를 해주세요.")
+    // if (!isEmailCheck) {
+    //   showFeedbackModalWithContent("이메일 중복 체크를 해주세요.")
 
-      return
-    }
+    //   return
+    // }
 
-    if (!isPasswordValid) {
-      showFeedbackModalWithContent(
-        "비밀번호는 영문, 숫자와 공백을 제외한 특수문자를 포함한 8~20자리를 입력해주시고, 동일한 비밀번호를 입력해주세요."
-      )
+    // if (!isPasswordValid) {
+    //   showFeedbackModalWithContent(
+    //     "비밀번호는 영문, 숫자와 공백을 제외한 특수문자를 포함한 8~20자리를 입력해주시고, 동일한 비밀번호를 입력해주세요."
+    //   )
 
-      return
-    }
+    //   return
+    // }
 
-    if (!isNameValid) {
-      showFeedbackModalWithContent("올바른 이름을 입력해주세요.")
+    // if (!isNameValid) {
+    //   showFeedbackModalWithContent("올바른 이름을 입력해주세요.")
 
-      return
-    }
+    //   return
+    // }
 
-    if (!isPhoneCheck) {
-      showFeedbackModalWithContent("휴대폰 인증을 진행해 주세요.")
+    // if (!isPhoneCheck) {
+    //   showFeedbackModalWithContent("휴대폰 인증을 진행해 주세요.")
 
-      return
-    }
+    //   return
+    // }
 
-    if (!isAddressCheck) {
-      showFeedbackModalWithContent("주소를 입력해주세요.")
+    // if (!isAddressCheck) {
+    //   showFeedbackModalWithContent("주소를 입력해주세요.")
 
-      return
-    }
+    //   return
+    // }
 
-    if (!isBirthValid) {
-      showFeedbackModalWithContent("올바른 생년월일을 입력해주세요.")
+    // if (!isBirthValid) {
+    //   showFeedbackModalWithContent("올바른 생년월일을 입력해주세요.")
 
-      return
-    }
+    //   return
+    // }
 
-    if (!isAgeAgree || !isPrivacyAgree || !isTermAgree) {
-      showFeedbackModalWithContent("필수 이용 약관에 동의해 주세요.")
+    // if (!isAgeAgree || !isPrivacyAgree || !isTermAgree) {
+    //   showFeedbackModalWithContent("필수 이용 약관에 동의해 주세요.")
 
-      return
-    }
+    //   return
+    // }
 
     const formData = new FormData(event.currentTarget)
 
@@ -149,12 +150,14 @@ const SignUpForm = () => {
           type="submit"
           className="rounded-[5px] w-[400px] text-[14px] mt-[50px] bg-black dark:bg-white text-white dark:text-black py-[14px] tracking-[5px]"
         >
-          {/* {isLoading ? (
-            <LoadingView spinnerSize="20px" isFrame={false} />
+          {isSignUpLoading ? (
+            <Loading
+              spinnerSize={{ height: "h-[20px]", width: "w-[20px]" }}
+              isFrame={false}
+            />
           ) : (
-            "가입하기"
-          )} */}
-          회원가입
+            "회원가입"
+          )}
         </button>
       </div>
     </form>

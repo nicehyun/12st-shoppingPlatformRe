@@ -133,12 +133,6 @@ export default function Stage({
           className="min-w-[57px] rounded-[5px] px-[16px] text-lightRed bg-white border-[1px] border-lightRed md:text-[12px] sm:text-[10px] hover:bg-lightRed hover:text-white disabled:bg-border disabled:border-border disabled:text-lightBlack dark:bg-black dark:text-white dark:hover:bg-lightRed tracking-[3px]"
           disabled={disabledNextButton[activeStep]}
         >
-          {/* {activeStep === stages.length - 1
-            ? finishButtonText
-            : activeStep === 0
-            ? firstButtonText
-            : "다음"} */}
-
           {buttonContent}
         </button>
       </Box>
