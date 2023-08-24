@@ -68,8 +68,6 @@ const SignUpBirthInput = ({ isMobile }: Mobile) => {
     }
   }, [isYearValid, isMonthValid, isDayValid, dispatch])
 
-  console.log(isDayValid)
-
   return (
     <>
       <div

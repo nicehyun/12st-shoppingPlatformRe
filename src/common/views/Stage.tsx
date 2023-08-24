@@ -8,39 +8,41 @@ import Step from "@mui/material/Step"
 import StepLabel from "@mui/material/StepLabel"
 import Button from "@mui/material/Button"
 import Typography from "@mui/material/Typography"
-import { ReactNode, useState } from "react"
+import { ReactNode } from "react"
 
 export interface IStage {
+  activeStep: number
   stages: string[]
   stageContents: ReactNode[]
   firstButtonText: string
   finishButtonText: string
   disabledNextButton: boolean[]
   onClickBackButton: () => void
+  onClickNextButton: () => void
 }
 
 export default function Stage({
+  activeStep,
   stageContents,
   stages,
   firstButtonText,
   finishButtonText,
   disabledNextButton,
   onClickBackButton,
+  onClickNextButton,
 }: IStage) {
-  const [activeStep, setActiveStep] = useState(0)
-
   const isShowStageContent = (stage: number, activeStage: number) => {
     return stage === activeStage
   }
 
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1)
-  }
+  // const handleNext = () => {
+  //   setActiveStep((prevActiveStep) => prevActiveStep + 1)
+  // }
 
-  const handleBack = () => {
-    setActiveStep(0)
-    onClickBackButton()
-  }
+  // const handleBack = () => {
+  //   setActiveStep(0)
+  //   onClickBackButton()
+  // }
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -93,7 +95,7 @@ export default function Stage({
         <Button
           color="inherit"
           disabled={activeStep === 0}
-          onClick={handleBack}
+          onClick={onClickBackButton}
           className="ml-[-18px]"
         >
           <AiOutlineArrowLeft className="text-border text-[20px]" />
@@ -102,7 +104,7 @@ export default function Stage({
         <Box sx={{ flex: "1 1 auto" }} />
         <button
           type={activeStep === stages.length ? "submit" : "button"}
-          onClick={activeStep === stages.length ? () => {} : handleNext}
+          onClick={activeStep === stages.length ? () => {} : onClickNextButton}
           className="rounded-[5px] px-[16px] text-lightRed bg-white border-[1px] border-lightRed md:text-[12px] sm:text-[10px] hover:bg-lightRed hover:text-white disabled:bg-border disabled:border-border disabled:text-lightBlack dark:bg-black dark:text-white dark:hover:bg-lightRed tracking-[3px]"
           disabled={disabledNextButton[activeStep]}
         >

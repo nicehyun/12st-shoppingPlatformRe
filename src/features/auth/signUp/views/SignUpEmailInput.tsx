@@ -3,6 +3,7 @@
 import {
   checkToEmailDuplication,
   resetEmailDuplication,
+  selectSignUpActiveStepState,
   selectSignUpCheckState,
 } from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
@@ -20,6 +21,7 @@ const SignUpEmailInput = ({ isMobile }: Mobile) => {
   const { email: isCheckedEmailDuplication } = useAppSelector(
     selectSignUpCheckState
   )
+  const selectSignUpActiveStep = useAppSelector(selectSignUpActiveStepState)
 
   const { showFeedbackModalWithContent } = useFeedbackModal()
 
@@ -54,6 +56,13 @@ const SignUpEmailInput = ({ isMobile }: Mobile) => {
     dispatch(checkToEmailDuplication())
     showFeedbackModalWithContent("시용 가능한 이메일입니다.")
   }
+
+  useEffect(() => {
+    if (selectSignUpActiveStep === 0) {
+      reset()
+      return
+    }
+  }, [selectSignUpActiveStep])
 
   return (
     <>

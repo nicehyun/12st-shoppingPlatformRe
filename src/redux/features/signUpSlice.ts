@@ -25,6 +25,7 @@ type InitialSignUpState = {
   clause: Clause
   check: verifivationCheck
   isValid: isValid
+  activeStep: number
 }
 
 const initialSignUpState: InitialSignUpState = {
@@ -37,6 +38,7 @@ const initialSignUpState: InitialSignUpState = {
   },
   check: { email: false, phone: false, address: false },
   isValid: { password: false, birth: false },
+  activeStep: 0,
 }
 
 const signUpSlice = createSlice({
@@ -124,6 +126,13 @@ const signUpSlice = createSlice({
     validateBirth(state) {
       state.isValid.birth = true
     },
+    nextStep(state) {
+      console.log("123")
+      state.activeStep = state.activeStep + 1
+    },
+    resetStep(state) {
+      state.activeStep = 0
+    },
   },
 })
 
@@ -142,11 +151,15 @@ export const {
   resetSignUpPhoneCheck,
   validatePassword,
   validateBirth,
+  nextStep,
+  resetStep,
 } = signUpSlice.actions
 
 export const seletSignUpClauseState = (state: RootState) => state.signUp.clause
 export const selectSignUpCheckState = (state: RootState) => state.signUp.check
 export const selectSignUpIsValidState = (state: RootState) =>
   state.signUp.isValid
+export const selectSignUpActiveStepState = (state: RootState) =>
+  state.signUp.activeStep
 
 export default signUpSlice.reducer

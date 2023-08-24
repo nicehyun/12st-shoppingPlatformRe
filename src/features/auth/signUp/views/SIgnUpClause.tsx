@@ -20,10 +20,6 @@ const SignUpClause = () => {
 
   const dispatch = useAppDispatch()
 
-  useEffect(() => {
-    dispatch(resetAgree())
-  }, [dispatch])
-
   return (
     <div className="flex md:flex-col sm:flex-col lg:border-t-[1px] lg:border-lightBlack xl:border-t-[1px] xl:border-lightBlack px-[10px] py-[20px]">
       <h3 className="text-[16px] pt-[18px] font-bold tracking-[1.5px] mr-[80px] sm:mb-[50px] md:mb-[50px]">

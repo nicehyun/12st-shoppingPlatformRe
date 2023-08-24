@@ -4,7 +4,10 @@ import { Gender, UserInfo } from "@/common/types/user"
 import Stage, { IStage } from "@/common/views/Stage"
 
 import {
+  nextStep,
   resetSignUpState,
+  resetStep,
+  selectSignUpActiveStepState,
   selectSignUpCheckState,
   selectSignUpIsValidState,
   seletSignUpClauseState,
@@ -36,6 +39,9 @@ const MSignUpForm = () => {
   const { password: isPasswordValid, birth: isBirthValid } = useAppSelector(
     selectSignUpIsValidState
   )
+
+  const selectSignUpActiveStep = useAppSelector(selectSignUpActiveStepState)
+  console.log(selectSignUpActiveStep)
 
   const { isLoading: isSignUpLoading, mutateAsync: signUpMutateAsync } =
     useSignUpMutation()
@@ -79,7 +85,17 @@ const MSignUpForm = () => {
     // routeTo(ROUTE.HOME)
   }
 
+  const handleStageNextClick = () => {
+    dispatch(nextStep())
+  }
+
+  const handleStageBackClick = () => {
+    dispatch(resetSignUpState())
+    dispatch(resetStep())
+  }
+
   const stageProps: IStage = {
+    activeStep: selectSignUpActiveStep,
     stages: [
       "약관동의",
       "이메일",
@@ -111,7 +127,8 @@ const MSignUpForm = () => {
       !isBirthValid,
       isSignUpLoading,
     ],
-    onClickBackButton: () => dispatch(resetSignUpState()),
+    onClickBackButton: handleStageBackClick,
+    onClickNextButton: handleStageNextClick,
   }
 
   useEffect(() => {
