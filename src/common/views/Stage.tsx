@@ -103,12 +103,14 @@ export default function Stage({
 
         <Box sx={{ flex: "1 1 auto" }} />
         <button
-          type={activeStep === stages.length ? "submit" : "button"}
-          onClick={activeStep === stages.length ? () => {} : onClickNextButton}
+          type={activeStep === stages.length - 1 ? "submit" : "button"}
+          onClick={
+            activeStep === stages.length - 1 ? () => {} : onClickNextButton
+          }
           className="rounded-[5px] px-[16px] text-lightRed bg-white border-[1px] border-lightRed md:text-[12px] sm:text-[10px] hover:bg-lightRed hover:text-white disabled:bg-border disabled:border-border disabled:text-lightBlack dark:bg-black dark:text-white dark:hover:bg-lightRed tracking-[3px]"
           disabled={disabledNextButton[activeStep]}
         >
-          {activeStep === stages.length
+          {activeStep === stages.length - 1
             ? finishButtonText
             : activeStep === 0
             ? firstButtonText
