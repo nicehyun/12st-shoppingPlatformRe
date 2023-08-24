@@ -1,11 +1,12 @@
 "use client"
 
 import {
+  selectSignUpActiveStepState,
   selectSignUpCheckState,
   verifyToPhone,
 } from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useFeedbackModal } from "../hooks/useFeedbackModal"
 import useRequestVerificationMutation from "../hooks/useRequestVerificationMutation"
 import useSendVerificationCodeMutation from "../hooks/useSendVerificationCodeMutation"
@@ -17,6 +18,7 @@ import SignUpVerificationInput from "./SignUpVerificationInput"
 
 const SignUpPhoneVerificationInput = ({ isMobile }: Mobile) => {
   const dispatch = useAppDispatch()
+  const selectSignUpActiveStep = useAppSelector(selectSignUpActiveStepState)
 
   const { showFeedbackModalWithContent } = useFeedbackModal()
   const [isShowVerificationCodeInput, setIsShowVerificationCodeInput] =
@@ -33,6 +35,7 @@ const SignUpPhoneVerificationInput = ({ isMobile }: Mobile) => {
     handleInputBlur: handlePhoneInputBlur,
     isValid: isPhoneValid,
     hasError: hasErrorPhone,
+    reset,
   } = useSignUpUserInput(phoneValidator)
 
   const {
@@ -69,6 +72,14 @@ const SignUpPhoneVerificationInput = ({ isMobile }: Mobile) => {
     setIsShowVerificationCodeInput(false)
     dispatch(verifyToPhone())
   }
+
+  useEffect(() => {
+    if (selectSignUpActiveStep === 0) {
+      reset()
+      setVerificationCode("")
+      return
+    }
+  }, [selectSignUpActiveStep])
 
   return (
     <>
