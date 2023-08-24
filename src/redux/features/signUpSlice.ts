@@ -19,6 +19,7 @@ export type verifivationCheck = {
 export type isValid = {
   password: boolean
   birth: boolean
+  name: boolean
 }
 
 type InitialSignUpState = {
@@ -37,8 +38,8 @@ const initialSignUpState: InitialSignUpState = {
     term: false,
   },
   check: { email: false, phone: false, address: false },
-  isValid: { password: false, birth: false },
-  activeStep: 6,
+  isValid: { password: false, birth: false, name: false },
+  activeStep: 0,
 }
 
 const signUpSlice = createSlice({
@@ -129,6 +130,9 @@ const signUpSlice = createSlice({
     validateBirth(state) {
       state.isValid.birth = true
     },
+    validateName(state) {
+      state.isValid.name = true
+    },
     nextStep(state) {
       state.activeStep = state.activeStep + 1
     },
@@ -153,6 +157,7 @@ export const {
   resetSignUpPhoneCheck,
   validatePassword,
   validateBirth,
+  validateName,
   nextStep,
   resetStep,
   resetBirthValid,

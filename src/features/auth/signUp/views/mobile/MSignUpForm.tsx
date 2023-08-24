@@ -24,6 +24,7 @@ import MSignUpAddressInput from "./MSignUpAddressInput"
 import MSignUpBirthInput from "./MSignUpBirthInput"
 import MSignUpEmailInput from "./MSignUpEmailInput"
 import MSignUpGenderInput from "./MSignUpGenderInput"
+import MSignUpNameInput from "./MSignUpNameInput"
 
 import MSignUpPasswordInput from "./MSignUpPasswordInput"
 import MSignUpPhoneVerificationInput from "./MSignUpPhoneVerificationInput"
@@ -38,9 +39,11 @@ const MSignUpForm = () => {
     seletSignUpClauseState
   )
   const { email, address, phone } = useAppSelector(selectSignUpCheckState)
-  const { password: isPasswordValid, birth: isBirthValid } = useAppSelector(
-    selectSignUpIsValidState
-  )
+  const {
+    password: isPasswordValid,
+    birth: isBirthValid,
+    name: isNameValid,
+  } = useAppSelector(selectSignUpIsValidState)
 
   const selectSignUpActiveStep = useAppSelector(selectSignUpActiveStepState)
 
@@ -58,7 +61,7 @@ const MSignUpForm = () => {
     const userInfo: UserInfo = {
       email: formData.get("email") as string,
       password: formData.get("password") as string,
-      name: "",
+      name: formData.get("name") as string,
       phone: formData.get("phone") as string,
       address: formData.get("address") as string,
       additionalAddress: formData.get("additionalAddress") as string,
@@ -102,6 +105,7 @@ const MSignUpForm = () => {
       "약관동의",
       "이메일",
       "비밀번호",
+      "이름",
       "본인인증",
       "주소",
       "성별",
@@ -111,6 +115,7 @@ const MSignUpForm = () => {
       <SignUpClause key="clause" />,
       <MSignUpEmailInput key="email" />,
       <MSignUpPasswordInput key="password" />,
+      <MSignUpNameInput key="name" />,
       <MSignUpPhoneVerificationInput key="phone" />,
       <MSignUpAddressInput key="address" />,
       <MSignUpGenderInput key="gender" />,
@@ -122,6 +127,7 @@ const MSignUpForm = () => {
       !age || !privacy || !term,
       !email,
       !isPasswordValid,
+      !isNameValid,
       !phone,
       !address,
       false,

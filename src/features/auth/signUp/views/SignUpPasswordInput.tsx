@@ -64,10 +64,7 @@ const SignUpPasswordInput = ({ isMobile }: Mobile) => {
       />
 
       {hasErrorPassword && (
-        <SignUpFeedback
-          classNames="ml-[-0px]"
-          content="영문, 숫자와 공백을 제외한 특수문자를 포함한 8~20자리를 입력해주세요."
-        />
+        <SignUpFeedback content="영문, 숫자와 공백을 제외한 특수문자를 포함한 8~20자리를 입력해주세요." />
       )}
 
       <SignUpInput
@@ -80,10 +77,7 @@ const SignUpPasswordInput = ({ isMobile }: Mobile) => {
         isMobile={isMobile}
       />
       {hasErrorRepassword && (
-        <SignUpFeedback
-          classNames="ml-[-0px]"
-          content="비밀번호가 일치하지 않습니다."
-        />
+        <SignUpFeedback content="비밀번호가 일치하지 않습니다." />
       )}
     </>
   )
