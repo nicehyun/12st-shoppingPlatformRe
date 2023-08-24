@@ -83,7 +83,6 @@ const SignUpPhoneVerificationInput = ({ isMobile }: Mobile) => {
 
   return (
     <>
-      <div id="recaptcha-container"></div>
       <SignUpVerificationInput
         isDisabledButton={
           hasErrorPhone ||

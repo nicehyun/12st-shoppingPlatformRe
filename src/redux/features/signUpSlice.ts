@@ -130,7 +130,6 @@ const signUpSlice = createSlice({
       state.isValid.birth = true
     },
     nextStep(state) {
-      console.log("123")
       state.activeStep = state.activeStep + 1
     },
     resetStep(state) {

@@ -26,7 +26,7 @@ export default function RootLayout({
         <Providers>
           <Header />
           {children}
-
+          <div id="recaptcha-container"></div>
           <MNavgation />
 
           <FeedbackModal />

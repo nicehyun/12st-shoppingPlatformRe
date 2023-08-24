@@ -1,6 +1,7 @@
 "use client"
 
 import {
+  resetBirthValid,
   selectSignUpActiveStepState,
   validateBirth,
 } from "@/redux/features/signUpSlice"
@@ -69,11 +70,14 @@ const SignUpBirthInput = ({ isMobile }: Mobile) => {
   const isBirthInputFeedback = hasErrorYear || hasErrorMonth || hasErrorDay
 
   useEffect(() => {
+    dispatch(resetBirthValid())
+
     if (isYearValid && isMonthValid && isDayValid) {
       dispatch(validateBirth())
       return
     }
   }, [isYearValid, isMonthValid, isDayValid, dispatch])
+  console.log(isDayValid)
 
   useEffect(() => {
     if (selectSignUpActiveStep === 0) {

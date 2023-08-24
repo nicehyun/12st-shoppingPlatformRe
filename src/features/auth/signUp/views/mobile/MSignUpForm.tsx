@@ -125,8 +125,7 @@ const MSignUpForm = () => {
       !phone,
       !address,
       false,
-      !isBirthValid,
-      isSignUpLoading,
+      !isBirthValid || isSignUpLoading,
     ],
     onClickBackButton: handleStageBackClick,
     onClickNextButton: handleStageNextClick,
@@ -135,6 +134,8 @@ const MSignUpForm = () => {
   useEffect(() => {
     dispatch(resetSignUpState())
   }, [dispatch])
+
+  console.log(isBirthValid)
 
   return (
     <form
