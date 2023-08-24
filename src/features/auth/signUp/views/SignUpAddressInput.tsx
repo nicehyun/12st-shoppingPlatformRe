@@ -3,8 +3,11 @@
 import Input from "@/common/views/Input"
 import PostCodeModal from "@/common/views/PostCodeModal"
 import SignUpSideButton from "@/features/auth/signUp/views/SignUpSideButton"
-import { enterToAddress } from "@/redux/features/signUpSlice"
-import { useAppDispatch } from "@/redux/hooks"
+import {
+  enterToAddress,
+  selectSignUpActiveStepState,
+} from "@/redux/features/signUpSlice"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { useEffect, useState } from "react"
 import { Address } from "react-daum-postcode"
 import { useSignUpUserInput } from "../hooks/useSignUpUserInput"
@@ -18,9 +21,10 @@ interface ISignUpAddressInput {
 
 const SignUpAddressInput = ({ isMobile }: ISignUpAddressInput) => {
   const dispatch = useAppDispatch()
+  const selectSignUpActiveStep = useAppSelector(selectSignUpActiveStepState)
 
   const [isShowPostCodeModal, setIsShowPostCodeModal] = useState(false)
-  const [addressValue, setAddressValue] = useState("")
+  const [addtionalAddressValue, setAdditionalAddressValue] = useState("")
 
   const {
     value: additionalAddressInputValue,
@@ -28,21 +32,31 @@ const SignUpAddressInput = ({ isMobile }: ISignUpAddressInput) => {
     handleInputBlur: handleAdditionalAddressInputBlur,
     hasError: hasErrorAdditionalAddress,
     isValid: isValidAdditionalAddress,
+    reset,
   } = useSignUpUserInput(additionalAddressValidator)
 
   const handleAddressSearch = (address: Address) => {
-    setAddressValue(address.address)
+    setAdditionalAddressValue(address.address)
     setIsShowPostCodeModal(false)
   }
 
   useEffect(() => {
-    if (!addressValue) return
+    if (!addtionalAddressValue) return
 
     if (isValidAdditionalAddress) {
       dispatch(enterToAddress())
       return
     }
-  }, [addressValue, isValidAdditionalAddress, dispatch])
+  }, [addtionalAddressValue, isValidAdditionalAddress, dispatch])
+
+  useEffect(() => {
+    if (selectSignUpActiveStep === 0) {
+      reset()
+      setAdditionalAddressValue("")
+
+      return
+    }
+  }, [selectSignUpActiveStep])
 
   return (
     <>
@@ -54,7 +68,7 @@ const SignUpAddressInput = ({ isMobile }: ISignUpAddressInput) => {
             id={`${isMobile ? "m-address" : "address"}`}
             isReadOnly={true}
             classNames="mb-[10px] w-full"
-            value={addressValue}
+            value={addtionalAddressValue}
           />
 
           <SignUpSideButton
