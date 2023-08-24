@@ -1,7 +1,10 @@
 "use client"
 
-import { validatePassword } from "@/redux/features/signUpSlice"
-import { useAppDispatch } from "@/redux/hooks"
+import {
+  selectSignUpActiveStepState,
+  validatePassword,
+} from "@/redux/features/signUpSlice"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { useEffect } from "react"
 import {
   useSignUpUserInput,
@@ -14,6 +17,7 @@ import SignUpInput from "./SignUpInput"
 
 const SignUpPasswordInput = ({ isMobile }: Mobile) => {
   const dispatch = useAppDispatch()
+  const selectSignUpActiveStep = useAppSelector(selectSignUpActiveStepState)
 
   const {
     value: passwordInputValue,
@@ -21,6 +25,7 @@ const SignUpPasswordInput = ({ isMobile }: Mobile) => {
     handleInputBlur: handlePasswordInputBlur,
     hasError: hasErrorPassword,
     isValid: isPasswordValid,
+    reset: resetPassword,
   } = useSignUpUserInput(passwordValidator)
 
   const {
@@ -29,6 +34,7 @@ const SignUpPasswordInput = ({ isMobile }: Mobile) => {
     handleInputBlur: handleRepasswordInputBlur,
     hasError: hasErrorRepassword,
     isValid: isRepasswordValid,
+    reset: resetRepassword,
   } = useSignUpUserInputWithRePassword(passwordInputValue)
 
   useEffect(() => {
@@ -37,6 +43,14 @@ const SignUpPasswordInput = ({ isMobile }: Mobile) => {
       return
     }
   }, [isPasswordValid, isRepasswordValid, dispatch])
+
+  useEffect(() => {
+    if (selectSignUpActiveStep === 0) {
+      resetPassword()
+      resetRepassword()
+      return
+    }
+  }, [selectSignUpActiveStep])
 
   return (
     <>
