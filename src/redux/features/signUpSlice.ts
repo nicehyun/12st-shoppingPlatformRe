@@ -120,6 +120,7 @@ const signUpSlice = createSlice({
       state.check.address = false
       state.isValid.birth = false
       state.isValid.password = false
+      state.isValid.name = false
     },
     resetSignUpPhoneCheck(state) {
       state.check.phone = false
@@ -132,6 +133,15 @@ const signUpSlice = createSlice({
     },
     validateName(state) {
       state.isValid.name = true
+    },
+    resetValidatePassword(state) {
+      state.isValid.password = false
+    },
+    resetValidateBirth(state) {
+      state.isValid.birth = false
+    },
+    resetValidateName(state) {
+      state.isValid.name = false
     },
     nextStep(state) {
       state.activeStep = state.activeStep + 1
@@ -158,6 +168,9 @@ export const {
   validatePassword,
   validateBirth,
   validateName,
+  resetValidatePassword,
+  resetValidateBirth,
+  resetValidateName,
   nextStep,
   resetStep,
   resetBirthValid,
