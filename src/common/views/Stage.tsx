@@ -35,15 +35,11 @@ export default function Stage({
     return stage === activeStage
   }
 
-  // const handleNext = () => {
-  //   setActiveStep((prevActiveStep) => prevActiveStep + 1)
-  // }
+  const handleNextButton = () => {
+    if (disabledNextButton[activeStep]) return
 
-  // const handleBack = () => {
-  //   setActiveStep(0)
-  //   onClickBackButton()
-  // }
-
+    onClickNextButton()
+  }
   return (
     <Box sx={{ width: "100%" }}>
       <Stepper activeStep={activeStep}>
@@ -105,7 +101,7 @@ export default function Stage({
         <button
           type={activeStep === stages.length - 1 ? "submit" : "button"}
           onClick={
-            activeStep === stages.length - 1 ? () => {} : onClickNextButton
+            activeStep === stages.length - 1 ? () => {} : handleNextButton
           }
           className="rounded-[5px] px-[16px] text-lightRed bg-white border-[1px] border-lightRed md:text-[12px] sm:text-[10px] hover:bg-lightRed hover:text-white disabled:bg-border disabled:border-border disabled:text-lightBlack dark:bg-black dark:text-white dark:hover:bg-lightRed tracking-[3px]"
           disabled={disabledNextButton[activeStep]}

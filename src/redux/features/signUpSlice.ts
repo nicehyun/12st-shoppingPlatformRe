@@ -105,6 +105,9 @@ const signUpSlice = createSlice({
     resetEmailDuplication(state) {
       state.check.email = false
     },
+    resetBirthValid(state) {
+      state.isValid.birth = false
+    },
     resetSignUpState(state) {
       state.clause.all = false
       state.clause.age = false
@@ -153,6 +156,7 @@ export const {
   validateBirth,
   nextStep,
   resetStep,
+  resetBirthValid,
 } = signUpSlice.actions
 
 export const seletSignUpClauseState = (state: RootState) => state.signUp.clause

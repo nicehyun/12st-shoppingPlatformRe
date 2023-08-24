@@ -1,5 +1,6 @@
 "use client"
 
+import { ROUTE, useNavigations } from "@/common/hooks/useNavigations"
 import { Gender, UserInfo } from "@/common/types/user"
 import Stage, { IStage } from "@/common/views/Stage"
 
@@ -27,8 +28,9 @@ import MSignUpGenderInput from "./MSignUpGenderInput"
 import MSignUpPasswordInput from "./MSignUpPasswordInput"
 import MSignUpPhoneVerificationInput from "./MSignUpPhoneVerificationInput"
 
-// TODO : firebase 트래픽 초과 - email, phone 값 fasle 대신 전달하기
 const MSignUpForm = () => {
+  const { routeTo } = useNavigations()
+
   const dispatch = useAppDispatch()
   const { showFeedbackModalWithContent } = useFeedbackModal()
 
@@ -74,14 +76,15 @@ const MSignUpForm = () => {
         "회원가입에 실패했습니다. 오류가 계속되면 고객센터에 문의해주세요."
       )
 
-      // routeTo(ROUTE.SIGNUP)
+      dispatch(resetStep())
       return
     }
 
     showFeedbackModalWithContent("회원가입을 축하합니다🎉")
 
     dispatch(resetSignUpState())
-    // routeTo(ROUTE.HOME)
+    dispatch(resetStep())
+    routeTo(ROUTE.HOME)
   }
 
   const handleStageNextClick = () => {
