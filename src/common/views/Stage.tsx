@@ -25,7 +25,7 @@ export default function Stage({
   finishButtonText,
   disabledNextButton,
 }: IStage) {
-  const [activeStep, setActiveStep] = useState(5)
+  const [activeStep, setActiveStep] = useState(0)
 
   const isShowStageContent = (stage: number, activeStage: number) => {
     return stage === activeStage
@@ -100,7 +100,7 @@ export default function Stage({
         <button
           type={activeStep === stages.length ? "submit" : "button"}
           onClick={activeStep === stages.length ? () => {} : handleNext}
-          className="rounded-[5px] px-[16px] text-lightRed bg-white border-[1px] border-lightRed md:text-[12px] sm:text-[10px] hover:bg-lightRed hover:text-white disabled:bg-border disabled:text-lightBlack dark:bg-black dark:text-white dark:hover:bg-lightRed tracking-[3px]"
+          className="rounded-[5px] px-[16px] text-lightRed bg-white border-[1px] border-lightRed md:text-[12px] sm:text-[10px] hover:bg-lightRed hover:text-white disabled:bg-border disabled:border-border disabled:text-lightBlack dark:bg-black dark:text-white dark:hover:bg-lightRed tracking-[3px]"
           disabled={disabledNextButton[activeStep]}
         >
           {activeStep === stages.length

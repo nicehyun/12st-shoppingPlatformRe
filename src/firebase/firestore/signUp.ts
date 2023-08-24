@@ -31,7 +31,7 @@ export async function signUp(email: string, password: string) {
 
 export async function emailDuplicateCheck(email: string) {
   try {
-    const userRef = doc(db, "users", email)
+    const userRef = doc(db, "user", email)
     const userDoc = await getDoc(userRef)
 
     if (userDoc.exists()) {

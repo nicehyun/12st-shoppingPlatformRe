@@ -113,6 +113,7 @@ const MSignUpForm = () => {
       isSignUpLoading,
     ],
   }
+  console.log(isBirthValid)
 
   useEffect(() => {
     dispatch(resetSignUpState())
@@ -126,7 +127,6 @@ const MSignUpForm = () => {
       <h2 className="mb-[20px] text-[20px] font-bold text-center">회원가입</h2>
 
       <Stage {...stageProps} />
-      <button>테스트 회원가입 버튼</button>
     </form>
   )
 }
