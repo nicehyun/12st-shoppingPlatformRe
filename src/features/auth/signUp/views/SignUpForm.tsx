@@ -10,6 +10,7 @@ import {
   seletSignUpClauseState,
 } from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { useEffect } from "react"
 import { useFeedbackModal } from "../hooks/useFeedbackModal"
 import useSignUpMutation from "../hooks/useSignUpMutation"
 import SignUpClause from "./SIgnUpClause"
@@ -22,10 +23,17 @@ const SignUpForm = () => {
   const dispatch = useAppDispatch()
   const { showFeedbackModalWithContent } = useFeedbackModal()
 
-  const { age, privacy, term, marketing } = useAppSelector(
-    seletSignUpClauseState
-  )
-  const { email, address, phone } = useAppSelector(selectSignUpCheckState)
+  const {
+    age: isAgeAgree,
+    privacy: isPrivacyAgree,
+    term: isTermAgree,
+    marketing,
+  } = useAppSelector(seletSignUpClauseState)
+  const {
+    email: isEmailCheck,
+    address: isAddressCheck,
+    phone: isPhoneCheck,
+  } = useAppSelector(selectSignUpCheckState)
   const {
     password: isPasswordValid,
     birth: isBirthValid,
@@ -39,6 +47,50 @@ const SignUpForm = () => {
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault()
+
+    if (!isEmailCheck) {
+      showFeedbackModalWithContent("이메일 중복 체크를 해주세요.")
+
+      return
+    }
+
+    if (!isPasswordValid) {
+      showFeedbackModalWithContent(
+        "비밀번호는 영문, 숫자와 공백을 제외한 특수문자를 포함한 8~20자리를 입력해주시고, 동일한 비밀번호를 입력해주세요."
+      )
+
+      return
+    }
+
+    if (!isNameValid) {
+      showFeedbackModalWithContent("올바른 이름을 입력해주세요.")
+
+      return
+    }
+
+    if (!isPhoneCheck) {
+      showFeedbackModalWithContent("휴대폰 인증을 진행해 주세요.")
+
+      return
+    }
+
+    if (!isAddressCheck) {
+      showFeedbackModalWithContent("주소를 입력해주세요.")
+
+      return
+    }
+
+    if (!isBirthValid) {
+      showFeedbackModalWithContent("올바른 생년월일을 입력해주세요.")
+
+      return
+    }
+
+    if (!isAgeAgree || !isPrivacyAgree || !isTermAgree) {
+      showFeedbackModalWithContent("필수 이용 약관에 동의해 주세요.")
+
+      return
+    }
 
     const formData = new FormData(event.currentTarget)
 
@@ -70,8 +122,12 @@ const SignUpForm = () => {
 
     dispatch(resetSignUpState())
 
-    // routeTo(ROUTE.HOME)
+    routeTo(ROUTE.HOME)
   }
+
+  useEffect(() => {
+    dispatch(resetSignUpState())
+  }, [dispatch])
   return (
     <form
       onSubmit={handleSignUpSubmit}

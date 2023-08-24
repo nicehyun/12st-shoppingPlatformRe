@@ -35,10 +35,17 @@ const MSignUpForm = () => {
   const dispatch = useAppDispatch()
   const { showFeedbackModalWithContent } = useFeedbackModal()
 
-  const { age, privacy, term, marketing } = useAppSelector(
-    seletSignUpClauseState
-  )
-  const { email, address, phone } = useAppSelector(selectSignUpCheckState)
+  const {
+    age: isAgeAgree,
+    privacy: isPrivacyAgree,
+    term: isTermAgree,
+    marketing,
+  } = useAppSelector(seletSignUpClauseState)
+  const {
+    email: isEmailCheck,
+    address: isAddressCheck,
+    phone: isPhoneCheck,
+  } = useAppSelector(selectSignUpCheckState)
   const {
     password: isPasswordValid,
     birth: isBirthValid,
@@ -123,12 +130,12 @@ const MSignUpForm = () => {
     firstButtonText: "동의하고 가입하기",
     finishButtonText: "회원가입",
     disabledNextButton: [
-      !age || !privacy || !term,
-      !email,
+      !isAgeAgree || !isPrivacyAgree || !isTermAgree,
+      !isEmailCheck,
       !isPasswordValid,
       !isNameValid,
-      !phone,
-      !address,
+      !isPhoneCheck,
+      !isAddressCheck,
       false,
       !isBirthValid || isSignUpLoading,
     ],
