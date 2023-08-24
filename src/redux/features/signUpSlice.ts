@@ -111,6 +111,8 @@ const signUpSlice = createSlice({
       state.check.email = false
       state.check.phone = false
       state.check.address = false
+      state.isValid.birth = false
+      state.isValid.password = false
     },
     resetSignUpPhoneCheck(state) {
       state.check.phone = false

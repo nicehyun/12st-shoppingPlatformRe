@@ -25,7 +25,7 @@ export default function Stage({
   finishButtonText,
   disabledNextButton,
 }: IStage) {
-  const [activeStep, setActiveStep] = useState(6)
+  const [activeStep, setActiveStep] = useState(0)
 
   const isShowStageContent = (stage: number, activeStage: number) => {
     return stage === activeStage
@@ -98,12 +98,13 @@ export default function Stage({
 
         <Box sx={{ flex: "1 1 auto" }} />
         <Button
-          onClick={handleNext}
+          type={activeStep === stages.length ? "submit" : "button"}
+          onClick={activeStep === stages.length ? () => {} : handleNext}
           sx={{ bgcolor: "#ff4e0a", color: "#fff" }}
           className="text-white bg-lightRed md:text-[12px] sm:text-[10px] hover:border-lightRed border-[1px] disabled:bg-border disabled:text-lightBlack dark:hover:bg-white hover:text-lightRed"
           disabled={disabledNextButton[activeStep]}
         >
-          {activeStep === stages.length - 1
+          {activeStep === stages.length
             ? finishButtonText
             : activeStep === 0
             ? firstButtonText
