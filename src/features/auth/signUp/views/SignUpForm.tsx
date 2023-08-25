@@ -143,7 +143,7 @@ const SignUpForm = () => {
 
       <SIgnUpUserInfo />
 
-      <SignUpClause />
+      <SignUpClause isMobile={false} />
 
       <div className="flexCenter">
         <button

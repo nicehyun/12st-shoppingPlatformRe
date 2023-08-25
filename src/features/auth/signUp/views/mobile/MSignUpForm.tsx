@@ -118,7 +118,7 @@ const MSignUpForm = () => {
       "생년월일",
     ],
     stageContents: [
-      <SignUpClause key="clause" />,
+      <SignUpClause key="clause" isMobile={true} />,
       <MSignUpEmailInput key="email" />,
       <MSignUpPasswordInput key="password" />,
       <MSignUpNameInput key="name" />,

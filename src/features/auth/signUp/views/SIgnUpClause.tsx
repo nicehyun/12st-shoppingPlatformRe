@@ -1,5 +1,3 @@
-"use client"
-
 import {
   toggleAgreeToAllClause,
   seletSignUpClauseState,
@@ -10,10 +8,10 @@ import {
   resetAgree,
 } from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { useEffect } from "react"
+import { Mobile } from "../types/mobile"
 import SignUpClauseEl from "./SIgnUpClauseEl"
 
-const SignUpClause = () => {
+const SignUpClause = ({ isMobile }: Mobile) => {
   const { age, marketing, privacy, term, all } = useAppSelector(
     seletSignUpClauseState
   )
@@ -38,6 +36,7 @@ const SignUpClause = () => {
             borderColor: "peer-checked/all:after:border-lightRed",
           }}
           onClickClause={() => dispatch(toggleAgreeToAllClause())}
+          isMobile={isMobile}
         />
 
         <SignUpClauseEl
@@ -51,6 +50,7 @@ const SignUpClause = () => {
             borderColor: "peer-checked/age:after:border-lightRed",
           }}
           onClickClause={() => dispatch(toggleAgreeToAgeClause())}
+          isMobile={isMobile}
         />
 
         <SignUpClauseEl
@@ -64,6 +64,7 @@ const SignUpClause = () => {
             borderColor: "peer-checked/term:after:border-lightRed",
           }}
           onClickClause={() => dispatch(toggleAgreeToTermClause())}
+          isMobile={isMobile}
         />
 
         <SignUpClauseEl
@@ -77,6 +78,7 @@ const SignUpClause = () => {
             borderColor: "peer-checked/privacy:after:border-lightRed",
           }}
           onClickClause={() => dispatch(toggleAgreeToPrivacyClause())}
+          isMobile={isMobile}
         />
 
         <SignUpClauseEl
@@ -90,6 +92,7 @@ const SignUpClause = () => {
             borderColor: "peer-checked/marketing:after:border-lightRed",
           }}
           onClickClause={() => dispatch(toggleAgreeToMarketingClause())}
+          isMobile={isMobile}
         />
       </div>
     </div>

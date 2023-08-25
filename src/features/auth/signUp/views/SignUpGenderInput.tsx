@@ -5,12 +5,9 @@ import RadioInput from "@/common/views/RadioInput"
 import { selectSignUpActiveStepState } from "@/redux/features/signUpSlice"
 import { useAppSelector } from "@/redux/hooks"
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react"
+import { Mobile } from "../types/mobile"
 
-interface ISignUpGenderInput {
-  isMobile: boolean
-}
-
-const SignUpGenderInput = ({ isMobile }: ISignUpGenderInput) => {
+const SignUpGenderInput = ({ isMobile }: Mobile) => {
   const [gender, setGender] = useState<Gender>("none")
   const selectSignUpActiveStep = useAppSelector(selectSignUpActiveStepState)
 
