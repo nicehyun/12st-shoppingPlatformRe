@@ -65,9 +65,13 @@ const SignUpVerificationInput = ({
     default:
       break
   }
+
+  // TODO : Time 함수 수정
   const test = () => {
     console.log("test")
   }
+
+  console.log(type)
 
   return (
     <div className={`${classNames} flex flex-grow`}>

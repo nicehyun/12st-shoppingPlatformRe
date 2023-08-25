@@ -37,12 +37,12 @@ const SIgnUpUserInfo = () => {
       />
 
       <SignUpInputWrap
-        htmlFor="gender"
+        htmlFor="gender-male"
         userInputComponent={<SignUpGenderInput isMobile={false} />}
       />
 
       <SignUpInputWrap
-        htmlFor="birth"
+        htmlFor="birthYear"
         userInputComponent={<SignUpBirthInput isMobile={false} />}
       />
     </div>

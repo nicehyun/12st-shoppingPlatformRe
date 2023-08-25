@@ -40,6 +40,7 @@ const SignUpClauseEl = ({
           type="checkbox"
           checked={isChecked}
           name={clauseType}
+          id={clauseType}
           className={`checked: mr-[10px] overflow-hidden absolute top-[2px] left-[2px] w-[1px] h-[1px] border-none bg-transparent z-10 appearance-none ${peer}`}
           readOnly
         />

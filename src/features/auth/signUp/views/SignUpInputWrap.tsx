@@ -7,8 +7,8 @@ type UserInputType =
   | "name"
   | "phone"
   | "address"
-  | "gender"
-  | "birth"
+  | "gender-male"
+  | "birthYear"
   | "verificationPhone"
 
 interface ISignUpInputWrap {
@@ -40,13 +40,13 @@ const SignUpInputWrap = ({
     case "phone":
       labelText = "휴대폰"
       break
-    case "gender":
+    case "gender-male":
       labelText = "성별"
       break
     case "address":
       labelText = "주소"
       break
-    case "birth":
+    case "birthYear":
       labelText = "생년월일"
       break
     default:
