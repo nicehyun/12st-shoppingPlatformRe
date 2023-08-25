@@ -50,6 +50,7 @@ const Input = ({
         maxLength={maxLength}
         minLength={minLength}
         onBlur={onBlur}
+        autoComplete="off"
       />
       {children}
     </div>
