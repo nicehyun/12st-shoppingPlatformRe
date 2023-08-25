@@ -71,8 +71,6 @@ const SignUpVerificationInput = ({
     console.log("test")
   }
 
-  console.log(type)
-
   return (
     <div className={`${classNames} flex flex-grow`}>
       <Input
