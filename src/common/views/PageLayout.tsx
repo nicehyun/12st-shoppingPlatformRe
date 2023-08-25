@@ -7,9 +7,9 @@ interface IPageLayout {
 
 const PageLayout = ({ children, classNames }: IPageLayout) => {
   return (
-    <div className={`${classNames} px-10 pt-[200px] pb-[100px]`}>
+    <main className={`${classNames} px-10 pt-[200px] pb-[100px]`}>
       {children}
-    </div>
+    </main>
   )
 }
 
