@@ -6,12 +6,12 @@ import {
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { useEffect } from "react"
 import { useSignUpUserInput } from "../hooks/useSignUpUserInput"
-import { Mobile } from "../types/mobile"
 import { nameValidator } from "../utils/validation"
 import SignUpFeedback from "./SignUpFeedback"
 import SignUpInput from "./SignUpInput"
+import SignUpInputLayout from "./SignUpInputLayout"
 
-const SignUpNameInput = ({ isMobile }: Mobile) => {
+const SignUpNameInput = () => {
   const dispatch = useAppDispatch()
   const selectSignUpActiveStep = useAppSelector(selectSignUpActiveStepState)
 
@@ -40,7 +40,7 @@ const SignUpNameInput = ({ isMobile }: Mobile) => {
     }
   }, [isNameValid, dispatch])
   return (
-    <>
+    <SignUpInputLayout headingText="이름을 입력해주세요">
       <SignUpInput
         type="name"
         classNames="mt-[10px]"
@@ -48,10 +48,9 @@ const SignUpNameInput = ({ isMobile }: Mobile) => {
         onChangeInputValue={handleNameInputValueChange}
         onBlurInput={handleNameInputBlur}
         isShowFeedback={hasErrorName}
-        isMobile={isMobile}
       />
       {hasErrorName && <SignUpFeedback content="올바른 이름을 입력해주세요." />}
-    </>
+    </SignUpInputLayout>
   )
 }
 

@@ -11,12 +11,12 @@ import { ChangeEvent, useEffect } from "react"
 import { useEmailDuplicationCheckMutaion } from "../hooks/useEmailDuplicationCheckMutaion"
 import { useFeedbackModal } from "../hooks/useFeedbackModal"
 import { useSignUpUserInput } from "../hooks/useSignUpUserInput"
-import { Mobile } from "../types/mobile"
 import { emailValidator } from "../utils/validation"
 import SignUpFeedback from "./SignUpFeedback"
+import SignUpInputLayout from "./SignUpInputLayout"
 import SignUpVerificationInput from "./SignUpVerificationInput"
 
-const SignUpEmailInput = ({ isMobile }: Mobile) => {
+const SignUpEmailInput = () => {
   const dispatch = useAppDispatch()
   const { email: isCheckedEmailDuplication } = useAppSelector(
     selectSignUpCheckState
@@ -65,7 +65,7 @@ const SignUpEmailInput = ({ isMobile }: Mobile) => {
   }, [selectSignUpActiveStep])
 
   return (
-    <>
+    <SignUpInputLayout headingText="로그인에 사용할 이메일을 입력해주세요">
       <SignUpVerificationInput
         isDisabledButton={
           !isEmailValid ||
@@ -79,12 +79,11 @@ const SignUpEmailInput = ({ isMobile }: Mobile) => {
         onClickVerificationButton={handleEmailDuplicationCheck}
         isShowFeedback={hasErrorEmail}
         isLoading={isEmailDuplicateCheckLoading}
-        isMobile={isMobile}
       />
       {hasErrorEmail && (
         <SignUpFeedback content="이메일 형식을 입력해주세요." />
       )}
-    </>
+    </SignUpInputLayout>
   )
 }
 

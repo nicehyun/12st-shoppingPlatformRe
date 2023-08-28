@@ -1,11 +1,13 @@
 "use client"
 
-import { ROUTE, useNavigations } from "@/common/hooks/useNavigations"
+import { useNavigations } from "@/common/hooks/useNavigations"
 import { Gender, UserInfo } from "@/common/types/user"
-import Loading from "@/common/views/Loading"
+import Stage, { IStage } from "@/common/views/Stage"
 import {
+  nextStep,
   resetSignUpState,
   resetStep,
+  selectSignUpActiveStepState,
   selectSignUpCheckState,
   selectSignUpIsValidState,
   seletSignUpClauseState,
@@ -14,10 +16,15 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { useEffect } from "react"
 import { useFeedbackModal } from "../hooks/useFeedbackModal"
 import useSignUpMutation from "../hooks/useSignUpMutation"
+import SignUpAddressInput from "./SignUpAddressInput"
+import SignUpBirthInput from "./SignUpBirthInput"
 import SignUpClause from "./SIgnUpClause"
-import SIgnUpUserInfo from "./SIgnUpUserInfo"
+import SignUpEmailInput from "./SignUpEmailInput"
+import SignUpGenderInput from "./SignUpGenderInput"
+import SignUpNameInput from "./SignUpNameInput"
+import SignUpPasswordInput from "./SignUpPasswordInput"
+import SignUpPhoneVerificationInput from "./SignUpPhoneVerificationInput"
 
-// TODO : isLoading 처리
 const SignUpForm = () => {
   const { routeTo } = useNavigations()
 
@@ -41,6 +48,8 @@ const SignUpForm = () => {
     name: isNameValid,
   } = useAppSelector(selectSignUpIsValidState)
 
+  const selectSignUpActiveStep = useAppSelector(selectSignUpActiveStepState)
+
   const { isLoading: isSignUpLoading, mutateAsync: signUpMutateAsync } =
     useSignUpMutation()
 
@@ -48,50 +57,6 @@ const SignUpForm = () => {
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault()
-
-    if (!isEmailCheck) {
-      showFeedbackModalWithContent("이메일 중복 체크를 해주세요.")
-
-      return
-    }
-
-    if (!isPasswordValid) {
-      showFeedbackModalWithContent(
-        "비밀번호는 영문, 숫자와 공백을 제외한 특수문자를 포함한 8~20자리를 입력해주시고, 동일한 비밀번호를 입력해주세요."
-      )
-
-      return
-    }
-
-    if (!isNameValid) {
-      showFeedbackModalWithContent("올바른 이름을 입력해주세요.")
-
-      return
-    }
-
-    if (!isPhoneCheck) {
-      showFeedbackModalWithContent("휴대폰 인증을 진행해 주세요.")
-
-      return
-    }
-
-    if (!isAddressCheck) {
-      showFeedbackModalWithContent("주소를 입력해주세요.")
-
-      return
-    }
-
-    if (!isBirthValid) {
-      showFeedbackModalWithContent("올바른 생년월일을 입력해주세요.")
-
-      return
-    }
-
-    if (!isAgeAgree || !isPrivacyAgree || !isTermAgree) {
-      showFeedbackModalWithContent("필수 이용 약관에 동의해 주세요.")
-
-      return
-    }
 
     const formData = new FormData(event.currentTarget)
 
@@ -116,50 +81,74 @@ const SignUpForm = () => {
     //     "회원가입에 실패했습니다. 오류가 계속되면 고객센터에 문의해주세요."
     //   )
 
+    //   dispatch(resetStep())
     //   return
     // }
 
     // showFeedbackModalWithContent("회원가입을 축하합니다🎉")
 
     // dispatch(resetSignUpState())
-
+    // dispatch(resetStep())
     // routeTo(ROUTE.HOME)
+  }
+
+  const handleStageNextClick = () => {
+    dispatch(nextStep())
+  }
+
+  const handleStageBackClick = () => {
+    dispatch(resetSignUpState())
+    dispatch(resetStep())
+  }
+
+  const stageProps: IStage = {
+    activeStep: selectSignUpActiveStep,
+    stages: [
+      "약관동의",
+      "이메일",
+      "비밀번호",
+      "이름",
+      "본인인증",
+      "주소",
+      "성별",
+      "생년월일",
+    ],
+    stageContents: [
+      <SignUpClause key="clause" />,
+      <SignUpEmailInput key="email" />,
+      <SignUpPasswordInput key="password" />,
+      <SignUpNameInput key="name" />,
+      <SignUpPhoneVerificationInput key="phone" />,
+      <SignUpAddressInput key="address" />,
+      <SignUpGenderInput key="gender" />,
+      <SignUpBirthInput key="birth" />,
+    ],
+    firstButtonText: "동의하고 가입하기",
+    finishButtonText: "회원가입",
+    disabledNextButton: [
+      !isAgeAgree || !isPrivacyAgree || !isTermAgree,
+      !isEmailCheck,
+      !isPasswordValid,
+      !isNameValid,
+      !isPhoneCheck,
+      !isAddressCheck,
+      false,
+      !isBirthValid || isSignUpLoading,
+    ],
+    onClickBackButton: handleStageBackClick,
+    onClickNextButton: handleStageNextClick,
+    isFinishLoading: isSignUpLoading,
   }
 
   useEffect(() => {
     dispatch(resetSignUpState())
   }, [dispatch])
+
   return (
-    <form
-      onSubmit={handleSignUpSubmit}
-      className="sm:hidden md:hidden max-w-[800px] mx-auto"
-    >
-      <h2 className="text-[28px] font-bold mb-[40px] text-center border-black dark:border-white tracking-[20px]">
-        회원가입
-      </h2>
-      <h3 className="border-b-[1px] border-black dark:border-white pb-[10px] mb-[10px] text-right text-[12px] text-lightGray">
-        <span className="text-lightRed mr-[5px]">*</span>필수입력사항
-      </h3>
+    <form onSubmit={handleSignUpSubmit} className="w-[400px] mx-auto h-[500px]">
+      <h2 className="mb-[20px] text-[20px] font-bold text-center">회원가입</h2>
 
-      <SIgnUpUserInfo />
-
-      <SignUpClause isMobile={false} />
-
-      <div className="flexCenter">
-        <button
-          type="submit"
-          className="rounded-[5px] w-[400px] text-[14px] mt-[50px] bg-black dark:bg-white text-white dark:text-black py-[14px] tracking-[5px]"
-        >
-          {isSignUpLoading ? (
-            <Loading
-              spinnerSize={{ height: "h-[20px]", width: "w-[20px]" }}
-              isFrame={false}
-            />
-          ) : (
-            "회원가입"
-          )}
-        </button>
-      </div>
+      <Stage {...stageProps} />
     </form>
   )
 }

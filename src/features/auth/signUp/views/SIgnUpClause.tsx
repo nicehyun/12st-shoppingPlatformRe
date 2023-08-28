@@ -1,3 +1,5 @@
+"use client"
+
 import {
   toggleAgreeToAllClause,
   seletSignUpClauseState,
@@ -7,20 +9,18 @@ import {
   toggleAgreeToTermClause,
 } from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { Mobile } from "../types/mobile"
 import SignUpClauseEl from "./SIgnUpClauseEl"
 
-const SignUpClause = ({ isMobile }: Mobile) => {
+const SignUpClause = () => {
   const { age, marketing, privacy, term, all } = useAppSelector(
     seletSignUpClauseState
   )
-  console.log(age)
 
   const dispatch = useAppDispatch()
 
   return (
-    <div className="flex md:flex-col sm:flex-col lg:border-t-[1px] lg:border-lightBlack xl:border-t-[1px] xl:border-lightBlack px-[10px] py-[20px]">
-      <h3 className="text-[16px] pt-[18px] font-bold tracking-[1.5px] mr-[80px] sm:mb-[50px] md:mb-[50px]">
+    <div className="flex flex-col px-[10px] py-[20px]">
+      <h3 className="text-[16px] pt-[18px] font-bold tracking-[1.5px] mr-[80px] mb-[50px]">
         12st 이용약관 동의
       </h3>
 
@@ -36,7 +36,6 @@ const SignUpClause = ({ isMobile }: Mobile) => {
             borderColor: "peer-checked/all:after:border-lightRed",
           }}
           onClickClause={() => dispatch(toggleAgreeToAllClause())}
-          isMobile={isMobile}
         />
 
         <SignUpClauseEl
@@ -50,7 +49,6 @@ const SignUpClause = ({ isMobile }: Mobile) => {
             borderColor: "peer-checked/age:after:border-lightRed",
           }}
           onClickClause={() => dispatch(toggleAgreeToAgeClause())}
-          isMobile={isMobile}
         />
 
         <SignUpClauseEl
@@ -64,7 +62,6 @@ const SignUpClause = ({ isMobile }: Mobile) => {
             borderColor: "peer-checked/term:after:border-lightRed",
           }}
           onClickClause={() => dispatch(toggleAgreeToTermClause())}
-          isMobile={isMobile}
         />
 
         <SignUpClauseEl
@@ -78,7 +75,6 @@ const SignUpClause = ({ isMobile }: Mobile) => {
             borderColor: "peer-checked/privacy:after:border-lightRed",
           }}
           onClickClause={() => dispatch(toggleAgreeToPrivacyClause())}
-          isMobile={isMobile}
         />
 
         <SignUpClauseEl
@@ -92,7 +88,6 @@ const SignUpClause = ({ isMobile }: Mobile) => {
             borderColor: "peer-checked/marketing:after:border-lightRed",
           }}
           onClickClause={() => dispatch(toggleAgreeToMarketingClause())}
-          isMobile={isMobile}
         />
       </div>
     </div>

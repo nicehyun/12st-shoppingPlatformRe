@@ -8,15 +8,15 @@ import {
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { ChangeEvent, useEffect } from "react"
 import { useSignUpUserInput } from "../hooks/useSignUpUserInput"
-import { Mobile } from "../types/mobile"
 import {
   birthDayValidatorWithMonth,
   birthMonthValidator,
   birthYearValidator,
 } from "../utils/validation"
 import SignUpFeedback from "./SignUpFeedback"
+import SignUpInputLayout from "./SignUpInputLayout"
 
-const SignUpBirthInput = ({ isMobile }: Mobile) => {
+const SignUpBirthInput = () => {
   const dispatch = useAppDispatch()
   const selectSignUpActiveStep = useAppSelector(selectSignUpActiveStepState)
 
@@ -88,7 +88,7 @@ const SignUpBirthInput = ({ isMobile }: Mobile) => {
   }, [selectSignUpActiveStep])
 
   return (
-    <>
+    <SignUpInputLayout headingText="로그인에 사용할 이메일을 입력해주세요">
       <div
         className={`flex-grow max-w-[400px] h-[38px] flexCenter items-center ${
           isBirthInputFeedback ? "border-lightRed" : "border-border"
@@ -98,7 +98,7 @@ const SignUpBirthInput = ({ isMobile }: Mobile) => {
           type="number"
           placeholder="YYYY"
           maxLength={4}
-          id={isMobile ? "m-birthYear" : "birthYear"}
+          id="birthYear"
           name="birthYear"
           value={yearInputValue}
           onChange={(event) =>
@@ -112,7 +112,7 @@ const SignUpBirthInput = ({ isMobile }: Mobile) => {
           type="number"
           placeholder="MM"
           maxLength={2}
-          id={isMobile ? "m-birthMonth" : "birthMonth"}
+          id="birthMonth"
           name="birthMonth"
           value={monthInputValue}
           onChange={(event) =>
@@ -127,7 +127,7 @@ const SignUpBirthInput = ({ isMobile }: Mobile) => {
           placeholder="DD"
           maxLength={2}
           name="birthDay"
-          id={isMobile ? "m-birthDay" : "birthDay"}
+          id="birthDay"
           value={dayInputValue}
           onChange={(event) =>
             handleBirthInputMaxLength(event, handleDayInputValueChange, 2)
@@ -137,7 +137,7 @@ const SignUpBirthInput = ({ isMobile }: Mobile) => {
         />
       </div>
       <SignUpFeedback content={birthInputFeedbackContent} />
-    </>
+    </SignUpInputLayout>
   )
 }
 

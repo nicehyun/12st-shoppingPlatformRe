@@ -11,12 +11,12 @@ import {
   useSignUpUserInput,
   useSignUpUserInputWithRePassword,
 } from "../hooks/useSignUpUserInput"
-import { Mobile } from "../types/mobile"
 import { passwordValidator } from "../utils/validation"
 import SignUpFeedback from "./SignUpFeedback"
 import SignUpInput from "./SignUpInput"
+import SignUpInputLayout from "./SignUpInputLayout"
 
-const SignUpPasswordInput = ({ isMobile }: Mobile) => {
+const SignUpPasswordInput = () => {
   const dispatch = useAppDispatch()
   const selectSignUpActiveStep = useAppSelector(selectSignUpActiveStepState)
 
@@ -56,14 +56,13 @@ const SignUpPasswordInput = ({ isMobile }: Mobile) => {
   }, [selectSignUpActiveStep])
 
   return (
-    <>
+    <SignUpInputLayout headingText="로그인에 사용할 비밀번호를 입력해주세요">
       <SignUpInput
         type="password"
         inputValue={passwordInputValue}
         onChangeInputValue={handlePasswordInputValueChange}
         onBlurInput={handlePasswordInputBlur}
         isShowFeedback={hasErrorPassword}
-        isMobile={isMobile}
       />
 
       {hasErrorPassword && (
@@ -77,12 +76,11 @@ const SignUpPasswordInput = ({ isMobile }: Mobile) => {
         onChangeInputValue={handleRepasswordInputValueChange}
         onBlurInput={handleRepasswordInputBlur}
         isShowFeedback={hasErrorRepassword}
-        isMobile={isMobile}
       />
       {hasErrorRepassword && (
         <SignUpFeedback content="비밀번호가 일치하지 않습니다." />
       )}
-    </>
+    </SignUpInputLayout>
   )
 }
 

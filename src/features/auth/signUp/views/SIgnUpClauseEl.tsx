@@ -1,5 +1,3 @@
-import { Mobile } from "../types/mobile"
-
 interface ISignUpClauseEl {
   label: string
   clauseType: "term" | "age" | "privacy" | "marketing" | "all"
@@ -22,8 +20,7 @@ const SignUpClauseEl = ({
   peer,
   peerChecked,
   onClickClause,
-  isMobile,
-}: ISignUpClauseEl & Mobile) => {
+}: ISignUpClauseEl) => {
   const fomatRequired = (isRequired: boolean | null) => {
     if (isRequired === null) return ""
 
@@ -43,7 +40,7 @@ const SignUpClauseEl = ({
           type="checkbox"
           checked={isChecked}
           name={clauseType}
-          id={`${isMobile ? `m-${clauseType}` : clauseType}`}
+          id={clauseType}
           className={`checked: mr-[10px] overflow-hidden absolute top-[2px] left-[2px] w-[1px] h-[1px] border-none bg-transparent z-10 appearance-none ${peer}`}
           readOnly
         />

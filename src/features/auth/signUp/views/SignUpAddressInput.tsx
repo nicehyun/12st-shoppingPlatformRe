@@ -15,12 +15,9 @@ import { useSignUpUserInput } from "../hooks/useSignUpUserInput"
 import { additionalAddressValidator } from "../utils/validation"
 
 import SignUpFeedback from "./SignUpFeedback"
+import SignUpInputLayout from "./SignUpInputLayout"
 
-interface ISignUpAddressInput {
-  isMobile: boolean
-}
-
-const SignUpAddressInput = ({ isMobile }: ISignUpAddressInput) => {
+const SignUpAddressInput = () => {
   const dispatch = useAppDispatch()
   const selectSignUpActiveStep = useAppSelector(selectSignUpActiveStepState)
 
@@ -62,13 +59,13 @@ const SignUpAddressInput = ({ isMobile }: ISignUpAddressInput) => {
   }, [selectSignUpActiveStep])
 
   return (
-    <>
+    <SignUpInputLayout headingText="주소를 입력해주세요">
       <div className="flex flex-col flex-grow">
         <div className="flex">
           <Input
             type="text"
             name="address"
-            id={`${isMobile ? "m-address" : "address"}`}
+            id="address"
             isReadOnly={true}
             classNames="mb-[10px] w-full"
             value={addtionalAddressValue}
@@ -84,7 +81,7 @@ const SignUpAddressInput = ({ isMobile }: ISignUpAddressInput) => {
         <Input
           type="text"
           name="additionalAddress"
-          id={`${isMobile ? "m-additionalAddress" : "additionalAddress"}`}
+          id="additionalAddress"
           placeholder="나머지 주소를 입력해주세요"
           value={additionalAddressInputValue}
           onBlur={handleAdditionalAddressInputBlur}
@@ -103,7 +100,7 @@ const SignUpAddressInput = ({ isMobile }: ISignUpAddressInput) => {
           onHide={() => setIsShowPostCodeModal(false)}
         />
       )}
-    </>
+    </SignUpInputLayout>
   )
 }
 

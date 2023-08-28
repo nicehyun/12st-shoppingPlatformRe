@@ -1,11 +1,11 @@
 import { ReactNode } from "react"
 
-interface IMSignUpInputLayout {
+interface ISignUpInputLayout {
   children: ReactNode
   headingText: string
 }
 
-const MSignUpInputLayout = ({ children, headingText }: IMSignUpInputLayout) => {
+const SignUpInputLayout = ({ children, headingText }: ISignUpInputLayout) => {
   return (
     <div className="py-[30px]">
       <h3 className="mb-[30px] font-bold">{headingText}</h3>
@@ -14,4 +14,4 @@ const MSignUpInputLayout = ({ children, headingText }: IMSignUpInputLayout) => {
   )
 }
 
-export default MSignUpInputLayout
+export default SignUpInputLayout

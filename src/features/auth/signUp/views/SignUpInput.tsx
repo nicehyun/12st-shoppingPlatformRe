@@ -3,7 +3,6 @@
 import Input, { InputType } from "@/common/views/Input"
 import PasswordToggleIcon from "@/common/views/PasswordToggleIcon"
 import { ChangeEvent, useState } from "react"
-import { Mobile } from "../types/mobile"
 
 type UserInputType = "password" | "repassword" | "name"
 
@@ -23,8 +22,7 @@ const SignUpInput = ({
   isShowFeedback,
   onBlurInput,
   onChangeInputValue,
-  isMobile,
-}: ISignUpInput & Mobile) => {
+}: ISignUpInput) => {
   const [isShowPassword, setIsShowPassword] = useState(false)
 
   const handleShowPassword = () => {
@@ -58,7 +56,7 @@ const SignUpInput = ({
     <Input
       type={isShowPassword ? "text" : inputType}
       name={type}
-      id={isMobile ? `m-${type}` : type}
+      id={type}
       placeholder={placeholder}
       classNames={`${classNames} flex-grow w-full`}
       value={inputValue}

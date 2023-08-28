@@ -14,9 +14,10 @@ import { useSignUpUserInput } from "../hooks/useSignUpUserInput"
 import { Mobile } from "../types/mobile"
 import { phoneValidator } from "../utils/validation"
 import SignUpFeedback from "./SignUpFeedback"
+import SignUpInputLayout from "./SignUpInputLayout"
 import SignUpVerificationInput from "./SignUpVerificationInput"
 
-const SignUpPhoneVerificationInput = ({ isMobile }: Mobile) => {
+const SignUpPhoneVerificationInput = () => {
   const dispatch = useAppDispatch()
   const selectSignUpActiveStep = useAppSelector(selectSignUpActiveStepState)
 
@@ -82,7 +83,7 @@ const SignUpPhoneVerificationInput = ({ isMobile }: Mobile) => {
   }, [selectSignUpActiveStep])
 
   return (
-    <>
+    <SignUpInputLayout headingText="본인인증을 진행해주세요">
       <SignUpVerificationInput
         isDisabledButton={
           hasErrorPhone ||
@@ -98,7 +99,6 @@ const SignUpPhoneVerificationInput = ({ isMobile }: Mobile) => {
         onClickVerificationButton={handlePhoneVerificationRequest}
         isLoading={isRequestVerificationLoading}
         isReadOnly={isShowVerificationCodeInput || isCheckedPhoneVerification}
-        isMobile={isMobile}
       />
       {hasErrorPhone && (
         <SignUpFeedback
@@ -116,10 +116,9 @@ const SignUpPhoneVerificationInput = ({ isMobile }: Mobile) => {
           }
           onClickVerificationButton={handlePhoneVerificationCodeSend}
           isLoading={isSendVerificationCodeLoading}
-          isMobile={isMobile}
         />
       )}
-    </>
+    </SignUpInputLayout>
   )
 }
 

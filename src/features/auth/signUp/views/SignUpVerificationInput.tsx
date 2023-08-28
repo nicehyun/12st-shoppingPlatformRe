@@ -5,7 +5,6 @@ import SignUpSideButton from "@/features/auth/signUp/views/SignUpSideButton"
 import Timer from "@/common/views/TImer"
 import { ChangeEvent } from "react"
 import Loading from "@/common/views/Loading"
-import { Mobile } from "../types/mobile"
 
 type UserInputType = "email" | "phone" | "verificationPhone"
 
@@ -37,8 +36,7 @@ const SignUpVerificationInput = ({
   classNames,
   isShowFeedback,
   isReadOnly,
-  isMobile,
-}: ISignUpVerificationInput & Mobile) => {
+}: ISignUpVerificationInput) => {
   let inputType: InputType = "text",
     placeholder = "",
     preVerificationButtonText = "",
@@ -76,7 +74,7 @@ const SignUpVerificationInput = ({
       <Input
         type={inputType}
         name={type}
-        id={isMobile ? `m-${type}` : type}
+        id={type}
         placeholder={placeholder}
         classNames="flex-grow"
         maxLength={type === "verificationPhone" ? 6 : undefined}
