@@ -1,7 +1,5 @@
 "use client"
-
 import { useNavigations } from "@/common/hooks/useNavigations"
-import { Gender, UserInfo } from "@/common/types/user"
 import Stage, { IStage } from "@/common/views/Stage"
 import {
   nextStep,
@@ -59,36 +57,24 @@ const SignUpForm = () => {
     event.preventDefault()
 
     const formData = new FormData(event.currentTarget)
+    formData.append("marketing", marketing.toString())
 
-    const userInfo: UserInfo = {
-      email: formData.get("email") as string,
-      password: formData.get("password") as string,
-      name: formData.get("name") as string,
-      phone: formData.get("phone") as string,
-      address: formData.get("address") as string,
-      additionalAddress: formData.get("additionalAddress") as string,
-      gender: formData.get("gender") as Gender,
-      birth:
-        (((formData.get("birthYear") as string) +
-          formData.get("birthMonth")) as string) + formData.get("birthDay"),
-      marketingClause: marketing,
+    const response = await fetch("/api/auth/signUp", {
+      method: "POST",
+      body: formData,
+    })
+
+    if (!response.ok) {
+      showFeedbackModalWithContent(
+        "회원가입에 실패했습니다. 오류가 계속되면 고객센터에 문의해주세요."
+      )
+      dispatch(resetStep())
+      return
     }
 
-    const isSignUpSuccess = await signUpMutateAsync(userInfo)
-
-    // if (!isSignUpSuccess) {
-    //   showFeedbackModalWithContent(
-    //     "회원가입에 실패했습니다. 오류가 계속되면 고객센터에 문의해주세요."
-    //   )
-
-    //   dispatch(resetStep())
-    //   return
-    // }
-
-    // showFeedbackModalWithContent("회원가입을 축하합니다🎉")
-
-    // dispatch(resetSignUpState())
-    // dispatch(resetStep())
+    showFeedbackModalWithContent("회원가입을 축하합니다🎉")
+    dispatch(resetSignUpState())
+    dispatch(resetStep())
     // routeTo(ROUTE.HOME)
   }
 
@@ -147,6 +133,7 @@ const SignUpForm = () => {
   return (
     <form
       onSubmit={handleSignUpSubmit}
+      // action="/api/auth"
       className="sm:w-[400px] md:w-[400px] w-4/5 max-w-[800px] mx-auto h-[500px]"
     >
       <h2 className="mb-[20px] text-[20px] font-bold text-center">회원가입</h2>
