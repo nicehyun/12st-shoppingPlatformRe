@@ -35,18 +35,19 @@ const SignUpClauseEl = ({
     <div
       className={`${classNames} relative p-[8px] flex items-center max-w-[400px]`}
     >
-      <span className="py-[5px] mr-[10px]" onClick={onClickClause}>
+      <span className="py-[5px] mr-[10px]">
         <input
           type="checkbox"
           checked={isChecked}
           name={clauseType}
           id={clauseType}
-          className={`checked: mr-[10px] overflow-hidden absolute top-[2px] left-[2px] w-[1px] h-[1px] border-none bg-transparent z-10 appearance-none ${peer}`}
+          className={`mr-[10px] overflow-hidden absolute top-[2px] left-[2px] w-[1px] h-[1px] border-none bg-transparent z-10 appearance-none ${peer}`}
           readOnly
         />
 
         <label
           htmlFor={clauseType}
+          onClick={onClickClause}
           className={`text-[14px] sm:text-[10px] md:text-[12px] min-w-[300px] inline-block cursor-pointer py-[5px] pl-[18px] after:top-1/2 after:left-[6px] after:w-[6px] after:h-[11px] after:mt-[-8px] after:absolute after:content-[''] after:border-r-[1px] after:border-b-[1px] after:rotate-45 after:border-border ${peerChecked.borderColor}`}
         >
           <span className="text-lightBlack py-[5px]">

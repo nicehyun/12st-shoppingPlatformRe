@@ -16,6 +16,8 @@ const SignUpClause = () => {
     seletSignUpClauseState
   )
 
+  console.log(age)
+
   const dispatch = useAppDispatch()
 
   return (
