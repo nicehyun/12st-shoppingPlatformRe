@@ -5,7 +5,6 @@ import {
   toggleAgreeToMarketingClause,
   toggleAgreeToPrivacyClause,
   toggleAgreeToTermClause,
-  resetAgree,
 } from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { Mobile } from "../types/mobile"
@@ -15,6 +14,7 @@ const SignUpClause = ({ isMobile }: Mobile) => {
   const { age, marketing, privacy, term, all } = useAppSelector(
     seletSignUpClauseState
   )
+  console.log(age)
 
   const dispatch = useAppDispatch()
 

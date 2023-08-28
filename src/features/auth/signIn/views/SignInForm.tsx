@@ -1,6 +1,14 @@
 import SignInInput from "./SignInInput"
 
 const SignInForm = () => {
+  // const testSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault()
+
+  //   const formData = new FormData(event.currentTarget)
+
+  //   console.log(formData.get("email") as string)
+  //   console.log(formData.get("password") as string)
+  // }
   return (
     <form className={`flexCenter flex-col mb-[50px]`}>
       <h2 className="w-[400px] text-center text-[20px] font-bold mb-[30px] pb-[30px] border-b-[3px] border-black dark:border-white tracking-[20px]">

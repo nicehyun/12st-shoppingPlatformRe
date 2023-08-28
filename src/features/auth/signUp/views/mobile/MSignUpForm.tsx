@@ -80,20 +80,20 @@ const MSignUpForm = () => {
 
     const isSignUpSuccess = await signUpMutateAsync(userInfo)
 
-    if (!isSignUpSuccess) {
-      showFeedbackModalWithContent(
-        "회원가입에 실패했습니다. 오류가 계속되면 고객센터에 문의해주세요."
-      )
+    // if (!isSignUpSuccess) {
+    //   showFeedbackModalWithContent(
+    //     "회원가입에 실패했습니다. 오류가 계속되면 고객센터에 문의해주세요."
+    //   )
 
-      dispatch(resetStep())
-      return
-    }
+    //   dispatch(resetStep())
+    //   return
+    // }
 
-    showFeedbackModalWithContent("회원가입을 축하합니다🎉")
+    // showFeedbackModalWithContent("회원가입을 축하합니다🎉")
 
-    dispatch(resetSignUpState())
-    dispatch(resetStep())
-    routeTo(ROUTE.HOME)
+    // dispatch(resetSignUpState())
+    // dispatch(resetStep())
+    // routeTo(ROUTE.HOME)
   }
 
   const handleStageNextClick = () => {
