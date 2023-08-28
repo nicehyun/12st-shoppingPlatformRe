@@ -145,7 +145,10 @@ const SignUpForm = () => {
   }, [dispatch])
 
   return (
-    <form onSubmit={handleSignUpSubmit} className="w-[400px] mx-auto h-[500px]">
+    <form
+      onSubmit={handleSignUpSubmit}
+      className="sm:w-[400px] md:w-[400px] w-4/5 max-w-[800px] mx-auto h-[500px]"
+    >
       <h2 className="mb-[20px] text-[20px] font-bold text-center">회원가입</h2>
 
       <Stage {...stageProps} />
