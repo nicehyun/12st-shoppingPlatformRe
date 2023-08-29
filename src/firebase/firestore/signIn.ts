@@ -7,16 +7,14 @@ import { ResponseUserInfo } from "@/common/types/user"
 const db = getFirestore(firebaseApp)
 
 export async function signIn(email: string, password: string) {
-  console.log(email, password)
   const userRef = doc(db, "user", email)
 
   const userDoc = await getDoc(userRef)
 
   if (userDoc.exists()) {
     const userData = userDoc.data() as ResponseUserInfo
-    console.log(userData)
 
-    if (await bcrypt.compare(userData.password, password)) {
+    if (await bcrypt.compare(password, userData.password)) {
       return { result: "success" }
     } else {
       throw Error("🚨firebase signIn API : 비밀번호가 일치하지 않습니다.")

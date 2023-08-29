@@ -2,7 +2,6 @@ import { ChangeEvent, ReactNode } from "react"
 
 export type InputType = "checkbox" | "text" | "password" | "number" | "tel"
 
-// TODO : value, onChange 타입 수정 (?)
 interface IInput {
   type: InputType
   name: string
