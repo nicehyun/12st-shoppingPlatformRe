@@ -31,6 +31,9 @@ const SignInForm = () => {
 
   const testSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+
+    if (!isEmailValid || !isPasswordValid) return
+
     const formData = new FormData(event.currentTarget)
 
     const response = await fetch("/api/auth/signIn", {
