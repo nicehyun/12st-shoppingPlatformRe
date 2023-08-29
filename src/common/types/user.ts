@@ -10,4 +10,8 @@ export type UserInfo = {
   marketingClause: boolean
 }
 
+export type ResponseUserInfo = UserInfo & {
+  mile: number
+}
+
 export type Gender = UserInfo["gender"]

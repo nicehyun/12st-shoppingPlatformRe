@@ -1,20 +1,13 @@
-import * as bcrypt from "bcrypt"
+import { signIn } from "@/firebase/firestore/signIn"
+import { NextResponse } from "next/server"
 
-interface RequestBody {
-  username: string
-  password: string
-}
+export async function POST(request: Request) {
+  const formData = await request.formData()
 
-export const POST = (request: Request) => {
-  //   const body: RequestBody = await request.json()
-  //   const user = await prisma.user.findFirst({
-  //     where: {
-  //       email: body.username,
-  //     },
-  //   })
-  //   if (user && (await bcrypt.compare(body.password, user.password))) {
-  //     const { password, ...userWithoutPass } = user
-  //     return new Response(JSON.stringify(userWithoutPass))
-  //   } else return new Response(JSON.stringify(null))
-  // console.log("123")
+  const email = formData.get("email") as string
+  const password = formData.get("password") as string
+
+  const response = await signIn(email, password)
+
+  return NextResponse.json(email)
 }

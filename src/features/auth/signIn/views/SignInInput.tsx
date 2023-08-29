@@ -3,7 +3,7 @@ interface ISignInInput {
   placeholder: string
   name: string
   classNames?: string
-  onChange: () => void
+  onChange?: () => void
 }
 
 const SignInInput = ({

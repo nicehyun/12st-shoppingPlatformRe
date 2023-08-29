@@ -1,21 +1,25 @@
+"use client"
 import SignInInput from "./SignInInput"
 
 const SignInForm = () => {
-  // const testSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault()
+  const testSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const formData = new FormData(event.currentTarget)
 
-  //   const formData = new FormData(event.currentTarget)
+    const response = await fetch("/api/auth/signIn", {
+      method: "POST",
+      body: formData,
+    })
 
-  //   console.log(formData.get("email") as string)
-  //   console.log(formData.get("password") as string)
-  // }
+    console.log(response)
+  }
   return (
-    <form className={`flexCenter flex-col mb-[50px]`}>
+    <form onSubmit={testSubmit} className={`flexCenter flex-col mb-[50px]`}>
       <h2 className="w-[400px] text-center text-[20px] font-bold mb-[30px] pb-[30px] border-b-[3px] border-black dark:border-white tracking-[20px]">
         로그인
       </h2>
-      <SignInInput onChange={() => {}} name="email" placeholder="이메일" />
-      <SignInInput onChange={() => {}} name="password" placeholder="비밀번호" />
+      <SignInInput name="email" placeholder="이메일" />
+      <SignInInput name="password" placeholder="비밀번호" />
 
       <button
         type="submit"

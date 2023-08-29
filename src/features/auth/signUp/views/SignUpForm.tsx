@@ -22,7 +22,7 @@ import SignUpGenderInput from "./SignUpGenderInput"
 import SignUpNameInput from "./SignUpNameInput"
 import SignUpPasswordInput from "./SignUpPasswordInput"
 import SignUpPhoneVerificationInput from "./SignUpPhoneVerificationInput"
-//TODO : fetch랑 mutation이랑 합치기
+
 const SignUpForm = () => {
   const { routeTo } = useNavigations()
 
