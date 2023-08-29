@@ -1,5 +1,5 @@
 "use client"
-import { useNavigations } from "@/common/hooks/useNavigations"
+import { ROUTE, useNavigations } from "@/common/hooks/useNavigations"
 import Stage, { IStage } from "@/common/views/Stage"
 import {
   nextStep,
@@ -22,7 +22,7 @@ import SignUpGenderInput from "./SignUpGenderInput"
 import SignUpNameInput from "./SignUpNameInput"
 import SignUpPasswordInput from "./SignUpPasswordInput"
 import SignUpPhoneVerificationInput from "./SignUpPhoneVerificationInput"
-
+//TODO : fetch랑 mutation이랑 합치기
 const SignUpForm = () => {
   const { routeTo } = useNavigations()
 
@@ -56,13 +56,16 @@ const SignUpForm = () => {
   ) => {
     event.preventDefault()
 
-    const formData = new FormData(event.currentTarget)
-    formData.append("marketing", marketing.toString())
+    if (!isAgeAgree || !isPrivacyAgree || !isTermAgree) return
 
-    const response = await fetch("/api/auth/signUp", {
-      method: "POST",
-      body: formData,
-    })
+    if (!isEmailCheck || !isAddressCheck || !isPhoneCheck) return
+
+    if (!isPasswordValid || !isBirthValid || !isNameValid) return
+
+    const formData = new FormData(event.currentTarget)
+    formData.append("marketing", `${marketing}`)
+
+    const response = (await signUpMutateAsync(formData)) as Response
 
     if (!response.ok) {
       showFeedbackModalWithContent(
@@ -75,7 +78,7 @@ const SignUpForm = () => {
     showFeedbackModalWithContent("회원가입을 축하합니다🎉")
     dispatch(resetSignUpState())
     dispatch(resetStep())
-    // routeTo(ROUTE.HOME)
+    routeTo(ROUTE.HOME)
   }
 
   const handleStageNextClick = () => {
@@ -112,14 +115,14 @@ const SignUpForm = () => {
     firstButtonText: "동의하고 가입하기",
     finishButtonText: "회원가입",
     disabledNextButton: [
-      !isAgeAgree || !isPrivacyAgree || !isTermAgree,
-      !isEmailCheck,
-      !isPasswordValid,
-      !isNameValid,
-      !isPhoneCheck,
-      !isAddressCheck,
-      false,
-      !isBirthValid || isSignUpLoading,
+      // !isAgeAgree || !isPrivacyAgree || !isTermAgree,
+      // !isEmailCheck,
+      // !isPasswordValid,
+      // !isNameValid,
+      // !isPhoneCheck,
+      // !isAddressCheck,
+      // false,
+      // !isBirthValid || isSignUpLoading,
     ],
     onClickBackButton: handleStageBackClick,
     onClickNextButton: handleStageNextClick,
@@ -133,7 +136,6 @@ const SignUpForm = () => {
   return (
     <form
       onSubmit={handleSignUpSubmit}
-      // action="/api/auth"
       className="sm:w-[400px] md:w-[400px] w-4/5 max-w-[800px] mx-auto h-[500px]"
     >
       <h2 className="mb-[20px] text-[20px] font-bold text-center">회원가입</h2>

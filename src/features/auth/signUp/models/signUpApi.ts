@@ -1,20 +1,14 @@
-import { UserInfo } from "@/common/types/user"
-import addUserInfo from "@/firebase/firestore/addUserInfo"
-import { signUp } from "@/firebase/firestore/signUp"
-
 export const signUpAPI = {
-  signUp: async (userInfo: UserInfo) => {
+  signUp: async (formData: FormData) => {
     try {
-      // const { result: signUpResult } = await signUp(
-      //   userInfo.email,
-      //   userInfo.password
-      // )
-      const { result: addUserResult } = await addUserInfo(userInfo)
+      const response = await fetch("/api/auth/signUp", {
+        method: "POST",
+        body: formData,
+      })
 
-      return addUserResult === "success"
+      return response
     } catch (error) {
       console.error(error)
-      return !error
     }
   },
 }

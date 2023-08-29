@@ -17,7 +17,7 @@ export async function POST(request: Request) {
     birth:
       (((formData.get("birthYear") as string) +
         formData.get("birthMonth")) as string) + formData.get("birthDay"),
-    marketingClause: formData.get("marketing") === "true",
+    marketingClause: formData.get("marketing") === "on",
   }
 
   const response = await addUserInfo(userInfo)
