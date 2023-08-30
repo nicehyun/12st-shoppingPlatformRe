@@ -7,8 +7,6 @@ interface RequestBody {
 
 export async function POST(request: Request) {
   const body: RequestBody = await request.json()
-  console.log(`signIn route : ${body.email}`)
-  console.log(`signIn route : ${body.password}`)
 
   try {
     const user = await signIn(body.email, body.password)

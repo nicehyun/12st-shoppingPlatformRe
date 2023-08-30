@@ -1,6 +1,6 @@
 "use client"
 import Input from "@/common/views/Input"
-import { signIn, signOut } from "next-auth/react"
+import { signIn, signOut, useSession } from "next-auth/react"
 import { useSignUpUserInput } from "../../signUp/hooks/useSignUpUserInput"
 import {
   emailValidator,
@@ -9,6 +9,9 @@ import {
 import SignUpFeedback from "../../signUp/views/SignUpFeedback"
 
 const SignInForm = () => {
+  const { data: session } = useSession()
+
+  console.log(session)
   const {
     value: emailInputValue,
     handleValueChange: handleEmailInputValueChange,
@@ -44,6 +47,8 @@ const SignInForm = () => {
       email: emailInputValue,
       password: passwordInputValue,
       redirect: false,
+      // redirect: true,
+      // callbackUrl: "/",
     })
 
     console.log(res)

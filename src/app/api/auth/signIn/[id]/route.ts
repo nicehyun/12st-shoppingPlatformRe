@@ -1,5 +1,5 @@
 import { verifyJwt } from "@/app/lib/jwt"
-
+// 장바구니 목록 가져오기
 export async function GET(
   request: Request,
   { params }: { params: { id: string } }
