@@ -95,7 +95,7 @@ const SignInForm = () => {
 
       <button
         type="submit"
-        className="w-[400px] text-[14px] tracking-[8px] h-[50px] border-lightRed border-[1px] bg-lightRed text-white"
+        className="w-[400px] text-[14px] tracking-[8px] h-[50px] bg-black text-white"
       >
         {/* {isLoginLoading ? (
           <LoadingView spinnerSize="20px" isFrame={false} />
