@@ -1,15 +1,13 @@
 "use client"
 import Input from "@/common/views/Input"
-import { useState } from "react"
+import { signIn, signOut } from "next-auth/react"
 import { useSignUpUserInput } from "../../signUp/hooks/useSignUpUserInput"
 import {
   emailValidator,
   passwordValidator,
 } from "../../signUp/utils/validation"
 import SignUpFeedback from "../../signUp/views/SignUpFeedback"
-import SignInInput from "./SignInInput"
 
-// TODO :input state 추가 -> 피드백
 const SignInForm = () => {
   const {
     value: emailInputValue,
@@ -32,16 +30,25 @@ const SignInForm = () => {
   const testSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    if (!isEmailValid || !isPasswordValid) return
+    // if (!isEmailValid || !isPasswordValid) return
 
-    const formData = new FormData(event.currentTarget)
+    // const formData = new FormData(event.currentTarget)
 
-    const response = await fetch("/api/auth/signIn", {
-      method: "POST",
-      body: formData,
+    // const response = await fetch("/api/auth/signIn", {
+    //   method: "POST",
+    //   body: formData,
+    // })
+
+    // console.log(response.ok)
+    const res = await signIn("user-credentials", {
+      email: emailInputValue,
+      password: passwordInputValue,
+      redirect: false,
     })
 
-    console.log(response.ok)
+    console.log(res)
+
+    // signIn()
   }
 
   const feedbackContent = hasErrorEmail

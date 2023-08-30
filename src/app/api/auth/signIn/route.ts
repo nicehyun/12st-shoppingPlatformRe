@@ -1,13 +1,20 @@
 import { signIn } from "@/firebase/firestore/signIn"
-import { NextResponse } from "next/server"
+
+interface RequestBody {
+  email: string
+  password: string
+}
 
 export async function POST(request: Request) {
-  const formData = await request.formData()
+  const body: RequestBody = await request.json()
+  console.log(`signIn route : ${body.email}`)
+  console.log(`signIn route : ${body.password}`)
 
-  const email = formData.get("email") as string
-  const password = formData.get("password") as string
+  try {
+    const user = await signIn(body.email, body.password)
 
-  const response = await signIn(email, password)
-
-  return NextResponse.json(email)
+    return new Response(JSON.stringify(user))
+  } catch (error) {
+    return new Response(JSON.stringify(null))
+  }
 }
