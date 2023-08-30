@@ -4,7 +4,6 @@ import Input from "@/common/views/Input"
 import Loading from "@/common/views/Loading"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
-import { useSession } from "next-auth/react"
 import { useSignUpUserInput } from "../../signUp/hooks/useSignUpUserInput"
 import {
   emailValidator,
@@ -16,9 +15,7 @@ import useSignInMutaion from "../hooks/useSIgnInMutaion"
 const SignInForm = () => {
   const { routeTo } = useNavigations()
   const dispatch = useAppDispatch()
-  const { data: session } = useSession()
 
-  console.log(session)
   const {
     value: emailInputValue,
     handleValueChange: handleEmailInputValueChange,
