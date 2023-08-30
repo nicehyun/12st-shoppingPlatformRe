@@ -1,4 +1,5 @@
 "use client"
+import { ROUTE, useNavigations } from "@/common/hooks/useNavigations"
 import Input from "@/common/views/Input"
 import Loading from "@/common/views/Loading"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
@@ -13,6 +14,7 @@ import SignUpFeedback from "../../signUp/views/SignUpFeedback"
 import useSignInMutaion from "../hooks/useSIgnInMutaion"
 
 const SignInForm = () => {
+  const { routeTo } = useNavigations()
   const dispatch = useAppDispatch()
   const { data: session } = useSession()
 
@@ -41,7 +43,7 @@ const SignInForm = () => {
   const testSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    if (!isEmailValid || !isPasswordValid) return
+    if (!isEmailValid || !isPasswordValid || isSignInLoading) return
 
     const signInRes = await signInMutateAsync({
       email: emailInputValue,
@@ -55,6 +57,13 @@ const SignInForm = () => {
         })
       )
     }
+
+    dispatch(
+      showFeedbackModal({
+        modalContent: "로그인에 성공했습니다. 잠시 후 HOME으로 이동합니다.",
+      })
+    )
+    routeTo(ROUTE.HOME)
   }
 
   const feedbackContent = hasErrorEmail
