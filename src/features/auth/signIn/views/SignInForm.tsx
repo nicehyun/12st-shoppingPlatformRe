@@ -1,14 +1,19 @@
 "use client"
 import Input from "@/common/views/Input"
-import { signIn, signOut, useSession } from "next-auth/react"
+import Loading from "@/common/views/Loading"
+import { showFeedbackModal } from "@/redux/features/modalSlice"
+import { useAppDispatch } from "@/redux/hooks"
+import { useSession } from "next-auth/react"
 import { useSignUpUserInput } from "../../signUp/hooks/useSignUpUserInput"
 import {
   emailValidator,
   passwordValidator,
 } from "../../signUp/utils/validation"
 import SignUpFeedback from "../../signUp/views/SignUpFeedback"
+import useSignInMutaion from "../hooks/useSIgnInMutaion"
 
 const SignInForm = () => {
+  const dispatch = useAppDispatch()
   const { data: session } = useSession()
 
   console.log(session)
@@ -30,30 +35,26 @@ const SignInForm = () => {
     reset: resetPassword,
   } = useSignUpUserInput(passwordValidator)
 
+  const { isLoading: isSignInLoading, mutateAsync: signInMutateAsync } =
+    useSignInMutaion()
+
   const testSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    // if (!isEmailValid || !isPasswordValid) return
+    if (!isEmailValid || !isPasswordValid) return
 
-    // const formData = new FormData(event.currentTarget)
-
-    // const response = await fetch("/api/auth/signIn", {
-    //   method: "POST",
-    //   body: formData,
-    // })
-
-    // console.log(response.ok)
-    const res = await signIn("user-credentials", {
+    const signInRes = await signInMutateAsync({
       email: emailInputValue,
       password: passwordInputValue,
-      redirect: false,
-      // redirect: true,
-      // callbackUrl: "/",
     })
 
-    console.log(res)
-
-    // signIn()
+    if (signInRes?.error) {
+      return dispatch(
+        showFeedbackModal({
+          modalContent: "아이디와 비밀번호를 확인해주세요.",
+        })
+      )
+    }
   }
 
   const feedbackContent = hasErrorEmail
@@ -97,12 +98,14 @@ const SignInForm = () => {
         type="submit"
         className="w-[400px] text-[14px] tracking-[8px] h-[50px] bg-black text-white"
       >
-        {/* {isLoginLoading ? (
-          <LoadingView spinnerSize="20px" isFrame={false} />
+        {isSignInLoading ? (
+          <Loading
+            spinnerSize={{ height: "h-[20px]", width: "w-[20px]" }}
+            isFrame={false}
+          />
         ) : (
           "로그인"
-        )} */}
-        로그인
+        )}
       </button>
 
       <SignUpFeedback classNames="h-[16px]" content={feedbackContent} />
