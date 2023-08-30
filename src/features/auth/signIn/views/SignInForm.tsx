@@ -102,7 +102,7 @@ const SignInForm = () => {
 
       <button
         type="submit"
-        className="w-[400px] text-[14px] tracking-[8px] h-[50px] bg-black text-white"
+        className="w-[400px] text-[14px] tracking-[8px] h-[50px] bg-black dark:bg-white dark:text-black text-white"
       >
         {isSignInLoading ? (
           <Loading
