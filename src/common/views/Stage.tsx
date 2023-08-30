@@ -130,7 +130,7 @@ export default function Stage({
           onClick={
             activeStep === stages.length - 1 ? () => {} : handleNextButton
           }
-          className="min-w-[57px] rounded-[5px] px-[16px] py-[8px] text-lightRed bg-white border-[1px] border-lightRed text-[14px] md:text-[12px] sm:text-[10px] hover:bg-lightRed hover:text-white disabled:bg-border dark:disabled:bg-border disabled:cursor-not-allowed disabled:border-border disabled:text-lightBlack dark:bg-black dark:text-white dark:hover:bg-lightRed tracking-[3px]"
+          className="min-w-[57px] rounded-[5px] px-[16px] py-[8px] text-lightRed bg-white border-[1px] border-lightRed text-[14px] md:text-[12px] sm:text-[10px] hover:bg-lightRed hover:text-white disabled:bg-border dark:disabled:bg-border disabled:cursor-not-allowed disabled:border-border disabled:text-lightBlack dark:bg-lightRed dark:text-white tracking-[3px]"
           disabled={disabledNextButton[activeStep]}
         >
           {buttonContent}
