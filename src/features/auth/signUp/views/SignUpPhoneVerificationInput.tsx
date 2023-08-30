@@ -85,7 +85,7 @@ const SignUpPhoneVerificationInput = () => {
     <SignUpInputLayout headingText="본인인증을 진행해주세요">
       <SignUpVerificationInput
         isDisabledButton={
-          hasErrorPhone ||
+          !isPhoneValid ||
           isShowVerificationCodeInput ||
           isCheckedPhoneVerification
         }
