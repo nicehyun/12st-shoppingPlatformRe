@@ -12,6 +12,8 @@ import { MdOutlineSell } from "react-icons/md"
 import { BsFillCartDashFill, BsFillCartPlusFill } from "react-icons/bs"
 import { numberToLocaleString, sliceText, truncateText } from "../utils/text"
 import { Product } from "../types/product"
+import useSessionQuery from "@/app/api/user/[email]/useSessionQuery"
+import useAddToCartMutaion from "@/features/cart/hooks/useAddToCartMutaion"
 
 interface IProductCard {
   productInfo: Product
@@ -32,6 +34,29 @@ const ProductCard = ({ productInfo }: IProductCard) => {
   } = productInfo
 
   const productBrandInfo = brand || maker || mallName
+
+  const { sessionQuery } = useSessionQuery()
+
+  const addMutaion = useAddToCartMutaion(
+    sessionQuery?.user.email ?? "",
+    productInfo
+  )
+
+  const onClickAddProductInCart = async () => {
+    if (sessionQuery === null) {
+      // setIsShowCartFeedbackModal(true)
+      console.log("세션 없음")
+      return
+    }
+    // if (
+    //   (productListInCart && productListInCart.length >= 10) ||
+    //   isProductInCart
+    // )
+    //   return
+    addMutaion.mutate()
+    // setupAnimationTransform(cartAddIconRef, "Y", -100, 0, "none")
+    // setupAnimationTransform(cartRemoveIconRef, "Y", 0, 1, "block")
+  }
 
   return (
     <Card className="w-[194px]">
@@ -112,7 +137,10 @@ const ProductCard = ({ productInfo }: IProductCard) => {
           <span className="text-[2px]">{reviewCount}</span>
         </button>
 
-        <button className="text-[18px] absolute right-[8px]">
+        <button
+          onClick={onClickAddProductInCart}
+          className="text-[18px] absolute right-[8px]"
+        >
           <BsFillCartDashFill />
         </button>
       </CardActions>
