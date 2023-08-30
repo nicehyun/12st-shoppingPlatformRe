@@ -4,6 +4,7 @@ import { FaUserTag, FaHeart } from "react-icons/fa"
 import { FiLogIn, FiLogOut } from "react-icons/fi"
 import HeaderCartButton from "./HeaderCartButton"
 import { ROUTE, useNavigations } from "@/common/hooks/useNavigations"
+import { signOut, useSession } from "next-auth/react"
 
 interface IHeaderController {
   isShowPromotion: boolean
@@ -11,6 +12,7 @@ interface IHeaderController {
 
 const HeaderController = ({ isShowPromotion }: IHeaderController) => {
   const { routeTo } = useNavigations()
+  const { data: session } = useSession()
 
   return (
     <div
@@ -36,13 +38,24 @@ const HeaderController = ({ isShowPromotion }: IHeaderController) => {
         <li className="relative xl:before:vertical-divider">
           <HeaderCartButton />
         </li>
-        <HeaderControllerEl
-          title="LOGIN"
-          icon={<FiLogIn />}
-          isShowPromotion={isShowPromotion}
-          classNames="before:vertical-divider"
-          onClick={() => routeTo(ROUTE.SIGNIN)}
-        />
+
+        {session ? (
+          <HeaderControllerEl
+            title="SIGN OUT"
+            icon={<FiLogOut />}
+            isShowPromotion={isShowPromotion}
+            classNames="before:vertical-divider"
+            onClick={() => signOut()}
+          />
+        ) : (
+          <HeaderControllerEl
+            title="SIGN IN"
+            icon={<FiLogIn />}
+            isShowPromotion={isShowPromotion}
+            classNames="before:vertical-divider"
+            onClick={() => routeTo(ROUTE.SIGNIN)}
+          />
+        )}
       </ul>
     </div>
   )
