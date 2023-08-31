@@ -28,7 +28,7 @@ module.exports = {
     extend: {
       boxShadow: {
         DEFAULT: "2px 2px 8px rgba(43, 46, 74, 0.5)",
-        whiteShadow: "2px 4px 6px rgba(230,230,230, 0.4)",
+        whiteShadow: "2px 4px 6px rgba(200,200,200, 0.4)",
       },
       container: {
         center: true,
