@@ -15,14 +15,13 @@ export async function getProductListInCart(emailValue: string) {
 
     if (cartDoc.exists()) {
       const cartData = cartDoc.data()
-      return cartData.products
+      return cartData.products as string[]
     } else {
       console.log("Cart document not found for email:", emailValue)
-      return null
+      return []
     }
   } catch (error) {
-    console.error("🚨 Error getting cart document:", error)
-    throw error
+    throw Error(`🚨 Error getting cart document : ${error}`)
   }
 }
 
@@ -57,7 +56,6 @@ export async function addProductToCart(emailValue: string, productId: string) {
       return newCartData
     }
   } catch (error) {
-    console.error("🚨 Error updating cart document:", error)
-    throw error
+    throw Error(`🚨 Error updating cart document : ${error}`)
   }
 }
