@@ -9,8 +9,13 @@ export const useProductListInCartQuery = () => {
     data: productListInCart,
     isError,
     isLoading,
-  } = useQuery(["productListInCart"], () =>
-    getProductListInCart(sessionQuery?.user.email ?? "")
+  } = useQuery(
+    ["productListInCart"],
+    () => getProductListInCart(sessionQuery?.user.email ?? ""),
+    {
+      // enabled 옵션을 사용하여 sessionQuery 값이 설정된 이후에만 쿼리를 실행
+      enabled: !!sessionQuery?.user.email,
+    }
   )
 
   return {

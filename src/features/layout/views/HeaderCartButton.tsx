@@ -5,6 +5,7 @@ import { BsFillCartXFill, BsFillCartFill } from "react-icons/bs"
 
 const HeaderCartButton = () => {
   const { productListInCart } = useProductListInCartQuery()
+  console.log(productListInCart)
 
   return (
     <button className="group mx-[10px] border border-border rounded-lg px-2 py-[4px] flex hover:bg-black hover:text-lightRed dark:hover:bg-white dark:hover:text-lightRed transition-3 flexCenter peer">

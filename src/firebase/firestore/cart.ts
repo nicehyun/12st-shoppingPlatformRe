@@ -4,6 +4,8 @@ import firebaseApp from "../config"
 const db = getFirestore(firebaseApp)
 
 export async function getProductListInCart(emailValue: string) {
+  console.log(`getProductListInCart api 실행 : ${emailValue}`)
+
   if (emailValue === "") {
     return []
   }
