@@ -8,42 +8,10 @@ import { useProductListInCartQuery } from "../hooks/useProductListInCartQuery"
 import CartModalRouteButton from "./CartModalRouteButton"
 import ProductInCartModalCard from "./ProductInCartModalCard"
 
-// const CartModalContainer = styled.div<CartModalThemeProps>`
-//   position: absolute;
-//   top: 39px;
-//   left: 42px;
-//   z-index: 2;
-//   width: 320px;
-//   padding: 15px 10px;
-//   background-color: ${colorWhite};
-//   border: 1px solid ${colorBasicBlack};
-//   border-radius: 5px;
-//   cursor: default;
-//   box-shadow: ${boxShadow};
-
-//   display: ${(props) => (props.isShowCartModal ? "block" : "none")};
-
-//   .notification {
-//     background-color: ${colorBasicBlack};
-//     color: ${colorWhite};
-//     text-align: center;
-//     border: 1px solid ${colorBorder};
-//     border-radius: 5px;
-//     font-size: 12px;
-//     padding: 8px;
-//     margin-bottom: 10px;
-//   }
-// `
-
-// const ProductList = styled.ul`
-//   max-height: 500px;
-//   overflow-y: scroll;
-// `
-
 const CartModal = () => {
   const { productListInCart } = useProductListInCartQuery()
   const { sessionQuery } = useSessionQuery()
-  console.log(productListInCart)
+
   return (
     <div className="absolute top-[90px] right-[80px] z-10 w-[320px] py-[15px] px-[10px] bg-white dark:bg-black border-[1px] border-black dark:border-white rounded-[5px] cursor-default shadow dark:shadow-whiteShadow">
       {sessionQuery && (
@@ -53,8 +21,11 @@ const CartModal = () => {
               장바구니가 가득 찼습니다.
             </p>
           )}
+
           {productListInCart.length === 0 && (
-            <p className="notification">장바구니가 비어있습니다.</p>
+            <p className="border-[1px] border-black dark:border-white text-center text-[12px] p-[8px] mb-[10px] rounded-[5px]">
+              장바구니가 비어있습니다.
+            </p>
           )}
           <ul className="max-h-[500px] overflow-y-scroll">
             {productListInCart.map((product) => (
