@@ -1,4 +1,4 @@
-import { Products } from "@/common/types/product"
+import { Product, Products } from "@/common/types/product"
 import {
   collection,
   doc,
@@ -51,7 +51,10 @@ export async function getProductListInCart(emailValue: string) {
   }
 }
 
-export async function addProductToCart(emailValue: string, productId: string) {
+export async function addProductToCart(
+  emailValue: string,
+  productInfo: Product
+) {
   if (emailValue === "") {
     return
   }
@@ -62,21 +65,21 @@ export async function addProductToCart(emailValue: string, productId: string) {
     if (cartDoc.exists()) {
       const cartData = cartDoc.data()
 
-      if (cartData.products && cartData.products.includes(productId)) {
+      const existingProductIndex = cartData.products.findIndex(
+        (product: Product) => product.id === productInfo.id
+      )
+
+      if (existingProductIndex !== -1) {
         return cartData
       }
 
-      if (!cartData.products) {
-        cartData.products = [productId]
-      } else {
-        cartData.products.push(productId)
-      }
+      cartData.products.push(productInfo)
 
       await setDoc(cartRef, cartData)
 
       return cartData
     } else {
-      const newCartData = { products: [productId] }
+      const newCartData = { products: [productInfo] }
       await setDoc(cartRef, newCartData)
 
       return newCartData

@@ -13,7 +13,7 @@ export const useAddToCartMutaion = (productInfo: Product) => {
   const { sessionQuery } = useSessionQuery()
 
   const addMutaion = useMutation(
-    () => addProductToCart(sessionQuery?.user.email ?? "", productInfo.id),
+    () => addProductToCart(sessionQuery?.user.email ?? "", productInfo),
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["productListInCart"])
