@@ -46,25 +46,27 @@ const CartModal = () => {
   console.log(productListInCart)
   return (
     <div className="absolute top-[90px] right-[80px] z-10 w-[320px] py-[15px] px-[10px] bg-white dark:bg-black border-[1px] border-black dark:border-white rounded-[5px] cursor-default shadow dark:shadow-whiteShadow">
-      <>
-        {productListInCart.length === 10 && (
-          <p className="bg-black text-white text-center border-[1px] border-border rounded-[5px] text-[12px] p-[8px] mb-[10px]">
-            장바구니가 가득 찼습니다.
-          </p>
-        )}
-        {productListInCart.length === 0 && (
-          <p className="notification">장바구니가 비어있습니다.</p>
-        )}
-        <ul className="max-h-[500px] overflow-y-scroll">
-          {productListInCart.map((product) => (
-            <ProductInCartModalCard
-              imageUrl={product.image}
-              productName={product.name}
-              key={product.id}
-            />
-          ))}
-        </ul>
-      </>
+      {sessionQuery && (
+        <>
+          {productListInCart.length === 10 && (
+            <p className="bg-black text-white text-center border-[1px] border-border rounded-[5px] text-[12px] p-[8px] mb-[10px]">
+              장바구니가 가득 찼습니다.
+            </p>
+          )}
+          {productListInCart.length === 0 && (
+            <p className="notification">장바구니가 비어있습니다.</p>
+          )}
+          <ul className="max-h-[500px] overflow-y-scroll">
+            {productListInCart.map((product) => (
+              <ProductInCartModalCard
+                imageUrl={product.image}
+                productName={product.name}
+                key={product.id}
+              />
+            ))}
+          </ul>
+        </>
+      )}
 
       <div className="flex flex-col">
         {sessionQuery ? (
