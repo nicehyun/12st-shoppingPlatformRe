@@ -8,18 +8,18 @@ import { useEffect, useState } from "react"
 import { BsFillCartXFill, BsFillCartFill } from "react-icons/bs"
 
 const HeaderCartButton = () => {
-  const dispatch = useAppDispatch()
+  // const dispatch = useAppDispatch()
 
-  const [test, setTest] = useState()
+  // const [test, setTest] = useState()
 
-  const product = async () => {
-    const t123 = await getProductListInCart("test@test.com")
-    console.log(t123)
-  }
+  // const product = async () => {
+  //   const t123 = await getProductListInCart("test@test.com")
+  //   console.log(t123)
+  // }
 
-  useEffect(() => {
-    product()
-  }, [])
+  // useEffect(() => {
+  //   product()
+  // }, [])
 
   // const { data } = useSession()
   // console.log(data?.user.email)

@@ -7,15 +7,7 @@ export const useProductListInCartQuery = (email: string) => {
     isError,
     isLoading,
     error,
-  } = useQuery(["productListInCart", email], () =>
-    fetch(`/api/user/${email}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: "123",
-      },
-    })
-  )
+  } = useQuery(["productListInCart", email], () => getProductListInCart(email))
 
   return { productListInCart, isError, isLoading, error }
 }

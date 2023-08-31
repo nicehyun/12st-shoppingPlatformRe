@@ -12,9 +12,9 @@ export default async function Home() {
     <Hydrate state={dehydratedState}>
       <PageLayout>
         <HomeBestProducts />
+        {/* <HomeBestProducts />
         <HomeBestProducts />
-        <HomeBestProducts />
-        <HomeBestProducts />
+        <HomeBestProducts /> */}
       </PageLayout>
     </Hydrate>
   )

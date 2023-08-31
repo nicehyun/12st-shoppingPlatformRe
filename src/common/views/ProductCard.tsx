@@ -13,7 +13,10 @@ import { BsFillCartDashFill, BsFillCartPlusFill } from "react-icons/bs"
 import { numberToLocaleString, sliceText, truncateText } from "../utils/text"
 import { Product } from "../types/product"
 import useSessionQuery from "@/app/api/user/[email]/useSessionQuery"
-import useAddToCartMutaion from "@/features/cart/hooks/useAddToCartMutaion"
+
+import { checkingTheExistOfProduct } from "../utils/product"
+import { useProductListInCartQuery } from "@/features/cart/hooks/useProductListInCartQuery"
+import { useAddToCartMutaion } from "@/features/cart/hooks/useAddToCartMutaion"
 
 interface IProductCard {
   productInfo: Product
@@ -31,23 +34,37 @@ const ProductCard = ({ productInfo }: IProductCard) => {
     discountedPrice,
     reviewCount,
     sellCount,
+    id,
   } = productInfo
 
   const productBrandInfo = brand || maker || mallName
 
   const { sessionQuery } = useSessionQuery()
 
-  const addMutaion = useAddToCartMutaion(
-    sessionQuery?.user.email ?? "",
-    productInfo
-  )
+  const addMutaion = useAddToCartMutaion(productInfo)
+
+  // const { productListInCart } = useProductListInCartQuery(
+  //   sessionQuery?.user.email ?? ""
+  // )
+
+  // console.log(productListInCart)
+
+  // const existedProduct = productListInCart.includes(id)
+  // console.log(existedProduct)
+
+  // const isExistedProductInCart = checkingTheExistOfProduct(
+  //   productListInCart ? productListInCart : [],
+  //   productInfo.id
+  // )
+
+  // console.log(isExistedProductInCart)
 
   const onClickAddProductInCart = async () => {
-    if (sessionQuery === null) {
-      // setIsShowCartFeedbackModal(true)
-      console.log("세션 없음")
-      return
-    }
+    // if (sessionQuery === null) {
+    //   // setIsShowCartFeedbackModal(true)
+    //   console.log("세션 없음")
+    //   return
+    // }
     // if (
     //   (productListInCart && productListInCart.length >= 10) ||
     //   isProductInCart

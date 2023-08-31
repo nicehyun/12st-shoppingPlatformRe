@@ -1,3 +1,4 @@
+import useSessionQuery from "@/app/api/user/[email]/useSessionQuery"
 import { Product } from "@/common/types/product"
 import { addProductToCart } from "@/firebase/firestore/cart"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
@@ -5,12 +6,14 @@ import { useAppDispatch } from "@/redux/hooks"
 
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 
-const useAddToCartMutaion = (email: string, productInfo: Product) => {
+export const useAddToCartMutaion = (productInfo: Product) => {
   const queryClient = useQueryClient()
   const dispatch = useAppDispatch()
 
+  const { sessionQuery } = useSessionQuery()
+
   const addMutaion = useMutation(
-    () => addProductToCart(email, productInfo.id),
+    () => addProductToCart(sessionQuery?.user.email ?? "", productInfo.id),
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["productListInCart"])
@@ -28,5 +31,3 @@ const useAddToCartMutaion = (email: string, productInfo: Product) => {
 
   return addMutaion
 }
-
-export default useAddToCartMutaion
