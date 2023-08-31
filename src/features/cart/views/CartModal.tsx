@@ -2,6 +2,11 @@
 //   isShowCartModal: boolean
 // }
 
+import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
+import { useProductListInCartQuery } from "../hooks/useProductListInCartQuery"
+import CartModalRouteButton from "./CartModalRouteButton"
+import ProductInCartModalCard from "./ProductInCartModalCard"
+
 // const CartModalContainer = styled.div<CartModalThemeProps>`
 //   position: absolute;
 //   top: 39px;
@@ -34,73 +39,47 @@
 //   overflow-y: scroll;
 // `
 
-// const ButtonWrap = styled.div`
-//   display: flex;
-//   flex-direction: column;
-
-//   .btn-route__cart,
-//   .btn-close {
-//     text-align: center;
-//     font-size: 14px;
-//     border-radius: 5px;
-//   }
-
-//   .btn-route__cart {
-//     background-color: ${colorBasicBlack};
-//     border: 1px solid ${colorBasicBlack};
-//     color: ${colorWhite};
-//     margin: 20px 0;
-//     padding: 8px;
-//     transition: 0.2s;
-//   }
-
-//   .btn-route__cart:hover {
-//     background-color: ${colorWhite};
-//   }
-
-//   .btn-close {
-//     padding: 8px;
-//     border: 1px solid ${colorBorder};
-//     background-color: rgb(240, 240, 240);
-//   }
-// `
-
-const CartModalView = () => {
+const CartModal = () => {
+  const { productListInCart } = useProductListInCartQuery()
+  const { sessionQuery } = useSessionQuery()
+  console.log(productListInCart)
   return (
-    <div className="absolute top-[39px] left-[42px] z-10 w-[320px] py-[15px] px-[10px] bg-white border-[1px] border-black rounded-[5px] cursor-default shadow">
+    <div className="absolute top-[90px] right-[80px] z-10 w-[320px] py-[15px] px-[10px] bg-white border-[1px] border-black rounded-[5px] cursor-default shadow">
       <>
-        {/* {productListInCart.length === 10 && ( */}
-        <p className="bg-black text-white text-center border-[1px] border-border rounded-[5px] text-[12px] p-[8px] mb-[10px]">
-          장바구니가 가득 찼습니다!
-        </p>
-        {/* )} */}
-        {/* {productListInCart.length === 0 && (
-          <p className="notification">장바구니가 비어있습니다!</p>
-        )} */}
+        {productListInCart.length === 10 && (
+          <p className="bg-black text-white text-center border-[1px] border-border rounded-[5px] text-[12px] p-[8px] mb-[10px]">
+            장바구니가 가득 찼습니다.
+          </p>
+        )}
+        {productListInCart.length === 0 && (
+          <p className="notification">장바구니가 비어있습니다.</p>
+        )}
         <ul className="max-h-[500px] overflow-scroll">
-          {/* {productListInCart.map((product) => (
-            <ProductInCartModal product={product} key={product.productId} />
-          ))} */}
+          {productListInCart.map((product) => (
+            <ProductInCartModalCard
+              imageUrl={product.image}
+              productName={product.name}
+              key={product.id}
+            />
+          ))}
         </ul>
       </>
 
-      <div>
-        {/* {isAuthenticated ? (
+      <div className="flex flex-col">
+        {sessionQuery ? (
           productListInCart.length !== 0 && (
-            <button className="btn-route__cart" onClick={routeToCart}>
-              장바구니로 이동
-            </button>
+            <CartModalRouteButton content="장바구니로 이동" />
           )
         ) : (
-          <button className="btn-route__cart" onClick={routeToLogin}>
-            로그인
-          </button>
-        )} */}
+          <CartModalRouteButton content="로그인" />
+        )}
 
-        <button className="btn-close">닫기</button>
+        <button className="p-[8px] border-1px border-border bg-lightGray btn-text-center text-[14px] md:text-[12px] sm:text-[12px] rounded-[5px]">
+          닫기
+        </button>
       </div>
     </div>
   )
 }
 
-export default CartModalView
+export default CartModal

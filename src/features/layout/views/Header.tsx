@@ -7,6 +7,7 @@ import PromotionBar from "./PromotionBar"
 import MPromotionModal from "./mobile/MPromotionModal"
 import ThemeSwich from "./ThemeSwich"
 import HeaderSearchForm from "./HeaderSearchForm"
+import CartModal from "@/features/cart/views/CartModal"
 
 const Header = () => {
   const [isShowPromotion, setIsShowPromotion] = useState(true)
@@ -35,6 +36,8 @@ const Header = () => {
         isShow={isShowPromotionModal}
         onHide={() => setIsShowPromotionModal(false)}
       />
+
+      <CartModal />
     </header>
   )
 }

@@ -1,11 +1,19 @@
-import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore"
+import { Products } from "@/common/types/product"
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  getFirestore,
+  query,
+  setDoc,
+  where,
+} from "firebase/firestore"
 import firebaseApp from "../config"
 
 const db = getFirestore(firebaseApp)
 
 export async function getProductListInCart(emailValue: string) {
-  console.log(`getProductListInCart api 실행 : ${emailValue}`)
-
   if (emailValue === "") {
     return []
   }
@@ -17,7 +25,23 @@ export async function getProductListInCart(emailValue: string) {
 
     if (cartDoc.exists()) {
       const cartData = cartDoc.data()
-      return cartData.products as string[]
+      const productIds = (cartData.products as string[]) || []
+
+      const products = await Promise.all(
+        productIds.map(async (productId) => {
+          const productQuery = query(
+            collection(db, "products"),
+            where("id", "==", productId)
+          )
+          const productQuerySnapshot = await getDocs(productQuery)
+          if (!productQuerySnapshot.empty) {
+            return productQuerySnapshot.docs[0].data()
+          }
+          return null
+        })
+      )
+
+      return products.filter((product) => product !== null) as Products | null
     } else {
       console.log("Cart document not found for email:", emailValue)
       return []
