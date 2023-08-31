@@ -1,4 +1,4 @@
-import useSessionQuery from "@/app/api/user/[email]/useSessionQuery"
+import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { Product } from "@/common/types/product"
 import { addProductToCart } from "@/firebase/firestore/cart"
 import { showFeedbackModal } from "@/redux/features/modalSlice"

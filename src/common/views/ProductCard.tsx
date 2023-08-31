@@ -12,7 +12,7 @@ import { MdOutlineSell } from "react-icons/md"
 import { BsFillCartDashFill, BsFillCartPlusFill } from "react-icons/bs"
 import { numberToLocaleString, sliceText, truncateText } from "../utils/text"
 import { Product } from "../types/product"
-import useSessionQuery from "@/app/api/user/[email]/useSessionQuery"
+import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 
 import { checkingTheExistOfProduct } from "../utils/product"
 import { useProductListInCartQuery } from "@/features/cart/hooks/useProductListInCartQuery"

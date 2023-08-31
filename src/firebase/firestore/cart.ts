@@ -5,7 +5,7 @@ const db = getFirestore(firebaseApp)
 
 export async function getProductListInCart(emailValue: string) {
   if (emailValue === "") {
-    return
+    return []
   }
 
   try {

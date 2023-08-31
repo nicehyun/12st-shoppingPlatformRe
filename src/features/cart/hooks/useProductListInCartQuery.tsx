@@ -1,15 +1,15 @@
-import useSessionQuery from "@/app/api/user/[email]/useSessionQuery"
+import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { getProductListInCart } from "@/firebase/firestore/cart"
 import { useQuery } from "@tanstack/react-query"
 
 export const useProductListInCartQuery = () => {
   const { sessionQuery } = useSessionQuery()
+
   const {
     data: productListInCart,
     isError,
     isLoading,
-    error,
-  } = useQuery(["productListInCart", sessionQuery?.user.email], () =>
+  } = useQuery(["productListInCart"], () =>
     getProductListInCart(sessionQuery?.user.email ?? "")
   )
 
@@ -17,6 +17,5 @@ export const useProductListInCartQuery = () => {
     productListInCart: productListInCart ?? [],
     isError,
     isLoading,
-    error,
   }
 }
