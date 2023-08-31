@@ -1,6 +1,12 @@
+import { Products } from "../types/product"
+
 export const checkingTheExistOfProduct = (
-  productInCartList: string[],
+  productInCartList: Products,
   productId: string
 ) => {
-  return productInCartList.includes(productId)
+  const existingCartItemIndex = productInCartList.findIndex(
+    (product) => product.id === productId
+  )
+
+  return existingCartItemIndex === -1 ? false : true
 }

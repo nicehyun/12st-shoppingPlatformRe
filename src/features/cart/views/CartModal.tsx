@@ -1,7 +1,3 @@
-// interface CartModalThemeProps {
-//   isShowCartModal: boolean
-// }
-
 import { ROUTE } from "@/common/hooks/useNavigations"
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { useProductListInCartQuery } from "../hooks/useProductListInCartQuery"

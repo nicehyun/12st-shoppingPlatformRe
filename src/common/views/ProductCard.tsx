@@ -10,13 +10,13 @@ import Typography from "@mui/material/Typography"
 import { BiCommentDetail } from "react-icons/bi"
 import { MdOutlineSell } from "react-icons/md"
 import { BsFillCartDashFill, BsFillCartPlusFill } from "react-icons/bs"
-import { numberToLocaleString, sliceText, truncateText } from "../utils/text"
+import { numberToLocaleString, truncateText } from "../utils/text"
 import { Product } from "../types/product"
-import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 
 import { checkingTheExistOfProduct } from "../utils/product"
 import { useProductListInCartQuery } from "@/features/cart/hooks/useProductListInCartQuery"
 import { useAddToCartMutaion } from "@/features/cart/hooks/useAddToCartMutaion"
+import useRemoveFromCartMutation from "@/features/cart/hooks/useRemoveFromCartMutation"
 
 interface IProductCard {
   productInfo: Product
@@ -39,40 +39,25 @@ const ProductCard = ({ productInfo }: IProductCard) => {
 
   const productBrandInfo = brand || maker || mallName
 
-  const { sessionQuery } = useSessionQuery()
+  const { productListInCart } = useProductListInCartQuery()
 
   const addMutaion = useAddToCartMutaion(productInfo)
 
-  // const { productListInCart } = useProductListInCartQuery(
-  //   sessionQuery?.user.email ?? ""
-  // )
+  const removeMutaion = useRemoveFromCartMutation(productInfo)
 
-  // console.log(productListInCart)
-
-  // const existedProduct = productListInCart.includes(id)
-  // console.log(existedProduct)
-
-  // const isExistedProductInCart = checkingTheExistOfProduct(
-  //   productListInCart ? productListInCart : [],
-  //   productInfo.id
-  // )
-
-  // console.log(isExistedProductInCart)
+  const isExistedProductInCart = checkingTheExistOfProduct(
+    productListInCart,
+    id
+  )
 
   const onClickAddProductInCart = async () => {
-    // if (sessionQuery === null) {
-    //   // setIsShowCartFeedbackModal(true)
-    //   console.log("세션 없음")
-    //   return
-    // }
-    // if (
-    //   (productListInCart && productListInCart.length >= 10) ||
-    //   isProductInCart
-    // )
-    //   return
+    if (productListInCart.length >= 10) return
+
     addMutaion.mutate()
-    // setupAnimationTransform(cartAddIconRef, "Y", -100, 0, "none")
-    // setupAnimationTransform(cartRemoveIconRef, "Y", 0, 1, "block")
+  }
+
+  const onClickRemoveProductFromCart = () => {
+    removeMutaion.mutate()
   }
 
   return (
@@ -153,13 +138,21 @@ const ProductCard = ({ productInfo }: IProductCard) => {
           <BiCommentDetail />
           <span className="text-[2px]">{reviewCount}</span>
         </button>
-
-        <button
-          onClick={onClickAddProductInCart}
-          className="text-[18px] absolute right-[8px]"
-        >
-          <BsFillCartDashFill />
-        </button>
+        {isExistedProductInCart ? (
+          <button
+            onClick={onClickRemoveProductFromCart}
+            className="text-[18px] absolute right-[8px]"
+          >
+            <BsFillCartDashFill />
+          </button>
+        ) : (
+          <button
+            onClick={onClickAddProductInCart}
+            className="text-[18px] absolute right-[8px]"
+          >
+            <BsFillCartPlusFill />
+          </button>
+        )}
       </CardActions>
     </Card>
   )
