@@ -1,10 +1,22 @@
+import { ROUTE, useNavigations } from "@/common/hooks/useNavigations"
+
 interface ICartModalRouteButton {
   content: string
+  route: ROUTE.CART | ROUTE.SIGNIN
 }
 
-const CartModalRouteButton = ({ content }: ICartModalRouteButton) => {
+const CartModalRouteButton = ({ content, route }: ICartModalRouteButton) => {
+  const { routeTo } = useNavigations()
+
+  const handleRoute = () => {
+    if (route === ROUTE.CART) return routeTo(ROUTE.CART)
+    if (route === ROUTE.SIGNIN) return routeTo(ROUTE.SIGNIN)
+  }
   return (
-    <button className="text-center text-[14px] md:text-[12px] sm:text-[12px] rounded-[5px] border-[1px] border-black dark:border-white my-[20px] p-[8px] transition-3 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black">
+    <button
+      onClick={handleRoute}
+      className="text-center text-[14px] md:text-[12px] sm:text-[12px] rounded-[5px] border-[1px] border-black dark:border-white my-[20px] p-[8px] transition-3 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black"
+    >
       {content}
     </button>
   )

@@ -2,6 +2,7 @@
 //   isShowCartModal: boolean
 // }
 
+import { ROUTE } from "@/common/hooks/useNavigations"
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { useProductListInCartQuery } from "../hooks/useProductListInCartQuery"
 import CartModalRouteButton from "./CartModalRouteButton"
@@ -68,10 +69,13 @@ const CartModal = () => {
       <div className="flex flex-col">
         {sessionQuery ? (
           productListInCart.length !== 0 && (
-            <CartModalRouteButton content="장바구니로 이동" />
+            <CartModalRouteButton
+              content="장바구니로 이동"
+              route={ROUTE.CART}
+            />
           )
         ) : (
-          <CartModalRouteButton content="로그인" />
+          <CartModalRouteButton content="로그인" route={ROUTE.SIGNIN} />
         )}
 
         <button className="p-[8px] border-1px border-border bg-lightGray btn-text-center text-[14px] md:text-[12px] sm:text-[12px] rounded-[5px]">
