@@ -3,36 +3,43 @@ import { HiMinus, HiPlus } from "react-icons/hi"
 import { BsFillTrashFill } from "react-icons/bs"
 import useIncreaseAmountMutation from "../hooks/useIncreaseAmountMutation"
 import useDecreaseAmountMutation from "../hooks/useDecreaseAmountMutation"
+import useRemoveFromCartMutation from "../hooks/useRemoveFromCartMutation"
+import { ProductInCart } from "../types/cart"
 
 interface IProductInCartController {
   children: ReactNode
-  productId: string
-  productAmount: number
-  amount: number
+  productInfo: ProductInCart
 }
 
 const ProductInCartController = ({
   children,
-  productAmount,
-  productId,
-  amount,
+  productInfo,
 }: IProductInCartController) => {
-  const increaseMutaion = useIncreaseAmountMutation(productId)
-  const decreaseMutaion = useDecreaseAmountMutation(productId)
+  const increaseMutaion = useIncreaseAmountMutation(productInfo)
+  const decreaseMutaion = useDecreaseAmountMutation(productInfo)
+
+  const removeMutaion = useRemoveFromCartMutation(productInfo)
+
+  const onClickRemoveProductFromCart = () => {
+    removeMutaion.mutate()
+  }
 
   const handleAmoutIncrease = () => {
     increaseMutaion.mutate()
   }
 
   const handleAmoutDecrease = () => {
-    if (amount === 1) return
+    if (productInfo.amount === 1) return
 
     decreaseMutaion.mutate()
   }
 
   return (
     <div className="relative py-[10px] pr-[10px] flex flex-col grow text-black">
-      <button className="absolute text-border right-[10px] top-[10px] text-[22px] md:text-[18px] sm:text-[16px] transition-3 hover:text-lightRed">
+      <button
+        onClick={onClickRemoveProductFromCart}
+        className="absolute text-border right-[10px] top-[10px] text-[22px] md:text-[18px] sm:text-[16px] transition-3 hover:text-lightRed"
+      >
         <BsFillTrashFill />
       </button>
 
@@ -45,7 +52,7 @@ const ProductInCartController = ({
         <input
           type="text"
           readOnly
-          value={productAmount}
+          value={productInfo.amount}
           className="w-1/2 h-full md:text-[14px] sm:text-[12px] border-none bg-white text-black text-end cursor-default px-[10px] mx-[1px]"
         />
         <button onClick={handleAmoutIncrease}>

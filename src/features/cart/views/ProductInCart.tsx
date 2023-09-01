@@ -8,16 +8,8 @@ interface IProductInCart {
 }
 
 const ProductInCart = ({ productInfo }: IProductInCart) => {
-  const {
-    image,
-    name,
-    discountedPrice,
-    mallName,
-    price,
-    discount,
-    amount,
-    id,
-  } = productInfo
+  const { image, name, discountedPrice, mallName, price, discount } =
+    productInfo
   return (
     <li className="flex mb-[30px]">
       <input
@@ -38,11 +30,7 @@ const ProductInCart = ({ productInfo }: IProductInCart) => {
           />
         </div>
 
-        <ProductInCartController
-          productAmount={amount}
-          productId={id}
-          amount={amount}
-        >
+        <ProductInCartController productInfo={productInfo}>
           {/* TODO : 유틸리티 함수로 날짜 수정하기 */}
           <span className="absolute left-0 top-[40px] md:top-[30px] sm:top-[28px] p-[5px] text-[12px] md:text-[10px] sm:text-[10px] bg-black text-white rounded-[8px]">
             12/27 예약배송

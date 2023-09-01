@@ -4,14 +4,15 @@ import { showFeedbackModal } from "@/redux/features/modalSlice"
 
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useDispatch } from "react-redux"
+import { ProductInCart } from "../types/cart"
 
-const useDecreaseAmountMutation = (productId: string) => {
+const useDecreaseAmountMutation = (productInfo: ProductInCart) => {
   const { sessionQuery } = useSessionQuery()
   const queryClient = useQueryClient()
   const dispatch = useDispatch()
 
   const decreaseMutaion = useMutation(
-    () => decreaseProductToCart(sessionQuery?.user.email ?? "", productId),
+    () => decreaseProductToCart(sessionQuery?.user.email ?? "", productInfo.id),
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["productListInCart"])

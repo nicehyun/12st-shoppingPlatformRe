@@ -3,37 +3,6 @@
 import { useProductListInCartQuery } from "../hooks/useProductListInCartQuery"
 import ProductInCart from "./ProductInCart"
 
-//   .checkbox {
-//     margin-right: 10px;
-//     width: 18px;
-//     height: 18px;
-//     cursor: pointer;
-//   }
-// `
-
-// const div  = styled.div`
-//   position: relative;
-//   margin-bottom: 30px;
-//   padding-bottom: 20px;
-//   border-bottom: 1px solid ${colorLightBlack};
-//   display: flex;
-//   align-items: center;
-
-//   span {
-//     font-size: 16px;
-//   }
-
-//   button {
-//     position: absolute;
-//     right: 0;
-//     color: ${colorBorder};
-//     transition: 0.3s;
-//   }
-//   button:hover {
-//     color: ${colorRed};
-//   }
-// `
-
 const ProductListInCart = () => {
   const { productListInCart } = useProductListInCartQuery()
   return (
