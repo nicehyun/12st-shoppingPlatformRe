@@ -5,6 +5,7 @@ import {
   selectCartModalState,
 } from "@/redux/features/modalSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { MouseEventHandler, useEffect } from "react"
 import { useProductListInCartQuery } from "../hooks/useProductListInCartQuery"
 import CartModalRouteButton from "./CartModalRouteButton"
 import ProductInCartModalCard from "./ProductInCartModalCard"
@@ -18,10 +19,25 @@ const CartModal = () => {
   const onhideCartModal = () => {
     dispatch(hideCartModal())
   }
+
+  const onClickCartModal: MouseEventHandler<HTMLDivElement> = (e) => {
+    e.stopPropagation()
+  }
+
+  useEffect(() => {
+    window.addEventListener("click", onhideCartModal)
+
+    return () => {
+      window.removeEventListener("click", onhideCartModal)
+    }
+  }, [])
   return (
     <>
       {selectCartModal.isShow && (
-        <div className="absolute top-[90px] right-[80px] z-10 w-[320px] py-[15px] px-[10px] bg-white dark:bg-black border-[1px] border-black dark:border-white rounded-[5px] cursor-default shadow dark:shadow-whiteShadow">
+        <div
+          onClick={onClickCartModal}
+          className="absolute top-[90px] right-[80px] z-10 w-[320px] py-[15px] px-[10px] bg-white dark:bg-black border-[1px] border-black dark:border-white rounded-[5px] cursor-default shadow dark:shadow-whiteShadow"
+        >
           {sessionQuery && (
             <>
               {productListInCart.length === 10 && (
