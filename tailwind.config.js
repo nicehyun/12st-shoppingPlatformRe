@@ -15,6 +15,7 @@ module.exports = {
       white: "#fff",
       lightRed: "#ff4e0a",
       border: "#d2d2d2",
+      lightBorder: "#ececec",
       lightGray: "#ccc",
       gray: "#5d5d5d",
       error: "#D43639",
@@ -32,6 +33,9 @@ module.exports = {
       },
       container: {
         center: true,
+      },
+      margin: {
+        "2percent": "2%",
       },
     },
   },

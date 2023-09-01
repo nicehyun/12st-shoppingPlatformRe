@@ -25,13 +25,7 @@ const ProductInCartModalCard = ({ productInfo }: IProductInCartModalCard) => {
       </button>
 
       <div className="w-[90px] h-[90px] rounded-l-[5px] border-r-[1px] border-border overflow-hidden mr-[8px]">
-        <Image
-          src={image}
-          alt={name}
-          className="w-full h-full"
-          width={90}
-          height={90}
-        />
+        <Image src={image} alt={name} width={90} height={90} />
       </div>
       <div className="mt-[20px]">
         <p className="text-black dark:text-white w-[145px] h-[33.6px] text-[8px] leading-[1.2]">

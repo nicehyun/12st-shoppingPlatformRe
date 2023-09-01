@@ -1,4 +1,5 @@
 import { Product, Products } from "@/common/types/product"
+import { ProductsInCart } from "@/features/cart/types/cart"
 import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore"
 import firebaseApp from "../config"
 
@@ -17,7 +18,7 @@ export async function getProductListInCart(emailValue: string) {
     if (cartDoc.exists()) {
       const cartData = cartDoc.data()
 
-      return cartData.products as Products
+      return cartData.products as ProductsInCart
     } else {
       console.log("Cart document not found for email:", emailValue)
       return []

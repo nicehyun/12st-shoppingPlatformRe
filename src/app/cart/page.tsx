@@ -1,7 +1,12 @@
-import React from "react"
+import PageLayout from "@/common/views/PageLayout"
+import CartLayout from "@/features/cart/views/CartLayout"
 
 const page = () => {
-  return <div className="pt-[500px]">장바구니</div>
+  return (
+    <PageLayout>
+      <CartLayout />
+    </PageLayout>
+  )
 }
 
 export default page
