@@ -1,4 +1,6 @@
 import { ROUTE, useNavigations } from "@/common/hooks/useNavigations"
+import { hideCartModal } from "@/redux/features/modalSlice"
+import { useAppDispatch } from "@/redux/hooks"
 
 interface ICartModalRouteButton {
   content: string
@@ -6,9 +8,16 @@ interface ICartModalRouteButton {
 }
 
 const CartModalRouteButton = ({ content, route }: ICartModalRouteButton) => {
+  const dispatch = useAppDispatch()
   const { routeTo } = useNavigations()
 
+  const onhideCartModal = () => {
+    dispatch(hideCartModal())
+  }
+
   const handleRoute = () => {
+    onhideCartModal()
+
     if (route === ROUTE.CART) return routeTo(ROUTE.CART)
     if (route === ROUTE.SIGNIN) return routeTo(ROUTE.SIGNIN)
   }

@@ -19,6 +19,8 @@ const HeaderCartButton = () => {
   }
 
   useEffect(() => {
+    if (!productListInCart.length) return
+
     setIsCartHightlighted(true)
     const timer = setTimeout(() => {
       setIsCartHightlighted(false)
