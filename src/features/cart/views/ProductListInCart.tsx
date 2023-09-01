@@ -52,7 +52,7 @@ const ProductListInCart = () => {
         <input
           type="checkbox"
           checked={isAllChecked}
-          onClick={handleAllCheckClick}
+          onChange={handleAllCheckClick}
           className="mr-[10px] w-[18px] h-[18px] cursor-pointer"
         />
         <span className="text-[16px] md:text-[14px] sm:text-[12px] text-black">
