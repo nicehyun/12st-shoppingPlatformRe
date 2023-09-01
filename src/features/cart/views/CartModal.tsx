@@ -25,11 +25,7 @@ const CartModal = () => {
           )}
           <ul className="max-h-[500px] overflow-y-scroll">
             {productListInCart.map((product) => (
-              <ProductInCartModalCard
-                imageUrl={product.image}
-                productName={product.name}
-                key={product.id}
-              />
+              <ProductInCartModalCard productInfo={product} key={product.id} />
             ))}
           </ul>
         </>

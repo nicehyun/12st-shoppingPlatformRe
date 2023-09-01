@@ -78,7 +78,6 @@ export async function removeProductFromCart(
     if (cartDoc.exists()) {
       const cartData = cartDoc.data()
 
-      // 상품을 제거할 때, 상품 정보를 사용하여 제거합니다.
       const updatedProducts = cartData.products.filter(
         (product: Product) => product.id !== productInfo.id
       )
@@ -89,7 +88,6 @@ export async function removeProductFromCart(
 
       return cartData
     } else {
-      // 카트가 존재하지 않는 경우에는 아무 작업도 하지 않습니다.
       console.log("Cart document not found for email:", emailValue)
       return null
     }
