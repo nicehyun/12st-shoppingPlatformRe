@@ -6,9 +6,14 @@ import ProductInCartController from "./ProductInCartController"
 interface IProductInCart {
   productInfo: ProductInCart
   isChecked: boolean
+  onClickCheck: () => void
 }
 
-const ProductInCart = ({ productInfo, isChecked }: IProductInCart) => {
+const ProductInCart = ({
+  productInfo,
+  isChecked,
+  onClickCheck,
+}: IProductInCart) => {
   const { image, name, discountedPrice, mallName, price, discount } =
     productInfo
   return (
@@ -17,7 +22,7 @@ const ProductInCart = ({ productInfo, isChecked }: IProductInCart) => {
         type="checkbox"
         className="mr-[10px] w-[18px] h-[18px] cursor-pointer"
         checked={isChecked}
-        // onChange={onClickCheck}
+        onChange={onClickCheck}
       />
 
       <div className="relative flex grow border-[1px] border-border rounded-[5px]">
