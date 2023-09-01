@@ -2,22 +2,32 @@ import { ReactNode } from "react"
 import { HiMinus, HiPlus } from "react-icons/hi"
 import { BsFillTrashFill } from "react-icons/bs"
 import useIncreaseAmountMutation from "../hooks/useIncreaseAmountMutation"
+import useDecreaseAmountMutation from "../hooks/useDecreaseAmountMutation"
 
 interface IProductInCartController {
   children: ReactNode
   productId: string
   productAmount: number
+  amount: number
 }
 
 const ProductInCartController = ({
   children,
   productAmount,
   productId,
+  amount,
 }: IProductInCartController) => {
   const increaseMutaion = useIncreaseAmountMutation(productId)
+  const decreaseMutaion = useDecreaseAmountMutation(productId)
 
   const handleAmoutIncrease = () => {
     increaseMutaion.mutate()
+  }
+
+  const handleAmoutDecrease = () => {
+    if (amount === 1) return
+
+    decreaseMutaion.mutate()
   }
 
   return (
@@ -29,10 +39,7 @@ const ProductInCartController = ({
       {children}
 
       <div className="absolute bottom-[20px] w-[80px] h-[28px] md:h-[24px] sm:h-[20px] items-center bg-lightBorder rounded-[5px] flexCenter">
-        <button
-
-        // onClick={onClickMinusButton}
-        >
+        <button onClick={handleAmoutDecrease}>
           <HiMinus className="text-[16px] md:text-[14px] sm:text-[12px]  text-lightGray" />
         </button>
         <input

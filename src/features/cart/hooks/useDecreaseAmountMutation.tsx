@@ -1,22 +1,20 @@
-import { Product } from "@/common/types/product";
-import { decreaseProductToCart } from "@/firebase/realtime/cart";
-import { showFeedbackModal } from "@/store/features/modalSlice";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useDispatch } from "react-redux";
+import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
+import { decreaseProductToCart } from "@/firebase/firestore/cart"
+import { showFeedbackModal } from "@/redux/features/modalSlice"
 
-const useDecreaseAmountMutation = (
-  email: string,
-  productInfo: Product<number>
-) => {
-  const queryClient = useQueryClient();
-  const dispatch = useDispatch();
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { useDispatch } from "react-redux"
+
+const useDecreaseAmountMutation = (productId: string) => {
+  const { sessionQuery } = useSessionQuery()
+  const queryClient = useQueryClient()
+  const dispatch = useDispatch()
 
   const decreaseMutaion = useMutation(
-    (amountToDecrease: number) =>
-      decreaseProductToCart(email, productInfo.productId, amountToDecrease),
+    () => decreaseProductToCart(sessionQuery?.user.email ?? "", productId),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(["productListInCart"]);
+        queryClient.invalidateQueries(["productListInCart"])
       },
       onError: () =>
         dispatch(
@@ -26,9 +24,9 @@ const useDecreaseAmountMutation = (
           })
         ),
     }
-  );
+  )
 
-  return decreaseMutaion;
-};
+  return decreaseMutaion
+}
 
-export default useDecreaseAmountMutation;
+export default useDecreaseAmountMutation

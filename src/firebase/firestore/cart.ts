@@ -128,3 +128,35 @@ export const increaseProductToCart = async (
     throw Error(`🚨 Error updating cart document : ${error}`)
   }
 }
+
+export const decreaseProductToCart = async (
+  emailValue: string,
+  productId: string
+) => {
+  if (emailValue === "") {
+    return
+  }
+
+  try {
+    const cartRef = doc(db, "cart", emailValue)
+    const cartDoc = await getDoc(cartRef)
+
+    if (cartDoc.exists()) {
+      const cartData = cartDoc.data()
+
+      const existingProductIndex = cartData.products.findIndex(
+        (product: ProductInCart) => product.id === productId
+      )
+
+      if (existingProductIndex !== -1) {
+        cartData.products[existingProductIndex].amount -= 1
+
+        await setDoc(cartRef, cartData)
+
+        return cartData
+      }
+    }
+  } catch (error) {
+    throw Error(`🚨 Error updating cart document : ${error}`)
+  }
+}
