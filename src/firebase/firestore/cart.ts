@@ -1,5 +1,5 @@
 import { Product, Products } from "@/common/types/product"
-import { ProductsInCart } from "@/features/cart/types/cart"
+import { ProductInCart, ProductsInCart } from "@/features/cart/types/cart"
 import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore"
 import firebaseApp from "../config"
 
@@ -91,6 +91,38 @@ export async function removeProductFromCart(
     } else {
       console.log("Cart document not found for email:", emailValue)
       return null
+    }
+  } catch (error) {
+    throw Error(`🚨 Error updating cart document : ${error}`)
+  }
+}
+
+export const increaseProductToCart = async (
+  emailValue: string,
+  productId: string
+) => {
+  if (emailValue === "") {
+    return
+  }
+
+  try {
+    const cartRef = doc(db, "cart", emailValue)
+    const cartDoc = await getDoc(cartRef)
+
+    if (cartDoc.exists()) {
+      const cartData = cartDoc.data()
+
+      const existingProductIndex = cartData.products.findIndex(
+        (product: ProductInCart) => product.id === productId
+      )
+
+      if (existingProductIndex !== -1) {
+        cartData.products[existingProductIndex].amount += 1
+
+        await setDoc(cartRef, cartData)
+
+        return cartData
+      }
     }
   } catch (error) {
     throw Error(`🚨 Error updating cart document : ${error}`)
