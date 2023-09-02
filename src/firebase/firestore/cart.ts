@@ -67,7 +67,7 @@ export async function addProductToCart(
 
 export async function removeProductFromCart(
   emailValue: string,
-  productInfo: Product
+  productId: string
 ) {
   if (emailValue === "") {
     return
@@ -80,7 +80,40 @@ export async function removeProductFromCart(
       const cartData = cartDoc.data()
 
       const updatedProducts = cartData.products.filter(
-        (product: Product) => product.id !== productInfo.id
+        (product: Product) => product.id !== productId
+      )
+
+      cartData.products = updatedProducts
+
+      await setDoc(cartRef, cartData)
+
+      return cartData
+    } else {
+      console.log("Cart document not found for email:", emailValue)
+      return null
+    }
+  } catch (error) {
+    throw Error(`🚨 Error updating cart document : ${error}`)
+  }
+}
+
+export async function removeCheckedProductsFromCart(
+  emailValue: string,
+  productIds: string[]
+) {
+  if (emailValue === "" || productIds.length === 0) {
+    return
+  }
+
+  try {
+    const cartRef = doc(db, "cart", emailValue)
+    const cartDoc = await getDoc(cartRef)
+
+    if (cartDoc.exists()) {
+      const cartData = cartDoc.data()
+
+      const updatedProducts = cartData.products.filter(
+        (product: Product) => !productIds.includes(product.id)
       )
 
       cartData.products = updatedProducts

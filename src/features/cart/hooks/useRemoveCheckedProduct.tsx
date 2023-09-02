@@ -1,17 +1,20 @@
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
-import { removeProductFromCart } from "@/firebase/firestore/cart"
+import { removeCheckedProductsFromCart } from "@/firebase/firestore/cart"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 
-const useRemoveFromCartMutation = () => {
+export const useRemoveCheckedProduct = () => {
   const queryClient = useQueryClient()
   const { sessionQuery } = useSessionQuery()
   const dispatch = useAppDispatch()
 
-  const removeMutaion = useMutation(
-    (productId: string) =>
-      removeProductFromCart(sessionQuery?.user.email ?? "", productId),
+  const checkedProductRemoveMutaion = useMutation(
+    (checkedProduct: string[]) =>
+      removeCheckedProductsFromCart(
+        sessionQuery?.user.email ?? "",
+        checkedProduct
+      ),
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["productListInCart"])
@@ -26,7 +29,5 @@ const useRemoveFromCartMutation = () => {
       },
     }
   )
-  return removeMutaion
+  return checkedProductRemoveMutaion
 }
-
-export default useRemoveFromCartMutation

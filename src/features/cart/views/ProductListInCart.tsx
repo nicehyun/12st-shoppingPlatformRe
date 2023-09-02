@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react"
 import { useProductListInCartQuery } from "../hooks/useProductListInCartQuery"
+import { useRemoveCheckedProduct } from "../hooks/useRemoveCheckedProduct"
+
 import { ProductInCart as IProductInCart } from "../types/cart"
 import ProductInCart from "./ProductInCart"
 
@@ -9,6 +11,8 @@ const ProductListInCart = () => {
   const { productListInCart } = useProductListInCartQuery()
   const [checkedProductList, setCheckedProductList] = useState<string[]>([])
   const [isAllChecked, setIsAllChecked] = useState(false)
+
+  const checkedProductRemoveMutaion = useRemoveCheckedProduct()
 
   const handleAllCheckClick = () => {
     if (!isAllChecked) {
@@ -40,6 +44,12 @@ const ProductListInCart = () => {
     setCheckedProductList(updatedList)
   }
 
+  const handleCheckedProductRemove = (checkedProductList: string[] | []) => {
+    if (checkedProductList.length === 0) return
+
+    checkedProductRemoveMutaion.mutate(checkedProductList)
+  }
+
   useEffect(() => {
     if (checkedProductList.length === productListInCart.length) {
       setIsAllChecked(true)
@@ -59,7 +69,7 @@ const ProductListInCart = () => {
           선택 {checkedProductList.length}개
         </span>
         <button
-          // onClick={onClickCheckedProductRemove}
+          onClick={() => handleCheckedProductRemove(checkedProductList)}
           className="absolute right-0 text-border transition-3 hover:text-lightRed"
         >
           선택 삭제
