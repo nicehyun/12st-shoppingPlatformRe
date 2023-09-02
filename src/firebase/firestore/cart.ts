@@ -1,4 +1,4 @@
-import { Product, Products } from "@/common/types/product"
+import { Product } from "@/common/types/product"
 import { ProductInCart, ProductsInCart } from "@/features/cart/types/cart"
 import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore"
 import firebaseApp from "../config"
