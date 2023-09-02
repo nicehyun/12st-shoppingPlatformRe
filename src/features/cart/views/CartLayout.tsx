@@ -1,9 +1,11 @@
+import CouponBar from "./CouponBar"
 import ProductListInCart from "./ProductListInCart"
 
 const CartLayout = () => {
   return (
-    <div>
+    <div className="flex mb-[40px]">
       <ProductListInCart />
+      <CouponBar />
     </div>
   )
 }
