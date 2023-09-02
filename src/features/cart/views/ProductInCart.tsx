@@ -22,7 +22,7 @@ const ProductInCart = ({
     <li className="flex mb-[30px]">
       <input
         type="checkbox"
-        className="mr-[10px] w-[18px] h-[18px] cursor-pointer"
+        className="mr-[10px] w-[18px] h-[18px] md:w-[16px] md:h-[16px] sm:w-[14px] sm:h-[14px] cursor-pointer"
         checked={isChecked}
         onChange={onClickCheck}
       />
@@ -34,6 +34,7 @@ const ProductInCart = ({
             alt={name}
             fill={true}
             sizes="(max-width: 767px) 100vw, (max-width: 479px) 100vw, 100vw"
+            priority={true}
           />
           {/* TODO : 유틸리티 함수로 날짜 수정하기 */}
           <span className="absolute left-[2px] top-[2px] p-[4px] text-[10px] md:text-[8px] sm:text-[8px] bg-black text-white rounded-[8px]">

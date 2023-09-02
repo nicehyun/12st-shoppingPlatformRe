@@ -71,14 +71,14 @@ const ProductListInCart = () => {
           type="checkbox"
           checked={isAllChecked}
           onChange={handleProductAllCheck}
-          className="mr-[10px] w-[18px] h-[18px] cursor-pointer"
+          className="mr-[10px] w-[18px] h-[18px] md:w-[16px] md:h-[16px] sm:w-[14px] sm:h-[14px] cursor-pointer"
         />
-        <span className="text-[16px] md:text-[14px] sm:text-[12px] text-black">
+        <span className="text-[14px] md:text-[12px] sm:text-[10px] text-black">
           선택 {checkedProductList.length}개
         </span>
         <button
           onClick={() => handleCheckedProductRemove(checkedProductList)}
-          className="absolute right-0 text-border transition-3 hover:text-lightRed"
+          className="absolute right-0 text-border transition-3 hover:text-lightRed text-[14px] md:text-[12px] sm:text-[10px]"
         >
           선택 삭제
         </button>
