@@ -8,11 +8,11 @@ interface IProductInCartModalCard {
 }
 
 const ProductInCartModalCard = ({ productInfo }: IProductInCartModalCard) => {
-  const { name, image } = productInfo
-  const removeMutaion = useRemoveFromCartMutation(productInfo)
+  const { name, image, id } = productInfo
+  const removeMutaion = useRemoveFromCartMutation()
 
   const onClickRemoveProductFromCart = () => {
-    removeMutaion.mutate()
+    removeMutaion.mutate(id)
   }
 
   return (

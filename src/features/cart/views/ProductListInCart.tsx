@@ -14,7 +14,12 @@ const ProductListInCart = () => {
 
   const checkedProductRemoveMutaion = useRemoveCheckedProduct()
 
-  const handleAllCheckClick = () => {
+  const resetCheckedProductList = () => {
+    setCheckedProductList([])
+    setIsAllChecked(false)
+  }
+
+  const handleProductAllCheck = () => {
     if (!isAllChecked) {
       const checkedProductList: string[] = []
 
@@ -30,7 +35,7 @@ const ProductListInCart = () => {
     }
   }
 
-  const handleCheckClick = (productId: string) => {
+  const handleProductCheck = (productId: string) => {
     const isProductChecked = checkedProductList.includes(productId)
 
     if (isProductChecked) {
@@ -44,10 +49,13 @@ const ProductListInCart = () => {
     setCheckedProductList(updatedList)
   }
 
-  const handleCheckedProductRemove = (checkedProductList: string[] | []) => {
+  const handleCheckedProductRemove = async (
+    checkedProductList: string[] | []
+  ) => {
     if (checkedProductList.length === 0) return
 
-    checkedProductRemoveMutaion.mutate(checkedProductList)
+    await checkedProductRemoveMutaion.mutateAsync(checkedProductList)
+    resetCheckedProductList()
   }
 
   useEffect(() => {
@@ -62,7 +70,7 @@ const ProductListInCart = () => {
         <input
           type="checkbox"
           checked={isAllChecked}
-          onChange={handleAllCheckClick}
+          onChange={handleProductAllCheck}
           className="mr-[10px] w-[18px] h-[18px] cursor-pointer"
         />
         <span className="text-[16px] md:text-[14px] sm:text-[12px] text-black">
@@ -82,7 +90,8 @@ const ProductListInCart = () => {
             key={product.name}
             productInfo={product}
             isChecked={checkedProductList.includes(product.id) || isAllChecked}
-            onClickCheck={() => handleCheckClick(product.id)}
+            onClickCheck={() => handleProductCheck(product.id)}
+            resetChecked={resetCheckedProductList}
           />
         ))}
       </ul>
