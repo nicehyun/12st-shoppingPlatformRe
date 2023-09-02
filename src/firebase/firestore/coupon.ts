@@ -1,3 +1,4 @@
+import { convertingObjectIntoArray } from "@/common/utils/object"
 import { AmountCoupon, RateCoupon } from "@/features/cart/types/coupon"
 import { doc, getDoc, getFirestore } from "firebase/firestore"
 import firebaseApp from "../config"
@@ -11,14 +12,19 @@ export const getCoupon = async () => {
     const rateRef = doc(db, "coupon", "rate")
 
     const amountDoc = await getDoc(amountRef)
-    // "rate" 문서 가져오기
+
     const rateDoc = await getDoc(rateRef)
 
     if (amountDoc.exists() && rateDoc.exists()) {
-      return {
+      const couponData = {
         amount: amountDoc.data() as AmountCoupon,
         rate: rateDoc.data() as RateCoupon,
       }
+
+      return convertingObjectIntoArray(couponData) as (
+        | RateCoupon
+        | AmountCoupon
+      )[]
     } else {
       console.log("Coupon document not found")
     }

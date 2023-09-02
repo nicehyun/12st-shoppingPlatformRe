@@ -1,16 +1,11 @@
 export type RateCoupon = {
   type: string
-  title: string
+  name: string
   discountRate: number
 }
 
 export type AmountCoupon = {
   type: string
-  title: string
+  name: string
   discountAmount: number
-}
-
-export type Coupon = {
-  amount: AmountCoupon
-  rate: RateCoupon
 }
