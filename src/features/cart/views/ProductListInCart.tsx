@@ -1,5 +1,7 @@
 "use client"
 
+import { ROUTE } from "@/common/hooks/useNavigations"
+import Empty from "@/common/views/Empty"
 import { useEffect, useState } from "react"
 import { useProductListInCartQuery } from "../hooks/useProductListInCartQuery"
 import { useRemoveCheckedProduct } from "../hooks/useRemoveCheckedProduct"
@@ -97,16 +99,27 @@ const ProductListInCart = () => {
         </button>
       </div>
 
-      <ul>
-        {productListInCart.map((product) => (
-          <ProductInCart
-            key={product.name}
-            productInfo={product}
-            isChecked={checkedProductList.includes(product.id) || isAllChecked}
-            onClickCheck={() => handleProductCheck(product.id)}
-          />
-        ))}
-      </ul>
+      {productListInCart.length ? (
+        <ul>
+          {productListInCart.map((product) => (
+            <ProductInCart
+              key={product.name}
+              productInfo={product}
+              isChecked={
+                checkedProductList.includes(product.id) || isAllChecked
+              }
+              onClickCheck={() => handleProductCheck(product.id)}
+            />
+          ))}
+        </ul>
+      ) : (
+        <Empty
+          content="장바구니에 담은 상품이 없습니다"
+          routeArray={[
+            { routeContent: "CONTINUE SHOPPING", route: ROUTE.HOME },
+          ]}
+        />
+      )}
     </section>
   )
 }
