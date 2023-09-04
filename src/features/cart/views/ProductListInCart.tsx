@@ -16,6 +16,13 @@ const ProductListInCart = () => {
 
   const checkedProductRemoveMutaion = useRemoveCheckedProduct()
 
+  const handleCheckedProductListEmpty = () => {
+    if (!productListInCart.length) return
+
+    setCheckedProductList([])
+    setIsAllChecked(false)
+  }
+
   const handleProductAllCheck = () => {
     if (!isAllChecked) {
       const checkedProductList: string[] = []
@@ -52,21 +59,18 @@ const ProductListInCart = () => {
     if (checkedProductList.length === 0) return
 
     await checkedProductRemoveMutaion.mutateAsync(checkedProductList)
+    handleCheckedProductListEmpty()
   }
 
   useEffect(() => {
+    if (!productListInCart.length) return
+
     if (productListInCart.length) {
       const productsId: string[] = []
       productListInCart.map((product) => productsId.push(product.id))
 
       setCheckedProductList(productsId)
       setIsAllChecked(true)
-      return
-    }
-
-    if (!productListInCart.length) {
-      setCheckedProductList([])
-      setIsAllChecked(false)
       return
     }
   }, [productListInCart])
@@ -109,6 +113,7 @@ const ProductListInCart = () => {
                 checkedProductList.includes(product.id) || isAllChecked
               }
               onClickCheck={() => handleProductCheck(product.id)}
+              onEmptyCheckedProductList={handleCheckedProductListEmpty}
             />
           ))}
         </ul>

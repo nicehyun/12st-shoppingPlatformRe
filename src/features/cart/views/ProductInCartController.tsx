@@ -9,11 +9,13 @@ import { ProductInCart } from "../types/cart"
 interface IProductInCartController {
   children: ReactNode
   productInfo: ProductInCart
+  onEmptyCheckedProductList: () => void
 }
 
 const ProductInCartController = ({
   children,
   productInfo,
+  onEmptyCheckedProductList,
 }: IProductInCartController) => {
   const increaseMutaion = useIncreaseAmountMutation(productInfo)
   const decreaseMutaion = useDecreaseAmountMutation(productInfo)
@@ -22,6 +24,7 @@ const ProductInCartController = ({
 
   const onClickRemoveProductFromCart = async () => {
     await removeMutaion.mutateAsync(productInfo.id)
+    onEmptyCheckedProductList()
   }
 
   const handleAmoutIncrease = () => {

@@ -7,12 +7,14 @@ interface IProductInCart {
   productInfo: ProductInCart
   isChecked: boolean
   onClickCheck: () => void
+  onEmptyCheckedProductList: () => void
 }
 
 const ProductInCart = ({
   productInfo,
   isChecked,
   onClickCheck,
+  onEmptyCheckedProductList,
 }: IProductInCart) => {
   const { image, name, discountedPrice, mallName, price, discount } =
     productInfo
@@ -40,7 +42,10 @@ const ProductInCart = ({
           </span>
         </div>
 
-        <ProductInCartController productInfo={productInfo}>
+        <ProductInCartController
+          productInfo={productInfo}
+          onEmptyCheckedProductList={onEmptyCheckedProductList}
+        >
           <p className="absolute top-[10px] left-0 text-lightGray text-[14px] md:text-[12px] sm:text-[10px] mb-[12px]">
             [ {mallName} ]
           </p>
