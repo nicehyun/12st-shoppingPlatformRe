@@ -13,12 +13,12 @@ import { SelectChangeEvent } from "@mui/material"
 
 const CouponBar = () => {
   const { coupons } = useCouponQuery()
-  // console.log(coupons)
+  console.log(coupons)
 
   const dispatch = useAppDispatch()
 
   const seletedCoupon = useAppSelector(selectSeletedCoupon)
-  // console.log(seletedCoupon)
+  console.log(seletedCoupon)
 
   const handleCouponSelect = (event: SelectChangeEvent<unknown>) => {
     if (coupons) {
@@ -31,7 +31,7 @@ const CouponBar = () => {
   }
 
   return (
-    <div className="sticky top-[150px] w-18percent h-[400px] py-[20px] p-[10px] border-[1px] border-black rounded-[5px] shadow">
+    <div className="sticky lg:top-[150px] xl:top-[150px] w-[190px] h-[400px] py-[20px] p-[10px] border-[1px] border-black rounded-[5px] shadow">
       <h4 className="mb-[32px]">쿠폰</h4>
 
       <div className="mb-[30px]">

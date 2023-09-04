@@ -84,7 +84,7 @@ const ProductListInCart = () => {
   }, [productListInCart, checkedProductList])
 
   return (
-    <section className="border-[1px] border-border bg-white py-[30px] px-[20px] xl:w-4/5 lg:w-4/5 xl:mr-2percent lg:mr-2percent shadow rounded-[5px]">
+    <section className="max-w-[800px] border-[1px] border-border bg-white py-[30px] px-[20px] xl:w-4/5 lg:w-4/5 xl:mr-2percent lg:mr-2percent shadow rounded-[5px]">
       <div className="relative mb-[30px] pb-[30px] border-b-[1px] border-lightBlack flex items-center">
         <input
           type="checkbox"
