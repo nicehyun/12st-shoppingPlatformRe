@@ -10,13 +10,18 @@ import ProductInCart from "./ProductInCart"
 const ProductListInCart = () => {
   const { productListInCart } = useProductListInCartQuery()
   const [checkedProductList, setCheckedProductList] = useState<string[]>([])
-  const [isAllChecked, setIsAllChecked] = useState(false)
+  const [isAllChecked, setIsAllChecked] = useState(true)
 
   const checkedProductRemoveMutaion = useRemoveCheckedProduct()
 
   const resetCheckedProductList = () => {
-    setCheckedProductList([])
-    setIsAllChecked(false)
+    const checkedProductList: string[] = []
+
+    productListInCart.map((product: IProductInCart) =>
+      checkedProductList.push(product.id)
+    )
+
+    setCheckedProductList(checkedProductList)
   }
 
   const handleProductAllCheck = () => {
@@ -61,6 +66,10 @@ const ProductListInCart = () => {
   useEffect(() => {
     if (checkedProductList.length === productListInCart.length) {
       setIsAllChecked(true)
+    }
+
+    if (isAllChecked && productListInCart) {
+      resetCheckedProductList()
     }
   }, [checkedProductList, productListInCart])
 
