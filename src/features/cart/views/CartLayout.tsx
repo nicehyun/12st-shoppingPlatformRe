@@ -6,8 +6,8 @@ import TotalPriceInfo from "./TotalPriceInfo"
 
 const CartLayout = () => {
   return (
-    <div className="mb-[40px]">
-      <div className="lg:flex xl:flex">
+    <div className="max-w-[1050px] mx-auto">
+      <div className="lg:flex xl:flex mb-[40px]">
         <ProductListInCart />
 
         <ViewPortConditionComponent type="pc" component={<CouponBar />} />

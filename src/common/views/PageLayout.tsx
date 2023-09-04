@@ -7,7 +7,7 @@ interface IPageLayout {
 
 const PageLayout = ({ children, classNames }: IPageLayout) => {
   return (
-    <main className={`${classNames} px-10 pt-[200px] pb-[100px]`}>
+    <main className={`${classNames} px-[40px] pt-[200px] pb-[100px]`}>
       {children}
     </main>
   )

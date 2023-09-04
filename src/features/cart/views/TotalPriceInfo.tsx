@@ -59,7 +59,9 @@
 
 const TotalPriceInfo = () => {
   return (
-    <div>totalprice</div>
+    <div className="grow bg-lightRed sm:mr-[5px] md:mr-[5px] h-[500px]">
+      totalprice
+    </div>
     // <TotalPriceInfoViewContainer>
     //   <h3 className="title">
     //     결제 예정금액 / 총
