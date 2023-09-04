@@ -13,12 +13,12 @@ import { SelectChangeEvent } from "@mui/material"
 
 const CouponBar = () => {
   const { coupons } = useCouponQuery()
-  console.log(coupons)
+  // console.log(coupons)
 
   const dispatch = useAppDispatch()
 
   const seletedCoupon = useAppSelector(selectSeletedCoupon)
-  console.log(seletedCoupon)
+  // console.log(seletedCoupon)
 
   const handleCouponSelect = (event: SelectChangeEvent<unknown>) => {
     if (coupons) {

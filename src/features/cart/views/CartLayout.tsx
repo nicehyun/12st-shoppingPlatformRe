@@ -5,7 +5,7 @@ const CartLayout = () => {
   return (
     <div className="lg:flex xl:flex mb-[40px]">
       <ProductListInCart />
-      {/* <CouponBar /> */}
+      <CouponBar />
     </div>
   )
 }

@@ -10,19 +10,9 @@ import ProductInCart from "./ProductInCart"
 const ProductListInCart = () => {
   const { productListInCart } = useProductListInCartQuery()
   const [checkedProductList, setCheckedProductList] = useState<string[]>([])
-  const [isAllChecked, setIsAllChecked] = useState(true)
+  const [isAllChecked, setIsAllChecked] = useState(false)
 
   const checkedProductRemoveMutaion = useRemoveCheckedProduct()
-
-  const resetCheckedProductList = () => {
-    const checkedProductList: string[] = []
-
-    productListInCart.map((product: IProductInCart) =>
-      checkedProductList.push(product.id)
-    )
-
-    setCheckedProductList(checkedProductList)
-  }
 
   const handleProductAllCheck = () => {
     if (!isAllChecked) {
@@ -60,18 +50,32 @@ const ProductListInCart = () => {
     if (checkedProductList.length === 0) return
 
     await checkedProductRemoveMutaion.mutateAsync(checkedProductList)
-    resetCheckedProductList()
   }
 
   useEffect(() => {
-    if (checkedProductList.length === productListInCart.length) {
+    if (productListInCart.length) {
+      const productsId: string[] = []
+      productListInCart.map((product) => productsId.push(product.id))
+
+      setCheckedProductList(productsId)
       setIsAllChecked(true)
+      return
     }
 
-    if (isAllChecked && productListInCart) {
-      resetCheckedProductList()
+    if (!productListInCart.length) {
+      setCheckedProductList([])
+      setIsAllChecked(false)
+      return
     }
-  }, [checkedProductList, productListInCart])
+  }, [productListInCart])
+
+  useEffect(() => {
+    if (!productListInCart.length) return
+
+    if (productListInCart.length === checkedProductList.length) {
+      setIsAllChecked(true)
+    }
+  }, [productListInCart, checkedProductList])
 
   return (
     <section className="border-[1px] border-border bg-white py-[30px] px-[20px] xl:w-4/5 lg:w-4/5 xl:mr-2percent lg:mr-2percent shadow rounded-[5px]">
@@ -100,7 +104,6 @@ const ProductListInCart = () => {
             productInfo={product}
             isChecked={checkedProductList.includes(product.id) || isAllChecked}
             onClickCheck={() => handleProductCheck(product.id)}
-            resetChecked={resetCheckedProductList}
           />
         ))}
       </ul>
