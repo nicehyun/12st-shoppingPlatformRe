@@ -62,12 +62,24 @@ const CouponBar = () => {
         <p className="text-[14px] text-lightBlack mb-[10px] sm:mb-[4px]">
           쿠폰
         </p>
-        <FormControl
-          variant="standard"
-          className="min-w-[170px] sm:min-w-[120px] md:min-w-[140px]"
-        >
-          <InputLabel className="text-[12px] sm:text-[10px]">Coupon</InputLabel>
+        <FormControl variant="standard" className="w-full">
+          <InputLabel
+            sx={{
+              fontSize: "12px",
+              color: "#ccc",
+              "&.Mui-focused": {
+                color: "#ff4e0a",
+              },
+            }}
+          >
+            Coupon
+          </InputLabel>
           <Select
+            sx={{
+              "&::after": {
+                borderBottomColor: "#ff4e0a",
+              },
+            }}
             labelId="bonus-coupons"
             id="bonus-coupons"
             value={seletedCoupon?.name ?? ""}
@@ -82,15 +94,15 @@ const CouponBar = () => {
           >
             <MenuItem
               value="선택안함"
-              className="text-[14px] md:text-[12px] sm:text-[10px] px-[10px] py-[3px] sm:py-[0px]"
+              sx={{ fontSize: "14px", padding: "5px" }}
             >
               선택안함
             </MenuItem>
             {coupons?.map((coupon) => (
               <MenuItem
+                sx={{ fontSize: "14px", padding: "5px" }}
                 key={`coupon_${coupon.type}`}
                 value={coupon.name}
-                className="text-[14px] sm:text-[10px] px-[10px] py-[3px]"
               >
                 {coupon.name}
               </MenuItem>
@@ -103,7 +115,6 @@ const CouponBar = () => {
         <span className="text-[14px] text-black">쿠폰 사용금액</span>
 
         <div className="text-[16px] sm:text-[14px] md:text-[14px] font-bold text-lightRed mr-[3px]">
-          {/* <span>{priceToUseCoupon}</span> <span>원</span> */}
           <span>{discountedPriceWithCoupon}</span> <span>원</span>
         </div>
       </div>

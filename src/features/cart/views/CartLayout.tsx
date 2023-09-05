@@ -1,6 +1,8 @@
 "use client"
 
-import ViewPortConditionComponent from "@/common/views/ViewPortConditionComponent"
+import MobileViewConditionComponent from "@/common/views/MobileViewConditionComponent"
+import PcConditionComponent from "@/common/views/PcConditionComponent"
+
 import CartController from "./CartController"
 
 import CouponBar from "./CouponBar"
@@ -13,12 +15,12 @@ const CartLayout = () => {
       <div className="lg:flex xl:flex mb-[40px]">
         <ProductListInCart />
 
-        <ViewPortConditionComponent type="pc" component={<CouponBar />} />
+        <PcConditionComponent component={<CouponBar />} />
       </div>
 
       <div className="sm:flex md:flex">
         <TotalPriceInfo />
-        <ViewPortConditionComponent type="mobile" component={<CouponBar />} />
+        <MobileViewConditionComponent component={<CouponBar />} />
       </div>
 
       <CartController />
