@@ -15,17 +15,24 @@ const TotalPriceEl = ({
 }: ITotalPriceEl) => {
   return (
     <div className="flex justify-between mb-[10px] items-center">
-      <span className="text-[14px]">{individualTitle}</span>
+      <span className="sm:text-[12px] md:text-[14px]">{individualTitle}</span>
       <span
         className={`${
           isFinalPrice
             ? "text-lightRed font-bold text-[22px]"
             : "flex items-center"
-        } tracking-[1.5px]`}
+        } tracking-[1.5px] sm:text-[12px] md:text-[14px]`}
       >
-        {icon && <span className="text-[14px] mr-[5px]">{icon}</span>}
+        {icon && (
+          <span className="text-[14px] sm:text-[12px] md:text-[14px] mr-[5px]">
+            {icon}
+          </span>
+        )}
+
         {price}
-        <span className="text-[12px] ml-[3px]">원</span>
+        <span className="text-[12px] sm:text-[10px] md:text-[10px] ml-[3px]">
+          원
+        </span>
       </span>
     </div>
   )
