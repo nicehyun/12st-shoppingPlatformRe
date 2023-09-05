@@ -1,7 +1,7 @@
 import PageLayout from "@/common/views/PageLayout"
 import CartLayout from "@/features/cart/views/CartLayout"
 
-const page = () => {
+const CartPage = () => {
   return (
     <PageLayout>
       <CartLayout />
@@ -9,4 +9,4 @@ const page = () => {
   )
 }
 
-export default page
+export default CartPage
