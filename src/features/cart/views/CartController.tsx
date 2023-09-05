@@ -22,7 +22,7 @@ const CartController = () => {
       <button
         onClick={handleCheckout}
         disabled={!checkedProductList.length}
-        className="w-[320px] h-[80px] sm:h-[60px] md:h-[70px] border-[1px] border-black dark:border-white text-white dark:text-black bg-black dark:bg-white text-[20px] font-bold hover:text-lightRed dark:hover:text-lightRed disabled:cursor-not-allowed disabled:bg-border disabled:text-white dark:disabled:text-black"
+        className="w-[320px] h-[80px] sm:h-[60px] md:h-[70px] border-[1px] border-black dark:border-white text-white dark:text-black bg-black dark:bg-white text-[20px] font-bold hover:text-lightRed dark:hover:text-lightRed disabled:cursor-not-allowed disabled:bg-border dark:disabled:bg-border disabled:text-white dark:disabled:text-black"
       >
         CHECK OUT
       </button>
