@@ -30,6 +30,7 @@ const TotalPriceInfo = () => {
       ? priceToUseCoupon(seletedCoupon, totalPriceOfCheckedProduct)
       : 0
 
+  const deliveryPrice = checkedProductList.length ? 2500 : 0
   return (
     <div className="grow max-h-[300px] bg-white sm:mr-[5px] md:mr-[5px] rounded-[5px] shadow border-[1px] border-border py-[30px] px-[20px] text-black">
       <h3 className="mb-[20px] pb-[20px] border-b-[2px] border-black sm:text-[12px] md:text-[14px]">
@@ -51,10 +52,16 @@ const TotalPriceInfo = () => {
         price={0}
         icon={<BiMinus />}
       />
-      <TotalPriceEl individualTitle="배송비" price={2500} icon={<BiPlus />} />
+      <TotalPriceEl
+        individualTitle="배송비"
+        price={deliveryPrice}
+        icon={<BiPlus />}
+      />
       <TotalPriceEl
         individualTitle="총 결제금액"
-        price={totalPriceOfCheckedProduct - discountedPriceWithCoupon + 2500}
+        price={
+          totalPriceOfCheckedProduct - discountedPriceWithCoupon + deliveryPrice
+        }
         isFinalPrice={true}
       />
     </div>
