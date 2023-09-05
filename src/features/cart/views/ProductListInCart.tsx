@@ -2,6 +2,14 @@
 
 import { ROUTE } from "@/common/hooks/useNavigations"
 import Empty from "@/common/views/Empty"
+import {
+  allcheckedProduct,
+  checkedProduct,
+  emptyCheckedProductList,
+  selectCheckedProductList,
+  uncheckedProduct,
+} from "@/redux/features/cartSlice"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { useEffect, useState } from "react"
 import { useProductListInCartQuery } from "../hooks/useProductListInCartQuery"
 import { useRemoveCheckedProduct } from "../hooks/useRemoveCheckedProduct"
@@ -10,8 +18,11 @@ import { ProductInCart as IProductInCart } from "../types/cart"
 import ProductInCart from "./ProductInCart"
 
 const ProductListInCart = () => {
+  const dispatch = useAppDispatch()
+  const checkedProductList = useAppSelector(selectCheckedProductList)
+  console.log(checkedProductList)
   const { productListInCart } = useProductListInCartQuery()
-  const [checkedProductList, setCheckedProductList] = useState<string[]>([])
+  // const [checkedProductList, setCheckedProductList] = useState<string[]>([])
   const [isAllChecked, setIsAllChecked] = useState(false)
 
   const checkedProductRemoveMutaion = useRemoveCheckedProduct()
@@ -19,22 +30,26 @@ const ProductListInCart = () => {
   const handleCheckedProductListEmpty = () => {
     if (!productListInCart.length) return
 
-    setCheckedProductList([])
+    // setCheckedProductList([])
+    dispatch(emptyCheckedProductList())
     setIsAllChecked(false)
   }
 
   const handleProductAllCheck = () => {
     if (!isAllChecked) {
-      const checkedProductList: string[] = []
+      // const checkedProductList: string[] = []
 
-      productListInCart.map((product: IProductInCart) =>
-        checkedProductList.push(product.id)
-      )
+      // productListInCart.map((product: IProductInCart) =>
+      //   checkedProductList.push(product.id)
+      // )
 
-      setCheckedProductList(checkedProductList)
+      // setCheckedProductList(checkedProductList)
+      dispatch(allcheckedProduct(checkedProductList))
       setIsAllChecked(true)
     } else {
-      setCheckedProductList([])
+      // setCheckedProductList([])
+      // TODO : dispatch로 수정
+      dispatch(emptyCheckedProductList())
       setIsAllChecked(false)
     }
   }
@@ -43,14 +58,17 @@ const ProductListInCart = () => {
     const isProductChecked = checkedProductList.includes(productId)
 
     if (isProductChecked) {
-      const updatedList = checkedProductList.filter((id) => id !== productId)
-      setCheckedProductList(updatedList)
+      // const updatedList = checkedProductList.filter((id) => id !== productId)
+      // setCheckedProductList(updatedList)
+
+      dispatch(uncheckedProduct(productId))
       setIsAllChecked(false)
       return
     }
 
-    const updatedList = [...checkedProductList, productId]
-    setCheckedProductList(updatedList)
+    // const updatedList = [...checkedProductList, productId]
+    // setCheckedProductList(updatedList)
+    dispatch(checkedProduct(productId))
   }
 
   const handleCheckedProductRemove = async (
@@ -69,7 +87,8 @@ const ProductListInCart = () => {
       const productsId: string[] = []
       productListInCart.map((product) => productsId.push(product.id))
 
-      setCheckedProductList(productsId)
+      // setCheckedProductList(productsId)
+      dispatch(allcheckedProduct(productsId))
       setIsAllChecked(true)
       return
     }
