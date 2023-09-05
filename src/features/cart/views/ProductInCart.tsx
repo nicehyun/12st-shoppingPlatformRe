@@ -28,7 +28,7 @@ const ProductInCart = ({
       />
 
       <div className="relative flex grow border-[1px] border-border rounded-[5px] overflow-hidden">
-        <div className="relative w-[200px] h-[200px] md:w-[140px] md:h-[140px] sm:w-[120px] sm:h-[120px] mr-[20px] border-r-[1px] border-border overflow-hidden">
+        <div className="relative w-[200px] h-[200px] lg:w-[180px] lg:h-[180px] md:w-[130px] md:h-[130px] sm:w-[120px] sm:h-[120px] mr-[20px] border-r-[1px] border-border overflow-hidden">
           <Image
             src={image}
             alt={name}
