@@ -1,4 +1,7 @@
+"use client"
+
 import ViewPortConditionComponent from "@/common/views/ViewPortConditionComponent"
+import CartController from "./CartController"
 
 import CouponBar from "./CouponBar"
 import ProductListInCart from "./ProductListInCart"
@@ -17,6 +20,8 @@ const CartLayout = () => {
         <TotalPriceInfo />
         <ViewPortConditionComponent type="mobile" component={<CouponBar />} />
       </div>
+
+      <CartController />
     </div>
   )
 }
