@@ -1,11 +1,10 @@
 "use client"
 
-import { useState } from "react"
+import { MouseEvent, useState } from "react"
 import { BsQuestionCircle } from "react-icons/bs"
 
 import Tabs from "@mui/material/Tabs"
 import Tab from "@mui/material/Tab"
-import Typography from "@mui/material/Typography"
 import Box from "@mui/material/Box"
 
 import CheckoutDeliveryNameInput from "./CheckoutDeliveryNameInput"
@@ -13,6 +12,8 @@ import CheckoutRecipientInput from "./CheckoutRecipientInput"
 import CheckoutAddressInput from "./CheckoutAddressInput"
 import CheckoutPhoneInput from "./CheckoutPhoneInput"
 import CheckoutDeliveryMemo from "./CheckoutDeliveryMemo"
+import BasicModal from "@/common/views/BasicModal"
+import DeliveryExplanation from "./DeliveryExplanation"
 
 interface TabPanelProps {
   children?: React.ReactNode
@@ -45,6 +46,7 @@ function a11yProps(index: number) {
 
 const DeliveryInfo = () => {
   const [deliveryTabvalue, setDeliveryTabvalue] = useState(1)
+  const [isShowExplanationModal, setIsShowExplanationModal] = useState(false)
 
   const handleDeliveryTabvalueChange = (
     event: React.SyntheticEvent,
@@ -53,12 +55,24 @@ const DeliveryInfo = () => {
     setDeliveryTabvalue(newValue)
   }
 
+  const showExplanationModal = () => {
+    setIsShowExplanationModal(true)
+  }
+
+  const hideExplanationModal = () => {
+    setIsShowExplanationModal(false)
+  }
+
   return (
     <div className="border-t-[2px] border-black">
       <span className="flex justify-between py-[18px] font-bold">
         <span className="flex">
           <h3 className="">배송정보</h3>
-          <button className="ml-[5px] text-border">
+          <button
+            onClick={showExplanationModal}
+            type="button"
+            className="ml-[5px] text-border"
+          >
             <BsQuestionCircle />
           </button>
         </span>
@@ -120,6 +134,15 @@ const DeliveryInfo = () => {
           <CheckoutDeliveryMemo />
         </CustomTabPanel>
       </Box>
+
+      <BasicModal
+        modalTitle="배송안내"
+        modalId="deliveryExplanation"
+        isShowModal={isShowExplanationModal}
+        hideModal={hideExplanationModal}
+      >
+        <DeliveryExplanation />
+      </BasicModal>
     </div>
   )
 }

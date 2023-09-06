@@ -13,6 +13,10 @@ const initialModalState = {
   cartModal: {
     isShow: false,
   },
+  explanationModal: {
+    isShowModal: false,
+    modalContent: undefined,
+  },
 }
 
 const modalSlice = createSlice({
@@ -33,6 +37,12 @@ const modalSlice = createSlice({
     hideCartModal(state) {
       state.cartModal.isShow = false
     },
+    showExplanationModal(state) {
+      state.explanationModal.isShowModal = true
+    },
+    hideExplanationModal(state) {
+      state.explanationModal.isShowModal = false
+    },
   },
 })
 
@@ -41,11 +51,16 @@ export const {
   hideFeedbackModal,
   showCartModal,
   hideCartModal,
+  showExplanationModal,
+  hideExplanationModal,
 } = modalSlice.actions
 
 export const selectFeedbackModal = (state: RootState) =>
   state.modal.feedbackModal
 
 export const selectCartModalState = (state: RootState) => state.modal.cartModal
+
+export const selectExplanationModalState = (state: RootState) =>
+  state.modal.explanationModal
 
 export default modalSlice.reducer
