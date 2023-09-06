@@ -67,7 +67,7 @@ const DeliveryInfo = () => {
     <div className="border-t-[2px] border-black">
       <span className="flex justify-between py-[18px] font-bold">
         <span className="flex">
-          <h3 className="">배송정보</h3>
+          <h3>배송정보</h3>
           <button
             onClick={showExplanationModal}
             type="button"
