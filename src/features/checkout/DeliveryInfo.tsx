@@ -1,6 +1,6 @@
 "use client"
 
-import { MouseEvent, useState } from "react"
+import { useState } from "react"
 import { BsQuestionCircle } from "react-icons/bs"
 
 import Tabs from "@mui/material/Tabs"
