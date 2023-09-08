@@ -43,18 +43,18 @@ const CheckoutPayment = () => {
       </div>
 
       <div
-        className={`py-[18px] opacity-${isShowDetail ? "100" : "0"} ${
+        className={`opacity-${isShowDetail ? "100" : "0"} ${
           isShowDetail ? "visible max-h-[500px]" : "invisible max-h-0"
-        } transition-max-h transition-3`}
+        } transition-max-h transition-p transition-3`}
       >
         <button
           type="button"
-          className="w-full text-end text-lightGray mb-[50px] text-[12px]"
+          className="w-full text-end text-lightGray mb-[50px] text-[14px] mt-[40px]"
         >
           <u>신용/체크카드 안내</u>
         </button>
 
-        <div className="grid grid-cols-4 xl:grid-cols-2 gap-4">
+        <div className="grid grid-cols-4 xl:grid-cols-2 gap-4 mb-[20px]">
           <PaymentButton
             buttonContent="신용/체크카드"
             paymentButtonValue="credit"
@@ -112,7 +112,7 @@ const CheckoutPayment = () => {
         </div>
 
         {payment.value === "credit" && (
-          <div className="border-[1px] border-border my-[20px] h-[40px] flex items-center text-[14px] px-[10px]">
+          <div className="border-[1px] border-border mb-[20px] h-[40px] flex items-center text-[14px] px-[10px]">
             카드사를 선택해주세요
           </div>
         )}

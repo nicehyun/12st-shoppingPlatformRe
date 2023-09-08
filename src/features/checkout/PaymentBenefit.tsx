@@ -58,7 +58,7 @@ const PaymentBenefit = () => {
 
   return (
     <>
-      <ul className="bg-lightBorder p-[14px]">
+      <ul className="bg-lightBorder p-[14px] mb-[50px]">
         <PaymentBenefitEl
           benefitTitle="[롯데카드] 14만원 이상 7천원 즉시할인"
           classNames="mb-[10px]"
