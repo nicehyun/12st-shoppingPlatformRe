@@ -10,7 +10,7 @@ const CheckoutPaymentAmountInfo = () => {
   }
 
   return (
-    <div className="border-y-2 border-black">
+    <div className="border-t-[2px] border-black">
       <div className="flex justify-between py-[18px] font-bold border-b-[1px] border-border">
         <h3>결제금액</h3>
 
