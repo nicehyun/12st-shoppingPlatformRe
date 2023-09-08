@@ -35,7 +35,7 @@ const CheckoutCouponAndMile = () => {
   }
   return (
     <div className="border-t-[2px] border-black">
-      <span className="flex justify-between py-[18px] font-bold border-b-[1px] border-border">
+      <div className="flex justify-between py-[18px] font-bold border-b-[1px] border-border">
         <span className="flex">
           <h3>쿠폰 / 마일리지</h3>
           <button
@@ -59,13 +59,12 @@ const CheckoutCouponAndMile = () => {
             {isShowDetail ? <AiOutlineUp /> : <AiOutlineDown />}
           </button>
         </div>
-      </span>
+      </div>
 
-      {/* TODO : 애니메이션 아래로 내려가는 걸로 수정하기 */}
       <div
-        className={
-          isShowDetail ? "opacity-100 transition-3" : "opacity-0 transition-3"
-        }
+        className={`opacity-${isShowDetail ? "100" : "0"} ${
+          isShowDetail ? "visible max-h-[300px]" : "invisible max-h-0"
+        } transition-max-h transition-3`}
       >
         <div className="py-[18px]">
           <p className="text-[18px] mb-[10px]">보너스 쿠폰</p>

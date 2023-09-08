@@ -65,7 +65,7 @@ const DeliveryInfo = () => {
 
   return (
     <div className="border-t-[2px] border-black">
-      <span className="flex justify-between py-[18px] font-bold">
+      <div className="flex justify-between py-[18px] font-bold">
         <span className="flex">
           <h3>배송정보</h3>
           <button
@@ -80,7 +80,7 @@ const DeliveryInfo = () => {
         <p className="text-[14px]">
           <span className="text-lightRed">*</span> 필수 입력 항목
         </p>
-      </span>
+      </div>
 
       <Box sx={{ width: "100%", bgcolor: "" }}>
         <Box sx={{ borderBottom: 1, borderColor: "#d2d2d2" }}>
