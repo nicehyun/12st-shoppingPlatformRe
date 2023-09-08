@@ -53,7 +53,7 @@ const CheckoutCouponAndMile = () => {
             onClick={toggleShowDetail}
             type="button"
             className={`${
-              isShowDetail ? "text-border" : "text-black"
+              isShowDetail ? "text-border" : "text-black dark:text-white"
             } text-[20px] ml-[10px]`}
           >
             {isShowDetail ? <AiOutlineUp /> : <AiOutlineDown />}

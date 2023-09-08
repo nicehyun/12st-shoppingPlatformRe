@@ -2,20 +2,25 @@
 
 import { MouseEvent, useState } from "react"
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai"
-import PaymentButton from "./PaymentButton"
+import PaymentBenefit from "./PaymentBenefit"
+import PaymentButton, { Payment } from "./PaymentButton"
 
 const CheckoutPayment = () => {
   const [isShowDetail, setIsShowDetail] = useState(false)
-  const [payment, setPayment] = useState("신용/체크카드")
+  const [payment, setPayment] = useState({
+    value: "credit",
+    label: "신용/체크카드",
+  })
 
   const toggleShowDetail = () => {
     setIsShowDetail((prev) => !prev)
   }
 
-  const handlePaymentChange = (e: MouseEvent<HTMLButtonElement>) => {
-    const paymentValue = e.currentTarget.value
-    console.log(paymentValue)
-    setPayment(paymentValue)
+  const handlePaymentChange = (
+    paymentValue: Payment,
+    selecedPayment: string
+  ) => {
+    setPayment({ value: paymentValue, label: selecedPayment })
   }
 
   return (
@@ -24,12 +29,12 @@ const CheckoutPayment = () => {
         <h3>결제방법</h3>
 
         <div className="flex">
-          <p className="text-[14px] text-border">{payment}</p>
+          <p className="text-[14px] text-border">{payment.label}</p>
           <button
             onClick={toggleShowDetail}
             type="button"
             className={`${
-              isShowDetail ? "text-border" : "text-black"
+              isShowDetail ? "text-border" : "text-black dark:text-white"
             } text-[20px] ml-[10px]`}
           >
             {isShowDetail ? <AiOutlineUp /> : <AiOutlineDown />}
@@ -37,10 +42,14 @@ const CheckoutPayment = () => {
         </div>
       </div>
 
-      <div className="py-[18px]">
+      <div
+        className={`py-[18px] opacity-${isShowDetail ? "100" : "0"} ${
+          isShowDetail ? "visible max-h-[500px]" : "invisible max-h-0"
+        } transition-max-h transition-3`}
+      >
         <button
           type="button"
-          className="w-full text-end text-lightGray mb-[50px]"
+          className="w-full text-end text-lightGray mb-[50px] text-[12px]"
         >
           <u>신용/체크카드 안내</u>
         </button>
@@ -50,57 +59,65 @@ const CheckoutPayment = () => {
             buttonContent="신용/체크카드"
             paymentButtonValue="credit"
             onChangePaymentValue={handlePaymentChange}
-            paymentValue={payment}
+            paymentValue={payment.value}
           />
           <PaymentButton
             buttonContent="토스페이"
             paymentButtonValue="tosspay"
             onChangePaymentValue={handlePaymentChange}
-            paymentValue={payment}
+            paymentValue={payment.value}
           />
 
           <PaymentButton
             buttonContent="네이버페이"
             paymentButtonValue="naverpay"
             onChangePaymentValue={handlePaymentChange}
-            paymentValue={payment}
+            paymentValue={payment.value}
           />
 
           <PaymentButton
             buttonContent="카카오페이"
             paymentButtonValue="kakaopay"
             onChangePaymentValue={handlePaymentChange}
-            paymentValue={payment}
+            paymentValue={payment.value}
           />
 
           <PaymentButton
             buttonContent="삼성페이"
             paymentButtonValue="samsungpay"
             onChangePaymentValue={handlePaymentChange}
-            paymentValue={payment}
+            paymentValue={payment.value}
           />
 
           <PaymentButton
             buttonContent="페이코"
             paymentButtonValue="payco"
             onChangePaymentValue={handlePaymentChange}
-            paymentValue={payment}
+            paymentValue={payment.value}
           />
 
           <PaymentButton
             buttonContent="SSG 페이"
             paymentButtonValue="SSGpay"
             onChangePaymentValue={handlePaymentChange}
-            paymentValue={payment}
+            paymentValue={payment.value}
           />
 
           <PaymentButton
             buttonContent="무통장입금"
             paymentButtonValue="deposit"
             onChangePaymentValue={handlePaymentChange}
-            paymentValue={payment}
+            paymentValue={payment.value}
           />
         </div>
+
+        {payment.value === "credit" && (
+          <div className="border-[1px] border-border my-[20px] h-[40px] flex items-center text-[14px] px-[10px]">
+            카드사를 선택해주세요
+          </div>
+        )}
+
+        <PaymentBenefit />
       </div>
     </div>
   )
