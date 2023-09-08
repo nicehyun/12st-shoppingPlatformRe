@@ -10,7 +10,7 @@ const CheckoutPaymentAmountInfo = () => {
   }
 
   return (
-    <div className="border-t-[2px] border-black">
+    <div className="border-y-2 border-black">
       <div className="flex justify-between py-[18px] font-bold border-b-[1px] border-border">
         <h3>결제금액</h3>
 
@@ -25,6 +25,37 @@ const CheckoutPaymentAmountInfo = () => {
           >
             {isShowDetail ? <AiOutlineUp /> : <AiOutlineDown />}
           </button>
+        </div>
+      </div>
+
+      <div
+        className={`opacity-${isShowDetail ? "100" : "0"} ${
+          isShowDetail ? "visible max-h-[500px]" : "invisible max-h-0"
+        } transition-max-h transition-3`}
+      >
+        <div className="pt-[20px] mb-[10px] flex justify-between">
+          <span>총 상품금액</span>
+          <span>69900원</span>
+        </div>
+
+        <div className="mb-[10px] flex justify-between">
+          <span>쿠폰 사용</span>
+          <span>0원</span>
+        </div>
+
+        <div className="mb-[10px] flex justify-between">
+          <span>마일리지 사용</span>
+          <span>0원</span>
+        </div>
+
+        <div className="mb-[10px] flex justify-between">
+          <span>배송비</span>
+          <span>0원</span>
+        </div>
+
+        <div className="border-t-[1px] border-border py-[20px] flex justify-between">
+          <span>총 결제금액</span>
+          <span>69900원</span>
         </div>
       </div>
     </div>
