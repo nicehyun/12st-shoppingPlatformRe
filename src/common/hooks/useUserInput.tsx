@@ -40,9 +40,7 @@ const inputStateReducer = (
   return state
 }
 
-export const useSignUpUserInput = (
-  validateValue: (value: string) => boolean
-) => {
+export const useUserInput = (validateValue: (value: string) => boolean) => {
   const [inputState, dispatch] = useReducer<
     Reducer<InitialInputState, InputStateReducerAction>
   >(inputStateReducer, initialInputState)
@@ -72,7 +70,7 @@ export const useSignUpUserInput = (
   }
 }
 
-export const useSignUpUserInputWithRePassword = (passwordValue: string) => {
+export const useUserInputWithRePassword = (passwordValue: string) => {
   const [inputState, dispatch] = useReducer<
     Reducer<InitialInputState, InputStateReducerAction>
   >(inputStateReducer, initialInputState)

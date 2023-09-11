@@ -10,7 +10,7 @@ import { useEffect, useState } from "react"
 import { useFeedbackModal } from "../hooks/useFeedbackModal"
 import useRequestVerificationMutation from "../hooks/useRequestVerificationMutation"
 import useSendVerificationCodeMutation from "../hooks/useSendVerificationCodeMutation"
-import { useSignUpUserInput } from "../hooks/useSignUpUserInput"
+import { useUserInput } from "../../../../common/hooks/useUserInput"
 import { phoneValidator } from "../utils/validation"
 import SignUpFeedback from "./SignUpFeedback"
 import SignUpInputLayout from "./SignUpInputLayout"
@@ -36,7 +36,7 @@ const SignUpPhoneVerificationInput = () => {
     isValid: isPhoneValid,
     hasError: hasErrorPhone,
     reset,
-  } = useSignUpUserInput(phoneValidator)
+  } = useUserInput(phoneValidator)
 
   const {
     isLoading: isRequestVerificationLoading,

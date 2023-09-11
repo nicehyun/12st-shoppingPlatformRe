@@ -4,7 +4,7 @@ import Input from "@/common/views/Input"
 import Loading from "@/common/views/Loading"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
-import { useSignUpUserInput } from "../../signUp/hooks/useSignUpUserInput"
+import { useUserInput } from "../../../../common/hooks/useUserInput"
 import {
   emailValidator,
   passwordValidator,
@@ -23,7 +23,7 @@ const SignInForm = () => {
     hasError: hasErrorEmail,
     isValid: isEmailValid,
     reset: resetEmail,
-  } = useSignUpUserInput(emailValidator)
+  } = useUserInput(emailValidator)
 
   const {
     value: passwordInputValue,
@@ -32,7 +32,7 @@ const SignInForm = () => {
     hasError: hasErrorPassword,
     isValid: isPasswordValid,
     reset: resetPassword,
-  } = useSignUpUserInput(passwordValidator)
+  } = useUserInput(passwordValidator)
 
   const { isLoading: isSignInLoading, mutateAsync: signInMutateAsync } =
     useSignInMutaion()

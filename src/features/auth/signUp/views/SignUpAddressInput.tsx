@@ -1,7 +1,8 @@
 "use client"
 
+import { usePostCodeModal } from "@/common/hooks/usePostCodeModal"
 import Input from "@/common/views/Input"
-import PostCodeModal from "@/common/views/PostCodeModal"
+
 import SignUpSideButton from "@/features/auth/signUp/views/SignUpSideButton"
 import {
   enterToAddress,
@@ -10,8 +11,7 @@ import {
 } from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { useEffect, useState } from "react"
-import { Address } from "react-daum-postcode"
-import { useSignUpUserInput } from "../hooks/useSignUpUserInput"
+import { useUserInput } from "../../../../common/hooks/useUserInput"
 import { additionalAddressValidator } from "../utils/validation"
 
 import SignUpFeedback from "./SignUpFeedback"
@@ -21,8 +21,12 @@ const SignUpAddressInput = () => {
   const dispatch = useAppDispatch()
   const selectSignUpActiveStep = useAppSelector(selectSignUpActiveStepState)
 
-  const [isShowPostCodeModal, setIsShowPostCodeModal] = useState(false)
-  const [addtionalAddressValue, setAdditionalAddressValue] = useState("")
+  const {
+    postCodeModalComponent,
+    showPostCodeModal,
+    addressValue,
+    resetAddressValue,
+  } = usePostCodeModal()
 
   const {
     value: additionalAddressInputValue,
@@ -31,29 +35,24 @@ const SignUpAddressInput = () => {
     hasError: hasErrorAdditionalAddress,
     isValid: isValidAdditionalAddress,
     reset,
-  } = useSignUpUserInput(additionalAddressValidator)
-
-  const handleAddressSearch = (address: Address) => {
-    setAdditionalAddressValue(address.address)
-    setIsShowPostCodeModal(false)
-  }
+  } = useUserInput(additionalAddressValidator)
 
   useEffect(() => {
     dispatch(resetSignUpAddressCheck())
 
-    if (!addtionalAddressValue) return
+    if (!addressValue) return
 
     if (isValidAdditionalAddress) {
       dispatch(enterToAddress())
       return
     }
-  }, [addtionalAddressValue, isValidAdditionalAddress, dispatch])
+  }, [addressValue, isValidAdditionalAddress, dispatch])
 
   useEffect(() => {
     if (selectSignUpActiveStep === 0) {
       reset()
-      setAdditionalAddressValue("")
 
+      resetAddressValue()
       return
     }
   }, [selectSignUpActiveStep])
@@ -68,13 +67,13 @@ const SignUpAddressInput = () => {
             id="address"
             isReadOnly={true}
             classNames="mb-[10px] w-full"
-            value={addtionalAddressValue}
+            value={addressValue}
           />
 
           <SignUpSideButton
             content="검색"
             classNames="ml-[10px]"
-            onClick={() => setIsShowPostCodeModal(true)}
+            onClick={showPostCodeModal}
           />
         </div>
 
@@ -93,13 +92,7 @@ const SignUpAddressInput = () => {
         <SignUpFeedback content="나머지 주소를 입력해주세요" />
       )}
 
-      {isShowPostCodeModal && (
-        <PostCodeModal
-          isShow={isShowPostCodeModal}
-          onComplete={handleAddressSearch}
-          onHide={() => setIsShowPostCodeModal(false)}
-        />
-      )}
+      {postCodeModalComponent}
     </SignUpInputLayout>
   )
 }

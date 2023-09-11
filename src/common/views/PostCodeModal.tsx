@@ -26,7 +26,7 @@ const PostCodeModal = ({ isShow, onComplete, onHide }: IPostCodeModalProps) => {
           <DaumPostcode
             onComplete={onComplete}
             autoClose={true}
-            style={{ height: "470px" }}
+            style={{ height: "450px" }}
           />
         </div>
       ) : (

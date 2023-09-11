@@ -88,14 +88,10 @@ const DeliveryInfo = () => {
 
         <TabPanel value={deliveryTabvalue} index={1}>
           <CheckoutDeliveryNameInput />
-
           <CheckoutRecipientInput />
-
           <CheckoutAddressInput />
-
           <CheckoutPhoneInput isRequired />
           <CheckoutPhoneInput />
-
           <CheckoutDeliveryMemo />
         </TabPanel>
       </Box>

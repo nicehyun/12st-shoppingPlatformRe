@@ -7,7 +7,7 @@ import {
 } from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { ChangeEvent, useEffect } from "react"
-import { useSignUpUserInput } from "../hooks/useSignUpUserInput"
+import { useUserInput } from "../../../../common/hooks/useUserInput"
 import {
   birthDayValidatorWithMonth,
   birthMonthValidator,
@@ -27,7 +27,7 @@ const SignUpBirthInput = () => {
     isValid: isYearValid,
     hasError: hasErrorYear,
     reset: resetBirthYear,
-  } = useSignUpUserInput(birthYearValidator)
+  } = useUserInput(birthYearValidator)
 
   const {
     value: monthInputValue,
@@ -36,7 +36,7 @@ const SignUpBirthInput = () => {
     isValid: isMonthValid,
     hasError: hasErrorMonth,
     reset: resetBirthMonth,
-  } = useSignUpUserInput(birthMonthValidator)
+  } = useUserInput(birthMonthValidator)
 
   const birthDayValidator = birthDayValidatorWithMonth(monthInputValue)
 
@@ -47,7 +47,7 @@ const SignUpBirthInput = () => {
     isValid: isDayValid,
     hasError: hasErrorDay,
     reset: resetBirthDay,
-  } = useSignUpUserInput(birthDayValidator)
+  } = useUserInput(birthDayValidator)
 
   const handleBirthInputMaxLength = (
     event: ChangeEvent<HTMLInputElement>,

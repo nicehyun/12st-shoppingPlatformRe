@@ -5,7 +5,7 @@ import {
 } from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { useEffect } from "react"
-import { useSignUpUserInput } from "../hooks/useSignUpUserInput"
+import { useUserInput } from "../../../../common/hooks/useUserInput"
 import { nameValidator } from "../utils/validation"
 import SignUpFeedback from "./SignUpFeedback"
 import SignUpInput from "./SignUpInput"
@@ -22,7 +22,7 @@ const SignUpNameInput = () => {
     hasError: hasErrorName,
     isValid: isNameValid,
     reset,
-  } = useSignUpUserInput(nameValidator)
+  } = useUserInput(nameValidator)
 
   useEffect(() => {
     if (selectSignUpActiveStep === 0) {

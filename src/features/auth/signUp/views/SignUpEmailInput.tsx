@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { ChangeEvent, useEffect } from "react"
 import { useEmailDuplicationCheckMutaion } from "../hooks/useEmailDuplicationCheckMutaion"
 import { useFeedbackModal } from "../hooks/useFeedbackModal"
-import { useSignUpUserInput } from "../hooks/useSignUpUserInput"
+import { useUserInput } from "../../../../common/hooks/useUserInput"
 import { emailValidator } from "../utils/validation"
 import SignUpFeedback from "./SignUpFeedback"
 import SignUpInputLayout from "./SignUpInputLayout"
@@ -32,7 +32,7 @@ const SignUpEmailInput = () => {
     hasError: hasErrorEmail,
     isValid: isEmailValid,
     reset,
-  } = useSignUpUserInput(emailValidator)
+  } = useUserInput(emailValidator)
 
   const {
     isLoading: isEmailDuplicateCheckLoading,

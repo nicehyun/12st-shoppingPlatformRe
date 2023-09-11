@@ -2,16 +2,33 @@ import Input from "@/common/views/Input"
 import React from "react"
 import CheckoutInputLayout from "./CheckoutInputLayout"
 
+import { useUserInput } from "../../common/hooks/useUserInput"
+import { nameValidator } from "../auth/signUp/utils/validation"
+
 const CheckoutRecipientInput = () => {
+  const {
+    value: nameInputValue,
+    handleValueChange: handleNameInputValueChange,
+    handleInputBlur: handleNameInputBlur,
+    hasError: hasErrorName,
+    isValid: isNameValid,
+    reset,
+  } = useUserInput(nameValidator)
+
   return (
-    <CheckoutInputLayout label="수령인" id="recipient" isRequired>
-      <Input
-        id="recipient"
-        name="recipient"
-        type="text"
-        classNames="w-full max-w-[500px] h-[50px] focus:border-black focus:border-[2px]"
-      />
-    </CheckoutInputLayout>
+    <CheckoutInputLayout
+      label="수령인"
+      id="recipient"
+      isRequired
+      inputState={{
+        value: nameInputValue,
+        handleValueChange: handleNameInputValueChange,
+        handleInputBlur: handleNameInputBlur,
+        hasError: hasErrorName,
+        isValid: isNameValid,
+      }}
+      errorFeedbackMsg="올바른 수령인 이름을 입력해주세요."
+    ></CheckoutInputLayout>
   )
 }
 

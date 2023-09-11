@@ -8,9 +8,9 @@ import {
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { useEffect } from "react"
 import {
-  useSignUpUserInput,
-  useSignUpUserInputWithRePassword,
-} from "../hooks/useSignUpUserInput"
+  useUserInput,
+  useUserInputWithRePassword,
+} from "../../../../common/hooks/useUserInput"
 import { passwordValidator } from "../utils/validation"
 import SignUpFeedback from "./SignUpFeedback"
 import SignUpInput from "./SignUpInput"
@@ -27,7 +27,7 @@ const SignUpPasswordInput = () => {
     hasError: hasErrorPassword,
     isValid: isPasswordValid,
     reset: resetPassword,
-  } = useSignUpUserInput(passwordValidator)
+  } = useUserInput(passwordValidator)
 
   const {
     value: repasswordInputValue,
@@ -36,7 +36,7 @@ const SignUpPasswordInput = () => {
     hasError: hasErrorRepassword,
     isValid: isRepasswordValid,
     reset: resetRepassword,
-  } = useSignUpUserInputWithRePassword(passwordInputValue)
+  } = useUserInputWithRePassword(passwordInputValue)
 
   useEffect(() => {
     dispatch(resetPasswordValid())
