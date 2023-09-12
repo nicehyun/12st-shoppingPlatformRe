@@ -1,4 +1,4 @@
-import Input from "@/common/views/Input"
+import Input, { InputType } from "@/common/views/Input"
 import { ReactNode } from "react"
 import CheckoutFeedback from "../auth/signUp/views/SignUpFeedback"
 
@@ -16,6 +16,7 @@ interface ICheckoutInput {
     isValid?: boolean
   }
   classNames?: string
+  inputType?: InputType
 }
 
 const CheckoutInputLayout = ({
@@ -26,6 +27,7 @@ const CheckoutInputLayout = ({
   errorFeedbackMsg,
   children,
   classNames,
+  inputType = "text",
 }: ICheckoutInput) => {
   return (
     <>
@@ -47,12 +49,12 @@ const CheckoutInputLayout = ({
           <Input
             id={id}
             name={id}
-            type="text"
+            type={inputType}
             classNames={`${classNames} w-full max-w-[500px] h-[50px] sm:h-[40px] md:h-[44px]`}
             value={inputState?.value}
             onChange={inputState?.handleValueChange}
             onBlur={inputState?.handleInputBlur}
-            isShowFeedback={!!errorFeedbackMsg}
+            isShowFeedback={inputState?.hasError}
             maxLength={11}
           />
         )}

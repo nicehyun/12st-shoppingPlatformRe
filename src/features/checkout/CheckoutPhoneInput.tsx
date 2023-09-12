@@ -37,6 +37,7 @@ const CheckoutPhoneInput = ({ isRequired = false }: ICheckoutPhoneInput) => {
           : undefined
       }
       classNames="max-w-[230px]"
+      inputType="tel"
     />
   )
 }

@@ -91,7 +91,7 @@ const DeliveryMemoSelect = () => {
           rows={5}
           maxLength={50}
           placeholder="요청사항을 입력해주세요. (최대 50자)"
-          className="w-full h-[150px] overflow-auto py-[19px] px-[14px] border-inputBorder mt-[10px] text-[14px] sm:text-[12px] leading-[20px] appearance-none resize-none"
+          className="w-full h-[150px] overflow-auto py-[19px] px-[14px] border-inputBorder mt-[10px] text-[14px] sm:text-[12px] leading-[20px] appearance-none resize-none rounded-[5px]"
         ></textarea>
       )}
     </div>
