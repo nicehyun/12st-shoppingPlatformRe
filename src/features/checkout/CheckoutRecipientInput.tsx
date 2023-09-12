@@ -1,4 +1,3 @@
-import Input from "@/common/views/Input"
 import React from "react"
 import CheckoutInputLayout from "./CheckoutInputLayout"
 

@@ -54,6 +54,7 @@ export default function BasicModal({
       onClose={hideModal}
       aria-labelledby={`modal-${modalId}`}
       aria-describedby={`modal-${modalId}`}
+      className="dark:text-black"
     >
       <Box sx={isFull ? fullScreenStyle : style}>
         <Typography
