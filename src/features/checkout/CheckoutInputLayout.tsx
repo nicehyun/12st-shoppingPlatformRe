@@ -32,7 +32,7 @@ const CheckoutInputLayout = ({
       <div
         className={`flex items-center mb-[${
           inputState?.hasError ? "0px" : "20px"
-        }]`}
+        }] mr-0`}
       >
         <label
           htmlFor={id}

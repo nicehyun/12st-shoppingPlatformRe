@@ -53,19 +53,19 @@ const DeliveryMemoSelect = () => {
         PaperProps: {
           style: {
             maxHeight: 48 * 4.5 + 8,
-            width: 300,
+            width: "200px",
           },
         },
       }}
-      inputProps={{ "aria-label": "Without label" }}
+      // inputProps={{ "aria-label": "Without label" }}
       sx={{
         width: "500px",
         height: "50px",
         fontSize: "16px",
-        border: "1px solid #d2d2d2",
+        border: "1px solid rgb(180, 180, 180)",
 
         "& .MuiOutlinedInput-notchedOutline": {
-          border: "#d2d2d2",
+          border: "rgb(180, 180, 180)",
         },
       }}
       className="h-[50px] sm:h-[40px] md:h-[44px] sm:text-[12px] md:text-[14px] dark:text-white"
