@@ -23,6 +23,7 @@ const CheckoutAddressInput = () => {
     isValid: isValidAdditionalAddress,
     reset,
   } = useUserInput(additionalAddressValidator)
+
   useEffect(() => {
     resetAddressValue()
   }, [])
@@ -57,7 +58,7 @@ const CheckoutAddressInput = () => {
           type="text"
           name="additionalAddress"
           id="additionalAddress"
-          placeholder="나머지 주소를 입력해주세요"
+          placeholder="배송지 상세 주소를 입력해주세요"
           value={additionalAddressInputValue}
           onBlur={handleAdditionalAddressInputBlur}
           isShowFeedback={hasErrorAdditionalAddress}

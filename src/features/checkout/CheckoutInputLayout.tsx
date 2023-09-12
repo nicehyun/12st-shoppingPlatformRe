@@ -15,6 +15,7 @@ interface ICheckoutInput {
     hasError?: boolean
     isValid?: boolean
   }
+  classNames?: string
 }
 
 const CheckoutInputLayout = ({
@@ -24,6 +25,7 @@ const CheckoutInputLayout = ({
   inputState,
   errorFeedbackMsg,
   children,
+  classNames,
 }: ICheckoutInput) => {
   return (
     <>
@@ -46,10 +48,11 @@ const CheckoutInputLayout = ({
             id={id}
             name={id}
             type="text"
-            classNames="w-full max-w-[500px] h-[50px] sm:h-[40px] md:h-[44px]"
+            classNames={`${classNames} w-full max-w-[500px] h-[50px] sm:h-[40px] md:h-[44px]`}
             value={inputState?.value}
             onChange={inputState?.handleValueChange}
             onBlur={inputState?.handleInputBlur}
+            isShowFeedback={!!errorFeedbackMsg}
           />
         )}
       </div>

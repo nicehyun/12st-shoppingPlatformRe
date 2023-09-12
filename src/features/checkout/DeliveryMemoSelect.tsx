@@ -5,19 +5,7 @@ import MenuItem from "@mui/material/MenuItem"
 import Select, { SelectChangeEvent } from "@mui/material/Select"
 import { useState } from "react"
 
-const ITEM_HEIGHT = 48
-const ITEM_PADDING_TOP = 8
-
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-}
-
-const names = [
+const memos = [
   "부재시 문앞에 놓아주세요.",
   "부재시 경비실에 맡겨 주세요.",
   "부재시 전화 또는 문자 주세요.",
@@ -28,22 +16,30 @@ const names = [
 ]
 
 const DeliveryMemoSelect = () => {
-  const [personName, setPersonName] = useState<string[]>([])
+  const [isOpen, setIsOpen] = useState(false)
+  const [selectedMemo, setSelectedMemo] = useState("")
 
-  const handleSelectChange = (event: SelectChangeEvent<typeof personName>) => {
-    const {
-      target: { value },
-    } = event
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    )
+  const handleClose = () => {
+    setIsOpen(false)
+  }
+
+  const handleOpen = () => {
+    setIsOpen(true)
+  }
+
+  const handleSelectChange = (
+    event: SelectChangeEvent<typeof selectedMemo>
+  ) => {
+    setSelectedMemo(event.target.value)
+    handleClose()
   }
   return (
     <Select
-      multiple
+      open={isOpen}
+      onClose={handleClose}
+      onOpen={handleOpen}
       displayEmpty
-      value={personName}
+      value={selectedMemo}
       onChange={handleSelectChange}
       input={<OutlinedInput />}
       renderValue={(selected) => {
@@ -51,24 +47,39 @@ const DeliveryMemoSelect = () => {
           return "배송시 요청사항을 선택해주세요"
         }
 
-        return selected.join(", ")
+        return selected
       }}
-      MenuProps={MenuProps}
+      MenuProps={{
+        PaperProps: {
+          style: {
+            maxHeight: 48 * 4.5 + 8,
+            width: 300,
+          },
+        },
+      }}
       inputProps={{ "aria-label": "Without label" }}
       sx={{
         width: "500px",
+        height: "50px",
         fontSize: "16px",
-        "&:hover .MuiOutlinedInput-notchedOutline": {
-          borderColor: "#333",
+        border: "1px solid #d2d2d2",
+
+        "& .MuiOutlinedInput-notchedOutline": {
+          border: "#d2d2d2",
         },
       }}
+      className="h-[50px] sm:h-[40px] md:h-[44px] sm:text-[12px] md:text-[14px] dark:text-white"
     >
-      <MenuItem disabled value="">
+      <MenuItem disabled value="" className="sm:text-[12px] md:text-[14px]">
         배송시 요청사항을 선택해주세요
       </MenuItem>
-      {names.map((name) => (
-        <MenuItem key={name} value={name}>
-          {name}
+      {memos.map((memo, index) => (
+        <MenuItem
+          key={`deliveyMemo-${index}`}
+          value={memo}
+          className="sm:text-[12px] md:text-[14px]"
+        >
+          {memo}
         </MenuItem>
       ))}
     </Select>
