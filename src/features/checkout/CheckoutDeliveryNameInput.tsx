@@ -10,6 +10,7 @@ const CheckoutDeliveryNameInput = () => {
           name="deliveryName"
           type="text"
           classNames="w-full max-w-[500px] h-[50px]"
+          maxLength={15}
         />
       </CheckoutInputLayout>
     </>
