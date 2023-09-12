@@ -53,6 +53,7 @@ const CheckoutInputLayout = ({
             onChange={inputState?.handleValueChange}
             onBlur={inputState?.handleInputBlur}
             isShowFeedback={!!errorFeedbackMsg}
+            maxLength={11}
           />
         )}
       </div>
