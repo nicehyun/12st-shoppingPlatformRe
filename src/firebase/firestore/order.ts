@@ -4,13 +4,11 @@ import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore"
 import { Order } from "@/common/types/order"
 
 const db = getFirestore(firebaseApp)
-export async function addProductToOrder(userEmail: string, orderInfo: Order) {
-  if (userEmail === "") {
-    throw new Error("사용자 이메일이 없습니다.")
-  }
+export async function addProductToOrder(email: string, orderInfo: Order) {
+  if (email === "") return
 
   try {
-    const orderRef = doc(db, "order", userEmail)
+    const orderRef = doc(db, "order", email)
     const orderDoc = await getDoc(orderRef)
 
     const orderData: { orders: Order[] } = {

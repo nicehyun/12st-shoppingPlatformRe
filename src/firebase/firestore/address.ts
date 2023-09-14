@@ -5,6 +5,8 @@ import { Address } from "@/common/types/address"
 
 const db = getFirestore(firebaseApp)
 export async function updateAddress(email: string, addressData: Address) {
+  if (email === "") return
+
   try {
     await setDoc(doc(db, "address", email), addressData, {
       merge: true,

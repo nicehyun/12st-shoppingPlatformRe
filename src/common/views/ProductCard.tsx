@@ -43,7 +43,7 @@ const ProductCard = ({ productInfo }: IProductCard) => {
 
   const addMutaion = useAddToCartMutaion(productInfo)
 
-  const removeMutaion = useRemoveFromCartMutation(productInfo)
+  const removeMutaion = useRemoveFromCartMutation()
 
   const isExistedProductInCart = checkingTheExistOfProduct(
     productListInCart,
@@ -57,7 +57,7 @@ const ProductCard = ({ productInfo }: IProductCard) => {
   }
 
   const onClickRemoveProductFromCart = () => {
-    removeMutaion.mutate()
+    removeMutaion.mutate(id)
   }
 
   return (
