@@ -49,6 +49,7 @@ const CheckoutPhoneInput = ({ isRequired = false }: ICheckoutPhoneInput) => {
       }
       classNames="max-w-[230px]"
       inputType="tel"
+      inputMaxLength={11}
     />
   )
 }

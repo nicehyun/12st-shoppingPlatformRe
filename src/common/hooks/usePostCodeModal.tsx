@@ -5,9 +5,11 @@ import PostCodeModal from "../views/PostCodeModal"
 export const usePostCodeModal = () => {
   const [isShowPostCodeModal, setIsShowPostCodeModal] = useState(false)
   const [addressValue, setAddressValue] = useState("")
+  const [zipcodeValue, setZipcodeValue] = useState("")
 
   const handleAddressSearch = (address: Address) => {
     setAddressValue(address.address)
+    setZipcodeValue(address.zonecode)
     setIsShowPostCodeModal(false)
   }
 
@@ -33,6 +35,7 @@ export const usePostCodeModal = () => {
     ) : null,
     showPostCodeModal,
     addressValue,
+    zipcodeValue,
     resetAddressValue,
   }
 }

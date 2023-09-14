@@ -37,6 +37,7 @@ const CheckoutRecipientInput = () => {
         isValid: isNameValid,
       }}
       errorFeedbackMsg="올바른 수령인 이름을 입력해주세요."
+      inputMaxLength={10}
     />
   )
 }

@@ -34,8 +34,10 @@ const DeliveryMemoSelect = () => {
     handleClose()
   }
   return (
-    <div className="flex items-start max-w-[500px] ml-[100px]">
+    <div className="flex flex-col items-start max-w-[500px] ml-[100px]">
       <Select
+        id="deliveryMemo-select"
+        name="deliveryMemo-select"
         open={isOpen}
         onClose={handleClose}
         onOpen={handleOpen}
@@ -87,12 +89,13 @@ const DeliveryMemoSelect = () => {
       {selectedMemo === "직접입력" && (
         <textarea
           id="deliveryMemo-direct"
+          name="deliveryMemo-direct"
           cols={30}
           rows={5}
           maxLength={50}
           placeholder="요청사항을 입력해주세요. (최대 50자)"
           className="w-full h-[150px] overflow-auto py-[19px] px-[14px] border-inputBorder mt-[10px] text-[14px] sm:text-[12px] leading-[20px] appearance-none resize-none rounded-[5px]"
-        ></textarea>
+        />
       )}
     </div>
   )

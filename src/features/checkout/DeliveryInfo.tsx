@@ -117,7 +117,7 @@ const DeliveryInfo = () => {
             peerChecked={{
               borderColor: "peer-checked/defalutAddress:after:border-lightRed",
             }}
-            classNames="ml-[100px] mb-[20px]"
+            classNames="ml-[100px] mb-[20px] max-w-[500px]"
           />
 
           <DeliveryMemoSelect />
@@ -132,6 +132,8 @@ const DeliveryInfo = () => {
       >
         <DeliveryExplanation />
       </BasicModal>
+
+      <button type="submit">test</button>
     </div>
   )
 }

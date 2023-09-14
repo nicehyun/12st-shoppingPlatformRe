@@ -14,6 +14,7 @@ const CheckoutAddressInput = () => {
 
   const {
     addressValue,
+    zipcodeValue,
     postCodeModalComponent,
     resetAddressValue,
     showPostCodeModal,
@@ -41,7 +42,7 @@ const CheckoutAddressInput = () => {
   return (
     <CheckoutInputLayout
       label="배송지"
-      id="recipient"
+      id="address"
       isRequired
       errorFeedbackMsg="배송지 상세 주소를 입력해주세요"
       inputState={{ hasError: hasErrorAdditionalAddress }}
@@ -50,11 +51,11 @@ const CheckoutAddressInput = () => {
         <div className="flex ">
           <Input
             type="text"
-            name="recipient"
-            id="recipient"
+            name="zipcode"
+            id="zipcode"
             isReadOnly={true}
             classNames="mb-[10px] w-full h-[50px] sm:h-[40px] md:h-[44px]"
-            value={addressValue}
+            value={zipcodeValue}
           />
 
           <SignUpSideButton
@@ -66,6 +67,15 @@ const CheckoutAddressInput = () => {
 
         <Input
           type="text"
+          name="address"
+          id="address"
+          isReadOnly={true}
+          classNames="mb-[10px] w-full h-[50px] sm:h-[40px] md:h-[44px]"
+          value={addressValue}
+        />
+
+        <Input
+          type="text"
           name="additionalAddress"
           id="additionalAddress"
           placeholder="배송지 상세 주소를 입력해주세요"
@@ -74,6 +84,7 @@ const CheckoutAddressInput = () => {
           isShowFeedback={hasErrorAdditionalAddress}
           onChange={handleAdditionalAddressInputValueChange}
           classNames="h-[50px] sm:h-[40px] md:h-[44px]"
+          maxLength={50}
         />
       </div>
 

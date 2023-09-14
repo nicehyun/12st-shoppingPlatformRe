@@ -23,7 +23,7 @@ const Checkbox = ({
 }: ICheckbox) => {
   return (
     <div
-      className={`${classNames} relative p-[8px] flex items-center justify-between w-full`}
+      className={`${classNames} relative p-[8px] flex items-center justify-between`}
     >
       <span className="py-[5px] mr-[10px] flex justify-between">
         <input
