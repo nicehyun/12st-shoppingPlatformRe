@@ -13,18 +13,18 @@ const CheckoutForm = () => {
   const { sessionQuery } = useSessionQuery()
   console.log(sessionQuery?.user)
 
-  const testSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+  const testSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault()
 
     if (sessionQuery?.user === undefined) return
 
     const formData = new FormData(event.currentTarget)
 
-    // const deliveryName = formData.get("deliveryName") as string
-    // console.log(deliveryName)
+    const deliveryName = formData.get("deliveryName") as string
+    console.log(deliveryName)
 
-    // const recipient = formData.get("recipient") as string
-    // console.log(recipient)
+    const recipient = formData.get("recipient") as string
+    console.log(recipient)
     const zipcode = formData.get("zipcode") as string
     const address = formData.get("address") as string
     const additionalAddress = formData.get("additionalAddress") as string
@@ -40,7 +40,7 @@ const CheckoutForm = () => {
     ) as "on" | null
 
     if (defalutAddressRegistration === "on") {
-      updateAddress(sessionQuery.user.email, {
+      await updateAddress(sessionQuery.user.email, {
         address,
         additionalAddress,
         zipcode,
