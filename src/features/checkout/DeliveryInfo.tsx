@@ -18,7 +18,7 @@ import TabPanel from "@/common/views/TabPanel"
 import { useModal } from "@/common/hooks/useModal"
 
 const DeliveryInfo = () => {
-  const [deliveryTabvalue, setDeliveryTabvalue] = useState(1)
+  const [deliveryTabvalue, setDeliveryTabvalue] = useState(0)
 
   const { isShowModal, showModal, hideModal } = useModal()
 
@@ -40,7 +40,7 @@ const DeliveryInfo = () => {
         aria-controls={`deliveryInfo-tabpanel-${index}`}
         sx={{
           "&.Mui-selected": {
-            color: "#333",
+            color: "#ff4e0a",
           },
           color: "#ccc",
         }}
@@ -75,15 +75,21 @@ const DeliveryInfo = () => {
             aria-label="checkout address teps"
             sx={{
               "& .MuiTabs-indicator": {
-                backgroundColor: "#333",
+                backgroundColor: "#ff4e0a",
               },
             }}
           >
             {renderTab()}
           </Tabs>
         </Box>
+
         <TabPanel value={deliveryTabvalue} index={0}>
-          기존 배송지
+          <CheckoutDeliveryNameInput />
+          <CheckoutRecipientInput />
+          <CheckoutAddressInput />
+          <CheckoutPhoneInput isRequired />
+          <CheckoutPhoneInput />
+          <CheckoutDeliveryMemo />
         </TabPanel>
 
         <TabPanel value={deliveryTabvalue} index={1}>

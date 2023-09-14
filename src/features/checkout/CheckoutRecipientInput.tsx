@@ -1,10 +1,14 @@
-import React from "react"
+import React, { useEffect } from "react"
 import CheckoutInputLayout from "./CheckoutInputLayout"
 
 import { useUserInput } from "../../common/hooks/useUserInput"
 import { nameValidator } from "../auth/signUp/utils/validation"
+import { useAppDispatch } from "@/redux/hooks"
+import { checkToRecipient } from "@/redux/features/checkoutSlice"
 
 const CheckoutRecipientInput = () => {
+  const dispatch = useAppDispatch()
+
   const {
     value: nameInputValue,
     handleValueChange: handleNameInputValueChange,
@@ -13,6 +17,12 @@ const CheckoutRecipientInput = () => {
     isValid: isNameValid,
     reset,
   } = useUserInput(nameValidator)
+
+  useEffect(() => {
+    if (isNameValid) {
+      dispatch(checkToRecipient())
+    }
+  }, [isNameValid])
 
   return (
     <CheckoutInputLayout
@@ -27,7 +37,7 @@ const CheckoutRecipientInput = () => {
         isValid: isNameValid,
       }}
       errorFeedbackMsg="올바른 수령인 이름을 입력해주세요."
-    ></CheckoutInputLayout>
+    />
   )
 }
 

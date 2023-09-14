@@ -39,16 +39,16 @@ const checkoutSlice = createSlice({
       state.deliveryInfo.address = false
     },
     checkToPhone(state) {
-      state.deliveryInfo.address = true
+      state.deliveryInfo.phone = true
     },
     uncheckToPhone(state) {
-      state.deliveryInfo.address = false
+      state.deliveryInfo.phone = false
     },
     checkToRecipient(state) {
-      state.deliveryInfo.address = true
+      state.deliveryInfo.recipient = true
     },
     uncheckToRecipient(state) {
-      state.deliveryInfo.address = false
+      state.deliveryInfo.recipient = false
     },
   },
 })
@@ -62,5 +62,8 @@ export const {
   uncheckToPhone,
   uncheckToRecipient,
 } = checkoutSlice.actions
+
+export const selectCheckoutDeliveyInfoCheckState = (state: RootState) =>
+  state.checkout.deliveryInfo
 
 export default checkoutSlice.reducer

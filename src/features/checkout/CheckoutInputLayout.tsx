@@ -17,6 +17,7 @@ interface ICheckoutInput {
   }
   classNames?: string
   inputType?: InputType
+  inputMaxLength?: number
 }
 
 const CheckoutInputLayout = ({
@@ -28,6 +29,7 @@ const CheckoutInputLayout = ({
   children,
   classNames,
   inputType = "text",
+  inputMaxLength,
 }: ICheckoutInput) => {
   return (
     <>
@@ -55,7 +57,7 @@ const CheckoutInputLayout = ({
             onChange={inputState?.handleValueChange}
             onBlur={inputState?.handleInputBlur}
             isShowFeedback={inputState?.hasError}
-            maxLength={11}
+            maxLength={inputMaxLength}
           />
         )}
       </div>
