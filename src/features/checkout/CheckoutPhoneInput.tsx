@@ -1,4 +1,10 @@
 import { useUserInput } from "@/common/hooks/useUserInput"
+import {
+  checkToPhone,
+  selectCheckoutDeliveyInfoCheckState,
+} from "@/redux/features/checkoutSlice"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { useEffect } from "react"
 import { phoneValidator } from "../auth/signUp/utils/validation"
 import CheckoutInputLayout from "./CheckoutInputLayout"
 
@@ -7,6 +13,13 @@ interface ICheckoutPhoneInput {
 }
 
 const CheckoutPhoneInput = ({ isRequired = false }: ICheckoutPhoneInput) => {
+  const checkoutDeliveyInfoCheckState = useAppSelector(
+    selectCheckoutDeliveyInfoCheckState
+  )
+  console.log(checkoutDeliveyInfoCheckState)
+
+  const dispatch = useAppDispatch()
+
   const inputId = isRequired ? "phone1" : "phone2"
   const label = isRequired ? "연락처1" : "연락처2"
 
@@ -18,6 +31,12 @@ const CheckoutPhoneInput = ({ isRequired = false }: ICheckoutPhoneInput) => {
     hasError: hasErrorPhone,
     reset,
   } = useUserInput(phoneValidator)
+
+  useEffect(() => {
+    if (isPhoneValid) {
+      dispatch(checkToPhone())
+    }
+  }, [isPhoneValid])
 
   return (
     <CheckoutInputLayout
