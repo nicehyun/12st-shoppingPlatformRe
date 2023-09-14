@@ -1,13 +1,17 @@
 import { usePostCodeModal } from "@/common/hooks/usePostCodeModal"
 import { useUserInput } from "@/common/hooks/useUserInput"
 import Input from "@/common/views/Input"
-import { useEffect, useState } from "react"
+import { checkToAddress } from "@/redux/features/checkoutSlice"
+import { useAppDispatch } from "@/redux/hooks"
+import { useEffect } from "react"
 import { additionalAddressValidator } from "../auth/signUp/utils/validation"
 import SignUpSideButton from "../auth/signUp/views/SignUpSideButton"
 
 import CheckoutInputLayout from "./CheckoutInputLayout"
 
 const CheckoutAddressInput = () => {
+  const dispatch = useAppDispatch()
+
   const {
     addressValue,
     postCodeModalComponent,
@@ -27,6 +31,12 @@ const CheckoutAddressInput = () => {
   useEffect(() => {
     resetAddressValue()
   }, [])
+
+  useEffect(() => {
+    if (isValidAdditionalAddress && addressValue.length !== 0) {
+      dispatch(checkToAddress())
+    }
+  }, [isValidAdditionalAddress, addressValue])
 
   return (
     <CheckoutInputLayout
