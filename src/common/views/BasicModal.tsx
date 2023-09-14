@@ -10,7 +10,6 @@ interface IBasicModal {
   modalId: string
   isShowModal: boolean
   hideModal: () => void
-  isFull?: boolean
 }
 
 const style = {
@@ -18,7 +17,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  minWidth: 550,
+  width: "90%",
   maxWidth: 800,
   maxHeight: "80vh",
   bgcolor: "background.paper",
@@ -29,24 +28,12 @@ const style = {
   overflowY: "scroll",
 }
 
-const fullScreenStyle = {
-  position: "absolute" as "absolute",
-  top: "0",
-  left: "0",
-  width: "100vw",
-  height: "100vh",
-  bgcolor: "background.paper",
-  p: 4,
-  overflowY: "scroll",
-}
-
 export default function BasicModal({
   children,
   modalId,
   modalTitle,
   hideModal,
   isShowModal,
-  isFull = false,
 }: IBasicModal) {
   return (
     <Modal
@@ -56,7 +43,7 @@ export default function BasicModal({
       aria-describedby={`modal-${modalId}`}
       className="dark:text-black"
     >
-      <Box sx={isFull ? fullScreenStyle : style}>
+      <Box sx={style}>
         <Typography
           id={modalId}
           variant="h6"
