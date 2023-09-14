@@ -34,7 +34,7 @@ const DeliveryMemoSelect = () => {
     handleClose()
   }
   return (
-    <div className="w-full max-w-[500px]">
+    <div className="flex items-start max-w-[500px] ml-[100px]">
       <Select
         open={isOpen}
         onClose={handleClose}

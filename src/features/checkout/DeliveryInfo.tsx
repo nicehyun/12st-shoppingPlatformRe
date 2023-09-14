@@ -11,16 +11,25 @@ import CheckoutDeliveryNameInput from "./CheckoutDeliveryNameInput"
 import CheckoutRecipientInput from "./CheckoutRecipientInput"
 import CheckoutAddressInput from "./CheckoutAddressInput"
 import CheckoutPhoneInput from "./CheckoutPhoneInput"
-import CheckoutDeliveryMemo from "./CheckoutDeliveryMemo"
+
 import BasicModal from "@/common/views/BasicModal"
 import DeliveryExplanation from "./DeliveryExplanation"
 import TabPanel from "@/common/views/TabPanel"
 import { useModal } from "@/common/hooks/useModal"
 
+import Checkbox from "@/common/views/Checkbox"
+import DeliveryMemoSelect from "./DeliveryMemoSelect"
+
 const DeliveryInfo = () => {
-  const [deliveryTabvalue, setDeliveryTabvalue] = useState(0)
+  const [isDefalutAddressRegistration, setIsDefalutAddressRegistration] =
+    useState(false)
+  const [deliveryTabvalue, setDeliveryTabvalue] = useState(1)
 
   const { isShowModal, showModal, hideModal } = useModal()
+
+  const toggleDefalutAddressRegistration = () => {
+    setIsDefalutAddressRegistration((prev) => !prev)
+  }
 
   const handleDeliveryTabvalueChange = (
     event: React.SyntheticEvent,
@@ -89,7 +98,7 @@ const DeliveryInfo = () => {
           <CheckoutAddressInput />
           <CheckoutPhoneInput isRequired />
           <CheckoutPhoneInput />
-          <CheckoutDeliveryMemo />
+          <DeliveryMemoSelect />
         </TabPanel>
 
         <TabPanel value={deliveryTabvalue} index={1}>
@@ -98,7 +107,20 @@ const DeliveryInfo = () => {
           <CheckoutAddressInput />
           <CheckoutPhoneInput isRequired />
           <CheckoutPhoneInput />
-          <CheckoutDeliveryMemo />
+
+          <Checkbox
+            id="defalutAddressRegistration"
+            isChecked={isDefalutAddressRegistration}
+            onClickCheckbox={toggleDefalutAddressRegistration}
+            checkboxLabel="기본배송지로 등록하기"
+            peer="peer/defalutAddress"
+            peerChecked={{
+              borderColor: "peer-checked/defalutAddress:after:border-lightRed",
+            }}
+            classNames="ml-[100px] mb-[20px]"
+          />
+
+          <DeliveryMemoSelect />
         </TabPanel>
       </Box>
 
