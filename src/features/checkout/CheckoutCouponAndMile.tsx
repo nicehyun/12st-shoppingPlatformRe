@@ -1,13 +1,18 @@
 "use client"
 
 import BasicModal from "@/common/views/BasicModal"
+import { selectSeletedCoupon } from "@/redux/features/couponSlice"
+import { useAppSelector } from "@/redux/hooks"
 import { useState } from "react"
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai"
 import { BsQuestionCircle } from "react-icons/bs"
 import CouponExplanation from "./CouponExplanation"
+import CouponSelect from "./CouponSelect"
 import MileExplanation from "./MileExplanation"
 
 const CheckoutCouponAndMile = () => {
+  const seletedCoupon = useAppSelector(selectSeletedCoupon)
+  console.log(seletedCoupon)
   const [isShowCouponExplanationModal, setIsShowCouponExplanationModal] =
     useState(false)
   const [isShowMileExplanationModal, setIsShowMileExplanationModal] =
@@ -48,7 +53,9 @@ const CheckoutCouponAndMile = () => {
         </span>
 
         <div className="flex">
-          <p className="text-[14px] text-border">쿠폰 0장 적용 / 0P 사용</p>
+          <p className="text-[14px] md:text-[12px] sm:text-[12px] text-border">
+            쿠폰 {seletedCoupon ? "적용" : "미적용"} / 0P 사용
+          </p>
           <button
             onClick={toggleShowDetail}
             type="button"
@@ -67,14 +74,16 @@ const CheckoutCouponAndMile = () => {
         } transition-max-h transition-3`}
       >
         <div className="py-[18px]">
-          <p className="text-[18px] mb-[10px]">보너스 쿠폰</p>
-          <div className="border-[1px] border-border py-[14px] px-[20px]">
-            10% 할인 쿠폰
-          </div>
+          <p className="lg:text-[16px] md:text-[14px] sm:text-[14px] mb-[10px]">
+            보너스 쿠폰
+          </p>
+          <CouponSelect />
         </div>
 
         <div className="py-[18px]">
-          <p className="text-[18px] mb-[10px]">마일리지</p>
+          <p className="lg:text-[16px] md:text-[14px] sm:text-[14px] mb-[10px]">
+            마일리지
+          </p>
           <div className="flex">
             <div className="border-[1px] border-border py-[14px] px-[20px] grow">
               0
