@@ -5,8 +5,7 @@ import Select from "@mui/material/Select"
 import InputLabel from "@mui/material/InputLabel"
 import MenuItem from "@mui/material/MenuItem"
 
-import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { resetCoupon } from "@/redux/features/couponSlice"
+import { useAppSelector } from "@/redux/hooks"
 
 import {
   accumulationOfProductsPrice,
@@ -18,10 +17,12 @@ import { useEffect } from "react"
 import useSelectCoupon from "../hooks/useSelectCoupon"
 
 const CouponBar = () => {
-  const { handleSelectedCoupon, seletedCoupon, availableCoupons } =
-    useSelectCoupon()
-
-  const dispatch = useAppDispatch()
+  const {
+    handleSelectedCoupon,
+    seletedCoupon,
+    availableCoupons,
+    resetSelectedCoupon,
+  } = useSelectCoupon()
 
   const { productListInCart } = useProductListInCartQuery()
 
@@ -41,7 +42,7 @@ const CouponBar = () => {
       : 0
 
   useEffect(() => {
-    dispatch(resetCoupon())
+    resetSelectedCoupon()
   }, [checkedProductList])
 
   return (
