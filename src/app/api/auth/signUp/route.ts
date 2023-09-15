@@ -1,5 +1,6 @@
 import { Gender, UserInfo } from "@/common/types/user"
-import addUserInfo from "@/firebase/firestore/addUserInfo"
+import { addUserInfo } from "@/firebase/firestore/user"
+
 import bcrypt from "bcrypt"
 import { NextResponse } from "next/server"
 

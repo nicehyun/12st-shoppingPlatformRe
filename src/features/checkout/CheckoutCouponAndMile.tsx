@@ -1,16 +1,23 @@
 "use client"
 
+import { junkOfNoMoreThanOneDigit } from "@/common/utils/price"
 import BasicModal from "@/common/views/BasicModal"
+
 import { useState } from "react"
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai"
 import { BsQuestionCircle } from "react-icons/bs"
+
 import useSelectCoupon from "../cart/hooks/useSelectCoupon"
 import CouponExplanation from "./CouponExplanation"
 import CouponSelect from "./CouponSelect"
+import { useGetAvailableMileQuery } from "./hooks/useGetAvailableMileQuery"
 import MileExplanation from "./MileExplanation"
 
 const CheckoutCouponAndMile = () => {
   const { seletedCoupon } = useSelectCoupon()
+
+  const { availableMile } = useGetAvailableMileQuery()
+  console.log(availableMile)
 
   const [isShowCouponExplanationModal, setIsShowCouponExplanationModal] =
     useState(false)
@@ -93,7 +100,8 @@ const CheckoutCouponAndMile = () => {
 
           <div className="flex mt-[10px]">
             <p>
-              사용 가능 0P / <span className="text-lightGray">보유 0P</span>
+              사용 가능 {junkOfNoMoreThanOneDigit(availableMile ?? 0)}P /{" "}
+              <span className="text-lightGray">보유 {availableMile}P</span>
             </p>
             <button
               onClick={showMileExplanationModal}
