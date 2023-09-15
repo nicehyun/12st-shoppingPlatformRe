@@ -2,7 +2,7 @@
 import { useState } from "react"
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai"
 
-const CheckoutPaymentAmountInfo = () => {
+const CheckoutTotalPriceInfo = () => {
   const [isShowDetail, setIsShowDetail] = useState(false)
 
   const toggleShowDetail = () => {
@@ -62,4 +62,4 @@ const CheckoutPaymentAmountInfo = () => {
   )
 }
 
-export default CheckoutPaymentAmountInfo
+export default CheckoutTotalPriceInfo

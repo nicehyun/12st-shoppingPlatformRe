@@ -8,7 +8,7 @@ import CheckoutClause from "./CheckoutClause"
 import CheckoutCouponAndMile from "./CheckoutCouponAndMile"
 import CheckoutOrderListInfo from "./CheckoutOrderListInfo"
 import CheckoutPayment from "./CheckoutPayment"
-import CheckoutPaymentAmountInfo from "./CheckoutPaymentAmountInfo"
+import CheckoutTotalPriceInfo from "./CheckoutTotalPriceInfo"
 import DeliveryInfo from "./DeliveryInfo"
 
 const CheckoutForm = () => {
@@ -70,7 +70,7 @@ const CheckoutForm = () => {
       <CheckoutOrderListInfo />
       <CheckoutCouponAndMile />
       <CheckoutPayment />
-      <CheckoutPaymentAmountInfo />
+      <CheckoutTotalPriceInfo />
       <CheckoutClause />
     </form>
   )

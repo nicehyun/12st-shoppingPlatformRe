@@ -55,8 +55,6 @@ const CheckoutPayment = () => {
 
         <PaymentBenefit />
       </div>
-
-      <button type="submit">test</button>
     </div>
   )
 }
