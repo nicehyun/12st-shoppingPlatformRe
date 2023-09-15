@@ -1,3 +1,4 @@
+import { Payment } from "@/features/checkout/PaymentButton"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { RootState } from "../types/store"
 
@@ -7,11 +8,17 @@ export type CheckoutDeliveryInfoCheck = {
   phone: boolean
 }
 
+export type CheckoutPayment = {
+  value: string
+  label: string
+}
+
 export type CheckoutClauseCheck = {}
 
 type InitialCheckoutState = {
   deliveryInfo: CheckoutDeliveryInfoCheck
   clause: CheckoutClauseCheck
+  payment: CheckoutPayment
 }
 
 const initialCartState: InitialCheckoutState = {
@@ -19,6 +26,10 @@ const initialCartState: InitialCheckoutState = {
     recipient: false,
     address: false,
     phone: false,
+  },
+  payment: {
+    value: "credit",
+    label: "신용/체크카드",
   },
   clause: {},
 }
@@ -50,6 +61,13 @@ const checkoutSlice = createSlice({
     uncheckToRecipient(state) {
       state.deliveryInfo.recipient = false
     },
+    selectPayment(
+      state,
+      action: PayloadAction<{ value: Payment; label: string }>
+    ) {
+      state.payment.label = action.payload.label
+      state.payment.value = action.payload.value
+    },
   },
 })
 
@@ -61,9 +79,13 @@ export const {
   uncheckToAddress,
   uncheckToPhone,
   uncheckToRecipient,
+  selectPayment,
 } = checkoutSlice.actions
 
 export const selectCheckoutDeliveyInfoCheckState = (state: RootState) =>
   state.checkout.deliveryInfo
+
+export const selectCheckoutPaymentState = (state: RootState) =>
+  state.checkout.payment
 
 export default checkoutSlice.reducer

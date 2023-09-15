@@ -1,29 +1,21 @@
 "use client"
 
+import { selectCheckoutPaymentState } from "@/redux/features/checkoutSlice"
+import { useAppSelector } from "@/redux/hooks"
 import { useState } from "react"
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai"
 import CreditSelect from "./CreditSelect"
 import InstallmentPeriodSelect from "./InstallmentPeriodSelect"
 import PaymentBenefit from "./PaymentBenefit"
-import { Payment } from "./PaymentButton"
 import PaymentList from "./PaymentList"
 
 const CheckoutPayment = () => {
   const [isShowDetail, setIsShowDetail] = useState(false)
-  const [payment, setPayment] = useState({
-    value: "credit",
-    label: "신용/체크카드",
-  })
+
+  const checkoutPaymentState = useAppSelector(selectCheckoutPaymentState)
 
   const toggleShowDetail = () => {
     setIsShowDetail((prev) => !prev)
-  }
-
-  const handlePaymentChange = (
-    paymentValue: Payment,
-    selecedPayment: string
-  ) => {
-    setPayment({ value: paymentValue, label: selecedPayment })
   }
 
   return (
@@ -33,7 +25,7 @@ const CheckoutPayment = () => {
 
         <div className="flex items-center">
           <p className="text-[14px] md:text-[12px] sm:text-[12px] text-border">
-            {payment.label}
+            {checkoutPaymentState.label}
           </p>
           <button
             onClick={toggleShowDetail}
@@ -52,9 +44,9 @@ const CheckoutPayment = () => {
           isShowDetail ? "visible max-h-[500px]" : "invisible max-h-0"
         } transition-max-h transition-p transition-3`}
       >
-        <PaymentList payment={payment} onChangePayment={handlePaymentChange} />
+        <PaymentList />
 
-        {payment.value === "credit" && (
+        {checkoutPaymentState.value === "credit" && (
           <>
             <CreditSelect />
             <InstallmentPeriodSelect />
@@ -63,6 +55,8 @@ const CheckoutPayment = () => {
 
         <PaymentBenefit />
       </div>
+
+      <button type="submit">test</button>
     </div>
   )
 }

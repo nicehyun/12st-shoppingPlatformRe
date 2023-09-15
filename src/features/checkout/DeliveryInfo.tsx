@@ -132,8 +132,6 @@ const DeliveryInfo = () => {
       >
         <DeliveryExplanation />
       </BasicModal>
-
-      <button type="submit">test</button>
     </div>
   )
 }
