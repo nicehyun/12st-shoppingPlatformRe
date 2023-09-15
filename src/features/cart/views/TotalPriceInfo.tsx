@@ -6,29 +6,13 @@ import {
 import { selectCheckedProductList } from "@/redux/features/cartSlice"
 import { useAppSelector } from "@/redux/hooks"
 import { BiMinus, BiPlus } from "react-icons/bi"
-import { useProductListInCartQuery } from "../hooks/useProductListInCartQuery"
-import useSelectCoupon from "../hooks/useSelectCoupon"
+import useCheckoutPrice from "../hooks/useCheckoutPrice"
 import TotalPriceEl from "./TotalPriceEl"
 
 const TotalPriceInfo = () => {
+  const { discountedPriceWithCoupon, totalPriceOfCheckedProduct } =
+    useCheckoutPrice()
   const checkedProductList = useAppSelector(selectCheckedProductList)
-  const { seletedCoupon } = useSelectCoupon()
-
-  const { productListInCart } = useProductListInCartQuery()
-
-  const totalPriceOfCheckedProduct =
-    productListInCart !== undefined
-      ? accumulationOfProductsPrice(
-          productListInCart?.filter((product) =>
-            checkedProductList.includes(product.id)
-          )
-        )
-      : 0
-
-  const discountedPriceWithCoupon =
-    seletedCoupon && totalPriceOfCheckedProduct
-      ? priceToUseCoupon(seletedCoupon, totalPriceOfCheckedProduct)
-      : 0
 
   const deliveryPrice = checkedProductList.length ? 2500 : 0
   return (

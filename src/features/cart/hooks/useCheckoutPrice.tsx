@@ -8,7 +8,7 @@ import { useAppSelector } from "@/redux/hooks"
 
 const useCheckoutPrice = () => {
   const checkedProductList = useAppSelector(selectCheckedProductList)
-  console.log(checkedProductList)
+
   const seletedCoupon = useAppSelector(selectSelectedCoupon)
 
   const totalPriceOfCheckedProduct =
