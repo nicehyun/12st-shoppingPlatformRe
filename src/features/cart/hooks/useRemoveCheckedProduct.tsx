@@ -3,6 +3,7 @@ import { removeCheckedProductsFromCart } from "@/firebase/firestore/cart"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { ProductsInCart } from "../types/cart"
 
 export const useRemoveCheckedProduct = () => {
   const queryClient = useQueryClient()
@@ -10,10 +11,10 @@ export const useRemoveCheckedProduct = () => {
   const dispatch = useAppDispatch()
 
   const checkedProductRemoveMutaion = useMutation(
-    (checkedProduct: string[]) =>
+    (checkedProductList: ProductsInCart) =>
       removeCheckedProductsFromCart(
         sessionQuery?.user.email ?? "",
-        checkedProduct
+        checkedProductList
       ),
     {
       onSuccess: () => {

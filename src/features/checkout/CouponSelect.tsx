@@ -9,16 +9,11 @@ import useCheckoutPrice from "../cart/hooks/useCheckoutPrice"
 
 import useSelectCoupon from "../cart/hooks/useSelectCoupon"
 
-interface ICouponSelect {
-  disabled: boolean
-}
-
-const CouponSelect = ({ disabled }: ICouponSelect) => {
+const CouponSelect = () => {
   const { handleSelectedCoupon, seletedCoupon, availableCoupons } =
     useSelectCoupon()
 
-  const { discountedPriceWithCoupon, totalPriceOfCheckedProduct } =
-    useCheckoutPrice()
+  const { totalPriceOfCheckedProduct } = useCheckoutPrice()
 
   const [isOpen, setIsOpen] = useState(false)
 

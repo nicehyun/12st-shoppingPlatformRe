@@ -1,9 +1,9 @@
-import { ProductsInCart } from "@/features/cart/types/cart"
+import { ProductInCart, ProductsInCart } from "@/features/cart/types/cart"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { RootState } from "../types/store"
 
 type InitialCartState = {
-  checkedProductList: string[]
+  checkedProductList: ProductsInCart
 }
 
 const initialCartState: InitialCartState = {
@@ -15,19 +15,15 @@ const cartSlice = createSlice({
   initialState: initialCartState,
   reducers: {
     allcheckedProduct(state, actions: PayloadAction<ProductsInCart>) {
-      const checkedProductList: string[] = []
-
-      actions.payload.map((product) => checkedProductList.push(product.id))
-
-      state.checkedProductList = checkedProductList
+      state.checkedProductList = actions.payload
     },
 
-    checkedProduct(state, actions: PayloadAction<string>) {
+    checkedProduct(state, actions: PayloadAction<ProductInCart>) {
       state.checkedProductList.push(actions.payload)
     },
     uncheckedProduct(state, actions: PayloadAction<string>) {
       state.checkedProductList = state.checkedProductList.filter(
-        (checkedProduct) => checkedProduct !== actions.payload
+        (checkedProduct) => checkedProduct.id !== actions.payload
       )
     },
     emptyCheckedProductList(state) {

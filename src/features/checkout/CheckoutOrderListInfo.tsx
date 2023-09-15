@@ -1,16 +1,14 @@
+import { selectCheckedProductList } from "@/redux/features/cartSlice"
 import { selectSelectedCoupon } from "@/redux/features/couponSlice"
 import { useAppSelector } from "@/redux/hooks"
 import { useState } from "react"
 import { BsCaretDownFill, BsCaretUpFill } from "react-icons/bs"
-import { useProductListInCartQuery } from "../cart/hooks/useProductListInCartQuery"
 import CheckoutOrderListEl from "./CheckoutOrderListEl"
 
 const CheckoutOrderListInfo = () => {
-  const { productListInCart } = useProductListInCartQuery()
   const [isShowDetail, setIsShowDetail] = useState(false)
-
+  const checkedProductList = useAppSelector(selectCheckedProductList)
   const seletedCoupon = useAppSelector(selectSelectedCoupon)
-  console.log(seletedCoupon)
 
   const toggleShowDetail = () => {
     setIsShowDetail((prev) => !prev)
@@ -18,12 +16,12 @@ const CheckoutOrderListInfo = () => {
 
   const renderProductList = () => {
     if (isShowDetail) {
-      return productListInCart.map((product) => (
+      return checkedProductList.map((product) => (
         <CheckoutOrderListEl key={`order-${product.id}`} prductInfo={product} />
       ))
     } else {
-      if (productListInCart.length > 0) {
-        const product = productListInCart[0]
+      if (checkedProductList.length > 0) {
+        const product = checkedProductList[0]
         return (
           <CheckoutOrderListEl
             key={`order-${product.id}`}
@@ -47,7 +45,7 @@ const CheckoutOrderListInfo = () => {
       >
         총{" "}
         <span className="text-lightRed mx-[5px]">
-          {productListInCart.length}건
+          {checkedProductList.length}건
         </span>{" "}
         전체
         {isShowDetail ? " 보기 닫기" : " 보기"}{" "}

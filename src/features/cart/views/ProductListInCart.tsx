@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { useEffect, useState } from "react"
 import { useProductListInCartQuery } from "../hooks/useProductListInCartQuery"
 import { useRemoveCheckedProduct } from "../hooks/useRemoveCheckedProduct"
+import { ProductInCart as IProductInCart, ProductsInCart } from "../types/cart"
 
 import ProductInCart from "./ProductInCart"
 
@@ -43,20 +44,20 @@ const ProductListInCart = () => {
     }
   }
 
-  const handleProductCheck = (productId: string) => {
-    const isProductChecked = checkedProductList.includes(productId)
+  const handleProductCheck = (product: IProductInCart) => {
+    const isProductChecked = checkedProductList.includes(product)
 
     if (isProductChecked) {
-      dispatch(uncheckedProduct(productId))
+      dispatch(uncheckedProduct(product.id))
       setIsAllChecked(false)
       return
     }
 
-    dispatch(checkedProduct(productId))
+    dispatch(checkedProduct(product))
   }
 
   const handleCheckedProductRemove = async (
-    checkedProductList: string[] | []
+    checkedProductList: ProductsInCart
   ) => {
     if (checkedProductList.length === 0) return
 
@@ -111,10 +112,8 @@ const ProductListInCart = () => {
             <ProductInCart
               key={product.name}
               productInfo={product}
-              isChecked={
-                checkedProductList.includes(product.id) || isAllChecked
-              }
-              onClickCheck={() => handleProductCheck(product.id)}
+              isChecked={checkedProductList.includes(product) || isAllChecked}
+              onClickCheck={() => handleProductCheck(product)}
               onEmptyCheckedProductList={handleCheckedProductListEmpty}
             />
           ))}

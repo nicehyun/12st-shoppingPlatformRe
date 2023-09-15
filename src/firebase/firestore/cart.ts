@@ -99,9 +99,9 @@ export async function removeProductFromCart(
 
 export async function removeCheckedProductsFromCart(
   emailValue: string,
-  productIds: string[]
+  checkedProductList: ProductsInCart
 ) {
-  if (emailValue === "" || productIds.length === 0) {
+  if (emailValue === "" || checkedProductList.length === 0) {
     return
   }
 
@@ -113,7 +113,11 @@ export async function removeCheckedProductsFromCart(
       const cartData = cartDoc.data()
 
       const updatedProducts = cartData.products.filter(
-        (product: Product) => !productIds.includes(product.id)
+        (cartProduct: ProductInCart) => {
+          return !checkedProductList.some(
+            (product) => product.id === cartProduct.id
+          )
+        }
       )
 
       cartData.products = updatedProducts

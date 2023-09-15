@@ -1,8 +1,6 @@
 "use client"
 
 import BasicModal from "@/common/views/BasicModal"
-import { selectSelectedCoupon } from "@/redux/features/couponSlice"
-import { useAppSelector } from "@/redux/hooks"
 import { useState } from "react"
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai"
 import { BsQuestionCircle } from "react-icons/bs"
