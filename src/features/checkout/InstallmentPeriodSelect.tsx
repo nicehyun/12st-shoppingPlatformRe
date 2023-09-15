@@ -6,7 +6,7 @@ import {
 } from "@mui/material"
 import { useState } from "react"
 
-const CreditSelect = () => {
+const InstallmentPeriodSelect = () => {
   const periodList = [
     "일시불",
     "2개월",
@@ -78,4 +78,4 @@ const CreditSelect = () => {
   )
 }
 
-export default CreditSelect
+export default InstallmentPeriodSelect
