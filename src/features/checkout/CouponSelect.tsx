@@ -5,12 +5,20 @@ import {
   SelectChangeEvent,
 } from "@mui/material"
 import { useState } from "react"
+import useCheckoutPrice from "../cart/hooks/useCheckoutPrice"
 
 import useSelectCoupon from "../cart/hooks/useSelectCoupon"
 
-const CouponSelect = () => {
+interface ICouponSelect {
+  disabled: boolean
+}
+
+const CouponSelect = ({ disabled }: ICouponSelect) => {
   const { handleSelectedCoupon, seletedCoupon, availableCoupons } =
     useSelectCoupon()
+
+  const { discountedPriceWithCoupon, totalPriceOfCheckedProduct } =
+    useCheckoutPrice()
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -46,6 +54,7 @@ const CouponSelect = () => {
 
         return selected
       }}
+      disabled={totalPriceOfCheckedProduct < 15000}
       MenuProps={{
         PaperProps: {
           style: {

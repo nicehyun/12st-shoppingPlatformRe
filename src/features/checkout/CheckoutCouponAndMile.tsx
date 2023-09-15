@@ -12,8 +12,7 @@ import CouponSelect from "./CouponSelect"
 import MileExplanation from "./MileExplanation"
 
 const CheckoutCouponAndMile = () => {
-  const { handleSelectedCoupon, seletedCoupon, availableCoupons } =
-    useSelectCoupon()
+  const { seletedCoupon } = useSelectCoupon()
 
   const [isShowCouponExplanationModal, setIsShowCouponExplanationModal] =
     useState(false)

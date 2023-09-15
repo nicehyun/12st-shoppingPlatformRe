@@ -19,6 +19,7 @@ import ProductInCart from "./ProductInCart"
 const ProductListInCart = () => {
   const dispatch = useAppDispatch()
   const checkedProductList = useAppSelector(selectCheckedProductList)
+  console.log(checkedProductList)
 
   const { productListInCart } = useProductListInCartQuery()
 

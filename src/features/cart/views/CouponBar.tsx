@@ -7,14 +7,10 @@ import MenuItem from "@mui/material/MenuItem"
 
 import { useAppSelector } from "@/redux/hooks"
 
-import {
-  accumulationOfProductsPrice,
-  priceToUseCoupon,
-} from "@/common/utils/price"
-import { useProductListInCartQuery } from "../hooks/useProductListInCartQuery"
 import { selectCheckedProductList } from "@/redux/features/cartSlice"
 import { useEffect } from "react"
 import useSelectCoupon from "../hooks/useSelectCoupon"
+import useCheckoutPrice from "../hooks/useCheckoutPrice"
 
 const CouponBar = () => {
   const {
@@ -24,22 +20,10 @@ const CouponBar = () => {
     resetSelectedCoupon,
   } = useSelectCoupon()
 
-  const { productListInCart } = useProductListInCartQuery()
+  const { discountedPriceWithCoupon, totalPriceOfCheckedProduct } =
+    useCheckoutPrice()
 
   const checkedProductList = useAppSelector(selectCheckedProductList)
-
-  const totalPriceOfCheckedProduct =
-    productListInCart &&
-    accumulationOfProductsPrice(
-      productListInCart?.filter((product) =>
-        checkedProductList.includes(product.id)
-      )
-    )
-
-  const discountedPriceWithCoupon =
-    seletedCoupon && totalPriceOfCheckedProduct
-      ? priceToUseCoupon(seletedCoupon, totalPriceOfCheckedProduct)
-      : 0
 
   useEffect(() => {
     resetSelectedCoupon()
@@ -74,11 +58,7 @@ const CouponBar = () => {
             value={seletedCoupon?.name ?? ""}
             label="Coupon"
             onChange={handleSelectedCoupon}
-            disabled={
-              totalPriceOfCheckedProduct
-                ? totalPriceOfCheckedProduct < 15000
-                : false
-            }
+            disabled={totalPriceOfCheckedProduct < 15000}
             className="text-[14px]"
           >
             <MenuItem

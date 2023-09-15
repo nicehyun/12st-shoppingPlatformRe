@@ -1,5 +1,4 @@
 import { numberToLocaleString } from "@/common/utils/price"
-import { spawn } from "child_process"
 import Image from "next/image"
 import useSelectCoupon from "../cart/hooks/useSelectCoupon"
 import { ProductInCart } from "../cart/types/cart"
@@ -38,6 +37,8 @@ const CheckoutOrderListEl = ({ prductInfo }: ICheckoutOrderListEl) => {
           <span>{numberToLocaleString(discountedPrice)}원</span> /{" "}
           <span>수량 {amount}개</span>
         </p>
+
+        {seletedCoupon && <span>쿠폰적용가 : {}</span>}
       </div>
 
       <div className="relative border-[1px] boder-black w-[200px] h-[200px] lg:w-[180px] lg:h-[180px] md:w-[130px] md:h-[130px] sm:w-[120px] sm:h-[120px] ml-[20px]">
@@ -49,8 +50,6 @@ const CheckoutOrderListEl = ({ prductInfo }: ICheckoutOrderListEl) => {
           priority={true}
         />
       </div>
-
-      {seletedCoupon && <span>ds</span>}
     </li>
   )
 }

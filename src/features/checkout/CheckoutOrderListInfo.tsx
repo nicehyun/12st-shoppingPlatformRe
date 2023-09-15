@@ -34,8 +34,6 @@ const CheckoutOrderListInfo = () => {
         return null
       }
     }
-
-    return
   }
 
   return (
