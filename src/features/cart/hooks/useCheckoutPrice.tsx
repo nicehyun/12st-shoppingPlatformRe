@@ -19,7 +19,15 @@ const useCheckoutPrice = () => {
       ? priceToUseCoupon(seletedCoupon, totalPriceOfCheckedProduct)
       : 0
 
-  return { totalPriceOfCheckedProduct, discountedPriceWithCoupon }
+  const totalDeliveryFee = checkedProductList.reduce((accumulator, product) => {
+    return accumulator + product.deliveryFree
+  }, 0)
+
+  return {
+    totalPriceOfCheckedProduct,
+    discountedPriceWithCoupon,
+    totalDeliveryFee,
+  }
 }
 
 export default useCheckoutPrice
