@@ -28,10 +28,10 @@ const PaymentButton = ({
       type="button"
       value={paymentButtonValue}
       onClick={() => onChangePaymentValue(paymentButtonValue, buttonContent)}
-      className={`border-[1px] border-border h-[40px] text-[12px] md:text-[14px] lg:text-[16px] xl:text-[16px] ${
+      className={`border-[1px] h-[40px] text-[12px] md:text-[14px] lg:text-[16px] xl:text-[16px] ${
         paymentValue === paymentButtonValue
-          ? "bg-black dark:bg-white text-lightRed"
-          : "bg-border dark:bg-lightBlack text-black"
+          ? "bg-black dark:bg-white text-lightRed border-black dark:border-white"
+          : "bg-white dark:bg-border text-black border-border"
       }`}
     >
       {buttonContent}

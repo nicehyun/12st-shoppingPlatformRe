@@ -5,17 +5,28 @@ import {
   SelectChangeEvent,
 } from "@mui/material"
 import { useState } from "react"
-import useCheckoutPrice from "../cart/hooks/useCheckoutPrice"
 
-import useSelectCoupon from "../cart/hooks/useSelectCoupon"
-
-const CouponSelect = () => {
-  const { handleSelectedCoupon, seletedCoupon, availableCoupons } =
-    useSelectCoupon()
-
-  const { totalPriceOfCheckedProduct } = useCheckoutPrice()
-
+const CreditSelect = () => {
+  const creditList = [
+    "우체국카드",
+    "NH카드",
+    "KEB하나카드",
+    "신한카드",
+    "수협카드",
+    "제주카드",
+    "KB국민카드",
+    "삼성카드",
+    "우리카드",
+    "씨티카드",
+    "BC카드",
+    "광주카드",
+    "전북카드",
+    "현대카드",
+    "현대카드",
+    "롯데카드",
+  ]
   const [isOpen, setIsOpen] = useState(false)
+  const [selectedCredit, setSelectedCredit] = useState("")
 
   const handleClose = () => {
     setIsOpen(false)
@@ -25,31 +36,29 @@ const CouponSelect = () => {
     setIsOpen(true)
   }
 
-  const handleSelectChange = (event: SelectChangeEvent<unknown>) => {
-    handleSelectedCoupon(event)
-
+  const handleSelectChange = (event: SelectChangeEvent<string>) => {
+    setSelectedCredit(event.target.value)
     handleClose()
   }
 
   return (
     <Select
-      id="coupon-select"
-      name="coupon-select"
+      id="credit-select"
+      name="credit-select"
       open={isOpen}
       onClose={handleClose}
       onOpen={handleOpen}
       displayEmpty
-      value={seletedCoupon ? seletedCoupon.name : ""}
+      value={selectedCredit ? selectedCredit : ""}
       onChange={handleSelectChange}
       input={<OutlinedInput />}
       renderValue={(selected: string) => {
         if (selected.length === 0) {
-          return `사용 가능 쿠폰 ${availableCoupons?.length} 장`
+          return "카드사를 선택해주세요."
         }
 
         return selected
       }}
-      disabled={totalPriceOfCheckedProduct < 15000}
       MenuProps={{
         PaperProps: {
           style: {
@@ -65,25 +74,19 @@ const CouponSelect = () => {
           border: "rgb(180, 180, 180)",
         },
       }}
-      className={`h-[50px] sm:h-[40px] md:h-[44px] sm:text-[12px] md:text-[14px] dark:text-white w-full`}
+      className={`h-[50px] sm:h-[40px] md:h-[44px] sm:text-[12px] md:text-[14px] dark:text-white w-full mb-[20px]`}
     >
-      <MenuItem
-        value=""
-        className="sm:text-[12px] md:text-[14px] text-lightBlack"
-      >
-        선택안함
-      </MenuItem>
-      {availableCoupons?.map((coupon, index) => (
+      {creditList?.map((credit, index) => (
         <MenuItem
-          key={`coupon-${index}`}
-          value={coupon.name}
+          key={`credit-${index}`}
+          value={credit}
           className="sm:text-[12px] md:text-[14px]"
         >
-          {coupon.name}
+          {credit}
         </MenuItem>
       ))}
     </Select>
   )
 }
 
-export default CouponSelect
+export default CreditSelect
