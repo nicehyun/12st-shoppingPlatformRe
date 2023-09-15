@@ -1,23 +1,24 @@
 import { selectCheckedProductList } from "@/redux/features/cartSlice"
-import { selectSelectedCoupon } from "@/redux/features/couponSlice"
 import { useAppSelector } from "@/redux/hooks"
 import { useState } from "react"
 import { BsCaretDownFill, BsCaretUpFill } from "react-icons/bs"
+import useCheckoutPrice from "../cart/hooks/useCheckoutPrice"
 import CheckoutOrderListEl from "./CheckoutOrderListEl"
 
 const CheckoutOrderListInfo = () => {
   const [isShowDetail, setIsShowDetail] = useState(false)
   const checkedProductList = useAppSelector(selectCheckedProductList)
-  const seletedCoupon = useAppSelector(selectSelectedCoupon)
 
-  const toggleShowDetail = () => {
-    setIsShowDetail((prev) => !prev)
-  }
+  const { calculatedDiscountPerProductArr } = useCheckoutPrice() // [2500, 2500]
 
   const renderProductList = () => {
     if (isShowDetail) {
-      return checkedProductList.map((product) => (
-        <CheckoutOrderListEl key={`order-${product.id}`} prductInfo={product} />
+      return checkedProductList.map((product, index) => (
+        <CheckoutOrderListEl
+          key={`order-${product.id}`}
+          prductInfo={product}
+          discountPerProduct={calculatedDiscountPerProductArr[index]}
+        />
       ))
     } else {
       if (checkedProductList.length > 0) {
@@ -26,12 +27,17 @@ const CheckoutOrderListInfo = () => {
           <CheckoutOrderListEl
             key={`order-${product.id}`}
             prductInfo={product}
+            discountPerProduct={calculatedDiscountPerProductArr[0]}
           />
         )
       } else {
         return null
       }
     }
+  }
+
+  const toggleShowDetail = () => {
+    setIsShowDetail((prev) => !prev)
   }
 
   return (

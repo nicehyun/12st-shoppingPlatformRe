@@ -5,9 +5,13 @@ import { ProductInCart } from "../cart/types/cart"
 
 interface ICheckoutOrderListEl {
   prductInfo: ProductInCart
+  discountPerProduct: number
 }
 
-const CheckoutOrderListEl = ({ prductInfo }: ICheckoutOrderListEl) => {
+const CheckoutOrderListEl = ({
+  prductInfo,
+  discountPerProduct,
+}: ICheckoutOrderListEl) => {
   const { seletedCoupon } = useSelectCoupon()
 
   const {
@@ -28,7 +32,7 @@ const CheckoutOrderListEl = ({ prductInfo }: ICheckoutOrderListEl) => {
         <span className="text-lightBlack text-[14px] sm:text-[12px] md:text-[12px]">
           {productBrandInfo}
         </span>
-        <p className="font-bold mb-[40px] mt-[10px] h-[67.2px] w-[400px] md:w-[300px] sm:w-[200px] overflow-hidden">
+        <p className="font-bold mb-[10px] mt-[10px] h-[67.2px] w-[400px] md:w-[300px] sm:w-[200px] overflow-hidden">
           {name}
         </p>
 
@@ -38,10 +42,15 @@ const CheckoutOrderListEl = ({ prductInfo }: ICheckoutOrderListEl) => {
           <span>수량 {amount}개</span>
         </p>
 
-        {seletedCoupon && <span>쿠폰적용가 : {}</span>}
+        {seletedCoupon && (
+          <span className="text-lightRed md:text-[14px] sm:text-[12px] mt-[10px] inline-block">
+            쿠폰적용가 :{" "}
+            {numberToLocaleString(discountedPrice - discountPerProduct)}원
+          </span>
+        )}
       </div>
 
-      <div className="relative border-[1px] boder-black w-[200px] h-[200px] lg:w-[180px] lg:h-[180px] md:w-[130px] md:h-[130px] sm:w-[120px] sm:h-[120px] ml-[20px]">
+      <div className="relative w-[200px] h-[200px] lg:w-[180px] lg:h-[180px] md:w-[130px] md:h-[130px] sm:w-[120px] sm:h-[120px] ml-[20px]">
         <Image
           alt={name}
           src={image}
