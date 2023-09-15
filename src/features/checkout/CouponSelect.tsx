@@ -1,25 +1,18 @@
 import {
-  resetCoupon,
-  selectCoupon,
-  selectSeletedCoupon,
-} from "@/redux/features/couponSlice"
-import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import {
   MenuItem,
   OutlinedInput,
   Select,
   SelectChangeEvent,
 } from "@mui/material"
 import { useState } from "react"
-import useCouponQuery from "../cart/hooks/useCouponQuery"
+
+import useSelectCoupon from "../cart/hooks/useSelectCoupon"
 
 const CouponSelect = () => {
-  const dispatch = useAppDispatch()
-
-  const { coupons } = useCouponQuery()
+  const { handleSelectedCoupon, seletedCoupon, availableCoupons } =
+    useSelectCoupon()
 
   const [isOpen, setIsOpen] = useState(false)
-  const [selectedCoupon, setSelectedCoupon] = useState("")
 
   const handleClose = () => {
     setIsOpen(false)
@@ -29,22 +22,8 @@ const CouponSelect = () => {
     setIsOpen(true)
   }
 
-  const handleSelectChange = (
-    event: SelectChangeEvent<typeof selectedCoupon>
-  ) => {
-    const findedCoupon = coupons?.find(
-      (coupon) => coupon.name === event.target.value
-    )
-
-    if (!findedCoupon) {
-      setSelectedCoupon("")
-      dispatch(resetCoupon())
-    }
-
-    if (findedCoupon) {
-      setSelectedCoupon(findedCoupon.name ?? "")
-      dispatch(selectCoupon(findedCoupon))
-    }
+  const handleSelectChange = (event: SelectChangeEvent<unknown>) => {
+    handleSelectedCoupon(event)
 
     handleClose()
   }
@@ -57,12 +36,12 @@ const CouponSelect = () => {
       onClose={handleClose}
       onOpen={handleOpen}
       displayEmpty
-      value={selectedCoupon}
+      value={seletedCoupon ? seletedCoupon.name : ""}
       onChange={handleSelectChange}
       input={<OutlinedInput />}
       renderValue={(selected: string) => {
         if (selected.length === 0) {
-          return `사용 가능 쿠폰 ${coupons?.length} 장`
+          return `사용 가능 쿠폰 ${availableCoupons?.length} 장`
         }
 
         return selected
@@ -93,7 +72,7 @@ const CouponSelect = () => {
       >
         선택안함
       </MenuItem>
-      {coupons?.map((coupon, index) => (
+      {availableCoupons?.map((coupon, index) => (
         <MenuItem
           key={`coupon-${index}`}
           value={coupon.name}

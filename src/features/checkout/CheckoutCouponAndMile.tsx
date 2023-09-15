@@ -1,7 +1,7 @@
 "use client"
 
 import BasicModal from "@/common/views/BasicModal"
-import { selectSeletedCoupon } from "@/redux/features/couponSlice"
+import { selectSelectedCoupon } from "@/redux/features/couponSlice"
 import { useAppSelector } from "@/redux/hooks"
 import { useState } from "react"
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai"
@@ -11,7 +11,7 @@ import CouponSelect from "./CouponSelect"
 import MileExplanation from "./MileExplanation"
 
 const CheckoutCouponAndMile = () => {
-  const seletedCoupon = useAppSelector(selectSeletedCoupon)
+  const seletedCoupon = useAppSelector(selectSelectedCoupon)
   console.log(seletedCoupon)
   const [isShowCouponExplanationModal, setIsShowCouponExplanationModal] =
     useState(false)

@@ -1,31 +1,31 @@
-import { AmountCoupon, RateCoupon } from "@/features/cart/types/coupon";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../types/store";
+import { AmountCoupon, RateCoupon } from "@/features/cart/types/coupon"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { RootState } from "../types/store"
 
 type InitialCouponState = {
-  seletedCoupon: RateCoupon | AmountCoupon | null;
-};
+  seletedCoupon: RateCoupon | AmountCoupon | null
+}
 
 const initialCouponState: InitialCouponState = {
   seletedCoupon: null,
-};
+}
 
 const couponSlice = createSlice({
   name: "coupon",
   initialState: initialCouponState,
   reducers: {
     resetCoupon(state) {
-      state.seletedCoupon = null;
+      state.seletedCoupon = null
     },
     selectCoupon(state, actions: PayloadAction<RateCoupon | AmountCoupon>) {
-      state.seletedCoupon = actions.payload;
+      state.seletedCoupon = actions.payload
     },
   },
-});
+})
 
-export const { resetCoupon, selectCoupon } = couponSlice.actions;
+export const { resetCoupon, selectCoupon } = couponSlice.actions
 
-export const selectSeletedCoupon = (state: RootState) =>
-  state.coupon.seletedCoupon;
+export const selectSelectedCoupon = (state: RootState) =>
+  state.coupon.seletedCoupon
 
-export default couponSlice.reducer;
+export default couponSlice.reducer

@@ -1,3 +1,4 @@
+import { numberToLocaleString } from "@/common/utils/price"
 import { ReactNode } from "react"
 
 interface ITotalPriceEl {
@@ -29,7 +30,7 @@ const TotalPriceEl = ({
           </span>
         )}
 
-        {price}
+        {numberToLocaleString(price)}
         <span className="text-[12px] sm:text-[10px] md:text-[10px] ml-[3px]">
           원
         </span>

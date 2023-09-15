@@ -1,7 +1,6 @@
-import { selectSeletedCoupon } from "@/redux/features/couponSlice"
+import { selectSelectedCoupon } from "@/redux/features/couponSlice"
 import { useAppSelector } from "@/redux/hooks"
 import { useState } from "react"
-import { AiOutlineDown, AiOutlineUp } from "react-icons/ai"
 import { BsCaretDownFill, BsCaretUpFill } from "react-icons/bs"
 import { useProductListInCartQuery } from "../cart/hooks/useProductListInCartQuery"
 import CheckoutOrderListEl from "./CheckoutOrderListEl"
@@ -10,7 +9,7 @@ const CheckoutOrderListInfo = () => {
   const { productListInCart } = useProductListInCartQuery()
   const [isShowDetail, setIsShowDetail] = useState(false)
 
-  const seletedCoupon = useAppSelector(selectSeletedCoupon)
+  const seletedCoupon = useAppSelector(selectSelectedCoupon)
   console.log(seletedCoupon)
 
   const toggleShowDetail = () => {

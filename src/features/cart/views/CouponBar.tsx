@@ -4,14 +4,10 @@ import FormControl from "@mui/material/FormControl"
 import Select from "@mui/material/Select"
 import InputLabel from "@mui/material/InputLabel"
 import MenuItem from "@mui/material/MenuItem"
-import useCouponQuery from "../hooks/useCouponQuery"
+
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import {
-  resetCoupon,
-  selectCoupon,
-  selectSeletedCoupon,
-} from "@/redux/features/couponSlice"
-import { SelectChangeEvent } from "@mui/material"
+import { resetCoupon } from "@/redux/features/couponSlice"
+
 import {
   accumulationOfProductsPrice,
   priceToUseCoupon,
@@ -19,25 +15,17 @@ import {
 import { useProductListInCartQuery } from "../hooks/useProductListInCartQuery"
 import { selectCheckedProductList } from "@/redux/features/cartSlice"
 import { useEffect } from "react"
+import useSelectCoupon from "../hooks/useSelectCoupon"
 
 const CouponBar = () => {
-  const { coupons } = useCouponQuery()
+  const { handleSelectedCoupon, seletedCoupon, availableCoupons } =
+    useSelectCoupon()
 
   const dispatch = useAppDispatch()
 
   const { productListInCart } = useProductListInCartQuery()
-  const seletedCoupon = useAppSelector(selectSeletedCoupon)
+
   const checkedProductList = useAppSelector(selectCheckedProductList)
-
-  const handleCouponSelect = (event: SelectChangeEvent<unknown>) => {
-    if (coupons) {
-      const findedCoupon = coupons.find(
-        (coupon) => coupon.name === event.target.value
-      )
-
-      findedCoupon && dispatch(selectCoupon(findedCoupon))
-    }
-  }
 
   const totalPriceOfCheckedProduct =
     productListInCart &&
@@ -84,7 +72,7 @@ const CouponBar = () => {
             id="bonus-coupons"
             value={seletedCoupon?.name ?? ""}
             label="Coupon"
-            onChange={handleCouponSelect}
+            onChange={handleSelectedCoupon}
             disabled={
               totalPriceOfCheckedProduct
                 ? totalPriceOfCheckedProduct < 15000
@@ -98,10 +86,10 @@ const CouponBar = () => {
             >
               선택안함
             </MenuItem>
-            {coupons?.map((coupon) => (
+            {availableCoupons?.map((coupon, index) => (
               <MenuItem
                 sx={{ fontSize: "14px", padding: "5px" }}
-                key={`coupon_${coupon.type}`}
+                key={`coupon_${coupon.type}_${index}`}
                 value={coupon.name}
               >
                 {coupon.name}

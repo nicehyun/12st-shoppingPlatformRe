@@ -22,12 +22,14 @@ const CheckoutOrderListEl = ({ prductInfo }: ICheckoutOrderListEl) => {
   return (
     <li className="py-[18px] flex justify-between border-t-[1px] border-border">
       <div className="grow">
-        <span className="text-lightBlack text-[14px]">{productBrandInfo}</span>
-        <p className="font-bold mb-[40px] h-[67.2px] w-[400px] md:w-[300px] sm:w-[200px] overflow-hidden">
+        <span className="text-lightBlack text-[14px] sm:text-[12px] md:text-[12px]">
+          {productBrandInfo}
+        </span>
+        <p className="font-bold mb-[40px] mt-[10px] h-[67.2px] w-[400px] md:w-[300px] sm:w-[200px] overflow-hidden">
           {name}
         </p>
 
-        <p className="text-lightRed font-bold md:text-[14px]">
+        <p className="text-lightRed md:text-[14px] sm:text-[12px]">
           <span>[{discount}%]</span>{" "}
           <span>{numberToLocaleString(discountedPrice)}원</span> /{" "}
           <span>수량 {amount}개</span>
