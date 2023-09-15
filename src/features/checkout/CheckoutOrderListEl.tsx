@@ -1,5 +1,7 @@
 import { numberToLocaleString } from "@/common/utils/price"
+import { spawn } from "child_process"
 import Image from "next/image"
+import useSelectCoupon from "../cart/hooks/useSelectCoupon"
 import { ProductInCart } from "../cart/types/cart"
 
 interface ICheckoutOrderListEl {
@@ -7,6 +9,8 @@ interface ICheckoutOrderListEl {
 }
 
 const CheckoutOrderListEl = ({ prductInfo }: ICheckoutOrderListEl) => {
+  const { seletedCoupon } = useSelectCoupon()
+
   const {
     mallName,
     brand,
@@ -45,6 +49,8 @@ const CheckoutOrderListEl = ({ prductInfo }: ICheckoutOrderListEl) => {
           priority={true}
         />
       </div>
+
+      {seletedCoupon && <span>ds</span>}
     </li>
   )
 }

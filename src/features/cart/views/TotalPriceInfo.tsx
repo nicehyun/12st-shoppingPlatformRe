@@ -4,15 +4,15 @@ import {
   priceToUseCoupon,
 } from "@/common/utils/price"
 import { selectCheckedProductList } from "@/redux/features/cartSlice"
-import { selectSeletedCoupon } from "@/redux/features/couponSlice"
 import { useAppSelector } from "@/redux/hooks"
 import { BiMinus, BiPlus } from "react-icons/bi"
 import { useProductListInCartQuery } from "../hooks/useProductListInCartQuery"
+import useSelectCoupon from "../hooks/useSelectCoupon"
 import TotalPriceEl from "./TotalPriceEl"
 
 const TotalPriceInfo = () => {
   const checkedProductList = useAppSelector(selectCheckedProductList)
-  const seletedCoupon = useAppSelector(selectSeletedCoupon)
+  const { seletedCoupon } = useSelectCoupon()
 
   const { productListInCart } = useProductListInCartQuery()
 
