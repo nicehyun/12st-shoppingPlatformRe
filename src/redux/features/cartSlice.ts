@@ -1,3 +1,4 @@
+import { ProductsInCart } from "@/features/cart/types/cart"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { RootState } from "../types/store"
 
@@ -13,10 +14,10 @@ const cartSlice = createSlice({
   name: "cart",
   initialState: initialCartState,
   reducers: {
-    allcheckedProduct(state, actions: PayloadAction<string[]>) {
+    allcheckedProduct(state, actions: PayloadAction<ProductsInCart>) {
       const checkedProductList: string[] = []
 
-      actions.payload.map((productId) => checkedProductList.push(productId))
+      actions.payload.map((product) => checkedProductList.push(product.id))
 
       state.checkedProductList = checkedProductList
     },

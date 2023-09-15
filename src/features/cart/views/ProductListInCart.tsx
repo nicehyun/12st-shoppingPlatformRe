@@ -19,7 +19,6 @@ import ProductInCart from "./ProductInCart"
 const ProductListInCart = () => {
   const dispatch = useAppDispatch()
   const checkedProductList = useAppSelector(selectCheckedProductList)
-  console.log(checkedProductList)
 
   const { productListInCart } = useProductListInCartQuery()
 
@@ -36,7 +35,7 @@ const ProductListInCart = () => {
 
   const handleProductAllCheck = () => {
     if (!isAllChecked) {
-      dispatch(allcheckedProduct(checkedProductList))
+      dispatch(allcheckedProduct(productListInCart))
       setIsAllChecked(true)
     } else {
       dispatch(emptyCheckedProductList())
@@ -72,7 +71,7 @@ const ProductListInCart = () => {
       const productsId: string[] = []
       productListInCart.map((product) => productsId.push(product.id))
 
-      dispatch(allcheckedProduct(productsId))
+      dispatch(allcheckedProduct(productListInCart))
       setIsAllChecked(true)
       return
     }
