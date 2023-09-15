@@ -1,4 +1,4 @@
-import { numberToLocaleString } from "@/common/utils/text"
+import { numberToLocaleString } from "@/common/utils/price"
 import Image from "next/image"
 import { ProductInCart } from "../types/cart"
 import ProductInCartController from "./ProductInCartController"

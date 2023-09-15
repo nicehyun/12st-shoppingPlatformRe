@@ -40,6 +40,3 @@ export const truncateText = (text: string, maxLength: number) => {
 export const sliceText = (text: string, endIndex: number) => {
   return text.slice(0, endIndex)
 }
-
-export const numberToLocaleString = (number: number) =>
-  number.toLocaleString("ko-kr")

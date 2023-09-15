@@ -10,13 +10,14 @@ import Typography from "@mui/material/Typography"
 import { BiCommentDetail } from "react-icons/bi"
 import { MdOutlineSell } from "react-icons/md"
 import { BsFillCartDashFill, BsFillCartPlusFill } from "react-icons/bs"
-import { numberToLocaleString, truncateText } from "../utils/text"
+import { truncateText } from "../utils/text"
 import { Product } from "../types/product"
 
 import { checkingTheExistOfProduct } from "../utils/product"
 import { useProductListInCartQuery } from "@/features/cart/hooks/useProductListInCartQuery"
 import { useAddToCartMutaion } from "@/features/cart/hooks/useAddToCartMutaion"
 import useRemoveFromCartMutation from "@/features/cart/hooks/useRemoveFromCartMutation"
+import { numberToLocaleString } from "../utils/price"
 
 interface IProductCard {
   productInfo: Product

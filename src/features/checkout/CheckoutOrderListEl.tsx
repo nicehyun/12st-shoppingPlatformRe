@@ -1,3 +1,4 @@
+import { numberToLocaleString } from "@/common/utils/price"
 import Image from "next/image"
 import { ProductInCart } from "../cart/types/cart"
 
@@ -6,7 +7,16 @@ interface ICheckoutOrderListEl {
 }
 
 const CheckoutOrderListEl = ({ prductInfo }: ICheckoutOrderListEl) => {
-  const { mallName, brand, maker, name, discount, amount, image } = prductInfo
+  const {
+    mallName,
+    brand,
+    maker,
+    name,
+    discount,
+    amount,
+    image,
+    discountedPrice,
+  } = prductInfo
 
   const productBrandInfo = brand || maker || mallName
   return (
@@ -17,8 +27,9 @@ const CheckoutOrderListEl = ({ prductInfo }: ICheckoutOrderListEl) => {
           {name}
         </p>
 
-        <p className="text-lightRed font-bold">
-          <span>[{discount}%]</span> <span>76,900원</span> /{" "}
+        <p className="text-lightRed font-bold md:text-[14px]">
+          <span>[{discount}%]</span>{" "}
+          <span>{numberToLocaleString(discountedPrice)}원</span> /{" "}
           <span>수량 {amount}개</span>
         </p>
       </div>
