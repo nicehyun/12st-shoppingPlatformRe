@@ -71,7 +71,7 @@ const CheckoutForm = () => {
       <CheckoutCouponAndMile />
       <CheckoutPayment />
       <CheckoutTotalPriceInfo />
-      <CheckoutClause />
+      {/* <CheckoutClause /> */}
     </form>
   )
 }
