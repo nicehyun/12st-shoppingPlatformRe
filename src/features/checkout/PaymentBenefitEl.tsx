@@ -12,7 +12,7 @@ const PaymentBenefitEl = ({
   onClickBenefit,
 }: IPaymentBenefitEl) => {
   return (
-    <li className={classNames}>
+    <li className={`${classNames} text-black`}>
       <button
         onClick={onClickBenefit}
         type="button"
@@ -24,7 +24,7 @@ const PaymentBenefitEl = ({
 
         <span className="relative truncate pr-[18px]">
           {benefitTitle}
-          <span className="absolute text-lightBlack top-1/2 right-0 transform -translate-y-1/2">
+          <span className="absolute top-1/2 right-0 transform -translate-y-1/2">
             <AiOutlineRight />
           </span>
         </span>
