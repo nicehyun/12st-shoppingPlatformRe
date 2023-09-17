@@ -68,8 +68,8 @@ const CreditSelect = () => {
         },
       }}
       sx={{
+        fontSize: "14px",
         border: "1px solid rgb(180, 180, 180)",
-
         "& .MuiOutlinedInput-notchedOutline": {
           border: "rgb(180, 180, 180)",
         },
@@ -80,7 +80,7 @@ const CreditSelect = () => {
         <MenuItem
           key={`credit-${index}`}
           value={credit}
-          className="sm:text-[12px] md:text-[14px]"
+          sx={{ fontSize: "14px" }}
         >
           {credit}
         </MenuItem>

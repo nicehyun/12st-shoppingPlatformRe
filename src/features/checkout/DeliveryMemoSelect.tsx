@@ -61,23 +61,23 @@ const DeliveryMemoSelect = () => {
           },
         }}
         sx={{
-          fontSize: "16px",
+          fontSize: "14px",
           border: "1px solid rgb(180, 180, 180)",
 
           "& .MuiOutlinedInput-notchedOutline": {
             border: "rgb(180, 180, 180)",
           },
         }}
-        className={`h-[50px] sm:h-[40px] md:h-[44px] sm:text-[12px] md:text-[14px] dark:text-white w-full`}
+        className={`h-[50px] sm:h-[40px] md:h-[44px] dark:text-white w-full`}
       >
-        <MenuItem disabled value="" className="sm:text-[12px] md:text-[14px]">
+        <MenuItem disabled value="" sx={{ fontSize: "14px" }}>
           배송시 요청사항을 선택해주세요
         </MenuItem>
         {memos.map((memo, index) => (
           <MenuItem
             key={`deliveyMemo-${index}`}
             value={memo}
-            className="sm:text-[12px] md:text-[14px]"
+            sx={{ fontSize: "14px" }}
           >
             {memo}
           </MenuItem>

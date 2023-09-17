@@ -59,25 +59,22 @@ const CouponSelect = () => {
         },
       }}
       sx={{
+        fontSize: "14px",
         border: "1px solid rgb(180, 180, 180)",
-
         "& .MuiOutlinedInput-notchedOutline": {
           border: "rgb(180, 180, 180)",
         },
       }}
       className={`h-[50px] sm:h-[40px] md:h-[44px] sm:text-[12px] md:text-[14px] dark:text-white w-full`}
     >
-      <MenuItem
-        value=""
-        className="sm:text-[12px] md:text-[14px] text-lightBlack"
-      >
+      <MenuItem value="" sx={{ fontSize: "14px" }} className="text-lightBlack">
         선택안함
       </MenuItem>
       {availableCoupons?.map((coupon, index) => (
         <MenuItem
           key={`coupon-${index}`}
           value={coupon.name}
-          className="sm:text-[12px] md:text-[14px]"
+          sx={{ fontSize: "14px" }}
         >
           {coupon.name}
         </MenuItem>
