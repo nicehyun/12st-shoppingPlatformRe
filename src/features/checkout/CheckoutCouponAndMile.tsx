@@ -16,7 +16,7 @@ const CheckoutCouponAndMile = () => {
   const dispatch = useAppDispatch()
   const { seletedCoupon } = useSelectCoupon()
 
-  const [isShowDetail, setIsShowDetail] = useState(false)
+  const [isShowDetail, setIsShowDetail] = useState(true)
 
   const toggleShowDetail = () => {
     setIsShowDetail((prev) => !prev)

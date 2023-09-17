@@ -7,7 +7,7 @@ import {
 } from "@/redux/features/checkoutSlice"
 import { showBasicModal } from "@/redux/features/modalSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import React, { ChangeEventHandler } from "react"
+import React, { ChangeEventHandler, useEffect } from "react"
 import { BsQuestionCircle } from "react-icons/bs"
 import { useGetUserMileQuery } from "./hooks/useGetUserMileQuery"
 import MileExplanation from "./MileExplanation"
@@ -51,6 +51,10 @@ const Mile = () => {
       setPlannedUseMile(junkOfNoMoreThanOneDigit(checkoutPlannedUseMileState))
     )
   }
+
+  useEffect(() => {
+    dispatch(resetPlannedUseMile())
+  }, [])
 
   return (
     <>

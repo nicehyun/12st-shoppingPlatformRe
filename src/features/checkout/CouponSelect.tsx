@@ -4,14 +4,18 @@ import {
   Select,
   SelectChangeEvent,
 } from "@mui/material"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import useCheckoutPrice from "../cart/hooks/useCheckoutPrice"
 
 import useSelectCoupon from "../cart/hooks/useSelectCoupon"
 
 const CouponSelect = () => {
-  const { handleSelectedCoupon, seletedCoupon, availableCoupons } =
-    useSelectCoupon()
+  const {
+    handleSelectedCoupon,
+    seletedCoupon,
+    availableCoupons,
+    resetSelectedCoupon,
+  } = useSelectCoupon()
 
   const { totalPriceOfCheckedProduct } = useCheckoutPrice()
 
@@ -30,6 +34,10 @@ const CouponSelect = () => {
 
     handleClose()
   }
+
+  useEffect(() => {
+    resetSelectedCoupon()
+  }, [])
 
   return (
     <Select
