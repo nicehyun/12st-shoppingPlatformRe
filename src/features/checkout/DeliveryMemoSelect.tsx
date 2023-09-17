@@ -61,8 +61,6 @@ const DeliveryMemoSelect = () => {
           },
         }}
         sx={{
-          width: "500px",
-          height: "50px",
           fontSize: "16px",
           border: "1px solid rgb(180, 180, 180)",
 
@@ -85,7 +83,7 @@ const DeliveryMemoSelect = () => {
           </MenuItem>
         ))}
       </Select>
-      {/* TODO api에서 selectedMemo=== "직접입력일경우 deliveryMemo-direct 가져오기" */}
+
       {selectedMemo === "직접입력" && (
         <textarea
           id="deliveryMemo-direct"
