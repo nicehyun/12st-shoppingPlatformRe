@@ -24,7 +24,7 @@ const CheckoutTotalPriceInfo = () => {
     checkoutPlannedUseMileState +
     totalDeliveryFee
 
-  const [isShowDetail, setIsShowDetail] = useState(false)
+  const [isShowDetail, setIsShowDetail] = useState(true)
 
   const toggleShowDetail = () => {
     setIsShowDetail((prev) => !prev)

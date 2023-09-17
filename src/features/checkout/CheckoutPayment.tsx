@@ -10,7 +10,7 @@ import PaymentBenefit from "./PaymentBenefit"
 import PaymentList from "./PaymentList"
 
 const CheckoutPayment = () => {
-  const [isShowDetail, setIsShowDetail] = useState(false)
+  const [isShowDetail, setIsShowDetail] = useState(true)
 
   const checkoutPaymentState = useAppSelector(selectCheckoutPaymentState)
 
