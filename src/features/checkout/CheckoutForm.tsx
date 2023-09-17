@@ -74,6 +74,7 @@ const CheckoutForm = () => {
       <CheckoutPayment />
       <CheckoutTotalPriceInfo />
       {/* <PcConditionComponent component={<CouponBar />} /> */}
+      <CheckoutClause />
       <MobileViewConditionComponent component={<MCheckoutButton />} />
     </form>
   )

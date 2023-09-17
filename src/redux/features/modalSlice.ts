@@ -1,21 +1,52 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+
 import { RootState } from "../types/store"
 
 interface ShowFeedbackModalPayload {
   modalContent: string
 }
 
-const initialModalState = {
+interface ShowBasicModalPayload {
+  modalId: string
+  modalTitle: string
+  modalContent: JSX.Element
+}
+
+type FeedbackModal = {
+  isShowModal: boolean
+  modalContent: string
+}
+
+type CartModal = {
+  isShowModal: boolean
+}
+
+type BasicModal = {
+  isShowModal: boolean
+  modalId: string
+  modalTitle: string
+  modalContent: JSX.Element | null
+}
+
+type InitialModalState = {
+  feedbackModal: FeedbackModal
+  cartModal: CartModal
+  basicModal: BasicModal
+}
+
+const initialModalState: InitialModalState = {
   feedbackModal: {
     isShowModal: false,
     modalContent: "",
   },
   cartModal: {
-    isShow: false,
-  },
-  explanationModal: {
     isShowModal: false,
-    modalContent: undefined,
+  },
+  basicModal: {
+    isShowModal: false,
+    modalId: "",
+    modalTitle: "",
+    modalContent: null,
   },
 }
 
@@ -32,16 +63,19 @@ const modalSlice = createSlice({
       state.feedbackModal.modalContent = ""
     },
     showCartModal(state) {
-      state.cartModal.isShow = true
+      state.cartModal.isShowModal = true
     },
     hideCartModal(state) {
-      state.cartModal.isShow = false
+      state.cartModal.isShowModal = false
     },
-    showExplanationModal(state) {
-      state.explanationModal.isShowModal = true
+    showBasicModal(state, actions: PayloadAction<ShowBasicModalPayload>) {
+      state.basicModal.isShowModal = true
+      state.basicModal.modalId = actions.payload.modalId
+      state.basicModal.modalTitle = actions.payload.modalTitle
+      state.basicModal.modalContent = actions.payload.modalContent
     },
-    hideExplanationModal(state) {
-      state.explanationModal.isShowModal = false
+    hideBasicModal(state) {
+      state.basicModal.isShowModal = false
     },
   },
 })
@@ -51,8 +85,8 @@ export const {
   hideFeedbackModal,
   showCartModal,
   hideCartModal,
-  showExplanationModal,
-  hideExplanationModal,
+  showBasicModal,
+  hideBasicModal,
 } = modalSlice.actions
 
 export const selectFeedbackModal = (state: RootState) =>
@@ -60,7 +94,7 @@ export const selectFeedbackModal = (state: RootState) =>
 
 export const selectCartModalState = (state: RootState) => state.modal.cartModal
 
-export const selectExplanationModalState = (state: RootState) =>
-  state.modal.explanationModal
+export const selectBasicModalState = (state: RootState) =>
+  state.modal.basicModal
 
 export default modalSlice.reducer

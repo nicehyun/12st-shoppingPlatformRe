@@ -12,20 +12,29 @@ import CheckoutRecipientInput from "./CheckoutRecipientInput"
 import CheckoutAddressInput from "./CheckoutAddressInput"
 import CheckoutPhoneInput from "./CheckoutPhoneInput"
 
-import BasicModal from "@/common/views/BasicModal"
 import DeliveryExplanation from "./DeliveryExplanation"
 import TabPanel from "@/common/views/TabPanel"
-import { useModal } from "@/common/hooks/useModal"
 
 import Checkbox from "@/common/views/Checkbox"
 import DeliveryMemoSelect from "./DeliveryMemoSelect"
+import { showBasicModal } from "@/redux/features/modalSlice"
+import { useAppDispatch } from "@/redux/hooks"
 
 const DeliveryInfo = () => {
+  const dispatch = useAppDispatch()
   const [isDefalutAddressRegistration, setIsDefalutAddressRegistration] =
     useState(false)
   const [deliveryTabvalue, setDeliveryTabvalue] = useState(1)
 
-  const { isShowModal, showModal, hideModal } = useModal()
+  const showDeliveryExplanationModal = () => {
+    dispatch(
+      showBasicModal({
+        modalId: "deliveryExplanation",
+        modalTitle: "배송 안내",
+        modalContent: <DeliveryExplanation />,
+      })
+    )
+  }
 
   const toggleDefalutAddressRegistration = () => {
     setIsDefalutAddressRegistration((prev) => !prev)
@@ -63,7 +72,7 @@ const DeliveryInfo = () => {
         <span className="flex">
           <h3>배송정보</h3>
           <button
-            onClick={showModal}
+            onClick={showDeliveryExplanationModal}
             type="button"
             className="ml-[5px] text-border"
           >
@@ -123,15 +132,6 @@ const DeliveryInfo = () => {
           <DeliveryMemoSelect />
         </TabPanel>
       </Box>
-
-      <BasicModal
-        modalTitle="배송안내"
-        modalId="deliveryExplanation"
-        isShowModal={isShowModal}
-        hideModal={hideModal}
-      >
-        <DeliveryExplanation />
-      </BasicModal>
     </div>
   )
 }

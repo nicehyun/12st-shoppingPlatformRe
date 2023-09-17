@@ -39,7 +39,7 @@ const initialSignUpState: InitialSignUpState = {
   },
   check: { email: false, phone: false, address: false },
   isValid: { password: false, birth: false, name: false },
-  activeStep: 5,
+  activeStep: 0,
 }
 
 const signUpSlice = createSlice({

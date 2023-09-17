@@ -1,6 +1,7 @@
 import { Payment } from "@/features/checkout/PaymentButton"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { RootState } from "../types/store"
+import { checkToAllAgreeClauseByCheckout } from "../utils/clause"
 
 export type CheckoutDeliveryInfoCheck = {
   recipient: boolean
@@ -13,7 +14,12 @@ export type CheckoutPayment = {
   label: string
 }
 
-export type CheckoutClauseCheck = {}
+export type CheckoutClauseCheck = {
+  all: boolean
+  collectionOfUserInfo: boolean
+  provisionOfUserInfo: boolean
+  paymentAgency: boolean
+}
 
 type InitialCheckoutState = {
   deliveryInfo: CheckoutDeliveryInfoCheck
@@ -33,7 +39,12 @@ const initialCartState: InitialCheckoutState = {
     label: "신용/체크카드",
   },
   plannedUseMile: 0,
-  clause: {},
+  clause: {
+    all: false,
+    collectionOfUserInfo: false,
+    provisionOfUserInfo: false,
+    paymentAgency: false,
+  },
 }
 
 const checkoutSlice = createSlice({
@@ -80,6 +91,56 @@ const checkoutSlice = createSlice({
     setPlannedUseMile(state, action: PayloadAction<number>) {
       state.plannedUseMile = action.payload
     },
+
+    toggleCollectionOfUserInfoClause(state) {
+      state.clause.collectionOfUserInfo = !state.clause.collectionOfUserInfo
+
+      if (checkToAllAgreeClauseByCheckout(state.clause)) {
+        state.clause.all = true
+      } else {
+        state.clause.all = false
+      }
+    },
+    togglePaymentAgencyClause(state) {
+      state.clause.paymentAgency = !state.clause.paymentAgency
+
+      if (checkToAllAgreeClauseByCheckout(state.clause)) {
+        state.clause.all = true
+      } else {
+        state.clause.all = false
+      }
+    },
+    toggleprovisionOfUserInfoClause(state) {
+      state.clause.provisionOfUserInfo = !state.clause.provisionOfUserInfo
+
+      if (checkToAllAgreeClauseByCheckout(state.clause)) {
+        state.clause.all = true
+      } else {
+        state.clause.all = false
+      }
+    },
+
+    toggleAgreeToAllClause(state) {
+      state.clause.all = !state.clause.all
+
+      if (state.clause.all) {
+        state.clause.collectionOfUserInfo = true
+        state.clause.paymentAgency = true
+        state.clause.provisionOfUserInfo = true
+
+        return
+      }
+
+      state.clause.collectionOfUserInfo = false
+      state.clause.paymentAgency = false
+      state.clause.provisionOfUserInfo = false
+    },
+    resetAgree(state) {
+      state.clause.all = false
+      state.clause.collectionOfUserInfo = false
+      state.clause.paymentAgency = false
+      state.clause.provisionOfUserInfo = false
+    },
   },
 })
 
@@ -95,7 +156,15 @@ export const {
   selectPayment,
   resetPlannedUseMile,
   setPlannedUseMile,
+  resetAgree,
+  toggleAgreeToAllClause,
+  toggleCollectionOfUserInfoClause,
+  togglePaymentAgencyClause,
+  toggleprovisionOfUserInfoClause,
 } = checkoutSlice.actions
+
+export const selectCheckoutClauseState = (state: RootState) =>
+  state.checkout.clause
 
 export const selectCheckoutDeliveyInfoCheckState = (state: RootState) =>
   state.checkout.deliveryInfo

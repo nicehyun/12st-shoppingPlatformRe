@@ -1,12 +1,13 @@
 import { junkOfNoMoreThanOneDigit } from "@/common/utils/price"
-import BasicModal from "@/common/views/BasicModal"
+
 import {
   resetPlannedUseMile,
   selectCheckoutPlannedUseMileState,
   setPlannedUseMile,
 } from "@/redux/features/checkoutSlice"
+import { showBasicModal } from "@/redux/features/modalSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import React, { ChangeEventHandler, useState } from "react"
+import React, { ChangeEventHandler } from "react"
 import { BsQuestionCircle } from "react-icons/bs"
 import { useGetUserMileQuery } from "./hooks/useGetUserMileQuery"
 import MileExplanation from "./MileExplanation"
@@ -18,15 +19,14 @@ const Mile = () => {
   )
   const { userMile, availableMiles } = useGetUserMileQuery()
 
-  const [isShowMileExplanationModal, setIsShowMileExplanationModal] =
-    useState(false)
-
   const showMileExplanationModal = () => {
-    setIsShowMileExplanationModal(true)
-  }
-
-  const hideMileExplanationModal = () => {
-    setIsShowMileExplanationModal(false)
+    dispatch(
+      showBasicModal({
+        modalId: "MileExplanation",
+        modalTitle: "마일리지 사용 안내",
+        modalContent: <MileExplanation />,
+      })
+    )
   }
 
   const handleUseAllMileButtonClick = () => {
@@ -85,15 +85,6 @@ const Mile = () => {
           <BsQuestionCircle />
         </button>
       </div>
-
-      <BasicModal
-        modalTitle="마일리지 사용 안내"
-        modalId="MileExplanation"
-        isShowModal={isShowMileExplanationModal}
-        hideModal={hideMileExplanationModal}
-      >
-        <MileExplanation />
-      </BasicModal>
     </>
   )
 }

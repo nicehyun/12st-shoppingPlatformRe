@@ -1,16 +1,14 @@
+"use client"
+
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import Modal from "@mui/material/Modal"
-import { ReactNode } from "react"
 import { AiOutlineClose } from "react-icons/ai"
-
-interface IBasicModal {
-  children: ReactNode
-  modalTitle: string
-  modalId: string
-  isShowModal: boolean
-  hideModal: () => void
-}
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import {
+  hideBasicModal,
+  selectBasicModalState,
+} from "@/redux/features/modalSlice"
 
 const style = {
   position: "absolute" as "absolute",
@@ -28,17 +26,15 @@ const style = {
   overflowY: "scroll",
 }
 
-export default function BasicModal({
-  children,
-  modalId,
-  modalTitle,
-  hideModal,
-  isShowModal,
-}: IBasicModal) {
+export default function BasicModal() {
+  const { isShowModal, modalContent, modalId, modalTitle } = useAppSelector(
+    selectBasicModalState
+  )
+  const dispatch = useAppDispatch()
   return (
     <Modal
       open={isShowModal}
-      onClose={hideModal}
+      onClose={() => dispatch(hideBasicModal())}
       aria-labelledby={`modal-${modalId}`}
       aria-describedby={`modal-${modalId}`}
       className="dark:text-black"
@@ -56,10 +52,10 @@ export default function BasicModal({
         >
           {modalTitle}
         </Typography>
-        {children}
+        {modalContent}
 
         <button
-          onClick={hideModal}
+          onClick={() => dispatch(hideBasicModal())}
           className="absolute top-[20px] right-[20px] text-[20px] text-lightBlack"
         >
           <AiOutlineClose />

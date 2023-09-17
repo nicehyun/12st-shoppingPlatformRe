@@ -35,7 +35,7 @@ const CartModal = () => {
   }, [])
   return (
     <>
-      {selectCartModal.isShow && (
+      {selectCartModal.isShowModal && (
         <div
           onClick={onClickCartModal}
           className="absolute top-[90px] right-[80px] z-10 w-[320px] py-[15px] px-[10px] bg-white dark:bg-black border-[1px] border-black dark:border-white rounded-[5px] cursor-default shadow dark:shadow-whiteShadow"

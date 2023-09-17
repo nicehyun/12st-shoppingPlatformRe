@@ -8,6 +8,8 @@ import Header from "@/features/layout/views/Header"
 import Footer from "@/features/layout/views/Footer"
 import FeedbackModal from "@/common/views/FeedbackModal"
 
+import BasicModal from "@/common/views/BasicModal"
+
 const roboto = Roboto({
   weight: ["400", "700"],
   style: ["normal"],
@@ -32,6 +34,7 @@ export default function RootLayout({
           <FeedbackModal />
 
           <Footer />
+          <BasicModal />
         </Providers>
       </body>
     </html>

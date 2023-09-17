@@ -35,7 +35,7 @@ const ClauseCheckbox = ({
     <div
       className={`${classNames} relative p-[8px] flex items-center justify-between w-full`}
     >
-      {/* <span className="py-[5px] mr-[10px] flex justify-between">
+      <span className="py-[5px] mr-[10px] flex justify-between">
         <input
           type="checkbox"
           checked={isChecked}
@@ -63,7 +63,7 @@ const ClauseCheckbox = ({
         >
           약관보기
         </button>
-      )} */}
+      )}
     </div>
   )
 }

@@ -1,6 +1,7 @@
 "use client"
 
-import BasicModal from "@/common/views/BasicModal"
+import { showBasicModal } from "@/redux/features/modalSlice"
+import { useAppDispatch } from "@/redux/hooks"
 
 import { useState } from "react"
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai"
@@ -12,10 +13,8 @@ import CouponSelect from "./CouponSelect"
 import Mile from "./Mile"
 
 const CheckoutCouponAndMile = () => {
+  const dispatch = useAppDispatch()
   const { seletedCoupon } = useSelectCoupon()
-
-  const [isShowCouponExplanationModal, setIsShowCouponExplanationModal] =
-    useState(false)
 
   const [isShowDetail, setIsShowDetail] = useState(false)
 
@@ -24,11 +23,13 @@ const CheckoutCouponAndMile = () => {
   }
 
   const showCouponExplanationModal = () => {
-    setIsShowCouponExplanationModal(true)
-  }
-
-  const hideCouponExplanationModal = () => {
-    setIsShowCouponExplanationModal(false)
+    dispatch(
+      showBasicModal({
+        modalId: "couponExplanation",
+        modalTitle: "쿠폰 안내",
+        modalContent: <CouponExplanation />,
+      })
+    )
   }
 
   return (
@@ -81,15 +82,6 @@ const CheckoutCouponAndMile = () => {
           <Mile />
         </div>
       </div>
-
-      <BasicModal
-        modalTitle="쿠폰 안내"
-        modalId="couponExplanation"
-        isShowModal={isShowCouponExplanationModal}
-        hideModal={hideCouponExplanationModal}
-      >
-        <CouponExplanation />
-      </BasicModal>
     </div>
   )
 }
