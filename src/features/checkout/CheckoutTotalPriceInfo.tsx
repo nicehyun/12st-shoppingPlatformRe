@@ -1,12 +1,28 @@
 "use client"
 import { numberToLocaleString } from "@/common/utils/price"
+import { selectCheckoutPlannedUseMileState } from "@/redux/features/checkoutSlice"
+import { useAppSelector } from "@/redux/hooks"
 import { useState } from "react"
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai"
 import useCheckoutPrice from "../cart/hooks/useCheckoutPrice"
 import TotalPriceList from "../cart/views/TotalPriceList"
 
 const CheckoutTotalPriceInfo = () => {
-  const { totalPriceOfCheckedProduct } = useCheckoutPrice()
+  const {
+    discountedPriceWithCoupon,
+    totalPriceOfCheckedProduct,
+    totalDeliveryFee,
+  } = useCheckoutPrice()
+
+  const checkoutPlannedUseMileState = useAppSelector(
+    selectCheckoutPlannedUseMileState
+  )
+
+  const totalCheckoutPirce =
+    totalPriceOfCheckedProduct -
+    discountedPriceWithCoupon -
+    checkoutPlannedUseMileState +
+    totalDeliveryFee
 
   const [isShowDetail, setIsShowDetail] = useState(false)
 
@@ -21,7 +37,7 @@ const CheckoutTotalPriceInfo = () => {
 
         <div className="flex">
           <p className="text-[18px] text-lightRed">
-            {numberToLocaleString(totalPriceOfCheckedProduct)}
+            {numberToLocaleString(totalCheckoutPirce)}
             <span className="text-[12px]">원</span>
           </p>
           <button

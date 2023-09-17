@@ -1,4 +1,5 @@
 "use client"
+import MobileViewConditionComponent from "@/common/views/MobileViewConditionComponent"
 import { updateAddress } from "@/firebase/firestore/address"
 import { selectCheckoutPaymentState } from "@/redux/features/checkoutSlice"
 import { useAppSelector } from "@/redux/hooks"
@@ -10,6 +11,7 @@ import CheckoutOrderListInfo from "./CheckoutOrderListInfo"
 import CheckoutPayment from "./CheckoutPayment"
 import CheckoutTotalPriceInfo from "./CheckoutTotalPriceInfo"
 import DeliveryInfo from "./DeliveryInfo"
+import MCheckoutButton from "./MCheckoutButton"
 
 const CheckoutForm = () => {
   const { sessionQuery } = useSessionQuery()
@@ -71,7 +73,8 @@ const CheckoutForm = () => {
       <CheckoutCouponAndMile />
       <CheckoutPayment />
       <CheckoutTotalPriceInfo />
-      {/* <CheckoutClause /> */}
+      {/* <PcConditionComponent component={<CouponBar />} /> */}
+      <MobileViewConditionComponent component={<MCheckoutButton />} />
     </form>
   )
 }

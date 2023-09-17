@@ -19,6 +19,7 @@ type InitialCheckoutState = {
   deliveryInfo: CheckoutDeliveryInfoCheck
   clause: CheckoutClauseCheck
   payment: CheckoutPayment
+  plannedUseMile: number
 }
 
 const initialCartState: InitialCheckoutState = {
@@ -31,6 +32,7 @@ const initialCartState: InitialCheckoutState = {
     value: "credit",
     label: "신용/체크카드",
   },
+  plannedUseMile: 0,
   clause: {},
 }
 
@@ -61,12 +63,22 @@ const checkoutSlice = createSlice({
     uncheckToRecipient(state) {
       state.deliveryInfo.recipient = false
     },
+    resetSelectPayment(state) {
+      state.payment.label = "신용/체크카드"
+      state.payment.value = "credit"
+    },
     selectPayment(
       state,
       action: PayloadAction<{ value: Payment; label: string }>
     ) {
       state.payment.label = action.payload.label
       state.payment.value = action.payload.value
+    },
+    resetPlannedUseMile(state) {
+      state.plannedUseMile = 0
+    },
+    setPlannedUseMile(state, action: PayloadAction<number>) {
+      state.plannedUseMile = action.payload
     },
   },
 })
@@ -79,7 +91,10 @@ export const {
   uncheckToAddress,
   uncheckToPhone,
   uncheckToRecipient,
+  resetSelectPayment,
   selectPayment,
+  resetPlannedUseMile,
+  setPlannedUseMile,
 } = checkoutSlice.actions
 
 export const selectCheckoutDeliveyInfoCheckState = (state: RootState) =>
@@ -87,5 +102,8 @@ export const selectCheckoutDeliveyInfoCheckState = (state: RootState) =>
 
 export const selectCheckoutPaymentState = (state: RootState) =>
   state.checkout.payment
+
+export const selectCheckoutPlannedUseMileState = (state: RootState) =>
+  state.checkout.plannedUseMile
 
 export default checkoutSlice.reducer
