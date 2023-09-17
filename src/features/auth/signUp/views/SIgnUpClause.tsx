@@ -1,5 +1,7 @@
 "use client"
 
+import ClauseCheckbox from "@/common/views/ClauseCheckbox"
+import { showBasicModal } from "@/redux/features/modalSlice"
 import {
   toggleAgreeToAllClause,
   seletSignUpClauseState,
@@ -9,7 +11,9 @@ import {
   toggleAgreeToTermClause,
 } from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import SignUpClauseEl from "./SIgnUpClauseEl"
+import MarketingClause from "./MarketingClause"
+import SignupCollectionOfUserInfoClause from "./SignupCollectionOfUserInfoClause"
+import TermClause from "./TermClause"
 
 const SignUpClause = () => {
   const { age, marketing, privacy, term, all } = useAppSelector(
@@ -18,6 +22,35 @@ const SignUpClause = () => {
 
   const dispatch = useAppDispatch()
 
+  const handleTermClauseClick = () => {
+    dispatch(
+      showBasicModal({
+        modalId: "clause-term",
+        modalTitle: "이용약관 동의",
+        modalContent: <TermClause />,
+      })
+    )
+  }
+  const handlePrivacyClauseClick = () => {
+    dispatch(
+      showBasicModal({
+        modalId: "clause-privacy",
+        modalTitle: "개인정보 수집 및 이용 동의",
+        modalContent: <SignupCollectionOfUserInfoClause />,
+      })
+    )
+  }
+
+  const handleMarketingClauseClick = () => {
+    dispatch(
+      showBasicModal({
+        modalId: "clause-marketing",
+        modalTitle: "광고성 정보 수신 및 마케팅 활용 동의",
+        modalContent: <MarketingClause />,
+      })
+    )
+  }
+
   return (
     <div className="flex flex-col px-[10px] py-[20px]">
       <h3 className="text-[16px] pt-[18px] font-bold tracking-[1.5px] mr-[80px] mb-[50px]">
@@ -25,7 +58,7 @@ const SignUpClause = () => {
       </h3>
 
       <div className="flex-grow">
-        <SignUpClauseEl
+        <ClauseCheckbox
           clauseType="all"
           label="모두 동의 (선택 정보 포함)"
           isClause={false}
@@ -35,10 +68,10 @@ const SignUpClause = () => {
           peerChecked={{
             borderColor: "peer-checked/all:after:border-lightRed",
           }}
-          onClickClause={() => dispatch(toggleAgreeToAllClause())}
+          onClickClauseLabel={() => dispatch(toggleAgreeToAllClause())}
         />
 
-        <SignUpClauseEl
+        <ClauseCheckbox
           clauseType="age"
           label="만 14세 이상입니다"
           isClause={false}
@@ -48,10 +81,10 @@ const SignUpClause = () => {
           peerChecked={{
             borderColor: "peer-checked/age:after:border-lightRed",
           }}
-          onClickClause={() => dispatch(toggleAgreeToAgeClause())}
+          onClickClauseLabel={() => dispatch(toggleAgreeToAgeClause())}
         />
 
-        <SignUpClauseEl
+        <ClauseCheckbox
           clauseType="term"
           label="이용약관 동의"
           isClause={true}
@@ -61,10 +94,11 @@ const SignUpClause = () => {
           peerChecked={{
             borderColor: "peer-checked/term:after:border-lightRed",
           }}
-          onClickClause={() => dispatch(toggleAgreeToTermClause())}
+          onClickClauseLabel={() => dispatch(toggleAgreeToTermClause())}
+          onClickDetailClause={handleTermClauseClick}
         />
 
-        <SignUpClauseEl
+        <ClauseCheckbox
           clauseType="privacy"
           label="개인정보 수집 및 이용 동의"
           isClause={true}
@@ -74,10 +108,11 @@ const SignUpClause = () => {
           peerChecked={{
             borderColor: "peer-checked/privacy:after:border-lightRed",
           }}
-          onClickClause={() => dispatch(toggleAgreeToPrivacyClause())}
+          onClickClauseLabel={() => dispatch(toggleAgreeToPrivacyClause())}
+          onClickDetailClause={handlePrivacyClauseClick}
         />
 
-        <SignUpClauseEl
+        <ClauseCheckbox
           clauseType="marketing"
           label="광고성 정보 수신 및 마케팅 활용 동의"
           isClause={true}
@@ -87,7 +122,8 @@ const SignUpClause = () => {
           peerChecked={{
             borderColor: "peer-checked/marketing:after:border-lightRed",
           }}
-          onClickClause={() => dispatch(toggleAgreeToMarketingClause())}
+          onClickClauseLabel={() => dispatch(toggleAgreeToMarketingClause())}
+          onClickDetailClause={handleMarketingClauseClick}
         />
       </div>
     </div>

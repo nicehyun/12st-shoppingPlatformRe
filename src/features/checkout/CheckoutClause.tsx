@@ -10,8 +10,8 @@ import {
 } from "@/redux/features/checkoutSlice"
 import { showBasicModal } from "@/redux/features/modalSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import CollectionOfUserInfoClause from "../clause/CollectionOfUserInfoClause"
-import ProvisionOfUserInfoClause from "../clause/ProvisionOfUserInfoClause"
+import CollectionOfUserInfoClause from "./CollectionOfUserInfoClause"
+import ProvisionOfUserInfoClause from "./ProvisionOfUserInfoClause"
 
 const CheckoutClause = () => {
   const { all, collectionOfUserInfo, paymentAgency, provisionOfUserInfo } =
