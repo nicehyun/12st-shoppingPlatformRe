@@ -8,12 +8,39 @@ import {
   togglePaymentAgencyClause,
   toggleprovisionOfUserInfoClause,
 } from "@/redux/features/checkoutSlice"
+import { showBasicModal } from "@/redux/features/modalSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import CollectionOfUserInfoClause from "../clause/CollectionOfUserInfoClause"
+import ProvisionOfUserInfoClause from "../clause/ProvisionOfUserInfoClause"
 
 const CheckoutClause = () => {
   const { all, collectionOfUserInfo, paymentAgency, provisionOfUserInfo } =
     useAppSelector(selectCheckoutClauseState)
   const dispatch = useAppDispatch()
+
+  const handleColletionOfUserInfoClauseClick = () => {
+    dispatch(
+      showBasicModal({
+        modalId: "clause-collectionOfUserInfo",
+        modalTitle: "개인정보 수집 및 이용 동의",
+        modalContent: <CollectionOfUserInfoClause />,
+      })
+    )
+  }
+
+  const handleProvisionOfUserInfoClauseClick = () => {
+    dispatch(
+      showBasicModal({
+        modalId: "clause-ProvisionOfUserInfo",
+        modalTitle: "개인정보 제3자 제공",
+        modalContent: <ProvisionOfUserInfoClause />,
+      })
+    )
+  }
+
+  const handlePaymentAgencyClauseClick = (href: string) => {
+    window.open(href)
+  }
 
   return (
     <div className="border-t-[2px] border-black">
@@ -28,7 +55,7 @@ const CheckoutClause = () => {
           peerChecked={{
             borderColor: "peer-checked/checkout-all:after:border-lightRed",
           }}
-          onClickClause={() => dispatch(toggleAgreeToAllClause())}
+          onClickClauseLabel={() => dispatch(toggleAgreeToAllClause())}
         />
       </div>
 
@@ -43,7 +70,8 @@ const CheckoutClause = () => {
           borderColor:
             "peer-checked/checkout-collectionOfUserInfo:after:border-lightRed",
         }}
-        onClickClause={() => dispatch(toggleCollectionOfUserInfoClause())}
+        onClickClauseLabel={() => dispatch(toggleCollectionOfUserInfoClause())}
+        onClickDetailClause={handleColletionOfUserInfoClauseClick}
       />
 
       <ClauseCheckbox
@@ -57,7 +85,8 @@ const CheckoutClause = () => {
           borderColor:
             "peer-checked/checkout-provisionOfUserInfo:after:border-lightRed",
         }}
-        onClickClause={() => dispatch(toggleprovisionOfUserInfoClause())}
+        onClickClauseLabel={() => dispatch(toggleprovisionOfUserInfoClause())}
+        onClickDetailClause={handleProvisionOfUserInfoClauseClick}
       />
 
       <ClauseCheckbox
@@ -71,7 +100,10 @@ const CheckoutClause = () => {
           borderColor:
             "peer-checked/checkout-paymentAgencyClause:after:border-lightRed",
         }}
-        onClickClause={() => dispatch(togglePaymentAgencyClause())}
+        onClickClauseLabel={() => dispatch(togglePaymentAgencyClause())}
+        onClickDetailClause={() =>
+          handlePaymentAgencyClauseClick("https://www.inicis.com/terms")
+        }
       />
     </div>
   )
