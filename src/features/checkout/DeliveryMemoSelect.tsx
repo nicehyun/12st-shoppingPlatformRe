@@ -68,7 +68,7 @@ const DeliveryMemoSelect = () => {
             border: "rgb(180, 180, 180)",
           },
         }}
-        className={`h-[50px] sm:h-[40px] md:h-[44px] dark:text-white w-full`}
+        className={`h-[50px] sm:h-[40px] md:h-[44px] w-full bg-white dark:bg-lightBorder`}
       >
         <MenuItem disabled value="" sx={{ fontSize: "14px" }}>
           배송시 요청사항을 선택해주세요

@@ -73,17 +73,16 @@ const CouponSelect = () => {
           border: "rgb(180, 180, 180)",
         },
       }}
-      className={`h-[50px] sm:h-[40px] md:h-[44px] sm:text-[12px] md:text-[14px] dark:text-white w-full`}
+      className={`h-[50px] sm:h-[40px] md:h-[44px] sm:text-[12px] md:text-[14px] dark:text-white w-full bg-lightBorder`}
     >
-      <MenuItem value="" sx={{ fontSize: "14px" }} className="text-lightBlack">
+      <MenuItem
+        value=""
+        className="text-lightBlack sm:text-[12px] md:text-[14px]"
+      >
         선택안함
       </MenuItem>
       {availableCoupons?.map((coupon, index) => (
-        <MenuItem
-          key={`coupon-${index}`}
-          value={coupon.name}
-          sx={{ fontSize: "14px" }}
-        >
+        <MenuItem key={`coupon-${index}`} value={coupon.name}>
           {coupon.name}
         </MenuItem>
       ))}

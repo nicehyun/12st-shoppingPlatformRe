@@ -1,7 +1,7 @@
 "use client"
 
 import { ThemeProvider } from "next-themes"
-import { ReactNode, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
 interface IThemeProvider {
   children: React.ReactNode

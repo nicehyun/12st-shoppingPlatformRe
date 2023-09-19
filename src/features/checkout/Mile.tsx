@@ -64,13 +64,13 @@ const Mile = () => {
           value={checkoutPlannedUseMileState}
           onChange={handleUseMileValueChange}
           onBlur={handleUseMileBlur}
-          className="rounded-[5px] py-[14px] px-[20px] grow max-w-[300px] h-[50px] sm:h-[40px] md:h-[44px] sm:text-[14px] md:text-[14px] dark:text-white"
+          className="rounded-[5px] py-[14px] px-[20px] grow max-w-[300px] h-[50px] sm:h-[40px] md:h-[44px] sm:text-[14px] md:text-[14px] bg-white dark:bg-lightBorder text-lightBlack"
         />
 
         <button
           type="button"
           onClick={handleUseAllMileButtonClick}
-          className="bg-border w-[70px] ml-[10px] md:text-[14px] sm:text-[14px] rounded-[5px]"
+          className="bg-border w-[70px] ml-[10px] text-[14px] rounded-[5px]"
         >
           모두 사용
         </button>

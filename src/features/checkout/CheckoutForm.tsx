@@ -13,6 +13,7 @@ import CheckoutTotalPriceInfo from "./CheckoutTotalPriceInfo"
 import DeliveryInfo from "./DeliveryInfo"
 import MCheckoutButton from "./MCheckoutButton"
 
+// TODO : Submit 설정하기
 const CheckoutForm = () => {
   const { sessionQuery } = useSessionQuery()
   const checkoutPaymentState = useAppSelector(selectCheckoutPaymentState)

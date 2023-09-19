@@ -74,7 +74,7 @@ const CreditSelect = () => {
           border: "rgb(180, 180, 180)",
         },
       }}
-      className={`h-[50px] sm:h-[40px] md:h-[44px] sm:text-[12px] md:text-[14px] dark:text-white w-full mb-[20px]`}
+      className={`h-[50px] sm:h-[40px] md:h-[44px] sm:text-[12px] md:text-[14px] w-full mb-[20px] bg-white dark:bg-lightBorder`}
     >
       {creditList?.map((credit, index) => (
         <MenuItem
