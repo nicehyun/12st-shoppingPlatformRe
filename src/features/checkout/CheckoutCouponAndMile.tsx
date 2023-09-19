@@ -33,7 +33,7 @@ const CheckoutCouponAndMile = () => {
   }
 
   return (
-    <div className="border-t-[2px] border-black">
+    <section className="border-t-[2px] border-black">
       <div className="flex justify-between py-[18px] font-bold border-b-[1px] border-border">
         <span className="flex">
           <h3>쿠폰 / 마일리지</h3>
@@ -82,7 +82,7 @@ const CheckoutCouponAndMile = () => {
           <Mile />
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 

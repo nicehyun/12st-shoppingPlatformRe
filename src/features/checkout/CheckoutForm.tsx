@@ -89,13 +89,12 @@ const CheckoutForm = () => {
   }
 
   return (
-    <form onSubmit={testSubmit}>
+    <form onSubmit={testSubmit} className="max-w-[800px] mx-auto">
       <DeliveryInfo />
       <CheckoutOrderListInfo />
       <CheckoutCouponAndMile />
       <CheckoutPayment />
       <CheckoutTotalPriceInfo />
-      {/* <PcConditionComponent component={<CouponBar />} /> */}
       <CheckoutClause />
       <MobileViewConditionComponent component={<MCheckoutButton />} />
     </form>

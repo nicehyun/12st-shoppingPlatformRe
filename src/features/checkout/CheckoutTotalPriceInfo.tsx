@@ -31,7 +31,7 @@ const CheckoutTotalPriceInfo = () => {
   }
 
   return (
-    <div className="border-t-[2px] border-black">
+    <section className="border-t-[2px] border-black">
       <div className="flex items-center justify-between py-[18px] font-bold border-b-[1px] border-border">
         <h3>결제금액</h3>
 
@@ -59,7 +59,7 @@ const CheckoutTotalPriceInfo = () => {
       >
         <TotalPriceList />
       </div>
-    </div>
+    </section>
   )
 }
 

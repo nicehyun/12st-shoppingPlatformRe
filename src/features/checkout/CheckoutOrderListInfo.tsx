@@ -9,7 +9,7 @@ const CheckoutOrderListInfo = () => {
   const [isShowDetail, setIsShowDetail] = useState(false)
   const checkedProductList = useAppSelector(selectCheckedProductList)
 
-  const { calculatedDiscountPerProductArr } = useCheckoutPrice() // [2500, 2500]
+  const { calculatedDiscountPerProductArr } = useCheckoutPrice()
 
   const renderProductList = () => {
     if (isShowDetail) {
@@ -41,7 +41,7 @@ const CheckoutOrderListInfo = () => {
   }
 
   return (
-    <div className="border-t-[2px] border-black">
+    <section className="border-t-[2px] border-black">
       <h3 className="py-[18px] font-bold">주문상품 정보</h3>
       <ul>{renderProductList()}</ul>
 
@@ -59,7 +59,7 @@ const CheckoutOrderListInfo = () => {
           {isShowDetail ? <BsCaretUpFill /> : <BsCaretDownFill />}
         </span>
       </button>
-    </div>
+    </section>
   )
 }
 

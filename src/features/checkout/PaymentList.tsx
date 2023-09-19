@@ -2,7 +2,7 @@ import PaymentButton from "./PaymentButton"
 
 const PaymentList = () => {
   return (
-    <div className="grid grid-cols-4 xl:grid-cols-2 gap-4 mb-[20px] pt-[50px]">
+    <div className="grid grid-cols-4 xl:grid-cols-2 gap-4 mb-[50px] pt-[50px]">
       <PaymentButton
         buttonContent="신용/체크카드"
         paymentButtonValue="credit"

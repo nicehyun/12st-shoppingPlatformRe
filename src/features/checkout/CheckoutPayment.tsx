@@ -19,7 +19,7 @@ const CheckoutPayment = () => {
   }
 
   return (
-    <div className="border-t-[2px] border-black">
+    <section className="border-t-[2px] border-black">
       <div className="flex justify-between py-[18px] font-bold border-b-[1px] border-border">
         <h3>결제방법</h3>
 
@@ -41,7 +41,9 @@ const CheckoutPayment = () => {
 
       <div
         className={`opacity-${isShowDetail ? "100" : "0"} ${
-          isShowDetail ? "visible max-h-[500px]" : "invisible max-h-0"
+          isShowDetail
+            ? "visible max-h-[500px] lg:max-h-[700px] xl:max-h-[700px]"
+            : "invisible max-h-0"
         } transition-max-h transition-p transition-3`}
       >
         <PaymentList />
@@ -55,7 +57,7 @@ const CheckoutPayment = () => {
 
         <PaymentBenefit />
       </div>
-    </div>
+    </section>
   )
 }
 

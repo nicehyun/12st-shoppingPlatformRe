@@ -67,7 +67,7 @@ const DeliveryInfo = () => {
   }
 
   return (
-    <div className="border-t-[2px] border-black">
+    <section className="border-t-[2px] border-black">
       <div className="flex justify-between py-[18px] font-bold">
         <span className="flex">
           <h3>배송정보</h3>
@@ -132,7 +132,7 @@ const DeliveryInfo = () => {
           <DeliveryMemoSelect />
         </TabPanel>
       </Box>
-    </div>
+    </section>
   )
 }
 

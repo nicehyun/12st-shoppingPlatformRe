@@ -43,7 +43,7 @@ const CheckoutClause = () => {
   }
 
   return (
-    <div className="border-t-[2px] border-black">
+    <section className="border-t-[2px] border-black">
       <div className="flex justify-between font-bold border-border">
         <ClauseCheckbox
           clauseType="all"
@@ -105,7 +105,7 @@ const CheckoutClause = () => {
           handlePaymentAgencyClauseClick("https://www.inicis.com/terms")
         }
       />
-    </div>
+    </section>
   )
 }
 
