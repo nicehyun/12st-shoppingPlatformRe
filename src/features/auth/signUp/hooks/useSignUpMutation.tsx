@@ -1,11 +1,9 @@
-import { useAppDispatch } from "@/redux/hooks"
 import { useMutation } from "@tanstack/react-query"
 import { signUpAPI } from "../models/signUpApi"
 import { useFeedbackModal } from "./useFeedbackModal"
 
 const useSignUpMutation = () => {
   const { showFeedbackModalWithContent } = useFeedbackModal()
-  const dispatch = useAppDispatch()
 
   const signUpMutation = useMutation(
     (formData: FormData) => signUpAPI.signUp(formData),

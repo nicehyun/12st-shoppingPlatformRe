@@ -60,6 +60,7 @@ const Mile = () => {
     <>
       <div className="flex">
         <input
+          name="useMile"
           type="text"
           value={checkoutPlannedUseMileState}
           onChange={handleUseMileValueChange}

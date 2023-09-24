@@ -6,15 +6,14 @@ import {
 } from "@mui/material"
 import { useEffect, useState } from "react"
 import useCheckoutPrice from "../cart/hooks/useCheckoutPrice"
-
 import useSelectCoupon from "../cart/hooks/useSelectCoupon"
 
 const CouponSelect = () => {
   const {
     handleSelectedCoupon,
-    seletedCoupon,
     availableCoupons,
     resetSelectedCoupon,
+    selectedCoupon,
   } = useSelectCoupon()
 
   const { totalPriceOfCheckedProduct } = useCheckoutPrice()
@@ -47,7 +46,7 @@ const CouponSelect = () => {
       onClose={handleClose}
       onOpen={handleOpen}
       displayEmpty
-      value={seletedCoupon ? seletedCoupon.name : ""}
+      value={selectedCoupon ? selectedCoupon.name : ""}
       onChange={handleSelectChange}
       input={<OutlinedInput />}
       renderValue={(selected: string) => {

@@ -14,7 +14,7 @@ import Mile from "./Mile"
 
 const CheckoutCouponAndMile = () => {
   const dispatch = useAppDispatch()
-  const { seletedCoupon } = useSelectCoupon()
+  const { selectedCoupon } = useSelectCoupon()
 
   const [isShowDetail, setIsShowDetail] = useState(true)
 
@@ -48,7 +48,7 @@ const CheckoutCouponAndMile = () => {
 
         <div className="flex items-center">
           <p className="text-[14px] md:text-[12px] sm:text-[12px] text-border">
-            쿠폰 {seletedCoupon ? "적용" : "미적용"} / 0P 사용
+            쿠폰 {selectedCoupon ? "적용" : "미적용"} / 0P 사용
           </p>
           <button
             onClick={toggleShowDetail}

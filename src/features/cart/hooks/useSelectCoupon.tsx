@@ -9,7 +9,7 @@ import useCouponQuery from "./useCouponQuery"
 
 const useSelectCoupon = () => {
   const dispatch = useAppDispatch()
-  const seletedCoupon = useAppSelector(selectSelectedCoupon)
+  const selectedCoupon = useAppSelector(selectSelectedCoupon)
 
   const { coupons } = useCouponQuery()
 
@@ -29,7 +29,7 @@ const useSelectCoupon = () => {
 
   return {
     availableCoupons: coupons,
-    seletedCoupon,
+    selectedCoupon,
     handleSelectedCoupon,
     resetSelectedCoupon,
   }

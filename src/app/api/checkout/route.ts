@@ -1,23 +1,31 @@
-import { NextResponse } from "next/server"
+import { CheckoutList } from "@/common/types/checkout"
 
-export async function POST(request: Request) {
-  const formData = await request.formData()
+import { updateAddress } from "@/firebase/firestore/address"
+import { addCheckoutList } from "@/firebase/firestore/checkout"
 
-  // const userInfo: UserInfo = {
-  //   email: formData.get("email") as string,
-  //   password: await bcrypt.hash(formData.get("password") as string, 10),
-  //   name: formData.get("name") as string,
-  //   phone: formData.get("phone") as string,
-  //   address: formData.get("address") as string,
-  //   additionalAddress: formData.get("additionalAddress") as string,
-  //   gender: formData.get("gender") as Gender,
-  //   birth:
-  //     (((formData.get("birthYear") as string) +
-  //       formData.get("birthMonth")) as string) + formData.get("birthDay"),
-  //   marketingClause: formData.get("marketing") === "on",
-  // }
+import { NextRequest, NextResponse } from "next/server"
 
-  // const response = await addUserInfo(userInfo)
+// TODO : 유효성 검사 동일하게 진행하기
+export async function POST(request: NextRequest) {
+  const {
+    checkoutInfo,
+    email,
+    isDefalutAddressCheck,
+  }: {
+    checkoutInfo: CheckoutList
+    email: string
+    isDefalutAddressCheck: boolean
+  } = await request.json()
 
-  // return NextResponse.json(response)
+  if (isDefalutAddressCheck) {
+    await updateAddress(email, {
+      additionalAddress: checkoutInfo.additionalAddress,
+      address: checkoutInfo.address,
+      zipcode: checkoutInfo.zipcode,
+    })
+  }
+
+  const response = await addCheckoutList(email, checkoutInfo)
+
+  return NextResponse.json(response)
 }
