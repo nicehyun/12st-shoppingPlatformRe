@@ -1,11 +1,9 @@
-import styled from "@emotion/styled"
-
 interface ILoadingProps {
   spinnerSize: {
     width: string
     height: string
   }
-  height?: number
+  height?: string
   content?: string
   isFrame?: boolean
 }
@@ -13,15 +11,15 @@ interface ILoadingProps {
 // frame 미사용시 height 전달하지 않아도 되지만, frame 사용 시 height 전달해야 함.
 const Loading = ({
   content = "",
-  height = 0,
+  height = "",
   spinnerSize,
   isFrame = true,
 }: ILoadingProps) => {
   return (
     <div
-      className={`${isFrame && height} ${
+      className={`${height} ${
         isFrame && "border-[3px] border-black py-[80px]"
-      } flexCenter flex-col`}
+      } flexCenter flex-col `}
     >
       <p className={`${content && "mb-[40px] text-[24px] font-bold"}`}>
         {content}

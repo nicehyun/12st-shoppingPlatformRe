@@ -2,6 +2,7 @@
 
 import { ROUTE } from "@/common/hooks/useNavigations"
 import Empty from "@/common/views/Empty"
+import Loading from "@/common/views/Loading"
 import {
   allcheckedProduct,
   checkedProduct,
@@ -21,7 +22,8 @@ const ProductListInCart = () => {
   const dispatch = useAppDispatch()
   const checkedProductList = useAppSelector(selectCheckedProductList)
 
-  const { productListInCart } = useProductListInCartQuery()
+  const { productListInCart, isLoading: isCartFetchLoading } =
+    useProductListInCartQuery()
 
   const [isAllChecked, setIsAllChecked] = useState(false)
 
@@ -88,43 +90,54 @@ const ProductListInCart = () => {
 
   return (
     <section className="border-[1px] border-border bg-white py-[30px] px-[20px] shadow rounded-[5px]">
-      <div className="relative mb-[30px] pb-[30px] border-b-[1px] border-lightBlack flex items-center">
-        <input
-          type="checkbox"
-          checked={isAllChecked}
-          onChange={handleProductAllCheck}
-          className="mr-[10px] w-[18px] h-[18px] md:w-[16px] md:h-[16px] sm:w-[14px] sm:h-[14px] cursor-pointer"
+      {isCartFetchLoading ? (
+        <Loading
+          spinnerSize={{ width: "w-[50px]", height: "h-[50px]" }}
+          height="h-[400px]"
+          isFrame={false}
         />
-        <span className="text-[14px] md:text-[12px] sm:text-[10px] text-black">
-          선택 {checkedProductList.length}개
-        </span>
-        <button
-          onClick={() => handleCheckedProductRemove(checkedProductList)}
-          className="absolute right-0 text-border transition-3 hover:text-lightRed text-[14px] md:text-[12px] sm:text-[10px]"
-        >
-          선택 삭제
-        </button>
-      </div>
-
-      {productListInCart.length ? (
-        <ul>
-          {productListInCart.map((product) => (
-            <ProductInCart
-              key={product.name}
-              productInfo={product}
-              isChecked={checkedProductList.includes(product) || isAllChecked}
-              onClickCheck={() => handleProductCheck(product)}
-              onEmptyCheckedProductList={handleCheckedProductListEmpty}
-            />
-          ))}
-        </ul>
       ) : (
-        <Empty
-          content="장바구니에 담은 상품이 없습니다"
-          routeArray={[
-            { routeContent: "CONTINUE SHOPPING", route: ROUTE.HOME },
-          ]}
-        />
+        <>
+          <div className="relative mb-[30px] pb-[30px] border-b-[1px] border-lightBlack flex items-center">
+            <input
+              type="checkbox"
+              checked={isAllChecked}
+              onChange={handleProductAllCheck}
+              className="mr-[10px] w-[18px] h-[18px] md:w-[16px] md:h-[16px] sm:w-[14px] sm:h-[14px] cursor-pointer"
+            />
+            <span className="text-[14px] md:text-[12px] sm:text-[10px] text-black">
+              선택 {checkedProductList.length}개
+            </span>
+            <button
+              onClick={() => handleCheckedProductRemove(checkedProductList)}
+              className="absolute right-0 text-border transition-3 hover:text-lightRed text-[14px] md:text-[12px] sm:text-[10px]"
+            >
+              선택 삭제
+            </button>
+          </div>
+          {productListInCart.length ? (
+            <ul>
+              {productListInCart.map((product) => (
+                <ProductInCart
+                  key={product.name}
+                  productInfo={product}
+                  isChecked={
+                    checkedProductList.includes(product) || isAllChecked
+                  }
+                  onClickCheck={() => handleProductCheck(product)}
+                  onEmptyCheckedProductList={handleCheckedProductListEmpty}
+                />
+              ))}
+            </ul>
+          ) : (
+            <Empty
+              content="장바구니에 담은 상품이 없습니다"
+              routeArray={[
+                { routeContent: "CONTINUE SHOPPING", route: ROUTE.HOME },
+              ]}
+            />
+          )}
+        </>
       )}
     </section>
   )

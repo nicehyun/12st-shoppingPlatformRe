@@ -1,5 +1,6 @@
 "use client"
 
+import { Suspense } from "react"
 import CartController from "./CartController"
 import CartPriceInfo from "./CartPriceInfo"
 
@@ -8,7 +9,9 @@ import ProductListInCart from "./ProductListInCart"
 const CartLayout = () => {
   return (
     <div className="max-w-[1050px] mx-auto">
-      <ProductListInCart />
+      <Suspense fallback={<span>asdasd</span>}>
+        <ProductListInCart />
+      </Suspense>
 
       <CartPriceInfo />
 
