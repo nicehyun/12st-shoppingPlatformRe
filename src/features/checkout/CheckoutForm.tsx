@@ -1,7 +1,7 @@
 "use client"
 
 import { selectCheckoutPaymentState } from "@/redux/features/checkoutSlice"
-import { useAppSelector } from "@/redux/hooks"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { FormEventHandler } from "react"
 import CheckoutClause from "./CheckoutClause"
 import CheckoutCouponAndMile from "./CheckoutCouponAndMile"
@@ -15,30 +15,96 @@ import { selectCheckedProductList } from "@/redux/features/cartSlice"
 import { useCheckoutMutaion } from "./hooks/useCheckoutMutaion"
 import { CheckoutList, CheckoutPaymentInfo } from "@/common/types/checkout"
 import CheckoutPayment from "./CheckoutPayment"
+import { showFeedbackModal } from "@/redux/features/modalSlice"
+import { nameValidator } from "../auth/signUp/utils/validation"
 
-// TODO : Submit 설정하기
 const CheckoutForm = () => {
   const checkoutPaymentState = useAppSelector(selectCheckoutPaymentState)
   const { selectedCoupon } = useSelectCoupon()
   const checkedProductList = useAppSelector(selectCheckedProductList)
+  const dispatch = useAppDispatch()
 
   const checkoutMutation = useCheckoutMutaion()
 
-  const testSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+  const handleCheckoutSubmit: FormEventHandler<HTMLFormElement> = async (
+    event
+  ) => {
     event.preventDefault()
 
     const formData = new FormData(event.currentTarget)
 
-    // TODO : 약관 미체크 시 피드백 모달!
-    // const collectionOfUserInfo = formData.get("collectionOfUserInfo") as string
-    // console.log(collectionOfUserInfo)
+    const isRecipientValid = nameValidator(formData.get("recipient") as string)
 
-    // const provisionOfUserInfo = formData.get("provisionOfUserInfo") as string
-    // console.log(provisionOfUserInfo)
+    if (!isRecipientValid) {
+      dispatch(
+        showFeedbackModal({
+          modalContent: "올바른 수령인 이름을 입력해주세요",
+        })
+      )
+      return
+    }
 
-    // const paymentAgencyClause = formData.get("paymentAgencyClause") as string
-    // console.log(paymentAgencyClause)
-    // formData.append("prodcutList", `${checkedProductList}`)
+    const isAddressValid = !!(formData.get("address") as string)
+    const isAdditionalAddressValid = !!(formData.get(
+      "additionalAddress"
+    ) as string)
+
+    if (!isAddressValid) {
+      dispatch(
+        showFeedbackModal({
+          modalContent: "배송지 주소를 입력해주세요",
+        })
+      )
+      return
+    }
+
+    if (!isAdditionalAddressValid) {
+      dispatch(
+        showFeedbackModal({
+          modalContent: "배송지 상세 주소를 입력해주세요",
+        })
+      )
+      return
+    }
+
+    const isPhone1Valid = !!(formData.get("phone1") as string)
+    if (!isPhone1Valid) {
+      dispatch(
+        showFeedbackModal({
+          modalContent: "올바른 수령인의 연락처를 입력해주세요",
+        })
+      )
+      return
+    }
+
+    if (
+      checkoutPaymentState.value === "credit" &&
+      !(formData.get("credit-select") as string)
+    ) {
+      dispatch(
+        showFeedbackModal({
+          modalContent: "카드사를 선택해주세요",
+        })
+      )
+      return
+    }
+
+    const collectionOfUserInfo = formData.get("collectionOfUserInfo") as string
+    const provisionOfUserInfo = formData.get("provisionOfUserInfo") as string
+    const paymentAgencyClause = formData.get("paymentAgencyClause") as string
+
+    if (
+      collectionOfUserInfo !== "on" ||
+      provisionOfUserInfo !== "on" ||
+      paymentAgencyClause !== "on"
+    ) {
+      dispatch(
+        showFeedbackModal({
+          modalContent: "결제를 위해 필수사항에 모두 동의해주세요",
+        })
+      )
+      return
+    }
 
     const defalutAddressRegistration = formData.get(
       "defalutAddressRegistration"
@@ -58,7 +124,6 @@ const CheckoutForm = () => {
       return selectedDeliveryMemo
     }
 
-    // TODO : 신용/체크카드 선택 시 카드 선택 체크!
     const checkoutPayment: CheckoutPaymentInfo =
       checkoutPaymentState.value === "credit"
         ? {
@@ -95,7 +160,7 @@ const CheckoutForm = () => {
   }
 
   return (
-    <form onSubmit={testSubmit} className="max-w-[800px] mx-auto">
+    <form onSubmit={handleCheckoutSubmit} className="max-w-[800px] mx-auto">
       <DeliveryInfo />
       <CheckoutOrderListInfo />
       <CheckoutCouponAndMile />

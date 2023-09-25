@@ -12,7 +12,7 @@ const CheckoutOrderListEl = ({
   prductInfo,
   discountPerProduct,
 }: ICheckoutOrderListEl) => {
-  const { seletedCoupon } = useSelectCoupon()
+  const { selectedCoupon } = useSelectCoupon()
 
   const {
     mallName,
@@ -42,7 +42,7 @@ const CheckoutOrderListEl = ({
           <span>수량 {amount}개</span>
         </p>
 
-        {seletedCoupon && (
+        {selectedCoupon && (
           <span className="text-lightRed md:text-[14px] sm:text-[12px] mt-[10px] inline-block">
             쿠폰적용가 :{" "}
             {numberToLocaleString(discountedPrice - discountPerProduct)}원

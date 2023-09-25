@@ -46,6 +46,7 @@ const CheckoutOrderListInfo = () => {
       <ul>{renderProductList()}</ul>
 
       <button
+        type="button"
         className="font-bold text-[16px] flexCenter w-full h-[50px] my-[30px]"
         onClick={toggleShowDetail}
       >
