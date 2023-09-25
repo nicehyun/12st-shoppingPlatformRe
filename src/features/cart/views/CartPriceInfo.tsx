@@ -8,14 +8,14 @@ const CartPriceInfo = () => {
   const { totalDeliveryFee, totalPriceOfCheckedProduct } = useCheckoutPrice()
 
   return (
-    <section className="mt-[50px] border-t-[3px] border-b-[1px] border-black dark:border-white">
-      <div className="border-b-[1px] border-border flex">
+    <section className="mt-[50px] border-t-[3px] border-b-[1px] border-black dark:border-white sm:flex md:flex sm:h-[300px] md:h-[350px]">
+      <div className="border-b-[1px] border-border sm:border-r-[1px] md:border-r-[1px] flex sm:block md:block sm:w-1/3 md:w-1/3">
         <CartPriceInfoHeaderEl headerContent="총 주문금액" />
         <CartPriceInfoHeaderEl headerContent="총 배송비" />
         <CartPriceInfoHeaderEl headerContent="총 결제금액" />
       </div>
 
-      <div className="py-[50px] flex relative ">
+      <div className="relative py-[50px] sm:py-0 md:py-0 flex md:block sm:block sm:w-2/3 md:w-2/3">
         <CartPriceInfoEl price={totalPriceOfCheckedProduct} />
 
         <CartPriceInfoEl price={totalDeliveryFee} />
@@ -25,11 +25,11 @@ const CartPriceInfo = () => {
 
         <CartPriceOperation
           icon={<FaPlus />}
-          classNames="left-1/3 -translate-x-1/2"
+          classNames="left-1/3 -translate-x-1/2 top-1/2 -translate-y-1/2 sm:left-1/2 sm:top-1/3 md:left-1/2 md:top-1/3"
         />
         <CartPriceOperation
           icon={<FaEquals />}
-          classNames="right-1/3 translate-x-1/2"
+          classNames="right-1/3 translate-x-1/2 top-1/2 -translate-y-1/2 sm:right-1/2 sm:top-2/3 md:right-1/2 md:top-2/3"
         />
       </div>
     </section>
