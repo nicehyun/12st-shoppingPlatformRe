@@ -1,8 +1,9 @@
+import useCheckoutPrice from "@/features/cart/hooks/useCheckoutPrice"
 import { selectCheckedProductList } from "@/redux/features/cartSlice"
 import { useAppSelector } from "@/redux/hooks"
 import { useState } from "react"
 import { BsCaretDownFill, BsCaretUpFill } from "react-icons/bs"
-import useCheckoutPrice from "../cart/hooks/useCheckoutPrice"
+
 import CheckoutOrderListEl from "./CheckoutOrderListEl"
 
 const CheckoutOrderListInfo = () => {

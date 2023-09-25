@@ -10,8 +10,6 @@ import {
 } from "@/redux/features/checkoutSlice"
 import { showBasicModal } from "@/redux/features/modalSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import CollectionOfUserInfoClause from "./CollectionOfUserInfoClause"
-import ProvisionOfUserInfoClause from "./ProvisionOfUserInfoClause"
 
 const CheckoutClause = () => {
   const { all, collectionOfUserInfo, paymentAgency, provisionOfUserInfo } =
@@ -23,7 +21,7 @@ const CheckoutClause = () => {
       showBasicModal({
         modalId: "clause-collectionOfUserInfo",
         modalTitle: "개인정보 수집 및 이용 동의",
-        modalContent: <CollectionOfUserInfoClause />,
+        modalContent: "CollectionOfUserInfoClause",
       })
     )
   }
@@ -33,7 +31,7 @@ const CheckoutClause = () => {
       showBasicModal({
         modalId: "clause-ProvisionOfUserInfo",
         modalTitle: "개인정보 제3자 제공",
-        modalContent: <ProvisionOfUserInfoClause />,
+        modalContent: "ProvisionOfUserInfoClause",
       })
     )
   }

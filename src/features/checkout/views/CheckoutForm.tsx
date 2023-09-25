@@ -10,13 +10,15 @@ import CheckoutOrderListInfo from "./CheckoutOrderListInfo"
 import CheckoutTotalPriceInfo from "./CheckoutTotalPriceInfo"
 import DeliveryInfo from "./DeliveryInfo"
 import CheckoutButton from "./CheckoutButton"
-import useSelectCoupon from "../cart/hooks/useSelectCoupon"
+
 import { selectCheckedProductList } from "@/redux/features/cartSlice"
-import { useCheckoutMutaion } from "./hooks/useCheckoutMutaion"
+
 import { CheckoutList, CheckoutPaymentInfo } from "@/common/types/checkout"
 import CheckoutPayment from "./CheckoutPayment"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
-import { nameValidator } from "../auth/signUp/utils/validation"
+import useSelectCoupon from "@/features/cart/hooks/useSelectCoupon"
+import { useCheckoutMutaion } from "../hooks/useCheckoutMutaion"
+import { nameValidator } from "@/features/auth/signUp/utils/validation"
 
 const CheckoutForm = () => {
   const checkoutPaymentState = useAppSelector(selectCheckoutPaymentState)

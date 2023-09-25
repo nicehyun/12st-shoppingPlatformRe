@@ -1,3 +1,5 @@
+import useCheckoutPrice from "@/features/cart/hooks/useCheckoutPrice"
+import useSelectCoupon from "@/features/cart/hooks/useSelectCoupon"
 import {
   MenuItem,
   OutlinedInput,
@@ -5,8 +7,6 @@ import {
   SelectChangeEvent,
 } from "@mui/material"
 import { useEffect, useState } from "react"
-import useCheckoutPrice from "../cart/hooks/useCheckoutPrice"
-import useSelectCoupon from "../cart/hooks/useSelectCoupon"
 
 const CouponSelect = () => {
   const {

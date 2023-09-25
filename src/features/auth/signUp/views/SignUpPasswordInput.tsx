@@ -12,7 +12,7 @@ import {
   useUserInputWithRePassword,
 } from "../../../../common/hooks/useUserInput"
 import { passwordValidator } from "../utils/validation"
-import SignUpFeedback from "./SignUpFeedback"
+import SignUpFeedback from "../../../../common/views/Feedback"
 import SignUpInput from "./SignUpInput"
 import SignUpInputLayout from "./SignUpInputLayout"
 

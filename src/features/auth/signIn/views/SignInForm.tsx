@@ -9,7 +9,7 @@ import {
   emailValidator,
   passwordValidator,
 } from "../../signUp/utils/validation"
-import SignUpFeedback from "../../signUp/views/SignUpFeedback"
+import SignUpFeedback from "../../../../common/views/Feedback"
 import useSignInMutaion from "../hooks/useSIgnInMutaion"
 
 const SignInForm = () => {

@@ -4,8 +4,8 @@ import Input from "@/common/views/Input"
 import { checkToAddress } from "@/redux/features/checkoutSlice"
 import { useAppDispatch } from "@/redux/hooks"
 import { useEffect } from "react"
-import { additionalAddressValidator } from "../auth/signUp/utils/validation"
-import SignUpSideButton from "../auth/signUp/views/SignUpSideButton"
+import { additionalAddressValidator } from "../../auth/signUp/utils/validation"
+import SignUpSideButton from "../../auth/signUp/views/SignUpSideButton"
 
 import CheckoutInputLayout from "./CheckoutInputLayout"
 

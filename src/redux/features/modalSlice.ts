@@ -9,7 +9,7 @@ interface ShowFeedbackModalPayload {
 interface ShowBasicModalPayload {
   modalId: string
   modalTitle: string
-  modalContent: JSX.Element
+  modalContent: string
 }
 
 type FeedbackModal = {
@@ -25,7 +25,7 @@ type BasicModal = {
   isShowModal: boolean
   modalId: string
   modalTitle: string
-  modalContent: JSX.Element | null
+  modalContent: string | null
 }
 
 type InitialModalState = {

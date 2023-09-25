@@ -1,11 +1,11 @@
 "use client"
 import { numberToLocaleString } from "@/common/utils/price"
+import useCheckoutPrice from "@/features/cart/hooks/useCheckoutPrice"
+import TotalPriceList from "@/features/cart/views/TotalPriceList"
 import { selectCheckoutPlannedUseMileState } from "@/redux/features/checkoutSlice"
 import { useAppSelector } from "@/redux/hooks"
 import { useState } from "react"
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai"
-import useCheckoutPrice from "../cart/hooks/useCheckoutPrice"
-import TotalPriceList from "../cart/views/TotalPriceList"
 
 const CheckoutTotalPriceInfo = () => {
   const {

@@ -14,7 +14,7 @@ import { useEffect, useState } from "react"
 import { useUserInput } from "../../../../common/hooks/useUserInput"
 import { additionalAddressValidator } from "../utils/validation"
 
-import SignUpFeedback from "./SignUpFeedback"
+import SignUpFeedback from "../../../../common/views/Feedback"
 import SignUpInputLayout from "./SignUpInputLayout"
 
 const SignUpAddressInput = () => {

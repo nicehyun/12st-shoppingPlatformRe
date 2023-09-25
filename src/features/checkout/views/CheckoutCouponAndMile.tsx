@@ -1,14 +1,12 @@
 "use client"
 
+import useSelectCoupon from "@/features/cart/hooks/useSelectCoupon"
 import { showBasicModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
 
 import { useState } from "react"
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai"
 import { BsQuestionCircle } from "react-icons/bs"
-
-import useSelectCoupon from "../cart/hooks/useSelectCoupon"
-import CouponExplanation from "./CouponExplanation"
 import CouponSelect from "./CouponSelect"
 import Mile from "./Mile"
 
@@ -27,7 +25,7 @@ const CheckoutCouponAndMile = () => {
       showBasicModal({
         modalId: "couponExplanation",
         modalTitle: "쿠폰 안내",
-        modalContent: <CouponExplanation />,
+        modalContent: "CouponExplanation",
       })
     )
   }

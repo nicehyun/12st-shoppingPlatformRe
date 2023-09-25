@@ -1,8 +1,9 @@
 import { useUserInput } from "@/common/hooks/useUserInput"
+import { phoneValidator } from "@/features/auth/signUp/utils/validation"
 import { checkToPhone } from "@/redux/features/checkoutSlice"
 import { useAppDispatch } from "@/redux/hooks"
 import { useEffect } from "react"
-import { phoneValidator } from "../auth/signUp/utils/validation"
+
 import CheckoutInputLayout from "./CheckoutInputLayout"
 
 interface ICheckoutPhoneInput {

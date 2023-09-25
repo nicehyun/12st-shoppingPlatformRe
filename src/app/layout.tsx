@@ -31,7 +31,7 @@ export default function RootLayout({
           <Footer />
 
           <FeedbackModal />
-          <BasicModal />
+          {/* <BasicModal /> */}
         </Providers>
       </body>
     </html>

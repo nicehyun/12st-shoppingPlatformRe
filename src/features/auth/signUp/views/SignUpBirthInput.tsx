@@ -13,7 +13,7 @@ import {
   birthMonthValidator,
   birthYearValidator,
 } from "../utils/validation"
-import SignUpFeedback from "./SignUpFeedback"
+import SignUpFeedback from "../../../../common/views/Feedback"
 import SignUpInputLayout from "./SignUpInputLayout"
 
 const SignUpBirthInput = () => {

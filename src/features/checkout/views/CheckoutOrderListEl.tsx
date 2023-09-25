@@ -1,7 +1,7 @@
 import { numberToLocaleString } from "@/common/utils/price"
+import useSelectCoupon from "@/features/cart/hooks/useSelectCoupon"
+import { ProductInCart } from "@/features/cart/types/cart"
 import Image from "next/image"
-import useSelectCoupon from "../cart/hooks/useSelectCoupon"
-import { ProductInCart } from "../cart/types/cart"
 
 interface ICheckoutOrderListEl {
   prductInfo: ProductInCart

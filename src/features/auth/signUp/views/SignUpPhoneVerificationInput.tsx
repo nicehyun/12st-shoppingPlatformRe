@@ -12,7 +12,7 @@ import useRequestVerificationMutation from "../hooks/useRequestVerificationMutat
 import useSendVerificationCodeMutation from "../hooks/useSendVerificationCodeMutation"
 import { useUserInput } from "../../../../common/hooks/useUserInput"
 import { phoneValidator } from "../utils/validation"
-import SignUpFeedback from "./SignUpFeedback"
+import SignUpFeedback from "../../../../common/views/Feedback"
 import SignUpInputLayout from "./SignUpInputLayout"
 import SignUpVerificationInput from "./SignUpVerificationInput"
 

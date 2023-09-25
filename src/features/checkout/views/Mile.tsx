@@ -9,8 +9,7 @@ import { showBasicModal } from "@/redux/features/modalSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import React, { ChangeEventHandler, useEffect } from "react"
 import { BsQuestionCircle } from "react-icons/bs"
-import { useGetUserMileQuery } from "./hooks/useGetUserMileQuery"
-import MileExplanation from "./MileExplanation"
+import { useGetUserMileQuery } from "../hooks/useGetUserMileQuery"
 
 const Mile = () => {
   const dispatch = useAppDispatch()
@@ -24,7 +23,7 @@ const Mile = () => {
       showBasicModal({
         modalId: "MileExplanation",
         modalTitle: "마일리지 사용 안내",
-        modalContent: <MileExplanation />,
+        modalContent: "MileExplanation",
       })
     )
   }

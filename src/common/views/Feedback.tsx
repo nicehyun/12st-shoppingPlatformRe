@@ -3,7 +3,7 @@ interface ISignUpFeedback {
   content: string
 }
 
-const SignUpFeedback = ({ classNames, content }: ISignUpFeedback) => {
+const Feedback = ({ classNames, content }: ISignUpFeedback) => {
   return (
     <p
       className={`${classNames} mt-[10px] max-w-[400px] text-[12px] text-error`}
@@ -13,4 +13,4 @@ const SignUpFeedback = ({ classNames, content }: ISignUpFeedback) => {
   )
 }
 
-export default SignUpFeedback
+export default Feedback

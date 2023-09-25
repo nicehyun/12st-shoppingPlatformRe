@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { useEffect } from "react"
 import { useUserInput } from "../../../../common/hooks/useUserInput"
 import { nameValidator } from "../utils/validation"
-import SignUpFeedback from "./SignUpFeedback"
+import SignUpFeedback from "../../../../common/views/Feedback"
 import SignUpInput from "./SignUpInput"
 import SignUpInputLayout from "./SignUpInputLayout"
 

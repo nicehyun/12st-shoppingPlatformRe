@@ -1,6 +1,6 @@
 import Input, { InputType } from "@/common/views/Input"
+import Feedback from "@/common/views/Feedback"
 import { ReactNode } from "react"
-import CheckoutFeedback from "../auth/signUp/views/SignUpFeedback"
 
 interface ICheckoutInput {
   isRequired?: boolean
@@ -62,7 +62,7 @@ const CheckoutInputLayout = ({
         )}
       </div>
       {inputState?.hasError && errorFeedbackMsg && (
-        <CheckoutFeedback
+        <Feedback
           content={errorFeedbackMsg}
           classNames="ml-[100px] mb-[10px] mt-[5px]"
         />

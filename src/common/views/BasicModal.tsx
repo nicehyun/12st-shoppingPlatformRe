@@ -9,6 +9,7 @@ import {
   hideBasicModal,
   selectBasicModalState,
 } from "@/redux/features/modalSlice"
+import { ReactNode } from "react"
 
 const style = {
   position: "absolute" as "absolute",
@@ -26,11 +27,16 @@ const style = {
   overflowY: "scroll",
 }
 
-export default function BasicModal() {
-  const { isShowModal, modalContent, modalId, modalTitle } = useAppSelector(
+interface IBasicModal {
+  children: ReactNode
+}
+
+export default function BasicModal({ children }: IBasicModal) {
+  const { isShowModal, modalId, modalTitle } = useAppSelector(
     selectBasicModalState
   )
   const dispatch = useAppDispatch()
+
   return (
     <Modal
       open={isShowModal}
@@ -40,26 +46,29 @@ export default function BasicModal() {
       className="dark:text-black"
     >
       <Box sx={style}>
-        <Typography
-          id={modalId}
-          variant="h6"
-          sx={{
-            mb: 2,
-            textAlign: "center",
-            fontWeight: "bold",
-            fontSize: "16px",
-          }}
-        >
-          {modalTitle}
-        </Typography>
-        {modalContent}
+        <>
+          <Typography
+            id={modalId}
+            variant="h6"
+            sx={{
+              mb: 2,
+              textAlign: "center",
+              fontWeight: "bold",
+              fontSize: "16px",
+            }}
+          >
+            {modalTitle}
+          </Typography>
 
-        <button
-          onClick={() => dispatch(hideBasicModal())}
-          className="absolute top-[20px] right-[20px] text-[20px] text-lightBlack"
-        >
-          <AiOutlineClose />
-        </button>
+          {children}
+
+          <button
+            onClick={() => dispatch(hideBasicModal())}
+            className="absolute top-[20px] right-[20px] text-[20px] text-lightBlack"
+          >
+            <AiOutlineClose />
+          </button>
+        </>
       </Box>
     </Modal>
   )

@@ -12,7 +12,7 @@ import { useEmailDuplicationCheckMutaion } from "../hooks/useEmailDuplicationChe
 import { useFeedbackModal } from "../hooks/useFeedbackModal"
 import { useUserInput } from "../../../../common/hooks/useUserInput"
 import { emailValidator } from "../utils/validation"
-import SignUpFeedback from "./SignUpFeedback"
+import SignUpFeedback from "../../../../common/views/Feedback"
 import SignUpInputLayout from "./SignUpInputLayout"
 import SignUpVerificationInput from "./SignUpVerificationInput"
 

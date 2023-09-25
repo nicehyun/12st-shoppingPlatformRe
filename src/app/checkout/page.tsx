@@ -1,11 +1,15 @@
 import PageLayout from "@/common/views/PageLayout"
-import CheckoutForm from "@/features/checkout/CheckoutForm"
+import CheckoutBasicModal from "@/features/checkout/views/CheckoutBasicModal"
+import CheckoutForm from "@/features/checkout/views/CheckoutForm"
 
 const CheckoutPage = () => {
   return (
-    <PageLayout>
-      <CheckoutForm />
-    </PageLayout>
+    <>
+      <PageLayout>
+        <CheckoutForm />
+      </PageLayout>
+      <CheckoutBasicModal />
+    </>
   )
 }
 

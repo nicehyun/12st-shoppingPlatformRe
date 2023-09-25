@@ -1,10 +1,10 @@
 import React, { useEffect } from "react"
 import CheckoutInputLayout from "./CheckoutInputLayout"
 
-import { useUserInput } from "../../common/hooks/useUserInput"
-import { nameValidator } from "../auth/signUp/utils/validation"
 import { useAppDispatch } from "@/redux/hooks"
 import { checkToRecipient } from "@/redux/features/checkoutSlice"
+import { useUserInput } from "@/common/hooks/useUserInput"
+import { nameValidator } from "@/features/auth/signUp/utils/validation"
 
 const CheckoutRecipientInput = () => {
   const dispatch = useAppDispatch()

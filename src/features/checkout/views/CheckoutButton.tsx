@@ -1,7 +1,7 @@
 import { numberToLocaleString } from "@/common/utils/price"
+import useCheckoutPrice from "@/features/cart/hooks/useCheckoutPrice"
 import { selectCheckoutPlannedUseMileState } from "@/redux/features/checkoutSlice"
 import { useAppSelector } from "@/redux/hooks"
-import useCheckoutPrice from "../cart/hooks/useCheckoutPrice"
 
 const CheckoutButton = () => {
   const {

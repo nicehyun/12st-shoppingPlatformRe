@@ -12,7 +12,6 @@ import CheckoutRecipientInput from "./CheckoutRecipientInput"
 import CheckoutAddressInput from "./CheckoutAddressInput"
 import CheckoutPhoneInput from "./CheckoutPhoneInput"
 
-import DeliveryExplanation from "./DeliveryExplanation"
 import TabPanel from "@/common/views/TabPanel"
 
 import Checkbox from "@/common/views/Checkbox"
@@ -31,7 +30,7 @@ const DeliveryInfo = () => {
       showBasicModal({
         modalId: "deliveryExplanation",
         modalTitle: "배송 안내",
-        modalContent: <DeliveryExplanation />,
+        modalContent: "DeliveryExplanation",
       })
     )
   }
