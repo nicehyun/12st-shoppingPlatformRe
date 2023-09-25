@@ -49,11 +49,11 @@ const ProductInCart = ({
           <p className="absolute top-[10px] left-0 text-lightGray text-[14px] md:text-[12px] sm:text-[10px] mb-[12px]">
             [ {mallName} ]
           </p>
-          <p className="absolute md:text-[14px] sm:text-[12px] top-[40px] md:top-[35px] sm:top-[30px] left-0 flex w-5/7 h-[50.4px] md:h-[42px] sm:h-[36px] pr-[20px] mb-[12px] font-bold flex-wrap overflow-hidden">
+          <p className="absolute truncate-2 md:text-[14px] sm:text-[12px] top-[40px] md:top-[35px] sm:top-[30px] left-0 flex w-5/7 h-[50.4px] md:h-[42px] sm:h-[36px] pr-[20px] mb-[12px] font-bold flex-wrap">
             {name}
           </p>
           <p className="absolute right-[10px] text-[14px] md:text-[10px] sm:text-[10px] text-border line-through bottom-[40px] sm:bottom-[25px] md:bottom-[25px]">
-            {price}
+            {numberToLocaleString(price)}
           </p>
           <p className="absolute right-[10px] text-[14px] md:text-[12px] sm:text-[12px] font-bold bottom-[20px] sm:bottom-[10px] md:bottom-[10px]">
             <span className="text-lightRed mr-[5px]">[{discount}%]</span>
