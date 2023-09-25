@@ -7,7 +7,7 @@ import { AiOutlineDown, AiOutlineUp } from "react-icons/ai"
 import CreditSelect from "./CreditSelect"
 import InstallmentPeriodSelect from "./InstallmentPeriodSelect"
 import PaymentBenefit from "./PaymentBenefit"
-import PaymentList from "./PaymentList"
+import PaymentList from "../../layout/views/PaymentList"
 
 const CheckoutPayment = () => {
   const [isShowDetail, setIsShowDetail] = useState(true)

@@ -7,21 +7,12 @@ import CartController from "./CartController"
 
 import CouponBar from "./CouponBar"
 import ProductListInCart from "./ProductListInCart"
-import TotalPriceInfo from "./TotalPriceInfo"
+import TotalPriceInfo from "../../layout/views/TotalPriceInfo"
 
 const CartLayout = () => {
   return (
     <div className="max-w-[1050px] mx-auto">
-      <div className="lg:flex xl:flex mb-[40px]">
-        <ProductListInCart />
-
-        <PcConditionComponent component={<CouponBar />} />
-      </div>
-
-      <div className="sm:flex md:flex">
-        <TotalPriceInfo />
-        <MobileViewConditionComponent component={<CouponBar />} />
-      </div>
+      <ProductListInCart />
 
       <CartController />
     </div>
