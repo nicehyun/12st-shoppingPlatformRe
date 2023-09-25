@@ -1,10 +1,10 @@
 import { ReactNode } from "react"
 import { HiMinus, HiPlus } from "react-icons/hi"
-import { BsFillTrashFill } from "react-icons/bs"
 import useIncreaseAmountMutation from "../hooks/useIncreaseAmountMutation"
 import useDecreaseAmountMutation from "../hooks/useDecreaseAmountMutation"
 import useRemoveFromCartMutation from "../hooks/useRemoveFromCartMutation"
 import { ProductInCart } from "../types/cart"
+import { FaRegWindowClose } from "react-icons/fa"
 
 interface IProductInCartController {
   children: ReactNode
@@ -43,7 +43,7 @@ const ProductInCartController = ({
         onClick={onClickRemoveProductFromCart}
         className="absolute text-border right-[10px] top-[10px] text-[22px] md:text-[18px] sm:text-[16px] transition-3 hover:text-lightRed"
       >
-        <BsFillTrashFill />
+        <FaRegWindowClose />
       </button>
 
       {children}
