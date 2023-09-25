@@ -54,6 +54,7 @@ const ProductInCartController = ({
         </button>
         <input
           type="text"
+          name="cart-amount"
           readOnly
           value={productInfo.amount}
           className="w-1/2 h-full text-[14px] md:text-[12px] sm:text-[10px] border-none bg-white text-black text-end cursor-default px-[10px] mx-[1px]"

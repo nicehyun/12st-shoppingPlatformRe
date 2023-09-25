@@ -16,12 +16,13 @@ const ProductInCart = ({
   onClickCheck,
   onEmptyCheckedProductList,
 }: IProductInCart) => {
-  const { image, name, discountedPrice, mallName, price, discount } =
+  const { image, name, discountedPrice, mallName, price, discount, id } =
     productInfo
   return (
     <li className="flex mb-[30px]">
       <input
         type="checkbox"
+        id={`cartCheckbox-product-${id}`}
         className="mr-[10px] w-[18px] h-[18px] md:w-[16px] md:h-[16px] sm:w-[14px] sm:h-[14px] cursor-pointer"
         checked={isChecked}
         onChange={onClickCheck}

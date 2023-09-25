@@ -101,6 +101,7 @@ const ProductListInCart = () => {
           <div className="relative mb-[30px] pb-[30px] border-b-[1px] border-lightBlack flex items-center">
             <input
               type="checkbox"
+              id="cartCheckbox-all"
               checked={isAllChecked}
               onChange={handleProductAllCheck}
               className="mr-[10px] w-[18px] h-[18px] md:w-[16px] md:h-[16px] sm:w-[14px] sm:h-[14px] cursor-pointer"
