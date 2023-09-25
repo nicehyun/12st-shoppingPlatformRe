@@ -1,7 +1,7 @@
 "use client"
 import { numberToLocaleString } from "@/common/utils/price"
 import useCheckoutPrice from "@/features/cart/hooks/useCheckoutPrice"
-import TotalPriceList from "@/features/cart/views/TotalPriceList"
+import TotalPriceList from "@/features/checkout/views/TotalPriceList"
 import { selectCheckoutPlannedUseMileState } from "@/redux/features/checkoutSlice"
 import { useAppSelector } from "@/redux/hooks"
 import { useState } from "react"

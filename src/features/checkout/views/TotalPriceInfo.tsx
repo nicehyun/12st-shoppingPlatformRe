@@ -3,7 +3,7 @@
 import { selectCheckedProductList } from "@/redux/features/cartSlice"
 import { useAppSelector } from "@/redux/hooks"
 
-import TotalPriceList from "../../cart/views/TotalPriceList"
+import TotalPriceList from "./TotalPriceList"
 
 const TotalPriceInfo = () => {
   const checkedProductList = useAppSelector(selectCheckedProductList)

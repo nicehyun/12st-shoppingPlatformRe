@@ -1,7 +1,7 @@
 import { selectCheckoutPlannedUseMileState } from "@/redux/features/checkoutSlice"
 import { useAppSelector } from "@/redux/hooks"
 import { BiMinus, BiPlus } from "react-icons/bi"
-import useCheckoutPrice from "../hooks/useCheckoutPrice"
+import useCheckoutPrice from "../../cart/hooks/useCheckoutPrice"
 import TotalPriceEl from "./TotalPriceEl"
 
 const TotalPriceList = () => {

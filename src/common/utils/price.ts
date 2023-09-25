@@ -16,8 +16,9 @@ export const numberToLocaleString = (number: number) =>
 export const accumulationOfProductsPrice = (productList: ProductInCart[]) =>
   productList.reduce(
     (prevValue, curValue) =>
-      (prevValue + discountedProductPrice(curValue.price, curValue.discount)) *
-      curValue.amount,
+      prevValue +
+      discountedProductPrice(curValue.price, curValue.discount) *
+        curValue.amount,
     0
   )
 
