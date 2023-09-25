@@ -44,7 +44,7 @@ const CheckoutAddressInput = () => {
       label="배송지"
       id="address"
       isRequired
-      errorFeedbackMsg="배송지 상세 주소를 입력해주세요"
+      errorFeedbackMsg="배송지 상세 주소를 입력해주세요 (특수문자 사용 불가)"
       inputState={{ hasError: hasErrorAdditionalAddress }}
     >
       <div className="max-w-[500px] flex flex-col flex-grow">
