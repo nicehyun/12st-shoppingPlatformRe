@@ -13,7 +13,7 @@ import {
   PaymentBenefitLotteCardExplanation,
   PaymentBenefitTosspayExplanation,
   PaymentBenefitWooriCardExplanation,
-} from "./PaymentBenefitExplanation"
+} from "./explanations/PaymentBenefitExplanation"
 
 const CheckoutBasicModal = () => {
   const { modalContent } = useAppSelector(selectBasicModalState)
