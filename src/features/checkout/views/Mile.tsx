@@ -81,7 +81,7 @@ const Mile = () => {
         <button
           type="button"
           onClick={handleUseAllMileButtonClick}
-          className="bg-border w-[70px] ml-[10px] text-[14px] rounded-[5px]"
+          className="bg-border w-[70px] ml-[10px] text-[14px] md:text-[12px] sm:text-[12px] rounded-[5px]"
         >
           모두 사용
         </button>
