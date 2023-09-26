@@ -27,7 +27,7 @@ const CheckoutButton = ({ isCheckoutLoading }: ICheckoutButton) => {
   return (
     <button
       type="submit"
-      className="fixed bottom-0 left-0 right-0 z-20 min-h-[76px] py-[25px] lg:py-[36px] xl:py-[40px] text-[20px] lg:text-[22px] xl:text-[24px] tracking-[1.5px] bg-black dark:bg-lightRed text-lightRed dark:text-white font-bold "
+      className="fixed bottom-0 left-0 right-0 z-20 min-h-[76px] py-[25px] lg:py-[36px] xl:py-[40px] text-[24px] lg:text-[26px] xl:text-[28px] tracking-[1.5px] bg-black dark:bg-black text-lightRed font-bold border-t-[1px] border-white"
     >
       {isCheckoutLoading ? (
         <Loading
