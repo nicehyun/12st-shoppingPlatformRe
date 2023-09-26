@@ -1,6 +1,9 @@
 "use client"
 
-import { selectCheckoutPaymentState } from "@/redux/features/checkoutSlice"
+import {
+  selectCheckoutPaymentState,
+  selectCheckoutPlannedUseMileState,
+} from "@/redux/features/checkoutSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { FormEventHandler } from "react"
 import CheckoutClause from "./CheckoutClause"
@@ -25,11 +28,18 @@ import {
 } from "@/features/auth/signUp/utils/validation"
 import { ROUTE, useNavigations } from "@/common/hooks/useNavigations"
 import { useRemoveCheckedProduct } from "@/features/cart/hooks/useRemoveCheckedProduct"
+import useCheckoutPrice from "../hooks/useCheckoutPrice"
 
 const CheckoutForm = () => {
   const checkoutPaymentState = useAppSelector(selectCheckoutPaymentState)
   const { selectedCoupon } = useSelectCoupon()
   const checkedProductList = useAppSelector(selectCheckedProductList)
+
+  const checkoutPlannedUseMileState = useAppSelector(
+    selectCheckoutPlannedUseMileState
+  )
+  const { discountedPriceWithCoupon } = useCheckoutPrice()
+
   const dispatch = useAppDispatch()
   const { routeTo } = useNavigations()
 
@@ -45,43 +55,52 @@ const CheckoutForm = () => {
 
     const isRecipientValid = nameValidator(formData.get("recipient") as string)
 
-    if (!isRecipientValid) {
+    // if (!isRecipientValid) {
+    //   dispatch(
+    //     showFeedbackModal({
+    //       modalContent: "올바른 수령인 이름을 입력해주세요",
+    //     })
+    //   )
+    //   return
+    // }
+
+    // const isAddressValid = !!(formData.get("address") as string)
+    // const isAdditionalAddressValid = !!additionalAddressValidator(
+    //   formData.get("additionalAddress") as string
+    // )
+
+    // if (!isAddressValid) {
+    //   dispatch(
+    //     showFeedbackModal({
+    //       modalContent: "배송지 주소를 입력해주세요",
+    //     })
+    //   )
+    //   return
+    // }
+
+    // if (!isAdditionalAddressValid) {
+    //   dispatch(
+    //     showFeedbackModal({
+    //       modalContent: "올바른 배송지 상세 주소를 입력해주세요",
+    //     })
+    //   )
+    //   return
+    // }
+
+    // const isPhone1Valid = !!phoneValidator(formData.get("phone1") as string)
+    // if (!isPhone1Valid) {
+    //   dispatch(
+    //     showFeedbackModal({
+    //       modalContent: "올바른 수령인의 연락처를 입력해주세요",
+    //     })
+    //   )
+    //   return
+    // }
+
+    if (checkoutPlannedUseMileState > discountedPriceWithCoupon) {
       dispatch(
         showFeedbackModal({
-          modalContent: "올바른 수령인 이름을 입력해주세요",
-        })
-      )
-      return
-    }
-
-    const isAddressValid = !!(formData.get("address") as string)
-    const isAdditionalAddressValid = !!additionalAddressValidator(
-      formData.get("additionalAddress") as string
-    )
-
-    if (!isAddressValid) {
-      dispatch(
-        showFeedbackModal({
-          modalContent: "배송지 주소를 입력해주세요",
-        })
-      )
-      return
-    }
-
-    if (!isAdditionalAddressValid) {
-      dispatch(
-        showFeedbackModal({
-          modalContent: "올바른 배송지 상세 주소를 입력해주세요",
-        })
-      )
-      return
-    }
-
-    const isPhone1Valid = !!phoneValidator(formData.get("phone1") as string)
-    if (!isPhone1Valid) {
-      dispatch(
-        showFeedbackModal({
-          modalContent: "올바른 수령인의 연락처를 입력해주세요",
+          modalContent: "상품 가격보다 마일리지를 많이 사용하실 수 없습니다",
         })
       )
       return
@@ -158,7 +177,7 @@ const CheckoutForm = () => {
       deliveryMemo: handleDeliveryMemo(),
       prductList: checkedProductList,
       coupon: selectedCoupon,
-      useMile: +(formData.get("useMile") as string),
+      useMile: checkoutPlannedUseMileState,
       getMile: 0,
       payment: checkoutPayment,
     }

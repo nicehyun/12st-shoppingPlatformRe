@@ -9,6 +9,7 @@ import { showBasicModal } from "@/redux/features/modalSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import React, { ChangeEventHandler, useEffect } from "react"
 import { BsQuestionCircle } from "react-icons/bs"
+import useCheckoutPrice from "../hooks/useCheckoutPrice"
 import { useGetUserMileQuery } from "../hooks/useGetUserMileQuery"
 
 const Mile = () => {
@@ -17,6 +18,8 @@ const Mile = () => {
     selectCheckoutPlannedUseMileState
   )
   const { userMile, availableMiles } = useGetUserMileQuery()
+
+  const { totalPriceOfCheckedProduct } = useCheckoutPrice()
 
   const showMileExplanationModal = () => {
     dispatch(
@@ -37,7 +40,10 @@ const Mile = () => {
   ) => {
     if (!userMile) return
 
-    if (availableMiles < +event.target.value) {
+    if (
+      totalPriceOfCheckedProduct < +event.target.value ||
+      availableMiles < +event.target.value
+    ) {
       dispatch(resetPlannedUseMile())
       return
     }
@@ -46,6 +52,11 @@ const Mile = () => {
   }
 
   const handleUseMileBlur = () => {
+    if (!(totalPriceOfCheckedProduct > checkoutPlannedUseMileState)) {
+      dispatch(resetPlannedUseMile())
+      return
+    }
+
     dispatch(
       setPlannedUseMile(junkOfNoMoreThanOneDigit(checkoutPlannedUseMileState))
     )
@@ -64,7 +75,7 @@ const Mile = () => {
           value={checkoutPlannedUseMileState}
           onChange={handleUseMileValueChange}
           onBlur={handleUseMileBlur}
-          className="rounded-[5px] py-[14px] px-[20px] grow max-w-[300px] h-[50px] sm:h-[40px] md:h-[44px] sm:text-[14px] md:text-[14px] bg-white dark:bg-lightBorder text-lightBlack"
+          className={`rounded-[5px] py-[14px] px-[20px] grow max-w-[300px] h-[50px] sm:h-[40px] md:h-[44px] sm:text-[14px] md:text-[14px] bg-white dark:bg-lightBorder text-lightBlack `}
         />
 
         <button
