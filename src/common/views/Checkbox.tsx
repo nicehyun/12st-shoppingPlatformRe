@@ -38,7 +38,7 @@ const Checkbox = ({
         <label
           htmlFor={id}
           onClick={onClickCheckbox}
-          className={`text-[14px] sm:text-[10px] md:text-[12px] min-w-[300px] inline-block cursor-pointer py-[5px] pl-[18px] after:top-1/2 after:left-[6px] after:w-[6px] after:h-[11px] after:mt-[-8px] after:absolute after:content-[''] after:border-r-[1px] after:border-b-[1px] after:rotate-45 after:border-border ${peerChecked?.borderColor}`}
+          className={`sm:text-[14px] md:text-[14px] min-w-[300px] inline-block cursor-pointer py-[5px] pl-[18px] after:top-1/2 after:left-[6px] after:w-[6px] after:h-[11px] after:mt-[-8px] after:absolute after:content-[''] after:border-r-[1px] after:border-b-[1px] after:rotate-45 after:border-border ${peerChecked?.borderColor}`}
         >
           {checkboxLabel}
         </label>
