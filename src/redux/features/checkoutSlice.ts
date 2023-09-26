@@ -3,12 +3,6 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { RootState } from "../types/store"
 import { checkToAllAgreeClauseByCheckout } from "../utils/clause"
 
-export type CheckoutDeliveryInfoCheck = {
-  recipient: boolean
-  address: boolean
-  phone: boolean
-}
-
 export type CheckoutPayment = {
   value: string
   label: string
@@ -22,18 +16,12 @@ export type CheckoutClauseCheck = {
 }
 
 type InitialCheckoutState = {
-  deliveryInfo: CheckoutDeliveryInfoCheck
   clause: CheckoutClauseCheck
   payment: CheckoutPayment
   plannedUseMile: number
 }
 
 const initialCartState: InitialCheckoutState = {
-  deliveryInfo: {
-    recipient: false,
-    address: false,
-    phone: false,
-  },
   payment: {
     value: "credit",
     label: "신용/체크카드",
@@ -51,29 +39,6 @@ const checkoutSlice = createSlice({
   name: "checkout",
   initialState: initialCartState,
   reducers: {
-    resetDeliveryInfoCheck(state) {
-      state.deliveryInfo.address = false
-      state.deliveryInfo.phone = false
-      state.deliveryInfo.recipient = false
-    },
-    checkToAddress(state) {
-      state.deliveryInfo.address = true
-    },
-    uncheckToAddress(state) {
-      state.deliveryInfo.address = false
-    },
-    checkToPhone(state) {
-      state.deliveryInfo.phone = true
-    },
-    uncheckToPhone(state) {
-      state.deliveryInfo.phone = false
-    },
-    checkToRecipient(state) {
-      state.deliveryInfo.recipient = true
-    },
-    uncheckToRecipient(state) {
-      state.deliveryInfo.recipient = false
-    },
     resetSelectPayment(state) {
       state.payment.label = "신용/체크카드"
       state.payment.value = "credit"
@@ -135,7 +100,7 @@ const checkoutSlice = createSlice({
       state.clause.paymentAgency = false
       state.clause.provisionOfUserInfo = false
     },
-    resetAgree(state) {
+    resetClause(state) {
       state.clause.all = false
       state.clause.collectionOfUserInfo = false
       state.clause.paymentAgency = false
@@ -145,18 +110,11 @@ const checkoutSlice = createSlice({
 })
 
 export const {
-  resetDeliveryInfoCheck,
-  checkToAddress,
-  checkToPhone,
-  checkToRecipient,
-  uncheckToAddress,
-  uncheckToPhone,
-  uncheckToRecipient,
   resetSelectPayment,
   selectPayment,
   resetPlannedUseMile,
   setPlannedUseMile,
-  resetAgree,
+  resetClause,
   toggleAgreeToAllClause,
   toggleCollectionOfUserInfoClause,
   togglePaymentAgencyClause,
@@ -165,9 +123,6 @@ export const {
 
 export const selectCheckoutClauseState = (state: RootState) =>
   state.checkout.clause
-
-export const selectCheckoutDeliveyInfoCheckState = (state: RootState) =>
-  state.checkout.deliveryInfo
 
 export const selectCheckoutPaymentState = (state: RootState) =>
   state.checkout.payment

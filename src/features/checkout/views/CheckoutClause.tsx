@@ -2,6 +2,7 @@
 
 import ClauseCheckbox from "@/common/views/ClauseCheckbox"
 import {
+  resetClause,
   selectCheckoutClauseState,
   toggleAgreeToAllClause,
   toggleCollectionOfUserInfoClause,
@@ -10,6 +11,7 @@ import {
 } from "@/redux/features/checkoutSlice"
 import { showBasicModal } from "@/redux/features/modalSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { useEffect } from "react"
 
 const CheckoutClause = () => {
   const { all, collectionOfUserInfo, paymentAgency, provisionOfUserInfo } =
@@ -39,6 +41,10 @@ const CheckoutClause = () => {
   const handlePaymentAgencyClauseClick = (href: string) => {
     window.open(href)
   }
+
+  useEffect(() => {
+    dispatch(resetClause())
+  }, [])
 
   return (
     <section className="border-t-[2px] border-black">
