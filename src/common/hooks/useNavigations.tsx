@@ -6,6 +6,7 @@ export enum ROUTE {
   HOME = "/",
   SIGNIN = "/auth/signIn",
   CHECKOUT = "/checkout",
+  CHECKOUTCOMFIRMED = "/checkoutConfirmed",
   SIGNUP = "/auth/signUp",
   FIND_EMAIL = "/auth/find/email",
   FIND_PASSWORD = "/auth/find/password",

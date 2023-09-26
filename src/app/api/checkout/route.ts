@@ -11,7 +11,6 @@ import { CheckoutClauseCheck } from "@/redux/features/checkoutSlice"
 
 import { NextRequest, NextResponse } from "next/server"
 
-// TODO : 유효성 검사 동일하게 진행하기
 export async function POST(request: NextRequest) {
   const {
     checkoutInfo,
