@@ -1,14 +1,10 @@
-import React, { useEffect } from "react"
 import CheckoutInputLayout from "./CheckoutInputLayout"
 
-import { useAppDispatch } from "@/redux/hooks"
-import { checkToRecipient } from "@/redux/features/checkoutSlice"
 import { useUserInput } from "@/common/hooks/useUserInput"
 import { nameValidator } from "@/features/auth/signUp/utils/validation"
+import { useEffect } from "react"
 
 const CheckoutRecipientInput = () => {
-  const dispatch = useAppDispatch()
-
   const {
     value: nameInputValue,
     handleValueChange: handleNameInputValueChange,
@@ -19,10 +15,8 @@ const CheckoutRecipientInput = () => {
   } = useUserInput(nameValidator)
 
   useEffect(() => {
-    if (isNameValid) {
-      dispatch(checkToRecipient())
-    }
-  }, [isNameValid])
+    reset()
+  }, [])
 
   return (
     <CheckoutInputLayout

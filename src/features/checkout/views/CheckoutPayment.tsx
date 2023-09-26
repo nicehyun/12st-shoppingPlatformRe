@@ -1,8 +1,11 @@
 "use client"
 
-import { selectCheckoutPaymentState } from "@/redux/features/checkoutSlice"
-import { useAppSelector } from "@/redux/hooks"
-import { useState } from "react"
+import {
+  resetSelectPayment,
+  selectCheckoutPaymentState,
+} from "@/redux/features/checkoutSlice"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { useEffect, useState } from "react"
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai"
 import CreditSelect from "./CreditSelect"
 import InstallmentPeriodSelect from "./InstallmentPeriodSelect"
@@ -13,10 +16,15 @@ const CheckoutPayment = () => {
   const [isShowDetail, setIsShowDetail] = useState(true)
 
   const checkoutPaymentState = useAppSelector(selectCheckoutPaymentState)
+  const dispatch = useAppDispatch()
 
   const toggleShowDetail = () => {
     setIsShowDetail((prev) => !prev)
   }
+
+  useEffect(() => {
+    dispatch(resetSelectPayment())
+  }, [])
 
   return (
     <section className="border-t-[2px] border-black">
