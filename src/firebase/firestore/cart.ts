@@ -5,13 +5,13 @@ import firebaseApp from "../config"
 
 const db = getFirestore(firebaseApp)
 
-export async function getProductListInCart(emailValue: string) {
-  if (emailValue === "") {
+export async function getProductListInCart(email: string) {
+  if (email === "") {
     return []
   }
 
   try {
-    const cartRef = doc(db, "cart", emailValue)
+    const cartRef = doc(db, "cart", email)
 
     const cartDoc = await getDoc(cartRef)
 
@@ -20,7 +20,7 @@ export async function getProductListInCart(emailValue: string) {
 
       return cartData.products as ProductsInCart
     } else {
-      console.log("Cart document not found for email:", emailValue)
+      console.log("Cart document not found for email:", email)
       return []
     }
   } catch (error) {
@@ -28,18 +28,15 @@ export async function getProductListInCart(emailValue: string) {
   }
 }
 
-export async function addProductToCart(
-  emailValue: string,
-  productInfo: Product
-) {
-  if (emailValue === "") {
+export async function addProductToCart(email: string, productInfo: Product) {
+  if (email === "") {
     return
   }
 
   const productInfoInCart = { ...productInfo, amount: 1 }
 
   try {
-    const cartRef = doc(db, "cart", emailValue)
+    const cartRef = doc(db, "cart", email)
     const cartDoc = await getDoc(cartRef)
 
     if (cartDoc.exists()) {
@@ -65,15 +62,12 @@ export async function addProductToCart(
   }
 }
 
-export async function removeProductFromCart(
-  emailValue: string,
-  productId: string
-) {
-  if (emailValue === "") {
+export async function removeProductFromCart(email: string, productId: string) {
+  if (email === "") {
     return
   }
   try {
-    const cartRef = doc(db, "cart", emailValue)
+    const cartRef = doc(db, "cart", email)
     const cartDoc = await getDoc(cartRef)
 
     if (cartDoc.exists()) {
@@ -89,7 +83,7 @@ export async function removeProductFromCart(
 
       return cartData
     } else {
-      console.log("Cart document not found for email:", emailValue)
+      console.log("Cart document not found for email:", email)
       return null
     }
   } catch (error) {
@@ -98,15 +92,15 @@ export async function removeProductFromCart(
 }
 
 export async function removeCheckedProductsFromCart(
-  emailValue: string,
+  email: string,
   checkedProductList: ProductsInCart
 ) {
-  if (emailValue === "" || checkedProductList.length === 0) {
+  if (email === "" || checkedProductList.length === 0) {
     return
   }
 
   try {
-    const cartRef = doc(db, "cart", emailValue)
+    const cartRef = doc(db, "cart", email)
     const cartDoc = await getDoc(cartRef)
 
     if (cartDoc.exists()) {
@@ -126,7 +120,7 @@ export async function removeCheckedProductsFromCart(
 
       return cartData
     } else {
-      console.log("Cart document not found for email:", emailValue)
+      console.log("Cart document not found for email:", email)
       return null
     }
   } catch (error) {
@@ -135,15 +129,15 @@ export async function removeCheckedProductsFromCart(
 }
 
 export const increaseProductToCart = async (
-  emailValue: string,
+  email: string,
   productId: string
 ) => {
-  if (emailValue === "") {
+  if (email === "") {
     return
   }
 
   try {
-    const cartRef = doc(db, "cart", emailValue)
+    const cartRef = doc(db, "cart", email)
     const cartDoc = await getDoc(cartRef)
 
     if (cartDoc.exists()) {

@@ -69,9 +69,11 @@ export async function POST(request: NextRequest) {
 
     await checkoutGetMile(email, totalPrice - checkoutInfo.useMile)
 
+    a
+
     response = { result: "success" }
   } catch (error) {
-    return
+    throw error
   }
 
   return NextResponse.json(response)
