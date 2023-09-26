@@ -25,7 +25,6 @@ export default function RootLayout({
     <html lang="ko" className={roboto.className}>
       <body className="bg-white text-black dark:text-white dark:bg-black">
         <Providers>
-          <Header />
           {children}
           <div id="recaptcha-container"></div>
           <Footer />

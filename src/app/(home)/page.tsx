@@ -1,4 +1,5 @@
 import { getBestSellingProducts } from "@/features/home/models/bestProducts"
+import Header from "@/features/layout/views/Header"
 import Navigation from "@/features/layout/views/Navigation"
 import getQueryClient from "@/reactQuery/utils/getQueryClient"
 import { dehydrate, Hydrate } from "@tanstack/react-query"
@@ -11,6 +12,8 @@ export default async function Home() {
   const dehydratedState = dehydrate(queryClient)
   return (
     <Hydrate state={dehydratedState}>
+      <Header isShowCart={true} />
+
       <PageLayout>
         <HomeBestProducts />
       </PageLayout>

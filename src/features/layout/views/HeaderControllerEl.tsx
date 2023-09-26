@@ -18,7 +18,7 @@ const HeaderControllerEl = ({
 }: IHeaderControllerEl) => {
   return (
     <li
-      className={`relative ${classNames} cursor-pointer  w-[100px] sm:w-[60px] md:w-[80px] `}
+      className={`relative ${classNames} cursor-pointer  w-[100px] sm:w-[60px] md:w-[80px] h-[30px]`}
     >
       <Button
         onClick={onClick}

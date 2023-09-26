@@ -8,9 +8,13 @@ import { signOut, useSession } from "next-auth/react"
 
 interface IHeaderController {
   isShowPromotion: boolean
+  isShowCart: boolean
 }
 
-const HeaderController = ({ isShowPromotion }: IHeaderController) => {
+const HeaderController = ({
+  isShowPromotion,
+  isShowCart,
+}: IHeaderController) => {
   const { routeTo } = useNavigations()
   const { data: session } = useSession()
 
@@ -35,16 +39,19 @@ const HeaderController = ({ isShowPromotion }: IHeaderController) => {
           classNames="before:vertical-divider hidden xl:block"
           onClick={() => {}}
         />
-        <li className="relative xl:before:vertical-divider">
-          <HeaderCartButton />
-        </li>
+
+        {isShowCart && (
+          <li className="relative xl:before:vertical-divider">
+            <HeaderCartButton />
+          </li>
+        )}
 
         {session ? (
           <HeaderControllerEl
             title="SIGN OUT"
             icon={<FiLogOut />}
             isShowPromotion={isShowPromotion}
-            classNames="before:vertical-divider"
+            classNames={isShowCart ? "before:vertical-divider" : ""}
             onClick={() => signOut()}
           />
         ) : (

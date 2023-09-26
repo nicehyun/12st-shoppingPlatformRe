@@ -9,7 +9,11 @@ import ThemeSwich from "./ThemeSwich"
 import HeaderSearchForm from "./HeaderSearchForm"
 import CartModal from "@/features/cart/views/CartModal"
 
-const Header = () => {
+interface IHeader {
+  isShowCart: boolean
+}
+
+const Header = ({ isShowCart }: IHeader) => {
   const [isShowPromotion, setIsShowPromotion] = useState(true)
   const [isShowPromotionModal, setIsShowPromotionModal] = useState(false)
 
@@ -26,7 +30,10 @@ const Header = () => {
         onShowPromotionModal={() => setIsShowPromotionModal(true)}
       />
       <HeaderLogo isShowPromotion={isShowPromotion} />
-      <HeaderController isShowPromotion={isShowPromotion} />
+      <HeaderController
+        isShowPromotion={isShowPromotion}
+        isShowCart={isShowCart}
+      />
 
       <ThemeSwich />
 

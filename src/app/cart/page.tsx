@@ -1,11 +1,15 @@
 import PageLayout from "@/common/views/PageLayout"
 import CartLayout from "@/features/cart/views/CartLayout"
+import Header from "@/features/layout/views/Header"
 
 const CartPage = () => {
   return (
-    <PageLayout>
-      <CartLayout />
-    </PageLayout>
+    <>
+      <Header isShowCart={false} />
+      <PageLayout>
+        <CartLayout />
+      </PageLayout>
+    </>
   )
 }
 
