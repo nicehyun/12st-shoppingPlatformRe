@@ -46,7 +46,7 @@ export async function checkoutGetMile(email: string, checkoutPirce: number) {
     if (userDoc.exists()) {
       const userData = userDoc.data() as ResponseUserInfo
 
-      const getMile = junkOfNoMoreThanOneDigit(checkoutPirce * 0.02)
+      const getMile = junkOfNoMoreThanOneDigit(checkoutPirce * 0.01)
 
       await updateDoc(userRef, {
         mile: userData.mile + getMile,

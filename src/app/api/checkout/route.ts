@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
     const totalPrice = accumulationOfProductsPrice(checkoutInfo.prductList)
     await addCheckoutList(email, {
       ...checkoutInfo,
-      getMile: junkOfNoMoreThanOneDigit(totalPrice * 0.02),
+      getMile: junkOfNoMoreThanOneDigit(totalPrice * 0.01),
     })
 
     await checkoutUseMile(email, checkoutInfo.useMile)
