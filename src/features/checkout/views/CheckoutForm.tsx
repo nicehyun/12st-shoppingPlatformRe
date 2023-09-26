@@ -55,47 +55,47 @@ const CheckoutForm = () => {
 
     const isRecipientValid = nameValidator(formData.get("recipient") as string)
 
-    // if (!isRecipientValid) {
-    //   dispatch(
-    //     showFeedbackModal({
-    //       modalContent: "올바른 수령인 이름을 입력해주세요",
-    //     })
-    //   )
-    //   return
-    // }
+    if (!isRecipientValid) {
+      dispatch(
+        showFeedbackModal({
+          modalContent: "올바른 수령인 이름을 입력해주세요",
+        })
+      )
+      return
+    }
 
-    // const isAddressValid = !!(formData.get("address") as string)
-    // const isAdditionalAddressValid = !!additionalAddressValidator(
-    //   formData.get("additionalAddress") as string
-    // )
+    const isAddressValid = !!(formData.get("address") as string)
+    const isAdditionalAddressValid = !!additionalAddressValidator(
+      formData.get("additionalAddress") as string
+    )
 
-    // if (!isAddressValid) {
-    //   dispatch(
-    //     showFeedbackModal({
-    //       modalContent: "배송지 주소를 입력해주세요",
-    //     })
-    //   )
-    //   return
-    // }
+    if (!isAddressValid) {
+      dispatch(
+        showFeedbackModal({
+          modalContent: "배송지 주소를 입력해주세요",
+        })
+      )
+      return
+    }
 
-    // if (!isAdditionalAddressValid) {
-    //   dispatch(
-    //     showFeedbackModal({
-    //       modalContent: "올바른 배송지 상세 주소를 입력해주세요",
-    //     })
-    //   )
-    //   return
-    // }
+    if (!isAdditionalAddressValid) {
+      dispatch(
+        showFeedbackModal({
+          modalContent: "올바른 배송지 상세 주소를 입력해주세요",
+        })
+      )
+      return
+    }
 
-    // const isPhone1Valid = !!phoneValidator(formData.get("phone1") as string)
-    // if (!isPhone1Valid) {
-    //   dispatch(
-    //     showFeedbackModal({
-    //       modalContent: "올바른 수령인의 연락처를 입력해주세요",
-    //     })
-    //   )
-    //   return
-    // }
+    const isPhone1Valid = !!phoneValidator(formData.get("phone1") as string)
+    if (!isPhone1Valid) {
+      dispatch(
+        showFeedbackModal({
+          modalContent: "올바른 수령인의 연락처를 입력해주세요",
+        })
+      )
+      return
+    }
 
     if (checkoutPlannedUseMileState > discountedPriceWithCoupon) {
       dispatch(

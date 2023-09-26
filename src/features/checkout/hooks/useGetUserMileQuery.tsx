@@ -4,7 +4,7 @@ import { getUserMile } from "@/firebase/firestore/user"
 import { useQuery } from "@tanstack/react-query"
 import useCheckoutPrice from "./useCheckoutPrice"
 
-export const useGetUserMileQuery = () => {
+export const useUserMileQuery = () => {
   const { sessionQuery } = useSessionQuery()
   const { totalPriceOfCheckedProduct } = useCheckoutPrice()
 

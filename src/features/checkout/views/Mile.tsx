@@ -10,14 +10,14 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import React, { ChangeEventHandler, useEffect } from "react"
 import { BsQuestionCircle } from "react-icons/bs"
 import useCheckoutPrice from "../hooks/useCheckoutPrice"
-import { useGetUserMileQuery } from "../hooks/useGetUserMileQuery"
+import { useUserMileQuery } from "../hooks/useGetUserMileQuery"
 
 const Mile = () => {
   const dispatch = useAppDispatch()
   const checkoutPlannedUseMileState = useAppSelector(
     selectCheckoutPlannedUseMileState
   )
-  const { userMile, availableMiles } = useGetUserMileQuery()
+  const { userMile, availableMiles } = useUserMileQuery()
 
   const { totalPriceOfCheckedProduct } = useCheckoutPrice()
 
