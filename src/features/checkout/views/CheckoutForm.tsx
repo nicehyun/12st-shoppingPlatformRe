@@ -24,6 +24,7 @@ import {
   phoneValidator,
 } from "@/features/auth/signUp/utils/validation"
 import { ROUTE, useNavigations } from "@/common/hooks/useNavigations"
+import { useRemoveCheckedProduct } from "@/features/cart/hooks/useRemoveCheckedProduct"
 
 const CheckoutForm = () => {
   const checkoutPaymentState = useAppSelector(selectCheckoutPaymentState)
@@ -33,6 +34,7 @@ const CheckoutForm = () => {
   const { routeTo } = useNavigations()
 
   const { checkoutMutateAsync, isCheckoutLoading } = useCheckoutMutaion()
+  const checkedProductRemoveMutaion = useRemoveCheckedProduct()
 
   const handleCheckoutSubmit: FormEventHandler<HTMLFormElement> = async (
     event
@@ -182,6 +184,7 @@ const CheckoutForm = () => {
     }
 
     if (response?.ok) {
+      await checkedProductRemoveMutaion.mutateAsync(checkedProductList)
       // routeTo(ROUTE.CHECKOUTCOMFIRMED)
     }
   }

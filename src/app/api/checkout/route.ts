@@ -10,6 +10,7 @@ import {
 } from "@/features/auth/signUp/utils/validation"
 
 import { updateAddress } from "@/firebase/firestore/address"
+
 import { addCheckoutList } from "@/firebase/firestore/checkout"
 import { checkoutGetMile, checkoutUseMile } from "@/firebase/firestore/mile"
 import { CheckoutClauseCheck } from "@/redux/features/checkoutSlice"
@@ -68,8 +69,6 @@ export async function POST(request: NextRequest) {
     await checkoutUseMile(email, checkoutInfo.useMile)
 
     await checkoutGetMile(email, totalPrice - checkoutInfo.useMile)
-
-    a
 
     response = { result: "success" }
   } catch (error) {
