@@ -1,6 +1,6 @@
 import { numberToLocaleString } from "@/common/utils/price"
 import Loading from "@/common/views/Loading"
-import useCheckoutPrice from "@/features/cart/hooks/useCheckoutPrice"
+import useCheckoutPrice from "@/features/checkout/hooks/useCheckoutPrice"
 import { selectCheckoutPlannedUseMileState } from "@/redux/features/checkoutSlice"
 import { useAppSelector } from "@/redux/hooks"
 

@@ -182,7 +182,7 @@ const CheckoutForm = () => {
     }
 
     if (response?.ok) {
-      routeTo(ROUTE.CHECKOUTCOMFIRMED)
+      // routeTo(ROUTE.CHECKOUTCOMFIRMED)
     }
   }
 

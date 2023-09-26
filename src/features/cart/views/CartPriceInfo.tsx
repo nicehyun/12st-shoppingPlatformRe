@@ -1,5 +1,5 @@
 import { FaEquals, FaPlus } from "react-icons/fa"
-import useCheckoutPrice from "../hooks/useCheckoutPrice"
+import useCheckoutPrice from "../../checkout/hooks/useCheckoutPrice"
 import CartPriceInfoEl from "./CartPriceInfoEl"
 import CartPriceInfoHeaderEl from "./CartPriceInfoHeaderEl"
 import CartPriceOperation from "./CartPriceOperation"

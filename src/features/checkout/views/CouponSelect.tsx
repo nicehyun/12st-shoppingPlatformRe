@@ -1,4 +1,4 @@
-import useCheckoutPrice from "@/features/cart/hooks/useCheckoutPrice"
+import useCheckoutPrice from "@/features/checkout/hooks/useCheckoutPrice"
 import useSelectCoupon from "@/features/cart/hooks/useSelectCoupon"
 import {
   MenuItem,

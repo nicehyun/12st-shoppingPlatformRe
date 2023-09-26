@@ -10,12 +10,12 @@ import { useAppSelector } from "@/redux/hooks"
 import { selectCheckedProductList } from "@/redux/features/cartSlice"
 import { useEffect } from "react"
 import useSelectCoupon from "../hooks/useSelectCoupon"
-import useCheckoutPrice from "../hooks/useCheckoutPrice"
+import useCheckoutPrice from "../../checkout/hooks/useCheckoutPrice"
 
 const CouponBar = () => {
   const {
     handleSelectedCoupon,
-    seletedCoupon,
+    selectedCoupon,
     availableCoupons,
     resetSelectedCoupon,
   } = useSelectCoupon()
@@ -55,7 +55,7 @@ const CouponBar = () => {
             }}
             labelId="bonus-coupons"
             id="bonus-coupons"
-            value={seletedCoupon?.name ?? ""}
+            value={selectedCoupon?.name ?? ""}
             label="Coupon"
             onChange={handleSelectedCoupon}
             disabled={totalPriceOfCheckedProduct < 15000}

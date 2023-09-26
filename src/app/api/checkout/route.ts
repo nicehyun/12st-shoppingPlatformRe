@@ -1,5 +1,9 @@
 import { CheckoutList } from "@/common/types/checkout"
 import {
+  accumulationOfProductsPrice,
+  junkOfNoMoreThanOneDigit,
+} from "@/common/utils/price"
+import {
   additionalAddressValidator,
   nameValidator,
   phoneValidator,
@@ -7,6 +11,7 @@ import {
 
 import { updateAddress } from "@/firebase/firestore/address"
 import { addCheckoutList } from "@/firebase/firestore/checkout"
+import { checkoutGetMile, checkoutUseMile } from "@/firebase/firestore/mile"
 import { CheckoutClauseCheck } from "@/redux/features/checkoutSlice"
 
 import { NextRequest, NextResponse } from "next/server"
@@ -51,7 +56,23 @@ export async function POST(request: NextRequest) {
     })
   }
 
-  const response = await addCheckoutList(email, checkoutInfo)
+  let response
+
+  try {
+    const totalPrice = accumulationOfProductsPrice(checkoutInfo.prductList)
+    await addCheckoutList(email, {
+      ...checkoutInfo,
+      getMile: junkOfNoMoreThanOneDigit(totalPrice * 0.02),
+    })
+
+    await checkoutUseMile(email, checkoutInfo.useMile)
+
+    await checkoutGetMile(email, totalPrice - checkoutInfo.useMile)
+
+    response = { result: "success" }
+  } catch (error) {
+    return
+  }
 
   return NextResponse.json(response)
 }

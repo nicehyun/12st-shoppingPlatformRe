@@ -1,4 +1,4 @@
-import useCheckoutPrice from "@/features/cart/hooks/useCheckoutPrice"
+import useCheckoutPrice from "@/features/checkout/hooks/useCheckoutPrice"
 import { selectCheckedProductList } from "@/redux/features/cartSlice"
 import { useAppSelector } from "@/redux/hooks"
 import { useState } from "react"
