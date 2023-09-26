@@ -18,7 +18,11 @@ import CheckoutPayment from "./CheckoutPayment"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
 import useSelectCoupon from "@/features/cart/hooks/useSelectCoupon"
 import { useCheckoutMutaion } from "../hooks/useCheckoutMutaion"
-import { nameValidator } from "@/features/auth/signUp/utils/validation"
+import {
+  additionalAddressValidator,
+  nameValidator,
+  phoneValidator,
+} from "@/features/auth/signUp/utils/validation"
 
 const CheckoutForm = () => {
   const checkoutPaymentState = useAppSelector(selectCheckoutPaymentState)
@@ -47,9 +51,9 @@ const CheckoutForm = () => {
     }
 
     const isAddressValid = !!(formData.get("address") as string)
-    const isAdditionalAddressValid = !!(formData.get(
-      "additionalAddress"
-    ) as string)
+    const isAdditionalAddressValid = !!additionalAddressValidator(
+      formData.get("additionalAddress") as string
+    )
 
     if (!isAddressValid) {
       dispatch(
@@ -63,13 +67,13 @@ const CheckoutForm = () => {
     if (!isAdditionalAddressValid) {
       dispatch(
         showFeedbackModal({
-          modalContent: "배송지 상세 주소를 입력해주세요",
+          modalContent: "올바른 배송지 상세 주소를 입력해주세요",
         })
       )
       return
     }
 
-    const isPhone1Valid = !!(formData.get("phone1") as string)
+    const isPhone1Valid = !!phoneValidator(formData.get("phone1") as string)
     if (!isPhone1Valid) {
       dispatch(
         showFeedbackModal({
