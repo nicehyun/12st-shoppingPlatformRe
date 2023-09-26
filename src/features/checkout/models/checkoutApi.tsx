@@ -1,10 +1,12 @@
 import { CheckoutList } from "@/common/types/checkout"
+import { CheckoutClauseCheck } from "@/redux/features/checkoutSlice"
 
 export const checkoutAPI = {
   checkout: async (
     checkoutInfo: CheckoutList,
     email: string,
-    isDefalutAddressCheck: boolean
+    isDefalutAddressCheck: boolean,
+    isClauseCheck: Omit<CheckoutClauseCheck, "all">
   ) => {
     try {
       const response = await fetch("/api/checkout", {
@@ -13,6 +15,7 @@ export const checkoutAPI = {
           checkoutInfo,
           email,
           isDefalutAddressCheck,
+          isClauseCheck,
         }),
       })
 
