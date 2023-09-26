@@ -30,7 +30,12 @@ const CheckoutForm = () => {
   const checkedProductList = useAppSelector(selectCheckedProductList)
   const dispatch = useAppDispatch()
 
-  const checkoutMutation = useCheckoutMutaion()
+  const {
+    checkoutMutateAsync,
+    isCheckoutError,
+    isCheckoutLoading,
+    isCheckoutSuccess,
+  } = useCheckoutMutaion()
 
   const handleCheckoutSubmit: FormEventHandler<HTMLFormElement> = async (
     event
@@ -159,7 +164,7 @@ const CheckoutForm = () => {
       payment: checkoutPayment,
     }
 
-    const response = checkoutMutation.mutateAsync({
+    const response = checkoutMutateAsync({
       checkoutInfo,
       isDefalutAddressCheck: defalutAddressRegistration === "on",
     })
@@ -173,7 +178,7 @@ const CheckoutForm = () => {
       <CheckoutPayment />
       <CheckoutTotalPriceInfo />
       <CheckoutClause />
-      <CheckoutButton />
+      <CheckoutButton isCheckoutLoading={isCheckoutLoading} />
     </form>
   )
 }

@@ -9,7 +9,12 @@ export const useCheckoutMutaion = () => {
   const { showFeedbackModalWithContent } = useFeedbackModal()
   const { sessionQuery } = useSessionQuery()
 
-  const checkoutMutation = useMutation<
+  const {
+    isLoading: isCheckoutLoading,
+    isError: isCheckoutError,
+    isSuccess: isCheckoutSuccess,
+    mutateAsync: checkoutMutateAsync,
+  } = useMutation<
     Response | undefined,
     unknown,
     {
@@ -32,5 +37,10 @@ export const useCheckoutMutaion = () => {
     }
   )
 
-  return checkoutMutation
+  return {
+    isCheckoutLoading,
+    isCheckoutError,
+    isCheckoutSuccess,
+    checkoutMutateAsync,
+  }
 }
