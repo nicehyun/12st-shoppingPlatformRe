@@ -22,7 +22,7 @@ const style = {
   bgcolor: "background.paper",
   border: "1px solid #000",
   boxShadow: 24,
-  p: 4,
+
   borderRadius: "5px",
   overflowY: "scroll",
 }
@@ -47,27 +47,31 @@ export default function BasicModal({ children }: IBasicModal) {
     >
       <Box sx={style}>
         <>
-          <Typography
-            id={modalId}
-            variant="h6"
-            sx={{
-              mb: 2,
-              textAlign: "center",
-              fontWeight: "bold",
-              fontSize: "16px",
-            }}
-          >
-            {modalTitle}
-          </Typography>
+          <div className="sticky w-full top-0 h-[40px] bg-white flex items-center justify-end pr-[10px]">
+            <button
+              onClick={() => dispatch(hideBasicModal())}
+              className="text-[20px] text-lightBlack"
+            >
+              <AiOutlineClose />
+            </button>
+          </div>
 
-          {children}
+          <div className="px-[32px] pb-[32px]">
+            <Typography
+              id={modalId}
+              variant="h6"
+              sx={{
+                mb: 2,
+                textAlign: "center",
+                fontWeight: "bold",
+                fontSize: "16px",
+              }}
+            >
+              {modalTitle}
+            </Typography>
 
-          <button
-            onClick={() => dispatch(hideBasicModal())}
-            className="absolute top-[20px] right-[20px] text-[20px] text-lightBlack"
-          >
-            <AiOutlineClose />
-          </button>
+            {children}
+          </div>
         </>
       </Box>
     </Modal>

@@ -3,10 +3,8 @@ import "./globals.css"
 import { Roboto } from "next/font/google"
 import Providers from "../common/utils/Providers"
 
-import Header from "@/features/layout/views/Header"
 import FeedbackModal from "@/common/views/FeedbackModal"
 
-import BasicModal from "@/common/views/BasicModal"
 import Footer from "@/features/layout/views/Footer"
 
 const roboto = Roboto({
@@ -30,7 +28,6 @@ export default function RootLayout({
           <Footer />
 
           <FeedbackModal />
-          {/* <BasicModal /> */}
         </Providers>
       </body>
     </html>
