@@ -75,6 +75,6 @@ export const birthDayValidatorWithMonth = (month: string) => {
 }
 
 export const additionalAddressValidator: InputValidator = (value) => {
-  const additionalAddressRegex = /^[a-zA-Z0-9\s]+$/
+  const additionalAddressRegex = /^[a-zA-Z0-9가-힣\s]+$/
   return additionalAddressRegex.test(value.trim())
 }
