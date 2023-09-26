@@ -182,7 +182,6 @@ const CheckoutForm = () => {
     }
 
     if (response?.ok) {
-      console.log("성공")
       routeTo(ROUTE.CHECKOUTCOMFIRMED)
     }
   }

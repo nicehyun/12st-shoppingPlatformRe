@@ -24,8 +24,6 @@ export async function POST(request: NextRequest) {
     isClauseCheck: Omit<CheckoutClauseCheck, "all">
   } = await request.json()
 
-  console.log(isClauseCheck)
-
   if (!nameValidator(checkoutInfo.recipient)) return
   if (!checkoutInfo.zipcode) return
   if (!checkoutInfo.address) return

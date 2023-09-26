@@ -1,6 +1,7 @@
 import firebaseApp from "../config"
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore"
 import { CheckoutList } from "@/common/types/checkout"
+import { getCurrentDateTime } from "@/common/utils/time"
 
 const db = getFirestore(firebaseApp)
 export async function addCheckoutList(
@@ -19,7 +20,10 @@ export async function addCheckoutList(
       const existingCheckoutData = checkoutDoc.data()
       const existingCheckoutList = existingCheckoutData.checkoutList || []
 
-      updatedCheckoutList = [checkoutListInfos, ...existingCheckoutList]
+      updatedCheckoutList = [
+        { ...checkoutListInfos, checkoutDate: getCurrentDateTime() },
+        ...existingCheckoutList,
+      ]
     } else {
       updatedCheckoutList = [checkoutListInfos]
     }
