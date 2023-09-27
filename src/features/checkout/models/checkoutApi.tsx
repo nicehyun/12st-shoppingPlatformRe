@@ -5,9 +5,8 @@ export const checkoutAPI = {
   checkout: async (
     checkoutInfo: CheckoutList,
     email: string,
-    isDefalutAddressCheck: boolean,
     isClauseCheck: Omit<CheckoutClauseCheck, "all">,
-    deliveryInfoTabValue: "0" | "1"
+    isUpdateDeliveryInfo: boolean
   ) => {
     try {
       const response = await fetch("/api/checkout", {
@@ -15,9 +14,8 @@ export const checkoutAPI = {
         body: JSON.stringify({
           checkoutInfo,
           email,
-          isDefalutAddressCheck,
           isClauseCheck,
-          deliveryInfoTabValue,
+          isUpdateDeliveryInfo,
         }),
       })
 

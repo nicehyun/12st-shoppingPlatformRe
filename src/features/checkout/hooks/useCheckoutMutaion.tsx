@@ -16,23 +16,16 @@ export const useCheckoutMutaion = () => {
       unknown,
       {
         checkoutInfo: CheckoutList
-        isDefalutAddressCheck: boolean
         isClauseCheck: Omit<CheckoutClauseCheck, "all">
-        deliveryInfoTabValue: "0" | "1"
+        isUpdateDeliveryInfo: boolean
       }
     >(
-      ({
-        checkoutInfo,
-        isDefalutAddressCheck,
-        isClauseCheck,
-        deliveryInfoTabValue,
-      }) =>
+      ({ checkoutInfo, isClauseCheck, isUpdateDeliveryInfo }) =>
         checkoutAPI.checkout(
           checkoutInfo,
           sessionQuery?.user.email ?? "",
-          isDefalutAddressCheck,
           isClauseCheck,
-          deliveryInfoTabValue
+          isUpdateDeliveryInfo
         ),
       {
         onError: () => {

@@ -87,7 +87,7 @@ const DeliveryInfo = () => {
         value={deliveryTabValue}
         name="deliveryInfo-tab"
         readOnly
-        // className="absolute"
+        className="absolute transform translate-x-[9999px] hidden"
       />
 
       <Box sx={{ width: "100%", bgcolor: "" }}>

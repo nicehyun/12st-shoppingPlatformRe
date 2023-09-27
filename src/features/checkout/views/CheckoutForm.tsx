@@ -55,8 +55,6 @@ const CheckoutForm = () => {
 
     const formData = new FormData(event.currentTarget)
 
-    console.log(formData.get("deliveryInfo-tab"))
-
     const isRecipientValid = nameValidator(formData.get("recipient") as string)
 
     if (!isRecipientValid) {
@@ -191,15 +189,18 @@ const CheckoutForm = () => {
       payment: checkoutPayment,
     }
 
+    const deliveryInfoTab = formData.get("deliveryInfo-tab") as "0" | "1"
+    const isUpdateDeliveryInfo =
+      deliveryInfoTab === "0" || defalutAddressRegistration === "on"
+
     const response = await checkoutMutateAsync({
       checkoutInfo,
-      isDefalutAddressCheck: defalutAddressRegistration === "on",
       isClauseCheck: {
         collectionOfUserInfo: !!collectionOfUserInfo,
         provisionOfUserInfo: !!provisionOfUserInfo,
         paymentAgency: !!paymentAgencyClause,
       },
-      deliveryInfoTabValue: formData.get("deliveryInfo-tab") as "0" | "1",
+      isUpdateDeliveryInfo,
     })
 
     if (!response?.ok) {
