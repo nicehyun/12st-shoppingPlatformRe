@@ -7,13 +7,23 @@ import SignUpSideButton from "../../auth/signUp/views/SignUpSideButton"
 
 import CheckoutInputLayout from "./CheckoutInputLayout"
 
-const CheckoutAddressInput = () => {
+interface ICheckoutAddressInput {
+  defaultValue?: {
+    zipcode?: string
+    address?: string
+    additionalAddress?: string
+  }
+}
+
+const CheckoutAddressInput = ({ defaultValue }: ICheckoutAddressInput) => {
   const {
     addressValue,
     zipcodeValue,
     postCodeModalComponent,
     resetAddressValue,
     showPostCodeModal,
+    changeZipcodeValue,
+    changeAddreddValue,
   } = usePostCodeModal()
 
   const {
@@ -23,14 +33,24 @@ const CheckoutAddressInput = () => {
     hasError: hasErrorAdditionalAddress,
     isValid: isValidAdditionalAddress,
     reset: resetAdditionalAddress,
-  } = useUserInput(additionalAddressValidator)
+  } = useUserInput(additionalAddressValidator, defaultValue?.additionalAddress)
 
   useEffect(() => {
-    resetAddressValue()
-    resetAdditionalAddress()
+    return () => {
+      resetAddressValue()
+      resetAdditionalAddress()
+    }
   }, [])
 
-  useEffect(() => {}, [])
+  useEffect(() => {
+    if (defaultValue?.zipcode) {
+      changeZipcodeValue(defaultValue.zipcode)
+    }
+
+    if (defaultValue?.address) {
+      changeAddreddValue(defaultValue.address)
+    }
+  }, [defaultValue])
 
   return (
     <CheckoutInputLayout

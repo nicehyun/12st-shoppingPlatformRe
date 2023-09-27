@@ -1,29 +1,31 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { BsQuestionCircle } from "react-icons/bs"
 
 import Tabs from "@mui/material/Tabs"
 import Tab from "@mui/material/Tab"
 import Box from "@mui/material/Box"
 
-import CheckoutDeliveryNameInput from "./CheckoutDeliveryNameInput"
-import CheckoutRecipientInput from "./CheckoutRecipientInput"
-import CheckoutAddressInput from "./CheckoutAddressInput"
-import CheckoutPhoneInput from "./CheckoutPhoneInput"
-
 import TabPanel from "@/common/views/TabPanel"
 
-import Checkbox from "@/common/views/Checkbox"
-import DeliveryMemoSelect from "./DeliveryMemoSelect"
 import { showBasicModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
+import { useGetAddressQuery } from "../hooks/useGetAddressQuery"
+import CheckoutDefalutDeliveryInfo from "./CheckoutDefalutDeliveryInfo"
+import CheckoutNewDeliveryInfo from "./CheckoutNewDeliveryInfo"
 
 const DeliveryInfo = () => {
   const dispatch = useAppDispatch()
-  const [isDefalutAddressRegistration, setIsDefalutAddressRegistration] =
-    useState(false)
+  const { userDefalutAddress } = useGetAddressQuery()
+
   const [deliveryTabvalue, setDeliveryTabvalue] = useState(1)
+
+  useEffect(() => {
+    if (userDefalutAddress) {
+      setDeliveryTabvalue(0)
+    }
+  }, [userDefalutAddress])
 
   const showDeliveryExplanationModal = () => {
     dispatch(
@@ -33,10 +35,6 @@ const DeliveryInfo = () => {
         modalContent: "DeliveryExplanation",
       })
     )
-  }
-
-  const toggleDefalutAddressRegistration = () => {
-    setIsDefalutAddressRegistration((prev) => !prev)
   }
 
   const handleDeliveryTabvalueChange = (
@@ -67,6 +65,7 @@ const DeliveryInfo = () => {
 
   return (
     <section className="border-t-[2px] border-black">
+      <div>{userDefalutAddress?.additionalAddress}</div>
       <div className="flex justify-between py-[18px] font-bold">
         <span className="flex">
           <h3>배송정보</h3>
@@ -101,34 +100,11 @@ const DeliveryInfo = () => {
         </Box>
 
         <TabPanel value={deliveryTabvalue} index={0}>
-          <CheckoutDeliveryNameInput />
-          <CheckoutRecipientInput />
-          <CheckoutAddressInput />
-          <CheckoutPhoneInput isRequired />
-          <CheckoutPhoneInput />
-          <DeliveryMemoSelect />
+          <CheckoutDefalutDeliveryInfo />
         </TabPanel>
 
         <TabPanel value={deliveryTabvalue} index={1}>
-          <CheckoutDeliveryNameInput />
-          <CheckoutRecipientInput />
-          <CheckoutAddressInput />
-          <CheckoutPhoneInput isRequired />
-          <CheckoutPhoneInput />
-
-          <Checkbox
-            id="defalutAddressRegistration"
-            isChecked={isDefalutAddressRegistration}
-            onClickCheckbox={toggleDefalutAddressRegistration}
-            checkboxLabel="기본배송지로 등록하기"
-            peer="peer/defalutAddress"
-            peerChecked={{
-              borderColor: "peer-checked/defalutAddress:after:border-lightRed",
-            }}
-            classNames="ml-[100px] mb-[20px] max-w-[500px]"
-          />
-
-          <DeliveryMemoSelect />
+          <CheckoutNewDeliveryInfo />
         </TabPanel>
       </Box>
     </section>

@@ -1,11 +1,32 @@
+import { ChangeEvent, useEffect, useState } from "react"
 import CheckoutInputLayout from "./CheckoutInputLayout"
 
-const CheckoutDeliveryNameInput = () => {
+interface ICheckoutDeliveryNameInput {
+  defaultValue?: string
+}
+
+const CheckoutDeliveryNameInput = ({
+  defaultValue,
+}: ICheckoutDeliveryNameInput) => {
+  const [deliveryName, setDeliveryName] = useState("")
+
+  const handleDeliveryNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setDeliveryName(event.target.value)
+  }
+
+  useEffect(() => {
+    if (defaultValue) setDeliveryName(defaultValue)
+  }, [defaultValue])
   return (
     <CheckoutInputLayout
       label="배송지명"
       id="deliveryName"
       inputMaxLength={15}
+      defaultValue={defaultValue}
+      inputState={{
+        value: deliveryName,
+        handleValueChange: handleDeliveryNameChange,
+      }}
     />
   )
 }

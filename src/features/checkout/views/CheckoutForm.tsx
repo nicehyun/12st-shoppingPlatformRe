@@ -5,7 +5,7 @@ import {
   selectCheckoutPlannedUseMileState,
 } from "@/redux/features/checkoutSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { FormEventHandler } from "react"
+import { FormEventHandler, Suspense } from "react"
 import CheckoutClause from "./CheckoutClause"
 import CheckoutCouponAndMile from "./CheckoutCouponAndMile"
 import CheckoutOrderListInfo from "./CheckoutOrderListInfo"
@@ -29,6 +29,7 @@ import {
 import { ROUTE, useNavigations } from "@/common/hooks/useNavigations"
 import { useRemoveCheckedProduct } from "@/features/cart/hooks/useRemoveCheckedProduct"
 import useCheckoutPrice from "../hooks/useCheckoutPrice"
+import Loading from "@/common/views/Loading"
 
 const CheckoutForm = () => {
   const checkoutPaymentState = useAppSelector(selectCheckoutPaymentState)
@@ -210,7 +211,18 @@ const CheckoutForm = () => {
 
   return (
     <form onSubmit={handleCheckoutSubmit} className="max-w-[800px] mx-auto">
-      <DeliveryInfo />
+      <Suspense
+        fallback={
+          <Loading
+            spinnerSize={{ width: "w-[50px]", height: "h-[50px]" }}
+            height="h-[400px]"
+            isFrame={false}
+          />
+        }
+      >
+        <DeliveryInfo />
+      </Suspense>
+
       <CheckoutOrderListInfo />
       <CheckoutCouponAndMile />
       <CheckoutPayment />

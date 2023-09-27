@@ -4,7 +4,11 @@ import { useUserInput } from "@/common/hooks/useUserInput"
 import { nameValidator } from "@/features/auth/signUp/utils/validation"
 import { useEffect } from "react"
 
-const CheckoutRecipientInput = () => {
+interface ICheckoutRecipientInput {
+  defaultValue?: string
+}
+
+const CheckoutRecipientInput = ({ defaultValue }: ICheckoutRecipientInput) => {
   const {
     value: nameInputValue,
     handleValueChange: handleNameInputValueChange,
@@ -12,10 +16,10 @@ const CheckoutRecipientInput = () => {
     hasError: hasErrorName,
     isValid: isNameValid,
     reset,
-  } = useUserInput(nameValidator)
+  } = useUserInput(nameValidator, defaultValue)
 
   useEffect(() => {
-    reset()
+    return () => reset()
   }, [])
 
   return (

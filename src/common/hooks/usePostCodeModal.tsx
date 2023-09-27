@@ -37,5 +37,7 @@ export const usePostCodeModal = () => {
     addressValue,
     zipcodeValue,
     resetAddressValue,
+    changeZipcodeValue: setZipcodeValue,
+    changeAddreddValue: setAddressValue,
   }
 }

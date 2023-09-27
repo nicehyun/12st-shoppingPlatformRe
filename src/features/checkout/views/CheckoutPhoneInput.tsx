@@ -1,29 +1,43 @@
 import { useUserInput } from "@/common/hooks/useUserInput"
 import { phoneValidator } from "@/features/auth/signUp/utils/validation"
 
-import { useEffect } from "react"
+import { ChangeEvent, useEffect } from "react"
 
 import CheckoutInputLayout from "./CheckoutInputLayout"
 
 interface ICheckoutPhoneInput {
   isRequired?: boolean
+  defaultValue?: string
 }
 
-const CheckoutPhoneInput = ({ isRequired = false }: ICheckoutPhoneInput) => {
+const CheckoutPhoneInput = ({
+  isRequired = false,
+  defaultValue,
+}: ICheckoutPhoneInput) => {
   const inputId = isRequired ? "phone1" : "phone2"
   const label = isRequired ? "연락처1" : "연락처2"
 
   const {
     value: phoneInputValue,
-    handleValueChange: handlePhoneInputValueChange,
+    handleValueChange: handlePhoneInputChange,
     handleInputBlur: handlePhoneInputBlur,
     isValid: isPhoneValid,
     hasError: hasErrorPhone,
     reset,
-  } = useUserInput(phoneValidator)
+  } = useUserInput(phoneValidator, defaultValue)
+
+  const handlePhoneInputValueChange = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    if (isNaN(Number(event.target.value))) {
+      return
+    }
+
+    handlePhoneInputChange(event)
+  }
 
   useEffect(() => {
-    reset()
+    return () => reset()
   }, [])
 
   return (
@@ -41,10 +55,13 @@ const CheckoutPhoneInput = ({ isRequired = false }: ICheckoutPhoneInput) => {
               isValid: isPhoneValid,
               hasError: hasErrorPhone,
             }
-          : undefined
+          : {
+              value: phoneInputValue,
+              handleValueChange: handlePhoneInputValueChange,
+            }
       }
       classNames="max-w-[230px]"
-      inputType="number"
+      inputType="text"
       inputMaxLength={11}
     />
   )

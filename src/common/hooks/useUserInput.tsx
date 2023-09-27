@@ -1,4 +1,4 @@
-import { ChangeEvent, Reducer, useReducer } from "react"
+import { ChangeEvent, Reducer, useEffect, useReducer } from "react"
 
 type InitialInputState = {
   value: string
@@ -40,7 +40,10 @@ const inputStateReducer = (
   return state
 }
 
-export const useUserInput = (validateValue: (value: string) => boolean) => {
+export const useUserInput = (
+  validateValue: (value: string) => boolean,
+  defaultValue?: string
+) => {
   const [inputState, dispatch] = useReducer<
     Reducer<InitialInputState, InputStateReducerAction>
   >(inputStateReducer, initialInputState)
@@ -59,6 +62,12 @@ export const useUserInput = (validateValue: (value: string) => boolean) => {
   const reset = () => {
     dispatch({ type: "RESET" })
   }
+
+  useEffect(() => {
+    if (defaultValue) {
+      dispatch({ type: "INPUT", value: defaultValue })
+    }
+  }, [defaultValue])
 
   return {
     value: inputState.value,

@@ -1,7 +1,8 @@
 import firebaseApp from "../config"
-import { getFirestore, doc, setDoc } from "firebase/firestore"
+import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore"
 import { AxiosError } from "axios"
 import { Address } from "@/common/types/address"
+import { ResponseUserInfo } from "@/common/types/user"
 
 const db = getFirestore(firebaseApp)
 export async function updateAddress(email: string, addressData: Address) {
@@ -21,5 +22,31 @@ export async function updateAddress(email: string, addressData: Address) {
     }
 
     throw Error(`🚨firebase updateAddress API error : ${error}`)
+  }
+}
+
+export async function getUserAddress(email: string) {
+  if (email === "") return null
+
+  try {
+    const addressRef = doc(db, "address", email)
+
+    const addressDoc = await getDoc(addressRef)
+
+    if (addressDoc.exists()) {
+      const AddressData = addressDoc.data() as Address
+
+      return AddressData
+    }
+
+    return null
+  } catch (error) {
+    const { response } = error as unknown as AxiosError
+
+    if (response) {
+      throw Error(`🚨firebase getDocs API : ${error}`)
+    }
+
+    throw Error(`getUserAddress firebase API : ${error}`)
   }
 }
