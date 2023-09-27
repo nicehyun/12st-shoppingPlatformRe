@@ -39,7 +39,8 @@ const CheckoutForm = () => {
   const checkoutPlannedUseMileState = useAppSelector(
     selectCheckoutPlannedUseMileState
   )
-  const { discountedPriceWithCoupon } = useCheckoutPrice()
+  const { discountedPriceWithCoupon, totalPriceOfCheckedProduct } =
+    useCheckoutPrice()
 
   const dispatch = useAppDispatch()
   const { routeTo } = useNavigations()
@@ -98,7 +99,10 @@ const CheckoutForm = () => {
       return
     }
 
-    if (checkoutPlannedUseMileState > discountedPriceWithCoupon) {
+    if (
+      checkoutPlannedUseMileState >
+      totalPriceOfCheckedProduct - discountedPriceWithCoupon
+    ) {
       dispatch(
         showFeedbackModal({
           modalContent: "상품 가격보다 마일리지를 많이 사용하실 수 없습니다",
@@ -166,7 +170,9 @@ const CheckoutForm = () => {
           }
 
     const checkoutInfo: CheckoutList = {
-      deliveryName: formData.get("deliveryName") as string,
+      deliveryName: formData.get("deliveryName")
+        ? (formData.get("deliveryName") as string)
+        : null,
       recipient: formData.get("recipient") as string,
       zipcode: formData.get("zipcode") as string,
       address: formData.get("address") as string,
@@ -204,8 +210,8 @@ const CheckoutForm = () => {
     }
 
     if (response?.ok) {
-      await checkedProductRemoveMutaion.mutateAsync(checkedProductList)
-      routeTo(ROUTE.CHECKOUTCOMFIRMED, true)
+      // await checkedProductRemoveMutaion.mutateAsync(checkedProductList)
+      // routeTo(ROUTE.CHECKOUTCOMFIRMED, true)
     }
   }
 

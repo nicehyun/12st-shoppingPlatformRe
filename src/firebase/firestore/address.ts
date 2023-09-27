@@ -1,15 +1,17 @@
 import firebaseApp from "../config"
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore"
 import { AxiosError } from "axios"
-import { Address } from "@/common/types/address"
-import { ResponseUserInfo } from "@/common/types/user"
+import { DeliveryInfo } from "@/common/types/address"
 
 const db = getFirestore(firebaseApp)
-export async function updateAddress(email: string, addressData: Address) {
+export async function updateDefalutDeliveryInfo(
+  email: string,
+  deliveryInfo: DeliveryInfo
+) {
   if (email === "") return
 
   try {
-    await setDoc(doc(db, "address", email), addressData, {
+    await setDoc(doc(db, "defaultDeliveryInfo", email), deliveryInfo, {
       merge: true,
     })
 
@@ -25,16 +27,16 @@ export async function updateAddress(email: string, addressData: Address) {
   }
 }
 
-export async function getUserAddress(email: string) {
+export async function getUserDefaultDeliveryInfo(email: string) {
   if (email === "") return null
 
   try {
-    const addressRef = doc(db, "address", email)
+    const addressRef = doc(db, "defaultDeliveryInfo", email)
 
     const addressDoc = await getDoc(addressRef)
 
     if (addressDoc.exists()) {
-      const AddressData = addressDoc.data() as Address
+      const AddressData = addressDoc.data() as DeliveryInfo
 
       return AddressData
     }

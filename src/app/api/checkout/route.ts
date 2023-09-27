@@ -8,8 +8,7 @@ import {
   nameValidator,
   phoneValidator,
 } from "@/features/auth/signUp/utils/validation"
-
-import { updateAddress } from "@/firebase/firestore/address"
+import { updateDefalutDeliveryInfo } from "@/firebase/firestore/address"
 
 import { addCheckoutList } from "@/firebase/firestore/checkout"
 import { checkoutGetMile, checkoutUseMile } from "@/firebase/firestore/mile"
@@ -49,17 +48,21 @@ export async function POST(request: NextRequest) {
   )
     return
 
-  if (isDefalutAddressCheck) {
-    await updateAddress(email, {
-      additionalAddress: checkoutInfo.additionalAddress,
-      address: checkoutInfo.address,
-      zipcode: checkoutInfo.zipcode,
-    })
-  }
-
   let response
 
   try {
+    if (isDefalutAddressCheck) {
+      await updateDefalutDeliveryInfo(email, {
+        delivertName: checkoutInfo.deliveryName,
+        recipient: checkoutInfo.recipient,
+        additionalAddress: checkoutInfo.additionalAddress,
+        address: checkoutInfo.address,
+        zipcode: checkoutInfo.zipcode,
+        phone1: checkoutInfo.phone1,
+        phone2: checkoutInfo.phone2,
+      })
+    }
+
     const totalPrice = accumulationOfProductsPrice(checkoutInfo.prductList)
     await addCheckoutList(email, {
       ...checkoutInfo,

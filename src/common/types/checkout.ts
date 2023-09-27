@@ -8,7 +8,7 @@ export type CheckoutPaymentInfo = {
 }
 
 export type CheckoutList = {
-  deliveryName: string
+  deliveryName: string | null
   recipient: string
   zipcode: string
   address: string
