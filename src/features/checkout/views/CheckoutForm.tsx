@@ -214,8 +214,8 @@ const CheckoutForm = () => {
     }
 
     if (response?.ok) {
-      // await checkedProductRemoveMutaion.mutateAsync(checkedProductList)
-      // routeTo(ROUTE.CHECKOUTCOMFIRMED, true)
+      await checkedProductRemoveMutaion.mutateAsync(checkedProductList)
+      routeTo(ROUTE.CHECKOUTCOMFIRMED, true)
     }
   }
 
