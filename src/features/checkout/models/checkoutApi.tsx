@@ -6,7 +6,8 @@ export const checkoutAPI = {
     checkoutInfo: CheckoutList,
     email: string,
     isDefalutAddressCheck: boolean,
-    isClauseCheck: Omit<CheckoutClauseCheck, "all">
+    isClauseCheck: Omit<CheckoutClauseCheck, "all">,
+    deliveryInfoTabValue: "0" | "1"
   ) => {
     try {
       const response = await fetch("/api/checkout", {
@@ -16,6 +17,7 @@ export const checkoutAPI = {
           email,
           isDefalutAddressCheck,
           isClauseCheck,
+          deliveryInfoTabValue,
         }),
       })
 

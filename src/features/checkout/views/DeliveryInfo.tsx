@@ -19,11 +19,11 @@ const DeliveryInfo = () => {
   const dispatch = useAppDispatch()
   const { userDefalutAddress } = useGetAddressQuery()
 
-  const [deliveryTabvalue, setDeliveryTabvalue] = useState(1)
+  const [deliveryTabValue, setDeliveryTabValue] = useState(1)
 
   useEffect(() => {
     if (userDefalutAddress) {
-      setDeliveryTabvalue(0)
+      setDeliveryTabValue(0)
     }
   }, [userDefalutAddress])
 
@@ -41,7 +41,7 @@ const DeliveryInfo = () => {
     event: React.SyntheticEvent,
     newValue: number
   ) => {
-    setDeliveryTabvalue(newValue)
+    setDeliveryTabValue(newValue)
   }
 
   const renderTab = () => {
@@ -65,7 +65,6 @@ const DeliveryInfo = () => {
 
   return (
     <section className="border-t-[2px] border-black">
-      <div>{userDefalutAddress?.additionalAddress}</div>
       <div className="flex justify-between py-[18px] font-bold">
         <span className="flex">
           <h3>배송정보</h3>
@@ -83,10 +82,18 @@ const DeliveryInfo = () => {
         </p>
       </div>
 
+      <input
+        type="text"
+        value={deliveryTabValue}
+        name="deliveryInfo-tab"
+        readOnly
+        // className="absolute"
+      />
+
       <Box sx={{ width: "100%", bgcolor: "" }}>
         <Box sx={{ borderBottom: 1, borderColor: "#d2d2d2" }}>
           <Tabs
-            value={deliveryTabvalue}
+            value={deliveryTabValue}
             onChange={handleDeliveryTabvalueChange}
             aria-label="checkout address teps"
             sx={{
@@ -99,11 +106,11 @@ const DeliveryInfo = () => {
           </Tabs>
         </Box>
 
-        <TabPanel value={deliveryTabvalue} index={0}>
+        <TabPanel value={deliveryTabValue} index={0}>
           <CheckoutDefalutDeliveryInfo />
         </TabPanel>
 
-        <TabPanel value={deliveryTabvalue} index={1}>
+        <TabPanel value={deliveryTabValue} index={1}>
           <CheckoutNewDeliveryInfo />
         </TabPanel>
       </Box>

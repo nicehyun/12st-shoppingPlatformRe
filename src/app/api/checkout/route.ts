@@ -22,11 +22,13 @@ export async function POST(request: NextRequest) {
     email,
     isDefalutAddressCheck,
     isClauseCheck,
+    deliveryInfoTabValue,
   }: {
     checkoutInfo: CheckoutList
     email: string
     isDefalutAddressCheck: boolean
     isClauseCheck: Omit<CheckoutClauseCheck, "all">
+    deliveryInfoTabValue: "0" | "1"
   } = await request.json()
 
   if (!nameValidator(checkoutInfo.recipient)) return
@@ -50,8 +52,30 @@ export async function POST(request: NextRequest) {
 
   let response
 
+  const text = {
+    delivertName: checkoutInfo.deliveryName,
+    recipient: checkoutInfo.recipient,
+    additionalAddress: checkoutInfo.additionalAddress,
+    address: checkoutInfo.address,
+    zipcode: checkoutInfo.zipcode,
+    phone1: checkoutInfo.phone1,
+    phone2: checkoutInfo.phone2,
+  }
+
   try {
-    if (isDefalutAddressCheck) {
+    if (deliveryInfoTabValue === "0") {
+      await updateDefalutDeliveryInfo(email, {
+        delivertName: checkoutInfo.deliveryName,
+        recipient: checkoutInfo.recipient,
+        additionalAddress: checkoutInfo.additionalAddress,
+        address: checkoutInfo.address,
+        zipcode: checkoutInfo.zipcode,
+        phone1: checkoutInfo.phone1,
+        phone2: checkoutInfo.phone2,
+      })
+    }
+
+    if (deliveryInfoTabValue === "1" && isDefalutAddressCheck) {
       await updateDefalutDeliveryInfo(email, {
         delivertName: checkoutInfo.deliveryName,
         recipient: checkoutInfo.recipient,

@@ -55,6 +55,8 @@ const CheckoutForm = () => {
 
     const formData = new FormData(event.currentTarget)
 
+    console.log(formData.get("deliveryInfo-tab"))
+
     const isRecipientValid = nameValidator(formData.get("recipient") as string)
 
     if (!isRecipientValid) {
@@ -197,6 +199,7 @@ const CheckoutForm = () => {
         provisionOfUserInfo: !!provisionOfUserInfo,
         paymentAgency: !!paymentAgencyClause,
       },
+      deliveryInfoTabValue: formData.get("deliveryInfo-tab") as "0" | "1",
     })
 
     if (!response?.ok) {
