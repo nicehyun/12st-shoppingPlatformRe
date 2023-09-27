@@ -7,7 +7,7 @@ import CheckoutInputLayout from "./CheckoutInputLayout"
 
 interface ICheckoutPhoneInput {
   isRequired?: boolean
-  defaultValue?: string
+  defaultValue?: string | null
 }
 
 const CheckoutPhoneInput = ({
@@ -24,7 +24,7 @@ const CheckoutPhoneInput = ({
     isValid: isPhoneValid,
     hasError: hasErrorPhone,
     reset,
-  } = useUserInput(phoneValidator, defaultValue)
+  } = useUserInput(phoneValidator, defaultValue ?? "")
 
   const handlePhoneInputValueChange = (
     event: ChangeEvent<HTMLInputElement>

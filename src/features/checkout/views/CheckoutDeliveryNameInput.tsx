@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useState } from "react"
 import CheckoutInputLayout from "./CheckoutInputLayout"
 
 interface ICheckoutDeliveryNameInput {
-  defaultValue?: string
+  defaultValue?: string | null
 }
 
 const CheckoutDeliveryNameInput = ({
@@ -22,7 +22,6 @@ const CheckoutDeliveryNameInput = ({
       label="배송지명"
       id="deliveryName"
       inputMaxLength={15}
-      defaultValue={defaultValue}
       inputState={{
         value: deliveryName,
         handleValueChange: handleDeliveryNameChange,
