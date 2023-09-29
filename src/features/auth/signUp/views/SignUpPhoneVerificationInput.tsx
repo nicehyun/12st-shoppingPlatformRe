@@ -15,6 +15,7 @@ import { phoneValidator } from "../utils/validation"
 import SignUpFeedback from "../../../../common/views/Feedback"
 import SignUpInputLayout from "./SignUpInputLayout"
 import SignUpVerificationInput from "./SignUpVerificationInput"
+import { BsFileLock2 } from "react-icons/bs"
 
 const SignUpPhoneVerificationInput = () => {
   const dispatch = useAppDispatch()
@@ -117,6 +118,13 @@ const SignUpPhoneVerificationInput = () => {
           isLoading={isSendVerificationCodeLoading}
         />
       )}
+
+      <span className="flex items-center text-[14px] mt-[20px] font-semibold">
+        <span className="mr-[5px] text-lightRed">
+          <BsFileLock2 />
+        </span>
+        안전한 거래를 위해 딱 한번 본인인증을 진행해요.
+      </span>
     </SignUpInputLayout>
   )
 }

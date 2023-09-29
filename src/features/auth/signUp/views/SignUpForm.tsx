@@ -58,9 +58,8 @@ const SignUpForm = () => {
 
     if (!isAgeAgree || !isPrivacyAgree || !isTermAgree) return
 
-    if (!isEmailCheck || !isAddressCheck || !isPhoneCheck) return
-
-    if (!isPasswordValid || !isBirthValid || !isNameValid) return
+    if (!isEmailCheck || !isPasswordValid || !isNameValid || !isPhoneCheck)
+      return
 
     const formData = new FormData(event.currentTarget)
     formData.append("marketing", `${marketing}`)
@@ -92,24 +91,14 @@ const SignUpForm = () => {
 
   const stageProps: IStage = {
     activeStep: selectSignUpActiveStep,
-    stages: [
-      "약관동의",
-      "이메일",
-      "비밀번호",
-      "이름",
-      "본인인증",
-      "주소",
-      "성별",
-      "생년월일",
-    ],
+    stages: ["약관동의", "이메일", "비밀번호", "이름", "본인인증"],
     stageContents: [
       <SignUpClause key="clause" />,
       <SignUpEmailInput key="email" />,
       <SignUpPasswordInput key="password" />,
       <SignUpNameInput key="name" />,
       <SignUpPhoneVerificationInput key="phone" />,
-      <SignUpAddressInput key="address" />,
-      <SignUpGenderInput key="gender" />,
+
       <SignUpBirthInput key="birth" />,
     ],
     firstButtonText: "동의하고 가입하기",
@@ -120,9 +109,8 @@ const SignUpForm = () => {
       !isPasswordValid,
       !isNameValid,
       !isPhoneCheck,
-      !isAddressCheck,
-      false,
-      !isBirthValid || isSignUpLoading,
+
+      isSignUpLoading,
     ],
     onClickBackButton: handleStageBackClick,
     onClickNextButton: handleStageNextClick,
@@ -130,7 +118,10 @@ const SignUpForm = () => {
   }
 
   useEffect(() => {
-    dispatch(resetSignUpState())
+    return () => {
+      dispatch(resetSignUpState())
+      dispatch(resetStep())
+    }
   }, [dispatch])
 
   return (

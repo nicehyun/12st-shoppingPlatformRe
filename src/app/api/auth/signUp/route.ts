@@ -1,4 +1,4 @@
-import { Gender, UserInfo } from "@/common/types/user"
+import { UserInfo } from "@/common/types/user"
 import { addUserInfo } from "@/firebase/firestore/user"
 
 import bcrypt from "bcrypt"
@@ -12,12 +12,6 @@ export async function POST(request: Request) {
     password: await bcrypt.hash(formData.get("password") as string, 10),
     name: formData.get("name") as string,
     phone: formData.get("phone") as string,
-    address: formData.get("address") as string,
-    additionalAddress: formData.get("additionalAddress") as string,
-    gender: formData.get("gender") as Gender,
-    birth:
-      (((formData.get("birthYear") as string) +
-        formData.get("birthMonth")) as string) + formData.get("birthDay"),
     marketingClause: formData.get("marketing") === "on",
   }
 
