@@ -1,4 +1,9 @@
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation"
 
 export enum ROUTE {
   CART = "/cart",
@@ -15,12 +20,33 @@ export enum ROUTE {
 export const useNavigations = () => {
   const { push, replace } = useRouter()
   const pathname = usePathname()
-  const searchParams = useSearchParams()
+
+  const params = useSearchParams()
+
+  const routeTo = (
+    path: ROUTE,
+    isReplace = false,
+    dataToSend?: Record<string, any>
+  ) => {
+    const newPath = dataToSend
+      ? `${path}?data=${encodeURIComponent(JSON.stringify(dataToSend))}`
+      : path
+    isReplace ? replace(newPath) : push(newPath)
+  }
+
+  const getParams = () => {
+    const paramsData = params.get("data")
+
+    if (paramsData) {
+      return JSON.parse(paramsData)
+    } else {
+      return null
+    }
+  }
 
   return {
     pathname,
-    searchParams: searchParams.get("search"),
-    routeTo: (path: ROUTE, isReplace = false) =>
-      isReplace ? replace(path) : push(path),
+    routeTo,
+    getParams,
   }
 }

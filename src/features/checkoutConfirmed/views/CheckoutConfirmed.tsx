@@ -1,4 +1,5 @@
 import Loading from "@/common/views/Loading"
+
 import { Suspense } from "react"
 import CheckoutConfirmedController from "./CheckoutConfirmedController"
 import CheckoutConfirmedInfo from "./CheckoutConfirmedInfo"
