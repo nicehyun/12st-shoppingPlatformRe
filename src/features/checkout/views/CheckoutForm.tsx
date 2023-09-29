@@ -5,7 +5,7 @@ import {
   selectCheckoutPlannedUseMileState,
 } from "@/redux/features/checkoutSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { FormEventHandler, Suspense } from "react"
+import { FormEventHandler, Suspense, useEffect } from "react"
 import CheckoutClause from "./CheckoutClause"
 import CheckoutCouponAndMile from "./CheckoutCouponAndMile"
 import CheckoutOrderListInfo from "./CheckoutOrderListInfo"
@@ -14,7 +14,10 @@ import CheckoutTotalPriceInfo from "./CheckoutTotalPriceInfo"
 import DeliveryInfo from "./DeliveryInfo"
 import CheckoutButton from "./CheckoutButton"
 
-import { selectCheckedProductList } from "@/redux/features/cartSlice"
+import {
+  emptyCheckedProductList,
+  selectCheckedProductList,
+} from "@/redux/features/cartSlice"
 
 import { CheckoutList, CheckoutPaymentInfo } from "@/common/types/checkout"
 import CheckoutPayment from "./CheckoutPayment"
@@ -215,9 +218,16 @@ const CheckoutForm = () => {
 
     if (response?.ok) {
       await checkedProductRemoveMutaion.mutateAsync(checkedProductList)
+
       routeTo(ROUTE.CHECKOUTCOMFIRMED, true)
     }
   }
+
+  useEffect(() => {
+    return () => {
+      dispatch(emptyCheckedProductList())
+    }
+  }, [])
 
   return (
     <form onSubmit={handleCheckoutSubmit} className="max-w-[800px] mx-auto">
