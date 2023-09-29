@@ -2,6 +2,7 @@ import firebaseApp from "../config"
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore"
 import { CheckoutList } from "@/common/types/checkout"
 import { getCurrentDateTime } from "@/common/utils/time"
+import { AxiosError } from "axios"
 
 const db = getFirestore(firebaseApp)
 export async function addCheckoutList(
@@ -34,6 +35,38 @@ export async function addCheckoutList(
 
     return { result: "success" }
   } catch (error) {
-    throw Error(`🚨 Error updating checkout document : ${error}`)
+    const { response } = error as unknown as AxiosError
+    if (response) {
+      throw Error(`🚨firebase setDoc  API : ${error}`)
+    }
+
+    throw Error(`addCheckoutList firebase API : ${error}`)
+  }
+}
+
+export async function getCheckoutList(email: string) {
+  if (email === "") return null
+
+  try {
+    const checkoutRef = doc(db, "checkout", email)
+    const checkoutDoc = await getDoc(checkoutRef)
+
+    if (checkoutDoc.exists()) {
+      const checkoutData = checkoutDoc.data() as {
+        checkoutList: CheckoutList[]
+      }
+
+      return checkoutData.checkoutList
+    } else {
+      return null
+    }
+  } catch (error) {
+    const { response } = error as unknown as AxiosError
+
+    if (response) {
+      throw Error(`🚨firebase getDocs API : ${error}`)
+    }
+
+    throw Error(`getCheckoutList firebase API : ${error}`)
   }
 }

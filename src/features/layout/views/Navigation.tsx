@@ -23,7 +23,6 @@ const Navigation = () => {
     selectedValue: string
   ) => {
     setselectedMenu(selectedValue)
-    console.log(selectedValue)
   }
 
   return (
