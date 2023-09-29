@@ -29,7 +29,7 @@ const Navigation = () => {
   return (
     <>
       <BottomNavigation
-        className="lg:h-[60px] xl:h-[70px]"
+        className="lg:h-[60px] xl:h-[70px] h-[50px]"
         showLabels
         sx={{
           width: "100%",
@@ -45,10 +45,10 @@ const Navigation = () => {
         <BottomNavigationAction
           label={
             <span
-              className={`text-[4px] absolute inset-x-px top-[24px] lg:top-[40px] xl:top-[46px] ${
+              className={`text-[8px] absolute inset-x-px ${
                 selectedMenu === "home"
-                  ? " opacity-100"
-                  : "transform -translate-y-1/2 opacity-0"
+                  ? "bottom-0 opacity-100"
+                  : "bottom-0 transform -translate-y-1/2 opacity-0"
               }`}
               style={{
                 transition: "transform 0.3s ease",
