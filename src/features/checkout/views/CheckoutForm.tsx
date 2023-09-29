@@ -14,7 +14,10 @@ import CheckoutTotalPriceInfo from "./CheckoutTotalPriceInfo"
 import DeliveryInfo from "./DeliveryInfo"
 import CheckoutButton from "./CheckoutButton"
 
-import { selectCheckedProductList } from "@/redux/features/cartSlice"
+import {
+  emptyCheckedProductList,
+  selectCheckedProductList,
+} from "@/redux/features/cartSlice"
 
 import { CheckoutList, CheckoutPaymentInfo } from "@/common/types/checkout"
 import CheckoutPayment from "./CheckoutPayment"
@@ -39,11 +42,8 @@ const CheckoutForm = () => {
   const checkoutPlannedUseMileState = useAppSelector(
     selectCheckoutPlannedUseMileState
   )
-  const {
-    discountedPriceWithCoupon,
-    totalPriceOfCheckedProduct,
-    totalDeliveryFee,
-  } = useCheckoutPrice()
+  const { discountedPriceWithCoupon, totalPriceOfCheckedProduct } =
+    useCheckoutPrice()
 
   const dispatch = useAppDispatch()
   const { routeTo } = useNavigations()
@@ -218,7 +218,7 @@ const CheckoutForm = () => {
 
     if (response?.ok) {
       await checkedProductRemoveMutaion.mutateAsync(checkedProductList)
-
+      dispatch(emptyCheckedProductList())
       routeTo(ROUTE.CHECKOUTCOMFIRMED, true)
     }
   }

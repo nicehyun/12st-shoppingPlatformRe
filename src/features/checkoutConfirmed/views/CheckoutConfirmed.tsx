@@ -10,11 +10,8 @@ const CheckoutConfirmed = () => {
       <h1 className="text-center font-bold text-[24px] md:text-[22px] sm:text-[20px] mb-[14px] tracking-widest">
         주문완료
       </h1>
-      <p className="text-center text-gray md:text-[14px] sm:text-[14px] mb-[5px]">
-        주문이 완료되었습니다
-      </p>
-      <p className="text-center text-gray md:text-[14px] sm:text-[14px] mb-[40px]">
-        아래의 주문 정보를 확인해주세요
+      <p className="text-center md:text-[14px] sm:text-[14px] border-b-[4px] border-black dark:border-white pb-[40px] mb-[40px]">
+        주문이 정상적으로 완료되었습니다
       </p>
 
       <Suspense
