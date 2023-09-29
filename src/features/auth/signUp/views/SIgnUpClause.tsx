@@ -27,7 +27,7 @@ const SignUpClause = () => {
       showBasicModal({
         modalId: "clause-term",
         modalTitle: "이용약관 동의",
-        modalContent: <TermClause />,
+        modalContent: "TermClause",
       })
     )
   }
@@ -36,7 +36,7 @@ const SignUpClause = () => {
       showBasicModal({
         modalId: "clause-privacy",
         modalTitle: "개인정보 수집 및 이용 동의",
-        modalContent: <SignupCollectionOfUserInfoClause />,
+        modalContent: "SignupCollectionOfUserInfoClause",
       })
     )
   }
@@ -46,7 +46,7 @@ const SignUpClause = () => {
       showBasicModal({
         modalId: "clause-marketing",
         modalTitle: "광고성 정보 수신 및 마케팅 활용 동의",
-        modalContent: <MarketingClause />,
+        modalContent: "MarketingClause",
       })
     )
   }
