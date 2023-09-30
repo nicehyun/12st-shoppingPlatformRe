@@ -8,6 +8,7 @@ import MPromotionModal from "./mobile/MPromotionModal"
 import ThemeSwich from "./ThemeSwich"
 import HeaderSearchForm from "./HeaderSearchForm"
 import CartModal from "@/features/cart/views/CartModal"
+import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 
 interface IHeader {
   isShowCart: boolean
@@ -16,6 +17,11 @@ interface IHeader {
 const Header = ({ isShowCart }: IHeader) => {
   const [isShowPromotion, setIsShowPromotion] = useState(true)
   const [isShowPromotionModal, setIsShowPromotionModal] = useState(false)
+
+  const { sessionQuery } = useSessionQuery()
+  const isSignIn = !!sessionQuery?.user ?? false
+
+  const isShowCartController = isSignIn && isShowCart
 
   return (
     <header
@@ -32,7 +38,7 @@ const Header = ({ isShowCart }: IHeader) => {
       <HeaderLogo isShowPromotion={isShowPromotion} />
       <HeaderController
         isShowPromotion={isShowPromotion}
-        isShowCart={isShowCart}
+        isShowCart={isShowCartController}
       />
 
       <ThemeSwich />

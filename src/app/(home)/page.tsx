@@ -10,6 +10,7 @@ export default async function Home() {
   const queryClient = getQueryClient()
   await queryClient.prefetchQuery(["bestProducts"], getBestSellingProducts)
   const dehydratedState = dehydrate(queryClient)
+
   return (
     <Hydrate state={dehydratedState}>
       <Header isShowCart={true} />
