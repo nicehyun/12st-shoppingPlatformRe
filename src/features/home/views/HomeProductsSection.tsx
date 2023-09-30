@@ -1,6 +1,7 @@
 import { Product, Products } from "@/common/types/product"
 import Button from "@/common/views/Button"
 import ProductCard from "@/common/views/ProductCard"
+import { Grid } from "@mui/material"
 import Image, { StaticImageData } from "next/image"
 import { ReactNode } from "react"
 
@@ -34,9 +35,9 @@ const HomeProductsSection = ({
         />
       </div>
 
-      <ul className={`flex flex-wrap justify-center`}>
-        {products.slice(0, 6).map((product: Product) => (
-          <li className="px-[4px] mb-[10px]" key={product.id}>
+      <ul className={`flex flex-wrap`}>
+        {products.map((product: Product) => (
+          <li className="px-[4px] mb-[20px]" key={`productEl-${product.id}`}>
             <ProductCard productInfo={product} />
           </li>
         ))}

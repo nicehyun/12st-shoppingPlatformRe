@@ -1,23 +1,14 @@
-import Card from "@mui/material/Card"
-import CardHeader from "@mui/material/CardHeader"
-import CardMedia from "@mui/material/CardMedia"
-import CardContent from "@mui/material/CardContent"
-import CardActions from "@mui/material/CardActions"
-
-import Avatar from "@mui/material/Avatar"
-
-import Typography from "@mui/material/Typography"
 import { BiCommentDetail } from "react-icons/bi"
 import { MdOutlineSell } from "react-icons/md"
 import { BsFillCartDashFill, BsFillCartPlusFill } from "react-icons/bs"
-import { truncateText } from "../utils/text"
 import { Product } from "../types/product"
 
 import { checkingTheExistOfProduct } from "../utils/product"
 import { useProductListInCartQuery } from "@/features/cart/hooks/useProductListInCartQuery"
 import { useAddToCartMutaion } from "@/features/cart/hooks/useAddToCartMutaion"
 import useRemoveFromCartMutation from "@/features/cart/hooks/useRemoveFromCartMutation"
-import { numberToLocaleString } from "../utils/price"
+import { discountedProductPrice, numberToLocaleString } from "../utils/price"
+import Image from "next/image"
 
 interface IProductCard {
   productInfo: Product
@@ -32,7 +23,6 @@ const ProductCard = ({ productInfo }: IProductCard) => {
     image,
     price,
     discount,
-    discountedPrice,
     reviewCount,
     sellCount,
     id,
@@ -62,100 +52,57 @@ const ProductCard = ({ productInfo }: IProductCard) => {
   }
 
   return (
-    <Card className="w-[194px]">
-      <CardHeader
-        avatar={
-          <Avatar
-            sx={{
-              color: "#ff4e0a",
-              height: "20px",
-              backgroundColor: "#fff",
-              borderRadius: 0,
-              display: "inline-block",
-              width: "100%",
-            }}
-            aria-label={productBrandInfo}
-          >
-            <Typography
-              variant="body1"
-              sx={{
-                fontSize: "4px",
-              }}
-            >
-              {productBrandInfo}
-            </Typography>
-          </Avatar>
-        }
-        sx={{ padding: "3px", height: "38px" }}
-      />
-      <CardMedia
-        component="img"
-        image={image}
-        alt={name}
-        className="h-[194px]"
-      />
-      <CardContent className="relative h-[90px]">
-        <Typography
-          variant="h3"
-          sx={{ fontSize: 14 }}
-          className="absolute left-[8px] right-[8px] top-[5px] text-black"
-        >
-          {truncateText(name, 30)}
-        </Typography>
+    <div className="relative w-[200px] lg:w-[180px]  md:w-[130px] sm:w-[120px]">
+      <div className="w-[200px] h-[200px] lg:w-[180px] lg:h-[180px] md:w-[130px] md:h-[130px] sm:w-[120px] sm:h-[120px] overflow-hidden">
+        <Image
+          src={image}
+          alt={`product : ${name}`}
+          width={200}
+          height={200}
+          style={{ objectFit: "contain" }}
+          sizes="(max-width: 767px) 100vw, (max-width: 479px) 100vw, 100vw"
+          quality={90}
+          priority={false}
+        />
+      </div>
 
-        <Typography
-          variant="body2"
-          color="#d2d2d2"
-          sx={{ textDecoration: "line-through", fontSize: 14 }}
-          className="absolute left-[8px] bottom-[20px]"
-        >
-          {numberToLocaleString(price)}
-        </Typography>
-        <Typography
-          variant="body2"
-          color="#ff4e0a"
-          sx={{ fontWeight: 700, fontSize: 16 }}
-          className="absolute left-[8px] bottom-0"
-        >
+      <p className="text-[12px] sm:text-[10px] my-[15px] text-gray">
+        {productBrandInfo}
+      </p>
+      <p className="text-[14px] sm:text-[12px] h-[42px] sm:h-[33.6px] truncate-2 mb-[10px] font-medium">
+        {name}
+      </p>
+      <p className="pt-[10px] border-t-[1px] border-lightBorder text-border text-[13px] sm:text-[12px] line-through">
+        {numberToLocaleString(price)}
+      </p>
+      <p className="font-bold mb-[20px] sm:text-[15px]">
+        <span className="text-lightRed mr-[10px] text-[14px] sm:text-[13px]">
           {discount}%
-        </Typography>
-        <Typography
-          variant="body2"
-          color="#333"
-          sx={{ fontWeight: 700, fontSize: 18 }}
-          className="absolute right-[8px] bottom-[-3px]"
+        </span>
+
+        {numberToLocaleString(discountedProductPrice(price, discount))}
+      </p>
+      <div className="flex items-center text-[14px] sm:text-[12px]">
+        <MdOutlineSell /> <span className="ml-[3px] mr-[8px]">{sellCount}</span>
+        <BiCommentDetail /> <span className="ml-[3px]">{reviewCount}</span>
+      </div>
+
+      {isExistedProductInCart ? (
+        <button
+          onClick={onClickRemoveProductFromCart}
+          className="text-[18px] sm:text-[16px] absolute right-[8px] bottom-[2px]"
         >
-          {numberToLocaleString(discountedPrice)}
-        </Typography>
-      </CardContent>
-
-      <CardActions disableSpacing className="relative">
-        <button className="text-[18px] mr-[12px] flexCenter">
-          <MdOutlineSell />
-          <span className="text-[2px]">{sellCount}</span>
+          <BsFillCartDashFill />
         </button>
-
-        <button className="text-[18px] flexCenter">
-          <BiCommentDetail />
-          <span className="text-[2px]">{reviewCount}</span>
+      ) : (
+        <button
+          onClick={onClickAddProductInCart}
+          className="text-[18px] sm:text-[16px] absolute right-[8px] bottom-[2px]"
+        >
+          <BsFillCartPlusFill />
         </button>
-        {isExistedProductInCart ? (
-          <button
-            onClick={onClickRemoveProductFromCart}
-            className="text-[18px] absolute right-[8px]"
-          >
-            <BsFillCartDashFill />
-          </button>
-        ) : (
-          <button
-            onClick={onClickAddProductInCart}
-            className="text-[18px] absolute right-[8px]"
-          >
-            <BsFillCartPlusFill />
-          </button>
-        )}
-      </CardActions>
-    </Card>
+      )}
+    </div>
   )
 }
 
