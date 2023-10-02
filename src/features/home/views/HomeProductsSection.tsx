@@ -1,9 +1,10 @@
 import { Product, Products } from "@/common/types/product"
 import Button from "@/common/views/Button"
 import ProductCard from "@/common/views/ProductCard"
-import { Grid } from "@mui/material"
+
 import Image, { StaticImageData } from "next/image"
-import { ReactNode } from "react"
+import { ReactNode, useEffect, useState } from "react"
+import HomeProductSwiper from "./HomeProductSwiper"
 
 interface IHomeProductsSection {
   children?: ReactNode
@@ -20,7 +21,7 @@ const HomeProductsSection = ({
   onMoreClick,
 }: IHomeProductsSection) => {
   return (
-    <section className="mb-[80px]">
+    <section className="mb-[80px] h-[800px]">
       <div className="relative flex items-center mb-[30px] border-b-[1px] pb-[28px]">
         <Image
           src={sectionImage}
@@ -35,13 +36,7 @@ const HomeProductsSection = ({
         />
       </div>
 
-      <ul className={`flex flex-wrap`}>
-        {products.map((product: Product) => (
-          <li className="px-[4px] mb-[20px]" key={`productEl-${product.id}`}>
-            <ProductCard productInfo={product} />
-          </li>
-        ))}
-      </ul>
+      <HomeProductSwiper products={products} />
     </section>
   )
 }

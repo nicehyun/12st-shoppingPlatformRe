@@ -49,6 +49,24 @@
     -webkit-box-orient: vertical;
   }
 
+  .swiper {
+    width: 100%;
+    height: fit-content;
+    padding: 16px;
+    cursor: grabbing;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .swiper-slide {
+    width: fit-content;
+  }
+
+  .swiper-slide::-webkit-scrollbar {
+    display: none;
+  }
+
   @keyframes spin {
     from {
       transform: rotate(0deg);

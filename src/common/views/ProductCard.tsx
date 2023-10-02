@@ -52,7 +52,7 @@ const ProductCard = ({ productInfo }: IProductCard) => {
   }
 
   return (
-    <div className="relative w-[200px] lg:w-[180px]  md:w-[130px] sm:w-[120px]">
+    <div className="relative w-[200px] lg:w-[180px]  md:w-[130px] sm:w-[120px] mr-[20px]">
       <div className="w-[200px] h-[200px] lg:w-[180px] lg:h-[180px] md:w-[130px] md:h-[130px] sm:w-[120px] sm:h-[120px] overflow-hidden">
         <Image
           src={image}
@@ -83,8 +83,10 @@ const ProductCard = ({ productInfo }: IProductCard) => {
         {numberToLocaleString(discountedProductPrice(price, discount))}
       </p>
       <div className="flex items-center text-[14px] sm:text-[12px]">
-        <MdOutlineSell /> <span className="ml-[3px] mr-[8px]">{sellCount}</span>
-        <BiCommentDetail /> <span className="ml-[3px]">{reviewCount}</span>
+        <MdOutlineSell />
+        <span className="ml-[3px] mr-[8px] text-[10px]">{sellCount}</span>
+        <BiCommentDetail />
+        <span className="ml-[3px] text-[10px]">{reviewCount}</span>
       </div>
 
       {isExistedProductInCart ? (
