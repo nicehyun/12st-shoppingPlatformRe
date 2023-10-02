@@ -1,3 +1,5 @@
+"use client"
+
 import { useEffect, useState } from "react"
 
 import { Product, Products } from "@/common/types/product"

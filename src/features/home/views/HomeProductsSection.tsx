@@ -1,39 +1,46 @@
-import { Product, Products } from "@/common/types/product"
+import { Products } from "@/common/types/product"
 import Button from "@/common/views/Button"
-import ProductCard from "@/common/views/ProductCard"
 
-import Image, { StaticImageData } from "next/image"
-import { ReactNode, useEffect, useState } from "react"
+import { ReactNode } from "react"
 import HomeProductSwiper from "./HomeProductSwiper"
 
 interface IHomeProductsSection {
   children?: ReactNode
   products: Products
   sectionTitle: string
-  sectionImage: StaticImageData
+  sectionSubTitle: string
   onMoreClick: () => void
+  isBackGroundColor?: boolean
 }
 
 const HomeProductsSection = ({
   products,
-  sectionImage,
   sectionTitle,
+  sectionSubTitle,
   onMoreClick,
+  isBackGroundColor = true,
 }: IHomeProductsSection) => {
   return (
-    <section className="mb-[80px] h-[800px]">
-      <div className="relative flex items-center mb-[30px] border-b-[1px] pb-[28px]">
-        <Image
-          src={sectionImage}
-          alt={sectionTitle}
-          className="w-[50px] h-[50px] mr-[10px] dark:filter dark:invert"
-        />
-        <h3 className="font-bold text-[22px]">{sectionTitle}</h3>
-        <Button
-          onClick={onMoreClick}
+    <section
+      className={`h-[800px] bg-${
+        isBackGroundColor ? "lightBorder" : "white"
+      } py-[50px] text-black px-[50px]`}
+    >
+      <div className="relative flex items-center mb-[30px]">
+        <div>
+          <h3 className="font-bold text-[22px] xl:text-[28px]">
+            {sectionTitle}
+          </h3>
+          <p className="text-[12px] xl:text-[14px]">{sectionSubTitle}</p>
+        </div>
+
+        {/* <Button
+          onClick={() => {
+            console.log(123)
+          }}
           content="+ 더보기"
           classNames="absolute right-0 text-[12px] hover:text-lightRed transition-3"
-        />
+        /> */}
       </div>
 
       <HomeProductSwiper products={products} />

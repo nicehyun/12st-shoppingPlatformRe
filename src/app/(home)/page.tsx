@@ -4,7 +4,7 @@ import Navigation from "@/features/layout/views/Navigation"
 import getQueryClient from "@/reactQuery/utils/getQueryClient"
 import { dehydrate, Hydrate } from "@tanstack/react-query"
 import PageLayout from "../../common/views/PageLayout"
-import HomeBestProducts from "../../features/home/views/HomeBestProducts"
+import HomeLayout from "@/features/home/views/HomeLayout"
 
 export default async function Home() {
   const queryClient = getQueryClient()
@@ -15,8 +15,8 @@ export default async function Home() {
     <Hydrate state={dehydratedState}>
       <Header isShowCart={true} />
 
-      <PageLayout>
-        <HomeBestProducts />
+      <PageLayout classNames="px-0">
+        <HomeLayout />
       </PageLayout>
 
       <Navigation />

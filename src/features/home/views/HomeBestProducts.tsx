@@ -1,7 +1,6 @@
 "use client"
 
 import HomeProductsSection from "./HomeProductsSection"
-import bestImage from "/public/images/best.png"
 import { useBestSellingProducts } from "../hooks/useBestSellingProducts"
 
 const HomeBestProducts = () => {
@@ -11,8 +10,8 @@ const HomeBestProducts = () => {
     <HomeProductsSection
       products={products?.slice(0, 10) ?? []}
       onMoreClick={() => {}}
-      sectionImage={bestImage}
-      sectionTitle="12st BEST"
+      sectionTitle="WEEKLY BEST"
+      sectionSubTitle="한주간 가장 사랑받은 상품을 모아봤어요"
     />
   )
 }
