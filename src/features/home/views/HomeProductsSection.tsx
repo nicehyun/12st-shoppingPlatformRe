@@ -1,8 +1,10 @@
+"use client"
+
 import { Products } from "@/common/types/product"
 import Button from "@/common/views/Button"
 
-import { ReactNode } from "react"
-import HomeProductSwiper from "./HomeProductSwiper"
+import { ReactNode, useEffect, useState } from "react"
+import ProductSwiper from "./ProductSwiper"
 
 interface IHomeProductsSection {
   children?: ReactNode
@@ -20,6 +22,65 @@ const HomeProductsSection = ({
   onMoreClick,
   isBackGroundColor = true,
 }: IHomeProductsSection) => {
+  const [slidesPerView, setSlidesPerView] = useState<number>(3.8)
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1660) {
+        setSlidesPerView(6.8)
+      }
+
+      if (window.innerWidth < 1560) {
+        setSlidesPerView(5.8)
+      }
+
+      if (window.innerWidth < 1370) {
+        setSlidesPerView(4.9)
+      }
+
+      if (window.innerWidth < 1170) {
+        setSlidesPerView(3.8)
+      }
+
+      if (window.innerWidth < 880) {
+        setSlidesPerView(3.5)
+      }
+
+      if (window.innerWidth < 820) {
+        setSlidesPerView(3.2)
+      }
+
+      if (window.innerWidth < 767) {
+        setSlidesPerView(4.2)
+      }
+
+      if (window.innerWidth < 720) {
+        setSlidesPerView(3.8)
+      }
+
+      if (window.innerWidth < 680) {
+        setSlidesPerView(3.4)
+      }
+
+      if (window.innerWidth < 630) {
+        setSlidesPerView(3.2)
+      }
+
+      if (window.innerWidth < 580) {
+        setSlidesPerView(2.8)
+      }
+
+      if (window.innerWidth < 530) {
+        setSlidesPerView(2.4)
+      }
+    }
+
+    window.addEventListener("resize", handleResize)
+
+    return () => {
+      window.removeEventListener("resize", handleResize)
+    }
+  }, [])
   return (
     <section
       className={` bg-${
@@ -43,7 +104,11 @@ const HomeProductsSection = ({
         /> */}
       </div>
 
-      <HomeProductSwiper products={products} />
+      <ProductSwiper
+        productCardkind="basic"
+        products={products ?? []}
+        slidesPerView={slidesPerView}
+      />
     </section>
   )
 }

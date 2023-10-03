@@ -53,7 +53,7 @@ const ProductCard = ({ productInfo }: IProductCard) => {
 
   return (
     <div className="relative w-[200px] lg:w-[180px]  md:w-[130px] sm:w-[120px] mr-[20px]">
-      <div className="w-[200px] h-[200px] lg:w-[180px] lg:h-[180px] md:w-[130px] md:h-[130px] sm:w-[120px] sm:h-[120px] overflow-hidden text-[12px] text-center">
+      <div className="relative w-[200px] h-[200px] lg:w-[180px] lg:h-[180px] md:w-[130px] md:h-[130px] sm:w-[120px] sm:h-[120px] overflow-hidden text-[12px] text-center">
         <Image
           src={image}
           alt={`상품사진이 준비되지 않았습니다.`}
@@ -63,6 +63,7 @@ const ProductCard = ({ productInfo }: IProductCard) => {
           sizes="(max-width: 767px) 100vw, (max-width: 479px) 100vw, 100vw"
           quality={90}
           priority={false}
+          placeholder="empty"
         />
       </div>
 

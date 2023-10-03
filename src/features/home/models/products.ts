@@ -12,6 +12,33 @@ import {
 
 const db = getFirestore(firebaseApp)
 
+export const getArrivalProducts = async (): Promise<Products> => {
+  try {
+    const productsRef = collection(db, "products")
+    const arrivalQuery = query(productsRef, orderBy("name", "desc"), limit(30))
+
+    const arrivalProductsDoc = await getDocs(arrivalQuery)
+
+    const arrivalProducts: Products = []
+
+    arrivalProductsDoc.forEach((productDoc) => {
+      const productData = productDoc.data() as Product
+
+      arrivalProducts.push(productData)
+    })
+
+    return arrivalProducts
+  } catch (error) {
+    const { response } = error as unknown as AxiosError
+
+    if (response) {
+      throw Error(`🚨firebase getDocs API : ${error}`)
+    }
+
+    throw Error(`getArrivalProducts firebase API : ${error}`)
+  }
+}
+
 export const getTopSaleProducts = async (): Promise<Products> => {
   try {
     const productsRef = collection(db, "products")
@@ -27,7 +54,7 @@ export const getTopSaleProducts = async (): Promise<Products> => {
 
     topSaleProductsDoc.forEach((productDoc) => {
       const productData = productDoc.data() as Product
-      console.log(productData)
+
       topSaleProducts.push(productData)
     })
 
