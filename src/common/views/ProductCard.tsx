@@ -53,10 +53,10 @@ const ProductCard = ({ productInfo }: IProductCard) => {
 
   return (
     <div className="relative w-[200px] lg:w-[180px]  md:w-[130px] sm:w-[120px] mr-[20px]">
-      <div className="w-[200px] h-[200px] lg:w-[180px] lg:h-[180px] md:w-[130px] md:h-[130px] sm:w-[120px] sm:h-[120px] overflow-hidden">
+      <div className="w-[200px] h-[200px] lg:w-[180px] lg:h-[180px] md:w-[130px] md:h-[130px] sm:w-[120px] sm:h-[120px] overflow-hidden text-[12px] text-center">
         <Image
           src={image}
-          alt={`product : ${name}`}
+          alt={`상품사진이 준비되지 않았습니다.`}
           width={200}
           height={200}
           style={{ objectFit: "contain" }}

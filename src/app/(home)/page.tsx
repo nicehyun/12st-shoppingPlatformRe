@@ -1,4 +1,7 @@
-import { getBestSellingProducts } from "@/features/home/models/bestProducts"
+import {
+  getBestSellingProducts,
+  getTopSaleProducts,
+} from "@/features/home/models/products"
 import Header from "@/features/layout/views/Header"
 import Navigation from "@/features/layout/views/Navigation"
 import getQueryClient from "@/reactQuery/utils/getQueryClient"
@@ -9,6 +12,7 @@ import HomeLayout from "@/features/home/views/HomeLayout"
 export default async function Home() {
   const queryClient = getQueryClient()
   await queryClient.prefetchQuery(["bestProducts"], getBestSellingProducts)
+  await queryClient.prefetchQuery(["topSaleProducts"], getTopSaleProducts)
   const dehydratedState = dehydrate(queryClient)
 
   return (

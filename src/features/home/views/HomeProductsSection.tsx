@@ -22,7 +22,7 @@ const HomeProductsSection = ({
 }: IHomeProductsSection) => {
   return (
     <section
-      className={`h-[800px] bg-${
+      className={` bg-${
         isBackGroundColor ? "lightBorder" : "white"
       } py-[50px] text-black px-[50px]`}
     >

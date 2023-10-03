@@ -27,32 +27,44 @@ const HomeProductSwiper = ({ products }: IHomeProductSwiper) => {
         setSlidesPerView(5.8)
       }
 
-      if (window.innerWidth < 1300) {
+      if (window.innerWidth < 1370) {
         setSlidesPerView(4.9)
       }
 
-      if (window.innerWidth < 1100) {
-        setSlidesPerView(4.3)
+      if (window.innerWidth < 1170) {
+        setSlidesPerView(3.8)
       }
 
-      if (window.innerWidth < 850) {
+      if (window.innerWidth < 880) {
         setSlidesPerView(3.5)
+      }
+
+      if (window.innerWidth < 820) {
+        setSlidesPerView(3.2)
       }
 
       if (window.innerWidth < 767) {
         setSlidesPerView(4.2)
       }
 
-      if (window.innerWidth < 640) {
-        setSlidesPerView(3.5)
+      if (window.innerWidth < 720) {
+        setSlidesPerView(3.8)
+      }
+
+      if (window.innerWidth < 680) {
+        setSlidesPerView(3.4)
+      }
+
+      if (window.innerWidth < 630) {
+        setSlidesPerView(3.2)
+      }
+
+      if (window.innerWidth < 580) {
+        setSlidesPerView(2.8)
       }
 
       if (window.innerWidth < 530) {
-        setSlidesPerView(3.2)
-      }
-
-      if (window.innerWidth <= 479) {
-        setSlidesPerView(3.2)
+        setSlidesPerView(2.4)
       }
     }
 

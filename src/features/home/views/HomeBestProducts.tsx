@@ -1,10 +1,10 @@
 "use client"
 
 import HomeProductsSection from "./HomeProductsSection"
-import { useBestSellingProducts } from "../hooks/useBestSellingProducts"
+import { useBestSellingProductsQuery } from "../hooks/useBestSellingProductsQuery"
 
 const HomeBestProducts = () => {
-  const { products } = useBestSellingProducts()
+  const { products } = useBestSellingProductsQuery()
 
   return (
     <HomeProductsSection
