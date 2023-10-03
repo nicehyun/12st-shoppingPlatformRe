@@ -79,7 +79,7 @@ const LayoutSettingDial = () => {
         transform: "translateZ(0px)",
         flexGrow: 1,
         position: "fixed",
-        bottom: 20,
+        bottom: 0,
         right: 16,
       }}
     >
@@ -95,6 +95,7 @@ const LayoutSettingDial = () => {
             width: 50,
             height: 50,
             color: "#ff4e0a",
+            backgroundColor: "#fff",
             "&:hover": { backgroundColor: "#ff4e0a", color: "#fff" },
           },
         }}
