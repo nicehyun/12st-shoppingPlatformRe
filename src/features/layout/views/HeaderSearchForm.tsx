@@ -1,24 +1,55 @@
+import Button from "@/common/views/Button"
+import { FormEventHandler, useEffect, useRef } from "react"
 import { AiOutlineSearch } from "react-icons/ai"
 
-//TODO : 타입수정
 interface ISearchButton {
-  onClick?: () => void
+  onHideSearchForm: () => void
 }
 
-const HeaderSearchForm = ({}: ISearchButton) => {
+const HeaderSearchForm = ({ onHideSearchForm }: ISearchButton) => {
+  const handleHeaderSearchSubmit: FormEventHandler<HTMLFormElement> = (
+    event
+  ) => {}
+
+  const inputRef = useRef<HTMLInputElement | null>(null)
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus()
+    }
+  }, [])
+
   return (
-    <form className="absolute bottom-[5px] right-[26px] lg:right-[35px] xl:right-[38px] h-[34px]">
-      <input
-        id="search"
-        className="w-[100px] focus:w-[300px] sm:focus:w-[220px] md:focus:w-[250px] h-full px-[10px] pl-[4px] pr-[30px] border-border rounded-[5px] focus:border-lightRed text-lightBlack text-[12px] dark:focus:bg-white transition-3 peer"
-      />
-      <button
-        type="submit"
-        className="absolute top-0 bottom-0 right-[8px] peer-focus:hover:text-lightRed transition-3 peer-focus:text-lightBlack"
+    <>
+      <form
+        onSubmit={handleHeaderSearchSubmit}
+        className={`absolute flex justify-center z-50 top-0 h-screen w-screen bg-transparentWhite`}
       >
-        <AiOutlineSearch className="text-[20px]" />
-      </button>
-    </form>
+        <div
+          className={`absolute w-10/12 top-[180px] h-[80px] pr-[80px] border-black border-b-[5px] dark:focus:bg-white transition-3 peer`}
+        >
+          <input
+            id="search"
+            ref={inputRef}
+            placeholder="상품명 또는 브랜드를 검색해주세요"
+            className="w-full h-full border-none text-[50px] md:text-[36px] sm:text-[30px] px-[10px] font-bold bg-transparentWhite text-black placeholder:text-[30px] md:placeholder:text-[20px] sm:placeholder:text-[16px]"
+          />
+
+          <button
+            type="submit"
+            className="absolute top-[8px] text-[60px] md:text-[50px] sm:text-[40px] right-0 text-black"
+          >
+            <AiOutlineSearch />
+          </button>
+        </div>
+
+        <Button
+          onClick={onHideSearchForm}
+          classNames="absolute top-[50px] right-[50px] text-black font-bold"
+          content="CLOSE"
+        />
+      </form>
+    </>
   )
 }
 

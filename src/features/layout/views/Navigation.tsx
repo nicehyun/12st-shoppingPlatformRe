@@ -28,7 +28,7 @@ const Navigation = () => {
   return (
     <>
       <BottomNavigation
-        className="lg:h-[60px] xl:h-[70px] h-[50px] z-50"
+        className="lg:h-[60px] xl:h-[70px] h-[50px]"
         showLabels
         sx={{
           width: "100%",

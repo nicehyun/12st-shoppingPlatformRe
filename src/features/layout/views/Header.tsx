@@ -17,6 +17,15 @@ interface IHeader {
 const Header = ({ isShowCart }: IHeader) => {
   const [isShowPromotion, setIsShowPromotion] = useState(true)
   const [isShowPromotionModal, setIsShowPromotionModal] = useState(false)
+  const [isShowSeachForm, setIsShowSearchForm] = useState(false)
+
+  const handleSearchFormShow = () => {
+    setIsShowSearchForm(true)
+  }
+
+  const handleSearchFormHide = () => {
+    setIsShowSearchForm(false)
+  }
 
   const { sessionQuery } = useSessionQuery()
   const isSignIn = !!sessionQuery?.user ?? false
@@ -39,9 +48,12 @@ const Header = ({ isShowCart }: IHeader) => {
       <HeaderController
         isShowPromotion={isShowPromotion}
         isShowCart={isShowCartController}
+        onShowSearchForm={handleSearchFormShow}
       />
 
-      <HeaderSearchForm />
+      {isShowSeachForm && (
+        <HeaderSearchForm onHideSearchForm={handleSearchFormHide} />
+      )}
 
       <MPromotionModal
         isShow={isShowPromotionModal}

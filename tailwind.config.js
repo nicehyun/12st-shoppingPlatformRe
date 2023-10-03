@@ -19,6 +19,7 @@ module.exports = {
       lightGray: "#ccc",
       gray: "#5d5d5d",
       error: "#D43639",
+      transparentWhite: "rgba(240,240,240, 0.8)",
     },
     screens: {
       sm: { max: "479px" },

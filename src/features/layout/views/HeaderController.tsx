@@ -5,15 +5,18 @@ import { FiLogIn, FiLogOut } from "react-icons/fi"
 import HeaderCartButton from "./HeaderCartButton"
 import { ROUTE, useNavigations } from "@/common/hooks/useNavigations"
 import { signOut, useSession } from "next-auth/react"
+import { AiOutlineSearch } from "react-icons/ai"
 
 interface IHeaderController {
   isShowPromotion: boolean
   isShowCart: boolean
+  onShowSearchForm: () => void
 }
 
 const HeaderController = ({
   isShowPromotion,
   isShowCart,
+  onShowSearchForm,
 }: IHeaderController) => {
   const { routeTo } = useNavigations()
   const { data: session } = useSession()
@@ -26,10 +29,17 @@ const HeaderController = ({
     >
       <ul className="flex">
         <HeaderControllerEl
+          title="SEARCH"
+          icon={<AiOutlineSearch />}
+          isShowPromotion={isShowPromotion}
+          onClick={onShowSearchForm}
+        />
+
+        <HeaderControllerEl
           title="MY PAGE"
           icon={<FaUserTag />}
           isShowPromotion={isShowPromotion}
-          classNames="hidden xl:block"
+          classNames="before:vertical-divider hidden xl:block"
           onClick={() => {}}
         />
         <HeaderControllerEl
