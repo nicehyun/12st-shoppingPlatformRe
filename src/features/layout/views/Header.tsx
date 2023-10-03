@@ -5,7 +5,7 @@ import HeaderLogo from "./HeaderLogo"
 import HeaderController from "./HeaderController"
 import PromotionBar from "./PromotionBar"
 import MPromotionModal from "./mobile/MPromotionModal"
-import ThemeSwich from "./ThemeSwich"
+
 import HeaderSearchForm from "./HeaderSearchForm"
 import CartModal from "@/features/cart/views/CartModal"
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
@@ -40,8 +40,6 @@ const Header = ({ isShowCart }: IHeader) => {
         isShowPromotion={isShowPromotion}
         isShowCart={isShowCartController}
       />
-
-      <ThemeSwich />
 
       <HeaderSearchForm />
 
