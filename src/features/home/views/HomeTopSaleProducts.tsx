@@ -1,7 +1,6 @@
 "use client"
 
 import { useTopSaleProductsQuery } from "../hooks/useTopSaleProductsQuery"
-import { getTopSaleProducts } from "../models/products"
 import HomeProductsSection from "./HomeProductsSection"
 
 const HomeTopSaleProducts = () => {
