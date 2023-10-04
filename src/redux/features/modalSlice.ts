@@ -1,3 +1,4 @@
+import { ROUTE } from "@/common/hooks/useNavigations"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 import { RootState } from "../types/store"
@@ -10,6 +11,13 @@ interface ShowBasicModalPayload {
   modalId: string
   modalTitle: string
   modalContent: string
+}
+
+interface ShowRouteModalPayload {
+  modalId: string
+  modalTitle: string
+  modalContent: string
+  route: ROUTE
 }
 
 type FeedbackModal = {
@@ -28,10 +36,19 @@ type BasicModal = {
   modalContent: string | null
 }
 
+type RouteModal = {
+  isShowModal: boolean
+  modalId: string
+  modalTitle: string
+  modalContent: string
+  route: ROUTE | null
+}
+
 type InitialModalState = {
   feedbackModal: FeedbackModal
   cartModal: CartModal
   basicModal: BasicModal
+  routeModal: RouteModal
 }
 
 const initialModalState: InitialModalState = {
@@ -47,6 +64,13 @@ const initialModalState: InitialModalState = {
     modalId: "",
     modalTitle: "",
     modalContent: null,
+  },
+  routeModal: {
+    isShowModal: false,
+    modalId: "",
+    modalTitle: "",
+    modalContent: "",
+    route: null,
   },
 }
 
@@ -77,6 +101,20 @@ const modalSlice = createSlice({
     hideBasicModal(state) {
       state.basicModal.isShowModal = false
     },
+    showRouteModal(state, actions: PayloadAction<ShowRouteModalPayload>) {
+      state.routeModal.isShowModal = true
+      state.routeModal.modalId = actions.payload.modalId
+      state.routeModal.modalTitle = actions.payload.modalTitle
+      state.routeModal.modalContent = actions.payload.modalContent
+      state.routeModal.route = actions.payload.route
+    },
+    hideRouteModal(state) {
+      state.routeModal.isShowModal = false
+      state.routeModal.modalId = ""
+      state.routeModal.modalTitle = ""
+      state.routeModal.modalContent = ""
+      state.routeModal.route = null
+    },
   },
 })
 
@@ -87,6 +125,8 @@ export const {
   hideCartModal,
   showBasicModal,
   hideBasicModal,
+  hideRouteModal,
+  showRouteModal,
 } = modalSlice.actions
 
 export const selectFeedbackModal = (state: RootState) =>
@@ -96,5 +136,8 @@ export const selectCartModalState = (state: RootState) => state.modal.cartModal
 
 export const selectBasicModalState = (state: RootState) =>
   state.modal.basicModal
+
+export const selectRouteModalState = (state: RootState) =>
+  state.modal.routeModal
 
 export default modalSlice.reducer

@@ -7,6 +7,7 @@ import FeedbackModal from "@/common/views/FeedbackModal"
 
 import Footer from "@/features/layout/views/Footer"
 import LayoutSettingDial from "@/features/layout/views/LayoutSettingDial"
+import RouteModal from "@/common/views/RouteModal"
 
 const roboto = Roboto({
   weight: ["400", "700"],
@@ -29,6 +30,7 @@ export default function RootLayout({
           <LayoutSettingDial />
           <Footer />
 
+          <RouteModal />
           <FeedbackModal />
         </Providers>
       </body>

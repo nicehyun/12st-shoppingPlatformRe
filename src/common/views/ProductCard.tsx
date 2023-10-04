@@ -9,12 +9,15 @@ import { useAddToCartMutaion } from "@/features/cart/hooks/useAddToCartMutaion"
 import useRemoveFromCartMutation from "@/features/cart/hooks/useRemoveFromCartMutation"
 import { discountedProductPrice, numberToLocaleString } from "../utils/price"
 import Image from "next/image"
+import { useAuthenticate } from "@/features/auth/signIn/hooks/useAuthenticate"
 
 interface IProductCard {
   productInfo: Product
 }
 
 const ProductCard = ({ productInfo }: IProductCard) => {
+  const { authentication } = useAuthenticate()
+
   const {
     brand,
     maker,
@@ -42,6 +45,8 @@ const ProductCard = ({ productInfo }: IProductCard) => {
   )
 
   const onClickAddProductInCart = async () => {
+    authentication()
+
     if (productListInCart.length >= 10) return
 
     addMutaion.mutate()
