@@ -14,7 +14,6 @@ const HomeArrivalProducts = () => {
     console.log(123)
   }
 
-  console.log(products)
   const [slidesPerView, setSlidesPerView] = useState<number>(1.4)
 
   useEffect(() => {
@@ -64,26 +63,11 @@ const HomeArrivalProducts = () => {
           classNames="absolute right-0 text-[12px] hover:text-lightRed transition-3"
         /> */}
       </div>
-
       <ProductSwiper
         productCardkind="shadow"
         products={products ?? []}
         slidesPerView={slidesPerView}
       />
-      {/* <Swiper
-        slidesPerView={slidesPerView}
-        spaceBetween={30}
-        modules={[Scrollbar]}
-      >
-        {products?.map((product: Product) => (
-          <SwiperSlide
-            key={`arrivalProductEl-${product.id}`}
-            className="swiper-slide"
-          >
-            <ArrivalProductCard productInfo={product} />
-          </SwiperSlide>
-        ))}
-      </Swiper> */}
     </section>
   )
 }

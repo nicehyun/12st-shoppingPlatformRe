@@ -4,6 +4,9 @@ import { Product, Products } from "@/common/types/product"
 import ArrivalProductCard from "./ShadowProductCard"
 import ProductCard from "@/common/views/ProductCard"
 
+import "swiper/css"
+import "swiper/css/scrollbar"
+
 interface IProductSwiper {
   slidesPerView: number
   products: Products
@@ -26,7 +29,10 @@ const ProductSwiper = ({
 
     if (productCardkind === "shadow") {
       return products?.map((product: Product) => (
-        <SwiperSlide key={`ProductEl-${product.id}`} className="swiper-slide">
+        <SwiperSlide
+          key={`ProductEl-${product.id}`}
+          className="swiper-slide flex"
+        >
           <ArrivalProductCard productInfo={product} />
         </SwiperSlide>
       ))
@@ -35,11 +41,10 @@ const ProductSwiper = ({
   return (
     <Swiper
       slidesPerView={slidesPerView}
+      grabCursor={true}
       spaceBetween={30}
       modules={[Scrollbar]}
     >
-      {}
-
       {renderProducts()}
     </Swiper>
   )
