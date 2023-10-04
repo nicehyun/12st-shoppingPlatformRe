@@ -1,3 +1,4 @@
+import { ResponseUserInfo, UserInfo } from "@/common/types/user"
 import NextAuth from "next-auth/next"
 import CredentialsProvider from "next-auth/providers/credentials"
 
@@ -44,14 +45,22 @@ const handler = NextAuth({
       },
     }),
   ],
+  session: {
+    maxAge: 24 * 60 * 60,
+  },
   pages: { signIn: "/auth/signIn" },
   callbacks: {
     async jwt({ token, user }) {
-      return { ...token, ...user }
+      if (user) {
+        token.email = user.email
+        token.accessToken = user.accessToken
+      }
+      return token
     },
 
     async session({ session, token }) {
-      session.user = token as any
+      session.user.email = token.email
+      session.user.accessToken = token.accessToken as string | null | undefined
 
       return session
     },

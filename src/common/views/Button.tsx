@@ -3,7 +3,7 @@
 import { CSSProperties, ReactNode } from "react"
 
 interface IButton {
-  onClick: () => void
+  onClick?: () => void
   type?: "button" | "submit"
   content: string | ReactNode
   classNames?: string

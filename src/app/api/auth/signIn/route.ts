@@ -1,4 +1,4 @@
-import { signIn } from "@/firebase/firestore/signIn"
+import { signInAPI } from "@/features/auth/signIn/model/signInAPI"
 
 interface RequestBody {
   email: string
@@ -9,7 +9,7 @@ export async function POST(request: Request) {
   const body: RequestBody = await request.json()
 
   try {
-    const user = await signIn(body.email, body.password)
+    const user = await signInAPI.signIn(body.email, body.password)
 
     return new Response(JSON.stringify(user))
   } catch (error) {

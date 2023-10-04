@@ -9,8 +9,9 @@ import {
   emailValidator,
   passwordValidator,
 } from "../../signUp/utils/validation"
-import SignUpFeedback from "../../../../common/views/Feedback"
+import Feedback from "../../../../common/views/Feedback"
 import useSignInMutaion from "../hooks/useSIgnInMutaion"
+import Button from "@/common/views/Button"
 
 const SignInForm = () => {
   const { routeTo } = useNavigations()
@@ -55,11 +56,6 @@ const SignInForm = () => {
       )
     }
 
-    dispatch(
-      showFeedbackModal({
-        modalContent: "로그인에 성공했습니다. 잠시 후 HOME으로 이동합니다.",
-      })
-    )
     routeTo(ROUTE.HOME)
   }
 
@@ -70,8 +66,8 @@ const SignInForm = () => {
     : ""
   return (
     <form onSubmit={testSubmit} className={`flexCenter flex-col mb-[50px]`}>
-      <h2 className="w-[400px] text-center text-[20px] font-bold mb-[30px] pb-[30px] border-b-[3px] border-black dark:border-white tracking-[20px]">
-        로그인
+      <h2 className="w-[400px] text-center text-[24px] md:text-[20px] sm:text-[18px] font-extrabold mb-[30px] pb-[30px] border-b-[3px] border-black dark:border-white tracking-[20px]">
+        LOGIN
       </h2>
 
       <div className="w-[400px] mb-[10px]">
@@ -100,21 +96,22 @@ const SignInForm = () => {
         />
       </div>
 
-      <button
+      <Button
         type="submit"
-        className="w-[400px] text-[14px] tracking-[8px] h-[50px] bg-black dark:bg-white dark:text-black text-white"
-      >
-        {isSignInLoading ? (
-          <Loading
-            spinnerSize={{ height: "h-[20px]", width: "w-[20px]" }}
-            isFrame={false}
-          />
-        ) : (
-          "로그인"
-        )}
-      </button>
+        classNames="w-[400px] text-[14px] tracking-[8px] h-[50px] bg-black dark:bg-white dark:text-black text-white"
+        content={
+          isSignInLoading ? (
+            <Loading
+              spinnerSize={{ height: "h-[20px]", width: "w-[20px]" }}
+              isFrame={false}
+            />
+          ) : (
+            "로그인"
+          )
+        }
+      />
 
-      <SignUpFeedback classNames="h-[16px]" content={feedbackContent} />
+      <Feedback classNames="h-[16px]" content={feedbackContent} />
     </form>
   )
 }
