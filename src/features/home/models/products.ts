@@ -95,7 +95,12 @@ export const getBestSellingProducts = async (): Promise<Products> => {
 
     return bestSellingProducts
   } catch (error) {
-    console.error("Error fetching top selling products:", error)
-    throw error
+    const { response } = error as unknown as AxiosError
+
+    if (response) {
+      throw Error(`🚨firebase getDocs API : ${error}`)
+    }
+
+    throw Error(`getBestSellingProducts firebase API : ${error}`)
   }
 }
