@@ -1,7 +1,7 @@
 "use client"
 
 import { useTopSaleProductsQuery } from "../hooks/useTopSaleProductsQuery"
-import HomeProductsSection from "./HomeProductsSection"
+import HomeBasicProductsSection from "./HomeBasicProductsSection"
 
 const HomeTopSaleProducts = () => {
   const { products } = useTopSaleProductsQuery()
@@ -10,7 +10,7 @@ const HomeTopSaleProducts = () => {
   }
 
   return (
-    <HomeProductsSection
+    <HomeBasicProductsSection
       products={products?.slice(0, 10) ?? []}
       onMoreClick={tesst}
       sectionTitle="BIG SALE"

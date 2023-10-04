@@ -3,11 +3,10 @@
 import { Products } from "@/common/types/product"
 import Button from "@/common/views/Button"
 
-import { ReactNode, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import ProductSwiper from "./ProductSwiper"
 
-interface IHomeProductsSection {
-  children?: ReactNode
+interface IHomeBasicProductsSection {
   products: Products
   sectionTitle: string
   sectionSubTitle: string
@@ -15,13 +14,13 @@ interface IHomeProductsSection {
   isBackGroundColor?: boolean
 }
 
-const HomeProductsSection = ({
+const HomeBasicProductsSection = ({
   products,
   sectionTitle,
   sectionSubTitle,
   onMoreClick,
   isBackGroundColor = true,
-}: IHomeProductsSection) => {
+}: IHomeBasicProductsSection) => {
   const [slidesPerView, setSlidesPerView] = useState<number>(3.8)
 
   useEffect(() => {
@@ -113,4 +112,4 @@ const HomeProductsSection = ({
   )
 }
 
-export default HomeProductsSection
+export default HomeBasicProductsSection

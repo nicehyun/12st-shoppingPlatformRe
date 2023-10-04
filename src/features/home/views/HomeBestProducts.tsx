@@ -1,13 +1,13 @@
 "use client"
 
-import HomeProductsSection from "./HomeProductsSection"
+import HomeBasicProductsSection from "./HomeBasicProductsSection"
 import { useBestSellingProductsQuery } from "../hooks/useBestSellingProductsQuery"
 
 const HomeBestProducts = () => {
   const { products } = useBestSellingProductsQuery()
 
   return (
-    <HomeProductsSection
+    <HomeBasicProductsSection
       products={products?.slice(0, 10) ?? []}
       onMoreClick={() => {}}
       sectionTitle="WEEKLY BEST"
