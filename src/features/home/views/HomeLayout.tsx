@@ -6,8 +6,8 @@ const HomeLayout = () => {
   return (
     <>
       <HomeBestProducts />
-      {/* <HomeArrivalProducts />
-      <HomeTopSaleProducts /> */}
+      <HomeArrivalProducts />
+      <HomeTopSaleProducts />
     </>
   )
 }

@@ -34,7 +34,7 @@ const Header = ({ isShowCart }: IHeader) => {
 
   return (
     <header
-      className={`fixed w-full z-10 backdrop-blur-[16px] border-b-[1px] border-black dark:border-white transition-5
+      className={`fixed w-full z-50 backdrop-blur-[16px] border-b-[1px] border-black dark:border-white transition-5
       ${isShowPromotion ? "h-[132px]" : "h-[100px]"}
       `}
     >
