@@ -1,4 +1,3 @@
-import { ResponseUserInfo, UserInfo } from "@/common/types/user"
 import NextAuth from "next-auth/next"
 import CredentialsProvider from "next-auth/providers/credentials"
 
