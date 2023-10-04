@@ -1,9 +1,4 @@
-import {
-  useParams,
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from "next/navigation"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 export enum ROUTE {
   CART = "/cart",
