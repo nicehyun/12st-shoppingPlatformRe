@@ -18,7 +18,7 @@ export enum ROUTE {
 }
 
 export const useNavigations = () => {
-  const { push, replace } = useRouter()
+  const { push, replace, back } = useRouter()
   const pathname = usePathname()
 
   const params = useSearchParams()
@@ -48,5 +48,6 @@ export const useNavigations = () => {
     pathname,
     routeTo,
     getParams,
+    prevRoute: back,
   }
 }
