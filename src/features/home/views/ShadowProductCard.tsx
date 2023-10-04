@@ -19,7 +19,7 @@ const ShadowProductCard = ({ productInfo }: IArrivalProductCard) => {
       <div className="rounded-[8px] mb-[20px] w-full h-[500px] lg:h-[350px] md:h-[300px] sm:h-[200px] bg-black text-[12px] cardShadow">
         <Image
           src={image}
-          alt={`상품 ${name}`}
+          alt={`상품사진이 준비되지 않았습니다. - ${name}`}
           width={0}
           height={0}
           sizes="100vw"
