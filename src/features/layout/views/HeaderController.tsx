@@ -4,8 +4,9 @@ import { FaUserTag, FaHeart } from "react-icons/fa"
 import { FiLogIn, FiLogOut } from "react-icons/fi"
 import HeaderCartButton from "./HeaderCartButton"
 import { ROUTE, useNavigations } from "@/common/hooks/useNavigations"
-import { signOut, useSession } from "next-auth/react"
+import { signOut } from "next-auth/react"
 import { AiOutlineSearch } from "react-icons/ai"
+import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 
 interface IHeaderController {
   isShowPromotion: boolean
@@ -19,7 +20,7 @@ const HeaderController = ({
   onShowSearchForm,
 }: IHeaderController) => {
   const { routeTo } = useNavigations()
-  const { data: session } = useSession()
+  const { sessionQuery } = useSessionQuery()
 
   return (
     <div
@@ -56,22 +57,7 @@ const HeaderController = ({
           </li>
         )}
 
-        <HeaderControllerEl
-          title="SIGN OUT"
-          icon={<FiLogOut />}
-          isShowPromotion={isShowPromotion}
-          classNames={isShowCart ? "before:vertical-divider" : ""}
-          onClick={() => signOut()}
-        />
-        <HeaderControllerEl
-          title="SIGN IN"
-          icon={<FiLogIn />}
-          isShowPromotion={isShowPromotion}
-          classNames="before:vertical-divider"
-          onClick={() => routeTo(ROUTE.SIGNIN)}
-        />
-
-        {/* {session ? (
+        {sessionQuery ? (
           <HeaderControllerEl
             title="SIGN OUT"
             icon={<FiLogOut />}
@@ -87,7 +73,7 @@ const HeaderController = ({
             classNames="before:vertical-divider"
             onClick={() => routeTo(ROUTE.SIGNIN)}
           />
-        )} */}
+        )}
       </ul>
     </div>
   )

@@ -31,6 +31,7 @@ const CartModal = () => {
 
     return () => {
       window.removeEventListener("click", onhideCartModal)
+      dispatch(hideCartModal())
     }
   }, [])
   return (

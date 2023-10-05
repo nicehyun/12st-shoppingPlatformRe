@@ -4,11 +4,11 @@ import ClauseCheckbox from "@/common/views/ClauseCheckbox"
 import { showBasicModal } from "@/redux/features/modalSlice"
 import {
   toggleAgreeToAllClause,
-  seletSignUpClauseState,
   toggleAgreeToAgeClause,
   toggleAgreeToMarketingClause,
   toggleAgreeToPrivacyClause,
   toggleAgreeToTermClause,
+  selectSignUpClauseState,
 } from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import MarketingClause from "./MarketingClause"
@@ -17,7 +17,7 @@ import TermClause from "./TermClause"
 
 const SignUpClause = () => {
   const { age, marketing, privacy, term, all } = useAppSelector(
-    seletSignUpClauseState
+    selectSignUpClauseState
   )
 
   const dispatch = useAppDispatch()

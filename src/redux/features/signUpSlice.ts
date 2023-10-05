@@ -176,7 +176,7 @@ export const {
   resetStep,
 } = signUpSlice.actions
 
-export const seletSignUpClauseState = (state: RootState) => state.signUp.clause
+export const selectSignUpClauseState = (state: RootState) => state.signUp.clause
 export const selectSignUpCheckState = (state: RootState) => state.signUp.check
 export const selectSignUpIsValidState = (state: RootState) =>
   state.signUp.isValid

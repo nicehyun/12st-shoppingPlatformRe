@@ -8,7 +8,7 @@ import {
   selectSignUpActiveStepState,
   selectSignUpCheckState,
   selectSignUpIsValidState,
-  seletSignUpClauseState,
+  selectSignUpClauseState,
 } from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { useEffect } from "react"
@@ -34,7 +34,7 @@ const SignUpForm = () => {
     privacy: isPrivacyAgree,
     term: isTermAgree,
     marketing,
-  } = useAppSelector(seletSignUpClauseState)
+  } = useAppSelector(selectSignUpClauseState)
   const {
     email: isEmailCheck,
     address: isAddressCheck,

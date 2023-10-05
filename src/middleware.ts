@@ -1,5 +1,6 @@
 import { getToken } from "next-auth/jwt"
 import { NextRequest, NextResponse } from "next/server"
+import { verifyJwt } from "./app/lib/jwt"
 
 export { default } from "next-auth/middleware"
 

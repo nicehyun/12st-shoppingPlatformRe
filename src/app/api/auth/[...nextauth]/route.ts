@@ -45,7 +45,8 @@ const handler = NextAuth({
     }),
   ],
   session: {
-    maxAge: 24 * 60 * 60,
+    // maxAge: 24 * 60 * 60,
+    maxAge: 10,
   },
   pages: { signIn: "/auth/signIn" },
   callbacks: {

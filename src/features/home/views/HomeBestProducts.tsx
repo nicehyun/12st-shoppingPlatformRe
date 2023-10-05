@@ -2,7 +2,6 @@
 
 import HomeBasicProductsSection from "./HomeBasicProductsSection"
 import { useBestSellingProductsQuery } from "../hooks/useBestSellingProductsQuery"
-import { getToken } from "next-auth/jwt"
 
 const HomeBestProducts = () => {
   const { products } = useBestSellingProductsQuery()
