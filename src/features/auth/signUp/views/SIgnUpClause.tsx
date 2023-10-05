@@ -11,9 +11,9 @@ import {
   selectSignUpClauseState,
 } from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import MarketingClause from "./MarketingClause"
-import SignupCollectionOfUserInfoClause from "./SignupCollectionOfUserInfoClause"
-import TermClause from "./TermClause"
+import MarketingClause from "./clause/MarketingClause"
+import SignupCollectionOfUserInfoClause from "./clause/SignupCollectionOfUserInfoClause"
+import TermClause from "./clause/TermClause"
 
 const SignUpClause = () => {
   const { age, marketing, privacy, term, all } = useAppSelector(

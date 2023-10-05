@@ -8,7 +8,7 @@ const TermClause = () => {
         <h2 className="font-bold mt-[20px] mb-[5px] sm:text-[14px] md:text-[14px]">
           제 1조 (목적)
         </h2>
-        <p>
+        <p className="text-[14px]">
           본 이용약관은 무신사 주식회사(이하 &lsquo;회사&lsquo;)에서 제공하는
           모든 서비스(이하 &lsquo;서비스&lsquo;)를 이용함에 있어 회사와 이용자의
           권리·의무 및 책임사항을 규정함을 목적으로 합니다.
@@ -19,7 +19,7 @@ const TermClause = () => {
         <h2 className="font-bold mt-[20px] mb-[5px] sm:text-[14px] md:text-[14px]">
           제 2조 (정의)
         </h2>
-        <ol className="list-decimal pl-[20px]">
+        <ol className="list-decimal pl-[20px] text-[14px]">
           <li className="mb-[5px]">
             &lsquo;사이버몰&lsquo;이란 회사가 재화 또는 용역(이하 &lsquo;재화
             등&lsquo;)을 이용자에게 제공하기 위하여 컴퓨터 등 정보통신 설비를
@@ -47,7 +47,7 @@ const TermClause = () => {
         <h2 className="font-bold mt-[20px] mb-[5px] sm:text-[14px] md:text-[14px]">
           제 3조 (약관 등의 명시와 설명 및 개정)
         </h2>
-        <ol className="list-decimal pl-[20px]">
+        <ol className="list-decimal pl-[20px] text-[14px]">
           <li className="mb-[5px]">
             회사는 이 약관의 내용과 상호, 영업소 소재지 주소(소비자의 불만을
             처리할 수 있는 곳의 주소를 포함), 전화번호, 모사전송번호,
@@ -94,7 +94,7 @@ const TermClause = () => {
         <h2 className="font-bold mt-[20px] mb-[5px] sm:text-[14px] md:text-[14px]">
           제 4조 (서비스의 제공 및 변경)
         </h2>
-        <ol className="list-decimal pl-[20px]">
+        <ol className="list-decimal pl-[20px] text-[14px]">
           <li className="mb-[5px]">
             회사는 다음과 같은 서비스를 제공합니다.
             <br />① 재화 또는 용역에 대한 정보 제공 및 구매 계약의 체결
@@ -123,7 +123,7 @@ const TermClause = () => {
         <h2 className="font-bold mt-[20px] mb-[5px] sm:text-[14px] md:text-[14px]">
           제 5조 (서비스의 중단)
         </h2>
-        <ol className="list-decimal pl-[20px]">
+        <ol className="list-decimal pl-[20px] text-[14px]">
           <li className="mb-[5px]">
             회사는 컴퓨터 등 정보통신설비의 보수점검, 교체 및 고장, 통신의 두절
             등의 사유가 발생한 경우에는 서비스의 제공을 일시적으로 중단할 수
@@ -148,7 +148,7 @@ const TermClause = () => {
         <h2 className="font-bold mt-[20px] mb-[5px] sm:text-[14px] md:text-[14px]">
           제 6조 (회원가입)
         </h2>
-        <ol className="list-decimal pl-[20px]">
+        <ol className="list-decimal pl-[20px] text-[14px]">
           <li className="mb-[5px]">
             이용자는 무료로 사이버몰 회원에 가입할 수 있으며, 회사가 정한 가입
             양식에 회원정보를 기입한 후 이 약관에 동의한다는 의사표시를 함으로서
@@ -184,7 +184,7 @@ const TermClause = () => {
         <h2 className="font-bold mt-[20px] mb-[5px] sm:text-[14px] md:text-[14px]">
           제 7조 (회원 탈퇴 및 자격 상실 등){" "}
         </h2>
-        <ol className="list-decimal pl-[20px]">
+        <ol className="list-decimal pl-[20px] text-[14px]">
           <li className="mb-[5px]">
             회원은 회사에 언제든지 탈퇴를 요청할 수 있으며 회사는 즉시 회원
             탈퇴를 처리합니다.
@@ -217,7 +217,7 @@ const TermClause = () => {
         <h2 className="font-bold mt-[20px] mb-[5px] sm:text-[14px] md:text-[14px]">
           제 8조 (회원에 대한 통지)
         </h2>
-        <ol className="list-decimal pl-[20px]">
+        <ol className="list-decimal pl-[20px] text-[14px]">
           <li className="mb-[5px]">
             회원에 대한 통지를 하는 경우 회사는 회원이 등록한 e-mail 주소 또는
             휴대폰 번호 등으로 할 수 있습니다.
@@ -236,12 +236,12 @@ const TermClause = () => {
         <h2 className="font-bold mt-[20px] mb-[5px] sm:text-[14px] md:text-[14px]">
           제 9조 (구매신청)
         </h2>
-        <p>
+        <p className="text-[14px] mb-[10px]">
           이용자는 회사에서 다음 또는 이와 유사한 방법에 의하여 구매를 신청하며,
           회사는 이용자가 구매신청을 함에 있어서 다음의 각 내용을 알기 쉽게
           제공하여야 합니다.
         </p>
-        <ol className="list-decimal pl-[20px]">
+        <ol className="list-decimal pl-[20px] text-[14px]">
           <li className="mb-[5px]">재화 등의 검색 및 선택</li>
           <li className="mb-[5px]">
             성명, 주소, 전화번호(또는 휴대폰번호), 이메일 주소 등의 입력
@@ -258,7 +258,7 @@ const TermClause = () => {
         <h2 className="font-bold mt-[20px] mb-[5px] sm:text-[14px] md:text-[14px]">
           제 10조 (구매계약의 성립)
         </h2>
-        <ol className="list-decimal pl-[20px]">
+        <ol className="list-decimal pl-[20px] text-[14px]">
           <li className="mb-[5px]">
             회사는 제9조 구매신청에 대하여 다음 각 호에 해당하면 승낙하지 않을
             수 있습니다. 다만, 미성년자와 계약을 체결하는 경우에는 법정대리인의
@@ -283,7 +283,7 @@ const TermClause = () => {
         <h2 className="font-bold mt-[20px] mb-[5px] sm:text-[14px] md:text-[14px]">
           제 11조 (지급방법)
         </h2>
-        <ol className="list-decimal pl-[20px]">
+        <ol className="list-decimal pl-[20px] text-[14px]">
           <li className="mb-[5px]">
             회사에서 구매한 상품 또는 용역에 대한 대금지급방법은 다음 각 호의
             방법 중 가용한 방법으로 할 수 있습니다. 단, 회사는 이용자의
@@ -312,7 +312,7 @@ const TermClause = () => {
         <h2 className="font-bold mt-[20px] mb-[5px] sm:text-[14px] md:text-[14px]">
           제 12조 (수신확인통지·구매신청 변경 및 취소)
         </h2>
-        <ol className="list-decimal pl-[20px]">
+        <ol className="list-decimal pl-[20px] text-[14px]">
           <li className="mb-[5px]">
             회사는 이용자의 구매신청이 있는 경우 이용자에게 수신확인통지를
             합니다.
@@ -331,7 +331,7 @@ const TermClause = () => {
         <h2 className="font-bold mt-[20px] mb-[5px] sm:text-[14px] md:text-[14px]">
           제 13조 (재화 등의 공급)
         </h2>
-        <ol className="list-decimal pl-[20px]">
+        <ol className="list-decimal pl-[20px] text-[14px]">
           <li className="mb-[5px]">
             회사는 이용자와 재화 등의 공급시기에 관하여 별도의 약정이 없는 이상,
             이용자가 청약을 한 날로부터 7일 이내에 재화 등을 배송할 수 있도록
@@ -348,7 +348,7 @@ const TermClause = () => {
         <h2 className="font-bold mt-[20px] mb-[5px] sm:text-[14px] md:text-[14px]">
           제 14조 (환급)
         </h2>
-        <p>
+        <p className="text-[14px]">
           회사는 이용자가 구매 신청한 재화 등이 품절 등의 사유로 인도 또는
           제공을 할 수 없을 때에는 지체 없이 그 사유를 이용자에게 통지하고
           사전에 재화 등의 대금을 받은 경우에는 대금을 받은 날부터 3영업일
@@ -357,7 +357,7 @@ const TermClause = () => {
         <h2 className="font-bold mt-[20px] mb-[5px] sm:text-[14px] md:text-[14px]">
           제 15조 (청약 철회 등)
         </h2>
-        <ol className="list-decimal pl-[20px]">
+        <ol className="list-decimal pl-[20px] text-[14px]">
           <li className="mb-[5px]">
             회사와 재화 등의 구매에 관한 계약을 체결한 이용자는 수신확인의
             통지를 받은 날로부터 7일 이내에 청약의 철회를 할 수 있습니다. 다만,
@@ -391,7 +391,7 @@ const TermClause = () => {
         <h2 className="font-bold mt-[20px] mb-[5px] sm:text-[14px] md:text-[14px]">
           제 16조 (청약 철회 등의 효과)
         </h2>
-        <ol className="list-decimal pl-[20px]">
+        <ol className="list-decimal pl-[20px] text-[14px]">
           <li className="mb-[5px]">
             회사는 이용자로부터 재화 등을 반환 받은 경우 3영업일 이내에 이미
             지급받은 재화 등의 대금을 환급 합니다. 이 경우 회사가 이용자에게
@@ -426,7 +426,7 @@ const TermClause = () => {
         <h2 className="font-bold mt-[20px] mb-[5px] sm:text-[14px] md:text-[14px]">
           제 17조 (개인정보보호 및 이용)
         </h2>
-        <ol className="list-decimal pl-[20px]">
+        <ol className="list-decimal pl-[20px] text-[14px]">
           <li className="mb-[5px]">
             회사는 이용자의 정보수집 시 서비스의 제공에 필요한 최소한의 정보를
             수집합니다. 다만 관련 법령상 의무이행을 위하여 본인확인이 필요한
@@ -498,7 +498,7 @@ const TermClause = () => {
         <h2 className="font-bold mt-[20px] mb-[5px] sm:text-[14px] md:text-[14px]">
           제 18조 (회사의 의무)
         </h2>
-        <ol className="list-decimal pl-[20px]">
+        <ol className="list-decimal pl-[20px] text-[14px]">
           <li className="mb-[5px]">
             회사는 이 약관이 정하는 바에 따라 지속적이고, 안정적으로 상품 또는
             용역을 제공하는데 최선을 다합니다.
@@ -520,7 +520,7 @@ const TermClause = () => {
         <h2 className="font-bold mt-[20px] mb-[5px] sm:text-[14px] md:text-[14px]">
           제 19조 (회원의 계정에 대한 의무)
         </h2>
-        <ol className="list-decimal pl-[20px]">
+        <ol className="list-decimal pl-[20px] text-[14px]">
           <li className="mb-[5px]">
             제18조의 경우를 제외하고, 회원의 계정 및 계정에 접속할 수 있는
             정보(ID, 비밀번호)에 관한 관리책임은 회원에게 있습니다.
@@ -543,7 +543,7 @@ const TermClause = () => {
         <h2 className="font-bold mt-[20px] mb-[5px] sm:text-[14px] md:text-[14px]">
           제 20조 (이용자의 의무)
         </h2>
-        <ol className="list-decimal pl-[20px]">
+        <ol className="list-decimal pl-[20px] text-[14px]">
           <li className="mb-[5px]">
             이용자는 관계법령, 이 약관의 규정, 이용안내 등 회사가 통지하는
             사항을 준수하여야 합니다.
@@ -570,7 +570,7 @@ const TermClause = () => {
         <h2 className="font-bold mt-[20px] mb-[5px] sm:text-[14px] md:text-[14px]">
           제 21조 (마일리지)
         </h2>
-        <ol className="list-decimal pl-[20px]">
+        <ol className="list-decimal pl-[20px] text-[14px]">
           <li className="mb-[5px]">
             회사는 회원이 상품을 구매하거나, 상품리뷰의 작성 등의 경우 또는
             회원이 제휴사 포인트를 전환하는 경우 회원에게 일정한 마일리지를
@@ -610,7 +610,7 @@ const TermClause = () => {
         <h2 className="font-bold mt-[20px] mb-[5px] sm:text-[14px] md:text-[14px]">
           제 22조 (예치금)
         </h2>
-        <ol className="list-decimal pl-[20px]">
+        <ol className="list-decimal pl-[20px] text-[14px]">
           <li className="mb-[5px]">
             회사에서 구입한 상품을 반품 또는 취소하였을 때 회원이 원할 경우 환불
             금액을 예치금으로 환불 받을 수 있습니다.
@@ -627,7 +627,7 @@ const TermClause = () => {
         <h2 className="font-bold mt-[20px] mb-[5px] sm:text-[14px] md:text-[14px]">
           제 23조 (할인쿠폰)
         </h2>
-        <ol className="list-decimal pl-[20px]">
+        <ol className="list-decimal pl-[20px] text-[14px]">
           <li className="mb-[5px]">
             회사는 구매서비스를 이용하는 회원에게 지정된 상품 구매 시 일정액
             또는 일정비율을 할인 받을 수 있는 할인쿠폰을 발급할 수 있습니다.
@@ -668,7 +668,7 @@ const TermClause = () => {
         <h2 className="font-bold mt-[20px] mb-[5px] sm:text-[14px] md:text-[14px]">
           제 24조 (저작권의 귀속 및 저작물의 이용)
         </h2>
-        <ol className="list-decimal pl-[20px]">
+        <ol className="list-decimal pl-[20px] text-[14px]">
           <li className="mb-[5px]">
             회사가 회원에게 제공하는 서비스에 대한 지식재산권을 포함한 일체의
             권리는 회사에 귀속됩니다.
@@ -724,7 +724,7 @@ const TermClause = () => {
         <h2 className="font-bold mt-[20px] mb-[5px] sm:text-[14px] md:text-[14px]">
           제 25조 (게시물의 관리 및 이용 제한)
         </h2>
-        <ol className="list-decimal pl-[20px]">
+        <ol className="list-decimal pl-[20px] text-[14px]">
           <li className="mb-[5px]">
             서비스 내 모든 게시물 및 콘텐츠의 관리와 운영 권한은 작가 또는 해당
             게시물 및 콘텐츠를 게시한 회원에게 있으며, 회원은 콘텐츠 삭제, 수정
@@ -799,7 +799,7 @@ const TermClause = () => {
         <h2 className="font-bold mt-[20px] mb-[5px] sm:text-[14px] md:text-[14px]">
           제 26조 (면책)
         </h2>
-        <ol className="list-decimal pl-[20px]">
+        <ol className="list-decimal pl-[20px] text-[14px]">
           <li className="mb-[5px]">
             회사는 천재지변, 불가항력 기타 회사의 합리적인 통제범위를 벗어난
             사유로 인하여 서비스를 제공할 수 없는 경우에는 그에 대한 책임을
@@ -829,7 +829,7 @@ const TermClause = () => {
         <h2 className="font-bold mt-[20px] mb-[5px] sm:text-[14px] md:text-[14px]">
           제 27조 (사이트의 연결)
         </h2>
-        <ol className="list-decimal pl-[20px]">
+        <ol className="list-decimal pl-[20px] text-[14px]">
           <li className="mb-[5px]">
             회사에서 하이퍼링크(하이퍼링크의 대상에는 문자, 그림 및 동화상 등이
             포함됨)방식을 통해 타 사이트에 연결시킬 수 있습니다.
@@ -842,7 +842,7 @@ const TermClause = () => {
         <h2 className="font-bold mt-[20px] mb-[5px] sm:text-[14px] md:text-[14px]">
           제 28조 (정보의 제공 및 광고의 게재)
         </h2>
-        <ol className="list-decimal pl-[20px]">
+        <ol className="list-decimal pl-[20px] text-[14px]">
           <li className="mb-[5px]">
             회사는 서비스를 운영함에 있어 각종 정보를 서비스 화면에 게재하거나
             e-mail 및 서신우편 등의 방법으로 회원에게 제공할 수 있습니다.
@@ -862,7 +862,7 @@ const TermClause = () => {
         <h2 className="font-bold mt-[20px] mb-[5px] sm:text-[14px] md:text-[14px]">
           제 29조 (분쟁해결)
         </h2>
-        <ol className="list-decimal pl-[20px]">
+        <ol className="list-decimal pl-[20px] text-[14px]">
           <li className="mb-[5px]">
             회사는 이용자가 제기하는 정당한 의견이나 불만을 반영하고 그 피해를
             보상처리하기 위하여 고객센터를 운영합니다.
@@ -881,7 +881,7 @@ const TermClause = () => {
         <h2 className="font-bold mt-[20px] mb-[5px] sm:text-[14px] md:text-[14px]">
           제 30조 (재판권 및 준거법)
         </h2>
-        <ol className="list-decimal pl-[20px]">
+        <ol className="list-decimal pl-[20px] text-[14px]">
           <li className="mb-[5px]">
             회사와 이용자간에 발생한 전자상거래 분쟁에 관한 소송은 제소 당시의
             이용자의 주소에 의하고, 주소가 없는 경우에는 거소를 관할하는
@@ -894,7 +894,7 @@ const TermClause = () => {
             적용합니다.
           </li>
         </ol>
-        <ul className="font-bold list-disc pl-[20px]">
+        <ul className="font-bold list-disc pl-[20px] text-[14px]">
           <li className="mb-[5px]">이용약관 버전번호 : v2.1</li>
           <li className="mb-[5px]">
             현재 이용약관 고지일자 : 2019년 12월 16일
