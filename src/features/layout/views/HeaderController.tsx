@@ -56,7 +56,22 @@ const HeaderController = ({
           </li>
         )}
 
-        {session ? (
+        <HeaderControllerEl
+          title="SIGN OUT"
+          icon={<FiLogOut />}
+          isShowPromotion={isShowPromotion}
+          classNames={isShowCart ? "before:vertical-divider" : ""}
+          onClick={() => signOut()}
+        />
+        <HeaderControllerEl
+          title="SIGN IN"
+          icon={<FiLogIn />}
+          isShowPromotion={isShowPromotion}
+          classNames="before:vertical-divider"
+          onClick={() => routeTo(ROUTE.SIGNIN)}
+        />
+
+        {/* {session ? (
           <HeaderControllerEl
             title="SIGN OUT"
             icon={<FiLogOut />}
@@ -72,7 +87,7 @@ const HeaderController = ({
             classNames="before:vertical-divider"
             onClick={() => routeTo(ROUTE.SIGNIN)}
           />
-        )}
+        )} */}
       </ul>
     </div>
   )
