@@ -7,7 +7,7 @@ import {
 } from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { useEffect, useState } from "react"
-import { useFeedbackModal } from "../hooks/useFeedbackModal"
+import { useFeedbackModal } from "../../../../common/hooks/useFeedbackModal"
 import useRequestVerificationMutation from "../hooks/useRequestVerificationMutation"
 import useSendVerificationCodeMutation from "../hooks/useSendVerificationCodeMutation"
 import { useUserInput } from "../../../../common/hooks/useUserInput"

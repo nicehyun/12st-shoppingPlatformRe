@@ -9,7 +9,7 @@ import {
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { ChangeEvent, useEffect } from "react"
 import { useEmailDuplicationCheckMutaion } from "../hooks/useEmailDuplicationCheckMutaion"
-import { useFeedbackModal } from "../hooks/useFeedbackModal"
+import { useFeedbackModal } from "../../../../common/hooks/useFeedbackModal"
 import { useUserInput } from "../../../../common/hooks/useUserInput"
 import { emailValidator } from "../utils/validation"
 import SignUpFeedback from "../../../../common/views/Feedback"

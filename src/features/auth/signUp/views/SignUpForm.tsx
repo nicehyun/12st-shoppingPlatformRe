@@ -12,7 +12,7 @@ import {
 } from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { useEffect } from "react"
-import { useFeedbackModal } from "../hooks/useFeedbackModal"
+import { useFeedbackModal } from "../../../../common/hooks/useFeedbackModal"
 import useSignUpMutation from "../hooks/useSignUpMutation"
 import SignUpAddressInput from "./SignUpAddressInput"
 import SignUpBirthInput from "./SignUpBirthInput"
