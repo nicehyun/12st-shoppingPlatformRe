@@ -14,7 +14,7 @@ import { useEffect } from "react"
 import { useFeedbackModal } from "../../../../common/hooks/useFeedbackModal"
 import { useSignUpClasue } from "../hooks/useSignUpClasue"
 import useSignUpMutation from "../hooks/useSignUpMutation"
-import SignUpBirthInput from "./SignUpBirthInput"
+
 import SignUpClause, { ISignUpClause } from "./SIgnUpClause"
 import SignUpEmailInput from "./SignUpEmailInput"
 import SignUpNameInput from "./SignUpNameInput"
@@ -41,16 +41,12 @@ const SignUpForm = () => {
     marketing: isMarketingClauseCheck,
   } = checkedClaseState
 
-  const {
-    email: isEmailCheck,
-    address: isAddressCheck,
-    phone: isPhoneCheck,
-  } = useAppSelector(selectSignUpCheckState)
-  const {
-    password: isPasswordValid,
-    birth: isBirthValid,
-    name: isNameValid,
-  } = useAppSelector(selectSignUpIsValidState)
+  const { email: isEmailCheck, phone: isPhoneCheck } = useAppSelector(
+    selectSignUpCheckState
+  )
+  const { password: isPasswordValid, name: isNameValid } = useAppSelector(
+    selectSignUpIsValidState
+  )
 
   const selectSignUpActiveStep = useAppSelector(selectSignUpActiveStepState)
 
@@ -114,8 +110,6 @@ const SignUpForm = () => {
       <SignUpPasswordInput key="password" />,
       <SignUpNameInput key="name" />,
       <SignUpPhoneVerificationInput key="phone" />,
-
-      <SignUpBirthInput key="birth" />,
     ],
 
     firstButtonText: "동의하고 가입하기",
@@ -126,7 +120,6 @@ const SignUpForm = () => {
       !isPasswordValid,
       !isNameValid,
       !isPhoneCheck,
-
       isSignUpLoading,
     ],
     onClickBackButton: handleStageBackClick,
