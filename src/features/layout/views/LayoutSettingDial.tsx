@@ -1,77 +1,24 @@
-"use client"
-
 import Box from "@mui/material/Box"
 import SpeedDial from "@mui/material/SpeedDial"
 
 import SpeedDialAction from "@mui/material/SpeedDialAction"
 
 import { AiFillSetting } from "react-icons/ai"
-import { MdDarkMode, MdLightMode } from "react-icons/md"
-import { useEffect, useState } from "react"
-import { useTheme } from "next-themes"
+import GenderSwicher from "./GenderSwicher"
+
 import ThemeSwitcher from "./ThemeSwitcher"
 
 const LayoutSettingDial = () => {
-  const [mounted, setMounted] = useState(false)
-  // const { theme, setTheme } = useTheme()
-  const [gender, setGender] = useState("all")
-  // console.log(theme)
-
-  // const toggleTheme = () => {
-  //   if (theme === "light") {
-  //     setTheme("dark")
-  //   }
-
-  //   if (theme === "dark") {
-  //     setTheme("light")
-  //   }
-
-  //   return
-  // }
-
-  const chageGender = () => {
-    if (gender === "all") {
-      setGender("male")
-    }
-
-    if (gender === "male") {
-      setGender("female")
-    }
-
-    if (gender === "female") {
-      setGender("all")
-    }
-
-    return
-  }
-
   const actions = [
     {
       icon: <ThemeSwitcher />,
       name: "LightMode / DarkMode",
     },
-
     {
-      icon:
-        gender === "all" ? (
-          <span className="text-[12px]">전체</span>
-        ) : gender === "male" ? (
-          <span className="text-[12px]">남성</span>
-        ) : (
-          <span className="text-[12px]">여성</span>
-        ),
+      icon: <GenderSwicher />,
       name: "전체 / 남성 / 여성",
-      // action: chageGender,
     },
   ]
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) {
-    return null
-  }
 
   return (
     <Box
