@@ -5,6 +5,7 @@ import useDecreaseAmountMutation from "../hooks/useDecreaseAmountMutation"
 import useRemoveFromCartMutation from "../hooks/useRemoveFromCartMutation"
 import { ProductInCart } from "../types/cart"
 import { FaRegWindowClose } from "react-icons/fa"
+import Button from "@/common/views/Button"
 
 interface IProductInCartController {
   children: ReactNode
@@ -39,19 +40,21 @@ const ProductInCartController = ({
 
   return (
     <div className="relative py-[10px] pr-[10px] flex flex-col grow text-black">
-      <button
+      <Button
         onClick={onClickRemoveProductFromCart}
-        className="absolute text-border right-[10px] top-[10px] text-[22px] md:text-[18px] sm:text-[16px] transition-3 hover:text-lightRed"
-      >
-        <FaRegWindowClose />
-      </button>
+        classNames="absolute text-border right-[10px] top-[10px] text-[22px] md:text-[18px] sm:text-[16px] transition-3 hover:text-lightRed"
+        content={<FaRegWindowClose />}
+      />
 
       {children}
 
       <div className="absolute p-[1px] bottom-[20px] sm:bottom-[10px] md:bottom-[10px] w-[80px] h-[28px] md:w-[60px] sm:w-[50px] md:h-[24px] sm:h-[20px] items-center bg-lightBorder rounded-[5px] flexCenter">
-        <button onClick={handleAmoutDecrease}>
-          <HiMinus className="text-[14px] md:text-[12px] sm:text-[10px] text-lightGray" />
-        </button>
+        <Button
+          onClick={handleAmoutDecrease}
+          classNames="text-[14px] md:text-[12px] sm:text-[10px] text-lightGray"
+          content={<HiMinus />}
+        />
+
         <input
           type="text"
           name="cart-amount"
@@ -59,9 +62,11 @@ const ProductInCartController = ({
           value={productInfo.amount}
           className="w-1/2 h-full text-[14px] md:text-[12px] sm:text-[10px] border-none bg-white text-black text-end cursor-default px-[10px] mx-[1px]"
         />
-        <button onClick={handleAmoutIncrease}>
-          <HiPlus className="text-[14px] md:text-[12px] sm:text-[10px]" />
-        </button>
+        <Button
+          onClick={handleAmoutIncrease}
+          classNames="text-[14px] md:text-[12px] sm:text-[10px]"
+          content={<HiPlus />}
+        />
       </div>
     </div>
   )

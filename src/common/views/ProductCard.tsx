@@ -10,6 +10,7 @@ import useRemoveFromCartMutation from "@/features/cart/hooks/useRemoveFromCartMu
 import { discountedProductPrice, numberToLocaleString } from "../utils/price"
 import Image from "next/image"
 import { useAuthenticate } from "@/features/auth/signIn/hooks/useAuthenticate"
+import Button from "./Button"
 
 interface IProductCard {
   productInfo: Product
@@ -93,19 +94,17 @@ const ProductCard = ({ productInfo }: IProductCard) => {
       </div>
 
       {isExistedProductInCart ? (
-        <button
+        <Button
           onClick={onClickRemoveProductFromCart}
-          className="text-[18px] sm:text-[16px] absolute right-[8px] bottom-[2px]"
-        >
-          <BsFillCartDashFill />
-        </button>
+          classNames="text-[18px] sm:text-[16px] absolute right-[8px] bottom-[2px]"
+          content={<BsFillCartDashFill />}
+        />
       ) : (
-        <button
+        <Button
           onClick={onClickAddProductInCart}
-          className="text-[18px] sm:text-[16px] absolute right-[8px] bottom-[2px]"
-        >
-          <BsFillCartPlusFill />
-        </button>
+          classNames="text-[18px] sm:text-[16px] absolute right-[8px] bottom-[2px]"
+          content={<BsFillCartPlusFill />}
+        />
       )}
     </div>
   )

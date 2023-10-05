@@ -1,3 +1,5 @@
+import Button from "./Button"
+
 interface IClauseCheckbox {
   label: string
   clauseType: string
@@ -59,13 +61,11 @@ const ClauseCheckbox = ({
         </label>
       </span>
       {isClause && (
-        <button
+        <Button
           onClick={onClickDetailClause}
-          className="py-[5px] text-[14px] sm:text-[12px] md:text-[12px] text-lightGray after:content-[''] after:inline-block after:w-0 after:h-0 after:ml-[5px] after:border-t-[5px] after:border-t-transparent after:border-b-[5px] after:border-b-transparent after:border-r-[8px] after:border-r-lightGray after:rotate-180 flexCenter"
-          type="button"
-        >
-          약관보기
-        </button>
+          classNames="py-[5px] text-[14px] sm:text-[12px] md:text-[12px] text-lightGray after:content-[''] after:inline-block after:w-0 after:h-0 after:ml-[5px] after:border-t-[5px] after:border-t-transparent after:border-b-[5px] after:border-b-transparent after:border-r-[8px] after:border-r-lightGray after:rotate-180 flexCenter"
+          content="약관보기"
+        />
       )}
     </div>
   )

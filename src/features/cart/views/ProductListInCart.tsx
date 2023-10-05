@@ -1,6 +1,7 @@
 "use client"
 
 import { ROUTE } from "@/common/hooks/useNavigations"
+import Button from "@/common/views/Button"
 import Empty from "@/common/views/Empty"
 import Loading from "@/common/views/Loading"
 import {
@@ -109,12 +110,11 @@ const ProductListInCart = () => {
             <span className="text-[14px] md:text-[12px] sm:text-[10px] text-black">
               선택 {checkedProductList.length}개
             </span>
-            <button
+            <Button
               onClick={() => handleCheckedProductRemove(checkedProductList)}
-              className="absolute right-0 text-border transition-3 hover:text-lightRed text-[14px] md:text-[12px] sm:text-[10px]"
-            >
-              선택 삭제
-            </button>
+              classNames="absolute right-0 text-border transition-3 hover:text-lightRed text-[14px] md:text-[12px] sm:text-[10px]"
+              content="선택 삭제"
+            />
           </div>
           {productListInCart.length ? (
             <ul>

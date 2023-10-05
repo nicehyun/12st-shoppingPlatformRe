@@ -1,21 +1,71 @@
+"use client"
+
 import Box from "@mui/material/Box"
 import SpeedDial from "@mui/material/SpeedDial"
-
 import SpeedDialAction from "@mui/material/SpeedDialAction"
-
 import { AiFillSetting } from "react-icons/ai"
-import GenderSwicher from "./GenderSwicher"
-
-import ThemeSwitcher from "./ThemeSwitcher"
+import { useEffect, useState } from "react"
+import { MdDarkMode, MdLightMode } from "react-icons/md"
+import { useTheme } from "next-themes"
 
 const LayoutSettingDial = () => {
+  const [mounted, setMounted] = useState(false)
+  const [gender, setGender] = useState("all")
+  const { theme, setTheme } = useTheme()
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return null
+  }
+
   const actions = [
     {
-      icon: <ThemeSwitcher />,
+      icon:
+        theme === "light" ? (
+          <span
+            className="flexCenter w-full h-full"
+            onClick={() => setTheme("dark")}
+          >
+            <MdDarkMode />
+          </span>
+        ) : (
+          <span
+            className="flexCenter w-full h-full"
+            onClick={() => setTheme("light")}
+          >
+            <MdLightMode />
+          </span>
+        ),
       name: "LightMode / DarkMode",
     },
+
     {
-      icon: <GenderSwicher />,
+      icon:
+        gender === "all" ? (
+          <span
+            className="text-[12px] flexCenter w-full h-full"
+            onClick={() => setGender("male")}
+          >
+            전체
+          </span>
+        ) : gender === "male" ? (
+          <span
+            className="text-[12px] flexCenter w-full h-full"
+            onClick={() => setGender("female")}
+          >
+            남자
+          </span>
+        ) : (
+          <span
+            className="text-[12px] flexCenter w-full h-full"
+            onClick={() => setGender("all")}
+          >
+            여자
+          </span>
+        ),
       name: "전체 / 남성 / 여성",
     },
   ]

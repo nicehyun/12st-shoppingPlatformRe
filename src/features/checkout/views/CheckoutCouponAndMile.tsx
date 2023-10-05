@@ -1,5 +1,6 @@
 "use client"
 
+import Button from "@/common/views/Button"
 import useSelectCoupon from "@/features/cart/hooks/useSelectCoupon"
 import { showBasicModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
@@ -35,28 +36,24 @@ const CheckoutCouponAndMile = () => {
       <div className="flex justify-between py-[18px] font-bold border-b-[1px] border-border">
         <span className="flex">
           <h3>쿠폰 / 마일리지</h3>
-          <button
+          <Button
             onClick={showCouponExplanationModal}
-            type="button"
-            className="ml-[5px] text-border"
-          >
-            <BsQuestionCircle />
-          </button>
+            classNames="ml-[5px] text-border"
+            content={<BsQuestionCircle />}
+          />
         </span>
 
         <div className="flex items-center">
           <p className="text-[14px] md:text-[12px] sm:text-[12px] text-border">
             쿠폰 {selectedCoupon ? "적용" : "미적용"} / 0P 사용
           </p>
-          <button
+          <Button
             onClick={toggleShowDetail}
-            type="button"
-            className={`${
+            classNames={`${
               isShowDetail ? "text-border" : "text-black dark:text-white"
             } text-[20px] ml-[10px]`}
-          >
-            {isShowDetail ? <AiOutlineUp /> : <AiOutlineDown />}
-          </button>
+            content={isShowDetail ? <AiOutlineUp /> : <AiOutlineDown />}
+          />
         </div>
       </div>
 

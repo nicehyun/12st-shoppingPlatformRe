@@ -1,4 +1,5 @@
 import { ROUTE, useNavigations } from "@/common/hooks/useNavigations"
+import Button from "@/common/views/Button"
 import { hideCartModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
 
@@ -22,12 +23,11 @@ const CartModalRouteButton = ({ content, route }: ICartModalRouteButton) => {
     if (route === ROUTE.SIGNIN) return routeTo(ROUTE.SIGNIN)
   }
   return (
-    <button
+    <Button
       onClick={handleRoute}
-      className="text-center text-[14px] md:text-[12px] sm:text-[12px] rounded-[5px] border-[1px] border-black dark:border-white my-[20px] p-[8px] transition-3 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black"
-    >
-      {content}
-    </button>
+      classNames="text-center text-[14px] md:text-[12px] sm:text-[12px] rounded-[5px] border-[1px] border-black dark:border-white my-[20px] p-[8px] transition-3 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black"
+      content={content}
+    />
   )
 }
 

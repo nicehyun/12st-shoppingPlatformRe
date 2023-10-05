@@ -14,6 +14,7 @@ import { useAppDispatch } from "@/redux/hooks"
 import { useGetAddressQuery } from "../hooks/useGetAddressQuery"
 import CheckoutDefalutDeliveryInfo from "./CheckoutDefalutDeliveryInfo"
 import CheckoutNewDeliveryInfo from "./CheckoutNewDeliveryInfo"
+import Button from "@/common/views/Button"
 
 const DeliveryInfo = () => {
   const dispatch = useAppDispatch()
@@ -68,13 +69,11 @@ const DeliveryInfo = () => {
       <div className="flex justify-between py-[18px] font-bold">
         <span className="flex">
           <h3>배송정보</h3>
-          <button
+          <Button
             onClick={showDeliveryExplanationModal}
-            type="button"
-            className="ml-[5px] text-border"
-          >
-            <BsQuestionCircle />
-          </button>
+            classNames="ml-[5px] text-border"
+            content={<BsQuestionCircle />}
+          />
         </span>
 
         <p className="text-[14px]">

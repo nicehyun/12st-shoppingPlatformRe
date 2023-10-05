@@ -6,10 +6,11 @@ import Box from "@mui/material/Box"
 import Stepper from "@mui/material/Stepper"
 import Step from "@mui/material/Step"
 import StepLabel from "@mui/material/StepLabel"
-import Button from "@mui/material/Button"
 import Typography from "@mui/material/Typography"
 import { ReactNode } from "react"
 import Loading from "./Loading"
+import CustomButton from "./Button"
+import { Button } from "@mui/material"
 
 export interface IStage {
   activeStep: number
@@ -116,7 +117,6 @@ export default function Stage({
       ))}
       <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
         <Button
-          color="inherit"
           disabled={activeStep === 0}
           onClick={onClickBackButton}
           className="ml-[-18px]"
@@ -125,16 +125,15 @@ export default function Stage({
         </Button>
 
         <Box sx={{ flex: "1 1 auto" }} />
-        <button
+        <CustomButton
           type={activeStep === stages.length - 1 ? "submit" : "button"}
           onClick={
             activeStep === stages.length - 1 ? () => {} : handleNextButton
           }
-          className="min-w-[57px] rounded-[5px] px-[16px] py-[8px] text-lightRed bg-white border-[1px] border-lightRed text-[14px] md:text-[12px] sm:text-[10px] hover:bg-lightRed hover:text-white disabled:bg-border dark:disabled:bg-border disabled:cursor-not-allowed disabled:border-border disabled:text-lightBlack dark:bg-lightRed dark:text-white tracking-[3px]"
-          disabled={disabledNextButton[activeStep]}
-        >
-          {buttonContent}
-        </button>
+          classNames="min-w-[57px] rounded-[5px] px-[16px] py-[8px] text-lightRed bg-white border-[1px] border-lightRed text-[14px] md:text-[12px] sm:text-[10px] hover:bg-lightRed hover:text-white disabled:bg-border dark:disabled:bg-border disabled:cursor-not-allowed disabled:border-border disabled:text-lightBlack dark:bg-lightRed dark:text-white tracking-[3px]"
+          isDisabled={disabledNextButton[activeStep]}
+          content={buttonContent}
+        />
       </Box>
     </Box>
   )

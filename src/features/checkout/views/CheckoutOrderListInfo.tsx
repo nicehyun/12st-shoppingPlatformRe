@@ -1,3 +1,4 @@
+import Button from "@/common/views/Button"
 import useCheckoutPrice from "@/features/checkout/hooks/useCheckoutPrice"
 import { selectCheckedProductList } from "@/redux/features/cartSlice"
 import { useAppSelector } from "@/redux/hooks"
@@ -46,21 +47,19 @@ const CheckoutOrderListInfo = () => {
       <h3 className="py-[18px] font-bold">주문상품 정보</h3>
       <ul>{renderProductList()}</ul>
 
-      <button
-        type="button"
-        className="font-bold text-[16px] flexCenter w-full h-[50px] my-[30px]"
+      <Button
+        classNames="font-bold text-[16px] flexCenter w-full h-[50px] my-[30px]"
         onClick={toggleShowDetail}
-      >
-        총{" "}
-        <span className="text-lightRed mx-[5px]">
-          {checkedProductList.length}건
-        </span>{" "}
-        전체
-        {isShowDetail ? " 보기 닫기" : " 보기"}{" "}
-        <span className="ml-[5px]">
-          {isShowDetail ? <BsCaretUpFill /> : <BsCaretDownFill />}
-        </span>
-      </button>
+        content={`총 ${(
+          <span className="text-lightRed mx-[5px]">
+            {checkedProductList.length}건
+          </span>
+        )} 전체 ${isShowDetail ? " 보기 닫기" : " 보기"} ${(
+          <span className="ml-[5px]">
+            {isShowDetail ? <BsCaretUpFill /> : <BsCaretDownFill />}
+          </span>
+        )}`}
+      />
     </section>
   )
 }

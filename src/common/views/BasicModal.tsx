@@ -10,6 +10,7 @@ import {
   selectBasicModalState,
 } from "@/redux/features/modalSlice"
 import { ReactNode } from "react"
+import Button from "./Button"
 
 const style = {
   position: "absolute" as "absolute",
@@ -48,12 +49,11 @@ export default function BasicModal({ children }: IBasicModal) {
       <Box sx={style}>
         <>
           <div className="sticky w-full top-0 h-[40px] bg-white flex items-center justify-end pr-[10px]">
-            <button
+            <Button
               onClick={() => dispatch(hideBasicModal())}
-              className="text-[20px] text-lightBlack"
-            >
-              <AiOutlineClose />
-            </button>
+              classNames="text-[20px] text-lightBlack"
+              content={<AiOutlineClose />}
+            />
           </div>
 
           <div className="px-[32px] pb-[32px]">

@@ -1,6 +1,7 @@
 "use client"
 
 import { ROUTE } from "@/common/hooks/useNavigations"
+import Button from "@/common/views/Button"
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import {
   hideCartModal,
@@ -77,12 +78,11 @@ const CartModal = () => {
               <CartModalRouteButton content="로그인" route={ROUTE.SIGNIN} />
             )}
 
-            <button
+            <Button
               onClick={onhideCartModal}
-              className="p-[8px] border-1px border-border bg-lightGray btn-text-center text-[14px] md:text-[12px] sm:text-[12px] rounded-[5px]"
-            >
-              닫기
-            </button>
+              classNames="p-[8px] border-1px border-border bg-lightGray btn-text-center text-[14px] md:text-[12px] sm:text-[12px] rounded-[5px]"
+              content="닫기"
+            />
           </div>
         </div>
       )}

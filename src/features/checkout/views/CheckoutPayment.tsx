@@ -11,6 +11,7 @@ import CreditSelect from "./CreditSelect"
 import InstallmentPeriodSelect from "./InstallmentPeriodSelect"
 import PaymentBenefit from "./PaymentBenefit"
 import PaymentList from "../../layout/views/PaymentList"
+import Button from "@/common/views/Button"
 
 const CheckoutPayment = () => {
   const [isShowDetail, setIsShowDetail] = useState(true)
@@ -35,15 +36,13 @@ const CheckoutPayment = () => {
           <p className="text-[14px] md:text-[12px] sm:text-[12px] text-border">
             {checkoutPaymentState.label}
           </p>
-          <button
+          <Button
             onClick={toggleShowDetail}
-            type="button"
-            className={`${
+            classNames={`${
               isShowDetail ? "text-border" : "text-black dark:text-white"
             } text-[20px] ml-[10px]`}
-          >
-            {isShowDetail ? <AiOutlineUp /> : <AiOutlineDown />}
-          </button>
+            content={isShowDetail ? <AiOutlineUp /> : <AiOutlineDown />}
+          />
         </div>
       </div>
 

@@ -1,3 +1,4 @@
+import Button from "@/common/views/Button"
 import { useState } from "react"
 import { useGetAddressQuery } from "../hooks/useGetAddressQuery"
 import CheckoutAddressInput from "./CheckoutAddressInput"
@@ -40,13 +41,11 @@ const CheckoutDefalutDeliveryInfo = () => {
         </>
       ) : (
         <div className="flexCenter h-[200px]">
-          <button
-            type="button"
+          <Button
             onClick={() => setIsShowDeliveryInfo(true)}
-            className="border-[1px] border-black bg-black text-white text-[18px] md:text-[16px] sm:text-[14px] py-[18px] px-[10px]"
-          >
-            기본 배송지 추가하기
-          </button>
+            classNames="border-[1px] border-black bg-black text-white text-[18px] md:text-[16px] sm:text-[14px] py-[18px] px-[10px]"
+            content="기본 배송지 추가하기"
+          />
         </div>
       )}
     </>

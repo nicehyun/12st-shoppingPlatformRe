@@ -1,6 +1,7 @@
 "use client"
 
 import { ROUTE, useNavigations } from "../hooks/useNavigations"
+import Button from "./Button"
 
 interface IEmpty {
   content: string
@@ -17,13 +18,12 @@ const Empty = ({ content, routeArray }: IEmpty) => {
       <div>
         {routeArray?.length &&
           routeArray?.map((routeEl) => (
-            <button
+            <Button
               key={routeEl.routeContent}
               onClick={() => routeTo(routeEl.route)}
-              className="bg-black text-white w-[200px] py-[10px] mt-[20px]"
-            >
-              {routeEl.routeContent}
-            </button>
+              classNames="bg-black text-white w-[200px] py-[10px] mt-[20px]"
+              content={routeEl.routeContent}
+            />
           ))}
       </div>
     </div>
