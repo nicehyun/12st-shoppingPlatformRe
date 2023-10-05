@@ -1,50 +1,43 @@
 "use client"
 import { ROUTE, useNavigations } from "@/common/hooks/useNavigations"
-import Input from "@/common/views/Input"
 import Loading from "@/common/views/Loading"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
-import { useUserInput } from "../../../../common/hooks/useUserInput"
 import {
   emailValidator,
   passwordValidator,
 } from "../../signUp/utils/validation"
-import SignUpFeedback from "../../../../common/views/Feedback"
 import useSignInMutaion from "../hooks/useSIgnInMutaion"
+import Button from "@/common/views/Button"
+import { FaRegArrowAltCircleLeft } from "react-icons/fa"
+import SignInEmailInput from "./SignInEmailInput"
+import SignInPasswordInput from "./SignInPasswordInput"
 
 const SignInForm = () => {
-  const { routeTo } = useNavigations()
+  const { routeTo, prevRoute } = useNavigations()
   const dispatch = useAppDispatch()
-
-  const {
-    value: emailInputValue,
-    handleValueChange: handleEmailInputValueChange,
-    handleInputBlur: handleEmailInputBlur,
-    hasError: hasErrorEmail,
-    isValid: isEmailValid,
-    reset: resetEmail,
-  } = useUserInput(emailValidator)
-
-  const {
-    value: passwordInputValue,
-    handleValueChange: handlePasswordInputValueChange,
-    handleInputBlur: handlePasswordInputBlur,
-    hasError: hasErrorPassword,
-    isValid: isPasswordValid,
-    reset: resetPassword,
-  } = useUserInput(passwordValidator)
 
   const { isLoading: isSignInLoading, mutateAsync: signInMutateAsync } =
     useSignInMutaion()
 
-  const testSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSignInSubmit = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
     event.preventDefault()
+
+    const formData = new FormData(event.currentTarget)
+
+    const emailValue = formData.get("email") as string
+    const passwordValue = formData.get("password") as string
+
+    const isEmailValid = emailValidator(emailValue)
+    const isPasswordValid = passwordValidator(passwordValue)
 
     if (!isEmailValid || !isPasswordValid || isSignInLoading) return
 
     const signInRes = await signInMutateAsync({
-      email: emailInputValue,
-      password: passwordInputValue,
+      email: emailValue,
+      password: passwordValue,
     })
 
     if (signInRes?.error) {
@@ -55,66 +48,46 @@ const SignInForm = () => {
       )
     }
 
-    dispatch(
-      showFeedbackModal({
-        modalContent: "로그인에 성공했습니다. 잠시 후 HOME으로 이동합니다.",
-      })
-    )
     routeTo(ROUTE.HOME)
   }
 
-  const feedbackContent = hasErrorEmail
-    ? "이메일 형식을 입력해주세요."
-    : hasErrorPassword
-    ? "영문, 숫자와 공백을 제외한 특수문자를 포함한 8~20자리를 입력해주세요."
-    : ""
   return (
-    <form onSubmit={testSubmit} className={`flexCenter flex-col mb-[50px]`}>
-      <h2 className="w-[400px] text-center text-[20px] font-bold mb-[30px] pb-[30px] border-b-[3px] border-black dark:border-white tracking-[20px]">
-        로그인
+    <form
+      onSubmit={handleSignInSubmit}
+      className={`flexCenter flex-col mb-[50px]`}
+    >
+      <Button
+        content={<FaRegArrowAltCircleLeft />}
+        onClick={() => routeTo(ROUTE.HOME)}
+        classNames="absolute top-[50px] left-[50px] text-[30px] hover:text-lightRed"
+      />
+
+      <h2 className="w-[400px] text-center text-[24px] md:text-[20px] sm:text-[18px] font-extrabold mb-[30px] pb-[30px] border-b-[3px] border-black dark:border-white tracking-[20px]">
+        LOGIN
       </h2>
 
       <div className="w-[400px] mb-[10px]">
-        <Input
-          type="text"
-          name="email"
-          id="email"
-          value={emailInputValue}
-          onChange={handleEmailInputValueChange}
-          onBlur={handleEmailInputBlur}
-          placeholder="이메일을 입력해주세요"
-          isShowFeedback={hasErrorEmail}
-        />
+        <SignInEmailInput />
       </div>
 
       <div className="w-[400px] mb-[20px]">
-        <Input
-          type="password"
-          name="password"
-          id="password"
-          value={passwordInputValue}
-          onChange={handlePasswordInputValueChange}
-          onBlur={handlePasswordInputBlur}
-          placeholder="비밀번호를 입력해주세요"
-          isShowFeedback={hasErrorPassword}
-        />
+        <SignInPasswordInput />
       </div>
 
-      <button
+      <Button
         type="submit"
-        className="w-[400px] text-[14px] tracking-[8px] h-[50px] bg-black dark:bg-white dark:text-black text-white"
-      >
-        {isSignInLoading ? (
-          <Loading
-            spinnerSize={{ height: "h-[20px]", width: "w-[20px]" }}
-            isFrame={false}
-          />
-        ) : (
-          "로그인"
-        )}
-      </button>
-
-      <SignUpFeedback classNames="h-[16px]" content={feedbackContent} />
+        classNames="w-[400px] text-[14px] tracking-[8px] h-[50px] bg-black dark:bg-white dark:text-black text-white"
+        content={
+          isSignInLoading ? (
+            <Loading
+              spinnerSize={{ height: "h-[20px]", width: "w-[20px]" }}
+              isFrame={false}
+            />
+          ) : (
+            "로그인"
+          )
+        }
+      />
     </form>
   )
 }
