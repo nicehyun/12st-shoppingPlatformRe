@@ -37,33 +37,32 @@ const ClauseCheckbox = ({
 
   return (
     <div
-      className={`${classNames} relative p-[8px] flex items-center justify-between w-full`}
+      className={`${classNames} relative w-full mr-[10px] flex justify-between py-[8px]`}
     >
-      <span className="py-[5px] mr-[10px] flex justify-between">
-        <input
-          type="checkbox"
-          checked={isChecked}
-          name={clauseType}
-          id={clauseType}
-          className={`mr-[10px] overflow-hidden absolute top-[2px] left-[2px] w-[1px] h-[1px] border-none bg-transparent z-10 appearance-none ${peer}`}
-          readOnly
-        />
+      <input
+        type="checkbox"
+        checked={isChecked}
+        name={clauseType}
+        id={clauseType}
+        className={`mr-[10px] overflow-hidden absolute top-[2px] left-[2px] w-[1px] h-[1px] border-none bg-transparent z-10 appearance-none ${peer}`}
+        readOnly
+      />
 
-        <label
-          htmlFor={clauseType}
-          onClick={onClickClauseLabel}
-          className={`text-[14px] sm:text-[12px] md:text-[12px] min-w-[300px] inline-block cursor-pointer py-[5px] pl-[18px] after:top-1/2 after:left-[6px] after:w-[6px] after:h-[11px] after:mt-[-8px] after:absolute after:content-[''] after:border-r-[1px] after:border-b-[1px] after:rotate-45 after:border-border ${peerChecked.borderColor}`}
-        >
-          <span className="text-lightRed py-[5px]">
-            {fomatRequired(isRequired)}
-          </span>{" "}
-          {label}
-        </label>
-      </span>
+      <label
+        htmlFor={clauseType}
+        onClick={onClickClauseLabel}
+        className={`ml-[10px] text-[14px] sm:text-[12px] md:text-[12px] inline-block cursor-pointer py-[5px] pl-[18px] after:top-1/2 after:left-[6px] after:w-[6px] after:h-[11px] after:mt-[-8px] after:absolute after:content-[''] after:border-r-[1px] after:border-b-[1px] after:rotate-45 after:border-border ${peerChecked.borderColor} truncate pr-[80px]`}
+      >
+        <span className="text-lightRed py-[5px]">
+          {fomatRequired(isRequired)}
+        </span>{" "}
+        {label}
+      </label>
+
       {isClause && (
         <Button
           onClick={onClickDetailClause}
-          classNames="py-[5px] text-[14px] sm:text-[12px] md:text-[12px] text-lightGray after:content-[''] after:inline-block after:w-0 after:h-0 after:ml-[5px] after:border-t-[5px] after:border-t-transparent after:border-b-[5px] after:border-b-transparent after:border-r-[8px] after:border-r-lightGray after:rotate-180 flexCenter"
+          classNames="absolute top-1/2 right-0 transform -translate-y-1/2 py-[5px] text-[12px] sm:text-[10px] md:text-[10px] text-lightGray after:content-[''] after:inline-block after:w-0 after:h-0 after:ml-[5px] after:border-t-[5px] after:border-t-transparent after:border-b-[5px] after:border-b-transparent after:border-r-[8px] after:border-r-lightGray after:rotate-180 flexCenter"
           content="약관보기"
         />
       )}
