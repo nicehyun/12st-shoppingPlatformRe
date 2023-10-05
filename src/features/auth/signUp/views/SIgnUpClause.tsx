@@ -2,25 +2,38 @@
 
 import ClauseCheckbox from "@/common/views/ClauseCheckbox"
 import { showBasicModal } from "@/redux/features/modalSlice"
-import {
-  toggleAgreeToAllClause,
-  toggleAgreeToAgeClause,
-  toggleAgreeToMarketingClause,
-  toggleAgreeToPrivacyClause,
-  toggleAgreeToTermClause,
-  selectSignUpClauseState,
-} from "@/redux/features/signUpSlice"
-import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import MarketingClause from "./clause/MarketingClause"
-import SignupCollectionOfUserInfoClause from "./clause/SignupCollectionOfUserInfoClause"
-import TermClause from "./clause/TermClause"
 
-const SignUpClause = () => {
-  const { age, marketing, privacy, term, all } = useAppSelector(
-    selectSignUpClauseState
-  )
+import { useAppDispatch } from "@/redux/hooks"
 
+export interface ISignUpClause {
+  clause: {
+    all: boolean
+    age: boolean
+    term: boolean
+    privacy: boolean
+    marketing: boolean
+  }
+  toggleClauseCheck: {
+    toggleAllCheck: () => void
+    toggleAgeClauseCheck: () => void
+    toggleTermClauseCheck: () => void
+    togglePrivacyClauseCheck: () => void
+    toggleMarketingClauseCheck: () => void
+  }
+}
+
+const SignUpClause = ({ clause, toggleClauseCheck }: ISignUpClause) => {
   const dispatch = useAppDispatch()
+
+  const { all, age, marketing, privacy, term } = clause
+
+  const {
+    toggleAllCheck,
+    toggleAgeClauseCheck,
+    toggleMarketingClauseCheck,
+    togglePrivacyClauseCheck,
+    toggleTermClauseCheck,
+  } = toggleClauseCheck
 
   const handleTermClauseClick = () => {
     dispatch(
@@ -59,7 +72,7 @@ const SignUpClause = () => {
 
       <div className="flex-grow">
         <ClauseCheckbox
-          clauseType="all"
+          clauseType="signUp-clause-all"
           label="모두 동의 (선택 정보 포함)"
           isClause={false}
           classNames="border-b-[1px] border-lightBlack"
@@ -68,7 +81,7 @@ const SignUpClause = () => {
           peerChecked={{
             borderColor: "peer-checked/all:after:border-lightRed",
           }}
-          onClickClauseLabel={() => dispatch(toggleAgreeToAllClause())}
+          onClickClauseLabel={toggleAllCheck}
         />
 
         <ClauseCheckbox
@@ -81,7 +94,7 @@ const SignUpClause = () => {
           peerChecked={{
             borderColor: "peer-checked/age:after:border-lightRed",
           }}
-          onClickClauseLabel={() => dispatch(toggleAgreeToAgeClause())}
+          onClickClauseLabel={toggleAgeClauseCheck}
         />
 
         <ClauseCheckbox
@@ -94,7 +107,7 @@ const SignUpClause = () => {
           peerChecked={{
             borderColor: "peer-checked/term:after:border-lightRed",
           }}
-          onClickClauseLabel={() => dispatch(toggleAgreeToTermClause())}
+          onClickClauseLabel={toggleTermClauseCheck}
           onClickDetailClause={handleTermClauseClick}
         />
 
@@ -108,7 +121,7 @@ const SignUpClause = () => {
           peerChecked={{
             borderColor: "peer-checked/privacy:after:border-lightRed",
           }}
-          onClickClauseLabel={() => dispatch(toggleAgreeToPrivacyClause())}
+          onClickClauseLabel={togglePrivacyClauseCheck}
           onClickDetailClause={handlePrivacyClauseClick}
         />
 
@@ -122,7 +135,7 @@ const SignUpClause = () => {
           peerChecked={{
             borderColor: "peer-checked/marketing:after:border-lightRed",
           }}
-          onClickClauseLabel={() => dispatch(toggleAgreeToMarketingClause())}
+          onClickClauseLabel={toggleMarketingClauseCheck}
           onClickDetailClause={handleMarketingClauseClick}
         />
       </div>

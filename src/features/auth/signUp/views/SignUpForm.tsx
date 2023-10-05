@@ -8,17 +8,15 @@ import {
   selectSignUpActiveStepState,
   selectSignUpCheckState,
   selectSignUpIsValidState,
-  selectSignUpClauseState,
 } from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { useEffect } from "react"
 import { useFeedbackModal } from "../../../../common/hooks/useFeedbackModal"
+import { useSignUpClasue } from "../hooks/useSignUpClasue"
 import useSignUpMutation from "../hooks/useSignUpMutation"
-import SignUpAddressInput from "./SignUpAddressInput"
 import SignUpBirthInput from "./SignUpBirthInput"
-import SignUpClause from "./SIgnUpClause"
+import SignUpClause, { ISignUpClause } from "./SIgnUpClause"
 import SignUpEmailInput from "./SignUpEmailInput"
-import SignUpGenderInput from "./SignUpGenderInput"
 import SignUpNameInput from "./SignUpNameInput"
 import SignUpPasswordInput from "./SignUpPasswordInput"
 import SignUpPhoneVerificationInput from "./SignUpPhoneVerificationInput"
@@ -29,12 +27,20 @@ const SignUpForm = () => {
   const dispatch = useAppDispatch()
   const { showFeedbackModalWithContent } = useFeedbackModal()
 
+  const { checkedClaseState, toggleClauseCheck } = useSignUpClasue()
+
+  const SignUpClauseProps: ISignUpClause = {
+    clause: checkedClaseState,
+    toggleClauseCheck: toggleClauseCheck,
+  }
+
   const {
-    age: isAgeAgree,
-    privacy: isPrivacyAgree,
-    term: isTermAgree,
-    marketing,
-  } = useAppSelector(selectSignUpClauseState)
+    age: isAgeClauseCheck,
+    term: isTermClauseCheck,
+    privacy: isPrivacyClauseCheck,
+    marketing: isMarketingClauseCheck,
+  } = checkedClaseState
+
   const {
     email: isEmailCheck,
     address: isAddressCheck,
@@ -51,18 +57,28 @@ const SignUpForm = () => {
   const { isLoading: isSignUpLoading, mutateAsync: signUpMutateAsync } =
     useSignUpMutation()
 
+  const testSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    const formData = new FormData(event.currentTarget)
+    console.log(formData.get("signUp-clause-all"))
+  }
+
   const handleSignUpSubmit = async (
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault()
 
-    if (!isAgeAgree || !isPrivacyAgree || !isTermAgree) return
+    if (!isAgeClauseCheck || !isPrivacyClauseCheck || !isTermClauseCheck) return
 
     if (!isEmailCheck || !isPasswordValid || !isNameValid || !isPhoneCheck)
       return
 
     const formData = new FormData(event.currentTarget)
-    formData.append("marketing", `${marketing}`)
+    console.log(
+      formData.append("signUp-clause-all", `${isMarketingClauseCheck}`)
+    )
+    formData.append("marketing", `${isMarketingClauseCheck}`)
 
     const response = (await signUpMutateAsync(formData)) as Response
 
@@ -93,7 +109,7 @@ const SignUpForm = () => {
     activeStep: selectSignUpActiveStep,
     stages: ["약관동의", "이메일", "비밀번호", "이름", "본인인증"],
     stageContents: [
-      <SignUpClause key="clause" />,
+      <SignUpClause key="clause" {...SignUpClauseProps} />,
       <SignUpEmailInput key="email" />,
       <SignUpPasswordInput key="password" />,
       <SignUpNameInput key="name" />,
@@ -101,10 +117,11 @@ const SignUpForm = () => {
 
       <SignUpBirthInput key="birth" />,
     ],
+
     firstButtonText: "동의하고 가입하기",
     finishButtonText: "회원가입",
     disabledNextButton: [
-      !isAgeAgree || !isPrivacyAgree || !isTermAgree,
+      !isAgeClauseCheck || !isPrivacyClauseCheck || !isTermClauseCheck,
       !isEmailCheck,
       !isPasswordValid,
       !isNameValid,
@@ -126,9 +143,10 @@ const SignUpForm = () => {
 
   return (
     <form
-      onSubmit={handleSignUpSubmit}
+      onSubmit={testSubmit}
       className="sm:w-[400px] md:w-[400px] w-4/5 max-w-[800px] mx-auto h-[500px]"
     >
+      <button type="submit">sad</button>
       <h2 className="mb-[20px] text-[20px] font-bold text-center">회원가입</h2>
 
       <Stage {...stageProps} />
