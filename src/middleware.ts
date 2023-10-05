@@ -7,8 +7,8 @@ export { default } from "next-auth/middleware"
 export async function middleware(request: NextRequest) {
   const pageList = [
     "/",
-    "signIn",
-    "signUp",
+    "/auth/signIn",
+    "/auth/signUp",
     "/cart",
     "/checkout",
     "/checkoutConfirmed",
