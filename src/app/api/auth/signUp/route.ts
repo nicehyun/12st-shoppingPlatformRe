@@ -1,5 +1,5 @@
 import { UserInfo } from "@/common/types/user"
-import { addUserInfo } from "@/firebase/firestore/user"
+import { signUpAPI } from "@/features/auth/signUp/models/signUpApi"
 
 import bcrypt from "bcrypt"
 import { NextResponse } from "next/server"
@@ -15,7 +15,7 @@ export async function POST(request: Request) {
     marketingClause: formData.get("marketing") === "on",
   }
 
-  const response = await addUserInfo(userInfo)
+  const response = await signUpAPI.addUserInfo(userInfo)
 
   return NextResponse.json(response)
 }

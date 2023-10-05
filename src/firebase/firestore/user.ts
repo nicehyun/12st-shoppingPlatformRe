@@ -50,29 +50,29 @@ export const findUserEmailWithNameAndPassword = async (
   }
 }
 
-export const addUserInfo = async (data: UserInfo) => {
-  const userInfoIncludingMile = { ...data, mile: 0 }
+// export const addUserInfo = async (data: UserInfo) => {
+//   const userInfoIncludingMile = { ...data, mile: 0 }
 
-  try {
-    await setDoc(
-      doc(db, "user", userInfoIncludingMile.email),
-      userInfoIncludingMile,
-      {
-        merge: true,
-      }
-    )
+//   try {
+//     await setDoc(
+//       doc(db, "user", userInfoIncludingMile.email),
+//       userInfoIncludingMile,
+//       {
+//         merge: true,
+//       }
+//     )
 
-    return { result: "success" }
-  } catch (error) {
-    const { response } = error as unknown as AxiosError
+//     return { result: "success" }
+//   } catch (error) {
+//     const { response } = error as unknown as AxiosError
 
-    if (response) {
-      throw Error(`🚨firebase setDocs API: ${error}`)
-    }
+//     if (response) {
+//       throw Error(`🚨firebase setDocs API: ${error}`)
+//     }
 
-    throw Error(`🚨addUserInfo firebase addUser API error : ${error}`)
-  }
-}
+//     throw Error(`🚨addUserInfo firebase addUser API error : ${error}`)
+//   }
+// }
 
 export const getUserMile = async (email: string) => {
   if (email === "") {
