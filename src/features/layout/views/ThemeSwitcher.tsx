@@ -1,6 +1,8 @@
 "use client"
+import Button from "@/common/views/Button"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
+import { MdDarkMode, MdLightMode } from "react-icons/md"
 
 const ThemeSwitcher = () => {
   const [mounted, setMounted] = useState(false)
@@ -14,14 +16,10 @@ const ThemeSwitcher = () => {
     return null
   }
 
-  return (
-    <div className="fixed bottom-10 right-3 bg-lightRed">
-      <p>now theme : {theme}</p>
-      <button onClick={() => setTheme("light")}>light mode</button>
-      <br />
-      <button onClick={() => setTheme("dark")}>dark mode</button>
-    </div>
-  )
+  if (theme === "light")
+    return <Button onClick={() => setTheme("dark")} content={<MdDarkMode />} />
+
+  return <Button onClick={() => setTheme("light")} content={<MdLightMode />} />
 }
 
 export default ThemeSwitcher

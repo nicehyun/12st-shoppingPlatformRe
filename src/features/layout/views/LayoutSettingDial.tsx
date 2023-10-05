@@ -9,23 +9,25 @@ import { AiFillSetting } from "react-icons/ai"
 import { MdDarkMode, MdLightMode } from "react-icons/md"
 import { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
+import ThemeSwitcher from "./ThemeSwitcher"
 
 const LayoutSettingDial = () => {
   const [mounted, setMounted] = useState(false)
-  const { theme, setTheme } = useTheme()
+  // const { theme, setTheme } = useTheme()
   const [gender, setGender] = useState("all")
+  // console.log(theme)
 
-  const toggleTheme = () => {
-    if (theme === "light") {
-      setTheme("dark")
-    }
+  // const toggleTheme = () => {
+  //   if (theme === "light") {
+  //     setTheme("dark")
+  //   }
 
-    if (theme === "dark") {
-      setTheme("light")
-    }
+  //   if (theme === "dark") {
+  //     setTheme("light")
+  //   }
 
-    return
-  }
+  //   return
+  // }
 
   const chageGender = () => {
     if (gender === "all") {
@@ -45,9 +47,8 @@ const LayoutSettingDial = () => {
 
   const actions = [
     {
-      icon: theme === "light" ? <MdLightMode /> : <MdDarkMode />,
+      icon: <ThemeSwitcher />,
       name: "LightMode / DarkMode",
-      action: toggleTheme,
     },
 
     {
@@ -60,7 +61,7 @@ const LayoutSettingDial = () => {
           <span className="text-[12px]">여성</span>
         ),
       name: "전체 / 남성 / 여성",
-      action: chageGender,
+      // action: chageGender,
     },
   ]
 
@@ -114,7 +115,6 @@ const LayoutSettingDial = () => {
                 fontSize: "16px",
               },
             }}
-            onClick={action.action}
             className="dark:bg-white dark:text-black"
           />
         ))}
