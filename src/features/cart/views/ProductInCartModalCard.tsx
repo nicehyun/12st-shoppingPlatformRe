@@ -7,6 +7,7 @@ import {
   discountedProductPrice,
   numberToLocaleString,
 } from "@/common/utils/price"
+import Loading from "@/common/views/Loading"
 
 interface IProductInCartModalCard {
   productInfo: Product
@@ -22,11 +23,20 @@ const ProductInCartModalCard = ({ productInfo }: IProductInCartModalCard) => {
 
   return (
     <li className="relative mb-[10px] mr-[8px] pr-[5px] flex border-[1px] bg-white border-lightGray rounded-[5px]">
-      <Button
-        onClick={onClickRemoveProductFromCart}
-        classNames="absolute right-[2px] top-[2px] text-border"
-        content={<MdOutlineClose />}
-      />
+      {removeMutaion.isLoading ? (
+        <div className="absolute right-[2px] top-[2px] text-border">
+          <Loading
+            spinnerSize={{ width: "w-[15px]", height: "h-[15px]" }}
+            isFrame={false}
+          />
+        </div>
+      ) : (
+        <Button
+          onClick={onClickRemoveProductFromCart}
+          classNames="absolute right-[2px] top-[2px] text-border"
+          content={<MdOutlineClose />}
+        />
+      )}
 
       <div className="w-[90px] h-[90px] rounded-l-[5px] border-r-[1px] border-border overflow-hidden mr-[8px]">
         <Image
