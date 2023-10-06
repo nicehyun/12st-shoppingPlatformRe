@@ -121,7 +121,6 @@ const SignUpForm = () => {
 
     showFeedbackModalWithContent("회원가입을 축하합니다🎉")
     dispatch(resetSignUpState())
-
     setActiveStep(0)
     routeTo(ROUTE.HOME)
   }
