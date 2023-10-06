@@ -80,13 +80,6 @@ const SignUpForm = () => {
     resetClauseCheck()
   }
 
-  const testSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-
-    const formData = new FormData(event.currentTarget)
-    console.log(formData.get("signUp-clause-all"))
-  }
-
   const handleSignUpSubmit = async (
     event: React.FormEvent<HTMLFormElement>
   ) => {
@@ -151,12 +144,12 @@ const SignUpForm = () => {
     firstButtonText: "동의하고 가입하기",
     finishButtonText: "회원가입",
     disabledNextButton: [
-      // !isAgeClauseCheck || !isPrivacyClauseCheck || !isTermClauseCheck,
-      // !verificationCheckedState.email,
-      // !isPasswordValid,
-      // !isNameValid,
-      // !verificationCheckedState.phone,
-      // isSignUpLoading,
+      !isAgeClauseCheck || !isPrivacyClauseCheck || !isTermClauseCheck,
+      !verificationCheckedState.email,
+      !isPasswordValid,
+      !isNameValid,
+      !verificationCheckedState.phone,
+      isSignUpLoading,
     ],
     onClickBackButton: handleBackStepButtonClick,
     onClickNextButton: handleNextStepButtonClick,
