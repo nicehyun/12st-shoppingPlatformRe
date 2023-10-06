@@ -10,7 +10,7 @@ type UserInputType = "email" | "phone" | "verificationPhone"
 
 interface ISignUpVerificationInput {
   type: UserInputType
-  isChecked?: boolean
+  isChecked: boolean
   isLoading: boolean
   inputValue: string
   onChangeInputValue: (event: ChangeEvent<HTMLInputElement>) => void
