@@ -9,12 +9,10 @@ export type isValid = {
 
 type InitialSignUpState = {
   isValid: isValid
-  activeStep: number
 }
 
 const initialSignUpState: InitialSignUpState = {
   isValid: { password: false, name: false },
-  activeStep: 0,
 }
 
 const signUpSlice = createSlice({
@@ -37,12 +35,6 @@ const signUpSlice = createSlice({
     resetPasswordValid(state) {
       state.isValid.password = false
     },
-    nextStep(state) {
-      state.activeStep = state.activeStep + 1
-    },
-    resetStep(state) {
-      state.activeStep = 0
-    },
   },
 })
 
@@ -52,13 +44,9 @@ export const {
   validateName,
   resetPasswordValid,
   resetNameValid,
-  nextStep,
-  resetStep,
 } = signUpSlice.actions
 
 export const selectSignUpIsValidState = (state: RootState) =>
   state.signUp.isValid
-export const selectSignUpActiveStepState = (state: RootState) =>
-  state.signUp.activeStep
 
 export default signUpSlice.reducer

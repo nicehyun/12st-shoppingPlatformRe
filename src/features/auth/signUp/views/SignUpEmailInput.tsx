@@ -1,7 +1,5 @@
 "use client"
 
-import { selectSignUpActiveStepState } from "@/redux/features/signUpSlice"
-import { useAppSelector } from "@/redux/hooks"
 import { ChangeEvent, useEffect } from "react"
 import { useEmailDuplicationCheckMutaion } from "../hooks/useEmailDuplicationCheckMutaion"
 import { useFeedbackModal } from "../../../../common/hooks/useFeedbackModal"
@@ -12,6 +10,7 @@ import SignUpInputLayout from "./SignUpInputLayout"
 import SignUpVerificationInput from "./SignUpVerificationInput"
 
 export interface ISignUpEmailInput {
+  activeStep: number
   isVerificationChecked: boolean
   checkEmailDuplication: () => void
   resetEmailDuplicateCheck: () => void
@@ -21,9 +20,8 @@ const SignUpEmailInput = ({
   resetEmailDuplicateCheck,
   checkEmailDuplication,
   isVerificationChecked,
+  activeStep,
 }: ISignUpEmailInput) => {
-  const selectSignUpActiveStep = useAppSelector(selectSignUpActiveStepState)
-
   const { showFeedbackModalWithContent } = useFeedbackModal()
 
   const {
@@ -58,11 +56,11 @@ const SignUpEmailInput = ({
   }
 
   useEffect(() => {
-    if (selectSignUpActiveStep === 0) {
+    if (activeStep === 0) {
       reset()
       return
     }
-  }, [selectSignUpActiveStep])
+  }, [activeStep, reset])
 
   return (
     <SignUpInputLayout headingText="로그인에 사용할 이메일을 입력해주세요">

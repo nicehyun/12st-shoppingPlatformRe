@@ -2,14 +2,11 @@
 import { ROUTE, useNavigations } from "@/common/hooks/useNavigations"
 import Stage, { IStage } from "@/common/views/Stage"
 import {
-  nextStep,
   resetSignUpState,
-  resetStep,
-  selectSignUpActiveStepState,
   selectSignUpIsValidState,
 } from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useFeedbackModal } from "../../../../common/hooks/useFeedbackModal"
 import { useSignUpClasue } from "../hooks/useSignUpClasue"
 import useSignUpMutation from "../hooks/useSignUpMutation"
@@ -29,6 +26,7 @@ const SignUpForm = () => {
   const dispatch = useAppDispatch()
   const { showFeedbackModalWithContent } = useFeedbackModal()
 
+  const [activeStep, setActiveStep] = useState(0)
   const { checkedClaseState, toggleClauseCheck, resetClauseCheck } =
     useSignUpClasue()
   const {
@@ -40,12 +38,14 @@ const SignUpForm = () => {
   } = useSignUpVerificationCheck()
 
   const signUpEmailInputProps: ISignUpEmailInput = {
+    activeStep,
     isVerificationChecked: verificationCheckedState.email,
     checkEmailDuplication,
     resetEmailDuplicateCheck,
   }
 
   const signUpPhoneVerificationInputProps: ISignUpPhoneVerificationInput = {
+    activeStep,
     isVerificationChecked: verificationCheckedState.phone,
     checkPhoneVerification,
   }
@@ -66,10 +66,19 @@ const SignUpForm = () => {
     selectSignUpIsValidState
   )
 
-  const selectSignUpActiveStep = useAppSelector(selectSignUpActiveStepState)
-
   const { isLoading: isSignUpLoading, mutateAsync: signUpMutateAsync } =
     useSignUpMutation()
+
+  const handleNextStepButtonClick = () => {
+    setActiveStep((prev) => prev + 1)
+  }
+
+  const handleBackStepButtonClick = () => {
+    setActiveStep(0)
+    resetEmailDuplicateCheck()
+    resetPhoneVerificationCheck()
+    resetClauseCheck()
+  }
 
   const testSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -105,35 +114,26 @@ const SignUpForm = () => {
       showFeedbackModalWithContent(
         "회원가입에 실패했습니다. 오류가 계속되면 고객센터에 문의해주세요."
       )
-      dispatch(resetStep())
+
+      setActiveStep(0)
       return
     }
 
     showFeedbackModalWithContent("회원가입을 축하합니다🎉")
     dispatch(resetSignUpState())
-    dispatch(resetStep())
+
+    setActiveStep(0)
     routeTo(ROUTE.HOME)
   }
 
-  const handleStageNextClick = () => {
-    dispatch(nextStep())
-  }
-
-  const handleStageBackClick = () => {
-    resetEmailDuplicateCheck()
-    resetPhoneVerificationCheck()
-    resetClauseCheck()
-    dispatch(resetStep())
-  }
-
   const stageProps: IStage = {
-    activeStep: selectSignUpActiveStep,
+    activeStep: activeStep,
     stages: ["약관동의", "이메일", "비밀번호", "이름", "본인인증"],
     stageContents: [
       <SignUpClause key="clause" {...signUpClauseProps} />,
       <SignUpEmailInput key="email" {...signUpEmailInputProps} />,
-      <SignUpPasswordInput key="password" />,
-      <SignUpNameInput key="name" />,
+      <SignUpPasswordInput key="password" activeStep={activeStep} />,
+      <SignUpNameInput key="name" activeStep={activeStep} />,
       <SignUpPhoneVerificationInput
         key="phone"
         {...signUpPhoneVerificationInputProps}
@@ -150,15 +150,14 @@ const SignUpForm = () => {
       !verificationCheckedState.phone,
       isSignUpLoading,
     ],
-    onClickBackButton: handleStageBackClick,
-    onClickNextButton: handleStageNextClick,
+    onClickBackButton: handleBackStepButtonClick,
+    onClickNextButton: handleNextStepButtonClick,
     isFinishLoading: isSignUpLoading,
   }
 
   useEffect(() => {
     return () => {
       dispatch(resetSignUpState())
-      dispatch(resetStep())
     }
   }, [dispatch])
 

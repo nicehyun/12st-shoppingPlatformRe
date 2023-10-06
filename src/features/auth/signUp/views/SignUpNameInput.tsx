@@ -1,9 +1,5 @@
-import {
-  resetNameValid,
-  selectSignUpActiveStepState,
-  validateName,
-} from "@/redux/features/signUpSlice"
-import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { resetNameValid, validateName } from "@/redux/features/signUpSlice"
+import { useAppDispatch } from "@/redux/hooks"
 import { useEffect } from "react"
 import { useUserInput } from "../../../../common/hooks/useUserInput"
 import { nameValidator } from "../utils/validation"
@@ -11,9 +7,12 @@ import SignUpFeedback from "../../../../common/views/Feedback"
 import SignUpInput from "./SignUpInput"
 import SignUpInputLayout from "./SignUpInputLayout"
 
-const SignUpNameInput = () => {
+interface ISignUpNameInput {
+  activeStep: number
+}
+
+const SignUpNameInput = ({ activeStep }: ISignUpNameInput) => {
   const dispatch = useAppDispatch()
-  const selectSignUpActiveStep = useAppSelector(selectSignUpActiveStepState)
 
   const {
     value: nameInputValue,
@@ -25,11 +24,11 @@ const SignUpNameInput = () => {
   } = useUserInput(nameValidator)
 
   useEffect(() => {
-    if (selectSignUpActiveStep === 0) {
+    if (activeStep === 0) {
       reset()
       return
     }
-  }, [selectSignUpActiveStep])
+  }, [activeStep, reset])
 
   useEffect(() => {
     dispatch(resetNameValid())

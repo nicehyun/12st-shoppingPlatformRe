@@ -1,7 +1,5 @@
 "use client"
 
-import { selectSignUpActiveStepState } from "@/redux/features/signUpSlice"
-import { useAppSelector } from "@/redux/hooks"
 import { useEffect, useState } from "react"
 import { useFeedbackModal } from "../../../../common/hooks/useFeedbackModal"
 
@@ -16,6 +14,7 @@ import { useRequestVerificationMutation } from "../hooks/useRequestVerificationM
 
 import { verifyPhoneAPI } from "../models/verifyPhoneAPI"
 export interface ISignUpPhoneVerificationInput {
+  activeStep: number
   isVerificationChecked: boolean
   checkPhoneVerification: () => void
 }
@@ -23,9 +22,8 @@ export interface ISignUpPhoneVerificationInput {
 const SignUpPhoneVerificationInput = ({
   checkPhoneVerification,
   isVerificationChecked,
+  activeStep,
 }: ISignUpPhoneVerificationInput) => {
-  const selectSignUpActiveStep = useAppSelector(selectSignUpActiveStepState)
-
   const { showFeedbackModalWithContent } = useFeedbackModal()
   const [isShowVerificationCodeInput, setIsShowVerificationCodeInput] =
     useState(false)
@@ -92,11 +90,11 @@ const SignUpPhoneVerificationInput = ({
     : "인증하기"
 
   useEffect(() => {
-    if (selectSignUpActiveStep === 0) {
+    if (activeStep === 0) {
       reset()
       return
     }
-  }, [selectSignUpActiveStep])
+  }, [activeStep, reset])
 
   return (
     <SignUpInputLayout headingText="본인인증을 진행해주세요">
