@@ -125,19 +125,6 @@ const ProductCard = ({ productInfo }: IProductCard) => {
         <span className="ml-[3px] text-[10px]">{reviewCount}</span>
       </div>
 
-      {/* {isExistedProductInCart ? (
-        <Button
-          onClick={onClickRemoveProductFromCart}
-          classNames="text-[18px] sm:text-[16px] absolute right-[8px] bottom-[2px]"
-          content={<BsFillCartDashFill />}
-        />
-      ) : (
-        <Button
-          onClick={onClickAddProductInCart}
-          classNames="text-[18px] sm:text-[16px] absolute right-[8px] bottom-[2px]"
-          content={<BsFillCartPlusFill />}
-        />
-      )} */}
       {renderComponent()}
     </div>
   )
