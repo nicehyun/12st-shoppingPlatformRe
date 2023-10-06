@@ -63,6 +63,7 @@ const ProductListInCart = () => {
     checkedProductList: ProductsInCart
   ) => {
     if (checkedProductList.length === 0) return
+    if (checkedProductRemoveMutaion.isLoading) return
 
     await checkedProductRemoveMutaion.mutateAsync(checkedProductList)
     handleCheckedProductListEmpty()

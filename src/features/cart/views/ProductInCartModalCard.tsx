@@ -18,6 +18,7 @@ const ProductInCartModalCard = ({ productInfo }: IProductInCartModalCard) => {
   const removeMutaion = useRemoveFromCartMutation()
 
   const onClickRemoveProductFromCart = () => {
+    if (removeMutaion.isLoading) return
     removeMutaion.mutate(id)
   }
 

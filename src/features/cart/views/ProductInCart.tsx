@@ -1,6 +1,7 @@
 import { numberToLocaleString } from "@/common/utils/price"
 import Image from "next/image"
 import { ProductInCart } from "../types/cart"
+import { addDaysToCurrentDate } from "../utils/date"
 import ProductInCartController from "./ProductInCartController"
 
 interface IProductInCart {
@@ -40,7 +41,7 @@ const ProductInCart = ({
           />
           {/* TODO : 유틸리티 함수로 날짜 수정하기 */}
           <span className="absolute left-[2px] top-[2px] p-[4px] text-[10px] md:text-[8px] sm:text-[8px] bg-black text-white rounded-[8px]">
-            12/27 예약배송
+            {addDaysToCurrentDate(3)} 예약배송
           </span>
         </div>
 

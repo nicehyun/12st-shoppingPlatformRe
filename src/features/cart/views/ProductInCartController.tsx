@@ -24,6 +24,8 @@ const ProductInCartController = ({
   const removeMutaion = useRemoveFromCartMutation()
 
   const onClickRemoveProductFromCart = async () => {
+    if (removeMutaion.isLoading) return
+
     await removeMutaion.mutateAsync(productInfo.id)
     onEmptyCheckedProductList()
   }
