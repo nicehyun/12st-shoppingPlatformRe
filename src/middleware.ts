@@ -35,7 +35,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/", request.url))
 
   if (isWithoutAuth && !token)
-    return NextResponse.rewrite(new URL("/auth/signIn", request.url))
+    return NextResponse.redirect(new URL("/auth/signIn", request.url))
 
   if (request.nextUrl.pathname.startsWith("/auth/signIn") && !!token)
     return NextResponse.redirect(new URL("/", request.url))
