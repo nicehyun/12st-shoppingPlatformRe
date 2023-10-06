@@ -67,6 +67,7 @@ const SignUpEmailInput = ({
   return (
     <SignUpInputLayout headingText="로그인에 사용할 이메일을 입력해주세요">
       <SignUpVerificationInput
+        isChecked={isVerificationChecked}
         isDisabledButton={
           !isEmailValid || isVerificationChecked || isEmailDuplicateCheckLoading
         }

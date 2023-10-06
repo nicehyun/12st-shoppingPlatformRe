@@ -8,8 +8,6 @@ import Loading from "@/common/views/Loading"
 
 type UserInputType = "email" | "phone" | "verificationPhone"
 
-// TODO : isChecked, isLoading, onClick, disabled 타입 수정(?)
-
 interface ISignUpVerificationInput {
   type: UserInputType
   isChecked?: boolean
@@ -37,6 +35,7 @@ const SignUpVerificationInput = ({
   isShowFeedback,
   isReadOnly,
 }: ISignUpVerificationInput) => {
+  console.log(isChecked)
   let inputType: InputType = "text",
     placeholder = "",
     preVerificationButtonText = "",
