@@ -4,7 +4,7 @@ import { selectSignUpActiveStepState } from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { useEffect, useState } from "react"
 import { useFeedbackModal } from "../../../../common/hooks/useFeedbackModal"
-import useRequestVerificationMutation from "../hooks/useRequestVerificationMutation"
+
 import useSendVerificationCodeMutation from "../hooks/useSendVerificationCodeMutation"
 import { useUserInput } from "../../../../common/hooks/useUserInput"
 import { phoneValidator } from "../utils/validation"
@@ -12,6 +12,9 @@ import SignUpFeedback from "../../../../common/views/Feedback"
 import SignUpInputLayout from "./SignUpInputLayout"
 import SignUpVerificationInput from "./SignUpVerificationInput"
 import { BsFileLock2 } from "react-icons/bs"
+import { useRequestVerificationMutation } from "../hooks/useRequestVerificationMutation"
+import Timer from "@/common/views/TImer"
+import { verifyPhoneAPI } from "../models/verifyPhoneAPI"
 
 export interface ISignUpPhoneVerificationInput {
   isVerificationChecked: boolean
@@ -22,7 +25,6 @@ const SignUpPhoneVerificationInput = ({
   checkPhoneVerification,
   isVerificationChecked,
 }: ISignUpPhoneVerificationInput) => {
-  const dispatch = useAppDispatch()
   const selectSignUpActiveStep = useAppSelector(selectSignUpActiveStepState)
 
   const { showFeedbackModalWithContent } = useFeedbackModal()
@@ -39,20 +41,29 @@ const SignUpPhoneVerificationInput = ({
     reset,
   } = useUserInput(phoneValidator)
 
-  const {
-    isLoading: isRequestVerificationLoading,
-    mutateAsync: requestVerificationMutateAsync,
-  } = useRequestVerificationMutation(phoneInputValue)
+  const { isRequestVerificationLoading, requestVerificationMutateAsync } =
+    useRequestVerificationMutation()
 
   const {
     isLoading: isSendVerificationCodeLoading,
     mutateAsync: sendVerificationCodeMutateAsync,
   } = useSendVerificationCodeMutation(phoneInputValue, verificationCode)
 
+  const hanelVerficationCodeInputHide = () => {
+    setIsShowVerificationCodeInput(false)
+    setVerificationCode("")
+  }
+
+  const handleVerificationCodeTimerEnd = () => {
+    hanelVerficationCodeInputHide()
+    verifyPhoneAPI.removeVerificationId(phoneInputValue)
+  }
+
   const handlePhoneVerificationRequest = async () => {
     if (!isPhoneValid || isVerificationChecked) return
+    hanelVerficationCodeInputHide()
 
-    await requestVerificationMutateAsync()
+    await requestVerificationMutateAsync({ phoneInputValue })
 
     showFeedbackModalWithContent("인증 번호가 발송되었습니다.")
 
@@ -70,14 +81,20 @@ const SignUpPhoneVerificationInput = ({
 
     showFeedbackModalWithContent("본인인증이 완료되었습니다.")
 
-    setIsShowVerificationCodeInput(false)
+    hanelVerficationCodeInputHide()
     checkPhoneVerification()
   }
+
+  const requertVerificationCodeButtonContent = isVerificationChecked
+    ? "인증완료"
+    : isShowVerificationCodeInput
+    ? "재요청"
+    : "인증하기"
 
   useEffect(() => {
     if (selectSignUpActiveStep === 0) {
       reset()
-      setVerificationCode("")
+      // setVerificationCode("")
       return
     }
   }, [selectSignUpActiveStep])
@@ -85,11 +102,12 @@ const SignUpPhoneVerificationInput = ({
   return (
     <SignUpInputLayout headingText="본인인증을 진행해주세요">
       <SignUpVerificationInput
+        maxLength={11}
+        placeholder="휴대폰 번호는 숫자만 입력해주세요"
+        buttonContent={requertVerificationCodeButtonContent}
         isChecked={isVerificationChecked}
-        isDisabledButton={
-          !isPhoneValid || isShowVerificationCodeInput || isVerificationChecked
-        }
-        type="phone"
+        isDisabledButton={!isPhoneValid || isVerificationChecked}
+        id="input-verificationCode_request"
         classNames="mb-[5px]"
         inputValue={phoneInputValue}
         isShowFeedback={hasErrorPhone}
@@ -107,15 +125,19 @@ const SignUpPhoneVerificationInput = ({
       )}
       {isShowVerificationCodeInput && (
         <SignUpVerificationInput
-          isChecked={isShowVerificationCodeInput}
+          maxLength={6}
+          placeholder="인증번호 6자리를 입력해주세요"
+          buttonContent="인증"
           isDisabledButton={verificationCode.length !== 6}
-          type="verificationPhone"
+          id="input-verificationCode_response"
           inputValue={verificationCode}
           onChangeInputValue={(event) =>
             setVerificationCode(event.target.value)
           }
           onClickVerificationButton={handlePhoneVerificationCodeSend}
           isLoading={isSendVerificationCodeLoading}
+          isNeedTimerComponent
+          timerExpireFn={handleVerificationCodeTimerEnd}
         />
       )}
 

@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { RootState } from "../types/store"
 
+// TODO : 제거할 state 확인하기
 export type isValid = {
   password: boolean
   name: boolean

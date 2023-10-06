@@ -3,7 +3,7 @@ import { ChangeEvent, ReactNode } from "react"
 export type InputType = "checkbox" | "text" | "password" | "number" | "tel"
 
 interface IInput {
-  type: InputType
+  type?: InputType
   name: string
   id: string
   classNames?: string
@@ -19,7 +19,7 @@ interface IInput {
 }
 
 const Input = ({
-  type,
+  type = "text",
   classNames,
   id,
   name,

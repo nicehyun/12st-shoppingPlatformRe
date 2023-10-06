@@ -58,8 +58,11 @@ export const verifyPhoneAPI = {
     }
   },
 
-  // 휴대폰 인증 요청 함수
-  requestPhoneVerification: async (phoneNumber: string) => {
+  // 휴대폰 인증 요청 함수 (인증 번호 재발송 포함)
+  requestPhoneVerification: async (
+    phoneNumber: string,
+    isRequestCode: boolean = false
+  ) => {
     phoneNumber = `+82${phoneNumber.slice(1)}`
 
     try {
@@ -72,11 +75,32 @@ export const verifyPhoneAPI = {
 
       const provider = new PhoneAuthProvider(auth)
 
-      // 전화번호 인증 요청
-      const verificationId = await provider.verifyPhoneNumber(
-        phoneNumber,
-        recaptchaVerifier
-      )
+      let verificationId = null
+
+      if (!isRequestCode) {
+        // 새로운 인증 번호를 요청하는 경우
+        verificationId = await provider.verifyPhoneNumber(
+          phoneNumber,
+          recaptchaVerifier
+        )
+      } else {
+        // 인증 번호를 재발송하는 경우
+        const existingVerificationId = await verifyPhoneAPI.getVerificationId(
+          phoneNumber
+        )
+        if (existingVerificationId) {
+          // 이전 인증 번호가 존재하는 경우에만 무효화하고 재발송
+          await verifyPhoneAPI.removeVerificationId(phoneNumber)
+          verificationId = await provider.verifyPhoneNumber(
+            phoneNumber,
+            recaptchaVerifier
+          )
+        } else {
+          console.log(`No existing verificationId found for ${phoneNumber}`)
+          return
+        }
+      }
+
       verifyPhoneAPI.saveVerificationId(phoneNumber, verificationId)
     } catch (error) {
       console.log(`🚨requestPhoneVerificationAPI error : ${error}`)
