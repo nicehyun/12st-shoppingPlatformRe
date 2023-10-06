@@ -2,15 +2,16 @@ import { UserInfo } from "@/common/types/user"
 import firebaseApp from "@/firebase/config"
 import { AxiosError } from "axios"
 import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore"
+import { IRequestSignUp } from "../types/signUp"
 
 const db = getFirestore(firebaseApp)
 
 export const signUpAPI = {
-  signUp: async (formData: FormData) => {
+  signUp: async (props: IRequestSignUp) => {
     try {
       const response = await fetch("/api/auth/signUp", {
         method: "POST",
-        body: formData,
+        body: JSON.stringify(props),
       })
 
       return response

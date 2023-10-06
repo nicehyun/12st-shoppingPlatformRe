@@ -94,7 +94,7 @@ const SignUpPhoneVerificationInput = ({
       reset()
       return
     }
-  }, [activeStep, reset])
+  }, [activeStep])
 
   return (
     <SignUpInputLayout headingText="본인인증을 진행해주세요">
@@ -104,7 +104,7 @@ const SignUpPhoneVerificationInput = ({
         buttonContent={requertVerificationCodeButtonContent}
         isChecked={isVerificationChecked}
         isDisabledButton={!isPhoneValid || isVerificationChecked}
-        id="input-verificationCode_request"
+        id="signUp-phone"
         classNames="mb-[5px]"
         inputValue={phoneInputValue}
         isShowFeedback={hasErrorPhone}

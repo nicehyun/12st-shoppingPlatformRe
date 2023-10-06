@@ -103,12 +103,22 @@ const SignUpForm = () => {
       return
 
     const formData = new FormData(event.currentTarget)
-    console.log(
-      formData.append("signUp-clause-all", `${isMarketingClauseCheck}`)
-    )
-    formData.append("marketing", `${isMarketingClauseCheck}`)
 
-    const response = (await signUpMutateAsync(formData)) as Response
+    const response = (await signUpMutateAsync({
+      userInfo: {
+        email: formData.get("signUp-email") as string,
+        password: formData.get("signUp-password") as string,
+        name: formData.get("signUp-name") as string,
+        phone: formData.get("signUp-phone") as string,
+        marketingClause: isMarketingClauseCheck,
+      },
+      requireCheck: {
+        ...verificationCheckedState,
+        ageClause: isAgeClauseCheck,
+        termClause: isTermClauseCheck,
+        privacyClause: isPrivacyClauseCheck,
+      },
+    })) as Response
 
     if (!response.ok) {
       showFeedbackModalWithContent(
@@ -121,7 +131,6 @@ const SignUpForm = () => {
 
     showFeedbackModalWithContent("회원가입을 축하합니다🎉")
     dispatch(resetSignUpState())
-    setActiveStep(0)
     routeTo(ROUTE.HOME)
   }
 
@@ -142,12 +151,12 @@ const SignUpForm = () => {
     firstButtonText: "동의하고 가입하기",
     finishButtonText: "회원가입",
     disabledNextButton: [
-      !isAgeClauseCheck || !isPrivacyClauseCheck || !isTermClauseCheck,
-      !verificationCheckedState.email,
-      !isPasswordValid,
-      !isNameValid,
-      !verificationCheckedState.phone,
-      isSignUpLoading,
+      // !isAgeClauseCheck || !isPrivacyClauseCheck || !isTermClauseCheck,
+      // !verificationCheckedState.email,
+      // !isPasswordValid,
+      // !isNameValid,
+      // !verificationCheckedState.phone,
+      // isSignUpLoading,
     ],
     onClickBackButton: handleBackStepButtonClick,
     onClickNextButton: handleNextStepButtonClick,
@@ -162,7 +171,7 @@ const SignUpForm = () => {
 
   return (
     <form
-      onSubmit={testSubmit}
+      onSubmit={handleSignUpSubmit}
       className="sm:w-[400px] md:w-[400px] w-4/5 max-w-[800px] mx-auto h-[500px]"
     >
       <button type="submit">sad</button>

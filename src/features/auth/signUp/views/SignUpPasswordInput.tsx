@@ -55,12 +55,12 @@ const SignUpPasswordInput = ({ activeStep }: ISignUpPasswordInput) => {
       resetRepassword()
       return
     }
-  }, [activeStep, resetPassword, resetRepassword])
+  }, [activeStep])
 
   return (
     <SignUpInputLayout headingText="로그인에 사용할 비밀번호를 입력해주세요">
       <SignUpInput
-        type="password"
+        id="signUp-password"
         inputValue={passwordInputValue}
         onChangeInputValue={handlePasswordInputValueChange}
         onBlurInput={handlePasswordInputBlur}
@@ -72,7 +72,7 @@ const SignUpPasswordInput = ({ activeStep }: ISignUpPasswordInput) => {
       )}
 
       <SignUpInput
-        type="repassword"
+        id="signUp-repassword"
         classNames="mt-[10px]"
         inputValue={repasswordInputValue}
         onChangeInputValue={handleRepasswordInputValueChange}

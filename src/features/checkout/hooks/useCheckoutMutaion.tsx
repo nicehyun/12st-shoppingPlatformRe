@@ -4,7 +4,7 @@ import { useFeedbackModal } from "@/common/hooks/useFeedbackModal"
 import { CheckoutClauseCheck } from "@/redux/features/checkoutSlice"
 import { useMutation } from "@tanstack/react-query"
 
-import { checkoutAPI } from "../models/checkoutApi"
+import { checkoutAPI } from "../models/checkoutAPI"
 
 export const useCheckoutMutaion = () => {
   const { showFeedbackModalWithContent } = useFeedbackModal()

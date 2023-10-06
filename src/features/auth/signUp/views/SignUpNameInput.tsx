@@ -28,7 +28,7 @@ const SignUpNameInput = ({ activeStep }: ISignUpNameInput) => {
       reset()
       return
     }
-  }, [activeStep, reset])
+  }, [activeStep])
 
   useEffect(() => {
     dispatch(resetNameValid())
@@ -41,7 +41,7 @@ const SignUpNameInput = ({ activeStep }: ISignUpNameInput) => {
   return (
     <SignUpInputLayout headingText="이름을 입력해주세요">
       <SignUpInput
-        type="name"
+        id="signUp-name"
         classNames="mt-[10px]"
         inputValue={nameInputValue}
         onChangeInputValue={handleNameInputValueChange}

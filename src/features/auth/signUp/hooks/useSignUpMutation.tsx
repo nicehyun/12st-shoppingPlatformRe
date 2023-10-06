@@ -1,12 +1,13 @@
 import { useMutation } from "@tanstack/react-query"
 import { signUpAPI } from "../models/signUpAPI"
 import { useFeedbackModal } from "../../../../common/hooks/useFeedbackModal"
+import { IRequestSignUp } from "../types/signUp"
 
 const useSignUpMutation = () => {
   const { showFeedbackModalWithContent } = useFeedbackModal()
 
   const signUpMutation = useMutation(
-    (formData: FormData) => signUpAPI.signUp(formData),
+    (props: IRequestSignUp) => signUpAPI.signUp(props),
     {
       onError: () => {
         showFeedbackModalWithContent(

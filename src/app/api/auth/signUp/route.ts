@@ -1,21 +1,36 @@
 import { UserInfo } from "@/common/types/user"
 import { signUpAPI } from "@/features/auth/signUp/models/signUpAPI"
+import { IRequestSignUp } from "@/features/auth/signUp/types/signUp"
+import {
+  emailValidator,
+  nameValidator,
+  passwordValidator,
+  phoneValidator,
+} from "@/features/auth/signUp/utils/validation"
 
 import bcrypt from "bcrypt"
 import { NextResponse } from "next/server"
 
 export async function POST(request: Request) {
-  const formData = await request.formData()
+  const { userInfo, requireCheck }: IRequestSignUp = await request.json()
 
-  const userInfo: UserInfo = {
-    email: formData.get("email") as string,
-    password: await bcrypt.hash(formData.get("password") as string, 10),
-    name: formData.get("name") as string,
-    phone: formData.get("phone") as string,
-    marketingClause: formData.get("marketing") === "on",
+  const isRequireCheck = Object.values(requireCheck).every((value) => !!value)
+
+  if (!isRequireCheck) return
+  if (
+    !phoneValidator(userInfo.phone) ||
+    !nameValidator(userInfo.name) ||
+    !emailValidator(userInfo.email) ||
+    !passwordValidator(userInfo.password)
+  )
+    return
+
+  const userInfoWithBcryptedPassword: UserInfo = {
+    ...userInfo,
+    password: await bcrypt.hash(userInfo.password, 10),
   }
 
-  const response = await signUpAPI.addUserInfo(userInfo)
+  const response = await signUpAPI.addUserInfo(userInfoWithBcryptedPassword)
 
   return NextResponse.json(response)
 }
