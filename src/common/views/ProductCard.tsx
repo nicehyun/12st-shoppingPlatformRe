@@ -11,6 +11,7 @@ import { discountedProductPrice, numberToLocaleString } from "../utils/price"
 import Image from "next/image"
 import { useAuthenticate } from "@/features/auth/signIn/hooks/useAuthenticate"
 import Button from "./Button"
+import Loading from "./Loading"
 
 interface IProductCard {
   productInfo: Product
@@ -57,6 +58,37 @@ const ProductCard = ({ productInfo }: IProductCard) => {
     removeMutaion.mutate(id)
   }
 
+  const renderComponent = () => {
+    if (removeMutaion.isLoading || addMutaion.isLoading) {
+      return (
+        <div className="absolute right-[8px] bottom-[2px] text-border">
+          <Loading
+            spinnerSize={{ width: "w-[15px]", height: "h-[15px]" }}
+            isFrame={false}
+          />
+        </div>
+      )
+    }
+
+    if (isExistedProductInCart) {
+      return (
+        <Button
+          onClick={onClickRemoveProductFromCart}
+          classNames="text-[18px] sm:text-[16px] absolute right-[8px] bottom-[2px]"
+          content={<BsFillCartDashFill />}
+        />
+      )
+    }
+
+    return (
+      <Button
+        onClick={onClickAddProductInCart}
+        classNames="text-[18px] sm:text-[16px] absolute right-[8px] bottom-[2px]"
+        content={<BsFillCartPlusFill />}
+      />
+    )
+  }
+
   return (
     <div className="relative w-[200px] lg:w-[180px]  md:w-[130px] sm:w-[120px] mr-[20px]">
       <div className="relative w-[200px] h-[200px] lg:w-[180px] lg:h-[180px] md:w-[130px] md:h-[130px] sm:w-[120px] sm:h-[120px] overflow-hidden text-[12px] text-center border-[1px] border-border">
@@ -93,7 +125,7 @@ const ProductCard = ({ productInfo }: IProductCard) => {
         <span className="ml-[3px] text-[10px]">{reviewCount}</span>
       </div>
 
-      {isExistedProductInCart ? (
+      {/* {isExistedProductInCart ? (
         <Button
           onClick={onClickRemoveProductFromCart}
           classNames="text-[18px] sm:text-[16px] absolute right-[8px] bottom-[2px]"
@@ -105,7 +137,8 @@ const ProductCard = ({ productInfo }: IProductCard) => {
           classNames="text-[18px] sm:text-[16px] absolute right-[8px] bottom-[2px]"
           content={<BsFillCartPlusFill />}
         />
-      )}
+      )} */}
+      {renderComponent()}
     </div>
   )
 }
