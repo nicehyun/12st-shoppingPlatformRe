@@ -1,5 +1,5 @@
 import { numberToLocaleString } from "@/common/utils/price"
-import useSelectCoupon from "@/features/cart/hooks/useSelectCoupon"
+import useSelectCoupon from "@/features/checkout/hooks/useSelectCoupon"
 import { ProductInCart } from "@/features/cart/types/cart"
 import Image from "next/image"
 

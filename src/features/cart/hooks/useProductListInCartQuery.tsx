@@ -13,7 +13,8 @@ export const useProductListInCartQuery = () => {
     ["productListInCart"],
     () => getProductListInCart(sessionQuery?.user.email ?? ""),
     {
-      suspense: true,
+      // suspense: true,
+      enabled: !!sessionQuery,
     }
   )
 

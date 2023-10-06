@@ -9,7 +9,8 @@ export const useGetAddressQuery = () => {
     ["userDefaultAddress"],
     () => getUserDefaultDeliveryInfo(sessionQuery?.user.email ?? ""),
     {
-      suspense: true,
+      // suspense: true,
+      enabled: !!sessionQuery,
     }
   )
 

@@ -1,5 +1,5 @@
 import useCheckoutPrice from "@/features/checkout/hooks/useCheckoutPrice"
-import useSelectCoupon from "@/features/cart/hooks/useSelectCoupon"
+import useSelectCoupon from "@/features/checkout/hooks/useSelectCoupon"
 import {
   MenuItem,
   OutlinedInput,

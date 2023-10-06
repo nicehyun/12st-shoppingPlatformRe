@@ -10,7 +10,8 @@ export const useGetCheckoutListQuery = () => {
     ["checkoutList"],
     () => getCheckoutList(sessionQuery?.user.email ?? ""),
     {
-      suspense: true,
+      enabled: !!sessionQuery,
+      // suspense: true,
     }
   )
   const checkoutList: CheckoutList[] = data ?? []
