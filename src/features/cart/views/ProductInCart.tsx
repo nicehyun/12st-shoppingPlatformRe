@@ -32,10 +32,11 @@ const ProductInCart = ({
         <div className="relative w-[200px] h-[200px] lg:w-[180px] lg:h-[180px] md:w-[130px] md:h-[130px] sm:w-[120px] sm:h-[120px] mr-[20px] border-r-[1px] border-border overflow-hidden">
           <Image
             src={image}
-            alt={name}
-            fill={true}
-            sizes="(max-width: 767px) 100vw, (max-width: 479px) 100vw, 100vw"
-            priority={true}
+            alt={`상품사진이 준비되지 않았습니다. - ${name}`}
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="h-full w-full"
           />
           {/* TODO : 유틸리티 함수로 날짜 수정하기 */}
           <span className="absolute left-[2px] top-[2px] p-[4px] text-[10px] md:text-[8px] sm:text-[8px] bg-black text-white rounded-[8px]">
