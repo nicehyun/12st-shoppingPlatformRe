@@ -39,8 +39,6 @@ const SignUpForm = () => {
     resetPhoneVerificationCheck,
   } = useSignUpVerificationCheck()
 
-  console.log(verificationCheckedState)
-
   const signUpEmailInputProps: ISignUpEmailInput = {
     isVerificationChecked: verificationCheckedState.email,
     checkEmailDuplication,

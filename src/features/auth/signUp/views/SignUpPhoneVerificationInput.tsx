@@ -1,7 +1,7 @@
 "use client"
 
 import { selectSignUpActiveStepState } from "@/redux/features/signUpSlice"
-import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { useAppSelector } from "@/redux/hooks"
 import { useEffect, useState } from "react"
 import { useFeedbackModal } from "../../../../common/hooks/useFeedbackModal"
 
@@ -13,9 +13,8 @@ import SignUpInputLayout from "./SignUpInputLayout"
 import SignUpVerificationInput from "./SignUpVerificationInput"
 import { BsFileLock2 } from "react-icons/bs"
 import { useRequestVerificationMutation } from "../hooks/useRequestVerificationMutation"
-import Timer from "@/common/views/TImer"
-import { verifyPhoneAPI } from "../models/verifyPhoneAPI"
 
+import { verifyPhoneAPI } from "../models/verifyPhoneAPI"
 export interface ISignUpPhoneVerificationInput {
   isVerificationChecked: boolean
   checkPhoneVerification: () => void
@@ -55,6 +54,7 @@ const SignUpPhoneVerificationInput = ({
   }
 
   const handleVerificationCodeTimerEnd = () => {
+    showFeedbackModalWithContent("인증 시간이 만료되었습니다.")
     hanelVerficationCodeInputHide()
     verifyPhoneAPI.removeVerificationId(phoneInputValue)
   }
@@ -94,7 +94,6 @@ const SignUpPhoneVerificationInput = ({
   useEffect(() => {
     if (selectSignUpActiveStep === 0) {
       reset()
-      // setVerificationCode("")
       return
     }
   }, [selectSignUpActiveStep])

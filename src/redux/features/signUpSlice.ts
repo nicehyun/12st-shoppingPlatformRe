@@ -14,7 +14,7 @@ type InitialSignUpState = {
 
 const initialSignUpState: InitialSignUpState = {
   isValid: { password: false, name: false },
-  activeStep: 4,
+  activeStep: 0,
 }
 
 const signUpSlice = createSlice({
@@ -41,7 +41,7 @@ const signUpSlice = createSlice({
       state.activeStep = state.activeStep + 1
     },
     resetStep(state) {
-      state.activeStep = 4
+      state.activeStep = 0
     },
   },
 })

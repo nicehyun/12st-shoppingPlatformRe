@@ -67,11 +67,13 @@ const SignUpEmailInput = ({
   return (
     <SignUpInputLayout headingText="로그인에 사용할 이메일을 입력해주세요">
       <SignUpVerificationInput
+        placeholder="example@example.com"
+        id="input-signUpEmail"
+        buttonContent={isVerificationChecked ? "확인완료" : "중복확인"}
         isChecked={isVerificationChecked}
         isDisabledButton={
           !isEmailValid || isVerificationChecked || isEmailDuplicateCheckLoading
         }
-        type="email"
         inputValue={emailInputValue}
         onBlurInput={handleEmailInputBlur}
         onChangeInputValue={handleEmailInputChange}
