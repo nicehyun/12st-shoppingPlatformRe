@@ -39,7 +39,7 @@ const ProductInCart = ({
             sizes="100vw"
             className="h-full w-full"
           />
-          {/* TODO : 유틸리티 함수로 날짜 수정하기 */}
+
           <span className="absolute left-[2px] top-[2px] p-[4px] text-[10px] md:text-[8px] sm:text-[8px] bg-black text-white rounded-[8px]">
             {addDaysToCurrentDate(3)} 예약배송
           </span>
