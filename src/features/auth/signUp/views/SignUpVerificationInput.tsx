@@ -35,7 +35,6 @@ const SignUpVerificationInput = ({
   isShowFeedback,
   isReadOnly,
 }: ISignUpVerificationInput) => {
-  console.log(isChecked)
   let inputType: InputType = "text",
     placeholder = "",
     preVerificationButtonText = "",

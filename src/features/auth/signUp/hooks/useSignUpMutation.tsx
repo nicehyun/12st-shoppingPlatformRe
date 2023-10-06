@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query"
-import { signUpAPI } from "../models/signUpApi"
+import { signUpAPI } from "../models/signUpAPI"
 import { useFeedbackModal } from "../../../../common/hooks/useFeedbackModal"
 
 const useSignUpMutation = () => {

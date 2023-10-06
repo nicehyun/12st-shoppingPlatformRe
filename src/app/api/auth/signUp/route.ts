@@ -1,5 +1,5 @@
 import { UserInfo } from "@/common/types/user"
-import { signUpAPI } from "@/features/auth/signUp/models/signUpApi"
+import { signUpAPI } from "@/features/auth/signUp/models/signUpAPI"
 
 import bcrypt from "bcrypt"
 import { NextResponse } from "next/server"

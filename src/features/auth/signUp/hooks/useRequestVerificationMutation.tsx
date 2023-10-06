@@ -1,9 +1,9 @@
-import { requestPhoneVerification } from "@/firebase/auth/vertification"
 import { useMutation } from "@tanstack/react-query"
+import { verifyPhoneAPI } from "../models/verifyPhoneAPI"
 
 const useRequestVerificationMutation = (phoneInputValue: string) => {
   const requestVerificationMutaion = useMutation(() =>
-    requestPhoneVerification(phoneInputValue)
+    verifyPhoneAPI.requestPhoneVerification(phoneInputValue)
   )
 
   return requestVerificationMutaion

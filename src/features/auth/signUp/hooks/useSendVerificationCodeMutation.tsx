@@ -1,15 +1,15 @@
-import { sendVerificationCode } from "@/firebase/auth/vertification";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query"
+import { verifyPhoneAPI } from "../models/verifyPhoneAPI"
 
 const useSendVerificationCodeMutation = (
   phoneNumber: string,
   verificationCode: string
 ) => {
   const sendVerificationCodeMutaion = useMutation(() =>
-    sendVerificationCode(phoneNumber, verificationCode)
-  );
+    verifyPhoneAPI.sendVerificationCode(phoneNumber, verificationCode)
+  )
 
-  return sendVerificationCodeMutaion;
-};
+  return sendVerificationCodeMutaion
+}
 
-export default useSendVerificationCodeMutation;
+export default useSendVerificationCodeMutation

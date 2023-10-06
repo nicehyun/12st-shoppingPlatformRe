@@ -1,10 +1,9 @@
-import { emailDuplicateCheck } from "@/firebase/firestore/signUp"
-
 import { useMutation } from "@tanstack/react-query"
+import { signUpAPI } from "../models/signUpAPI"
 
 export const useEmailDuplicationCheckMutaion = (email: string) => {
   const emailDuplicateCheckMutaion = useMutation(() =>
-    emailDuplicateCheck(email)
+    signUpAPI.emailDuplicateCheck(email)
   )
 
   return emailDuplicateCheckMutaion
