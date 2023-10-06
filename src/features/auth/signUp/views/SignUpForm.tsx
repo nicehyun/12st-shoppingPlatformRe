@@ -6,7 +6,6 @@ import {
   resetSignUpState,
   resetStep,
   selectSignUpActiveStepState,
-  selectSignUpCheckState,
   selectSignUpIsValidState,
 } from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
@@ -14,12 +13,15 @@ import { useEffect } from "react"
 import { useFeedbackModal } from "../../../../common/hooks/useFeedbackModal"
 import { useSignUpClasue } from "../hooks/useSignUpClasue"
 import useSignUpMutation from "../hooks/useSignUpMutation"
+import useSignUpVerificationCheck from "../hooks/useSignUpVerificationCheck"
 
 import SignUpClause, { ISignUpClause } from "./SIgnUpClause"
-import SignUpEmailInput from "./SignUpEmailInput"
+import SignUpEmailInput, { ISignUpEmailInput } from "./SignUpEmailInput"
 import SignUpNameInput from "./SignUpNameInput"
 import SignUpPasswordInput from "./SignUpPasswordInput"
-import SignUpPhoneVerificationInput from "./SignUpPhoneVerificationInput"
+import SignUpPhoneVerificationInput, {
+  ISignUpPhoneVerificationInput,
+} from "./SignUpPhoneVerificationInput"
 
 const SignUpForm = () => {
   const { routeTo } = useNavigations()
@@ -27,9 +29,30 @@ const SignUpForm = () => {
   const dispatch = useAppDispatch()
   const { showFeedbackModalWithContent } = useFeedbackModal()
 
-  const { checkedClaseState, toggleClauseCheck } = useSignUpClasue()
+  const { checkedClaseState, toggleClauseCheck, resetClauseCheck } =
+    useSignUpClasue()
+  const {
+    checkEmailDuplication,
+    checkPhoneVerification,
+    verificationCheckedState,
+    resetEmailDuplicateCheck,
+    resetPhoneVerificationCheck,
+  } = useSignUpVerificationCheck()
 
-  const SignUpClauseProps: ISignUpClause = {
+  console.log(verificationCheckedState)
+
+  const signUpEmailInputProps: ISignUpEmailInput = {
+    isVerificationChecked: verificationCheckedState.email,
+    checkEmailDuplication,
+    resetEmailDuplicateCheck,
+  }
+
+  const signUpPhoneVerificationInputProps: ISignUpPhoneVerificationInput = {
+    isVerificationChecked: verificationCheckedState.phone,
+    checkPhoneVerification,
+  }
+
+  const signUpClauseProps: ISignUpClause = {
     clause: checkedClaseState,
     toggleClauseCheck: toggleClauseCheck,
   }
@@ -41,9 +64,6 @@ const SignUpForm = () => {
     marketing: isMarketingClauseCheck,
   } = checkedClaseState
 
-  const { email: isEmailCheck, phone: isPhoneCheck } = useAppSelector(
-    selectSignUpCheckState
-  )
   const { password: isPasswordValid, name: isNameValid } = useAppSelector(
     selectSignUpIsValidState
   )
@@ -67,7 +87,12 @@ const SignUpForm = () => {
 
     if (!isAgeClauseCheck || !isPrivacyClauseCheck || !isTermClauseCheck) return
 
-    if (!isEmailCheck || !isPasswordValid || !isNameValid || !isPhoneCheck)
+    if (
+      !verificationCheckedState.email ||
+      !isPasswordValid ||
+      !isNameValid ||
+      !verificationCheckedState.phone
+    )
       return
 
     const formData = new FormData(event.currentTarget)
@@ -97,7 +122,9 @@ const SignUpForm = () => {
   }
 
   const handleStageBackClick = () => {
-    dispatch(resetSignUpState())
+    resetEmailDuplicateCheck()
+    resetPhoneVerificationCheck()
+    resetClauseCheck()
     dispatch(resetStep())
   }
 
@@ -105,21 +132,24 @@ const SignUpForm = () => {
     activeStep: selectSignUpActiveStep,
     stages: ["약관동의", "이메일", "비밀번호", "이름", "본인인증"],
     stageContents: [
-      <SignUpClause key="clause" {...SignUpClauseProps} />,
-      <SignUpEmailInput key="email" />,
+      <SignUpClause key="clause" {...signUpClauseProps} />,
+      <SignUpEmailInput key="email" {...signUpEmailInputProps} />,
       <SignUpPasswordInput key="password" />,
       <SignUpNameInput key="name" />,
-      <SignUpPhoneVerificationInput key="phone" />,
+      <SignUpPhoneVerificationInput
+        key="phone"
+        {...signUpPhoneVerificationInputProps}
+      />,
     ],
 
     firstButtonText: "동의하고 가입하기",
     finishButtonText: "회원가입",
     disabledNextButton: [
       !isAgeClauseCheck || !isPrivacyClauseCheck || !isTermClauseCheck,
-      !isEmailCheck,
+      !verificationCheckedState.email,
       !isPasswordValid,
       !isNameValid,
-      !isPhoneCheck,
+      !verificationCheckedState.phone,
       isSignUpLoading,
     ],
     onClickBackButton: handleStageBackClick,

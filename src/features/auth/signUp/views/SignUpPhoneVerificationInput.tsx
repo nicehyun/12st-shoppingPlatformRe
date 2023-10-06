@@ -1,10 +1,6 @@
 "use client"
 
-import {
-  selectSignUpActiveStepState,
-  selectSignUpCheckState,
-  verifyToPhone,
-} from "@/redux/features/signUpSlice"
+import { selectSignUpActiveStepState } from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { useEffect, useState } from "react"
 import { useFeedbackModal } from "../../../../common/hooks/useFeedbackModal"
@@ -17,7 +13,15 @@ import SignUpInputLayout from "./SignUpInputLayout"
 import SignUpVerificationInput from "./SignUpVerificationInput"
 import { BsFileLock2 } from "react-icons/bs"
 
-const SignUpPhoneVerificationInput = () => {
+export interface ISignUpPhoneVerificationInput {
+  isVerificationChecked: boolean
+  checkPhoneVerification: () => void
+}
+
+const SignUpPhoneVerificationInput = ({
+  checkPhoneVerification,
+  isVerificationChecked,
+}: ISignUpPhoneVerificationInput) => {
   const dispatch = useAppDispatch()
   const selectSignUpActiveStep = useAppSelector(selectSignUpActiveStepState)
 
@@ -25,10 +29,6 @@ const SignUpPhoneVerificationInput = () => {
   const [isShowVerificationCodeInput, setIsShowVerificationCodeInput] =
     useState(false)
   const [verificationCode, setVerificationCode] = useState("")
-
-  const { phone: isCheckedPhoneVerification } = useAppSelector(
-    selectSignUpCheckState
-  )
 
   const {
     value: phoneInputValue,
@@ -50,7 +50,7 @@ const SignUpPhoneVerificationInput = () => {
   } = useSendVerificationCodeMutation(phoneInputValue, verificationCode)
 
   const handlePhoneVerificationRequest = async () => {
-    if (!isPhoneValid || isCheckedPhoneVerification) return
+    if (!isPhoneValid || isVerificationChecked) return
 
     await requestVerificationMutateAsync()
 
@@ -71,7 +71,7 @@ const SignUpPhoneVerificationInput = () => {
     showFeedbackModalWithContent("본인인증이 완료되었습니다.")
 
     setIsShowVerificationCodeInput(false)
-    dispatch(verifyToPhone())
+    checkPhoneVerification()
   }
 
   useEffect(() => {
@@ -86,9 +86,7 @@ const SignUpPhoneVerificationInput = () => {
     <SignUpInputLayout headingText="본인인증을 진행해주세요">
       <SignUpVerificationInput
         isDisabledButton={
-          !isPhoneValid ||
-          isShowVerificationCodeInput ||
-          isCheckedPhoneVerification
+          !isPhoneValid || isShowVerificationCodeInput || isVerificationChecked
         }
         type="phone"
         classNames="mb-[5px]"
@@ -98,7 +96,7 @@ const SignUpPhoneVerificationInput = () => {
         onChangeInputValue={handlePhoneInputValueChange}
         onClickVerificationButton={handlePhoneVerificationRequest}
         isLoading={isRequestVerificationLoading}
-        isReadOnly={isShowVerificationCodeInput || isCheckedPhoneVerification}
+        isReadOnly={isShowVerificationCodeInput || isVerificationChecked}
       />
       {hasErrorPhone && (
         <SignUpFeedback

@@ -51,6 +51,14 @@ export const useSignUpClasue = () => {
     setIsMarketingClauseCheck((prev) => !prev)
   }
 
+  const resetClauseCheck = () => {
+    setIsAllCheck(false)
+    setIsAgeClauseCheck(false)
+    setIsTermClauseCheck(false)
+    setIsPrivacyClauseCheck(false)
+    setIsMarketingClauseCheck(false)
+  }
+
   useEffect(() => {
     const clauseStateWithoutAll = {
       age: isAgeClauseCheck,
@@ -79,5 +87,6 @@ export const useSignUpClasue = () => {
       togglePrivacyClauseCheck,
       toggleMarketingClauseCheck,
     },
+    resetClauseCheck,
   }
 }
