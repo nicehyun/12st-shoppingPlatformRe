@@ -59,7 +59,7 @@ const SignUpVerificationInput = ({
       >
         {isNeedTimerComponent && (
           <Timer
-            seconds={10}
+            seconds={300}
             onTimeExpire={timerExpireFn}
             position={{ top: "top-[9px]", right: "right-[15px]" }}
           />
