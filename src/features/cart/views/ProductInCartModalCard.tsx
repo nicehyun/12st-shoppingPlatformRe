@@ -21,7 +21,7 @@ const ProductInCartModalCard = ({ productInfo }: IProductInCartModalCard) => {
   }
 
   return (
-    <li className="relative mb-[10px] mr-[8px] pr-[5px] flex border-[1px] border-lightGray rounded-[5px]">
+    <li className="relative mb-[10px] mr-[8px] pr-[5px] flex border-[1px] bg-white border-lightGray rounded-[5px]">
       <Button
         onClick={onClickRemoveProductFromCart}
         classNames="absolute right-[2px] top-[2px] text-border"
@@ -39,7 +39,7 @@ const ProductInCartModalCard = ({ productInfo }: IProductInCartModalCard) => {
         />
       </div>
       <div className="mt-[20px]">
-        <p className="text-black dark:text-white w-[145px] h-[22.6px] text-[8px] truncate-2 leading-[1.2]">
+        <p className="text-black w-[145px] h-[22.6px] text-[8px] truncate-2 leading-[1.2]">
           {name}
         </p>
       </div>
