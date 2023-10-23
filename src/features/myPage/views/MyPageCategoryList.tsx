@@ -1,4 +1,4 @@
-import MyPageCategoryLi from "./MyPageCategoryLi"
+import MyPageCategoryEl from "./MyPageCategoryEl"
 
 const MyPageCategoryList = () => {
   const myPageCategoryList = [
@@ -36,7 +36,7 @@ const MyPageCategoryList = () => {
   return (
     <section className="mt-[40px]">
       {myPageCategoryList.map((myPageCategoryLi, index) => (
-        <MyPageCategoryLi
+        <MyPageCategoryEl
           id={myPageCategoryLi.id}
           key={myPageCategoryLi.id}
           categoryTitle={myPageCategoryLi.categoryTitle}

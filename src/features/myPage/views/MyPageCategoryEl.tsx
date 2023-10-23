@@ -8,7 +8,7 @@ interface IMyPageCategoryLi {
   className?: string
 }
 
-const MyPageCategoryLi = ({
+const MyPageCategoryEl = ({
   id,
   categoryTitle,
   categoryList,
@@ -17,7 +17,7 @@ const MyPageCategoryLi = ({
   const { categoryListRoutes, categoryListContents } = categoryList
   return (
     <li className={`${className} list-none`}>
-      <h3 className="font-bold text-[28px]">{categoryTitle}</h3>
+      <h3 className="font-bold text-[24px]">{categoryTitle}</h3>
       <ul>
         {categoryListContents.map((categoryListContent) => (
           <li
@@ -32,4 +32,4 @@ const MyPageCategoryLi = ({
   )
 }
 
-export default MyPageCategoryLi
+export default MyPageCategoryEl
