@@ -22,7 +22,7 @@ const MyPageCategoryLi = ({
         {categoryListContents.map((categoryListContent) => (
           <li
             key={`myPage-categoryList__${id}`}
-            className="mt-[14px] text-[16px] cursor-pointer"
+            className="mt-[14px] text-[16px] cursor-pointer text-lightBlack hover:text-black dark:text-lightborder dark:hover:text-border"
           >
             {categoryListContent}
           </li>

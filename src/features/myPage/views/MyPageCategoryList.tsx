@@ -34,7 +34,7 @@ const MyPageCategoryList = () => {
   ]
 
   return (
-    <section className="bg-white dark:bg-lightBlack mt-[40px]">
+    <section className="mt-[40px]">
       {myPageCategoryList.map((myPageCategoryLi, index) => (
         <MyPageCategoryLi
           id={myPageCategoryLi.id}
