@@ -1,17 +1,23 @@
+"use client"
+import useCouponQuery from "@/features/checkout/hooks/useCouponQuery"
+import { useUserMileQuery } from "@/features/checkout/hooks/useGetUserMileQuery"
 import MyPageRewardsEl from "./MyPageRewardsEl"
 
 const MyPageRewards = () => {
+  const { coupons } = useCouponQuery()
+  const { userMile } = useUserMileQuery()
+
   const rewardList = [
     {
       id: "reward-coupon",
       rewardTitle: "쿠폰",
-      showRewardNumber: 2,
+      showRewardNumber: coupons?.length ?? 0,
       // onClickDetail?: () => void
     },
     {
       id: "reward-mile",
       rewardTitle: "마일리지",
-      showRewardNumber: 0,
+      showRewardNumber: userMile ?? 0,
       // onClickDetail?: () => void
     },
   ]
