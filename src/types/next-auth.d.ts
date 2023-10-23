@@ -1,13 +1,11 @@
 declare module "next-auth" {
   interface User {
+    name: string | null | undefined
     email: string | null | undefined
     accessToken: string | null | undefined
   }
   interface Session {
-    user: {
-      email: string | null | undefined
-      accessToken: string | null | undefined
-    }
+    user: User
   }
 }
 

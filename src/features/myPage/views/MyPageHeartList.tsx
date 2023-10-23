@@ -10,7 +10,7 @@ const MyPageHeartList = () => {
           <li className="w-[140px]">
             <div className="w-full h-[140px] bg-border mb-[20px]"></div>
             <p className="w-full bg-lightRed text-[14px] h-[39.2px]">
-              123상품asdsasdasdasdasjfkldsadjfk;ljsd;kljd123123123123ㅑ12ㅑ30981290381902839018290123
+              123상품asdsasdasda
             </p>
           </li>
         </ul>

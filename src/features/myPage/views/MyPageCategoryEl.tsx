@@ -17,12 +17,14 @@ const MyPageCategoryEl = ({
   const { categoryListRoutes, categoryListContents } = categoryList
   return (
     <li className={`${className} list-none`}>
-      <h3 className="font-bold text-[24px]">{categoryTitle}</h3>
+      <h3 className="font-bold text-[24px] sm:text-[18px] md:text-[20px]">
+        {categoryTitle}
+      </h3>
       <ul>
-        {categoryListContents.map((categoryListContent) => (
+        {categoryListContents.map((categoryListContent, index) => (
           <li
-            key={`myPage-categoryList__${id}`}
-            className="mt-[14px] text-[16px] cursor-pointer text-lightBlack hover:text-black dark:text-lightborder dark:hover:text-border"
+            key={`${id}-${index}`}
+            className="mt-[14px] text-[16px] sm:text-[12px] md:text-[14px] cursor-pointer text-lightBlack hover:text-black dark:text-lightborder dark:hover:text-border"
           >
             {categoryListContent}
           </li>

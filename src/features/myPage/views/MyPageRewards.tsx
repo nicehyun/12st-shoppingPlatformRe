@@ -4,7 +4,7 @@ const MyPageRewards = () => {
   const rewardList = [
     {
       id: "reward-coupon",
-      rewardTitle: "사용가능쿠폰",
+      rewardTitle: "쿠폰",
       showRewardNumber: 2,
       // onClickDetail?: () => void
     },
@@ -16,7 +16,7 @@ const MyPageRewards = () => {
     },
   ]
   return (
-    <section className="h-[180px] bg-black dark:bg-white p-[20px] flexCenter">
+    <section className="h-[180px] sm:h-[140px] md:h-[150px] bg-black dark:bg-white p-[20px] flexCenter">
       {rewardList.map((rewardEl, index) => (
         <MyPageRewardsEl
           key={rewardEl.id}

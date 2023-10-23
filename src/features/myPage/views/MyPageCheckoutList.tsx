@@ -8,9 +8,8 @@ const MyPageCheckoutList = () => {
 
       <div className="border-b-border border-b-[1px] dark:border-b-lightBlack">
         <div className="flex border-b-black dark:border-white border-b-[1px]">
-          <MyPageCheckoutHeaderEl headerContent="주문일" />
+          <MyPageCheckoutHeaderEl headerContent="주문일" isStart={true} />
           <MyPageCheckoutHeaderEl headerContent="주문내역" />
-          <MyPageCheckoutHeaderEl headerContent="주문번호" />
           <MyPageCheckoutHeaderEl headerContent="결제금액" />
         </div>
 
