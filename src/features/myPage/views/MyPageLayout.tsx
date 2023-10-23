@@ -1,9 +1,13 @@
+"use client"
+
+import MyPageCategory from "./MyPageCategory"
+
 const MyPageLayout = () => {
   return (
-    <div className="flex">
-      <div className="bg-lightRed w-[200px] h-full mr-[20px]">sd</div>
+    <section className="flex">
+      <MyPageCategory />
       <div className="bg-lightRed w-[400px] h-full">dss</div>
-    </div>
+    </section>
   )
 }
 
