@@ -1,23 +1,51 @@
-"use client"
-import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
-import MyPageCategoryList from "./MyPageCategoryList"
+import MyPageCategoryEl from "./MyPageCategoryEl"
 
 const MyPageCategory = () => {
-  const { sessionQuery } = useSessionQuery()
+  const myPageCategoryList = [
+    {
+      id: "shopping-information",
+      categoryTitle: "쇼핑정보",
+      categoryList: {
+        categoryListContents: [
+          "주문배송조회",
+          "주문내역",
+          "취소/교환/반품 내역",
+          "상품리뷰",
+        ],
+        // categoryListRoutes: [console.log(123)],
+      },
+    },
+    {
+      id: "account-setting",
+      categoryTitle: "계정설정",
+      categoryList: {
+        categoryListContents: ["회원정보수정", "쿠폰", "마일리지"],
+        // categoryListRoutes: [console.log(123)],
+      },
+    },
+
+    {
+      id: "customer-services",
+      categoryTitle: "고객센터",
+      categoryList: {
+        categoryListContents: ["1:1 문의내역", "상품 Q&A내역"],
+        // categoryListRoutes: [console.log(123)],
+      },
+    },
+  ]
 
   return (
-    <div className="w-[200px] h-full mr-[20px]">
-      <section className="flex flex-col">
-        <h3 className="font-bold text-[28px] sm:text-[20px] md:text-[22px] mb-[20px]">
-          {sessionQuery?.user.name}
-        </h3>
-        <span className="text-[18px] sm:text-[16px] md:text-[16px] font-semibold cursor-pointer">
-          좋아요 2
-        </span>
-      </section>
-
-      <MyPageCategoryList />
-    </div>
+    <section className="mt-[40px]">
+      {myPageCategoryList.map((myPageCategoryLi, index) => (
+        <MyPageCategoryEl
+          id={myPageCategoryLi.id}
+          key={myPageCategoryLi.id}
+          categoryTitle={myPageCategoryLi.categoryTitle}
+          categoryList={myPageCategoryLi.categoryList}
+          className={index !== 0 ? "mt-[60px]" : ""}
+        />
+      ))}
+    </section>
   )
 }
 
