@@ -1,8 +1,8 @@
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
-import { removeProductFromCart } from "@/firebase/firestore/cart"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { cartAPI } from "../models/cartAPI"
 
 const useRemoveFromCartMutation = () => {
   const queryClient = useQueryClient()
@@ -11,7 +11,7 @@ const useRemoveFromCartMutation = () => {
 
   const removeMutaion = useMutation(
     (productId: string) =>
-      removeProductFromCart(sessionQuery?.user.email ?? "", productId),
+      cartAPI.removeProductFromCart(sessionQuery?.user.email ?? "", productId),
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["productListInCart"])

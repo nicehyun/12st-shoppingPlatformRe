@@ -1,8 +1,8 @@
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
-import { removeCheckedProductsFromCart } from "@/firebase/firestore/cart"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { cartAPI } from "../models/cartAPI"
 import { ProductsInCart } from "../types/cart"
 
 export const useRemoveCheckedProduct = () => {
@@ -12,7 +12,7 @@ export const useRemoveCheckedProduct = () => {
 
   const checkedProductRemoveMutaion = useMutation(
     (checkedProductList: ProductsInCart) =>
-      removeCheckedProductsFromCart(
+      cartAPI.removeCheckedProductsFromCart(
         sessionQuery?.user.email ?? "",
         checkedProductList
       ),
