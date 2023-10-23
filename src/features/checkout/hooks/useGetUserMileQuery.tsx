@@ -1,6 +1,6 @@
+import { mileAPI } from "@/common/models/mileAPI"
 import { junkOfNoMoreThanOneDigit } from "@/common/utils/price"
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
-import { getUserMile } from "@/firebase/firestore/user"
 import { useQuery } from "@tanstack/react-query"
 import useCheckoutPrice from "./useCheckoutPrice"
 
@@ -9,7 +9,7 @@ export const useUserMileQuery = () => {
   const { totalPriceOfCheckedProduct } = useCheckoutPrice()
 
   const { data: userMile } = useQuery(["userMile"], () =>
-    getUserMile(sessionQuery?.user.email ?? "")
+    mileAPI.getUserMile(sessionQuery?.user.email ?? "")
   )
 
   const mile = userMile ?? 0

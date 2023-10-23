@@ -1,5 +1,5 @@
+import { addressAPI } from "@/common/models/addressAPI"
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
-import { getUserDefaultDeliveryInfo } from "@/firebase/firestore/address"
 import { useQuery } from "@tanstack/react-query"
 
 export const useGetAddressQuery = () => {
@@ -7,7 +7,7 @@ export const useGetAddressQuery = () => {
 
   const { data: userDefalutAddress } = useQuery(
     ["userDefaultAddress"],
-    () => getUserDefaultDeliveryInfo(sessionQuery?.user.email ?? ""),
+    () => addressAPI.getUserDefaultDeliveryInfo(sessionQuery?.user.email ?? ""),
     {
       // suspense: true,
       enabled: !!sessionQuery,

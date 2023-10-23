@@ -1,14 +1,14 @@
 import { CheckoutList } from "@/common/types/checkout"
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
-import { getCheckoutList } from "@/firebase/firestore/checkout"
 import { useQuery } from "@tanstack/react-query"
+import { checkoutAPI } from "../models/checkoutAPI"
 
 export const useGetCheckoutListQuery = () => {
   const { sessionQuery } = useSessionQuery()
 
   const { data } = useQuery(
     ["checkoutList"],
-    () => getCheckoutList(sessionQuery?.user.email ?? ""),
+    () => checkoutAPI.getCheckoutList(sessionQuery?.user.email ?? ""),
     {
       enabled: !!sessionQuery,
       // suspense: true,
