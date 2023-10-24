@@ -8,9 +8,10 @@ const layout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <Header isShowCart={true} />
-      <PageLayout classNames="px-0">
+      <PageLayout classNames="px-0 relative">
         <MyPageLayout>{children}</MyPageLayout>
       </PageLayout>
+
       <Navigation />
     </>
   )

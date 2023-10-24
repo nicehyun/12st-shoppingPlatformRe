@@ -12,7 +12,7 @@ const MyPageLayout = ({ children }: { children: ReactNode }) => {
       />
 
       <MobileViewConditionComponent
-        component={<MoblieMyPageLayout> {children}</MoblieMyPageLayout>}
+        component={<MoblieMyPageLayout>{children}</MoblieMyPageLayout>}
       />
     </section>
   )

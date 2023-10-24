@@ -1,5 +1,6 @@
 import { ReactNode } from "react"
-import MyPageCategory from "./MyPageCategory"
+import MoblieMyPageCategoryConroller from "./MoblieMyPageCategoryConroller"
+
 import MyPageNameAndHeart from "./MyPageNameAndHeart"
 import MyPageRewards from "./MyPageRewards"
 
@@ -12,8 +13,7 @@ const MoblieMyPageLayout = ({ children }: IMoblieMyPageLayout) => {
     <>
       <MyPageNameAndHeart />
       <MyPageRewards />
-      <MyPageCategory />
-
+      <MoblieMyPageCategoryConroller />
       {children}
     </>
   )
