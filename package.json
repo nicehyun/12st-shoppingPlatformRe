@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@lottiefiles/react-lottie-player": "^3.5.3",
     "@mui/icons-material": "^5.14.1",
     "@mui/joy": "^5.0.0-beta.2",
     "@mui/material": "^5.14.1",
@@ -33,7 +32,6 @@
     "gsap": "^3.12.2",
     "jsonwebtoken": "^9.0.1",
     "lodash": "^4.17.21",
-    "lottie-react": "^2.4.0",
     "next": "13.4.12",
     "next-auth": "^4.23.1",
     "next-themes": "^0.2.1",
