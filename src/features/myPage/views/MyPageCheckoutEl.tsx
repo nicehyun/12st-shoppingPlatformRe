@@ -15,9 +15,9 @@ const MyPageCheckoutEl = ({ checkoutList, className }: IMyPageCheckoutEl) => {
   const checkoutTime = ` ${checkoutDateInfo?.hour} : ${checkoutDateInfo?.minute}`
   return (
     <div
-      className={`${className} flex items-center h-[60px] text-[14px] sm:text-[12px] md:text-[12px] font-semibold group cursor-pointer`}
+      className={`${className} flex items-center h-[60px] text-[14px] sm:text-[12px] md:text-[12px] font-normal group cursor-pointer`}
     >
-      <div className="flex justify-start flex-col xl:flex-row w-1/4 text-lightBlack font-normal">
+      <div className="flex justify-start flex-col xl:flex-row w-1/4 text-lightBlack group-hover:text-black group-hover:dark:text-white  group-hover:font-semibold">
         <span className="xl:mr-[10px]">{checkoutDate}</span>
 
         <span>{checkoutTime}</span>
@@ -31,15 +31,13 @@ const MyPageCheckoutEl = ({ checkoutList, className }: IMyPageCheckoutEl) => {
         >
           {prductList[0].name}
         </span>
-        <span className="flex items-end font-extrabold whitespace-nowrap">
+        <span className="flex items-end font-bold whitespace-nowrap">
           외 {prductList.length}개
         </span>
       </div>
 
-      <div className="w-1/4 flex justify-end">
-        <span className="text-lightRed">
-          {numberToLocaleString(checkoutTotalPrice(checkoutList))}
-        </span>
+      <div className="w-1/4 flex justify-end font-semibold text-lightRed">
+        {numberToLocaleString(checkoutTotalPrice(checkoutList))}
       </div>
     </div>
   )
