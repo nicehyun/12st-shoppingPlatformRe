@@ -16,7 +16,7 @@ const MyPageNameAndHeart = () => {
             <BsFillSuitHeartFill />
           </span>
         }
-      ></Button>
+      />
     </section>
   )
 }

@@ -1,7 +1,13 @@
-import MyPageLayout from "@/features/myPage/views/MyPageLayout"
+import MyPageCheckoutList from "@/features/myPage/views/MyPageCheckoutList"
+import MyPageHeartList from "@/features/myPage/views/MyPageHeartList"
 
 const MyPagePage = () => {
-  return <MyPageLayout />
+  return (
+    <>
+      <MyPageCheckoutList />
+      <MyPageHeartList />
+    </>
+  )
 }
 
 export default MyPagePage

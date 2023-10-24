@@ -1,3 +1,4 @@
+import { MyPageRoute } from "../types/route"
 import MyPageCategoryEl from "./MyPageCategoryEl"
 
 const MyPageCategory = () => {
@@ -6,13 +7,12 @@ const MyPageCategory = () => {
       id: "shopping-information",
       categoryTitle: "쇼핑정보",
       categoryList: {
-        categoryListContents: [
-          "주문배송조회",
-          "주문내역",
-          "취소/교환/반품 내역",
-          "상품리뷰",
+        categoryListContents: ["주문내역", "취소/교환/반품 내역", "상품리뷰"],
+        categoryListRoutes: [
+          MyPageRoute.CHECKOUTLIST,
+          MyPageRoute.CHECKOUTACTIONLIST,
+          MyPageRoute.CHECKOUTREVIEWLIST,
         ],
-        // categoryListRoutes: [console.log(123)],
       },
     },
     {
@@ -20,7 +20,11 @@ const MyPageCategory = () => {
       categoryTitle: "계정설정",
       categoryList: {
         categoryListContents: ["회원정보수정", "쿠폰", "마일리지"],
-        // categoryListRoutes: [console.log(123)],
+        categoryListRoutes: [
+          MyPageRoute.CHECKOUTLIST,
+          MyPageRoute.CHECKOUTACTIONLIST,
+          MyPageRoute.CHECKOUTREVIEWLIST,
+        ],
       },
     },
 
@@ -29,7 +33,10 @@ const MyPageCategory = () => {
       categoryTitle: "고객센터",
       categoryList: {
         categoryListContents: ["1:1 문의내역", "상품 Q&A내역"],
-        // categoryListRoutes: [console.log(123)],
+        categoryListRoutes: [
+          MyPageRoute.CHECKOUTLIST,
+          MyPageRoute.CHECKOUTACTIONLIST,
+        ],
       },
     },
   ]

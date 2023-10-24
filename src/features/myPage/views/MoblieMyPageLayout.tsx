@@ -1,15 +1,20 @@
-import MyPageCouponSection from "@/app/myPage/[email]/page"
+import { ReactNode } from "react"
 import MyPageCategory from "./MyPageCategory"
 import MyPageNameAndHeart from "./MyPageNameAndHeart"
 import MyPageRewards from "./MyPageRewards"
 
-const MoblieMyPageLayout = () => {
+interface IMoblieMyPageLayout {
+  children: ReactNode
+}
+
+const MoblieMyPageLayout = ({ children }: IMoblieMyPageLayout) => {
   return (
     <>
       <MyPageNameAndHeart />
       <MyPageRewards />
       <MyPageCategory />
-      {/* <MyPageCouponSection /> */}
+
+      {children}
     </>
   )
 }

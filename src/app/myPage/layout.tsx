@@ -1,16 +1,19 @@
 import PageLayout from "@/common/views/PageLayout"
 import Header from "@/features/layout/views/Header"
 import Navigation from "@/features/layout/views/Navigation"
+import MyPageLayout from "@/features/myPage/views/MyPageLayout"
 import { ReactNode } from "react"
 
-const MyPageLayout = ({ children }: { children: ReactNode }) => {
+const layout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <Header isShowCart={true} />
-      <PageLayout classNames="px-0">{children}</PageLayout>
+      <PageLayout classNames="px-0">
+        <MyPageLayout>{children}</MyPageLayout>
+      </PageLayout>
       <Navigation />
     </>
   )
 }
 
-export default MyPageLayout
+export default layout

@@ -1,10 +1,13 @@
+import { ReactNode } from "react"
 import MyPageCategory from "./MyPageCategory"
-import MyPageCheckoutList from "./MyPageCheckoutList"
-import MyPageHeartList from "./MyPageHeartList"
 import MyPageNameAndHeart from "./MyPageNameAndHeart"
 import MyPageRewards from "./MyPageRewards"
 
-const NonMobileMyPageLayout = () => {
+interface INonMobileMyPageLayout {
+  children: ReactNode
+}
+
+const NonMobileMyPageLayout = ({ children }: INonMobileMyPageLayout) => {
   return (
     <>
       <div className="w-[200px] h-full mr-[40px]">
@@ -14,8 +17,7 @@ const NonMobileMyPageLayout = () => {
 
       <div className="w-full">
         <MyPageRewards />
-        <MyPageCheckoutList />
-        <MyPageHeartList />
+        {children}
       </div>
     </>
   )

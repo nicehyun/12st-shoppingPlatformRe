@@ -7,7 +7,7 @@ interface IMyPageSectionTitle {
 
 const MyPageSectionTitle = ({ title }: IMyPageSectionTitle) => {
   return (
-    <header className="flex justify-between border-b-black border-b-[3px] dark:border-b-white pb-[20px]">
+    <header className="flex justify-between border-b-black border-b-[4px] dark:border-b-white pb-[20px]">
       <h3 className="text-[24px] sm:text-[18px] md:text-[18px] font-bold">
         {title}
       </h3>
