@@ -1,3 +1,4 @@
+import { numberToLocaleString } from "@/common/utils/price"
 import Button from "@/common/views/Button"
 import { AiOutlineRight } from "react-icons/ai"
 
@@ -27,7 +28,7 @@ const MyPageRewardsEl = ({
       />
 
       <span className="text-[30px] font-bold sm:text-[20px] md:text-[24px] text-white dark:text-black">
-        {showRewardNumber}
+        {numberToLocaleString(showRewardNumber)}
       </span>
     </div>
   )

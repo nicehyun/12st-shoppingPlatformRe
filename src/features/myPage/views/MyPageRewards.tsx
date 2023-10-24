@@ -3,6 +3,7 @@ import useCouponQuery from "@/features/checkout/hooks/useCouponQuery"
 import { useUserMileQuery } from "@/features/checkout/hooks/useGetUserMileQuery"
 import MyPageRewardsEl from "./MyPageRewardsEl"
 
+//TODO : 쿠폰 클릭
 const MyPageRewards = () => {
   const { coupons } = useCouponQuery()
   const { userMile } = useUserMileQuery()
