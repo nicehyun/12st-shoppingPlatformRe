@@ -1,5 +1,7 @@
+import MyPageCheckoutList from "@/features/myPage/views/MyPageCheckoutList"
+
 const MyPageCouponSection = () => {
-  return <div>마이페이지 체크아웃 섹션</div>
+  return <MyPageCheckoutList />
 }
 
 export default MyPageCouponSection

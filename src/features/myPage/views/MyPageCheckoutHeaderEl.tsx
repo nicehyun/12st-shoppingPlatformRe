@@ -6,14 +6,14 @@ interface IMyPageCheckoutEl {
 
 const MyPageCheckoutHeaderEl = ({
   headerContent,
-  isEnd = false,
   isStart = false,
+  isEnd = false,
 }: IMyPageCheckoutEl) => {
   return (
     <span
-      className={`${
-        isStart && "text-start"
-      } block h-[60px] w-1/3 flexCenter text-[14px] sm:text-[10px] md:text-[10px] font-semibold`}
+      className={`flex items-center h-[60px] md:h-[50px] w-1/3 text-[14px] sm:text-[12px] md:text-[12px] font-semibold ${
+        isStart ? "justify-start" : isEnd ? "justify-end" : "justify-center"
+      }`}
     >
       {headerContent}
     </span>

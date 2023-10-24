@@ -7,6 +7,14 @@ export type CheckoutPaymentInfo = {
   period?: string
 }
 
+type checkoutDate = {
+  year: string
+  month: string
+  date: string
+  hour: string
+  minute: string
+}
+
 export type CheckoutList = {
   deliveryName: string | null
   recipient: string
@@ -21,5 +29,5 @@ export type CheckoutList = {
   useMile: number
   getMile: number
   payment: CheckoutPaymentInfo
-  date?: string
+  checkoutDate?: checkoutDate
 }
