@@ -1,5 +1,4 @@
 import PageLayout from "@/common/views/PageLayout"
-
 import Header from "@/features/layout/views/Header"
 import { ReactNode } from "react"
 
