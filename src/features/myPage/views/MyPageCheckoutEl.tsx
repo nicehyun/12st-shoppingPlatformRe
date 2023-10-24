@@ -24,10 +24,10 @@ const MyPageCheckoutEl = ({ checkoutList, className }: IMyPageCheckoutEl) => {
       </div>
 
       <div
-        className={`flex justify-start w-1/2 cursor-pointer  group-hover:text-lightRed group-hover:underline`}
+        className={`flex justify-start w-1/2 cursor-pointer  group-hover:text-lightRed `}
       >
         <span
-          className={`block sm:h-[34.8px] md:h-[34.8px] sm:truncate-2 md:truncate-2 lg:truncate-2 xl:mr-[10px]`}
+          className={`block sm:h-[34.8px] md:h-[34.8px] sm:truncate-2 md:truncate-2 lg:truncate-2 xl:mr-[10px] group-hover:underline`}
         >
           {prductList[0].name}
         </span>
