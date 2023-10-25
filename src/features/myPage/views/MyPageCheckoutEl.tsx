@@ -9,7 +9,11 @@ interface IMyPageCheckoutEl {
 }
 
 const MyPageCheckoutEl = ({ checkoutList, className }: IMyPageCheckoutEl) => {
-  const { checkoutDate: checkoutDateInfo, prductList } = checkoutList
+  const {
+    checkoutDate: checkoutDateInfo,
+    prductList,
+    checkoutNumber,
+  } = checkoutList
 
   const checkoutDate = `${checkoutDateInfo?.year}/${checkoutDateInfo?.month}/${checkoutDateInfo?.date}`
   const checkoutTime = ` ${checkoutDateInfo?.hour} : ${checkoutDateInfo?.minute}`
@@ -17,7 +21,7 @@ const MyPageCheckoutEl = ({ checkoutList, className }: IMyPageCheckoutEl) => {
     <div
       className={`${className} flex items-center h-[60px] text-[14px] sm:text-[12px] md:text-[12px] font-normal group cursor-pointer`}
     >
-      <div className="flex justify-start flex-col xl:flex-row w-1/4 text-lightBlack group-hover:text-black group-hover:dark:text-white  group-hover:font-semibold">
+      <div className="flex justify-start flex-col xl:flex-row w-1/4 text-lightBlack group-hover:text-black group-hover:dark:text-white  ">
         <span className="xl:mr-[10px]">{checkoutDate}</span>
 
         <span>{checkoutTime}</span>
@@ -27,7 +31,7 @@ const MyPageCheckoutEl = ({ checkoutList, className }: IMyPageCheckoutEl) => {
         className={`flex justify-start w-1/2 cursor-pointer  group-hover:text-lightRed `}
       >
         <span
-          className={`block sm:h-[34.8px] md:h-[34.8px] sm:truncate-2 md:truncate-2 lg:truncate-2 xl:mr-[10px] group-hover:underline`}
+          className={`block sm:h-[34.8px] md:h-[34.8px] sm:truncate-2 md:truncate-2 lg:truncate-2 xl:mr-[10px]`}
         >
           {prductList[0].name}
         </span>

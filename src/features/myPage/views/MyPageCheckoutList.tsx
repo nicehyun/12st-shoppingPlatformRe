@@ -19,7 +19,7 @@ const MyPageCheckoutList = () => {
           <MyPageCheckoutHeaderEl headerContent="결제금액" isEnd />
         </div>
 
-        <div className="">
+        <div>
           {checkoutList.length === 0 ? (
             <div className="flexCenter h-[100px] font-bold text-[18px]">
               주문내역이 없습니다
@@ -33,7 +33,7 @@ const MyPageCheckoutList = () => {
                     ? "border-t-[1px] border-border dark:border-b-lightBlack"
                     : ""
                 }
-                key={`checkoutList-${checkoutEl.checkoutDate?.year}/${checkoutEl.checkoutDate?.month}/${checkoutEl.checkoutDate?.date}/${checkoutEl.checkoutDate?.hour}/${checkoutEl.checkoutDate?.minute}-${index}`}
+                key={checkoutList[index]?.checkoutNumber}
               />
             ))
           )}

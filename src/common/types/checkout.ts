@@ -30,4 +30,5 @@ export type CheckoutList = {
   getMile: number
   payment: CheckoutPaymentInfo
   checkoutDate?: checkoutDate
+  checkoutNumber?: string
 }
