@@ -25,10 +25,6 @@ type FeedbackModal = {
   modalContent: string
 }
 
-type CartModal = {
-  isShowModal: boolean
-}
-
 type BasicModal = {
   isShowModal: boolean
   modalId: string
@@ -46,7 +42,7 @@ type RouteModal = {
 
 type InitialModalState = {
   feedbackModal: FeedbackModal
-  cartModal: CartModal
+
   basicModal: BasicModal
   routeModal: RouteModal
 }
@@ -56,9 +52,7 @@ const initialModalState: InitialModalState = {
     isShowModal: false,
     modalContent: "",
   },
-  cartModal: {
-    isShowModal: false,
-  },
+
   basicModal: {
     isShowModal: false,
     modalId: "",
@@ -85,12 +79,6 @@ const modalSlice = createSlice({
     hideFeedbackModal(state) {
       state.feedbackModal.isShowModal = false
       state.feedbackModal.modalContent = ""
-    },
-    showCartModal(state) {
-      state.cartModal.isShowModal = true
-    },
-    hideCartModal(state) {
-      state.cartModal.isShowModal = false
     },
     showBasicModal(state, actions: PayloadAction<ShowBasicModalPayload>) {
       state.basicModal.isShowModal = true
@@ -121,8 +109,6 @@ const modalSlice = createSlice({
 export const {
   showFeedbackModal,
   hideFeedbackModal,
-  showCartModal,
-  hideCartModal,
   showBasicModal,
   hideBasicModal,
   hideRouteModal,
@@ -131,8 +117,6 @@ export const {
 
 export const selectFeedbackModal = (state: RootState) =>
   state.modal.feedbackModal
-
-export const selectCartModalState = (state: RootState) => state.modal.cartModal
 
 export const selectBasicModalState = (state: RootState) =>
   state.modal.basicModal
