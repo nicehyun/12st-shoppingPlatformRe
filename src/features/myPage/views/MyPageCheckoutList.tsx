@@ -9,11 +9,11 @@ const MyPageCheckoutList = () => {
   const { checkoutList } = useGetCheckoutListQuery()
 
   return (
-    <section className="mt-[60px]">
+    <section>
       <MyPageSectionTitle title="주문내역" />
 
       <div className="border-b-border border-b-[1px] dark:border-b-lightBlack">
-        <div className="flex border-b-black dark:border-white border-b-[1px]">
+        <div className="flex border-b-black dark:border-white border-b-[1px] h-[60px] md:h-[50px] text-[14px] sm:text-[12px] md:text-[12px] font-semibold">
           <MyPageCheckoutHeaderEl headerContent="주문일" isStart />
           <MyPageCheckoutHeaderEl headerContent="주문내역" />
           <MyPageCheckoutHeaderEl headerContent="결제금액" isEnd />

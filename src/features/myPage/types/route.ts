@@ -1,5 +1,5 @@
 export enum MyPageRoute {
-  CHECKOUTLIST = "/checkoutlist",
-  CHECKOUTACTIONLIST = "/checkoutActionlist",
-  CHECKOUTREVIEWLIST = "/checkoutReviewlist",
+  CHECKOUTLIST = "/checkoutList",
+  CHECKOUTCANCELLIST = "/checkoutCancelList",
+  CHECKOUTREVIEWLIST = "/checkoutReviewList",
 }

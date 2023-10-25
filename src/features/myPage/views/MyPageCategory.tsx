@@ -10,7 +10,7 @@ const MyPageCategory = () => {
         categoryListContents: ["주문내역", "취소/교환/반품 내역", "상품리뷰"],
         categoryListRoutes: [
           MyPageRoute.CHECKOUTLIST,
-          MyPageRoute.CHECKOUTACTIONLIST,
+          MyPageRoute.CHECKOUTCANCELLIST,
           MyPageRoute.CHECKOUTREVIEWLIST,
         ],
       },
@@ -22,7 +22,7 @@ const MyPageCategory = () => {
         categoryListContents: ["회원정보수정", "쿠폰", "마일리지"],
         categoryListRoutes: [
           MyPageRoute.CHECKOUTLIST,
-          MyPageRoute.CHECKOUTACTIONLIST,
+          MyPageRoute.CHECKOUTCANCELLIST,
           MyPageRoute.CHECKOUTREVIEWLIST,
         ],
       },
@@ -35,7 +35,7 @@ const MyPageCategory = () => {
         categoryListContents: ["1:1 문의내역", "상품 Q&A내역"],
         categoryListRoutes: [
           MyPageRoute.CHECKOUTLIST,
-          MyPageRoute.CHECKOUTACTIONLIST,
+          MyPageRoute.CHECKOUTCANCELLIST,
         ],
       },
     },

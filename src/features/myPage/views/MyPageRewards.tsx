@@ -23,7 +23,7 @@ const MyPageRewards = () => {
     },
   ]
   return (
-    <section className="lg:h-[180px] xl:h-[180px] sm:border-b-[1px] md:border-b-[1px] sm:border-border md:border-border bg-black dark:bg-white flexCenter">
+    <section className="lg:h-[180px] xl:h-[180px] sm:border-b-[1px] md:border-b-[1px] sm:border-border md:border-border bg-black dark:bg-white flexCenter mb-[60px]">
       {rewardList.map((rewardEl, index) => (
         <MyPageRewardsEl
           key={rewardEl.id}
