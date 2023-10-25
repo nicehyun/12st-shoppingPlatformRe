@@ -4,6 +4,7 @@ import { useState } from "react"
 import { CancelType } from "../types/myPage"
 import MyPageCancelHeaderEl from "./MyPageCancelHeaderEl"
 import MyPageCancelListController from "./MyPageCancelListController"
+import MyPageSectionTitle from "./MyPageSectionTitle"
 
 const MyPageCancelList = () => {
   const [selectedCancelType, setSelectedCancelType] =
@@ -24,16 +25,13 @@ const MyPageCancelList = () => {
   ]
 
   return (
-    <div>
-      <header className="flex justify-between border-b-black border-b-[4px] dark:border-b-white pb-[20px]">
-        <h3 className="text-[24px] sm:text-[18px] md:text-[18px] font-bold">
-          취소/반품/교환 내역
-        </h3>
+    <section>
+      <MyPageSectionTitle title="취소/반품/교환 내역">
         <MyPageCancelListController
           cancelTypeState={selectedCancelType}
           onChangeCancelType={handleCancelTypeChange}
         />
-      </header>
+      </MyPageSectionTitle>
 
       <div className="border-b-border border-b-[1px] dark:border-b-lightBlack">
         <div className="h-[60px] md:h-[50px] flex justify-between border-b-black dark:border-white border-b-[1px] text-[14px] sm:text-[12px] md:text-[12px] font-semibold">
@@ -52,7 +50,7 @@ const MyPageCancelList = () => {
           취소/반품/교환 내역이 없습니다
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 
