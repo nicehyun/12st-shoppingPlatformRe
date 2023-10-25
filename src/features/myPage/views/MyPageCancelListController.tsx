@@ -6,36 +6,32 @@ interface IMyPageCancelListController {
   onChangeCancelType: (cancelType: CancelType) => void
 }
 
+type CancelTypeButtonList = {
+  value: CancelType
+  content: string
+}
+
 const MyPageCancelListController = ({
   onChangeCancelType,
   cancelTypeState,
 }: IMyPageCancelListController) => {
+  const cancelTypeButtonList: CancelTypeButtonList[] = [
+    { value: "all", content: "ALL" },
+    { value: "cancel", content: "취소" },
+    { value: "return", content: "반품" },
+    { value: "change", content: "교환" },
+  ]
   return (
-    <div className="font-semibold md:text-[12px] sm:text-[12px]">
-      <MyPageCancelTypeButton
-        value="all"
-        content="ALL"
-        cancelTypeState={cancelTypeState}
-        onChangeCancelType={onChangeCancelType}
-      />
-      <MyPageCancelTypeButton
-        value="cancel"
-        content="취소"
-        cancelTypeState={cancelTypeState}
-        onChangeCancelType={onChangeCancelType}
-      />
-      <MyPageCancelTypeButton
-        value="return"
-        content="반품"
-        cancelTypeState={cancelTypeState}
-        onChangeCancelType={onChangeCancelType}
-      />
-      <MyPageCancelTypeButton
-        value="change"
-        content="교환"
-        cancelTypeState={cancelTypeState}
-        onChangeCancelType={onChangeCancelType}
-      />
+    <div className="font-semibold md:text-[12px] sm:text-[12px] text-[14px]">
+      {cancelTypeButtonList.map((cancelTypeButtonEl) => (
+        <MyPageCancelTypeButton
+          key={`mypage-cancelType-${cancelTypeButtonEl.value}`}
+          value={cancelTypeButtonEl.value}
+          content={cancelTypeButtonEl.content}
+          cancelTypeState={cancelTypeState}
+          onChangeCancelType={onChangeCancelType}
+        />
+      ))}
     </div>
   )
 }
