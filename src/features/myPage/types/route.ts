@@ -4,4 +4,5 @@ export enum MyPageRoute {
   CHECKOUTREVIEWLIST = "/reviewList",
   WRITEABLEREVIEWS = "/reviewList/writeableReviews",
   MYREVIEW = "/reviewList/myReview",
+  USERINFOOFMODIFICATION = "/userInfoOfModification",
 }
