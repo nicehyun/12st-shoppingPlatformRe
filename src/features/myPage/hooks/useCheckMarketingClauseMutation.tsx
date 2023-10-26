@@ -1,25 +1,24 @@
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
-
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { cartAPI } from "../models/cartAPI"
-import { ProductInCart } from "../types/cart"
+import { myPageAPI } from "../models/myPageAPI"
 
-const useDecreaseAmountMutation = (productInfo: ProductInCart) => {
+const useCheckMarketingClauseMutation = () => {
   const { sessionQuery } = useSessionQuery()
   const queryClient = useQueryClient()
+
   const dispatch = useAppDispatch()
 
   const decreaseMutaion = useMutation(
-    () =>
-      cartAPI.decreaseProductToCart(
+    (isChecked: boolean) =>
+      myPageAPI.modificatieMarketingClause(
         sessionQuery?.user.email ?? "",
-        productInfo.id
+        isChecked
       ),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(["productListInCart"])
+        queryClient.invalidateQueries(["userInfo"])
       },
       onError: () =>
         dispatch(
@@ -34,4 +33,4 @@ const useDecreaseAmountMutation = (productInfo: ProductInCart) => {
   return decreaseMutaion
 }
 
-export default useDecreaseAmountMutation
+export default useCheckMarketingClauseMutation
