@@ -1,4 +1,4 @@
-import MyPageUserInfoOfModification from "@/features/myPage/views/MyPageUserInfoOfModification"
+import MyPageUserInfoOfModification from "@/features/myPage/views/userInfoOfMotification/MyPageUserInfoOfModification"
 
 const UserInfoOfModificationSection = () => {
   return <MyPageUserInfoOfModification />

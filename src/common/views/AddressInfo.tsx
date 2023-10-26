@@ -58,7 +58,7 @@ const AddressInfo = ({
           name="zipcode"
           id="zipcode"
           isReadOnly={true}
-          classNames="mb-[10px] flex-grow w-full h-[50px] sm:h-[40px] md:h-[44px]"
+          classNames="mb-[10px] flex-grow h-[50px] sm:h-[40px] md:h-[44px]"
           value={zipcodeValue}
         />
 
