@@ -15,9 +15,15 @@ interface IAddressInfo {
     hasError: boolean
     reset: () => void
   }
+  className?: string
 }
 
-const AddressInfo = ({ additionalAddress, address, zipcode }: IAddressInfo) => {
+const AddressInfo = ({
+  additionalAddress,
+  address,
+  zipcode,
+  className,
+}: IAddressInfo) => {
   const {
     addressValue,
     zipcodeValue,
@@ -45,14 +51,14 @@ const AddressInfo = ({ additionalAddress, address, zipcode }: IAddressInfo) => {
     }
   }, [zipcode, address])
   return (
-    <div className="max-w-[500px] flex flex-col flex-grow">
-      <div className="flex ">
+    <div className={`${className} flex flex-col flex-grow`}>
+      <div className="flex">
         <Input
           type="text"
           name="zipcode"
           id="zipcode"
           isReadOnly={true}
-          classNames="mb-[10px] w-full h-[50px] sm:h-[40px] md:h-[44px]"
+          classNames="mb-[10px] flex-grow w-full h-[50px] sm:h-[40px] md:h-[44px]"
           value={zipcodeValue}
         />
 
@@ -81,7 +87,7 @@ const AddressInfo = ({ additionalAddress, address, zipcode }: IAddressInfo) => {
         onBlur={additionalAddress?.handleInputBlur}
         isShowFeedback={additionalAddress?.hasError}
         onChange={additionalAddress?.handleValueChange}
-        classNames="h-[50px] sm:h-[40px] md:h-[44px]"
+        classNames="h-[50px] w-full sm:h-[40px] md:h-[44px]"
         maxLength={50}
       />
 

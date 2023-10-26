@@ -25,7 +25,7 @@ const CheckoutAddressInput = ({ defaultValue }: ICheckoutAddressInput) => {
       errorFeedbackMsg="배송지 상세 주소를 입력해주세요 (특수문자 사용 불가)"
       inputState={{ hasError: additionalInput.hasError }}
     >
-      <AddressInfo />
+      <AddressInfo className="max-w-[500px]" />
     </CheckoutInputLayout>
   )
 }

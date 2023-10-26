@@ -34,7 +34,7 @@ const Input = ({
   isShowFeedback,
 }: IInput) => {
   return (
-    <div className={`${classNames} relative h-[38px] max-w-[400px]`}>
+    <div className={`${classNames} relative h-[38px]`}>
       <input
         type={type}
         name={name}
