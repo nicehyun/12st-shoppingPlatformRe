@@ -12,16 +12,19 @@ const MyPageClauseModification = () => {
   const { userInfo } = useGetUserInfoQuery()
   const [isCheckedMarketingClause, setIsCheckedMarketingClause] =
     useState(false)
+  const [isChagedClauseState, setIsChagedClauseState] = useState(false)
 
   const handleMarketingClauseModification = async () => {
     if (userInfo?.marketingClause === isCheckedMarketingClause || isLoading)
       return
 
     await mutateAsync(isCheckedMarketingClause)
+    setIsChagedClauseState(false)
   }
 
   const toggleMarketingClause = () => {
     setIsCheckedMarketingClause((prev) => !prev)
+    setIsChagedClauseState(true)
   }
 
   useEffect(() => {
@@ -42,6 +45,8 @@ const MyPageClauseModification = () => {
         onClickClauseLabel={toggleMarketingClause}
         onClickDetailClause={() => console.log(123)}
       />
+      <button className="disabled:cursor-not-allowed disabled:bg-border "></button>
+
       <Button
         onClick={handleMarketingClauseModification}
         content={
@@ -54,7 +59,8 @@ const MyPageClauseModification = () => {
             "저장하기"
           )
         }
-        classNames="mt-[30px] h-[50px] w-[400px] md:w-full sm:w-full sm:h-[40px] md:h-[44px] border-[1px] text-lightRed border-lightRed dark:bg-lightRed text-lightRed dark:text-black text-[14px] font-semibold rounded-[5px]"
+        isDisabled={!isChagedClauseState}
+        classNames={`disabled:cursor-not-allowed disabled:bg-border disabled:text-white disabled:border-border mt-[30px] h-[50px] w-[400px] md:w-full sm:w-full sm:h-[40px] md:h-[44px] border-[1px] text-lightRed border-lightRed dark:bg-lightRed text-lightRed dark:text-black text-[14px] font-semibold rounded-[5px]`}
       />
     </>
   )

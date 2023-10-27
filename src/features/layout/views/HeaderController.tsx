@@ -21,6 +21,7 @@ const HeaderController = ({
 }: IHeaderController) => {
   const { routeTo } = useNavigations()
   const { sessionQuery } = useSessionQuery()
+  console.log(sessionQuery)
 
   return (
     <div
