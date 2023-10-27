@@ -11,22 +11,22 @@ import TabPanel from "@/common/views/TabPanel"
 
 import { showBasicModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
-import { useGetAddressQuery } from "../hooks/useGetAddressQuery"
+import { useGetDefaultDeliveryInfoQuery } from "../hooks/useGetDefaultDeliveryInfoQuery"
 import CheckoutDefalutDeliveryInfo from "./CheckoutDefalutDeliveryInfo"
 import CheckoutNewDeliveryInfo from "./CheckoutNewDeliveryInfo"
 import Button from "@/common/views/Button"
 
 const DeliveryInfo = () => {
   const dispatch = useAppDispatch()
-  const { userDefalutAddress } = useGetAddressQuery()
+  const { userDefalutDeliveryInfo } = useGetDefaultDeliveryInfoQuery()
 
   const [deliveryTabValue, setDeliveryTabValue] = useState(1)
 
   useEffect(() => {
-    if (userDefalutAddress) {
+    if (userDefalutDeliveryInfo) {
       setDeliveryTabValue(0)
     }
-  }, [userDefalutAddress])
+  }, [userDefalutDeliveryInfo])
 
   const showDeliveryExplanationModal = () => {
     dispatch(

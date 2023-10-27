@@ -1,6 +1,8 @@
+import Loading from "@/common/views/Loading"
+import { Suspense } from "react"
 import MyPageSectionTitle from "../MyPageSectionTitle"
 import MyPageClauseModification from "./MyPageClauseModification"
-import MyPageDefaultAddressModification from "./MyPageDefaultAddressModification"
+import MyPageDefaultDeliverInfoModification from "./MyPageDefaultDeliverInfoModification"
 import MyPageEmailModification from "./MyPageEmailModification"
 import MyPageMemberTermination from "./MyPageMemberTermination"
 import MyPageUserInfoModification from "./MyPageUserInfoModification"
@@ -22,8 +24,8 @@ const MyPageUserInfoOfModification = () => {
     },
     {
       id: "defaultAddress",
-      title: "주소정보",
-      modificationContent: <MyPageDefaultAddressModification />,
+      title: "기본 배송정보",
+      modificationContent: <MyPageDefaultDeliverInfoModification />,
       className: "border-b-[4px]",
     },
     {
@@ -44,12 +46,22 @@ const MyPageUserInfoOfModification = () => {
       <MyPageSectionTitle title="회원정보 수정" />
       <ul>
         {myPageUserModificationList.map((modificationEl) => (
-          <MyPageUserInfoOfModificationEl
+          <Suspense
             key={`modification__${modificationEl.id}`}
-            title={modificationEl.title}
-            modificationContent={modificationEl.modificationContent}
-            className={modificationEl.className}
-          />
+            fallback={
+              <Loading
+                spinnerSize={{ width: "w-[30px]", height: "h-[30px]" }}
+                height="h-[400px]"
+                isFrame={false}
+              />
+            }
+          >
+            <MyPageUserInfoOfModificationEl
+              title={modificationEl.title}
+              modificationContent={modificationEl.modificationContent}
+              className={modificationEl.className}
+            />
+          </Suspense>
         ))}
       </ul>
     </section>

@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
   try {
     if (isUpdateDeliveryInfo) {
       await addressAPI.updateDefalutDeliveryInfo(email, {
-        delivertName: checkoutInfo.deliveryName,
+        deliveryName: checkoutInfo.deliveryName,
         recipient: checkoutInfo.recipient,
         additionalAddress: checkoutInfo.additionalAddress,
         address: checkoutInfo.address,

@@ -2,11 +2,11 @@ import { addressAPI } from "@/common/models/addressAPI"
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { useQuery } from "@tanstack/react-query"
 
-export const useGetAddressQuery = () => {
+export const useGetDefaultDeliveryInfoQuery = () => {
   const { sessionQuery } = useSessionQuery()
 
   const { data: userDefalutAddress } = useQuery(
-    ["userDefaultAddress"],
+    ["userDefaultDeliveryInfo"],
     () => addressAPI.getUserDefaultDeliveryInfo(sessionQuery?.user.email ?? ""),
     {
       // suspense: true,
@@ -14,5 +14,5 @@ export const useGetAddressQuery = () => {
     }
   )
 
-  return { userDefalutAddress: userDefalutAddress ?? null }
+  return { userDefalutDeliveryInfo: userDefalutAddress ?? null }
 }

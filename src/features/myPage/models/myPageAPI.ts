@@ -1,7 +1,9 @@
+import { DeliveryInfo } from "@/common/types/address"
 import { ResponseUserInfo } from "@/common/types/user"
 import firebaseApp from "@/firebase/config"
 import { AxiosError } from "axios"
 import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore"
+import { MyPageRoute } from "../types/route"
 
 const db = getFirestore(firebaseApp)
 
@@ -59,6 +61,42 @@ export const myPageAPI = {
       }
 
       throw Error(`🚨 modificatieMarketingClause firebase API : ${error}`)
+    }
+  },
+
+  modificatieDefaultAddress: async (
+    email: string,
+    deliveryInfo: DeliveryInfo
+  ) => {
+    if (email === "") return
+
+    try {
+      const defaultDeliveryInfoRef = doc(db, "defaultDeliveryInfo", email)
+      const defaultDeliveryInfoRefDoc = await getDoc(defaultDeliveryInfoRef)
+
+      if (defaultDeliveryInfoRefDoc.exists()) {
+        const defaultDeliveryInfoData =
+          defaultDeliveryInfoRefDoc.data() as DeliveryInfo
+
+        if (
+          Object.keys(defaultDeliveryInfoData).every(
+            (key) => defaultDeliveryInfoData[key] === deliveryInfo[key]
+          )
+        )
+          return
+
+        await setDoc(defaultDeliveryInfoRef, deliveryInfo)
+      } else {
+        return undefined
+      }
+    } catch (error) {
+      const { response } = error as unknown as AxiosError
+
+      if (response) {
+        throw Error(`🚨 firebase getDocs API : ${error}`)
+      }
+
+      throw Error(`🚨 modificatieDefaultAddress firebase API : ${error}`)
     }
   },
 }

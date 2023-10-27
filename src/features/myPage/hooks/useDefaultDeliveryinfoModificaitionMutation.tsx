@@ -1,20 +1,21 @@
+import { DeliveryInfo } from "@/common/types/address"
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { myPageAPI } from "../models/myPageAPI"
 
-const useCheckMarketingClauseMutation = () => {
+const useDefaultDeliveryinfoModificaitionMutation = () => {
   const { sessionQuery } = useSessionQuery()
   const queryClient = useQueryClient()
 
   const dispatch = useAppDispatch()
 
   const checkMarketingClauseMutaion = useMutation(
-    (isChecked: boolean) =>
-      myPageAPI.modificatieMarketingClause(
+    (deliveryInfo: DeliveryInfo) =>
+      myPageAPI.modificatieDefaultAddress(
         sessionQuery?.user.email ?? "",
-        isChecked
+        deliveryInfo
       ),
     {
       onSuccess: () => {
@@ -33,4 +34,4 @@ const useCheckMarketingClauseMutation = () => {
   return checkMarketingClauseMutaion
 }
 
-export default useCheckMarketingClauseMutation
+export default useDefaultDeliveryinfoModificaitionMutation
