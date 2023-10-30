@@ -8,19 +8,19 @@ const MyPageTotalMileInfoContent = () => {
   const { userMile, totalGetMile, totalUseMile } = useGetUseMileAndGetMile()
   return (
     <div
-      className={`flex h-[60px] text-[14px] sm:text-[12px] md:text-[12px] text-black border-b-[1px] border-border`}
+      className={`flex h-[60px] text-[14px] sm:text-[12px] md:text-[12px] border-b-[1px] border-border`}
     >
       <MyPageTableContentEl
         equalParts={3}
-        content={numberToLocaleString(userMile ?? 0)}
+        content={`${numberToLocaleString(userMile ?? 0)} mile`}
       />
       <MyPageTableContentEl
         equalParts={3}
-        content={numberToLocaleString(totalGetMile ?? 0)}
+        content={`${numberToLocaleString(totalGetMile ?? 0)} mile`}
       />
       <MyPageTableContentEl
         equalParts={3}
-        content={numberToLocaleString(totalUseMile ?? 0)}
+        content={`${numberToLocaleString(totalUseMile ?? 0)} mile`}
       />
     </div>
   )
