@@ -6,11 +6,11 @@ import DialogContent from "@mui/material/DialogContent"
 import { ReactNode } from "react"
 
 interface IAlertModal {
-  cancelButtonContent: string
-  agreeButtonContent: string
+  cancelButtonContent: ReactNode
+  agreeButtonContent: ReactNode
   isShowModal: boolean
   modalId: string
-
+  isDisabledAgreeButton?: boolean
   onClickConfirmedAlertButton: () => void
   onHideModal: () => void
   children: ReactNode
@@ -20,7 +20,7 @@ const AlertModal = ({
   cancelButtonContent,
   agreeButtonContent,
   isShowModal,
-
+  isDisabledAgreeButton,
   modalId,
   onClickConfirmedAlertButton,
   onHideModal,
@@ -40,6 +40,7 @@ const AlertModal = ({
       </DialogContent>
       <DialogActions>
         <Button
+          disabled={isDisabledAgreeButton}
           onClick={onClickConfirmedAlertButton}
           sx={{
             "&:hover": {
