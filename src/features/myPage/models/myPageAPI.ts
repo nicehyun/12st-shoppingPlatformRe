@@ -2,7 +2,13 @@ import { DeliveryInfo } from "@/common/types/address"
 import { ResponseUserInfo } from "@/common/types/user"
 import firebaseApp from "@/firebase/config"
 import { AxiosError } from "axios"
-import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore"
+import {
+  deleteDoc,
+  doc,
+  getDoc,
+  getFirestore,
+  setDoc,
+} from "firebase/firestore"
 import { MyPageRoute } from "../types/route"
 
 const db = getFirestore(firebaseApp)
@@ -63,7 +69,6 @@ export const myPageAPI = {
       throw Error(`🚨 modificatieMarketingClause firebase API : ${error}`)
     }
   },
-
   modificatieDefaultAddress: async (
     email: string,
     deliveryInfo: DeliveryInfo
@@ -97,6 +102,35 @@ export const myPageAPI = {
       }
 
       throw Error(`🚨 modificatieDefaultAddress firebase API : ${error}`)
+    }
+  },
+  memberTermination: async (email: string) => {
+    if (email === "") return
+
+    try {
+      const userRef = doc(db, "user", email)
+      const addressRef = doc(db, "address", email)
+      const cartRef = doc(db, "cart", email)
+      const checkoutRef = doc(db, "checkout", email)
+      const defaultDeliveryInfoRef = doc(db, "defaultDeliveryInfo", email)
+
+      await deleteDoc(userRef)
+      await deleteDoc(addressRef)
+      await deleteDoc(cartRef)
+      await deleteDoc(checkoutRef)
+      await deleteDoc(defaultDeliveryInfoRef)
+
+      return {
+        result: "success",
+      }
+    } catch (error) {
+      const { response } = error as unknown as AxiosError
+
+      if (response) {
+        throw Error(`🚨 firebase getDocs API : ${error}`)
+      }
+
+      throw Error(`🚨 memberTermination firebase API : ${error}`)
     }
   },
 }

@@ -55,8 +55,8 @@ const RouteModal = () => {
             "&:hover": {
               backgroundColor: "rgba(255, 78, 10, 0.2)",
             },
+            color: "#ff4e0a",
           }}
-          className="text-lightRed"
           autoFocus
         >
           이동
@@ -67,8 +67,8 @@ const RouteModal = () => {
             "&:hover": {
               backgroundColor: "rgba(255, 78, 10, 0.2)",
             },
+            color: "#ccc",
           }}
-          className="text-lightGray"
         >
           닫기
         </Button>

@@ -3,6 +3,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 import { RootState } from "../types/store"
 
+interface ConfirmedButtonClickPatload {
+  alertFn: () => void
+}
+interface ShowAlertModalPayload {
+  modalId: string
+  modalContent: string
+}
 interface ShowFeedbackModalPayload {
   modalContent: string
 }
@@ -18,6 +25,12 @@ interface ShowRouteModalPayload {
   modalTitle: string
   modalContent: string
   route: ROUTE
+}
+
+type AlertModal = {
+  modalId: string
+  isShowModal: boolean
+  modalContent: string
 }
 
 type FeedbackModal = {
@@ -42,7 +55,7 @@ type RouteModal = {
 
 type InitialModalState = {
   feedbackModal: FeedbackModal
-
+  alertModal: AlertModal
   basicModal: BasicModal
   routeModal: RouteModal
 }
@@ -52,7 +65,11 @@ const initialModalState: InitialModalState = {
     isShowModal: false,
     modalContent: "",
   },
-
+  alertModal: {
+    modalId: "",
+    isShowModal: false,
+    modalContent: "",
+  },
   basicModal: {
     isShowModal: false,
     modalId: "",
@@ -103,6 +120,22 @@ const modalSlice = createSlice({
       state.routeModal.modalContent = ""
       state.routeModal.route = null
     },
+    showAlertModal(state, actions: PayloadAction<ShowAlertModalPayload>) {
+      state.alertModal.isShowModal = true
+      state.alertModal.modalId = actions.payload.modalId
+      state.alertModal.modalContent = actions.payload.modalContent
+    },
+    hideAlertModal(state) {
+      state.alertModal.isShowModal = false
+      state.alertModal.modalId = ""
+      state.alertModal.modalContent = ""
+    },
+    confirmedAlertButtonClick(
+      state,
+      actions: PayloadAction<ConfirmedButtonClickPatload>
+    ) {
+      actions.payload.alertFn()
+    },
   },
 })
 
@@ -113,6 +146,8 @@ export const {
   hideBasicModal,
   hideRouteModal,
   showRouteModal,
+  showAlertModal,
+  hideAlertModal,
 } = modalSlice.actions
 
 export const selectFeedbackModal = (state: RootState) =>
@@ -123,5 +158,8 @@ export const selectBasicModalState = (state: RootState) =>
 
 export const selectRouteModalState = (state: RootState) =>
   state.modal.routeModal
+
+export const selectAlertModalState = (state: RootState) =>
+  state.modal.alertModal
 
 export default modalSlice.reducer
