@@ -2,8 +2,9 @@
 
 import { useGetCheckoutListQuery } from "@/features/checkout/hooks/useGetCheckoutListQuery"
 import MyPageCheckoutEl from "./MyPageCheckoutEl"
-import MyPageCheckoutHeaderEl from "./MyPageCheckoutHeaderEl"
+
 import MyPageSectionTitle from "../MyPageSectionTitle"
+import MyPageTableHeaderEl from "../MyPageTableHeaderEl"
 
 const MyPageCheckoutList = () => {
   const { checkoutList } = useGetCheckoutListQuery()
@@ -14,9 +15,9 @@ const MyPageCheckoutList = () => {
 
       <div className="border-b-border border-b-[1px] dark:border-b-lightBlack">
         <div className="flex border-b-black dark:border-white border-b-[1px] h-[60px] md:h-[50px] text-[14px] sm:text-[12px] md:text-[12px] font-semibold">
-          <MyPageCheckoutHeaderEl headerContent="주문일" isStart />
-          <MyPageCheckoutHeaderEl headerContent="주문내역" />
-          <MyPageCheckoutHeaderEl headerContent="결제금액" isEnd />
+          <MyPageTableHeaderEl headerContent="주문일" equalParts={3} isStart />
+          <MyPageTableHeaderEl headerContent="주문내역" equalParts={3} />
+          <MyPageTableHeaderEl headerContent="결제금액" equalParts={3} isEnd />
         </div>
 
         <div>

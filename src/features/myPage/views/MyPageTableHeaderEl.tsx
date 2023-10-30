@@ -3,6 +3,7 @@ interface IMyPageCheckoutEl {
   isStart?: boolean
   isEnd?: boolean
   equalParts: number
+  className?: string
 }
 
 const MyPageTableHeaderEl = ({
@@ -10,10 +11,11 @@ const MyPageTableHeaderEl = ({
   isStart = false,
   isEnd = false,
   equalParts,
+  className,
 }: IMyPageCheckoutEl) => {
   return (
     <span
-      className={`flex items-center w-1/${equalParts} ${
+      className={`${className} flex items-center w-1/${equalParts} ${
         isStart ? "justify-start" : isEnd ? "justify-end" : "justify-center"
       }`}
     >

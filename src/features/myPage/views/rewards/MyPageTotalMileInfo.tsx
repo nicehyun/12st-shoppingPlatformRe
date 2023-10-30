@@ -1,6 +1,6 @@
 import MyPageSectionSubTitle from "../MyPageSectionSubTitle"
 import MyPageTableContentEl from "../MyPageTableContentEl"
-import MyPageTotalMileInfoContent from "./MyPageToTalMileInfoContent"
+import MyPageTotalMileInfoContent from "./MyPageTotalMileInfoContent"
 
 const MyPageTotalMileInfo = () => {
   return (
