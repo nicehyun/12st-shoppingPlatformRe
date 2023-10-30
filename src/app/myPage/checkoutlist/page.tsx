@@ -1,4 +1,4 @@
-import MyPageCheckoutList from "@/features/myPage/views/MyPageCheckoutList"
+import MyPageCheckoutList from "@/features/myPage/views/shoppingInfo/MyPageCheckoutList"
 
 const MyPageCheckoutListSection = () => {
   return <MyPageCheckoutList />

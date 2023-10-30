@@ -1,10 +1,10 @@
 "use client"
 
 import { useState } from "react"
-import { CancelType } from "../types/myPage"
+import { CancelType } from "../../types/myPage"
 import MyPageCancelHeaderEl from "./MyPageCancelHeaderEl"
 import MyPageCancelListController from "./MyPageCancelListController"
-import MyPageSectionTitle from "./MyPageSectionTitle"
+import MyPageSectionTitle from "../MyPageSectionTitle"
 
 const MyPageCancelList = () => {
   const [selectedCancelType, setSelectedCancelType] =

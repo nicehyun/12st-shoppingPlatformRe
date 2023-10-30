@@ -1,4 +1,4 @@
-import { CancelType } from "../types/myPage"
+import { CancelType } from "../../types/myPage"
 import MyPageCancelTypeButton from "./MyPageCancelTypeButton"
 
 interface IMyPageCancelListController {

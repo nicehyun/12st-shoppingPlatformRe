@@ -3,7 +3,7 @@
 import { useGetCheckoutListQuery } from "@/features/checkout/hooks/useGetCheckoutListQuery"
 import MyPageCheckoutEl from "./MyPageCheckoutEl"
 import MyPageCheckoutHeaderEl from "./MyPageCheckoutHeaderEl"
-import MyPageSectionTitle from "./MyPageSectionTitle"
+import MyPageSectionTitle from "../MyPageSectionTitle"
 
 const MyPageCheckoutList = () => {
   const { checkoutList } = useGetCheckoutListQuery()

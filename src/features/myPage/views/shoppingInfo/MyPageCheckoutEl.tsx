@@ -1,6 +1,6 @@
 import { CheckoutList } from "@/common/types/checkout"
 import { numberToLocaleString } from "@/common/utils/price"
-import { checkoutTotalPrice } from "../utils/price"
+import { checkoutTotalPrice } from "../../utils/price"
 
 interface IMyPageCheckoutEl {
   checkoutList: CheckoutList

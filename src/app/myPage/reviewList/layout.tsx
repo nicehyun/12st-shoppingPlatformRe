@@ -1,4 +1,4 @@
-import MyPageReviewList from "@/features/myPage/views/MyPageReviewList"
+import MyPageReviewList from "@/features/myPage/views/shoppingInfo/MyPageReviewList"
 import { ReactNode } from "react"
 
 const layout = ({ children }: { children: ReactNode }) => {

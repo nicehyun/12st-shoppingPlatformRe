@@ -2,7 +2,7 @@
 
 import { useNavigations } from "@/common/hooks/useNavigations"
 import Link from "next/link"
-import { MyPageRoute } from "../types/route"
+import { MyPageRoute } from "../../types/route"
 
 const MyPageReviewRouteList = () => {
   const { pathname } = useNavigations()

@@ -1,6 +1,6 @@
 import { ReactNode } from "react"
 import MyPageReviewRouteList from "./MyPageReviewRouteList"
-import MyPageSectionTitle from "./MyPageSectionTitle"
+import MyPageSectionTitle from "../MyPageSectionTitle"
 
 interface IMyPageReviewList {
   children: ReactNode

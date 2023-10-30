@@ -1,5 +1,5 @@
 import Button from "@/common/views/Button"
-import { CancelType } from "../types/myPage"
+import { CancelType } from "../../types/myPage"
 
 interface IMyPageCancelTypeButton {
   cancelTypeState: CancelType
