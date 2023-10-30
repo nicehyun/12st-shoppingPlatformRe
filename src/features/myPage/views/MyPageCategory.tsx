@@ -22,8 +22,8 @@ const MyPageCategory = () => {
         categoryListContents: ["회원정보수정", "쿠폰", "마일리지"],
         categoryListRoutes: [
           MyPageRoute.USERINFOOFMODIFICATION,
-          MyPageRoute.CHECKOUTCANCELLIST,
-          MyPageRoute.CHECKOUTREVIEWLIST,
+          MyPageRoute.COUPONS,
+          MyPageRoute.Mile,
         ],
       },
     },

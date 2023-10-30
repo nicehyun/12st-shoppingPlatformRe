@@ -8,8 +8,13 @@ export const useUserMileQuery = () => {
   const { sessionQuery } = useSessionQuery()
   const { totalPriceOfCheckedProduct } = useCheckoutPrice()
 
-  const { data: userMile } = useQuery(["userMile"], () =>
-    mileAPI.getUserMile(sessionQuery?.user.email ?? "")
+  const { data: userMile } = useQuery(
+    ["userMile"],
+    () => mileAPI.getUserMile(sessionQuery?.user.email ?? ""),
+    {
+      // suspense: true,
+      enabled: !!sessionQuery,
+    }
   )
 
   const mile = userMile ?? 0

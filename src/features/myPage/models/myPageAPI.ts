@@ -1,4 +1,5 @@
 import { DeliveryInfo } from "@/common/types/address"
+import { CheckoutList } from "@/common/types/checkout"
 import { ResponseUserInfo } from "@/common/types/user"
 import firebaseApp from "@/firebase/config"
 import { AxiosError } from "axios"
@@ -9,7 +10,7 @@ import {
   getFirestore,
   setDoc,
 } from "firebase/firestore"
-import { MyPageRoute } from "../types/route"
+import { UseMileAndGetMile } from "../types/mile"
 
 const db = getFirestore(firebaseApp)
 
@@ -77,11 +78,11 @@ export const myPageAPI = {
 
     try {
       const defaultDeliveryInfoRef = doc(db, "defaultDeliveryInfo", email)
-      const defaultDeliveryInfoRefDoc = await getDoc(defaultDeliveryInfoRef)
+      const defaultDeliveryInfoDoc = await getDoc(defaultDeliveryInfoRef)
 
-      if (defaultDeliveryInfoRefDoc.exists()) {
+      if (defaultDeliveryInfoDoc.exists()) {
         const defaultDeliveryInfoData =
-          defaultDeliveryInfoRefDoc.data() as DeliveryInfo
+          defaultDeliveryInfoDoc.data() as DeliveryInfo
 
         if (
           Object.keys(defaultDeliveryInfoData).every(
@@ -131,6 +132,37 @@ export const myPageAPI = {
       }
 
       throw Error(`🚨 memberTermination firebase API : ${error}`)
+    }
+  },
+  getUseMileAndGetMile: async (email: string) => {
+    if (email === "") return
+
+    try {
+      const checkoutRef = doc(db, "checkout", email)
+      const checkoutDoc = await getDoc(checkoutRef)
+
+      if (checkoutDoc.exists()) {
+        const checkoutData = checkoutDoc.data()
+        const checkoutList = checkoutData.checkoutList || []
+
+        const miles: UseMileAndGetMile[] = checkoutList.map(
+          (checkoutEl: CheckoutList) => {
+            const { getMile, useMile, checkoutNumber, checkoutDate } =
+              checkoutEl
+            return { getMile, useMile, checkoutNumber, checkoutDate }
+          }
+        )
+
+        return miles
+      }
+    } catch (error) {
+      const { response } = error as unknown as AxiosError
+
+      if (response) {
+        throw Error(`🚨 firebase getDocs API : ${error}`)
+      }
+
+      throw Error(`🚨 getUseMileAndGetMile firebase API : ${error}`)
     }
   },
 }

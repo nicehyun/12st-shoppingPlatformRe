@@ -18,6 +18,8 @@ export async function middleware(request: NextRequest) {
     "/myPage/reviewList/writeableReviews",
     "/myPage/reviewList/myReview",
     "/myPage/userInfoOfModification",
+    "/myPage/coupons",
+    "/myPage/mile",
   ]
   const withAuthPageList = [
     "/cart",
@@ -29,7 +31,8 @@ export async function middleware(request: NextRequest) {
     "/myPage/reviewList",
     "/myPage/reviewList/writeableReviews",
     "/myPage/reviewList/myReview",
-    "/myPage/userInfoOfModification",
+    "/myPage/coupons",
+    "/myPage/mile",
   ]
   const { pathname } = request.nextUrl
   const secret = process.env.NEXTAUTH_SECRET

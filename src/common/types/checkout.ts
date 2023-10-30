@@ -7,7 +7,7 @@ export type CheckoutPaymentInfo = {
   period?: string
 }
 
-type checkoutDate = {
+export type CheckoutDate = {
   year: string
   month: string
   date: string
@@ -29,6 +29,6 @@ export type CheckoutList = {
   useMile: number
   getMile: number
   payment: CheckoutPaymentInfo
-  checkoutDate?: checkoutDate
+  checkoutDate?: CheckoutDate
   checkoutNumber?: string
 }

@@ -6,7 +6,7 @@ interface IMyPageDefaultDeliveryInfoEl {
   className?: string
 }
 
-const MyPageDefaultDeliveryInfoEl = ({
+const MyPageSectionSubTitle = ({
   children,
   subtitle,
   className,
@@ -22,4 +22,4 @@ const MyPageDefaultDeliveryInfoEl = ({
   )
 }
 
-export default MyPageDefaultDeliveryInfoEl
+export default MyPageSectionSubTitle
