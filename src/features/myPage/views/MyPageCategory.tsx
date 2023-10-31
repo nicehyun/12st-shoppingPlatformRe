@@ -1,4 +1,4 @@
-import { MyPageRoute } from "../types/route"
+import { ROUTE } from "@/common/hooks/useNavigations"
 import MyPageCategoryEl from "./MyPageCategoryEl"
 
 const MyPageCategory = () => {
@@ -9,9 +9,9 @@ const MyPageCategory = () => {
       categoryList: {
         categoryListContents: ["주문내역", "취소/교환/반품 내역", "상품리뷰"],
         categoryListRoutes: [
-          MyPageRoute.CHECKOUTLIST,
-          MyPageRoute.CHECKOUTCANCELLIST,
-          MyPageRoute.CHECKOUTREVIEWLIST,
+          ROUTE.CHECKOUTLIST,
+          ROUTE.CHECKOUTCANCELLIST,
+          ROUTE.CHECKOUTREVIEWLIST,
         ],
       },
     },
@@ -21,9 +21,9 @@ const MyPageCategory = () => {
       categoryList: {
         categoryListContents: ["회원정보수정", "쿠폰", "마일리지"],
         categoryListRoutes: [
-          MyPageRoute.USERINFOOFMODIFICATION,
-          MyPageRoute.COUPONS,
-          MyPageRoute.Mile,
+          ROUTE.USERINFOOFMODIFICATION,
+          ROUTE.COUPONS,
+          ROUTE.Mile,
         ],
       },
     },
@@ -33,10 +33,7 @@ const MyPageCategory = () => {
       categoryTitle: "고객센터",
       categoryList: {
         categoryListContents: ["1:1 문의내역", "상품 Q&A내역"],
-        categoryListRoutes: [
-          MyPageRoute.CHECKOUTLIST,
-          MyPageRoute.CHECKOUTCANCELLIST,
-        ],
+        categoryListRoutes: [ROUTE.CHECKOUTLIST, ROUTE.CHECKOUTCANCELLIST],
       },
     },
   ]

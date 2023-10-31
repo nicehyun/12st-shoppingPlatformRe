@@ -1,9 +1,4 @@
-import {
-  useParams,
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from "next/navigation"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 export enum ROUTE {
   CART = "/cart",
@@ -15,6 +10,14 @@ export enum ROUTE {
   SIGNUP = "/auth/signUp",
   FIND_EMAIL = "/auth/find/email",
   FIND_PASSWORD = "/auth/find/password",
+  CHECKOUTLIST = "/myPage/checkoutList",
+  CHECKOUTCANCELLIST = "/myPage/checkoutCancelList",
+  CHECKOUTREVIEWLIST = "/myPage/reviewList",
+  WRITEABLEREVIEWS = "/myPage/reviewList/writeableReviews",
+  MYREVIEW = "/myPage/reviewList/myReview",
+  USERINFOOFMODIFICATION = "/myPage/userInfoOfModification",
+  COUPONS = "/myPage/coupons",
+  Mile = "/myPage/mile",
 }
 
 export const useNavigations = () => {

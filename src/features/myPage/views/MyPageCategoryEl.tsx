@@ -1,15 +1,14 @@
 "use client"
 
-import { useNavigations } from "@/common/hooks/useNavigations"
+import { ROUTE, useNavigations } from "@/common/hooks/useNavigations"
 import Link from "next/link"
-import { MyPageRoute } from "../types/route"
 
 interface IMyPageCategoryLi {
   id: string
   categoryTitle: string
   categoryList: {
     categoryListContents: string[]
-    categoryListRoutes: MyPageRoute[]
+    categoryListRoutes: ROUTE[]
   }
   className?: string
 }
@@ -37,9 +36,9 @@ const MyPageCategoryEl = ({
             }  border-lightBorder py-[20px] text-[16px] sm:text-[18px] md:text-[18px] lg:text-[14px] font-normal lg:font-light xl:font-light hover:font-semibold cursor-pointer text-black dark:text-border dark:text-lightborder dark:hover:text-border`}
           >
             <Link
-              href={`/myPage${categoryListRoutes[index]}#settings`}
+              href={`${categoryListRoutes[index]}#settings`}
               className={`link active:text-lightRed ${
-                pathname === `/myPage${categoryListRoutes[index]}`
+                pathname === `${categoryListRoutes[index]}`
                   ? "text-lightRed font-semibold"
                   : ""
               }`}

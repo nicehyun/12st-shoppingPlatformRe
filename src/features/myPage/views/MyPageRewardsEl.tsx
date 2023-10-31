@@ -5,7 +5,7 @@ import { AiOutlineRight } from "react-icons/ai"
 interface IMyPageRewardsLi {
   rewardTitle: string
   showRewardNumber: number
-  onClickDetail?: () => void
+  onClickDetail: () => void
   className?: string
 }
 
@@ -13,12 +13,14 @@ const MyPageRewardsEl = ({
   rewardTitle,
   showRewardNumber,
   className,
+  onClickDetail,
 }: IMyPageRewardsLi) => {
   return (
     <div
       className={`${className} p-[20px]  w-1/2 h-full flex flex-col justify-between`}
     >
       <Button
+        onClick={onClickDetail}
         content={
           <>
             {rewardTitle} <AiOutlineRight />

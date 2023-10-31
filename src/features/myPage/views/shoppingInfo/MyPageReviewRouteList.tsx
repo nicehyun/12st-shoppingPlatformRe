@@ -1,8 +1,7 @@
 "use client"
 
-import { useNavigations } from "@/common/hooks/useNavigations"
+import { ROUTE, useNavigations } from "@/common/hooks/useNavigations"
 import Link from "next/link"
-import { MyPageRoute } from "../../types/route"
 
 const MyPageReviewRouteList = () => {
   const { pathname } = useNavigations()
@@ -11,12 +10,12 @@ const MyPageReviewRouteList = () => {
     {
       id: "writeableReviews",
       categoryListContent: "작성 가능한 리뷰",
-      categoryListRoute: MyPageRoute.WRITEABLEREVIEWS,
+      categoryListRoute: ROUTE.WRITEABLEREVIEWS,
     },
     {
       id: "myReview",
       categoryListContent: "내 리뷰 (0)",
-      categoryListRoute: MyPageRoute.MYREVIEW,
+      categoryListRoute: ROUTE.MYREVIEW,
     },
   ]
 
@@ -28,8 +27,7 @@ const MyPageReviewRouteList = () => {
           href={`/myPage${reiviewListRouteEl.categoryListRoute}`}
           className={`flexCenter w-1/2  ${
             pathname === `/myPage${reiviewListRouteEl.categoryListRoute}` ||
-            (index === 0 &&
-              pathname === `/myPage${MyPageRoute.CHECKOUTREVIEWLIST}`)
+            (index === 0 && pathname === `${ROUTE.CHECKOUTREVIEWLIST}`)
               ? "bg-black text-white border-black border-[1px] border-t-0"
               : "bg-white text-black border-border border-[1px] border-t-0"
           }}`}
