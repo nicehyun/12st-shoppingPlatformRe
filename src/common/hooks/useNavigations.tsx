@@ -16,6 +16,8 @@ export enum ROUTE {
   USERINFOOFMODIFICATION = "/myPage/userInfoOfModification",
   COUPONS = "/myPage/coupons",
   Mile = "/myPage/mile",
+  INQUIRYCUSTOMERCOUNSELING = "/myPage/inquiryCustomerCounseling",
+  COUNSELINGWRITE = "/myPage/inquiryCustomerCounseling/write",
 }
 
 export const useNavigations = () => {

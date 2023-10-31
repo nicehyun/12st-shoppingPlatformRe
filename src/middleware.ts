@@ -1,38 +1,40 @@
 import { getToken } from "next-auth/jwt"
 import { NextRequest, NextResponse } from "next/server"
+import { ROUTE } from "./common/hooks/useNavigations"
 
 export { default } from "next-auth/middleware"
 
 export async function middleware(request: NextRequest) {
-  const pageList = [
-    "/",
-    "/auth/signIn",
-    "/auth/signUp",
-    "/cart",
-    "/checkout",
-    "/checkoutConfirmed",
-    "/myPage",
-    "/myPage/checkoutList",
-    "/myPage/checkoutCancelList",
-    "/myPage/reviewList",
-    "/myPage/reviewList/writeableReviews",
-    "/myPage/reviewList/myReview",
-    "/myPage/userInfoOfModification",
-    "/myPage/coupons",
-    "/myPage/mile",
+  const pageList: string[] = [
+    ROUTE.HOME,
+    ROUTE.SIGNIN,
+    ROUTE.SIGNUP,
+    ROUTE.CART,
+    ROUTE.CHECKOUT,
+    ROUTE.CHECKOUTCOMFIRMED,
+    ROUTE.MYPAGE,
+    ROUTE.CHECKOUTLIST,
+    ROUTE.CHECKOUTCANCELLIST,
+    ROUTE.CHECKOUTREVIEWLIST,
+    ROUTE.USERINFOOFMODIFICATION,
+    ROUTE.COUPONS,
+    ROUTE.Mile,
+    ROUTE.INQUIRYCUSTOMERCOUNSELING,
+    ROUTE.COUNSELINGWRITE,
   ]
-  const withAuthPageList = [
-    "/cart",
-    "/checkout",
-    "/checkoutConfirmed",
-    "/myPage",
-    "/myPage/checkoutList",
-    "/myPage/checkoutCancelList",
-    "/myPage/reviewList",
-    "/myPage/reviewList/writeableReviews",
-    "/myPage/reviewList/myReview",
-    "/myPage/coupons",
-    "/myPage/mile",
+  const withAuthPageList: string[] = [
+    ROUTE.CART,
+    ROUTE.CHECKOUT,
+    ROUTE.CHECKOUTCOMFIRMED,
+    ROUTE.MYPAGE,
+    ROUTE.CHECKOUTLIST,
+    ROUTE.CHECKOUTCANCELLIST,
+    ROUTE.CHECKOUTREVIEWLIST,
+    ROUTE.USERINFOOFMODIFICATION,
+    ROUTE.COUPONS,
+    ROUTE.Mile,
+    ROUTE.INQUIRYCUSTOMERCOUNSELING,
+    ROUTE.COUNSELINGWRITE,
   ]
   const { pathname } = request.nextUrl
   const secret = process.env.NEXTAUTH_SECRET
