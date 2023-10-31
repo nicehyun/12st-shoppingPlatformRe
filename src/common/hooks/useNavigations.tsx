@@ -13,8 +13,6 @@ export enum ROUTE {
   CHECKOUTLIST = "/myPage/checkoutList",
   CHECKOUTCANCELLIST = "/myPage/checkoutCancelList",
   CHECKOUTREVIEWLIST = "/myPage/reviewList",
-  WRITEABLEREVIEWS = "/myPage/reviewList/writeableReviews",
-  MYREVIEW = "/myPage/reviewList/myReview",
   USERINFOOFMODIFICATION = "/myPage/userInfoOfModification",
   COUPONS = "/myPage/coupons",
   Mile = "/myPage/mile",
