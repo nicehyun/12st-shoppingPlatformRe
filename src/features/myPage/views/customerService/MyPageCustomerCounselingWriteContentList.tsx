@@ -17,7 +17,7 @@ const MyPageCustomerCounselingWriteContentList = () => {
                   <Input
                     id="coustomweCounselingWrite-content__title"
                     name="coustomweCounselingWrite-content__title"
-                    classNames="w-1/2 md:w-full sm:w-full"
+                    classNames="w-full md:w-full sm:w-full"
                     maxLength={100}
                     placeholder="1:1 문의 제목을 입력해주세요"
                   />
@@ -44,7 +44,7 @@ const MyPageCustomerCounselingWriteContentList = () => {
                 <Input
                   id="coustomweCounselingWrite-content__title"
                   name="coustomweCounselingWrite-content__title"
-                  classNames="w-1/2 md:w-full sm:w-full"
+                  classNames="w-full"
                   maxLength={100}
                   placeholder="1:1 문의 제목을 입력해주세요"
                 />

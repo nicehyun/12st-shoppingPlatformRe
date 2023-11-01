@@ -8,6 +8,8 @@ import MyPageETCRelationRadioList from "./MyPageETCRelationRadioList"
 import MyPageCutomerCounselingWriteUserInfoList from "./MyPageCutomerCounselingWriteUserInfoList"
 import MyPageCustomerCounselingWriteContentList from "./MyPageCustomerCounselingWriteContentList"
 import Button from "@/common/views/Button"
+import MyPageProductSearch from "./MyPageProductSearch"
+import MyPageCheckoutSearch from "./MyPageCheckoutSearch"
 
 const MyPageInquiryCustomerCounselingWriteForm = () => {
   const { sessionQuery } = useSessionQuery()
@@ -18,32 +20,28 @@ const MyPageInquiryCustomerCounselingWriteForm = () => {
   }
 
   return (
-    <form className="mt-[50px] border-t-[1px]">
-      <fieldset>
-        <legend className="absolute left-[-9999px]">1:1 문의작성</legend>
+    <form className="mt-[50px] border-t-[1px] w-full">
+      <ul className="">
+        <MyPageCheckoutRelationRadioList
+          radioValue={radioValue}
+          onChangeRadioValue={handleWriteFromRadioChange}
+        />
+        <MyPageGeneralRelationRadioList
+          radioValue={radioValue}
+          onChangeRadioValue={handleWriteFromRadioChange}
+          className="border-border border-t-[1px]"
+        />
+        <MyPageETCRelationRadioList
+          radioValue={radioValue}
+          onChangeRadioValue={handleWriteFromRadioChange}
+          className="border-border border-t-[1px]"
+        />
+        <MyPageProductSearch />
+        <MyPageCheckoutSearch />
 
-        <ul>
-          <MyPageCheckoutRelationRadioList
-            radioValue={radioValue}
-            onChangeRadioValue={handleWriteFromRadioChange}
-          />
-
-          <MyPageGeneralRelationRadioList
-            radioValue={radioValue}
-            onChangeRadioValue={handleWriteFromRadioChange}
-            className="border-border border-t-[1px]"
-          />
-
-          <MyPageETCRelationRadioList
-            radioValue={radioValue}
-            onChangeRadioValue={handleWriteFromRadioChange}
-            className="border-border border-t-[1px]"
-          />
-
-          <MyPageCutomerCounselingWriteUserInfoList />
-          <MyPageCustomerCounselingWriteContentList />
-        </ul>
-      </fieldset>
+        <MyPageCutomerCounselingWriteUserInfoList />
+        <MyPageCustomerCounselingWriteContentList />
+      </ul>
 
       <div className="text-center">
         <Button
