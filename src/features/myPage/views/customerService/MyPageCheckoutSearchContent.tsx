@@ -1,7 +1,10 @@
+import { useAppDispatch } from "@/redux/hooks"
 import MyPageSearchInputAndButton from "./MyPageSearchInputAndButton"
 import MyPageSearchResultEl from "./MyPageSearchResultEl"
+import { showBasicModal } from "@/redux/features/modalSlice"
 
 const MyPageCheckoutSearchContent = () => {
+  const dispatch = useAppDispatch()
   const checkoutSearchContentList = [
     {
       id: "coustomweCounselingWrite-checkoutInfo__checkoutProductName",
@@ -19,12 +22,23 @@ const MyPageCheckoutSearchContent = () => {
       label: "결제방법",
     },
   ]
+
+  const handleSearchButtonClick = () => {
+    dispatch(
+      showBasicModal({
+        modalId: "modal-customerCounselingWrite__checkoutInfoSearch",
+        modalTitle: "주문조회",
+        modalContent: "checkoutInfoSearch",
+      })
+    )
+  }
   return (
     <div className="w-full">
       <MyPageSearchInputAndButton
         id="coustomweCounselingWrite-checkoutInfo__checkoutNumber"
         placeholder="주문번호를 조회해주세요"
         buttonContent="주문번호조회"
+        onClickSearchButton={handleSearchButtonClick}
       />
 
       <div className="mt-[20px] leading-[50px] text-[16px]">

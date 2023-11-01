@@ -15,7 +15,7 @@ const MyPageSearchResultEl = ({
 }: IMyPageSearchResultEl) => {
   return (
     <div className="flex">
-      <label className="font-extrabold w-[112px]" htmlFor={id}>
+      <label className="font-extrabold text-[14px] w-[112px]" htmlFor={id}>
         {label}
       </label>
       <Input

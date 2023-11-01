@@ -10,6 +10,7 @@ import MyPageCustomerCounselingWriteContentList from "./MyPageCustomerCounseling
 import Button from "@/common/views/Button"
 import MyPageProductSearch from "./MyPageProductSearch"
 import MyPageCheckoutSearch from "./MyPageCheckoutSearch"
+import BasicModal from "@/common/views/BasicModal"
 
 const MyPageInquiryCustomerCounselingWriteForm = () => {
   const { sessionQuery } = useSessionQuery()
@@ -18,6 +19,16 @@ const MyPageInquiryCustomerCounselingWriteForm = () => {
   const handleWriteFromRadioChange = (event: ChangeEvent<HTMLInputElement>) => {
     setRadioValue(event.target.value)
   }
+
+  const checkoutRelationRadioValueList = [
+    "delivery",
+    "checkout",
+    "cancel",
+    "return",
+    "change",
+    "refund",
+    "deposit",
+  ]
 
   return (
     <form className="mt-[50px] border-t-[1px] w-full">
@@ -36,8 +47,11 @@ const MyPageInquiryCustomerCounselingWriteForm = () => {
           onChangeRadioValue={handleWriteFromRadioChange}
           className="border-border border-t-[1px]"
         />
-        <MyPageProductSearch />
-        <MyPageCheckoutSearch />
+
+        {checkoutRelationRadioValueList.includes(radioValue) && (
+          <MyPageCheckoutSearch />
+        )}
+        {radioValue === "product" && <MyPageProductSearch />}
 
         <MyPageCutomerCounselingWriteUserInfoList />
         <MyPageCustomerCounselingWriteContentList />
