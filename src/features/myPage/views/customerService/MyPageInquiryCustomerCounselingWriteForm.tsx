@@ -5,6 +5,9 @@ import { ChangeEvent, useState } from "react"
 import MyPageCheckoutRelationRadioList from "./MyPageCheckoutRelationRadioList"
 import MyPageGeneralRelationRadioList from "./MyPageGeneralRelationRadioList"
 import MyPageETCRelationRadioList from "./MyPageETCRelationRadioList"
+import MyPageCutomerCounselingWriteUserInfoList from "./MyPageCutomerCounselingWriteUserInfoList"
+import MyPageCustomerCounselingWriteContentList from "./MyPageCustomerCounselingWriteContentList"
+import Button from "@/common/views/Button"
 
 const MyPageInquiryCustomerCounselingWriteForm = () => {
   const { sessionQuery } = useSessionQuery()
@@ -15,7 +18,7 @@ const MyPageInquiryCustomerCounselingWriteForm = () => {
   }
 
   return (
-    <form className="mt-[50px] border-t-black boder-b-border border-b-[1px] border-t-[1px]">
+    <form className="mt-[50px] border-t-[1px]">
       <fieldset>
         <legend className="absolute left-[-9999px]">1:1 문의작성</legend>
 
@@ -36,8 +39,18 @@ const MyPageInquiryCustomerCounselingWriteForm = () => {
             onChangeRadioValue={handleWriteFromRadioChange}
             className="border-border border-t-[1px]"
           />
+
+          <MyPageCutomerCounselingWriteUserInfoList />
+          <MyPageCustomerCounselingWriteContentList />
         </ul>
       </fieldset>
+
+      <div className="text-center">
+        <Button
+          content="등록하기"
+          classNames="tracking-[5px] py-[10px] px-[40px] mt-[50px] sm:text-[14px] md:text-[14px] border-[1px] border-lightRed dark:bg-lightRed dark:text-white text-lightRed rounded-[5px] tr"
+        />
+      </div>
     </form>
   )
 }
