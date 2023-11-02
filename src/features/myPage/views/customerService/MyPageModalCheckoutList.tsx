@@ -1,10 +1,22 @@
 import MyPageTableContentEl from "../MyPageTableContentEl"
 import MyPageTableHeaderEl from "../MyPageTableHeaderEl"
 import useCheckoutNumberToProductInfoPair from "../../hooks/useCheckoutNumberToProductInfoPair"
+import { useAppDispatch } from "@/redux/hooks"
+import {
+  SelectedCheckoutInfo,
+  selectCheckoutInfo,
+} from "@/redux/features/myPageSlice"
+import { hideBasicModal } from "@/redux/features/modalSlice"
 
 const MyPageModalCheckoutList = () => {
-  const { checkoutNumberToProductInfoPairList } =
+  const dispatch = useAppDispatch()
+  const { checkoutNumberToCheckoutInfoPairList } =
     useCheckoutNumberToProductInfoPair()
+
+  const handleCheckoutInfoSelect = (checkoutInfo: SelectedCheckoutInfo) => {
+    dispatch(selectCheckoutInfo(checkoutInfo))
+    dispatch(hideBasicModal())
+  }
 
   return (
     <div>
@@ -19,26 +31,29 @@ const MyPageModalCheckoutList = () => {
           <MyPageTableHeaderEl equalParts={3} headerContent="상품명" />
         </div>
 
-        {checkoutNumberToProductInfoPairList.map(
-          (checkoutNumberToProductInfoPair, index) => (
+        {checkoutNumberToCheckoutInfoPairList.map(
+          (checkoutNumberToCheckoutInfoPair, index) => (
             <div
-              key={`checkoutNumberToProductInfoPair__${checkoutNumberToProductInfoPair.product.id}-${index}`}
+              key={`checkoutNumberToCheckoutInfoPair__${checkoutNumberToCheckoutInfoPair.product.id}-${index}`}
+              onClick={() =>
+                handleCheckoutInfoSelect(checkoutNumberToCheckoutInfoPair)
+              }
               className="flex h-[60px] md:h-[50px] text-[14px] sm:text-[12px] md:text-[12px] border-b-[1px] border-border cursor-pointer group"
             >
               <MyPageTableContentEl
                 equalParts={3}
-                content={checkoutNumberToProductInfoPair.checkoutNumber ?? ""}
+                content={checkoutNumberToCheckoutInfoPair.checkoutNumber ?? ""}
                 className="break-words group-hover:text-lightRed"
                 NoCenter
               />
 
               <MyPageTableContentEl
                 equalParts={3}
-                content={`${checkoutNumberToProductInfoPair.checkoutDate?.year}-${checkoutNumberToProductInfoPair.checkoutDate?.month}-${checkoutNumberToProductInfoPair.checkoutDate?.date}`}
+                content={`${checkoutNumberToCheckoutInfoPair.checkoutDate?.year}-${checkoutNumberToCheckoutInfoPair.checkoutDate?.month}-${checkoutNumberToCheckoutInfoPair.checkoutDate?.date}`}
               />
               <MyPageTableContentEl
                 equalParts={3}
-                content={checkoutNumberToProductInfoPair.product.name}
+                content={checkoutNumberToCheckoutInfoPair.product.name}
                 className="truncate-2"
                 NoCenter
               />

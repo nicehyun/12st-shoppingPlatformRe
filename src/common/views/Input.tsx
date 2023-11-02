@@ -41,7 +41,9 @@ const Input = ({
         id={id}
         className={`bg-white dark:bg-lightBorder text-black px-[10px] h-full w-full rounded-[5px] sm:text-[14px] md:text-[14px] placeholder:text-[14px] sm:placeholder:text-[12px] md:placeholder:text-[12px] blur-lightRed  ${
           isReadOnly && "cursor-default"
-        } ${isShowFeedback && "border-error"}`}
+        } ${isShowFeedback && "border-error"} ${
+          isReadOnly ? "truncate pr-[20px]" : ""
+        }`}
         placeholder={placeholder}
         value={value}
         onChange={onChange}

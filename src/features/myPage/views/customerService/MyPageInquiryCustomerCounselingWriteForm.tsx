@@ -10,7 +10,6 @@ import MyPageCustomerCounselingWriteContentList from "./MyPageCustomerCounseling
 import Button from "@/common/views/Button"
 import MyPageProductSearch from "./MyPageProductSearch"
 import MyPageCheckoutSearch from "./MyPageCheckoutSearch"
-import BasicModal from "@/common/views/BasicModal"
 
 const MyPageInquiryCustomerCounselingWriteForm = () => {
   const { sessionQuery } = useSessionQuery()

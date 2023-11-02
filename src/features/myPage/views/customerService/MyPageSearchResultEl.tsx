@@ -22,7 +22,7 @@ const MyPageSearchResultEl = ({
         id={id}
         name={id}
         value={value}
-        classNames="sm:w-full md:w-full w-full"
+        classNames="sm:w-full md:w-full w-full sm:text-[12px] md:text-[12px] text-[14px]"
         isReadOnly
         placeholder={placeholder}
       />

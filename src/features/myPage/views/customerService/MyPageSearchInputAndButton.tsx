@@ -8,6 +8,7 @@ interface IMyPageSearchInputAndButton {
   placeholder?: string
   buttonContent: string
   onClickSearchButton?: () => void
+  inputValue: string
 }
 
 const MyPageSearchInputAndButton = ({
@@ -15,6 +16,7 @@ const MyPageSearchInputAndButton = ({
   id,
   onClickSearchButton,
   placeholder,
+  inputValue,
 }: IMyPageSearchInputAndButton) => {
   return (
     <div className="flex w-full">
@@ -25,6 +27,7 @@ const MyPageSearchInputAndButton = ({
         maxLength={100}
         isReadOnly
         placeholder={placeholder}
+        value={inputValue}
       />
       <Button
         onClick={onClickSearchButton}
