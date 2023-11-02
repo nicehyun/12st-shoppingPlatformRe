@@ -1,21 +1,25 @@
 "use client"
 
-import { ChangeEvent } from "react"
 import MyPageWriteTable from "./MyPageWriteTable"
 import MyPageRadioInput from "./MyPageRadioInput"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import {
+  selectCsType,
+  selectSelectedCsType,
+} from "@/redux/features/myPageSlice"
+import { CsRelationEl } from "../../types/myPage"
 
 interface IMyPageETCRelationRadioList {
-  radioValue: string
-  onChangeRadioValue: (e: ChangeEvent<HTMLInputElement>) => void
   className?: string
 }
 
 const MyPageETCRelationRadioList = ({
-  onChangeRadioValue,
-  radioValue,
   className,
 }: IMyPageETCRelationRadioList) => {
-  const etcRelationList = [
+  const dispatch = useAppDispatch()
+  const selectedCsType = useAppSelector(selectSelectedCsType)
+
+  const etcRelationList: CsRelationEl[] = [
     {
       value: "system",
       label: "시스템문의",
@@ -39,9 +43,9 @@ const MyPageETCRelationRadioList = ({
   const tableContent = etcRelationList.map((etcRelationEl, index) => (
     <MyPageRadioInput
       key={`inquiryCustomerCounselingWhite-radio__${etcRelationEl.value}`}
-      currentRadioValue={radioValue}
+      currentRadioValue={selectedCsType}
       label={etcRelationEl.label}
-      onChangeRadioValue={onChangeRadioValue}
+      onChangeRadioValue={() => dispatch(selectCsType(etcRelationEl.value))}
       peer={etcRelationEl.peer}
       peerChecked={etcRelationEl.peerChecked}
       value={etcRelationEl.value}

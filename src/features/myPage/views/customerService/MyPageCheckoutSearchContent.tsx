@@ -2,7 +2,11 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import MyPageSearchInputAndButton from "./MyPageSearchInputAndButton"
 import MyPageSearchResultEl from "./MyPageSearchResultEl"
 import { showBasicModal } from "@/redux/features/modalSlice"
-import { selectSelectedCheckoutInfo } from "@/redux/features/myPageSlice"
+import {
+  resetCheckoutInfo,
+  selectSelectedCheckoutInfo,
+} from "@/redux/features/myPageSlice"
+import { useEffect } from "react"
 
 const MyPageCheckoutSearchContent = () => {
   const dispatch = useAppDispatch()
@@ -17,7 +21,7 @@ const MyPageCheckoutSearchContent = () => {
   ]
 
   const myPageSearchResultPaymentValue = `${
-    selectedCheckoutInfo.payment?.selectedPayment
+    selectedCheckoutInfo.payment?.selectedPayment ?? ""
   }${
     selectedCheckoutInfo.payment?.creditName
       ? `-${selectedCheckoutInfo.payment?.creditName}`
@@ -60,6 +64,12 @@ const MyPageCheckoutSearchContent = () => {
       })
     )
   }
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetCheckoutInfo())
+    }
+  }, [])
   return (
     <div className="w-full">
       <MyPageSearchInputAndButton

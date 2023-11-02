@@ -1,11 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { RootState } from "../types/store"
-import {
-  CheckoutDate,
-  CheckoutList,
-  CheckoutPaymentInfo,
-} from "@/common/types/checkout"
+import { CheckoutDate, CheckoutPaymentInfo } from "@/common/types/checkout"
 import { ProductInCart } from "@/features/cart/types/cart"
+import { CsType } from "@/features/myPage/types/myPage"
 
 export type SelectedCheckoutInfo = {
   checkoutNumber: string | null
@@ -14,8 +11,11 @@ export type SelectedCheckoutInfo = {
   payment: CheckoutPaymentInfo | null
 }
 
+type SelectedCStype = CsType | null
+
 type InitialMyPageState = {
   selectedCheckoutInfo: SelectedCheckoutInfo
+  csType: SelectedCStype
 }
 
 const initialMyPageState: InitialMyPageState = {
@@ -25,6 +25,7 @@ const initialMyPageState: InitialMyPageState = {
     product: null,
     payment: null,
   },
+  csType: null,
 }
 
 const myPageSlice = createSlice({
@@ -37,12 +38,24 @@ const myPageSlice = createSlice({
       state.selectedCheckoutInfo.product = action.payload.product
       state.selectedCheckoutInfo.payment = action.payload.payment
     },
+    resetCheckoutInfo(state) {
+      state.selectedCheckoutInfo.checkoutNumber = null
+      state.selectedCheckoutInfo.checkoutDate = null
+      state.selectedCheckoutInfo.product = null
+      state.selectedCheckoutInfo.payment = null
+    },
+    selectCsType(state, action: PayloadAction<CsType>) {
+      state.csType = action.payload
+    },
   },
 })
 
-export const { selectCheckoutInfo } = myPageSlice.actions
+export const { selectCheckoutInfo, resetCheckoutInfo, selectCsType } =
+  myPageSlice.actions
 
 export const selectSelectedCheckoutInfo = (state: RootState) =>
   state.myPage.selectedCheckoutInfo
+
+export const selectSelectedCsType = (state: RootState) => state.myPage.csType
 
 export default myPageSlice.reducer

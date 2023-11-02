@@ -3,8 +3,8 @@ import RadioInput from "@/common/views/RadioInput"
 import { ChangeEvent } from "react"
 
 interface IMyPageRadioInput {
-  currentRadioValue: string
-  onChangeRadioValue: (e: ChangeEvent<HTMLInputElement>) => void
+  currentRadioValue: string | null
+  onChangeRadioValue: () => void
   value: string
   label: string
   peer: string

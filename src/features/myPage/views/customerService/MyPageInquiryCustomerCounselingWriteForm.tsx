@@ -10,14 +10,12 @@ import MyPageCustomerCounselingWriteContentList from "./MyPageCustomerCounseling
 import Button from "@/common/views/Button"
 import MyPageProductSearch from "./MyPageProductSearch"
 import MyPageCheckoutSearch from "./MyPageCheckoutSearch"
+import { useAppSelector } from "@/redux/hooks"
+import { selectSelectedCsType } from "@/redux/features/myPageSlice"
 
 const MyPageInquiryCustomerCounselingWriteForm = () => {
   const { sessionQuery } = useSessionQuery()
-
-  const [radioValue, setRadioValue] = useState("")
-  const handleWriteFromRadioChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setRadioValue(event.target.value)
-  }
+  const selectedCsType = useAppSelector(selectSelectedCsType)
 
   const checkoutRelationRadioValueList = [
     "delivery",
@@ -32,25 +30,14 @@ const MyPageInquiryCustomerCounselingWriteForm = () => {
   return (
     <form className="mt-[50px] border-t-[1px] w-full">
       <ul className="">
-        <MyPageCheckoutRelationRadioList
-          radioValue={radioValue}
-          onChangeRadioValue={handleWriteFromRadioChange}
-        />
-        <MyPageGeneralRelationRadioList
-          radioValue={radioValue}
-          onChangeRadioValue={handleWriteFromRadioChange}
-          className="border-border border-t-[1px]"
-        />
-        <MyPageETCRelationRadioList
-          radioValue={radioValue}
-          onChangeRadioValue={handleWriteFromRadioChange}
-          className="border-border border-t-[1px]"
-        />
+        <MyPageCheckoutRelationRadioList />
+        <MyPageGeneralRelationRadioList className="border-border border-t-[1px]" />
+        <MyPageETCRelationRadioList className="border-border border-t-[1px]" />
 
-        {checkoutRelationRadioValueList.includes(radioValue) && (
+        {checkoutRelationRadioValueList.includes(selectedCsType as string) && (
           <MyPageCheckoutSearch />
         )}
-        {radioValue === "product" && <MyPageProductSearch />}
+        {selectedCsType === "product" && <MyPageProductSearch />}
 
         <MyPageCutomerCounselingWriteUserInfoList />
         <MyPageCustomerCounselingWriteContentList />

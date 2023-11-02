@@ -1,21 +1,25 @@
 "use client"
 
-import { ChangeEvent } from "react"
 import MyPageWriteTable from "./MyPageWriteTable"
 import MyPageRadioInput from "./MyPageRadioInput"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import {
+  selectCsType,
+  selectSelectedCsType,
+} from "@/redux/features/myPageSlice"
+import { CsRelationEl } from "../../types/myPage"
 
 interface IMyPageCheckoutRelationRadioList {
-  radioValue: string
-  onChangeRadioValue: (e: ChangeEvent<HTMLInputElement>) => void
   className?: string
 }
 
 const MyPageCheckoutRelationRadioList = ({
-  onChangeRadioValue,
-  radioValue,
   className,
 }: IMyPageCheckoutRelationRadioList) => {
-  const checkoutRelationList = [
+  const dispatch = useAppDispatch()
+  const selectedCsType = useAppSelector(selectSelectedCsType)
+
+  const checkoutRelationList: CsRelationEl[] = [
     {
       value: "delivery",
       label: "배송문의",
@@ -84,9 +88,11 @@ const MyPageCheckoutRelationRadioList = ({
   const tableContent = checkoutRelationList.map((checkoutRelationEl) => (
     <MyPageRadioInput
       key={`inquiryCustomerCounselingWhite-radio__${checkoutRelationEl.value}`}
-      currentRadioValue={radioValue}
+      currentRadioValue={selectedCsType}
       label={checkoutRelationEl.label}
-      onChangeRadioValue={onChangeRadioValue}
+      onChangeRadioValue={() =>
+        dispatch(selectCsType(checkoutRelationEl.value))
+      }
       peer={checkoutRelationEl.peer}
       peerChecked={checkoutRelationEl.peerChecked}
       value={checkoutRelationEl.value}

@@ -1,8 +1,8 @@
-import { checkoutDate } from "@/common/types/checkout"
+import { CheckoutDate } from "@/common/types/checkout"
 
 export type UseMileAndGetMile = {
   getMile: number
   useMile: number
   checkoutNumber: string
-  checkoutDate: checkoutDate
+  checkoutDate: CheckoutDate
 }
