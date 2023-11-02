@@ -11,6 +11,7 @@ import {
   setDoc,
 } from "firebase/firestore"
 import { UseMileAndGetMile } from "../types/mile"
+import { Product } from "@/common/types/product"
 
 const db = getFirestore(firebaseApp)
 
@@ -163,6 +164,30 @@ export const myPageAPI = {
       }
 
       throw Error(`🚨 getUseMileAndGetMile firebase API : ${error}`)
+    }
+  },
+  getProductInfoByProductId: async (productId: string) => {
+    if (productId === "") return
+
+    try {
+      const productRef = doc(db, "products", productId)
+      const productDoc = await getDoc(productRef)
+
+      if (productDoc.exists()) {
+        const productData = productDoc.data() as Product
+
+        return productData
+      } else {
+        return undefined
+      }
+    } catch (error) {
+      const { response } = error as unknown as AxiosError
+
+      if (response) {
+        throw Error(`🚨 firebase getDocs API : ${error}`)
+      }
+
+      throw Error(`🚨 getProductInfoByProductId firebase API : ${error}`)
     }
   },
 }

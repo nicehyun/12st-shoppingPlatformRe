@@ -4,7 +4,6 @@ import BasicModal from "@/common/views/BasicModal"
 import { selectBasicModalState } from "@/redux/features/modalSlice"
 import { useAppSelector } from "@/redux/hooks"
 import MyPageModalCheckoutList from "./customerService/MyPageModalCheckoutList"
-import MyPageModalProductInfo from "./customerService/MyPageModalProductInfo"
 import { Suspense } from "react"
 import Loading from "@/common/views/Loading"
 
@@ -13,8 +12,6 @@ const MyPageBasicModal = () => {
 
   const renderModalContent = () => {
     switch (modalContent) {
-      case "productInfoSearch":
-        return <MyPageModalProductInfo />
       case "checkoutInfoSearch":
         return (
           <Suspense

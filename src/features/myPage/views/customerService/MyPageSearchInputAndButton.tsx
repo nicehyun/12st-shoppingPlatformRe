@@ -1,14 +1,16 @@
 import Button from "@/common/views/Button"
 import Input from "@/common/views/Input"
-
-//TODO : onClick 타입 수정
+import { ChangeEvent, ReactNode } from "react"
 
 interface IMyPageSearchInputAndButton {
   id: string
   placeholder?: string
-  buttonContent: string
-  onClickSearchButton?: () => void
-  inputValue: string
+  buttonContent: ReactNode
+  onClickSearchButton: () => void
+  searchInputValue: string
+  onChangeSearchInputValue?: (event: ChangeEvent<HTMLInputElement>) => void
+  isReadOnly?: boolean
+  isDisabled?: boolean
 }
 
 const MyPageSearchInputAndButton = ({
@@ -16,7 +18,10 @@ const MyPageSearchInputAndButton = ({
   id,
   onClickSearchButton,
   placeholder,
-  inputValue,
+  searchInputValue,
+  isReadOnly = true,
+  onChangeSearchInputValue,
+  isDisabled,
 }: IMyPageSearchInputAndButton) => {
   return (
     <div className="flex w-full">
@@ -25,14 +30,16 @@ const MyPageSearchInputAndButton = ({
         name={id}
         classNames="w-full mr-[20px] flex-grow"
         maxLength={100}
-        isReadOnly
+        isReadOnly={isReadOnly}
         placeholder={placeholder}
-        value={inputValue}
+        value={searchInputValue}
+        onChange={onChangeSearchInputValue}
       />
       <Button
         onClick={onClickSearchButton}
         content={buttonContent}
-        classNames="h-[38px] px-[20px] text-[14px] border-[1px] border-lightRed dark:bg-lightRed dark:text-white text-lightRed rounded-[5px]"
+        isDisabled={isDisabled}
+        classNames="h-[38px] w-[140px] text-[14px] border-[1px] border-lightRed dark:bg-lightRed dark:text-white text-lightRed rounded-[5px]"
       />
     </div>
   )

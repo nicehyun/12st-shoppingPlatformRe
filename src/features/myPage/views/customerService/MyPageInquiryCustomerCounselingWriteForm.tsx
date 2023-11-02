@@ -1,7 +1,5 @@
 "use client"
 
-import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
-import { ChangeEvent, useState } from "react"
 import MyPageCheckoutRelationRadioList from "./MyPageCheckoutRelationRadioList"
 import MyPageGeneralRelationRadioList from "./MyPageGeneralRelationRadioList"
 import MyPageETCRelationRadioList from "./MyPageETCRelationRadioList"
@@ -14,7 +12,6 @@ import { useAppSelector } from "@/redux/hooks"
 import { selectSelectedCsType } from "@/redux/features/myPageSlice"
 
 const MyPageInquiryCustomerCounselingWriteForm = () => {
-  const { sessionQuery } = useSessionQuery()
   const selectedCsType = useAppSelector(selectSelectedCsType)
 
   const checkoutRelationRadioValueList = [

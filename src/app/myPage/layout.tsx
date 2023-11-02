@@ -5,7 +5,7 @@ import Navigation from "@/features/layout/views/Navigation"
 import MyPageLayout from "@/features/myPage/views/MyPageLayout"
 import { ReactNode } from "react"
 
-const layout = ({ children }: { children: ReactNode }) => {
+const MypageLayout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <Header isShowCart={true} />
@@ -19,4 +19,4 @@ const layout = ({ children }: { children: ReactNode }) => {
   )
 }
 
-export default layout
+export default MypageLayout
