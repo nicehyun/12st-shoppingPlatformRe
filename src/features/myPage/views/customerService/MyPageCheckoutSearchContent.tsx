@@ -12,8 +12,6 @@ const MyPageCheckoutSearchContent = () => {
   const dispatch = useAppDispatch()
   const selectedCheckoutInfo = useAppSelector(selectSelectedCheckoutInfo)
 
-  console.log(selectedCheckoutInfo)
-
   const selectedCheckoutDate = [
     selectedCheckoutInfo.checkoutDate?.year,
     selectedCheckoutInfo.checkoutDate?.month,
@@ -77,7 +75,7 @@ const MyPageCheckoutSearchContent = () => {
         placeholder="주문번호를 조회해주세요"
         buttonContent="주문번호조회"
         onClickSearchButton={handleSearchButtonClick}
-        inputValue={selectedCheckoutInfo.checkoutNumber ?? ""}
+        searchInputValue={selectedCheckoutInfo.checkoutNumber ?? ""}
       />
 
       <div className="mt-[20px] leading-[50px] text-[16px]">

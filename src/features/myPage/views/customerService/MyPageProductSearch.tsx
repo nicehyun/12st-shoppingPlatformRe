@@ -9,6 +9,7 @@ const MyPageProductSearch = () => {
         tableTitle="상품정보"
         className="border-border border-t-[1px]"
         maxWidth={500}
+        isNoneLiTag
       />
     </>
   )

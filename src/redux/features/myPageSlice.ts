@@ -47,11 +47,18 @@ const myPageSlice = createSlice({
     selectCsType(state, action: PayloadAction<CsType>) {
       state.csType = action.payload
     },
+    resetCsType(state) {
+      state.csType = null
+    },
   },
 })
 
-export const { selectCheckoutInfo, resetCheckoutInfo, selectCsType } =
-  myPageSlice.actions
+export const {
+  selectCheckoutInfo,
+  resetCheckoutInfo,
+  selectCsType,
+  resetCsType,
+} = myPageSlice.actions
 
 export const selectSelectedCheckoutInfo = (state: RootState) =>
   state.myPage.selectedCheckoutInfo

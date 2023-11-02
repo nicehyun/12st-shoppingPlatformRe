@@ -5,7 +5,7 @@ import MyPageWriteTable from "./MyPageWriteTable"
 import PcConditionComponent from "@/common/views/PcConditionComponent"
 import MobileViewConditionComponent from "@/common/views/MobileViewConditionComponent"
 
-const MyPageCutomerCounselingWriteUserInfoList = () => {
+const MyPageCutsomerCounselingWriteUserInfoList = () => {
   const { sessionQuery } = useSessionQuery()
   return (
     <>
@@ -46,4 +46,4 @@ const MyPageCutomerCounselingWriteUserInfoList = () => {
   )
 }
 
-export default MyPageCutomerCounselingWriteUserInfoList
+export default MyPageCutsomerCounselingWriteUserInfoList

@@ -11,6 +11,7 @@ const MyPageCustomerCounselingWriteContentList = () => {
         component={
           <>
             <MyPageWriteTable
+              isNoneLiTag
               tableTitle="1:1 문의 내용"
               tableContent={
                 <>
@@ -50,6 +51,7 @@ const MyPageCustomerCounselingWriteContentList = () => {
                 />
               }
               className="border-border border-t-[1px]"
+              isNoneLiTag
             />
             <MyPageWriteTable
               tableTitle="내용"
@@ -62,6 +64,7 @@ const MyPageCustomerCounselingWriteContentList = () => {
                 />
               }
               className="border-border border-t-[1px] border-b-[1px]"
+              isNoneLiTag
             />
           </>
         }

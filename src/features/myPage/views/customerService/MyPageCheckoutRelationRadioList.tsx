@@ -103,7 +103,7 @@ const MyPageCheckoutRelationRadioList = ({
     <MyPageWriteTable
       tableTitle="구매관련문의"
       tableContent={tableContent}
-      className={className}
+      isNoneLiTag
     />
   )
 }

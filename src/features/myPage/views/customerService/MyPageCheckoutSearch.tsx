@@ -9,6 +9,7 @@ const MyPageCheckoutSearch = () => {
         tableTitle="주문정보"
         className="border-border border-t-[1px]"
         maxWidth={500}
+        isNoneLiTag
       />
     </>
   )
