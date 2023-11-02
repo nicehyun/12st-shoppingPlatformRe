@@ -2,8 +2,6 @@ import MyPageTableContentEl from "../MyPageTableContentEl"
 import MyPageTableHeaderEl from "../MyPageTableHeaderEl"
 import useCheckoutNumberToProductInfoPair from "../../hooks/useCheckoutNumberToProductInfoPair"
 
-//TODO : checkoutNumberToProductInfoPair state에 저장하기
-
 const MyPageModalCheckoutList = () => {
   const { checkoutNumberToProductInfoPairList } =
     useCheckoutNumberToProductInfoPair()

@@ -10,7 +10,7 @@ import getQueryClient from "@/reactQuery/utils/getQueryClient"
 import { dehydrate, Hydrate } from "@tanstack/react-query"
 import { ReactNode } from "react"
 
-const CartLayout = async ({ children }: { children: ReactNode }) => {
+const HomeLayout = async ({ children }: { children: ReactNode }) => {
   const queryClient = getQueryClient()
   await queryClient.prefetchQuery(["bestProducts"], getBestSellingProducts)
   await queryClient.prefetchQuery(["topSaleProducts"], getTopSaleProducts)
@@ -27,4 +27,4 @@ const CartLayout = async ({ children }: { children: ReactNode }) => {
   )
 }
 
-export default CartLayout
+export default HomeLayout

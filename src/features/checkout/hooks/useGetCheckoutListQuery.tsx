@@ -6,17 +6,17 @@ import { checkoutAPI } from "../models/checkoutAPI"
 export const useGetCheckoutListQuery = () => {
   const { sessionQuery } = useSessionQuery()
 
-  const { data } = useQuery(
+  const { data, isLoading } = useQuery(
     ["checkoutList"],
     () => checkoutAPI.getCheckoutList(sessionQuery?.user.email ?? ""),
     {
       enabled: !!sessionQuery,
-      // suspense: true,
+      suspense: true,
     }
   )
   const checkoutList: CheckoutList[] = data ?? []
 
   const currentCheckoutList = checkoutList[0]
 
-  return { checkoutList, currentCheckoutList }
+  return { checkoutList, currentCheckoutList, isLoading }
 }

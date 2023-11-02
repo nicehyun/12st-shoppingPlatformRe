@@ -1,7 +1,7 @@
 import MyPageBasicModal from "@/features/myPage/views/MyPageBasicModal"
 import { ReactNode } from "react"
 
-const layout = ({ children }: { children: ReactNode }) => {
+const WriteLayout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       {children}
@@ -10,4 +10,4 @@ const layout = ({ children }: { children: ReactNode }) => {
   )
 }
 
-export default layout
+export default WriteLayout

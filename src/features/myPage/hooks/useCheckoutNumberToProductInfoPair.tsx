@@ -1,7 +1,7 @@
 import { useGetCheckoutListQuery } from "@/features/checkout/hooks/useGetCheckoutListQuery"
 
 const useCheckoutNumberToProductInfoPair = () => {
-  const { checkoutList } = useGetCheckoutListQuery()
+  const { checkoutList, isLoading } = useGetCheckoutListQuery()
 
   const checkoutNumberToProductInfoPairList = checkoutList.flatMap(
     (checkoutEl) => {
