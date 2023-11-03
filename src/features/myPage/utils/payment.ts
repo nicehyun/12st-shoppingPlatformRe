@@ -1,4 +1,6 @@
 export const getKoreanPaymentMethod = (payment: string) => {
+  if (!payment) return
+
   const paymentList = [
     { kor: "신용/체크카드", eng: "credit" },
     { kor: "토스페이", eng: "tosspay" },
@@ -16,6 +18,8 @@ export const getKoreanPaymentMethod = (payment: string) => {
 }
 
 export const formatCheckoutDate = (checkoutDate: string) => {
+  if (!checkoutDate) return
+
   const formattedDate = checkoutDate.replace(/-|:/g, ",").replace(/\s/g, "")
 
   const [year, month, date, hour, minute] = formattedDate.split(",")

@@ -235,4 +235,22 @@ export const myPageAPI = {
       throw Error(`writeCoustomerCounseling firebase API : ${error}`)
     }
   },
+  getCoutomerCounselingList: async (email: string) => {
+    if (email === "") return
+
+    try {
+      const customerCounselingRef = doc(db, "customerCounseling", email)
+      const customerCounselingDoc = await getDoc(customerCounselingRef)
+
+      if (customerCounselingDoc) {
+        const existingCustomerCounselingData = customerCounselingDoc.data() as {
+          customerCounselingList: CustomerCounselingDetail[]
+        }
+
+        return existingCustomerCounselingData.customerCounselingList
+      } else {
+        return undefined
+      }
+    } catch (error) {}
+  },
 }

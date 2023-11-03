@@ -2,6 +2,8 @@ import { CheckoutDate, CheckoutPaymentInfo } from "@/common/types/checkout"
 
 export type CancelType = "all" | "cancel" | "change" | "return"
 
+export type WriteDate = CheckoutDate
+
 export type CsType =
   | "delivery"
   | "checkout"
@@ -34,12 +36,13 @@ export type CustomerCounselingUserInfo = {
 
 export type CustomerCounselingDetail = {
   csType: CsType
+  counselingTitle: string
+  counselingContent: string
   checkoutNumber?: string
   checkoutProductName?: string
   checkoutDate?: CheckoutDate
   checkoutPayment?: CheckoutPaymentInfo
   productName?: string
   productPrice?: number
-  counselingTitle: string
-  counselingContent: string
+  writeDate?: WriteDate
 }

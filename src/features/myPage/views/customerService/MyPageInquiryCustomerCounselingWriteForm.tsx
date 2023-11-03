@@ -17,6 +17,7 @@ import { useCustomerCounselingWriteSubmitMutation } from "../../hooks/useCustome
 import { useFeedbackModal } from "@/common/hooks/useFeedbackModal"
 import { ROUTE, useNavigations } from "@/common/hooks/useNavigations"
 import Loading from "@/common/views/Loading"
+import { convertinglocaleStringToNumber } from "@/common/utils/price"
 
 const MyPageInquiryCustomerCounselingWriteForm = () => {
   const { routeTo } = useNavigations()
@@ -135,21 +136,49 @@ const MyPageInquiryCustomerCounselingWriteForm = () => {
       return
     }
 
-    const writeDetail = {
-      csType: selectedCsType,
-      counselingContent,
-      counselingTitle,
-      checkoutDate: formatCheckoutDate(checkoutDate),
-      checkoutNumber,
-      checkoutPayment: formatCheckoutPayment(checkoutPayment),
-      checkoutProductName,
-      productName,
-      productPrice: Number(productPrice),
+    let response
+
+    if (checkoutRelationRadioValueList.includes(selectedCsType as string)) {
+      const writeDetail = {
+        csType: selectedCsType,
+        counselingContent,
+        counselingTitle,
+        checkoutProductName,
+        checkoutDate: formatCheckoutDate(checkoutDate),
+        checkoutNumber,
+        checkoutPayment: formatCheckoutPayment(checkoutPayment),
+      }
+
+      response = await customerCounselingWriteSubmitMutateAsync({
+        writeDetail,
+      })
     }
 
-    const response = await customerCounselingWriteSubmitMutateAsync({
-      writeDetail,
-    })
+    if (selectedCsType === "product") {
+      const writeDetail = {
+        csType: selectedCsType,
+        counselingContent,
+        counselingTitle,
+        productName,
+        productPrice: convertinglocaleStringToNumber(productPrice),
+      }
+
+      response = await customerCounselingWriteSubmitMutateAsync({
+        writeDetail,
+      })
+    }
+
+    if (selectedCsType === "system" || selectedCsType === "etc") {
+      const writeDetail = {
+        csType: selectedCsType,
+        counselingContent,
+        counselingTitle,
+      }
+
+      response = await customerCounselingWriteSubmitMutateAsync({
+        writeDetail,
+      })
+    }
 
     if (!response?.ok) {
       dispatch(

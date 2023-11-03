@@ -13,7 +13,7 @@ export const useGetUserInfoQuery = () => {
     ["userInfo"],
     () => myPageAPI.getUserInfo(sessionQuery?.user.email ?? ""),
     {
-      // suspense: true,
+      suspense: true,
       enabled: !!sessionQuery,
     }
   )

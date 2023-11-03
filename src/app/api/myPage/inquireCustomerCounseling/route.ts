@@ -46,6 +46,8 @@ export async function POST(request: NextRequest) {
   if (!nameValidator(name)) return
   if (!emailValidator(email)) return
 
+  let updatedWriteDetail: CustomerCounselingDetail
+
   if (checkoutRelationRadioValueList.includes(csType)) {
     if (
       ![
@@ -55,8 +57,16 @@ export async function POST(request: NextRequest) {
         !!checkoutPayment?.selectedPayment,
       ].every((checkoutRelationCsValidEl) => checkoutRelationCsValidEl)
     ) {
-      console.log(1)
       return
+    }
+
+    updatedWriteDetail = {
+      csType,
+      counselingContent,
+      counselingTitle,
+      checkoutDate,
+      checkoutNumber,
+      checkoutPayment,
     }
   }
 
@@ -66,8 +76,15 @@ export async function POST(request: NextRequest) {
         (productRelationCsValidEl) => productRelationCsValidEl
       )
     ) {
-      console.log(2)
       return
+    }
+
+    updatedWriteDetail = {
+      csType,
+      counselingContent,
+      counselingTitle,
+      productName,
+      productPrice,
     }
   }
 
@@ -76,14 +93,18 @@ export async function POST(request: NextRequest) {
       (commonValidEl) => commonValidEl
     )
   ) {
-    console.log(3)
     return
+  } else {
+    updatedWriteDetail = {
+      csType,
+      counselingContent,
+      counselingTitle,
+    }
   }
 
   let response
-
   try {
-    await myPageAPI.writeCoustomerCounseling(userInfo, writeDetail)
+    await myPageAPI.writeCoustomerCounseling(userInfo, updatedWriteDetail)
 
     response = { result: "success" }
   } catch (error) {
