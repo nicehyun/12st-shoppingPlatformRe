@@ -33,7 +33,7 @@ const MyPageInquiryCustomerCounselingContentList = () => {
             equalParts={2}
             content={customerCounselingEl.counselingTitle}
             NoCenter
-            className="truncate group-hover:text-lightRed"
+            className="truncate group-hover:text-lightRed ml-[10px]"
           />
           <MyPageTableContentEl
             equalParts={4}
