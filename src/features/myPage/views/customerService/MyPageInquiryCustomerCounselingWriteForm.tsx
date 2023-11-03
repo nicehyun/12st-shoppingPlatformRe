@@ -34,6 +34,8 @@ const MyPageInquiryCustomerCounselingWriteForm = () => {
     "deposit",
   ]
 
+  //TODO : 서버에 저장
+
   const handleCustomerCounselingWriteSubmit = async (
     event: React.FormEvent<HTMLFormElement>
   ) => {
