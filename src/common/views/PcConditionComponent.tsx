@@ -7,7 +7,7 @@ interface IPcConditionComponent {
 import { useEffect, useState } from "react"
 
 const PcConditionComponent = ({ component }: IPcConditionComponent) => {
-  const [isMobile, setIsMobile] = useState<boolean>(true)
+  const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth >= 768)
 
   useEffect(() => {
     const handleResize = () => {

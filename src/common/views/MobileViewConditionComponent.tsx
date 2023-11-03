@@ -9,7 +9,7 @@ interface IMobileViewConditionComponent {
 const MobileViewConditionComponent = ({
   component,
 }: IMobileViewConditionComponent) => {
-  const [isMobile, setIsMobile] = useState<boolean>(false)
+  const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 767)
 
   useEffect(() => {
     const handleResize = () => {
