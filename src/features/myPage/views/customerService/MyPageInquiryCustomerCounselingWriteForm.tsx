@@ -44,6 +44,14 @@ const MyPageInquiryCustomerCounselingWriteForm = () => {
     "deposit",
   ]
 
+  const genernalRelationRadioValueListWithoutProduct = [
+    "userInfo",
+    "payment",
+    "couponAndMile",
+  ]
+
+  const etcRelationRadioValueList = ["system", "etc"]
+
   const handleCustomerCounselingWriteSubmit = async (
     event: React.FormEvent<HTMLFormElement>
   ) => {
@@ -168,7 +176,10 @@ const MyPageInquiryCustomerCounselingWriteForm = () => {
       })
     }
 
-    if (selectedCsType === "system" || selectedCsType === "etc") {
+    if (
+      genernalRelationRadioValueListWithoutProduct.includes(selectedCsType) ||
+      etcRelationRadioValueList.includes(selectedCsType)
+    ) {
       const writeDetail = {
         csType: selectedCsType,
         counselingContent,
