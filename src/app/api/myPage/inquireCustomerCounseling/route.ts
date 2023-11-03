@@ -1,23 +1,13 @@
-import { addressAPI } from "@/common/models/addressAPI"
-import { mileAPI } from "@/common/models/mileAPI"
-import { CheckoutList } from "@/common/types/checkout"
 import {
-  accumulationOfProductsPrice,
-  junkOfNoMoreThanOneDigit,
-} from "@/common/utils/price"
-import {
-  additionalAddressValidator,
   emailValidator,
   nameValidator,
-  phoneValidator,
 } from "@/features/auth/signUp/utils/validation"
-import { checkoutAPI } from "@/features/checkout/models/checkoutAPI"
 import { myPageAPI } from "@/features/myPage/models/myPageAPI"
 import {
   CustomerCounselingDetail,
   CustomerCounselingUserInfo,
 } from "@/features/myPage/types/myPage"
-import { CheckoutClauseCheck } from "@/redux/features/checkoutSlice"
+
 import { NextRequest, NextResponse } from "next/server"
 
 export async function POST(request: NextRequest) {

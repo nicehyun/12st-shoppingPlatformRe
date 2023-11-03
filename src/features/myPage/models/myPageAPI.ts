@@ -13,6 +13,7 @@ import {
 import { UseMileAndGetMile } from "../types/mile"
 import { Product } from "@/common/types/product"
 import { CustomerCounselingDetail } from "../types/myPage"
+import { getCurrentDateTime } from "@/common/utils/time"
 
 const db = getFirestore(firebaseApp)
 
@@ -213,7 +214,7 @@ export const myPageAPI = {
           existingCustomerCounselingData.customerCounselingList || []
 
         updatedCustomerCounselingList = [
-          writeDetail,
+          { ...writeDetail, writeDate: getCurrentDateTime() },
           ...existingCustomerCounselingDataList,
         ]
       } else {

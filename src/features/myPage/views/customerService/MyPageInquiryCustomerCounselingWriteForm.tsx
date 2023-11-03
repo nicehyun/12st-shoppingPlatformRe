@@ -9,20 +9,27 @@ import MyPageProductSearch from "./MyPageProductSearch"
 import MyPageCheckoutSearch from "./MyPageCheckoutSearch"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { resetCsType, selectSelectedCsType } from "@/redux/features/myPageSlice"
-import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import MyPageCutsomerCounselingWriteUserInfoList from "./MyPageCustomerCounselingWriteUserInfoList"
 import { useEffect, useRef } from "react"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
-import { myPageAPI } from "../../models/myPageAPI"
 import { formatCheckoutDate, formatCheckoutPayment } from "../../utils/payment"
+import { useCustomerCounselingWriteSubmitMutation } from "../../hooks/useCustomerCounselingWriteSubmitMutation"
+import { useFeedbackModal } from "@/common/hooks/useFeedbackModal"
+import { ROUTE, useNavigations } from "@/common/hooks/useNavigations"
+import Loading from "@/common/views/Loading"
 
 const MyPageInquiryCustomerCounselingWriteForm = () => {
+  const { routeTo } = useNavigations()
+  const { showFeedbackModalWithContent } = useFeedbackModal()
+  const {
+    customerCounselingWriteSubmitMutateAsync,
+    isCustomerCounselingWriteLoading,
+  } = useCustomerCounselingWriteSubmitMutation()
   const radioListRef = useRef<HTMLLIElement | null>(null)
   const searchProductInfoRef = useRef<HTMLLIElement | null>(null)
   const searchCheckoutInfoRef = useRef<HTMLLIElement | null>(null)
   const writeRef = useRef<HTMLLIElement | null>(null)
 
-  const { sessionQuery } = useSessionQuery()
   const selectedCsType = useAppSelector(selectSelectedCsType)
   const dispatch = useAppDispatch()
 
@@ -40,6 +47,8 @@ const MyPageInquiryCustomerCounselingWriteForm = () => {
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault()
+
+    if (isCustomerCounselingWriteLoading) return
 
     const formData = new FormData(event.currentTarget)
 
@@ -126,7 +135,6 @@ const MyPageInquiryCustomerCounselingWriteForm = () => {
       return
     }
 
-    const userInfo = { email: "test@test.com", name: "승현쓰" }
     const writeDetail = {
       csType: selectedCsType,
       counselingContent,
@@ -139,36 +147,24 @@ const MyPageInquiryCustomerCounselingWriteForm = () => {
       productPrice: Number(productPrice),
     }
 
-    try {
-      const response = await fetch("/api/myPage/inquireCustomerCounseling", {
-        method: "POST",
-        body: JSON.stringify({
-          userInfo,
-          writeDetail,
-        }),
-      })
+    const response = await customerCounselingWriteSubmitMutateAsync({
+      writeDetail,
+    })
 
-      return response
-    } catch (error) {
-      console.error(error)
+    if (!response?.ok) {
+      dispatch(
+        showFeedbackModal({
+          modalContent:
+            "상품 주문에 실패했습니다. 오류가 계속되면 고객센터에 문의해주세요",
+        })
+      )
+      return
     }
 
-    // myPageAPI.writeCoustomerCounseling(
-    //   { email: "test@test.com", name: "승현쓰" },
-    //   {
-    //     csType: selectedCsType,
-    //     counselingContent,
-    //     counselingTitle,
-    //     checkoutDate: formatCheckoutDate(checkoutDate),
-    //     checkoutNumber,
-    //     checkoutPayment: formatCheckoutPayment(checkoutPayment),
-    //     checkoutProductName,
-    //     productName,
-    //     productPrice: Number(productPrice),
-    //   }
-    // )
-
-    console.log("sucessfully")
+    if (response?.ok) {
+      routeTo(ROUTE.INQUIRYCUSTOMERCOUNSELING)
+      showFeedbackModalWithContent("문의 등록이 완료되었습니다")
+    }
   }
 
   useEffect(() => {
@@ -211,8 +207,18 @@ const MyPageInquiryCustomerCounselingWriteForm = () => {
       <div className="text-center">
         <Button
           type="submit"
-          content="등록하기"
-          classNames="tracking-[5px] py-[10px] px-[40px] mt-[50px] sm:text-[14px] md:text-[14px] border-[1px] border-lightRed dark:bg-lightRed dark:text-white text-lightRed rounded-[5px] tr"
+          isDisabled={isCustomerCounselingWriteLoading}
+          content={
+            isCustomerCounselingWriteLoading ? (
+              <Loading
+                spinnerSize={{ height: "h-[26px]", width: "w-[26px]" }}
+                isFrame={false}
+              />
+            ) : (
+              "등록하기"
+            )
+          }
+          classNames="tracking-[5px] h-[50px] w-[140px] mt-[50px] sm:text-[14px] md:text-[14px] border-[1px] border-lightRed dark:bg-lightRed dark:text-white text-lightRed rounded-[5px] tr"
         />
       </div>
     </form>
