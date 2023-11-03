@@ -1,6 +1,7 @@
 "use client"
 
 import { useGetCustomerCounselingListQuery } from "../../hooks/useGetCustomerCounselingListQuery"
+import { getKoreanCsType } from "../../utils/csType"
 import MyPageTableContentEl from "../MyPageTableContentEl"
 
 const MyPageInquiryCustomerCounselingContentList = () => {
@@ -16,7 +17,7 @@ const MyPageInquiryCustomerCounselingContentList = () => {
   }
 
   return (
-    <div className="leading-[50px] text-[16px]">
+    <>
       {customerCounselingList?.map((customerCounselingEl, index) => (
         <div
           key={`customerCounselingList-${customerCounselingEl.csType}-${customerCounselingEl}-${index}`}
@@ -24,13 +25,15 @@ const MyPageInquiryCustomerCounselingContentList = () => {
         >
           <MyPageTableContentEl
             equalParts={4}
-            content={customerCounselingEl.csType ?? ""}
+            content={getKoreanCsType(customerCounselingEl.csType) ?? ""}
             NoCenter
+            className="group-hover:text-lightRed"
           />
           <MyPageTableContentEl
             equalParts={2}
             content={customerCounselingEl.counselingTitle}
             NoCenter
+            className="truncate group-hover:text-lightRed"
           />
           <MyPageTableContentEl
             equalParts={4}
@@ -40,7 +43,7 @@ const MyPageInquiryCustomerCounselingContentList = () => {
           <MyPageTableContentEl equalParts={4} content={"N"} />
         </div>
       ))}
-    </div>
+    </>
   )
 }
 
