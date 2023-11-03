@@ -13,6 +13,8 @@ import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import MyPageCutsomerCounselingWriteUserInfoList from "./MyPageCustomerCounselingWriteUserInfoList"
 import { useEffect, useRef } from "react"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
+import { myPageAPI } from "../../models/myPageAPI"
+import { formatCheckoutDate, formatCheckoutPayment } from "../../utils/payment"
 
 const MyPageInquiryCustomerCounselingWriteForm = () => {
   const radioListRef = useRef<HTMLLIElement | null>(null)
@@ -34,8 +36,6 @@ const MyPageInquiryCustomerCounselingWriteForm = () => {
     "deposit",
   ]
 
-  //TODO : 서버에 저장
-
   const handleCustomerCounselingWriteSubmit = async (
     event: React.FormEvent<HTMLFormElement>
   ) => {
@@ -43,26 +43,40 @@ const MyPageInquiryCustomerCounselingWriteForm = () => {
 
     const formData = new FormData(event.currentTarget)
 
+    const checkoutNumber = formData.get(
+      "coustomweCounselingWrite-checkoutInfo__checkoutNumber"
+    ) as string
+    const checkoutProductName = formData.get(
+      "coustomweCounselingWrite-checkoutInfo__checkoutProductName"
+    ) as string
+    const checkoutDate = formData.get(
+      "coustomweCounselingWrite-checkoutInfo__checkoutDate"
+    ) as string
+    const checkoutPayment = formData.get(
+      "coustomweCounselingWrite-checkoutInfo__checkoutPayment"
+    ) as string
+    const productName = formData.get(
+      "coustomweCounselingWrite-productInfo__productName"
+    ) as string
+    const productPrice = formData.get(
+      "coustomweCounselingWrite-productInfo__price"
+    ) as string
+    const counselingTitle = formData.get(
+      "coustomweCounselingWrite-content__title"
+    ) as string
+    const counselingContent = formData.get(
+      "coustomweCounselingWrite-content__content"
+    ) as string
+
     const checkoutRelationCsValidList = [
-      !!formData.get("coustomweCounselingWrite-checkoutInfo__checkoutNumber"),
-      !!formData.get(
-        "coustomweCounselingWrite-checkoutInfo__checkoutProductName"
-      ),
-      !!formData.get("coustomweCounselingWrite-checkoutInfo__checkoutDate"),
-      !!formData.get("coustomweCounselingWrite-checkoutInfo__checkoutPayment"),
+      !!checkoutNumber,
+      !!checkoutProductName,
+      !!checkoutDate,
+      !!checkoutPayment,
     ]
 
-    const productRelationCsValidList = [
-      !!formData.get(
-        "coustomweCounselingWrite-productInfo__checkoutProductName"
-      ),
-      !!formData.get("coustomweCounselingWrite-productInfo__checkoutDate"),
-    ]
-
-    const commonValidList = [
-      !!formData.get("coustomweCounselingWrite-content__title"),
-      !!formData.get("coustomweCounselingWrite-content__content"),
-    ]
+    const productRelationCsValidList = [!!productName, !!productPrice]
+    const commonValidList = [!!counselingTitle, !!counselingContent]
 
     if (!selectedCsType) {
       dispatch(showFeedbackModal({ modalContent: "문의 유형을 선택해주세요" }))
@@ -111,6 +125,48 @@ const MyPageInquiryCustomerCounselingWriteForm = () => {
       }
       return
     }
+
+    const userInfo = { email: "test@test.com", name: "승현쓰" }
+    const writeDetail = {
+      csType: selectedCsType,
+      counselingContent,
+      counselingTitle,
+      checkoutDate: formatCheckoutDate(checkoutDate),
+      checkoutNumber,
+      checkoutPayment: formatCheckoutPayment(checkoutPayment),
+      checkoutProductName,
+      productName,
+      productPrice: Number(productPrice),
+    }
+
+    try {
+      const response = await fetch("/api/myPage/inquireCustomerCounseling", {
+        method: "POST",
+        body: JSON.stringify({
+          userInfo,
+          writeDetail,
+        }),
+      })
+
+      return response
+    } catch (error) {
+      console.error(error)
+    }
+
+    // myPageAPI.writeCoustomerCounseling(
+    //   { email: "test@test.com", name: "승현쓰" },
+    //   {
+    //     csType: selectedCsType,
+    //     counselingContent,
+    //     counselingTitle,
+    //     checkoutDate: formatCheckoutDate(checkoutDate),
+    //     checkoutNumber,
+    //     checkoutPayment: formatCheckoutPayment(checkoutPayment),
+    //     checkoutProductName,
+    //     productName,
+    //     productPrice: Number(productPrice),
+    //   }
+    // )
 
     console.log("sucessfully")
   }

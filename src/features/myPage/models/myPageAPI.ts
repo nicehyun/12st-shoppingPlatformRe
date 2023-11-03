@@ -12,6 +12,7 @@ import {
 } from "firebase/firestore"
 import { UseMileAndGetMile } from "../types/mile"
 import { Product } from "@/common/types/product"
+import { CustomerCounselingDetail } from "../types/myPage"
 
 const db = getFirestore(firebaseApp)
 
@@ -188,6 +189,49 @@ export const myPageAPI = {
       }
 
       throw Error(`🚨 getProductInfoByProductId firebase API : ${error}`)
+    }
+  },
+  writeCoustomerCounseling: async (
+    userInfo: { email: string; name: string },
+    writeDetail: CustomerCounselingDetail
+  ) => {
+    if (userInfo.email === "") return
+
+    try {
+      const customerCounselingRef = doc(
+        db,
+        "customerCounseling",
+        userInfo.email
+      )
+      const customerCounselingDoc = await getDoc(customerCounselingRef)
+
+      let updatedCustomerCounselingList = []
+
+      if (customerCounselingDoc.exists()) {
+        const existingCustomerCounselingData = customerCounselingDoc.data()
+        const existingCustomerCounselingDataList =
+          existingCustomerCounselingData.customerCounselingList || []
+
+        updatedCustomerCounselingList = [
+          writeDetail,
+          ...existingCustomerCounselingDataList,
+        ]
+      } else {
+        updatedCustomerCounselingList = [writeDetail]
+      }
+
+      await setDoc(customerCounselingRef, {
+        customerCounselingList: updatedCustomerCounselingList,
+      })
+
+      return { result: "success" }
+    } catch (error) {
+      const { response } = error as unknown as AxiosError
+      if (response) {
+        throw Error(`🚨firebase setDoc API : ${error}`)
+      }
+
+      throw Error(`writeCoustomerCounseling firebase API : ${error}`)
     }
   },
 }

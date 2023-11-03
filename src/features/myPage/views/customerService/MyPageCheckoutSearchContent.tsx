@@ -7,29 +7,25 @@ import {
   selectSelectedCheckoutInfo,
 } from "@/redux/features/myPageSlice"
 import { useEffect } from "react"
+import { getKoreanPaymentMethod } from "../../utils/payment"
 
 const MyPageCheckoutSearchContent = () => {
   const dispatch = useAppDispatch()
   const selectedCheckoutInfo = useAppSelector(selectSelectedCheckoutInfo)
 
-  const selectedCheckoutDate = [
+  const selectedCheckoutDateList = [
     selectedCheckoutInfo.checkoutDate?.year,
     selectedCheckoutInfo.checkoutDate?.month,
     selectedCheckoutInfo.checkoutDate?.date,
+    selectedCheckoutInfo.checkoutDate?.hour,
+    selectedCheckoutInfo.checkoutDate?.minute,
   ]
 
-  const myPageSearchResultPaymentValue = `${
-    selectedCheckoutInfo.payment?.selectedPayment ?? ""
-  }${
-    selectedCheckoutInfo.payment?.creditName
-      ? `-${selectedCheckoutInfo.payment?.creditName}`
-      : ""
-  }
-  ${
-    selectedCheckoutInfo.payment?.period
-      ? ` (${selectedCheckoutInfo.payment?.period})`
-      : ""
-  }`
+  const selectedCheckoutPaymentList = [
+    getKoreanPaymentMethod(selectedCheckoutInfo.payment?.selectedPayment ?? ""),
+    selectedCheckoutInfo.payment?.creditName,
+    selectedCheckoutInfo.payment?.period,
+  ]
 
   const checkoutSearchContentList = [
     {
@@ -40,15 +36,29 @@ const MyPageCheckoutSearchContent = () => {
     {
       id: "coustomweCounselingWrite-checkoutInfo__checkoutDate",
       value: `${
-        selectedCheckoutDate.every((checkoutDateEl) => !!checkoutDateEl)
-          ? `${selectedCheckoutDate[0]}-${selectedCheckoutDate[1]}-${selectedCheckoutDate[2]}`
+        selectedCheckoutDateList.every((checkoutDateEl) => !!checkoutDateEl)
+          ? selectedCheckoutDateList
+              .map(
+                (checkoutDateEl, index) =>
+                  `${
+                    index === 0 ? "" : index === 4 ? " : " : " - "
+                  }${checkoutDateEl}`
+              )
+              .join("")
           : ""
       }`,
       label: "주문일자",
     },
     {
       id: "coustomweCounselingWrite-checkoutInfo__checkoutPayment",
-      value: myPageSearchResultPaymentValue,
+      value: selectedCheckoutPaymentList
+        .map(
+          (checkoutPaymentEl, index) =>
+            `${index === 0 || !checkoutPaymentEl ? "" : " - "}${
+              checkoutPaymentEl ?? ""
+            }`
+        )
+        .join(""),
       label: "결제방법",
     },
   ]

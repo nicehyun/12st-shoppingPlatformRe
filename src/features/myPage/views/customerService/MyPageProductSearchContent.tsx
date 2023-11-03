@@ -19,12 +19,12 @@ const MyPageProductSearchContent = () => {
 
   const productSearchContentList = [
     {
-      id: "coustomweCounselingWrite-productInfo__checkoutProductName",
+      id: "coustomweCounselingWrite-productInfo__productName",
       value: searchProductInfo?.name ?? "",
       label: "상품명",
     },
     {
-      id: "coustomweCounselingWrite-productInfo__checkoutDate",
+      id: "coustomweCounselingWrite-productInfo__price",
       value:
         numberToLocaleString(searchProductInfo?.price ?? 0) === "0"
           ? ""

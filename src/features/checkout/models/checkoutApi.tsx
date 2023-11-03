@@ -1,15 +1,7 @@
 import { CheckoutList } from "@/common/types/checkout"
 import { CheckoutClauseCheck } from "@/redux/features/checkoutSlice"
 
-import {
-  getFirestore,
-  doc,
-  setDoc,
-  getDoc,
-  collection,
-  addDoc,
-  updateDoc,
-} from "firebase/firestore"
+import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore"
 import { getCurrentDateTime } from "@/common/utils/time"
 import { AxiosError } from "axios"
 import firebaseApp from "@/firebase/config"
