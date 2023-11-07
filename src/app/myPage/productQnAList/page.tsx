@@ -1,5 +1,7 @@
+import MyPageProductQnAInfo from "@/features/myPage/views/productQnAList/MyPageProductQnAInfo"
+
 const productQnAListSection = () => {
-  return <div>ads</div>
+  return <MyPageProductQnAInfo />
 }
 
 export default productQnAListSection

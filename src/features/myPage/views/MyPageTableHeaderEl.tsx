@@ -15,9 +15,9 @@ const MyPageTableHeaderEl = ({
 }: IMyPageCheckoutEl) => {
   return (
     <span
-      className={`${className} flex items-center w-1/${equalParts} ${
-        isStart ? "justify-start" : isEnd ? "justify-end" : "justify-center"
-      }`}
+      className={`${className} ${
+        isStart || isEnd ? "my-auto" : "flexCenter"
+      } w-1/${equalParts} ${isStart ? "" : isEnd ? "text-end" : ""}`}
     >
       {headerContent}
     </span>
