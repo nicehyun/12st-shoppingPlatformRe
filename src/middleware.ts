@@ -21,6 +21,7 @@ export async function middleware(request: NextRequest) {
     ROUTE.Mile,
     ROUTE.INQUIRYCUSTOMERCOUNSELING,
     ROUTE.COUNSELINGWRITE,
+    ROUTE.PRODUCTQNA,
   ]
   const withAuthPageList: string[] = [
     ROUTE.CART,
@@ -35,6 +36,7 @@ export async function middleware(request: NextRequest) {
     ROUTE.Mile,
     ROUTE.INQUIRYCUSTOMERCOUNSELING,
     ROUTE.COUNSELINGWRITE,
+    ROUTE.PRODUCTQNA,
   ]
   const { pathname } = request.nextUrl
   const secret = process.env.NEXTAUTH_SECRET

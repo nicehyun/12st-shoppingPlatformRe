@@ -33,10 +33,7 @@ const MyPageCategory = () => {
       categoryTitle: "고객센터",
       categoryList: {
         categoryListContents: ["1:1 문의내역", "상품 Q&A내역"],
-        categoryListRoutes: [
-          ROUTE.INQUIRYCUSTOMERCOUNSELING,
-          ROUTE.CHECKOUTCANCELLIST,
-        ],
+        categoryListRoutes: [ROUTE.INQUIRYCUSTOMERCOUNSELING, ROUTE.PRODUCTQNA],
       },
     },
   ]
