@@ -36,7 +36,7 @@ const MyPageCategoryEl = ({
             }  border-lightBorder py-[20px] text-[16px] sm:text-[18px] md:text-[18px] lg:text-[14px] font-normal lg:font-light xl:font-light hover:font-semibold cursor-pointer text-black dark:text-border dark:text-lightborder dark:hover:text-border`}
           >
             <Link
-              href={`${categoryListRoutes[index]}#settings`}
+              href={`${categoryListRoutes[index]}`}
               className={`link active:text-lightRed ${
                 pathname === `${categoryListRoutes[index]}`
                   ? "text-lightRed font-semibold"
