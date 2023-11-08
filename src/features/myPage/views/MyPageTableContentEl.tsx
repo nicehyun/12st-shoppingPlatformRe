@@ -1,21 +1,19 @@
+import { ReactNode } from "react"
+
 interface IMyPageTableContentEl {
-  content: string
-  equalParts: number
+  content: ReactNode
   className?: string
   NoCenter?: boolean
 }
 
 const MyPageTableContentEl = ({
   content,
-  equalParts,
   className,
   NoCenter = false,
 }: IMyPageTableContentEl) => {
   return (
     <span
-      className={`${className} ${
-        NoCenter ? "my-auto" : "flexCenter"
-      } w-1/${equalParts}`}
+      className={`${className} block ${NoCenter ? "my-auto" : "flexCenter"}`}
     >
       {content}
     </span>

@@ -11,7 +11,6 @@ export const useGetCheckoutListQuery = () => {
     () => checkoutAPI.getCheckoutList(sessionQuery?.user.email ?? ""),
     {
       enabled: !!sessionQuery,
-      suspense: true,
     }
   )
   const checkoutList: CheckoutList[] = data ?? []

@@ -33,11 +33,11 @@ const MyPageCategoryEl = ({
             key={`${id}-${index}`}
             className={`${
               index !== 0 && "border-t-[1px]"
-            }  border-lightBorder text-[16px] sm:text-[18px] md:text-[18px] lg:text-[14px] font-normal lg:font-light xl:font-light hover:font-semibold cursor-pointer text-black dark:text-border dark:text-lightborder dark:hover:text-border`}
+            }  border-lightBorder text-[16px] sm:text-[18px] md:text-[18px] lg:text-[14px] font-normal lg:font-light xl:font-light hover:font-semibold text-black dark:text-border dark:text-lightborder dark:hover:text-border`}
           >
             <Link
               href={`${categoryListRoutes[index]}`}
-              className={`block link active:text-lightRed py-[20px] ${
+              className={`block link active:text-lightRed py-[20px] cursor-pointer ${
                 pathname === `${categoryListRoutes[index]}`
                   ? "text-lightRed font-semibold"
                   : ""

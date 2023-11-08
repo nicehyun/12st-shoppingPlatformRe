@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { CancelType } from "../../types/myPage"
-
 import MyPageCancelListController from "./MyPageCancelListController"
 import MyPageSectionTitle from "../MyPageSectionTitle"
 import MyPageTableHeaderEl from "../MyPageTableHeaderEl"

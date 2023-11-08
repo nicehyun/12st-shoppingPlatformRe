@@ -24,7 +24,7 @@ export type CheckoutList = {
   phone1: string
   phone2: string | null
   deliveryMemo: string | null
-  prductList: ProductsInCart
+  productList: ProductsInCart
   coupon: RateCoupon | AmountCoupon | null
   useMile: number
   getMile: number

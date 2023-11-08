@@ -17,7 +17,7 @@ const CheckoutOrderListInfo = () => {
       return checkedProductList.map((product, index) => (
         <CheckoutOrderListEl
           key={`order-${product.id}`}
-          prductInfo={product}
+          productInfo={product}
           discountPerProduct={calculatedDiscountPerProductArr[index]}
         />
       ))
@@ -27,7 +27,7 @@ const CheckoutOrderListInfo = () => {
         return (
           <CheckoutOrderListEl
             key={`order-${product.id}`}
-            prductInfo={product}
+            productInfo={product}
             discountPerProduct={calculatedDiscountPerProductArr[0]}
           />
         )

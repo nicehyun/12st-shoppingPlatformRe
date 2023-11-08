@@ -5,8 +5,8 @@ const useCheckoutNumberToProductInfoPair = () => {
 
   const checkoutNumberToCheckoutInfoPairList = checkoutList.flatMap(
     (checkoutEl) => {
-      const { prductList, checkoutNumber, checkoutDate, payment } = checkoutEl
-      const pairList = prductList.map((product) => ({
+      const { productList, checkoutNumber, checkoutDate, payment } = checkoutEl
+      const pairList = productList.map((product) => ({
         product,
         checkoutNumber: checkoutNumber!,
         checkoutDate: checkoutDate!,

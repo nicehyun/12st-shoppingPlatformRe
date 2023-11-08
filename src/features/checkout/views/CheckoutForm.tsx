@@ -185,7 +185,7 @@ const CheckoutForm = () => {
         ? (formData.get("phone2") as string)
         : null,
       deliveryMemo: handleDeliveryMemo(),
-      prductList: checkedProductList,
+      productList: checkedProductList,
       coupon: selectedCoupon,
       useMile: checkoutPlannedUseMileState,
       getMile: 0,

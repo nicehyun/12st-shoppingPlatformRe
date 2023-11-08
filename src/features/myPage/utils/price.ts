@@ -5,7 +5,7 @@ import {
 } from "@/common/utils/price"
 
 export const checkoutTotalPrice = (checkoutList: CheckoutList) => {
-  const totalPrice = accumulationOfProductsPrice(checkoutList.prductList)
+  const totalPrice = accumulationOfProductsPrice(checkoutList.productList)
 
   const usedCouponPrice = checkoutList.coupon
     ? priceToUseCoupon(checkoutList.coupon, totalPrice)
