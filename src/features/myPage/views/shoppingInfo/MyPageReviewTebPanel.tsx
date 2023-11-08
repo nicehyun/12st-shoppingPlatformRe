@@ -1,30 +1,26 @@
 "use client"
 
+import MyPageListNoneContents from "../MyPageListNoneContents"
+
 interface IMyPageReviewTebPanel {
-  reviewType: "available-review" | "my-review"
+  reviewType: "review__available" | "review__my"
 }
 
 const MyPageReviewTebPanel = ({ reviewType }: IMyPageReviewTebPanel) => {
   const renderAvailableReviewContent = () => {
     return (
-      <div className="h-[400px] flexCenter border-border border-b-[1px]">
-        아직 리뷰를 작성할 수 있는 주문내역이 없습니다.
-      </div>
+      <MyPageListNoneContents content="아직 리뷰를 작성할 수 있는 주문내역이 없습니다" />
     )
   }
 
   const renderMyReviewContent = () => {
-    return (
-      <div className="h-[400px] flexCenter border-border border-b-[1px]">
-        작성한 리뷰가 없습니다
-      </div>
-    )
+    return <MyPageListNoneContents content="작성한 리뷰가 없습니다" />
   }
 
   return (
     <>
-      {reviewType === "available-review" && renderAvailableReviewContent()}
-      {reviewType === "my-review" && renderMyReviewContent()}
+      {reviewType === "review__available" && renderAvailableReviewContent()}
+      {reviewType === "review__my" && renderMyReviewContent()}
     </>
   )
 }

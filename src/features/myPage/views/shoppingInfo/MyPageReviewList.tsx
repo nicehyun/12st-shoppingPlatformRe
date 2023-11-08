@@ -1,19 +1,12 @@
 "use client"
 
-import { useState } from "react"
 import MyPageSectionTitle from "../MyPageSectionTitle"
 import { Box, Tab, Tabs } from "@mui/material"
 import MyPageReviewTebPanel from "./MyPageReviewTebPanel"
+import { useTabValueHandler } from "@/features/checkout/hooks/useTabValueHandler"
 
 const MyPageReviewList = () => {
-  const [reviewTabValue, setReviewTabValue] = useState(0)
-
-  const handleReviewTabValueChange = (
-    event: React.SyntheticEvent,
-    newTapValue: number
-  ) => {
-    setReviewTabValue(newTapValue)
-  }
+  const { handleTabValueChange, tabValue } = useTabValueHandler()
 
   const renderTab = () => {
     const tabs = ["작성 가능한 리뷰", "내 리뷰 (0)"]
@@ -31,7 +24,7 @@ const MyPageReviewList = () => {
             color: "#ff4e0a",
           },
           color: "#ccc",
-          width: "200px",
+          width: "50%",
         }}
       />
     ))
@@ -43,8 +36,8 @@ const MyPageReviewList = () => {
       <Box sx={{ width: "100%", padding: 0 }}>
         <Box sx={{ borderColor: "#d2d2d2" }}>
           <Tabs
-            value={reviewTabValue}
-            onChange={handleReviewTabValueChange}
+            value={tabValue}
+            onChange={handleTabValueChange}
             aria-label="myPage-useMileAndGetMileInfo-teps"
             sx={{
               "& .MuiTabs-indicator": {
@@ -56,12 +49,10 @@ const MyPageReviewList = () => {
           </Tabs>
         </Box>
 
-        {reviewTabValue === 0 && (
-          <MyPageReviewTebPanel reviewType="available-review" />
+        {tabValue === 0 && (
+          <MyPageReviewTebPanel reviewType="review__available" />
         )}
-        {reviewTabValue === 1 && (
-          <MyPageReviewTebPanel reviewType="my-review" />
-        )}
+        {tabValue === 1 && <MyPageReviewTebPanel reviewType="review__my" />}
       </Box>
     </section>
   )
