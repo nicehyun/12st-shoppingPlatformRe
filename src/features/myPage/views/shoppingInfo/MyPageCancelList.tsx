@@ -27,6 +27,7 @@ const MyPageCancelList = () => {
             color: "#ff4e0a",
           },
           color: "#ccc",
+          width: "25%",
         }}
       />
     ))
