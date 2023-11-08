@@ -2,46 +2,46 @@
 
 import { useGetCustomerCounselingListQuery } from "../../hooks/useGetCustomerCounselingListQuery"
 import { getKoreanCsType } from "../../utils/csType"
+import MyPageListContentLayout from "../MyPageListContentLayout"
+import MyPageListLoading from "../MyPageListLoading"
+import MyPageListNoneContents from "../MyPageListNoneContents"
 import MyPageTableContentEl from "../MyPageTableContentEl"
 
 const MyPageInquiryCustomerCounselingContentList = () => {
-  const { customerCounselingList } = useGetCustomerCounselingListQuery()
-  console.log(customerCounselingList)
+  const { customerCounselingList, isLoading } =
+    useGetCustomerCounselingListQuery()
+
+  if (isLoading) {
+    return <MyPageListLoading />
+  }
 
   if (customerCounselingList?.length === 0) {
-    return (
-      <div className="h-[60px] flexCenter border-b-[1px] border-border text-[14px] sm:text-[12px] md:text-[12px]">
-        내역이 없습니다
-      </div>
-    )
+    return <MyPageListNoneContents />
   }
 
   return (
     <>
       {customerCounselingList?.map((customerCounselingEl, index) => (
-        <div
+        <MyPageListContentLayout
           key={`customerCounselingList-${customerCounselingEl.csType}-${customerCounselingEl}-${index}`}
-          className="flex h-[60px] md:h-[50px] text-[14px] sm:text-[12px] md:text-[12px] border-b-[1px] border-border cursor-pointer group"
         >
           <MyPageTableContentEl
-            equalParts={4}
             content={getKoreanCsType(customerCounselingEl.csType) ?? ""}
             NoCenter
-            className="group-hover:text-lightRed"
+            className="group-hover:text-lightRed w-1/3 font-semibold"
           />
           <MyPageTableContentEl
-            equalParts={2}
             content={customerCounselingEl.counselingTitle}
             NoCenter
-            className="truncate group-hover:text-lightRed ml-[10px]"
+            className="truncate-2 group-hover:text-lightRed w-1/2 break-words"
           />
           <MyPageTableContentEl
-            equalParts={4}
+            className="w-1/3 text-lightBlack"
             content={`${customerCounselingEl.writeDate?.year}-${customerCounselingEl.writeDate?.month}-${customerCounselingEl.writeDate?.date}`}
           />
 
-          <MyPageTableContentEl equalParts={4} content={"N"} />
-        </div>
+          <MyPageTableContentEl className="w-1/3" content={"N"} />
+        </MyPageListContentLayout>
       ))}
     </>
   )

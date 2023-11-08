@@ -1,27 +1,29 @@
-import React from "react"
-import MyPageSectionSubTitle from "../MyPageSectionSubTitle"
-import MyPageTableContentEl from "../MyPageTableContentEl"
 import MyPageTableHeaderEl from "../MyPageTableHeaderEl"
-import MyPageProductQnAListContent from "./MyPageProductQnAListContent"
+import MyPageSectionTitle from "../MyPageSectionTitle"
+import MyPageListHeaderLayout from "../MyPageListHeaderLayout"
+import MyPageProductQnAList from "./MyPageProductQnAList"
 
 const MyPageProductQnAInfo = () => {
   return (
-    <MyPageSectionSubTitle subtitle="상품 Q&A 내역" className="mt-[50px]">
-      <div className="flex border-t-[1px] font-extrabold border-b-border dark:border-white border-b-[1px] h-[60px] md:h-[50px] text-[14px] sm:text-[12px] md:text-[12px]">
-        <MyPageTableHeaderEl headerContent="상품번호" equalParts={4} isStart />
+    <section>
+      <MyPageSectionTitle title="상품 Q&A 내역" />
+      <MyPageListHeaderLayout>
+        <MyPageTableHeaderEl
+          headerContent="상품번호"
+          className="w-1/4"
+          isStart
+        />
         <MyPageTableHeaderEl
           headerContent="문의내용"
-          equalParts={2}
           isStart
-          className="ml-[10px]"
+          className="ml-[10px] w-1/2"
         />
+        <MyPageTableHeaderEl headerContent="작성일" className="w-1/4" />
+        <MyPageTableHeaderEl headerContent="답변유무" className="w-1/4" />
+      </MyPageListHeaderLayout>
 
-        <MyPageTableHeaderEl headerContent="작성일" equalParts={4} />
-        <MyPageTableHeaderEl headerContent="답변유무" equalParts={4} />
-      </div>
-
-      <MyPageProductQnAListContent />
-    </MyPageSectionSubTitle>
+      <MyPageProductQnAList />
+    </section>
   )
 }
 
