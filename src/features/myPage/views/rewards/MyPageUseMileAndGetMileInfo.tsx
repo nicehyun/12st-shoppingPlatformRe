@@ -33,6 +33,7 @@ const MyPageUseMileAndGetMileInfo = () => {
       />
     ))
   }
+  
   return (
     <MyPageSectionSubTitle
       subtitle="마일리지 적립 및 사용"

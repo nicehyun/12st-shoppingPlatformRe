@@ -1,53 +1,62 @@
 "use client"
 
-import { useState } from "react"
-import { CancelType } from "../../types/myPage"
-import MyPageCancelListController from "./MyPageCancelListController"
 import MyPageSectionTitle from "../MyPageSectionTitle"
-import MyPageTableHeaderEl from "../MyPageTableHeaderEl"
+import MyPageCancelTebPanel from "./MyPageCancelTebPanel"
+import { useTabValueHandler } from "@/features/checkout/hooks/useTabValueHandler"
+import { Box, Tab, Tabs } from "@mui/material"
 
 const MyPageCancelList = () => {
-  const [selectedCancelType, setSelectedCancelType] =
-    useState<CancelType>("all")
+  const { handleTabValueChange, tabValue } = useTabValueHandler()
 
-  const handleCancelTypeChange = (cancelType: CancelType) => {
-    setSelectedCancelType(cancelType)
+  const renderTab = () => {
+    const tabs = [
+      { label: "All", id: "all" },
+      { label: "취소", id: "return" },
+      { label: "반품", id: "return" },
+      { label: "교환", id: "change" },
+    ]
+
+    return tabs.map((tab, index) => (
+      <Tab
+        key={`tab-${index}`}
+        label={tab.label}
+        id={`cancel-tab-${tab.id}`}
+        aria-controls={`cancel-tabpanel-${tab.id}`}
+        sx={{
+          "&.Mui-selected": {
+            color: "#ff4e0a",
+          },
+          color: "#ccc",
+        }}
+      />
+    ))
   }
-
-  const cancelHeaderList = [
-    { title: "CS구분", id: "CSType" },
-    { title: "주문번호", id: "checkoutNumber" },
-    { title: "제목", id: "content" },
-    { title: "접수", id: "submisstionDate" },
-    { title: "진행", id: "phase" },
-    { title: "완료", id: "completeDate" },
-  ]
 
   return (
     <section>
-      <MyPageSectionTitle title="취소/반품/교환 내역">
-        <MyPageCancelListController
-          cancelTypeState={selectedCancelType}
-          onChangeCancelType={handleCancelTypeChange}
-        />
-      </MyPageSectionTitle>
+      <MyPageSectionTitle title="취소/반품/교환 내역" />
 
-      <div className="border-b-border border-b-[1px] dark:border-b-lightBlack">
-        <div className="h-[60px] md:h-[50px] flex justify-between border-b-black dark:border-white border-b-[1px] text-[14px] sm:text-[12px] md:text-[12px] font-semibold">
-          {cancelHeaderList.map((headerEl, index) => (
-            <MyPageTableHeaderEl
-              key={headerEl.id}
-              headerContent={headerEl.title}
-              equalParts={index === 2 ? 2 : 1}
-              className={`${index !== 0 ? "ml-[10px]" : ""}`}
-            />
-          ))}
-        </div>
+      <Box sx={{ width: "100%", padding: 0 }}>
+        <Box sx={{ borderColor: "#d2d2d2" }}>
+          <Tabs
+            value={tabValue}
+            onChange={handleTabValueChange}
+            aria-label="myPage-cancelList-teps"
+            sx={{
+              "& .MuiTabs-indicator": {
+                backgroundColor: "#ff4e0a",
+              },
+            }}
+          >
+            {renderTab()}
+          </Tabs>
+        </Box>
 
-        <div className="flexCenter h-[100px] font-bold text-[18px]">
-          취소/반품/교환 내역이 없습니다
-        </div>
-      </div>
+        {tabValue === 0 && <MyPageCancelTebPanel cancelType="cancel__all" />}
+        {tabValue === 1 && <MyPageCancelTebPanel cancelType="cancel__cancel" />}
+        {tabValue === 2 && <MyPageCancelTebPanel cancelType="cancel__return" />}
+        {tabValue === 3 && <MyPageCancelTebPanel cancelType="cancel__change" />}
+      </Box>
     </section>
   )
 }
