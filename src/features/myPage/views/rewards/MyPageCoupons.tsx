@@ -3,9 +3,14 @@
 import useCouponQuery from "@/features/checkout/hooks/useCouponQuery"
 import MyPageSectionTitle from "../MyPageSectionTitle"
 import MyPageCouponEl from "./MyPageCouponEl"
+import MyPageListLoading from "../MyPageListLoading"
 
 const MyPageCoupons = () => {
-  const { coupons } = useCouponQuery()
+  const { coupons, isLoading } = useCouponQuery()
+
+  if (isLoading) {
+    return <MyPageListLoading />
+  }
 
   return (
     <section>
