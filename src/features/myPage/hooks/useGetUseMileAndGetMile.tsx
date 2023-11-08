@@ -6,11 +6,10 @@ import { myPageAPI } from "../models/myPageAPI"
 const useGetUseMileAndGetMile = () => {
   const { sessionQuery } = useSessionQuery()
   const { userMile } = useUserMileQuery()
-  const { data: useMileAndGetMileInfo } = useQuery(
+  const { data: useMileAndGetMileInfo, isLoading } = useQuery(
     ["useMileAndGetMileInfo"],
     () => myPageAPI.getUseMileAndGetMile(sessionQuery?.user.email ?? ""),
     {
-      // suspense: true,
       enabled: !!sessionQuery,
     }
   )
@@ -25,7 +24,13 @@ const useGetUseMileAndGetMile = () => {
     0
   )
 
-  return { useMileAndGetMileInfo, userMile, totalGetMile, totalUseMile }
+  return {
+    useMileAndGetMileInfo,
+    userMile,
+    totalGetMile,
+    totalUseMile,
+    isLoading,
+  }
 }
 
 export default useGetUseMileAndGetMile

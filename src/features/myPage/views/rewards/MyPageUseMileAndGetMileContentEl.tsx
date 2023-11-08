@@ -1,5 +1,6 @@
 import { CheckoutDate } from "@/common/types/checkout"
 import MyPageTableContentEl from "../MyPageTableContentEl"
+import MyPageListContentLayout from "../MyPageListContentLayout"
 
 interface IMyPageUseMileAndGetMileContentEl {
   checkoutDate: CheckoutDate
@@ -14,24 +15,18 @@ const MyPageUseMileAndGetMileContentEl = ({
 }: IMyPageUseMileAndGetMileContentEl) => {
   const { date, month, year } = checkoutDate
   return (
-    <div className="flex h-[60px] md:h-[50px] text-[14px] sm:text-[12px] md:text-[12px] border-b-[1px] border-border">
+    <MyPageListContentLayout>
       <MyPageTableContentEl
         content={`${year}-${month}-${date}`}
-        equalParts={3}
-        className="text-lightBlack"
+        className="w-1/3 text-lightBlack"
       />
-      <MyPageTableContentEl
-        content={mile}
-        equalParts={3}
-        className="font-bold"
-      />
+      <MyPageTableContentEl content={mile} className="w-1/3 font-bold" />
       <MyPageTableContentEl
         content={checkoutNumber}
-        equalParts={3}
+        className="w-1/3 break-words truncate-2"
         NoCenter
-        className="text-ellipsis overflow-hidden"
       />
-    </div>
+    </MyPageListContentLayout>
   )
 }
 

@@ -1,62 +1,33 @@
 "use client"
 
-import { Box, Tab, Tabs } from "@mui/material"
-import { useState } from "react"
+import { Box } from "@mui/material"
 import MyPageSectionSubTitle from "../MyPageSectionSubTitle"
 import MyPageMileTebPanel from "./MyPageUseMileTebPanel"
+import { useTabValueHandler } from "@/features/checkout/hooks/useTabValueHandler"
+import MyPageTabs from "../MyPageTabs"
 
 const MyPageUseMileAndGetMileInfo = () => {
-  const [mileTabValue, setMileTabValue] = useState(0)
+  const { handleTabValueChange, tabValue } = useTabValueHandler()
+  const tabList = [
+    { label: "적립 마일리지", id: "get" },
+    { label: "사용 마일리지", id: "use" },
+  ]
 
-  const handleMileTabValueChange = (
-    event: React.SyntheticEvent,
-    newTapValue: number
-  ) => {
-    setMileTabValue(newTapValue)
-  }
-
-  const renderTab = () => {
-    const tabs = ["적립 마일리지", "사용 마일리지"]
-
-    return tabs.map((label, index) => (
-      <Tab
-        key={`tab-${index}`}
-        label={label}
-        id={`mile-tab-${index === 0 ? "getMile" : "useMile"}`}
-        aria-controls={`mile-tabpanel-${index === 0 ? "getMile" : "useMile"}`}
-        sx={{
-          "&.Mui-selected": {
-            color: "#ff4e0a",
-          },
-          color: "#ccc",
-        }}
-      />
-    ))
-  }
-  
   return (
     <MyPageSectionSubTitle
       subtitle="마일리지 적립 및 사용"
       className="mt-[80px]"
     >
       <Box sx={{ width: "100%", padding: 0 }}>
-        <Box sx={{ borderColor: "#d2d2d2" }}>
-          <Tabs
-            value={mileTabValue}
-            onChange={handleMileTabValueChange}
-            aria-label="myPage-useMileAndGetMileInfo-teps"
-            sx={{
-              "& .MuiTabs-indicator": {
-                backgroundColor: "#ff4e0a",
-              },
-            }}
-          >
-            {renderTab()}
-          </Tabs>
-        </Box>
+        <MyPageTabs
+          tabId="mileList"
+          onChangeTabValue={handleTabValueChange}
+          tabValue={tabValue}
+          tabs={tabList}
+        />
 
-        {mileTabValue === 0 && <MyPageMileTebPanel mileType="get" />}
-        {mileTabValue === 1 && <MyPageMileTebPanel mileType="use" />}
+        {tabValue === 0 && <MyPageMileTebPanel mileType="get" />}
+        {tabValue === 1 && <MyPageMileTebPanel mileType="use" />}
       </Box>
     </MyPageSectionSubTitle>
   )

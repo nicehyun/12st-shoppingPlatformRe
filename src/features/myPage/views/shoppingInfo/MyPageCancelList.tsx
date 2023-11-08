@@ -4,7 +4,7 @@ import MyPageSectionTitle from "../MyPageSectionTitle"
 import MyPageTabs from "../MyPageTabs"
 import MyPageCancelTebPanel from "./MyPageCancelTebPanel"
 import { useTabValueHandler } from "@/features/checkout/hooks/useTabValueHandler"
-import { Box, Tab, Tabs } from "@mui/material"
+import { Box } from "@mui/material"
 
 const MyPageCancelList = () => {
   const { handleTabValueChange, tabValue } = useTabValueHandler()
