@@ -27,7 +27,6 @@ const MyPageMemberTermination = () => {
     if (isMemberTerminationLoading) return
 
     const memberTerminationResult = await memberTerminationMutateAsync()
-    console.log(memberTerminationResult)
 
     if (memberTerminationResult?.result === "success") {
       handleAlertModalHide()
@@ -36,11 +35,11 @@ const MyPageMemberTermination = () => {
   }
 
   return (
-    <>
+    <div className="pt-[30px]">
       <Button
         onClick={handleMemberTerminateButtonClick}
         content="회원탈퇴"
-        classNames="underline"
+        classNames="underline text-lightBlack hover:text-black hover:font-semibold"
       />
 
       {isShowAlertModal && (
@@ -67,7 +66,7 @@ const MyPageMemberTermination = () => {
           <MyPageTerminationContent />
         </AlertModal>
       )}
-    </>
+    </div>
   )
 }
 

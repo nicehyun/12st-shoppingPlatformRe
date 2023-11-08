@@ -44,7 +44,7 @@ const MyPageClauseModification = () => {
     setIsCheckedMarketingClause(userInfo?.marketingClause ?? false)
   }, [userInfo?.marketingClause])
   return (
-    <>
+    <div className="pt-[30px] w-[400px] sm:w-full md:w-full">
       <ClauseCheckbox
         clauseType="marketing"
         label="광고성 정보 수신 및 마케팅 활용 동의"
@@ -57,8 +57,8 @@ const MyPageClauseModification = () => {
         }}
         onClickClauseLabel={toggleMarketingClause}
         onClickDetailClause={handleMarketingClauseClick}
+        classNames="font-semibold"
       />
-      <button className="disabled:cursor-not-allowed disabled:bg-border "></button>
 
       <Button
         onClick={handleMarketingClauseModification}
@@ -73,9 +73,9 @@ const MyPageClauseModification = () => {
           )
         }
         isDisabled={!isChagedClauseState}
-        classNames={`mt-[30px] h-[50px] w-[400px] md:w-full sm:w-full sm:h-[40px] md:h-[44px] border-[1px] text-lightRed border-lightRed dark:bg-lightRed text-lightRed dark:text-black text-[14px] font-semibold rounded-[5px]`}
+        classNames={`mt-[30px] h-[50px] w-full sm:h-[40px] md:h-[44px] border-[1px] text-lightRed border-lightRed dark:bg-lightRed text-lightRed dark:text-black text-[14px] font-semibold rounded-[5px]`}
       />
-    </>
+    </div>
   )
 }
 

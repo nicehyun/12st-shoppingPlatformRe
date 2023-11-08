@@ -1,69 +1,43 @@
-import Loading from "@/common/views/Loading"
-import { Suspense } from "react"
+"use client"
+
 import MyPageSectionTitle from "../MyPageSectionTitle"
-import MyPageClauseModification from "./MyPageClauseModification"
-import MyPageDefaultDeliverInfoModification from "./MyPageDefaultDeliverInfoModification"
-import MyPageEmailModification from "./MyPageEmailModification"
-import MyPageMemberTermination from "./MyPageMemberTermination"
-import MyPageUserInfoModification from "./MyPageUserInfoModification"
-import MyPageUserInfoOfModificationEl from "./MyPageUserInfoOfModificationEl"
+import MyPageUserInfoTebPanel from "./MyPageUserInfoTebPanel"
+import { useTabValueHandler } from "@/features/checkout/hooks/useTabValueHandler"
+import { Box } from "@mui/material"
+import MyPageTabs from "../MyPageTabs"
 
 const MyPageUserInfoOfModification = () => {
-  const myPageUserModificationList = [
-    {
-      id: "usesrInfo",
-      title: "회원정보",
-      modificationContent: <MyPageUserInfoModification />,
-      className: "border-b-[1px]",
-    },
-    {
-      id: "email",
-      title: "이메일",
-      modificationContent: <MyPageEmailModification />,
-      className: "border-b-[1px] relative",
-    },
-    {
-      id: "defaultAddress",
-      title: "기본 배송정보",
-      modificationContent: <MyPageDefaultDeliverInfoModification />,
-      className: "border-b-[4px]",
-    },
-    {
-      id: "clause",
-      title: "약관동의",
-      modificationContent: <MyPageClauseModification />,
-      className: "border-b-[4px]",
-    },
-    {
-      id: "memberTermination",
-      title: "",
-      modificationContent: <MyPageMemberTermination />,
-      className: "text-[14px]",
-    },
+  const { handleTabValueChange, tabValue } = useTabValueHandler()
+
+  const tabList = [
+    { id: "userInfo", label: "회원정보" },
+    { id: "defaultAddressModificate", label: "기본배송지 수정" },
+    { id: "marketingClauseModificate", label: "약관동의" },
+    { id: "memberTerminate", label: "회원탈퇴" },
   ]
   return (
     <section>
       <MyPageSectionTitle title="회원정보 수정" />
-      <ul>
-        {myPageUserModificationList.map((modificationEl) => (
-          <Suspense
-            key={`modification__${modificationEl.id}`}
-            fallback={
-              <Loading
-                spinnerSize={{ width: "w-[30px]", height: "h-[30px]" }}
-                height="h-[400px]"
-                isFrame={false}
-              />
-            }
-          >
-            <MyPageUserInfoOfModificationEl
-              title={modificationEl.title}
-              modificationContent={modificationEl.modificationContent}
-              className={modificationEl.className}
-            />
-          </Suspense>
-        ))}
-      </ul>
+
+      <Box sx={{ width: "100%" }}>
+        <MyPageTabs
+          onChangeTabValue={handleTabValueChange}
+          tabs={tabList}
+          tabId="userInfoModificate"
+          tabValue={tabValue}
+        />
+
+        {tabValue === 0 && <MyPageUserInfoTebPanel userInfoType="userInfo" />}
+        {tabValue === 1 && (
+          <MyPageUserInfoTebPanel userInfoType="userInfo__defaultAddressModificate" />
+        )}
+        {tabValue === 2 && (
+          <MyPageUserInfoTebPanel userInfoType="userInfo__marketingClauseModificate" />
+        )}
+        {tabValue === 3 && (
+          <MyPageUserInfoTebPanel userInfoType="memberTerminate" />
+        )}
+      </Box>
     </section>
   )
 }

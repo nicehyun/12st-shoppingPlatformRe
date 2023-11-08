@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query"
 import { myPageAPI } from "../models/myPageAPI"
 
 export const useGetUserInfoQuery = () => {
-  const { sessionQuery, isSessionCheckLoading } = useSessionQuery()
+  const { sessionQuery } = useSessionQuery()
 
   const {
     data: userInfo,
@@ -13,8 +13,7 @@ export const useGetUserInfoQuery = () => {
     ["userInfo"],
     () => myPageAPI.getUserInfo(sessionQuery?.user.email ?? ""),
     {
-      suspense: true,
-      enabled: !!sessionQuery && isSessionCheckLoading,
+      enabled: !!sessionQuery,
     }
   )
 
