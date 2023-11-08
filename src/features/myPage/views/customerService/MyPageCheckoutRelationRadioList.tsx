@@ -9,13 +9,7 @@ import {
 } from "@/redux/features/myPageSlice"
 import { CsRelationEl } from "../../types/myPage"
 
-interface IMyPageCheckoutRelationRadioList {
-  className?: string
-}
-
-const MyPageCheckoutRelationRadioList = ({
-  className,
-}: IMyPageCheckoutRelationRadioList) => {
+const MyPageCheckoutRelationRadioList = () => {
   const dispatch = useAppDispatch()
   const selectedCsType = useAppSelector(selectSelectedCsType)
 
