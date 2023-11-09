@@ -23,7 +23,11 @@ const usePagination = (perPage: number, listLength: number) => {
         indexOfFirst: productsPagination.indexOfLast - perPage,
       }
     })
-  }, [currentPage, productsPagination])
+  }, [
+    currentPage,
+    productsPagination.indexOfLast,
+    productsPagination.indexOfFirst,
+  ])
 
   const renderPaginationComponent = () => {
     return (

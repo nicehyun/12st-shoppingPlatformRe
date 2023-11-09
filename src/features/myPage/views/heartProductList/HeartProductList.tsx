@@ -2,8 +2,9 @@
 
 import usePagination from "@/common/hooks/usePagination"
 import ProductCard from "@/common/views/ProductCard"
+import MyPageListNoneContents from "../MyPageListNoneContents"
 
-const testProducList = [
+const testProducList: any[] = [
   {
     brand: "화이트워터보이즈1",
     category1: "패션의류",
@@ -102,6 +103,10 @@ const HeartProductList = () => {
     perPage,
     testProducList.length
   )
+
+  if (testProducList.length === 0) {
+    return <MyPageListNoneContents content="좋아요를 누른 상품이 없습니다" />
+  }
 
   return (
     <div>
