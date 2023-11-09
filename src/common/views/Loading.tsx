@@ -19,7 +19,7 @@ const Loading = ({
     <div
       className={`${height} ${
         isFrame && "border-[3px] border-black py-[80px]"
-      } flexCenter flex-col `}
+      } flexCenter flex-col`}
     >
       <p className={`${content && "mb-[40px] text-[24px] font-bold"}`}>
         {content}

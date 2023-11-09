@@ -1,3 +1,5 @@
+import { addressAPI } from "@/common/models/addressAPI"
+import { mileAPI } from "@/common/models/mileAPI"
 import { CheckoutList } from "@/common/types/checkout"
 import {
   accumulationOfProductsPrice,
@@ -8,12 +10,8 @@ import {
   nameValidator,
   phoneValidator,
 } from "@/features/auth/signUp/utils/validation"
-import { updateDefalutDeliveryInfo } from "@/firebase/firestore/address"
-
-import { addCheckoutList } from "@/firebase/firestore/checkout"
-import { checkoutGetMile, checkoutUseMile } from "@/firebase/firestore/mile"
+import { checkoutAPI } from "@/features/checkout/models/checkoutAPI"
 import { CheckoutClauseCheck } from "@/redux/features/checkoutSlice"
-
 import { NextRequest, NextResponse } from "next/server"
 
 export async function POST(request: NextRequest) {
@@ -52,8 +50,8 @@ export async function POST(request: NextRequest) {
 
   try {
     if (isUpdateDeliveryInfo) {
-      await updateDefalutDeliveryInfo(email, {
-        delivertName: checkoutInfo.deliveryName,
+      await addressAPI.updateDefalutDeliveryInfo(email, {
+        deliveryName: checkoutInfo.deliveryName,
         recipient: checkoutInfo.recipient,
         additionalAddress: checkoutInfo.additionalAddress,
         address: checkoutInfo.address,
@@ -63,15 +61,15 @@ export async function POST(request: NextRequest) {
       })
     }
 
-    const totalPrice = accumulationOfProductsPrice(checkoutInfo.prductList)
-    await addCheckoutList(email, {
+    const totalPrice = accumulationOfProductsPrice(checkoutInfo.productList)
+    await checkoutAPI.addCheckoutList(email, {
       ...checkoutInfo,
       getMile: junkOfNoMoreThanOneDigit(totalPrice * 0.01),
     })
 
-    await checkoutUseMile(email, checkoutInfo.useMile)
+    await mileAPI.checkoutUseMile(email, checkoutInfo.useMile)
 
-    await checkoutGetMile(email, totalPrice - checkoutInfo.useMile)
+    await mileAPI.checkoutGetMile(email, totalPrice - checkoutInfo.useMile)
 
     response = { result: "success" }
   } catch (error) {

@@ -5,11 +5,12 @@ export type Address = {
 }
 
 export type DeliveryInfo = {
-  delivertName: string | null
+  deliveryName: string | null
   recipient: string
   zipcode: string
   address: string
   additionalAddress: string
   phone1: string
   phone2: string | null
+  [key: string]: string | string | null
 }

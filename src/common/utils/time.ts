@@ -13,14 +13,14 @@ export const getCurrentDateTime = () => {
 
   const year = now.getFullYear()
   const month = now.getMonth() + 1
-  const day = now.getDay()
-  const hour = now.getHours()
+  const date = now.getDate()
+  const hour = String(now.getHours()).padStart(2, "0")
   const minute = now.getMinutes()
 
   const dateTimeInfo = {
     year,
     month,
-    day,
+    date,
     hour,
     minute,
   }

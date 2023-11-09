@@ -64,7 +64,7 @@ export default function BasicModal({ children }: IBasicModal) {
                 mb: 2,
                 textAlign: "center",
                 fontWeight: "bold",
-                fontSize: "16px",
+                fontSize: "24px",
               }}
             >
               {modalTitle}

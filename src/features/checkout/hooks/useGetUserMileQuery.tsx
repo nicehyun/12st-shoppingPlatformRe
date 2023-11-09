@@ -1,6 +1,6 @@
+import { mileAPI } from "@/common/models/mileAPI"
 import { junkOfNoMoreThanOneDigit } from "@/common/utils/price"
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
-import { getUserMile } from "@/firebase/firestore/user"
 import { useQuery } from "@tanstack/react-query"
 import useCheckoutPrice from "./useCheckoutPrice"
 
@@ -8,8 +8,12 @@ export const useUserMileQuery = () => {
   const { sessionQuery } = useSessionQuery()
   const { totalPriceOfCheckedProduct } = useCheckoutPrice()
 
-  const { data: userMile } = useQuery(["userMile"], () =>
-    getUserMile(sessionQuery?.user.email ?? "")
+  const { data: userMile, isLoading } = useQuery(
+    ["userMile"],
+    () => mileAPI.getUserMile(sessionQuery?.user.email ?? ""),
+    {
+      enabled: !!sessionQuery,
+    }
   )
 
   const mile = userMile ?? 0
@@ -19,5 +23,5 @@ export const useUserMileQuery = () => {
 
     return junkOfNoMoreThanOneDigit(totalPriceOfCheckedProduct)
   }
-  return { userMile, availableMiles: availableMiles() }
+  return { userMile, availableMiles: availableMiles(), isLoading }
 }

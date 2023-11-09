@@ -1,24 +1,44 @@
 import { getToken } from "next-auth/jwt"
 import { NextRequest, NextResponse } from "next/server"
-import { verifyJwt } from "./app/lib/jwt"
+import { ROUTE } from "./common/hooks/useNavigations"
 
 export { default } from "next-auth/middleware"
 
 export async function middleware(request: NextRequest) {
-  const pageList = [
-    "/",
-    "/auth/signIn",
-    "/auth/signUp",
-    "/cart",
-    "/checkout",
-    "/checkoutConfirmed",
-    "/myPage",
+  const pageList: string[] = [
+    ROUTE.HOME,
+    ROUTE.SIGNIN,
+    ROUTE.SIGNUP,
+    ROUTE.CART,
+    ROUTE.CHECKOUT,
+    ROUTE.CHECKOUTCOMFIRMED,
+    ROUTE.MYPAGE,
+    ROUTE.CHECKOUTLIST,
+    ROUTE.CHECKOUTCANCELLIST,
+    ROUTE.CHECKOUTREVIEWLIST,
+    ROUTE.USERINFOOFMODIFICATION,
+    ROUTE.COUPONS,
+    ROUTE.Mile,
+    ROUTE.INQUIRYCUSTOMERCOUNSELING,
+    ROUTE.COUNSELINGWRITE,
+    ROUTE.PRODUCTQNA,
+    ROUTE.HEARTPRODUCTLIST,
   ]
-  const withAuthPageList = [
-    "/cart",
-    "/checkout",
-    "/checkoutConfirmed",
-    "/myPage",
+  const withAuthPageList: string[] = [
+    ROUTE.CART,
+    ROUTE.CHECKOUT,
+    ROUTE.CHECKOUTCOMFIRMED,
+    ROUTE.MYPAGE,
+    ROUTE.CHECKOUTLIST,
+    ROUTE.CHECKOUTCANCELLIST,
+    ROUTE.CHECKOUTREVIEWLIST,
+    ROUTE.USERINFOOFMODIFICATION,
+    ROUTE.COUPONS,
+    ROUTE.Mile,
+    ROUTE.INQUIRYCUSTOMERCOUNSELING,
+    ROUTE.COUNSELINGWRITE,
+    ROUTE.PRODUCTQNA,
+    ROUTE.HEARTPRODUCTLIST,
   ]
   const { pathname } = request.nextUrl
   const secret = process.env.NEXTAUTH_SECRET
@@ -35,7 +55,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/", request.url))
 
   if (isWithoutAuth && !token)
-    return NextResponse.rewrite(new URL("/auth/signIn", request.url))
+    return NextResponse.redirect(new URL("/auth/signIn", request.url))
 
   if (request.nextUrl.pathname.startsWith("/auth/signIn") && !!token)
     return NextResponse.redirect(new URL("/", request.url))

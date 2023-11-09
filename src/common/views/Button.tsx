@@ -24,7 +24,7 @@ const Button = ({
     <button
       onClick={onClick}
       type={type}
-      className={`${classNames}`}
+      className={`${classNames} disabled:cursor-not-allowed disabled:bg-border disabled:text-white disabled:border-border dark:disabled:bg-border`}
       disabled={isDisabled}
       value={value}
     >

@@ -1,23 +1,16 @@
 "use client"
 
+import { ROUTE, useNavigations } from "@/common/hooks/useNavigations"
 import Button from "@/common/views/Button"
 import { useProductListInCartQuery } from "@/features/cart/hooks/useProductListInCartQuery"
-import { showCartModal } from "@/redux/features/modalSlice"
-import { useAppDispatch } from "@/redux/hooks"
-import { MouseEventHandler, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { BsFillCartXFill, BsFillCartFill } from "react-icons/bs"
 
 const HeaderCartButton = () => {
-  const dispatch = useAppDispatch()
   const [isCartHightlighted, setIsCartHightlighted] = useState(false)
+  const { routeTo } = useNavigations()
 
   const { productListInCart } = useProductListInCartQuery()
-
-  const onShowCartModal: MouseEventHandler<HTMLButtonElement> = (e) => {
-    e.stopPropagation()
-
-    dispatch(showCartModal())
-  }
 
   useEffect(() => {
     if (!productListInCart.length) return
@@ -33,7 +26,7 @@ const HeaderCartButton = () => {
 
   return (
     <Button
-      onClick={onShowCartModal}
+      onClick={() => routeTo(ROUTE.CART)}
       classNames={`group mx-[10px] border border-border rounded-lg px-2 py-[4px] flex ${
         isCartHightlighted && "bg-black dark:bg-white bump"
       } hover:bg-black hover:text-lightRed dark:hover:bg-white dark:hover:text-lightRed transition-3 flexCenter peer`}

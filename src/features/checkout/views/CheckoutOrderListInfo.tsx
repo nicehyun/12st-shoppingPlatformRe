@@ -1,9 +1,8 @@
-import Button from "@/common/views/Button"
 import useCheckoutPrice from "@/features/checkout/hooks/useCheckoutPrice"
 import { selectCheckedProductList } from "@/redux/features/cartSlice"
 import { useAppSelector } from "@/redux/hooks"
 import { useState } from "react"
-import { BsCaretDownFill, BsCaretUpFill } from "react-icons/bs"
+import CheckoutOrderListDetailButton from "./CheckoutOrderListDetailButton"
 
 import CheckoutOrderListEl from "./CheckoutOrderListEl"
 
@@ -18,7 +17,7 @@ const CheckoutOrderListInfo = () => {
       return checkedProductList.map((product, index) => (
         <CheckoutOrderListEl
           key={`order-${product.id}`}
-          prductInfo={product}
+          productInfo={product}
           discountPerProduct={calculatedDiscountPerProductArr[index]}
         />
       ))
@@ -28,7 +27,7 @@ const CheckoutOrderListInfo = () => {
         return (
           <CheckoutOrderListEl
             key={`order-${product.id}`}
-            prductInfo={product}
+            productInfo={product}
             discountPerProduct={calculatedDiscountPerProductArr[0]}
           />
         )
@@ -47,19 +46,32 @@ const CheckoutOrderListInfo = () => {
       <h3 className="py-[18px] font-bold">주문상품 정보</h3>
       <ul>{renderProductList()}</ul>
 
-      <Button
+      <CheckoutOrderListDetailButton
+        isShowDetail={isShowDetail}
+        onClickDetail={toggleShowDetail}
+        orderListAmount={checkedProductList.length}
+      />
+
+      {/* <Button
         classNames="font-bold text-[16px] flexCenter w-full h-[50px] my-[30px]"
         onClick={toggleShowDetail}
-        content={`총 ${(
-          <span className="text-lightRed mx-[5px]">
-            {checkedProductList.length}건
+        content={
+          <span>
+            총
+            {
+              <span className="text-lightRed mx-[5px]">
+                {checkoutOrderListAmount}건
+              </span>
+            }{" "}
+            전체 {isShowDetail ? " 보기 닫기" : " 보기"}
+            {
+              <span className="ml-[5px]">
+                {isShowDetail ? <BsCaretUpFill /> : <BsCaretDownFill />}
+              </span>
+            }
           </span>
-        )} 전체 ${isShowDetail ? " 보기 닫기" : " 보기"} ${(
-          <span className="ml-[5px]">
-            {isShowDetail ? <BsCaretUpFill /> : <BsCaretDownFill />}
-          </span>
-        )}`}
-      />
+        }
+      /> */}
     </section>
   )
 }
