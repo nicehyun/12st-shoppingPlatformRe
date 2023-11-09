@@ -19,6 +19,7 @@ export enum ROUTE {
   INQUIRYCUSTOMERCOUNSELING = "/myPage/inquiryCustomerCounseling",
   COUNSELINGWRITE = "/myPage/inquiryCustomerCounseling/write",
   PRODUCTQNA = "/myPage/productQnAList",
+  HEARTPRODUCTLIST = "/myPage/heartProductList",
 }
 
 export const useNavigations = () => {
