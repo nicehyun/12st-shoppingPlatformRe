@@ -8,11 +8,10 @@ export const useUserMileQuery = () => {
   const { sessionQuery } = useSessionQuery()
   const { totalPriceOfCheckedProduct } = useCheckoutPrice()
 
-  const { data: userMile } = useQuery(
+  const { data: userMile, isLoading } = useQuery(
     ["userMile"],
     () => mileAPI.getUserMile(sessionQuery?.user.email ?? ""),
     {
-      // suspense: true,
       enabled: !!sessionQuery,
     }
   )
@@ -24,5 +23,5 @@ export const useUserMileQuery = () => {
 
     return junkOfNoMoreThanOneDigit(totalPriceOfCheckedProduct)
   }
-  return { userMile, availableMiles: availableMiles() }
+  return { userMile, availableMiles: availableMiles(), isLoading }
 }

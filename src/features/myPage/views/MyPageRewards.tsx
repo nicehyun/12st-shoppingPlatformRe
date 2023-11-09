@@ -5,8 +5,8 @@ import { useUserMileQuery } from "@/features/checkout/hooks/useGetUserMileQuery"
 import MyPageRewardsEl from "./MyPageRewardsEl"
 
 const MyPageRewards = () => {
-  const { coupons } = useCouponQuery()
-  const { userMile } = useUserMileQuery()
+  const { coupons, isLoading: isCouponsLoading } = useCouponQuery()
+  const { userMile, isLoading: isUserMileLoading } = useUserMileQuery()
   const { routeTo } = useNavigations()
 
   const rewardList = [
@@ -15,12 +15,14 @@ const MyPageRewards = () => {
       rewardTitle: "쿠폰",
       showRewardNumber: coupons?.length ?? 0,
       onClickDetail: () => routeTo(ROUTE.COUPONS),
+      isLoading: isCouponsLoading,
     },
     {
       id: "reward-mile",
       rewardTitle: "마일리지",
       showRewardNumber: userMile ?? 0,
       onClickDetail: () => routeTo(ROUTE.Mile),
+      isLoading: isUserMileLoading,
     },
   ]
   return (
@@ -31,6 +33,7 @@ const MyPageRewards = () => {
           onClickDetail={rewardEl.onClickDetail}
           rewardTitle={rewardEl.rewardTitle}
           showRewardNumber={rewardEl.showRewardNumber}
+          isLoading={rewardEl.isLoading}
           className={index === 0 ? "border-r-[1px] border-border" : ""}
         />
       ))}
