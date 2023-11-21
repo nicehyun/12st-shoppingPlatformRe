@@ -5,7 +5,7 @@ import { formatTime } from "../utils/time"
 
 export interface ITimer {
   seconds: number
-  onTimeExpire: () => void
+  onTimeExpire?: () => void
   position?: {
     right?: string
     left?: string
@@ -29,7 +29,7 @@ const Timer = ({
   useEffect(() => {
     if (time < 0) return
 
-    if (time === 0) {
+    if (time === 0 && onTimeExpire) {
       onTimeExpire()
     }
 

@@ -1,18 +1,22 @@
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
-import { decreaseProductToCart } from "@/firebase/firestore/cart"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
+import { useAppDispatch } from "@/redux/hooks"
 
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { useDispatch } from "react-redux"
+import { cartAPI } from "../models/cartAPI"
 import { ProductInCart } from "../types/cart"
 
 const useDecreaseAmountMutation = (productInfo: ProductInCart) => {
   const { sessionQuery } = useSessionQuery()
   const queryClient = useQueryClient()
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const decreaseMutaion = useMutation(
-    () => decreaseProductToCart(sessionQuery?.user.email ?? "", productInfo.id),
+    () =>
+      cartAPI.decreaseProductToCart(
+        sessionQuery?.user.email ?? "",
+        productInfo.id
+      ),
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["productListInCart"])

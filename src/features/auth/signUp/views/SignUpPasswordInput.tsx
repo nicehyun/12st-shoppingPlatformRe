@@ -2,10 +2,9 @@
 
 import {
   resetPasswordValid,
-  selectSignUpActiveStepState,
   validatePassword,
 } from "@/redux/features/signUpSlice"
-import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { useAppDispatch } from "@/redux/hooks"
 import { useEffect } from "react"
 import {
   useUserInput,
@@ -16,9 +15,12 @@ import SignUpFeedback from "../../../../common/views/Feedback"
 import SignUpInput from "./SignUpInput"
 import SignUpInputLayout from "./SignUpInputLayout"
 
-const SignUpPasswordInput = () => {
+interface ISignUpPasswordInput {
+  activeStep: number
+}
+
+const SignUpPasswordInput = ({ activeStep }: ISignUpPasswordInput) => {
   const dispatch = useAppDispatch()
-  const selectSignUpActiveStep = useAppSelector(selectSignUpActiveStepState)
 
   const {
     value: passwordInputValue,
@@ -48,17 +50,17 @@ const SignUpPasswordInput = () => {
   }, [isPasswordValid, isRepasswordValid, dispatch])
 
   useEffect(() => {
-    if (selectSignUpActiveStep === 0) {
+    if (activeStep === 0) {
       resetPassword()
       resetRepassword()
       return
     }
-  }, [selectSignUpActiveStep])
+  }, [activeStep])
 
   return (
     <SignUpInputLayout headingText="로그인에 사용할 비밀번호를 입력해주세요">
       <SignUpInput
-        type="password"
+        id="signUp-password"
         inputValue={passwordInputValue}
         onChangeInputValue={handlePasswordInputValueChange}
         onBlurInput={handlePasswordInputBlur}
@@ -70,7 +72,7 @@ const SignUpPasswordInput = () => {
       )}
 
       <SignUpInput
-        type="repassword"
+        id="signUp-repassword"
         classNames="mt-[10px]"
         inputValue={repasswordInputValue}
         onChangeInputValue={handleRepasswordInputValueChange}

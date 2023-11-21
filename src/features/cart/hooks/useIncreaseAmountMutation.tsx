@@ -1,9 +1,9 @@
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
-import { increaseProductToCart } from "@/firebase/firestore/cart"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
 
 import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { cartAPI } from "../models/cartAPI"
 import { ProductInCart } from "../types/cart"
 
 const useIncreaseAmountMutation = (productInfo: ProductInCart) => {
@@ -12,7 +12,11 @@ const useIncreaseAmountMutation = (productInfo: ProductInCart) => {
   const dispatch = useAppDispatch()
 
   const increaseMutaion = useMutation(
-    () => increaseProductToCart(sessionQuery?.user.email ?? "", productInfo.id),
+    () =>
+      cartAPI.increaseProductToCart(
+        sessionQuery?.user.email ?? "",
+        productInfo.id
+      ),
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["productListInCart"])

@@ -3,9 +3,9 @@
 import BasicModal from "@/common/views/BasicModal"
 import { selectBasicModalState } from "@/redux/features/modalSlice"
 import { useAppSelector } from "@/redux/hooks"
-import MarketingClause from "./MarketingClause"
-import SignupCollectionOfUserInfoClause from "./SignupCollectionOfUserInfoClause"
-import TermClause from "./TermClause"
+import MarketingClause from "./clause/MarketingClause"
+import SignupCollectionOfUserInfoClause from "./clause/SignupCollectionOfUserInfoClause"
+import TermClause from "./clause/TermClause"
 
 const SignUpBasicModal = () => {
   const { modalContent } = useAppSelector(selectBasicModalState)

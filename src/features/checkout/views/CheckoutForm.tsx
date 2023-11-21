@@ -22,7 +22,7 @@ import {
 import { CheckoutList, CheckoutPaymentInfo } from "@/common/types/checkout"
 import CheckoutPayment from "./CheckoutPayment"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
-import useSelectCoupon from "@/features/cart/hooks/useSelectCoupon"
+import useSelectCoupon from "@/features/checkout/hooks/useSelectCoupon"
 import { useCheckoutMutaion } from "../hooks/useCheckoutMutaion"
 import {
   additionalAddressValidator,
@@ -185,7 +185,7 @@ const CheckoutForm = () => {
         ? (formData.get("phone2") as string)
         : null,
       deliveryMemo: handleDeliveryMemo(),
-      prductList: checkedProductList,
+      productList: checkedProductList,
       coupon: selectedCoupon,
       useMile: checkoutPlannedUseMileState,
       getMile: 0,

@@ -5,8 +5,8 @@ import HomeTopSaleProducts from "./HomeTopSaleProducts"
 const HomeLayout = () => {
   return (
     <>
-      {/* <HomeBestProducts />
-      <HomeArrivalProducts />
+      <HomeBestProducts />
+      {/* <HomeArrivalProducts />
       <HomeTopSaleProducts /> */}
     </>
   )

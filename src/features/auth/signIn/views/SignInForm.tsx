@@ -12,6 +12,10 @@ import Button from "@/common/views/Button"
 import { FaRegArrowAltCircleLeft } from "react-icons/fa"
 import SignInEmailInput from "./SignInEmailInput"
 import SignInPasswordInput from "./SignInPasswordInput"
+<<<<<<< HEAD
+=======
+import { signIn } from "@/redux/features/signInSlice"
+>>>>>>> 120e7d35f4b4673d70b178580e9b977497e227e3
 
 const SignInForm = () => {
   const { routeTo, prevRoute } = useNavigations()
@@ -48,6 +52,10 @@ const SignInForm = () => {
       )
     }
 
+<<<<<<< HEAD
+=======
+    dispatch(signIn())
+>>>>>>> 120e7d35f4b4673d70b178580e9b977497e227e3
     routeTo(ROUTE.HOME)
   }
 
@@ -58,7 +66,11 @@ const SignInForm = () => {
     >
       <Button
         content={<FaRegArrowAltCircleLeft />}
+<<<<<<< HEAD
         onClick={prevRoute}
+=======
+        onClick={() => routeTo(ROUTE.HOME)}
+>>>>>>> 120e7d35f4b4673d70b178580e9b977497e227e3
         classNames="absolute top-[50px] left-[50px] text-[30px] hover:text-lightRed"
       />
 

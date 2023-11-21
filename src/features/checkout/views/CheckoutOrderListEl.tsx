@@ -1,15 +1,15 @@
 import { numberToLocaleString } from "@/common/utils/price"
-import useSelectCoupon from "@/features/cart/hooks/useSelectCoupon"
+import useSelectCoupon from "@/features/checkout/hooks/useSelectCoupon"
 import { ProductInCart } from "@/features/cart/types/cart"
 import Image from "next/image"
 
 interface ICheckoutOrderListEl {
-  prductInfo: ProductInCart
+  productInfo: ProductInCart
   discountPerProduct: number
 }
 
 const CheckoutOrderListEl = ({
-  prductInfo,
+  productInfo,
   discountPerProduct,
 }: ICheckoutOrderListEl) => {
   const { selectedCoupon } = useSelectCoupon()
@@ -23,7 +23,7 @@ const CheckoutOrderListEl = ({
     amount,
     image,
     discountedPrice,
-  } = prductInfo
+  } = productInfo
 
   const productBrandInfo = brand || maker || mallName
   return (

@@ -8,7 +8,7 @@ const useSessionQuery = () => {
     isError: isSessionCheckError,
     isLoading: isSessionCheckLoading,
   } = useQuery(["session"], () => getSession(), {
-    refetchInterval: 300000, // 5분마다 세션 체크
+    refetchInterval: 30 * 60 * 1000,
   })
 
   return { sessionQuery, isSessionCheckError, isSessionCheckLoading }

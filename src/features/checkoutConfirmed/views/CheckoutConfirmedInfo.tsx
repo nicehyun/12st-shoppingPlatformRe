@@ -30,11 +30,11 @@ const CheckoutConfirmedInfo = () => {
       </CheckoutConfirmedInfoEl>
 
       <CheckoutConfirmedInfoEl title="주문정보">
-        {currentCheckoutList?.prductList.map((product, index) => (
+        {currentCheckoutList?.productList.map((product, index) => (
           <span
             key={product.id}
             className={`w-full truncate ${
-              index === currentCheckoutList?.prductList.length - 1
+              index === currentCheckoutList?.productList.length - 1
                 ? ""
                 : "mb-[10px]"
             } font-medium`}

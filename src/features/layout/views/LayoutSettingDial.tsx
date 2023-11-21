@@ -2,67 +2,16 @@
 
 import Box from "@mui/material/Box"
 import SpeedDial from "@mui/material/SpeedDial"
-
 import SpeedDialAction from "@mui/material/SpeedDialAction"
-
 import { AiFillSetting } from "react-icons/ai"
-import { MdDarkMode, MdLightMode } from "react-icons/md"
 import { useEffect, useState } from "react"
+import { MdDarkMode, MdLightMode } from "react-icons/md"
 import { useTheme } from "next-themes"
 
 const LayoutSettingDial = () => {
   const [mounted, setMounted] = useState(false)
-  const { theme, setTheme } = useTheme()
   const [gender, setGender] = useState("all")
-
-  const toggleTheme = () => {
-    if (theme === "light") {
-      setTheme("dark")
-    }
-
-    if (theme === "dark") {
-      setTheme("light")
-    }
-
-    return
-  }
-
-  const chageGender = () => {
-    if (gender === "all") {
-      setGender("male")
-    }
-
-    if (gender === "male") {
-      setGender("female")
-    }
-
-    if (gender === "female") {
-      setGender("all")
-    }
-
-    return
-  }
-
-  const actions = [
-    {
-      icon: theme === "light" ? <MdLightMode /> : <MdDarkMode />,
-      name: "LightMode / DarkMode",
-      action: toggleTheme,
-    },
-
-    {
-      icon:
-        gender === "all" ? (
-          <span className="text-[12px]">전체</span>
-        ) : gender === "male" ? (
-          <span className="text-[12px]">남성</span>
-        ) : (
-          <span className="text-[12px]">여성</span>
-        ),
-      name: "전체 / 남성 / 여성",
-      action: chageGender,
-    },
-  ]
+  const { theme, setTheme } = useTheme()
 
   useEffect(() => {
     setMounted(true)
@@ -71,6 +20,55 @@ const LayoutSettingDial = () => {
   if (!mounted) {
     return null
   }
+
+  const actions = [
+    {
+      icon:
+        theme === "light" ? (
+          <span
+            className="flexCenter w-full h-full"
+            onClick={() => setTheme("dark")}
+          >
+            <MdDarkMode />
+          </span>
+        ) : (
+          <span
+            className="flexCenter w-full h-full"
+            onClick={() => setTheme("light")}
+          >
+            <MdLightMode />
+          </span>
+        ),
+      name: "LightMode / DarkMode",
+    },
+
+    {
+      icon:
+        gender === "all" ? (
+          <span
+            className="text-[12px] flexCenter w-full h-full"
+            onClick={() => setGender("male")}
+          >
+            전체
+          </span>
+        ) : gender === "male" ? (
+          <span
+            className="text-[12px] flexCenter w-full h-full"
+            onClick={() => setGender("female")}
+          >
+            남자
+          </span>
+        ) : (
+          <span
+            className="text-[12px] flexCenter w-full h-full"
+            onClick={() => setGender("all")}
+          >
+            여자
+          </span>
+        ),
+      name: "전체 / 남성 / 여성",
+    },
+  ]
 
   return (
     <Box
@@ -114,7 +112,6 @@ const LayoutSettingDial = () => {
                 fontSize: "16px",
               },
             }}
-            onClick={action.action}
             className="dark:bg-white dark:text-black"
           />
         ))}

@@ -1,3 +1,5 @@
+import AuthenticationCheck from "@/features/auth/signIn/views/AuthenticationCheck"
+
 import ReduxProvider from "@/redux/utils/ReduxProvider"
 
 import ReactQueryProvider from "../../reactQuery/utils/ReactQueryProvider"
@@ -13,7 +15,10 @@ const Providers = ({ children }: IProviders) => {
     <ReactQueryProvider>
       <Sessionprovider>
         <ReduxProvider>
-          <Themeprovider>{children}</Themeprovider>
+          <Themeprovider>
+            <AuthenticationCheck />
+            {children}
+          </Themeprovider>
         </ReduxProvider>
       </Sessionprovider>
     </ReactQueryProvider>

@@ -10,6 +10,8 @@ import useRemoveFromCartMutation from "@/features/cart/hooks/useRemoveFromCartMu
 import { discountedProductPrice, numberToLocaleString } from "../utils/price"
 import Image from "next/image"
 import { useAuthenticate } from "@/features/auth/signIn/hooks/useAuthenticate"
+import Button from "./Button"
+import Loading from "./Loading"
 
 interface IProductCard {
   productInfo: Product
@@ -56,9 +58,40 @@ const ProductCard = ({ productInfo }: IProductCard) => {
     removeMutaion.mutate(id)
   }
 
+  const renderComponent = () => {
+    if (removeMutaion.isLoading || addMutaion.isLoading) {
+      return (
+        <div className="absolute right-[8px] text-border">
+          <Loading
+            spinnerSize={{ width: "w-[15px]", height: "h-[15px]" }}
+            isFrame={false}
+          />
+        </div>
+      )
+    }
+
+    if (isExistedProductInCart) {
+      return (
+        <Button
+          onClick={onClickRemoveProductFromCart}
+          classNames="text-[18px] sm:text-[16px] absolute right-[8px]"
+          content={<BsFillCartDashFill />}
+        />
+      )
+    }
+
+    return (
+      <Button
+        onClick={onClickAddProductInCart}
+        classNames="text-[18px] sm:text-[16px] absolute right-[8px]"
+        content={<BsFillCartPlusFill />}
+      />
+    )
+  }
+
   return (
-    <div className="relative w-[200px] lg:w-[180px]  md:w-[130px] sm:w-[120px] mr-[20px]">
-      <div className="relative w-[200px] h-[200px] lg:w-[180px] lg:h-[180px] md:w-[130px] md:h-[130px] sm:w-[120px] sm:h-[120px] overflow-hidden text-[12px] text-center border-[1px] border-border">
+    <div>
+      <div className="overflow-hidden text-[12px] text-center aspect-w-1 aspect-h-1">
         <Image
           src={image}
           alt={`상품사진이 준비되지 않았습니다. - ${name}`}
@@ -69,44 +102,33 @@ const ProductCard = ({ productInfo }: IProductCard) => {
         />
       </div>
 
-      <p className="text-[12px] sm:text-[10px] my-[15px] text-gray">
-        {productBrandInfo}
-      </p>
-      <p className="text-[14px] sm:text-[12px] h-[42px] sm:h-[33.6px] truncate-2 mb-[10px] font-medium">
-        {name}
-      </p>
-      <p className="pt-[10px] border-t-[1px] border-lightBorder text-border text-[13px] sm:text-[12px] line-through">
-        {numberToLocaleString(price)}
-      </p>
-      <p className="font-bold mb-[20px] sm:text-[15px]">
-        <span className="text-lightRed mr-[10px] text-[14px] sm:text-[13px]">
-          {discount}%
-        </span>
+      <div className="py-[15px] pr-[30px]">
+        <p className="text-[14px] sm:text-[12px] mb-[15px] text-gray font-semibold">
+          {productBrandInfo}
+        </p>
+        <p className="text-[14px] sm:text-[12px] h-[42px] sm:h-[33.6px] truncate-2 mb-[10px] font-medium">
+          {name}
+        </p>
+        <p className="pt-[10px] border-t-[1px] border-lightBorder text-border text-[13px] sm:text-[12px] line-through">
+          {numberToLocaleString(price)}
+        </p>
+        <p className="font-bold mb-[20px] sm:text-[15px]">
+          <span className="text-lightRed mr-[10px] text-[14px] sm:text-[13px]">
+            {discount}%
+          </span>
 
-        {numberToLocaleString(discountedProductPrice(price, discount))}
-      </p>
-      <div className="flex items-center text-[14px] sm:text-[12px]">
-        <MdOutlineSell />
-        <span className="ml-[3px] mr-[8px] text-[10px]">{sellCount}</span>
-        <BiCommentDetail />
-        <span className="ml-[3px] text-[10px]">{reviewCount}</span>
+          {numberToLocaleString(discountedProductPrice(price, discount))}
+        </p>
+
+        <div className="relative flex items-center text-[14px] sm:text-[12px]">
+          <MdOutlineSell />
+          <span className="ml-[3px] mr-[8px] text-[10px]">{sellCount}</span>
+          <BiCommentDetail />
+          <span className="ml-[3px] text-[10px]">{reviewCount}</span>
+
+          {renderComponent()}
+        </div>
       </div>
-
-      {isExistedProductInCart ? (
-        <button
-          onClick={onClickRemoveProductFromCart}
-          className="text-[18px] sm:text-[16px] absolute right-[8px] bottom-[2px]"
-        >
-          <BsFillCartDashFill />
-        </button>
-      ) : (
-        <button
-          onClick={onClickAddProductInCart}
-          className="text-[18px] sm:text-[16px] absolute right-[8px] bottom-[2px]"
-        >
-          <BsFillCartPlusFill />
-        </button>
-      )}
     </div>
   )
 }

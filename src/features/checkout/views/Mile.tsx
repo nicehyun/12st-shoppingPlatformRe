@@ -1,4 +1,5 @@
 import { junkOfNoMoreThanOneDigit } from "@/common/utils/price"
+import Button from "@/common/views/Button"
 
 import {
   resetPlannedUseMile,
@@ -78,13 +79,11 @@ const Mile = () => {
           className={`rounded-[5px] py-[14px] px-[20px] grow max-w-[300px] h-[50px] sm:h-[40px] md:h-[44px] sm:text-[14px] md:text-[14px] bg-white dark:bg-lightBorder text-lightBlack `}
         />
 
-        <button
-          type="button"
+        <Button
           onClick={handleUseAllMileButtonClick}
-          className="bg-border w-[70px] ml-[10px] text-[14px] md:text-[12px] sm:text-[12px] rounded-[5px]"
-        >
-          모두 사용
-        </button>
+          classNames="bg-border w-[70px] ml-[10px] text-[14px] md:text-[12px] sm:text-[12px] rounded-[5px]"
+          content="모두 사용"
+        />
       </div>
 
       <div className="flex mt-[10px] text-[14px]">
@@ -92,13 +91,11 @@ const Mile = () => {
           사용 가능 {availableMiles}P /{" "}
           <span className="text-lightGray">보유 {userMile}P</span>
         </p>
-        <button
+        <Button
           onClick={showMileExplanationModal}
-          type="button"
-          className="ml-[5px] text-border"
-        >
-          <BsQuestionCircle />
-        </button>
+          classNames="ml-[5px] text-border"
+          content={<BsQuestionCircle />}
+        />
       </div>
     </>
   )

@@ -1,28 +1,27 @@
 "use client"
 
-import {
-  checkToEmailDuplication,
-  resetEmailDuplication,
-  selectSignUpActiveStepState,
-  selectSignUpCheckState,
-} from "@/redux/features/signUpSlice"
-import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { ChangeEvent, useEffect } from "react"
 import { useEmailDuplicationCheckMutaion } from "../hooks/useEmailDuplicationCheckMutaion"
-import { useFeedbackModal } from "../hooks/useFeedbackModal"
+import { useFeedbackModal } from "../../../../common/hooks/useFeedbackModal"
 import { useUserInput } from "../../../../common/hooks/useUserInput"
 import { emailValidator } from "../utils/validation"
 import SignUpFeedback from "../../../../common/views/Feedback"
 import SignUpInputLayout from "./SignUpInputLayout"
 import SignUpVerificationInput from "./SignUpVerificationInput"
 
-const SignUpEmailInput = () => {
-  const dispatch = useAppDispatch()
-  const { email: isCheckedEmailDuplication } = useAppSelector(
-    selectSignUpCheckState
-  )
-  const selectSignUpActiveStep = useAppSelector(selectSignUpActiveStepState)
+export interface ISignUpEmailInput {
+  activeStep: number
+  isVerificationChecked: boolean
+  checkEmailDuplication: () => void
+  resetEmailDuplicateCheck: () => void
+}
 
+const SignUpEmailInput = ({
+  resetEmailDuplicateCheck,
+  checkEmailDuplication,
+  isVerificationChecked,
+  activeStep,
+}: ISignUpEmailInput) => {
   const { showFeedbackModalWithContent } = useFeedbackModal()
 
   const {
@@ -40,8 +39,7 @@ const SignUpEmailInput = () => {
   } = useEmailDuplicationCheckMutaion(emailInputValue)
 
   const handleEmailInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch(resetEmailDuplication())
-
+    resetEmailDuplicateCheck()
     handleEmailInputValueChange(event)
   }
 
@@ -53,26 +51,27 @@ const SignUpEmailInput = () => {
       return
     }
 
-    dispatch(checkToEmailDuplication())
+    checkEmailDuplication()
     showFeedbackModalWithContent("시용 가능한 이메일입니다.")
   }
 
   useEffect(() => {
-    if (selectSignUpActiveStep === 0) {
+    if (activeStep === 0) {
       reset()
       return
     }
-  }, [selectSignUpActiveStep])
+  }, [activeStep])
 
   return (
     <SignUpInputLayout headingText="로그인에 사용할 이메일을 입력해주세요">
       <SignUpVerificationInput
+        placeholder="example@example.com"
+        id="signUp-email"
+        buttonContent={isVerificationChecked ? "확인완료" : "중복확인"}
+        isChecked={isVerificationChecked}
         isDisabledButton={
-          !isEmailValid ||
-          isCheckedEmailDuplication ||
-          isEmailDuplicateCheckLoading
+          !isEmailValid || isVerificationChecked || isEmailDuplicateCheckLoading
         }
-        type="email"
         inputValue={emailInputValue}
         onBlurInput={handleEmailInputBlur}
         onChangeInputValue={handleEmailInputChange}

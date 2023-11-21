@@ -1,9 +1,13 @@
 import { CheckoutList } from "@/common/types/checkout"
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
-import { useFeedbackModal } from "@/features/auth/signUp/hooks/useFeedbackModal"
+import { useFeedbackModal } from "@/common/hooks/useFeedbackModal"
 import { CheckoutClauseCheck } from "@/redux/features/checkoutSlice"
 import { useMutation } from "@tanstack/react-query"
+<<<<<<< HEAD
 import { checkoutAPI } from "../models/checkoutApi"
+=======
+import { checkoutAPI } from "../models/checkoutAPI"
+>>>>>>> 120e7d35f4b4673d70b178580e9b977497e227e3
 
 export const useCheckoutMutaion = () => {
   const { showFeedbackModalWithContent } = useFeedbackModal()

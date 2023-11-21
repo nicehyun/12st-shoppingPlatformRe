@@ -10,6 +10,16 @@ export enum ROUTE {
   SIGNUP = "/auth/signUp",
   FIND_EMAIL = "/auth/find/email",
   FIND_PASSWORD = "/auth/find/password",
+  CHECKOUTLIST = "/myPage/checkoutList",
+  CHECKOUTCANCELLIST = "/myPage/checkoutCancelList",
+  CHECKOUTREVIEWLIST = "/myPage/reviewList",
+  USERINFOOFMODIFICATION = "/myPage/userInfoOfModification",
+  COUPONS = "/myPage/coupons",
+  Mile = "/myPage/mile",
+  INQUIRYCUSTOMERCOUNSELING = "/myPage/inquiryCustomerCounseling",
+  COUNSELINGWRITE = "/myPage/inquiryCustomerCounseling/write",
+  PRODUCTQNA = "/myPage/productQnAList",
+  HEARTPRODUCTLIST = "/myPage/heartProductList",
 }
 
 export const useNavigations = () => {

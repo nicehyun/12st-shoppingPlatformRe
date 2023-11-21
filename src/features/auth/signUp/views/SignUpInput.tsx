@@ -4,10 +4,10 @@ import Input, { InputType } from "@/common/views/Input"
 import PasswordToggleIcon from "@/common/views/PasswordToggleIcon"
 import { ChangeEvent, useState } from "react"
 
-type UserInputType = "password" | "repassword" | "name"
+type UserInputId = "signUp-password" | "signUp-repassword" | "signUp-name"
 
 interface ISignUpInput {
-  type: UserInputType
+  id: UserInputId
   classNames?: string
   inputValue: string
   onChangeInputValue: (event: ChangeEvent<HTMLInputElement>) => void
@@ -16,7 +16,7 @@ interface ISignUpInput {
 }
 
 const SignUpInput = ({
-  type,
+  id,
   classNames,
   inputValue,
   isShowFeedback,
@@ -36,16 +36,16 @@ const SignUpInput = ({
   let inputType: InputType = "text",
     placeholder = ""
 
-  switch (type) {
-    case "password":
+  switch (id) {
+    case "signUp-password":
       inputType = "password"
       placeholder = "비밀번호를 입력해주세요"
       break
-    case "repassword":
+    case "signUp-repassword":
       inputType = "password"
       placeholder = "비밀번호를 한번 더 입력해주세요"
       break
-    case "name":
+    case "signUp-name":
       placeholder = "이름을 입력해주세요"
       break
     default:
@@ -55,8 +55,8 @@ const SignUpInput = ({
   return (
     <Input
       type={isShowPassword ? "text" : inputType}
-      name={type}
-      id={type}
+      name={id}
+      id={id}
       placeholder={placeholder}
       classNames={`${classNames} flex-grow w-full`}
       value={inputValue}
@@ -64,7 +64,7 @@ const SignUpInput = ({
       onChange={onChangeInputValue}
       isShowFeedback={isShowFeedback}
     >
-      {(type === "password" || type === "repassword") && (
+      {(id === "signUp-password" || id === "signUp-repassword") && (
         <PasswordToggleIcon
           isShowPassword={isShowPassword}
           onShowPassword={handleShowPassword}

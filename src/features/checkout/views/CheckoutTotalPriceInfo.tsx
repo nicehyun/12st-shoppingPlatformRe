@@ -1,5 +1,6 @@
 "use client"
 import { numberToLocaleString } from "@/common/utils/price"
+import Button from "@/common/views/Button"
 import useCheckoutPrice from "@/features/checkout/hooks/useCheckoutPrice"
 import TotalPriceList from "@/features/checkout/views/TotalPriceList"
 import { selectCheckoutPlannedUseMileState } from "@/redux/features/checkoutSlice"
@@ -40,15 +41,13 @@ const CheckoutTotalPriceInfo = () => {
             {numberToLocaleString(totalCheckoutPirce)}
             <span className="text-[12px]">원</span>
           </p>
-          <button
+          <Button
             onClick={toggleShowDetail}
-            type="button"
-            className={`${
+            classNames={`${
               isShowDetail ? "text-border" : "text-black dark:text-white"
             } text-[20px] ml-[10px]`}
-          >
-            {isShowDetail ? <AiOutlineUp /> : <AiOutlineDown />}
-          </button>
+            content={isShowDetail ? <AiOutlineUp /> : <AiOutlineDown />}
+          />
         </div>
       </div>
 

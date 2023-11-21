@@ -1,3 +1,4 @@
+import Button from "@/common/views/Button"
 import {
   selectCheckoutPaymentState,
   selectPayment,
@@ -30,18 +31,16 @@ const PaymentButton = ({
     dispatch(selectPayment({ value, label }))
   }
   return (
-    <button
-      type="button"
+    <Button
       value={paymentButtonValue}
       onClick={() => handlePaymentChange(paymentButtonValue, buttonContent)}
-      className={`border-[1px] h-[40px] text-[12px] lg:text-[16px] xl:text-[16px] ${
+      classNames={`border-[1px] h-[40px] text-[12px] lg:text-[16px] xl:text-[16px] ${
         checkoutPaymentState.value === paymentButtonValue
           ? "bg-black dark:bg-white text-lightRed border-black dark:border-white"
           : "bg-white dark:bg-border text-black border-border"
       }`}
-    >
-      {buttonContent}
-    </button>
+      content={buttonContent}
+    />
   )
 }
 

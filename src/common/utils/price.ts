@@ -22,6 +22,18 @@ export const accumulationOfProductsPrice = (productList: ProductInCart[]) =>
     0
   )
 
+/**
+ * 숫자와 콤마로 구성된 문자열을 숫자로 변환
+ * @param {string} numberString - 숫자와 콤마로 구성된 문자열
+ * @returns {number} - 숫자로 변환된 결과
+ */
+export const convertinglocaleStringToNumber = (numberString: string) => {
+  if (/^[0-9,]*$/.test(numberString)) {
+    const withoutComma = numberString.replace(/,/g, "")
+    return parseFloat(withoutComma)
+  }
+}
+
 export const priceToUseCoupon = (
   coupon: RateCoupon | AmountCoupon,
   totalPrice: number

@@ -56,8 +56,8 @@ export default function FeedbackModal() {
             "&:hover": {
               backgroundColor: "rgba(255, 78, 10, 0.2)",
             },
+            color: "#ff4e0a",
           }}
-          className="text-lightRed"
         >
           확인
         </Button>

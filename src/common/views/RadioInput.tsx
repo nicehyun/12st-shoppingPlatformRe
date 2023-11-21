@@ -35,11 +35,11 @@ const RadioInput = ({
         name={name}
         onChange={onChange}
         onKeyPress={onKeyPress}
-        className={`${classNames} absolute left-[-9999px] ${peer}`}
+        className={`absolute left-[-9999px] ${peer}`}
       />
       <label
         htmlFor={id}
-        className={`inline-block mr-[20px] text-[14px] cursor-pointer  before:content-[''] before:mr-[5px] before:inline-block before:w-[10px] before:h-[10px] before:xr-[4px] before:border-border before:border-[1px] before:rounded-full ${peerChecked.bg} ${peerChecked.borderColor}`}
+        className={`${classNames} inline-block mr-[20px] text-[14px] cursor-pointer  before:content-[''] before:mr-[5px] before:inline-block before:w-[10px] before:h-[10px] before:xr-[4px] before:border-border before:border-[1px] before:rounded-full ${peerChecked.bg} ${peerChecked.borderColor}`}
       >
         {label}
       </label>

@@ -8,10 +8,10 @@ export const useCurrentCheckoutConfirmedPrice = () => {
   const { currentCheckoutList } = useGetCheckoutListQuery()
 
   const totalPriceOfCheckoutProduct = accumulationOfProductsPrice(
-    currentCheckoutList?.prductList ?? []
+    currentCheckoutList?.productList ?? []
   )
 
-  const totalDeliveryPrice = currentCheckoutList?.prductList.reduce(
+  const totalDeliveryPrice = currentCheckoutList?.productList.reduce(
     (prevValue, curValue) =>
       prevValue + (curValue.deliveryFree, curValue.deliveryFree),
     0

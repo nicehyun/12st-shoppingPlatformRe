@@ -5,9 +5,7 @@ import HeaderLogo from "./HeaderLogo"
 import HeaderController from "./HeaderController"
 import PromotionBar from "./PromotionBar"
 import MPromotionModal from "./mobile/MPromotionModal"
-
 import HeaderSearchForm from "./HeaderSearchForm"
-import CartModal from "@/features/cart/views/CartModal"
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 
 interface IHeader {
@@ -59,8 +57,6 @@ const Header = ({ isShowCart }: IHeader) => {
         isShow={isShowPromotionModal}
         onHide={() => setIsShowPromotionModal(false)}
       />
-
-      <CartModal />
     </header>
   )
 }
