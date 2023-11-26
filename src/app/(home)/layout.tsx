@@ -13,8 +13,8 @@ import { ReactNode } from "react"
 const HomeLayout = async ({ children }: { children: ReactNode }) => {
   const queryClient = getQueryClient()
   await queryClient.prefetchQuery(["bestProducts"], getBestSellingProducts)
-  await queryClient.prefetchQuery(["topSaleProducts"], getTopSaleProducts)
-  await queryClient.prefetchQuery(["arrivalProducts"], getArrivalProducts)
+  // await queryClient.prefetchQuery(["topSaleProducts"], getTopSaleProducts)
+  // await queryClient.prefetchQuery(["arrivalProducts"], getArrivalProducts)
   const dehydratedState = dehydrate(queryClient)
   return (
     <Hydrate state={dehydratedState}>

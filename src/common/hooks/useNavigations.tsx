@@ -4,12 +4,12 @@ export enum ROUTE {
   CART = "/cart",
   MYPAGE = "/myPage",
   HOME = "/",
-  SIGNIN = "/auth/signIn",
+  SIGNIN = "/signIn",
   CHECKOUT = "/checkout",
   CHECKOUTCOMFIRMED = "/checkoutConfirmed",
-  SIGNUP = "/auth/signUp",
-  FIND_EMAIL = "/auth/find/email",
-  FIND_PASSWORD = "/auth/find/password",
+  SIGNUP = "/signUp",
+  FIND_EMAIL = "/find/email",
+  FIND_PASSWORD = "/find/password",
   CHECKOUTLIST = "/myPage/checkoutList",
   CHECKOUTCANCELLIST = "/myPage/checkoutCancelList",
   CHECKOUTREVIEWLIST = "/myPage/reviewList",
@@ -20,6 +20,7 @@ export enum ROUTE {
   COUNSELINGWRITE = "/myPage/inquiryCustomerCounseling/write",
   PRODUCTQNA = "/myPage/productQnAList",
   HEARTPRODUCTLIST = "/myPage/heartProductList",
+  PRODUCTINFO = "/productInfo/:path*",
 }
 
 export const useNavigations = () => {

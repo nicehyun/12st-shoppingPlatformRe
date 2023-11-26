@@ -12,6 +12,7 @@ import Image from "next/image"
 import { useAuthenticate } from "@/features/auth/signIn/hooks/useAuthenticate"
 import Button from "./Button"
 import Loading from "./Loading"
+import Link from "next/link"
 
 interface IProductCard {
   productInfo: Product
@@ -46,7 +47,7 @@ const ProductCard = ({ productInfo }: IProductCard) => {
     id
   )
 
-  const onClickAddProductInCart = async () => {
+  const handleAddProductInCartClick = async () => {
     authentication()
 
     if (productListInCart.length >= 10) return
@@ -54,7 +55,7 @@ const ProductCard = ({ productInfo }: IProductCard) => {
     addMutaion.mutate()
   }
 
-  const onClickRemoveProductFromCart = () => {
+  const handleRemoveProductFromCartClick = () => {
     removeMutaion.mutate(id)
   }
 
@@ -73,7 +74,7 @@ const ProductCard = ({ productInfo }: IProductCard) => {
     if (isExistedProductInCart) {
       return (
         <Button
-          onClick={onClickRemoveProductFromCart}
+          onClick={handleRemoveProductFromCartClick}
           classNames="text-[18px] sm:text-[16px] absolute right-[8px]"
           content={<BsFillCartDashFill />}
         />
@@ -82,7 +83,7 @@ const ProductCard = ({ productInfo }: IProductCard) => {
 
     return (
       <Button
-        onClick={onClickAddProductInCart}
+        onClick={handleAddProductInCartClick}
         classNames="text-[18px] sm:text-[16px] absolute right-[8px]"
         content={<BsFillCartPlusFill />}
       />
@@ -92,23 +93,32 @@ const ProductCard = ({ productInfo }: IProductCard) => {
   return (
     <div>
       <div className="overflow-hidden text-[12px] text-center aspect-w-1 aspect-h-1">
-        <Image
-          src={image}
-          alt={`상품사진이 준비되지 않았습니다. - ${name}`}
-          width={0}
-          height={0}
-          sizes="100vw"
-          className="h-full w-full"
-        />
+        <Link
+          href={`/productInfo/${productInfo.id}`}
+          className={`cursor-pointer`}
+        >
+          <Image
+            src={image}
+            alt={`상품사진이 준비되지 않았습니다. - ${name}`}
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="h-full w-full"
+          />
+        </Link>
       </div>
 
       <div className="py-[15px] pr-[30px]">
         <p className="text-[14px] sm:text-[12px] mb-[15px] text-gray font-semibold">
           {productBrandInfo}
         </p>
-        <p className="text-[14px] sm:text-[12px] h-[42px] sm:h-[33.6px] truncate-2 mb-[10px] font-medium">
+
+        <Link
+          href={`/productInfo/${productInfo.id}`}
+          className="text-[14px] sm:text-[12px] h-[42px] sm:h-[33.6px] truncate-2 mb-[10px] font-medium"
+        >
           {name}
-        </p>
+        </Link>
         <p className="pt-[10px] border-t-[1px] border-lightBorder text-border text-[13px] sm:text-[12px] line-through">
           {numberToLocaleString(price)}
         </p>

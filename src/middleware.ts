@@ -23,6 +23,7 @@ export async function middleware(request: NextRequest) {
     ROUTE.COUNSELINGWRITE,
     ROUTE.PRODUCTQNA,
     ROUTE.HEARTPRODUCTLIST,
+    ROUTE.PRODUCTINFO,
   ]
   const withAuthPageList: string[] = [
     ROUTE.CART,
@@ -51,16 +52,19 @@ export async function middleware(request: NextRequest) {
   const isWithoutAuth = withAuthPageList.includes(pathname)
   const isIncludePageList = pageList.includes(pathname)
 
-  if (!isIncludePageList)
-    return NextResponse.redirect(new URL("/", request.url))
+  // if (!isIncludePageList)
+  //   return NextResponse.redirect(new URL("/", request.url))
 
-  if (isWithoutAuth && !token)
-    return NextResponse.redirect(new URL("/auth/signIn", request.url))
+  // if (isWithoutAuth && !token)
+  //   return NextResponse.redirect(new URL("/signIn", request.url))
 
-  if (request.nextUrl.pathname.startsWith("/auth/signIn") && !!token)
-    return NextResponse.redirect(new URL("/", request.url))
+  // if (request.nextUrl.pathname.startsWith("/signIn") && !!token)
+  //   return NextResponse.redirect(new URL("/", request.url))
 }
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: [
+    "/((?!api|_next/static|_next/image|favicon.ico).*)",
+    "/productInfo/:path*",
+  ],
 }
