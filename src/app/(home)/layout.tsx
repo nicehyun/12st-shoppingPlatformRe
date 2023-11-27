@@ -4,15 +4,16 @@ import {
   getBestSellingProducts,
   getTopSaleProducts,
 } from "@/features/home/models/products"
+
 import Header from "@/features/layout/views/Header"
-import Navigation from "@/features/layout/views/Navigation"
+import NavigationAndCategory from "@/features/layout/views/NavigationAndCategory"
 import getQueryClient from "@/reactQuery/utils/getQueryClient"
 import { dehydrate, Hydrate } from "@tanstack/react-query"
 import { ReactNode } from "react"
 
 const HomeLayout = async ({ children }: { children: ReactNode }) => {
   const queryClient = getQueryClient()
-  await queryClient.prefetchQuery(["bestProducts"], getBestSellingProducts)
+  // await queryClient.prefetchQuery(["bestProducts"], getBestSellingProducts)
   // await queryClient.prefetchQuery(["topSaleProducts"], getTopSaleProducts)
   // await queryClient.prefetchQuery(["arrivalProducts"], getArrivalProducts)
   const dehydratedState = dehydrate(queryClient)
@@ -22,7 +23,7 @@ const HomeLayout = async ({ children }: { children: ReactNode }) => {
 
       <PageLayout classNames="px-0">{children}</PageLayout>
 
-      <Navigation />
+      <NavigationAndCategory />
     </Hydrate>
   )
 }

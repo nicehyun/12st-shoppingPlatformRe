@@ -1,6 +1,6 @@
 import PageLayout from "@/common/views/PageLayout"
 import Header from "@/features/layout/views/Header"
-import Navigation from "@/features/layout/views/Navigation"
+import NavigationAndCategory from "@/features/layout/views/NavigationAndCategory"
 import { ReactNode } from "react"
 
 const CategoryProductManagementlayout = ({
@@ -14,7 +14,7 @@ const CategoryProductManagementlayout = ({
 
       <PageLayout classNames="px-0">{children}</PageLayout>
 
-      <Navigation />
+      <NavigationAndCategory />
     </div>
   )
 }

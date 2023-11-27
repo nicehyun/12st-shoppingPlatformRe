@@ -12,9 +12,11 @@ import {
   BiUser,
   BiSolidUser,
 } from "react-icons/bi"
-import CategoryDrawer from "./CategoryDrawer"
 import { ROUTE, useNavigations } from "@/common/hooks/useNavigations"
 import { removeSlashFromPath } from "@/common/utils/path"
+
+import { useAppDispatch } from "@/redux/hooks"
+import { showCategory } from "@/redux/features/categorySlice"
 
 type NavigationActionContent = {
   icon: {
@@ -24,12 +26,14 @@ type NavigationActionContent = {
   label: string
   value: string
   route: ROUTE | null
+  onClickFn?: () => void
 }
 
 type NavigationActionContents = NavigationActionContent[]
 
 const Navigation = () => {
   const { routeTo, pathname } = useNavigations()
+  const dispatch = useAppDispatch()
 
   const currentPath = removeSlashFromPath(pathname)
 
@@ -51,6 +55,7 @@ const Navigation = () => {
       label: "CATEGORIES",
       value: "categories",
       route: null,
+      onClickFn: () => dispatch(showCategory()),
     },
     {
       icon: {
@@ -59,7 +64,7 @@ const Navigation = () => {
       },
       label: "LIKE",
       value: "like",
-      route: null,
+      route: ROUTE.HEARTPRODUCTLIST,
     },
     {
       icon: {
@@ -82,15 +87,26 @@ const Navigation = () => {
       : null
   }
 
+  const findOnclickFnByValue = (selectedValue: string) => {
+    const foundBottomNavigationContent = navigationActionContents.find(
+      (navigationActionContent) =>
+        navigationActionContent.value === selectedValue
+    )
+    return foundBottomNavigationContent
+      ? foundBottomNavigationContent.onClickFn
+      : null
+  }
+
   const handleNavChange = (
     event: React.SyntheticEvent,
     selectedValue: string
   ) => {
     const route = findRouteByValue(selectedValue)
+    const onClickFn = findOnclickFnByValue(selectedValue)
 
-    if (!route) return
+    if (route) routeTo(route)
 
-    routeTo(route)
+    if (onClickFn) onClickFn()
   }
 
   const renderBottomNavigationActions = () => {
@@ -147,8 +163,6 @@ const Navigation = () => {
       >
         {renderBottomNavigationActions()}
       </BottomNavigation>
-
-      <CategoryDrawer />
     </>
   )
 }

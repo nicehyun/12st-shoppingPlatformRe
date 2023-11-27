@@ -6,6 +6,7 @@ import modalSlice from "./features/modalSlice"
 import signInSlice from "./features/signInSlice"
 import signUpSlice from "./features/signUpSlice"
 import myPageSlice from "./features/myPageSlice"
+import categorySlice from "./features/categorySlice"
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
     cart: cartSlice,
     checkout: checkoutSlice,
     myPage: myPageSlice,
+    category: categorySlice,
   },
 })
 
