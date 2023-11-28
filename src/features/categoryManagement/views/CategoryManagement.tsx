@@ -5,6 +5,7 @@ import { layoutAPI } from "@/features/layout/models/layoutAPI"
 import { filterProductsByThirdCategory } from "../models/product"
 import ProductCard from "@/common/views/ProductCard"
 import usePagination from "@/common/hooks/usePagination"
+import MyPageSectionTitle from "@/features/myPage/views/MyPageSectionTitle"
 
 const dummyProductsData = [
   {
@@ -40640,11 +40641,10 @@ const CategoryManagement = ({ thirdCategory }: ICategoryManagement) => {
 
   return (
     <div>
-      <h2 className="font-bold text-[24px] border-b-[4px] py-[20px] mb-[50px]">
-        {decodedCategory}
-      </h2>
+      {/* TODO : MyPageSectionTitle common으로 수정하기 */}
+      <MyPageSectionTitle title={decodedCategory} />
 
-      <div className="grid grid-cols-3 xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-[20px]">
+      <div className="grid grid-cols-3 xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-[20px] mt-[50px]">
         {filteredProducts
           .slice(
             productsPagination.indexOfFirst,
