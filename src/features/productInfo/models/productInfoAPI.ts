@@ -1,10 +1,10 @@
+import { Products } from "@/common/types/product"
 import firebaseApp from "@/firebase/config"
 import { AxiosError } from "axios"
 import { doc, getDoc, getFirestore } from "firebase/firestore"
 
 const db = getFirestore(firebaseApp)
 
-// TODO : getProductInfo type 수정하기
 export const productInfoAPI = {
   getProductInfo: async (productId: string) => {
     if (productId === "") return
@@ -14,7 +14,7 @@ export const productInfoAPI = {
       const productsDoc = await getDoc(productsRef)
 
       if (productsDoc.exists()) {
-        const productData = productsDoc.data() as any
+        const productData = productsDoc.data() as Products
 
         return productData
       } else {

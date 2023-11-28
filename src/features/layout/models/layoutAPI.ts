@@ -1,78 +1,56 @@
 import { Product } from "@/common/types/product"
 import firebaseApp from "@/firebase/config"
 import { AxiosError } from "axios"
-import { collection, getDocs, getFirestore, query } from "firebase/firestore"
-import { CategoryHierarchy } from "../types/category"
-//  TODO : api 타입 맞추기
-type Categories = {
-  category1: string
-  category2: string
-  category3: string
-}
+import { collection, getDocs, getFirestore } from "firebase/firestore"
 
-type CategoryHierarchyArray = Array<[string, Array<[string, Array<string>]>]>
+type Categories = {
+  [key: string]: { [key: string]: string[] }
+}
 
 const db = getFirestore(firebaseApp)
 
 export const layoutAPI = {
-  getCategories: async (): Promise<CategoryHierarchyArray> => {
+  getCategories: async (): Promise<Categories[]> => {
     try {
-      const productsRef = collection(db, "products")
-      const productsQuery = query(productsRef)
+      const productsCollectionRef = collection(db, "products")
+      const productsSnapshot = await getDocs(productsCollectionRef)
 
-      const productsDoc = await getDocs(productsQuery)
+      const categories: Categories[] = []
 
-      const categoryHierarchyArray: CategoryHierarchyArray = []
+      productsSnapshot.forEach((doc) => {
+        if (doc.exists()) {
+          const product = doc.data() as Product
 
-      // productsSnapshot.forEach((productDoc) => {
-      //   const { category1, category2, category3, category4 } =
-      //     productDoc.data() as Product
+          const { category1, category2, category3 } = product
 
-      // if (!categoryHierarchy[category1]) {
-      //   categoryHierarchy[category1] = {}
-      // }
+          const category1Index = categories.findIndex(
+            (categoryEntry) => categoryEntry[category1]
+          )
 
-      // if (!categoryHierarchy[category1][category2]) {
-      //   categoryHierarchy[category1][category2] = {}
-      // }
+          if (category1Index === -1) {
+            categories.push({
+              [category1]: {
+                [category2]: [category3],
+              },
+            })
+          } else {
+            const category1Data = categories[category1Index][category1]
+            const category2Index = Object.keys(category1Data).indexOf(category2)
 
-      // if (!categoryHierarchy[category1][category2][category3]) {
-      //   categoryHierarchy[category1][category2][category3] = []
-      // }
+            if (category2Index === -1) {
+              category1Data[category2] = [category3]
+            } else {
+              const category3Array = category1Data[category2]
 
-      // if (category4 !== "") {
-      //   categoryHierarchy[category1][category2][category3].push(category4)
-      // }
-
-      productsDoc.forEach((productDoc) => {
-        const { category1, category2, category3, category4 } =
-          productDoc.data() as Product
-
-        // Find or create category1 entry
-        let category1Entry = categoryHierarchyArray.find(
-          (entry) => entry[0] === category1
-        )
-
-        if (!category1Entry) {
-          category1Entry = [category1, []]
-          categoryHierarchyArray.push(category1Entry)
+              if (!category3Array.includes(category3)) {
+                category3Array.push(category3)
+              }
+            }
+          }
         }
-
-        // Find or create category2 entry within category1
-        let category2Entry = category1Entry[1].find(
-          (entry) => entry[0] === category2
-        )
-
-        if (!category2Entry) {
-          category2Entry = [category2, []]
-          category1Entry[1].push(category2Entry)
-        }
-
-        // Add category3 to category2
-        category2Entry[1].push(category3)
       })
 
-      return categoryHierarchyArray
+      return categories
     } catch (error) {
       const { response } = error as unknown as AxiosError
 
