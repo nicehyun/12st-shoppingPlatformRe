@@ -98,7 +98,7 @@ const testProducList: any[] = [
 ]
 
 const HeartProductList = () => {
-  const perPage = 2
+  const perPage = 12
   const { productsPagination, renderPaginationComponent } = usePagination(
     perPage,
     testProducList.length
@@ -108,25 +108,22 @@ const HeartProductList = () => {
     return <MyPageListNoneContents content="좋아요를 누른 상품이 없습니다" />
   }
 
+  // TODO : key값 product id로 전달하기
   return (
-    <div>
-      <div className="flex justify-between mt-[50px]">
+    <>
+      <div className="grid grid-cols-3 xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-[20px] mt-[50px]">
         {testProducList
           .slice(
             productsPagination.indexOfFirst,
             productsPagination.indexOfLast
           )
           .map((product, index) => (
-            <div className={`w-1/2`} key={index}>
-              <div className="">
-                <ProductCard productInfo={product} />
-              </div>
-            </div>
+            <ProductCard productInfo={product} key={`heart-product-${index}`} />
           ))}
       </div>
 
       <div className="mt-[30px]">{renderPaginationComponent()}</div>
-    </div>
+    </>
   )
 }
 
