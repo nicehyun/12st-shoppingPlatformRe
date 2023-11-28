@@ -108,8 +108,8 @@ const ProductCard = ({ productInfo }: IProductCard) => {
         </Link>
       </div>
 
-      <div className="py-[15px] pr-[30px]">
-        <p className="text-[14px] sm:text-[12px] mb-[15px] text-gray font-semibold">
+      <div className="py-[15px]">
+        <p className="text-[14px] sm:text-[12px] mb-[15px] text-gray dark:text-white font-semibold">
           {productBrandInfo}
         </p>
 

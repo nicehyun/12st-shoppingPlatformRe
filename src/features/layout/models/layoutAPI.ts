@@ -1,4 +1,4 @@
-import { Product } from "@/common/types/product"
+import { Product, Products } from "@/common/types/product"
 import firebaseApp from "@/firebase/config"
 import { AxiosError } from "axios"
 import { collection, getDocs, getFirestore } from "firebase/firestore"
@@ -10,6 +10,20 @@ type Categories = {
 const db = getFirestore(firebaseApp)
 
 export const layoutAPI = {
+  getAllProducts: async (): Promise<Products> => {
+    const productsCollectionRef = collection(db, "products")
+    const productsSnapshot = await getDocs(productsCollectionRef)
+
+    const products: Products = []
+
+    productsSnapshot.forEach((doc) => {
+      const product = doc.data() as Product
+
+      products.push(product)
+    })
+
+    return products
+  },
   getCategories: async (): Promise<Categories[]> => {
     try {
       const productsCollectionRef = collection(db, "products")

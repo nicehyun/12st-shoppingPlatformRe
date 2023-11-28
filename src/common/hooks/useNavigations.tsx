@@ -21,6 +21,7 @@ export enum ROUTE {
   PRODUCTQNA = "/myPage/productQnAList",
   HEARTPRODUCTLIST = "/myPage/heartProductList",
   PRODUCTINFO = "/productInfo/:path*",
+  CATEGORYMANAGEMENT = "categoryManagement",
 }
 
 export const useNavigations = () => {

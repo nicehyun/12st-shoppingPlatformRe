@@ -19,7 +19,7 @@ const HomeLayout = async ({ children }: { children: ReactNode }) => {
   const dehydratedState = dehydrate(queryClient)
   return (
     <Hydrate state={dehydratedState}>
-      {/* <Header isShowCart={true} /> */}
+      <Header isShowCart={true} />
 
       <PageLayout classNames="px-0">{children}</PageLayout>
 
