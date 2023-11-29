@@ -1,6 +1,9 @@
 import { ProductInCart } from "@/features/cart/types/cart"
 import { AmountCoupon, RateCoupon } from "@/features/cart/types/coupon"
 
+export const junkOfNoMoreThandecimaPoint = (number: number) =>
+  Math.floor(number)
+
 export const junkOfNoMoreThanOneDigit = (number: number) =>
   Math.floor(number / 10) * 10
 
