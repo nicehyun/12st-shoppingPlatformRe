@@ -1,6 +1,6 @@
-import { useUserInput } from "@/common/hooks/useUserInput"
-import Feedback from "@/common/views/Feedback"
-import Input from "@/common/views/Input"
+import { useUserInput } from "@/features/common/hooks/useUserInput"
+import Feedback from "@/features/common/views/Feedback"
+import Input from "@/features/common/views/Input"
 import { emailValidator } from "../../signUp/utils/validation"
 
 const SignInEmailInput = () => {

@@ -1,4 +1,4 @@
-import { useFeedbackModal } from "@/common/hooks/useFeedbackModal"
+import { useFeedbackModal } from "@/features/common/hooks/useFeedbackModal"
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { useMutation } from "@tanstack/react-query"
 import { CustomerCounselingDetail } from "../types/myPage"

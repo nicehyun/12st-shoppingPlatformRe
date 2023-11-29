@@ -1,4 +1,4 @@
-import { numberToLocaleString } from "@/common/utils/price"
+import { numberToLocaleString } from "@/features/common/utils/price"
 
 interface ICartPriceInfoEl {
   price: number

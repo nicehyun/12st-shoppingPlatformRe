@@ -1,4 +1,4 @@
-import PageLayout from "@/common/views/PageLayout"
+import PageLayout from "@/features/common/views/PageLayout"
 import {
   getArrivalProducts,
   getBestSellingProducts,
@@ -19,11 +19,11 @@ const HomeLayout = async ({ children }: { children: ReactNode }) => {
   const dehydratedState = dehydrate(queryClient)
   return (
     <Hydrate state={dehydratedState}>
-      <Header isShowCart={true} />
+      {/* <Header isShowCart={true} /> */}
 
       <PageLayout classNames="px-0">{children}</PageLayout>
 
-      <NavigationAndCategory />
+      {/* <NavigationAndCategory /> */}
     </Hydrate>
   )
 }

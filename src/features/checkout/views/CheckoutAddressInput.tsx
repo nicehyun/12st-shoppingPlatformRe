@@ -1,5 +1,5 @@
-import { useUserInput } from "@/common/hooks/useUserInput"
-import AddressInfo from "@/common/views/AddressInfo"
+import { useUserInput } from "@/features/common/hooks/useUserInput"
+import AddressInfo from "@/features/common/views/AddressInfo"
 import { additionalAddressValidator } from "../../auth/signUp/utils/validation"
 import CheckoutInputLayout from "./CheckoutInputLayout"
 

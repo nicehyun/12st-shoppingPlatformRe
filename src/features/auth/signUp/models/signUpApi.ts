@@ -1,4 +1,4 @@
-import { UserInfo } from "@/common/types/user"
+import { UserInfo } from "@/features/common/types/user"
 import firebaseApp from "@/firebase/config"
 import { AxiosError } from "axios"
 import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore"

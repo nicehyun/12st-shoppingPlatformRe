@@ -1,5 +1,5 @@
-import MobileViewConditionComponent from "@/common/views/MobileViewConditionComponent"
-import PcConditionComponent from "@/common/views/PcConditionComponent"
+import MobileViewConditionComponent from "@/features/common/views/MobileViewConditionComponent"
+import PcConditionComponent from "@/features/common/views/PcConditionComponent"
 import { ReactNode } from "react"
 import MoblieMyPageLayout from "./MoblieMyPageLayout"
 import NonMobileMyPageLayout from "./NonMobileMyPageLayout"

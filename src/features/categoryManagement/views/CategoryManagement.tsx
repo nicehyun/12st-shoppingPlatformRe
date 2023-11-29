@@ -3,8 +3,8 @@
 import { useGetProductsQuery } from "@/features/layout/hooks/useGetProductsQuery"
 import { layoutAPI } from "@/features/layout/models/layoutAPI"
 import { filterProductsByThirdCategory } from "../models/product"
-import ProductCard from "@/common/views/ProductCard"
-import usePagination from "@/common/hooks/usePagination"
+import ProductCard from "@/features/common/views/ProductCard"
+import usePagination from "@/features/common/hooks/usePagination"
 import MyPageSectionTitle from "@/features/myPage/views/MyPageSectionTitle"
 
 const dummyProductsData = [

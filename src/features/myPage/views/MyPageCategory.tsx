@@ -1,4 +1,4 @@
-import { ROUTE } from "@/common/hooks/useNavigations"
+import { ROUTE } from "@/features/common/hooks/useNavigations"
 import MyPageCategoryEl from "./MyPageCategoryEl"
 
 const MyPageCategory = () => {

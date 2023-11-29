@@ -1,4 +1,4 @@
-import { useFeedbackModal } from "@/common/hooks/useFeedbackModal"
+import { useFeedbackModal } from "@/features/common/hooks/useFeedbackModal"
 import { useMutation } from "@tanstack/react-query"
 import { verifyPhoneAPI } from "../models/verifyPhoneAPI"
 

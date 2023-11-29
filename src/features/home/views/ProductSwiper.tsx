@@ -1,8 +1,10 @@
+"use client"
+
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Scrollbar } from "swiper/modules"
-import { Product, Products } from "@/common/types/product"
+import { Product, Products } from "@/features/common/types/product"
 import ArrivalProductCard from "./ShadowProductCard"
-import ProductCard from "@/common/views/ProductCard"
+import ProductCard from "@/features/common/views/ProductCard"
 
 import "swiper/css"
 import "swiper/css/scrollbar"

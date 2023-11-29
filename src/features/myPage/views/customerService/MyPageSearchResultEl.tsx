@@ -1,4 +1,4 @@
-import Input from "@/common/views/Input"
+import Input from "@/features/common/views/Input"
 
 interface IMyPageSearchResultEl {
   id: string

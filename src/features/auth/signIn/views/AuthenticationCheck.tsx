@@ -1,6 +1,6 @@
 "use client"
 
-import { ROUTE } from "@/common/hooks/useNavigations"
+import { ROUTE } from "@/features/common/hooks/useNavigations"
 import { showRouteModal } from "@/redux/features/modalSlice"
 import { selectSignInState } from "@/redux/features/signInSlice"
 

@@ -1,8 +1,8 @@
-import Input from "@/common/views/Input"
+import Input from "@/features/common/views/Input"
 import MyPageWriteTable from "./MyPageWriteTable"
-import TextArea from "@/common/views/TextArea"
-import MobileViewConditionComponent from "@/common/views/MobileViewConditionComponent"
-import PcConditionComponent from "@/common/views/PcConditionComponent"
+import TextArea from "@/features/common/views/TextArea"
+import MobileViewConditionComponent from "@/features/common/views/MobileViewConditionComponent"
+import PcConditionComponent from "@/features/common/views/PcConditionComponent"
 
 const MyPageCustomerCounselingWriteContentList = () => {
   return (

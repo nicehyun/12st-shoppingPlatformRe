@@ -1,7 +1,7 @@
 "use client"
 
-import usePagination from "@/common/hooks/usePagination"
-import ProductCard from "@/common/views/ProductCard"
+import usePagination from "@/features/common/hooks/usePagination"
+import ProductCard from "@/features/common/views/ProductCard"
 import MyPageListNoneContents from "../MyPageListNoneContents"
 
 const testProducList: any[] = [

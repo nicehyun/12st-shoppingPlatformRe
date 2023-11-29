@@ -1,6 +1,6 @@
 "use client"
-import { numberToLocaleString } from "@/common/utils/price"
-import Button from "@/common/views/Button"
+import { numberToLocaleString } from "@/features/common/utils/price"
+import Button from "@/features/common/views/Button"
 import useCheckoutPrice from "@/features/checkout/hooks/useCheckoutPrice"
 import TotalPriceList from "@/features/checkout/views/TotalPriceList"
 import { selectCheckoutPlannedUseMileState } from "@/redux/features/checkoutSlice"

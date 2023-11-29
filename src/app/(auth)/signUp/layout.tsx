@@ -1,4 +1,4 @@
-import PageLayout from "@/common/views/PageLayout"
+import PageLayout from "@/features/common/views/PageLayout"
 import SignUpBasicModal from "@/features/auth/signUp/views/SignUpBasicModal"
 import Header from "@/features/layout/views/Header"
 

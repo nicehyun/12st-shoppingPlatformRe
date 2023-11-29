@@ -1,8 +1,8 @@
-import { Product } from "@/common/types/product"
+import { Product } from "@/features/common/types/product"
 import {
   discountedProductPrice,
   numberToLocaleString,
-} from "@/common/utils/price"
+} from "@/features/common/utils/price"
 import Image from "next/image"
 
 interface IArrivalProductCard {

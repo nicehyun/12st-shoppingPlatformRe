@@ -1,4 +1,4 @@
-import { UserInfo } from "@/common/types/user"
+import { UserInfo } from "@/features/common/types/user"
 
 export interface IRequestSignUp {
   userInfo: UserInfo

@@ -1,13 +1,13 @@
 "use client"
-import { ROUTE, useNavigations } from "@/common/hooks/useNavigations"
-import Stage, { IStage } from "@/common/views/Stage"
+import { ROUTE, useNavigations } from "@/features/common/hooks/useNavigations"
+import Stage, { IStage } from "@/features/common/views/Stage"
 import {
   resetSignUpState,
   selectSignUpIsValidState,
 } from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { useEffect, useState } from "react"
-import { useFeedbackModal } from "../../../../common/hooks/useFeedbackModal"
+import { useFeedbackModal } from "../../../common/hooks/useFeedbackModal"
 import { useSignUpClasue } from "../hooks/useSignUpClasue"
 import useSignUpMutation from "../hooks/useSignUpMutation"
 import useSignUpVerificationCheck from "../hooks/useSignUpVerificationCheck"

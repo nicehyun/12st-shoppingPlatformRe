@@ -1,4 +1,4 @@
-import { ROUTE } from "@/common/hooks/useNavigations"
+import { ROUTE } from "@/features/common/hooks/useNavigations"
 import { showRouteModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
 import useSessionQuery from "./useSessionQuery"

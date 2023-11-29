@@ -1,6 +1,6 @@
 "use client"
 
-import BasicModal from "@/common/views/BasicModal"
+import BasicModal from "@/features/common/views/BasicModal"
 import { selectBasicModalState } from "@/redux/features/modalSlice"
 import { useAppSelector } from "@/redux/hooks"
 import CollectionOfUserInfoClause from "./clauses/CollectionOfUserInfoClause"

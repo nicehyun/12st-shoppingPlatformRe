@@ -1,13 +1,13 @@
-import { Product } from "@/common/types/product"
+import { Product } from "@/features/common/types/product"
 import Image from "next/image"
 import { MdOutlineClose } from "react-icons/md"
 import useRemoveFromCartMutation from "../hooks/useRemoveFromCartMutation"
-import Button from "@/common/views/Button"
+import Button from "@/features/common/views/Button"
 import {
   discountedProductPrice,
   numberToLocaleString,
-} from "@/common/utils/price"
-import Loading from "@/common/views/Loading"
+} from "@/features/common/utils/price"
+import Loading from "@/features/common/views/Loading"
 
 interface IProductInCartModalCard {
   productInfo: Product

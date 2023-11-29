@@ -1,13 +1,13 @@
 import "./globals.css"
 
 import { Roboto } from "next/font/google"
-import Providers from "../common/utils/Providers"
+import Providers from "../features/common/utils/Providers"
 
-import FeedbackModal from "@/common/views/FeedbackModal"
+import FeedbackModal from "@/features/common/views/FeedbackModal"
 
 import Footer from "@/features/layout/views/Footer"
 import LayoutSettingDial from "@/features/layout/views/LayoutSettingDial"
-import RouteModal from "@/common/views/RouteModal"
+import RouteModal from "@/features/common/views/RouteModal"
 
 const roboto = Roboto({
   weight: ["400", "700"],

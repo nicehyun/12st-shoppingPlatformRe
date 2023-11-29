@@ -1,9 +1,9 @@
 "use client"
 
-import { ROUTE } from "@/common/hooks/useNavigations"
-import Button from "@/common/views/Button"
-import Empty from "@/common/views/Empty"
-import Loading from "@/common/views/Loading"
+import { ROUTE } from "@/features/common/hooks/useNavigations"
+import Button from "@/features/common/views/Button"
+import Empty from "@/features/common/views/Empty"
+import Loading from "@/features/common/views/Loading"
 import {
   allcheckedProduct,
   checkedProduct,

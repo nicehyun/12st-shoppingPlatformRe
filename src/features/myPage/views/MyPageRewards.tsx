@@ -1,5 +1,5 @@
 "use client"
-import { ROUTE, useNavigations } from "@/common/hooks/useNavigations"
+import { ROUTE, useNavigations } from "@/features/common/hooks/useNavigations"
 import useCouponQuery from "@/features/checkout/hooks/useCouponQuery"
 import { useUserMileQuery } from "@/features/checkout/hooks/useGetUserMileQuery"
 import MyPageRewardsEl from "./MyPageRewardsEl"

@@ -1,4 +1,4 @@
-import { UserInfo } from "@/common/types/user"
+import { UserInfo } from "@/features/common/types/user"
 import { signUpAPI } from "@/features/auth/signUp/models/signUpAPI"
 import { IRequestSignUp } from "@/features/auth/signUp/types/signUp"
 import {

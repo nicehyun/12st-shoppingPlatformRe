@@ -1,6 +1,6 @@
 import CheckoutInputLayout from "./CheckoutInputLayout"
 
-import { useUserInput } from "@/common/hooks/useUserInput"
+import { useUserInput } from "@/features/common/hooks/useUserInput"
 import { nameValidator } from "@/features/auth/signUp/utils/validation"
 import { useEffect } from "react"
 

@@ -1,9 +1,9 @@
 "use client"
 
-import { useUserInput } from "@/common/hooks/useUserInput"
-import { DeliveryInfo } from "@/common/types/address"
-import Button from "@/common/views/Button"
-import Loading from "@/common/views/Loading"
+import { useUserInput } from "@/features/common/hooks/useUserInput"
+import { DeliveryInfo } from "@/features/common/types/address"
+import Button from "@/features/common/views/Button"
+import Loading from "@/features/common/views/Loading"
 import { additionalAddressValidator } from "@/features/auth/signUp/utils/validation"
 import { useGetDefaultDeliveryInfoQuery } from "@/features/checkout/hooks/useGetDefaultDeliveryInfoQuery"
 import { showFeedbackModal } from "@/redux/features/modalSlice"

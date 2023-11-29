@@ -1,4 +1,4 @@
-import PageLayout from "@/common/views/PageLayout"
+import PageLayout from "@/features/common/views/PageLayout"
 import CheckoutBasicModal from "@/features/checkout/views/CheckoutBasicModal"
 import Header from "@/features/layout/views/Header"
 import { ReactNode } from "react"

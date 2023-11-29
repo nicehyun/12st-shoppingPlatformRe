@@ -1,4 +1,4 @@
-import { numberToLocaleString } from "@/common/utils/price"
+import { numberToLocaleString } from "@/features/common/utils/price"
 import Image from "next/image"
 import { ProductInCart } from "../types/cart"
 import { addDaysToCurrentDate } from "../utils/date"

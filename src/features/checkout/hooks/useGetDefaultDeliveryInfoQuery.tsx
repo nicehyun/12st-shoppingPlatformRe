@@ -1,4 +1,4 @@
-import { addressAPI } from "@/common/models/addressAPI"
+import { addressAPI } from "@/features/common/models/addressAPI"
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { useQuery } from "@tanstack/react-query"
 

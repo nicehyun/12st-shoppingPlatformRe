@@ -1,6 +1,6 @@
 "use client"
 
-import { numberToLocaleString } from "@/common/utils/price"
+import { numberToLocaleString } from "@/features/common/utils/price"
 import { useGetCheckoutListQuery } from "@/features/checkout/hooks/useGetCheckoutListQuery"
 import { useCurrentCheckoutConfirmedPrice } from "../hooks/useCheckoutConfirmedPrice"
 import { getPaymentContent, Payment } from "../utils/payment"

@@ -1,6 +1,6 @@
 import { getToken } from "next-auth/jwt"
 import { NextRequest, NextResponse } from "next/server"
-import { ROUTE } from "./common/hooks/useNavigations"
+import { ROUTE } from "./features/common/hooks/useNavigations"
 
 export { default } from "next-auth/middleware"
 

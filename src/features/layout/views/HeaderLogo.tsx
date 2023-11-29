@@ -1,5 +1,5 @@
-import { ROUTE, useNavigations } from "@/common/hooks/useNavigations"
-import Button from "@/common/views/Button"
+import { ROUTE, useNavigations } from "@/features/common/hooks/useNavigations"
+import Button from "@/features/common/views/Button"
 
 interface IHeaderLogo {
   isShowPromotion: boolean

@@ -1,4 +1,4 @@
-import { numberToLocaleString } from "@/common/utils/price"
+import { numberToLocaleString } from "@/features/common/utils/price"
 import useSelectCoupon from "@/features/checkout/hooks/useSelectCoupon"
 import { ProductInCart } from "@/features/cart/types/cart"
 import Image from "next/image"

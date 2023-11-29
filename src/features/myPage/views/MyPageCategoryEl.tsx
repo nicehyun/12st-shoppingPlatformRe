@@ -1,6 +1,6 @@
 "use client"
 
-import { ROUTE, useNavigations } from "@/common/hooks/useNavigations"
+import { ROUTE, useNavigations } from "@/features/common/hooks/useNavigations"
 import Link from "next/link"
 
 interface IMyPageCategoryLi {

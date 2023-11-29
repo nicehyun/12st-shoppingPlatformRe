@@ -1,4 +1,4 @@
-import { Products } from "@/common/types/product"
+import { Products } from "@/features/common/types/product"
 import firebaseApp from "@/firebase/config"
 import { AxiosError } from "axios"
 import { doc, getDoc, getFirestore } from "firebase/firestore"

@@ -1,6 +1,6 @@
 "use client"
 
-import Button from "@/common/views/Button"
+import Button from "@/features/common/views/Button"
 import useSelectCoupon from "@/features/checkout/hooks/useSelectCoupon"
 import { showBasicModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"

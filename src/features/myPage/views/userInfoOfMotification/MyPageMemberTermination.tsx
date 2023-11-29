@@ -1,8 +1,8 @@
 "use client"
 
-import AlertModal from "@/common/views/AlertModal"
-import Button from "@/common/views/Button"
-import Loading from "@/common/views/Loading"
+import AlertModal from "@/features/common/views/AlertModal"
+import Button from "@/features/common/views/Button"
+import Loading from "@/features/common/views/Loading"
 import { signOut } from "next-auth/react"
 import { useState } from "react"
 import { useMemberTerminationMutation } from "../../hooks/useMemberTerminationMutation"

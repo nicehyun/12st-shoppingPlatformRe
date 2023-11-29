@@ -1,7 +1,7 @@
 "use client"
 
 import MyPageTableContentEl from "../MyPageTableContentEl"
-import { numberToLocaleString } from "@/common/utils/price"
+import { numberToLocaleString } from "@/features/common/utils/price"
 import { checkoutTotalPrice } from "../../utils/price"
 import MyPageListNoneContents from "../MyPageListNoneContents"
 import { useGetCheckoutListQuery } from "@/features/checkout/hooks/useGetCheckoutListQuery"

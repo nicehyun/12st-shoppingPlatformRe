@@ -1,4 +1,4 @@
-import { convertingObjectIntoArray } from "@/common/utils/object"
+import { convertingObjectIntoArray } from "@/features/common/utils/object"
 import { AmountCoupon, RateCoupon } from "@/features/cart/types/coupon"
 import firebaseApp from "@/firebase/config"
 import { AxiosError } from "axios"

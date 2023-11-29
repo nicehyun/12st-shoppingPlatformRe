@@ -1,5 +1,5 @@
-import { handleKeyPress } from "@/common/utils/event"
-import RadioInput from "@/common/views/RadioInput"
+import { handleKeyPress } from "@/features/common/utils/event"
+import RadioInput from "@/features/common/views/RadioInput"
 import { ChangeEvent } from "react"
 
 interface IMyPageRadioInput {

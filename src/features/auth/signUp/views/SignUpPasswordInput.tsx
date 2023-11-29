@@ -9,9 +9,9 @@ import { useEffect } from "react"
 import {
   useUserInput,
   useUserInputWithRePassword,
-} from "../../../../common/hooks/useUserInput"
+} from "../../../common/hooks/useUserInput"
 import { passwordValidator } from "../utils/validation"
-import SignUpFeedback from "../../../../common/views/Feedback"
+import SignUpFeedback from "../../../common/views/Feedback"
 import SignUpInput from "./SignUpInput"
 import SignUpInputLayout from "./SignUpInputLayout"
 

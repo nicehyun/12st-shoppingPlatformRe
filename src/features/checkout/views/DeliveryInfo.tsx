@@ -7,14 +7,14 @@ import Tabs from "@mui/material/Tabs"
 import Tab from "@mui/material/Tab"
 import Box from "@mui/material/Box"
 
-import TabPanel from "@/common/views/TabPanel"
+import TabPanel from "@/features/common/views/TabPanel"
 
 import { showBasicModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
 import { useGetDefaultDeliveryInfoQuery } from "../hooks/useGetDefaultDeliveryInfoQuery"
 import CheckoutDefalutDeliveryInfo from "./CheckoutDefalutDeliveryInfo"
 import CheckoutNewDeliveryInfo from "./CheckoutNewDeliveryInfo"
-import Button from "@/common/views/Button"
+import Button from "@/features/common/views/Button"
 
 const DeliveryInfo = () => {
   const dispatch = useAppDispatch()

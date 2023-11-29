@@ -1,4 +1,4 @@
-import PageLayout from "@/common/views/PageLayout"
+import PageLayout from "@/features/common/views/PageLayout"
 
 import { ReactNode } from "react"
 

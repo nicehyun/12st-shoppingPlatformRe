@@ -1,12 +1,12 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useFeedbackModal } from "../../../../common/hooks/useFeedbackModal"
+import { useFeedbackModal } from "../../../common/hooks/useFeedbackModal"
 
 import useSendVerificationCodeMutation from "../hooks/useSendVerificationCodeMutation"
-import { useUserInput } from "../../../../common/hooks/useUserInput"
+import { useUserInput } from "../../../common/hooks/useUserInput"
 import { phoneValidator } from "../utils/validation"
-import SignUpFeedback from "../../../../common/views/Feedback"
+import SignUpFeedback from "../../../common/views/Feedback"
 import SignUpInputLayout from "./SignUpInputLayout"
 import SignUpVerificationInput from "./SignUpVerificationInput"
 import { BsFileLock2 } from "react-icons/bs"

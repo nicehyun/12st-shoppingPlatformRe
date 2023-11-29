@@ -1,6 +1,6 @@
-import { DeliveryInfo } from "@/common/types/address"
-import { CheckoutList } from "@/common/types/checkout"
-import { ResponseUserInfo } from "@/common/types/user"
+import { DeliveryInfo } from "@/features/common/types/address"
+import { CheckoutList } from "@/features/common/types/checkout"
+import { ResponseUserInfo } from "@/features/common/types/user"
 import firebaseApp from "@/firebase/config"
 import { AxiosError } from "axios"
 import {
@@ -11,9 +11,9 @@ import {
   setDoc,
 } from "firebase/firestore"
 import { UseMileAndGetMile } from "../types/mile"
-import { Product } from "@/common/types/product"
+import { Product } from "@/features/common/types/product"
 import { CustomerCounselingDetail } from "../types/myPage"
-import { getCurrentDateTime } from "@/common/utils/time"
+import { getCurrentDateTime } from "@/features/common/utils/time"
 
 const db = getFirestore(firebaseApp)
 

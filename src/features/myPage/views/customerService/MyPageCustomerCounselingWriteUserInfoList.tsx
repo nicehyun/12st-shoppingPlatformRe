@@ -2,8 +2,8 @@
 
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import MyPageWriteTable from "./MyPageWriteTable"
-import PcConditionComponent from "@/common/views/PcConditionComponent"
-import MobileViewConditionComponent from "@/common/views/MobileViewConditionComponent"
+import PcConditionComponent from "@/features/common/views/PcConditionComponent"
+import MobileViewConditionComponent from "@/features/common/views/MobileViewConditionComponent"
 
 const MyPageCutsomerCounselingWriteUserInfoList = () => {
   const { sessionQuery } = useSessionQuery()

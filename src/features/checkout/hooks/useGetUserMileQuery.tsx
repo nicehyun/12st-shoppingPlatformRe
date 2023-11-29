@@ -1,5 +1,5 @@
-import { mileAPI } from "@/common/models/mileAPI"
-import { junkOfNoMoreThanOneDigit } from "@/common/utils/price"
+import { mileAPI } from "@/features/common/models/mileAPI"
+import { junkOfNoMoreThanOneDigit } from "@/features/common/utils/price"
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { useQuery } from "@tanstack/react-query"
 import useCheckoutPrice from "./useCheckoutPrice"

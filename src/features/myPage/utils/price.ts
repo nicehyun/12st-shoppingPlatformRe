@@ -1,8 +1,8 @@
-import { CheckoutList } from "@/common/types/checkout"
+import { CheckoutList } from "@/features/common/types/checkout"
 import {
   accumulationOfProductsPrice,
   priceToUseCoupon,
-} from "@/common/utils/price"
+} from "@/features/common/utils/price"
 
 export const checkoutTotalPrice = (checkoutList: CheckoutList) => {
   const totalPrice = accumulationOfProductsPrice(checkoutList.productList)

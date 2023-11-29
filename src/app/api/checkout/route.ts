@@ -1,10 +1,10 @@
-import { addressAPI } from "@/common/models/addressAPI"
-import { mileAPI } from "@/common/models/mileAPI"
-import { CheckoutList } from "@/common/types/checkout"
+import { addressAPI } from "@/features/common/models/addressAPI"
+import { mileAPI } from "@/features/common/models/mileAPI"
+import { CheckoutList } from "@/features/common/types/checkout"
 import {
   accumulationOfProductsPrice,
   junkOfNoMoreThanOneDigit,
-} from "@/common/utils/price"
+} from "@/features/common/utils/price"
 import {
   additionalAddressValidator,
   nameValidator,

@@ -1,4 +1,4 @@
-import Button from "@/common/views/Button"
+import Button from "@/features/common/views/Button"
 import { AiOutlineRight } from "react-icons/ai"
 
 interface IPaymentBenefitEl {

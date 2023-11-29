@@ -1,5 +1,5 @@
-import { junkOfNoMoreThanOneDigit } from "@/common/utils/price"
-import Button from "@/common/views/Button"
+import { junkOfNoMoreThanOneDigit } from "@/features/common/utils/price"
+import Button from "@/features/common/views/Button"
 
 import {
   resetPlannedUseMile,

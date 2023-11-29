@@ -1,5 +1,5 @@
-import FeedbackModal from "@/common/views/FeedbackModal"
-import PageLayout from "@/common/views/PageLayout"
+import FeedbackModal from "@/features/common/views/FeedbackModal"
+import PageLayout from "@/features/common/views/PageLayout"
 import Header from "@/features/layout/views/Header"
 import NavigationAndCategory from "@/features/layout/views/NavigationAndCategory"
 import MyPageLayout from "@/features/myPage/views/MyPageLayout"

@@ -1,6 +1,6 @@
 import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore"
-import { ResponseUserInfo } from "@/common/types/user"
-import { junkOfNoMoreThanOneDigit } from "@/common/utils/price"
+import { ResponseUserInfo } from "@/features/common/types/user"
+import { junkOfNoMoreThanOneDigit } from "@/features/common/utils/price"
 import firebaseApp from "@/firebase/config"
 import { AxiosError } from "axios"
 

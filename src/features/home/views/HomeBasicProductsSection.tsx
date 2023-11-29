@@ -1,4 +1,4 @@
-import { Products } from "@/common/types/product"
+import { Products } from "@/features/common/types/product"
 import ProductSwiper from "./ProductSwiper"
 
 interface IHomeBasicProductsSection {

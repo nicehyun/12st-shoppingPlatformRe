@@ -1,4 +1,4 @@
-import { couponAPI } from "@/common/models/couponAPI"
+import { couponAPI } from "@/features/common/models/couponAPI"
 import { useQuery } from "@tanstack/react-query"
 
 const useCouponQuery = () => {

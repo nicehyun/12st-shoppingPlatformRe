@@ -1,5 +1,5 @@
-import Button from "@/common/views/Button"
-import Input from "@/common/views/Input"
+import Button from "@/features/common/views/Button"
+import Input from "@/features/common/views/Input"
 import { ChangeEvent, ReactNode } from "react"
 
 interface IMyPageSearchInputAndButton {

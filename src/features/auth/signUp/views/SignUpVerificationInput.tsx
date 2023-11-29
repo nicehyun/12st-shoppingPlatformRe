@@ -1,11 +1,11 @@
 "use client"
 
-import Input, { InputType } from "@/common/views/Input"
+import Input, { InputType } from "@/features/common/views/Input"
 import SignUpSideButton from "@/features/auth/signUp/views/SignUpSideButton"
 
 import { ChangeEvent } from "react"
-import Loading from "@/common/views/Loading"
-import Timer from "@/common/views/TImer"
+import Loading from "@/features/common/views/Loading"
+import Timer from "@/features/common/views/TImer"
 
 interface ISignUpVerificationInput {
   id: string

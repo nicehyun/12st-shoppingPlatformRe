@@ -1,4 +1,4 @@
-import { DeliveryInfo } from "@/common/types/address"
+import { DeliveryInfo } from "@/features/common/types/address"
 import CheckoutPhoneInput from "@/features/checkout/views/CheckoutPhoneInput"
 import MyPageSectionSubTitle from "../MyPageSectionSubTitle"
 

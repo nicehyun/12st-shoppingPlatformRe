@@ -1,7 +1,7 @@
 import {
   accumulationOfProductsPrice,
   priceToUseCoupon,
-} from "@/common/utils/price"
+} from "@/features/common/utils/price"
 import { useGetCheckoutListQuery } from "@/features/checkout/hooks/useGetCheckoutListQuery"
 
 export const useCurrentCheckoutConfirmedPrice = () => {

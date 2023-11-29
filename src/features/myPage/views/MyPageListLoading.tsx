@@ -1,4 +1,4 @@
-import Loading from "@/common/views/Loading"
+import Loading from "@/features/common/views/Loading"
 
 const MyPageListLoading = () => {
   return (

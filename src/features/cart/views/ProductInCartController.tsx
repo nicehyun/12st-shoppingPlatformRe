@@ -4,7 +4,7 @@ import useIncreaseAmountMutation from "../hooks/useIncreaseAmountMutation"
 import useDecreaseAmountMutation from "../hooks/useDecreaseAmountMutation"
 import useRemoveFromCartMutation from "../hooks/useRemoveFromCartMutation"
 import { ProductInCart } from "../types/cart"
-import Button from "@/common/views/Button"
+import Button from "@/features/common/views/Button"
 import { AiOutlineClose } from "react-icons/ai"
 
 interface IProductInCartController {

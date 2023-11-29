@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query"
 import { signUpAPI } from "../models/signUpAPI"
-import { useFeedbackModal } from "../../../../common/hooks/useFeedbackModal"
+import { useFeedbackModal } from "../../../common/hooks/useFeedbackModal"
 import { IRequestSignUp } from "../types/signUp"
 
 const useSignUpMutation = () => {

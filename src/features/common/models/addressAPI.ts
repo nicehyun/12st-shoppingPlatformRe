@@ -1,6 +1,6 @@
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore"
 import { AxiosError } from "axios"
-import { DeliveryInfo } from "@/common/types/address"
+import { DeliveryInfo } from "@/features/common/types/address"
 import firebaseApp from "@/firebase/config"
 
 const db = getFirestore(firebaseApp)

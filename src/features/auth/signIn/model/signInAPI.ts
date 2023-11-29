@@ -1,7 +1,7 @@
 import * as bcrypt from "bcrypt"
 
 import { doc, getDoc, getFirestore } from "firebase/firestore"
-import { ResponseUserInfo } from "@/common/types/user"
+import { ResponseUserInfo } from "@/features/common/types/user"
 import { signJwtAccessToken } from "@/app/lib/jwt"
 import firebaseApp from "@/firebase/config"
 

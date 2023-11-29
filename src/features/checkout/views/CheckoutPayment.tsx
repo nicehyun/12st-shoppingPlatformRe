@@ -11,7 +11,7 @@ import CreditSelect from "./CreditSelect"
 import InstallmentPeriodSelect from "./InstallmentPeriodSelect"
 import PaymentBenefit from "./PaymentBenefit"
 import PaymentList from "../../layout/views/PaymentList"
-import Button from "@/common/views/Button"
+import Button from "@/features/common/views/Button"
 
 const CheckoutPayment = () => {
   const [isShowDetail, setIsShowDetail] = useState(true)

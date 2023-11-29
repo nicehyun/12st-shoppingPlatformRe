@@ -1,7 +1,7 @@
 import {
   accumulationOfProductsPrice,
   priceToUseCoupon,
-} from "@/common/utils/price"
+} from "@/features/common/utils/price"
 import { selectCheckedProductList } from "@/redux/features/cartSlice"
 import { selectSelectedCoupon } from "@/redux/features/couponSlice"
 import { useAppSelector } from "@/redux/hooks"

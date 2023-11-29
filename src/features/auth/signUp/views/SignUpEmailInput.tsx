@@ -2,10 +2,10 @@
 
 import { ChangeEvent, useEffect } from "react"
 import { useEmailDuplicationCheckMutaion } from "../hooks/useEmailDuplicationCheckMutaion"
-import { useFeedbackModal } from "../../../../common/hooks/useFeedbackModal"
-import { useUserInput } from "../../../../common/hooks/useUserInput"
+import { useFeedbackModal } from "../../../common/hooks/useFeedbackModal"
+import { useUserInput } from "../../../common/hooks/useUserInput"
 import { emailValidator } from "../utils/validation"
-import SignUpFeedback from "../../../../common/views/Feedback"
+import SignUpFeedback from "../../../common/views/Feedback"
 import SignUpInputLayout from "./SignUpInputLayout"
 import SignUpVerificationInput from "./SignUpVerificationInput"
 

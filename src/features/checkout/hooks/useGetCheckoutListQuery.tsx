@@ -1,4 +1,4 @@
-import { CheckoutList } from "@/common/types/checkout"
+import { CheckoutList } from "@/features/common/types/checkout"
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { useQuery } from "@tanstack/react-query"
 import { checkoutAPI } from "../models/checkoutAPI"

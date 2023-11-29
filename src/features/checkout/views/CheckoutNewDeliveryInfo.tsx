@@ -1,4 +1,4 @@
-import Checkbox from "@/common/views/Checkbox"
+import Checkbox from "@/features/common/views/Checkbox"
 import { useState } from "react"
 import CheckoutAddressInput from "./CheckoutAddressInput"
 import CheckoutDeliveryNameInput from "./CheckoutDeliveryNameInput"

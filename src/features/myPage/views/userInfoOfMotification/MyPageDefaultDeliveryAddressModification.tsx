@@ -1,6 +1,6 @@
-import { useUserInput } from "@/common/hooks/useUserInput"
-import { Address } from "@/common/types/address"
-import AddressInfo from "@/common/views/AddressInfo"
+import { useUserInput } from "@/features/common/hooks/useUserInput"
+import { Address } from "@/features/common/types/address"
+import AddressInfo from "@/features/common/views/AddressInfo"
 import { additionalAddressValidator } from "@/features/auth/signUp/utils/validation"
 import MyPageSectionSubTitle from "../MyPageSectionSubTitle"
 

@@ -1,5 +1,5 @@
 "use client"
-import { Products } from "@/common/types/product"
+import { Products } from "@/features/common/types/product"
 import { useEffect, useState } from "react"
 import ProductSwiper from "./ProductSwiper"
 

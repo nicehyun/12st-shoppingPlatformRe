@@ -1,6 +1,6 @@
 "use client"
-import { useNavigations } from "@/common/hooks/useNavigations"
-import Button from "@/common/views/Button"
+import { useNavigations } from "@/features/common/hooks/useNavigations"
+import Button from "@/features/common/views/Button"
 import { useEffect, useState } from "react"
 import { BiCategory } from "react-icons/bi"
 import MobileMyPageCategory from "./MobileMyPageCategory"

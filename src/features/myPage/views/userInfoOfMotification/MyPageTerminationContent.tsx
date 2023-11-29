@@ -1,6 +1,6 @@
 "use client"
 
-import { numberToLocaleString } from "@/common/utils/price"
+import { numberToLocaleString } from "@/features/common/utils/price"
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import useCouponQuery from "@/features/checkout/hooks/useCouponQuery"
 import { useUserMileQuery } from "@/features/checkout/hooks/useGetUserMileQuery"

@@ -1,4 +1,4 @@
-import { DeliveryInfo } from "@/common/types/address"
+import { DeliveryInfo } from "@/features/common/types/address"
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"

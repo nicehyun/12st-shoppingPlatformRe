@@ -1,6 +1,6 @@
 "use client"
 
-import { numberToLocaleString } from "@/common/utils/price"
+import { numberToLocaleString } from "@/features/common/utils/price"
 import useGetUseMileAndGetMile from "../../hooks/useGetUseMileAndGetMile"
 import MyPageTableContentEl from "../MyPageTableContentEl"
 import MyPageListContentLayout from "../MyPageListContentLayout"

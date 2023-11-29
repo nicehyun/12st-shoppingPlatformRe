@@ -1,6 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { RootState } from "../types/store"
-import { CheckoutDate, CheckoutPaymentInfo } from "@/common/types/checkout"
+import {
+  CheckoutDate,
+  CheckoutPaymentInfo,
+} from "@/features/common/types/checkout"
 import { ProductInCart } from "@/features/cart/types/cart"
 import { CsType } from "@/features/myPage/types/myPage"
 

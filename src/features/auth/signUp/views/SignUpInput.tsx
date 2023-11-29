@@ -1,7 +1,7 @@
 "use client"
 
-import Input, { InputType } from "@/common/views/Input"
-import PasswordToggleIcon from "@/common/views/PasswordToggleIcon"
+import Input, { InputType } from "@/features/common/views/Input"
+import PasswordToggleIcon from "@/features/common/views/PasswordToggleIcon"
 import { ChangeEvent, useState } from "react"
 
 type UserInputId = "signUp-password" | "signUp-repassword" | "signUp-name"

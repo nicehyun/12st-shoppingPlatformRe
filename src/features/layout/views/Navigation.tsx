@@ -12,8 +12,8 @@ import {
   BiUser,
   BiSolidUser,
 } from "react-icons/bi"
-import { ROUTE, useNavigations } from "@/common/hooks/useNavigations"
-import { removeSlashFromPath } from "@/common/utils/path"
+import { ROUTE, useNavigations } from "@/features/common/hooks/useNavigations"
+import { removeSlashFromPath } from "@/features/common/utils/path"
 
 import { useAppDispatch } from "@/redux/hooks"
 import { showCategory } from "@/redux/features/categorySlice"

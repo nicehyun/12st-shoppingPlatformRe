@@ -1,5 +1,5 @@
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
-import { Product } from "@/common/types/product"
+import { Product } from "@/features/common/types/product"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
 

@@ -19,7 +19,10 @@ import {
   selectCheckedProductList,
 } from "@/redux/features/cartSlice"
 
-import { CheckoutList, CheckoutPaymentInfo } from "@/common/types/checkout"
+import {
+  CheckoutList,
+  CheckoutPaymentInfo,
+} from "@/features/common/types/checkout"
 import CheckoutPayment from "./CheckoutPayment"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
 import useSelectCoupon from "@/features/checkout/hooks/useSelectCoupon"
@@ -29,10 +32,10 @@ import {
   nameValidator,
   phoneValidator,
 } from "@/features/auth/signUp/utils/validation"
-import { ROUTE, useNavigations } from "@/common/hooks/useNavigations"
+import { ROUTE, useNavigations } from "@/features/common/hooks/useNavigations"
 import { useRemoveCheckedProduct } from "@/features/cart/hooks/useRemoveCheckedProduct"
 import useCheckoutPrice from "../hooks/useCheckoutPrice"
-import Loading from "@/common/views/Loading"
+import Loading from "@/features/common/views/Loading"
 
 const CheckoutForm = () => {
   const checkoutPaymentState = useAppSelector(selectCheckoutPaymentState)

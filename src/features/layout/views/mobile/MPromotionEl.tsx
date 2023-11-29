@@ -1,4 +1,4 @@
-import { highlightSplitText } from "@/common/utils/text"
+import { highlightSplitText } from "@/features/common/utils/text"
 
 interface MPromotionEl {
   classNames?: string

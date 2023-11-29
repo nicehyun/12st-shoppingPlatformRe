@@ -1,8 +1,8 @@
 "use client"
 
-import Button from "@/common/views/Button"
-import ClauseCheckbox from "@/common/views/ClauseCheckbox"
-import Loading from "@/common/views/Loading"
+import Button from "@/features/common/views/Button"
+import ClauseCheckbox from "@/features/common/views/ClauseCheckbox"
+import Loading from "@/features/common/views/Loading"
 import { showBasicModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
 import { useEffect, useState } from "react"

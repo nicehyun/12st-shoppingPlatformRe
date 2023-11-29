@@ -1,6 +1,6 @@
 "use client"
 
-import ClauseCheckbox from "@/common/views/ClauseCheckbox"
+import ClauseCheckbox from "@/features/common/views/ClauseCheckbox"
 import {
   resetClause,
   selectCheckoutClauseState,

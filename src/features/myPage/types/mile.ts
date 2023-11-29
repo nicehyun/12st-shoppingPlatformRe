@@ -1,4 +1,4 @@
-import { CheckoutDate } from "@/common/types/checkout"
+import { CheckoutDate } from "@/features/common/types/checkout"
 
 export type UseMileAndGetMile = {
   getMile: number

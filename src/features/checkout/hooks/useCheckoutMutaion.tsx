@@ -1,6 +1,6 @@
-import { CheckoutList } from "@/common/types/checkout"
+import { CheckoutList } from "@/features/common/types/checkout"
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
-import { useFeedbackModal } from "@/common/hooks/useFeedbackModal"
+import { useFeedbackModal } from "@/features/common/hooks/useFeedbackModal"
 import { CheckoutClauseCheck } from "@/redux/features/checkoutSlice"
 import { useMutation } from "@tanstack/react-query"
 import { checkoutAPI } from "../models/checkoutAPI"

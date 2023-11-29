@@ -1,5 +1,5 @@
-import Input, { InputType } from "@/common/views/Input"
-import Feedback from "@/common/views/Feedback"
+import Input, { InputType } from "@/features/common/views/Input"
+import Feedback from "@/features/common/views/Feedback"
 import { ReactNode } from "react"
 
 interface ICheckoutInput {

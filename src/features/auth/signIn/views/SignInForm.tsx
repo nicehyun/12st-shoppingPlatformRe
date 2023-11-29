@@ -1,6 +1,6 @@
 "use client"
-import { ROUTE, useNavigations } from "@/common/hooks/useNavigations"
-import Loading from "@/common/views/Loading"
+import { ROUTE, useNavigations } from "@/features/common/hooks/useNavigations"
+import Loading from "@/features/common/views/Loading"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
 import {
@@ -8,7 +8,7 @@ import {
   passwordValidator,
 } from "../../signUp/utils/validation"
 import useSignInMutaion from "../hooks/useSIgnInMutaion"
-import Button from "@/common/views/Button"
+import Button from "@/features/common/views/Button"
 import { FaRegArrowAltCircleLeft } from "react-icons/fa"
 import SignInEmailInput from "./SignInEmailInput"
 import SignInPasswordInput from "./SignInPasswordInput"
