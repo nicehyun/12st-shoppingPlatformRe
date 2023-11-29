@@ -13,8 +13,11 @@ export const discountedProductPrice = (rawPrice: number, discount: number) => {
   return junkOfNoMoreThanOneDigit(discountedPrice)
 }
 
-export const numberToLocaleString = (number: number) =>
-  number.toLocaleString("ko-kr")
+export const numberToLocaleString = (number: number) => {
+  if (!number) return 0
+
+  return number.toLocaleString("ko-kr")
+}
 
 export const accumulationOfProductsPrice = (productList: ProductInCart[]) =>
   productList.reduce(

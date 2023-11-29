@@ -1,5 +1,5 @@
 import HomeLayout from "@/features/home/views/HomeLayout"
 
-export default async function Home() {
+export default function Home() {
   return <HomeLayout />
 }

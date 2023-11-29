@@ -1,12 +1,11 @@
 import { Products } from "@/features/common/types/product"
-import ProductSwiper from "./ProductSwiper"
+import RenderProductList from "./RenderProductList"
 
 interface IHomeBasicProductsSection {
   products: Products
   sectionTitle: string
   sectionSubTitle: string
   onMoreClick: () => void
-  isBackGroundColor?: boolean
 }
 
 const HomeBasicProductsSection = ({
@@ -14,13 +13,10 @@ const HomeBasicProductsSection = ({
   sectionTitle,
   sectionSubTitle,
   onMoreClick,
-  isBackGroundColor = true,
 }: IHomeBasicProductsSection) => {
   return (
     <section
-      className={` bg-${
-        isBackGroundColor ? "lightBorder" : "white"
-      } py-[50px] text-black px-[50px]`}
+      className={`bg-white py-[50px] text-black px-[50px] sm:px-0 md:px-0`}
     >
       <div className="relative flex items-center mb-[30px]">
         <div>
@@ -39,11 +35,7 @@ const HomeBasicProductsSection = ({
         /> */}
       </div>
 
-      <ProductSwiper
-        productCardkind="basic"
-        products={products ?? []}
-        slidesPerView={1.4}
-      />
+      <RenderProductList products={products} />
     </section>
   )
 }

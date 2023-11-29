@@ -16,7 +16,7 @@ const ShadowProductCard = ({ productInfo }: IArrivalProductCard) => {
 
   return (
     <div className="m-w-[500px]">
-      <div className="rounded-[8px] mb-[20px] w-full h-[500px] lg:h-[350px] md:h-[300px] sm:h-[200px] bg-black text-[12px] cardShadow">
+      <div className="overflow-hidden rounded-[8px] mb-[20px] aspect-w-1 aspect-h-1 text-[12px] cardShadow">
         <Image
           src={image}
           alt={`상품사진이 준비되지 않았습니다. - ${name}`}
@@ -27,9 +27,12 @@ const ShadowProductCard = ({ productInfo }: IArrivalProductCard) => {
         />
       </div>
 
-      <div className="flex flex-col text-[14px] md:text-[12px] lg:w-1/2 xl:w-1/2">
-        <span className="font-bold mb-[5px]">{productBrandInfo}</span>
-        <span className="truncate-2 mb-[5px] font-medium">{name}</span>
+      <div className="flex flex-col text-[14px] md:text-[12px]">
+        <div className="h-[80px]">
+          <span className="font-bold mb-[5px]">{productBrandInfo}</span>
+          <span className="truncate-2 mb-[5px] font-medium">{name}</span>
+        </div>
+
         <span className="text-lightRed font-bold mb-[5px]">
           <span className="mr-[5px]">{discount}%</span>
           <span>

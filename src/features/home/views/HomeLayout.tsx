@@ -1,13 +1,13 @@
-import HomeArrivalProducts from "./HomeArrivalProducts"
-import HomeBestProducts from "./HomeBestProducts"
+import HomeArrivalProductListSection from "./HomeArrivalProductListSection"
+import HomeBestProductListSection from "./HomeBestProductListSection"
 import HomeTopSaleProducts from "./HomeTopSaleProducts"
 
 const HomeLayout = () => {
   return (
     <>
-      <HomeBestProducts />
-      {/* <HomeArrivalProducts />
-      <HomeTopSaleProducts /> */}
+      <HomeBestProductListSection />
+      <HomeArrivalProductListSection />
+      <HomeTopSaleProducts />
     </>
   )
 }

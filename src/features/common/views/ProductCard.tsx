@@ -91,7 +91,7 @@ const ProductCard = ({ productInfo }: IProductCard) => {
   }
 
   return (
-    <div>
+    <div className="bg-white">
       <div className="overflow-hidden text-[12px] text-center aspect-w-1 aspect-h-1">
         <Link
           href={`/productInfo/${productInfo.id}`}

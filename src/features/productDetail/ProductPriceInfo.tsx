@@ -1,7 +1,7 @@
 import {
   accumulateDiscountPrice,
   accumulateMile,
-} from "@/features/common/models/products"
+} from "@/features/common/models/product"
 import { numberToLocaleString } from "@/features/common/utils/price"
 import React from "react"
 import ProductMainInfoEl from "./ProductMainInfoEl"
