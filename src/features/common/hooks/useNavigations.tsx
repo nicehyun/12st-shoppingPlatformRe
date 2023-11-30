@@ -22,6 +22,11 @@ export enum ROUTE {
   HEARTPRODUCTLIST = "/myPage/heartProductList",
   PRODUCTINFO = "/productInfo/:path*",
   CATEGORYMANAGEMENT = "categoryManagement",
+
+  // 상품 리스트 관련 routes
+  BESTPRODUCTLIST = "/bestProductList",
+  ARRIVALPRODUCTLIST = "/arrivalProductList",
+  TOPSALEPRODUCTLIST = "/topsaleProductList",
 }
 
 export const useNavigations = () => {

@@ -1,18 +1,20 @@
 import { Products } from "@/features/common/types/product"
 import RenderProductList from "./RenderProductList"
+import Link from "next/link"
+import { ROUTE } from "@/features/common/hooks/useNavigations"
 
 interface IHomeBasicProductsSection {
   products: Products
   sectionTitle: string
   sectionSubTitle: string
-  onMoreClick: () => void
+  route: ROUTE
 }
 
 const HomeBasicProductsSection = ({
   products,
   sectionTitle,
   sectionSubTitle,
-  onMoreClick,
+  route,
 }: IHomeBasicProductsSection) => {
   return (
     <section
@@ -26,13 +28,12 @@ const HomeBasicProductsSection = ({
           <p className="text-[12px] xl:text-[14px]">{sectionSubTitle}</p>
         </div>
 
-        {/* <Button
-          onClick={() => {
-            console.log(123)
-          }}
-          content="+ 더보기"
-          classNames="absolute right-0 text-[12px] hover:text-lightRed transition-3"
-        /> */}
+        <Link
+          href={`${process.env.BASE_URL}/${route}`}
+          className="absolute right-0 text-[14px] text-lightRed transition-3 font-bold"
+        >
+          + 더보기
+        </Link>
       </div>
 
       <RenderProductList products={products} />

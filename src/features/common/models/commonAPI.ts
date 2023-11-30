@@ -1,10 +1,10 @@
 import { Products } from "../types/product"
 
-// TODO : revalidate 300으로 수정하기 (최종)
+// TODO : cache 수정
 export const commonAPI = {
   getProductList: async (): Promise<Products | null> => {
-    const response = await fetch("http://localhost:3000/api/", {
-      next: { revalidate: 300000 },
+    const response = await fetch(`${process.env.BASE_URL}/api`, {
+      next: { revalidate: 300 },
     })
 
     return response.json()

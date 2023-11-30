@@ -1,15 +1,15 @@
 import { Products } from "@/features/common/types/product"
 
 type IndividualSectionProductList = {
-  bestProductList: Products
-  arrivalProductList: Products
-  topSaleProductList: Products
+  bestProductList: Products | null
+  arrivalProductList: Products | null
+  topSaleProductList: Products | null
 }
-
+// TODO : cache 수정
 export const homeAPI = {
   getIndividualSectionProductList:
     async (): Promise<IndividualSectionProductList> => {
-      const response = await fetch("http://localhost:3000/api/home", {
+      const response = await fetch(`${process.env.BASE_URL}/api/home`, {
         next: { revalidate: 300 },
       })
 
