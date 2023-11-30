@@ -1,5 +1,5 @@
 import { UserInfo } from "@/features/common/types/user"
-import { signUpAPI } from "@/features/auth/signUp/models/signUpAPI"
+
 import { IRequestSignUp } from "@/features/auth/signUp/types/signUp"
 import {
   emailValidator,
@@ -10,6 +10,7 @@ import {
 
 import bcrypt from "bcrypt"
 import { NextResponse } from "next/server"
+import { signUpAPI } from "@/features/auth/signUp/models/signUpApi"
 
 export async function POST(request: Request) {
   const { userInfo, requireCheck }: IRequestSignUp = await request.json()

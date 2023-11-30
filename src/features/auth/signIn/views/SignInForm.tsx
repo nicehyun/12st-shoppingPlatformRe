@@ -49,8 +49,8 @@ const SignInForm = () => {
       )
     }
 
-    dispatch(signIn())
-    routeTo(ROUTE.HOME)
+    // dispatch(signIn())
+    // routeTo(ROUTE.HOME)
   }
 
   return (
