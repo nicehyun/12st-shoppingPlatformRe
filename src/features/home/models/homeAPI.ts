@@ -5,7 +5,7 @@ type IndividualSectionProductList = {
   arrivalProductList: Products | null
   topSaleProductList: Products | null
 }
-// TODO : cache 수정
+
 export const homeAPI = {
   getIndividualSectionProductList:
     async (): Promise<IndividualSectionProductList> => {

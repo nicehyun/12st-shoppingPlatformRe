@@ -35,7 +35,7 @@ const HomeShadowProductsSection = ({
         </Link>
       </div>
 
-      <RenderProductList isSwiper products={products ?? []} />
+      <RenderProductList isSwiper products={products} />
     </section>
   )
 }

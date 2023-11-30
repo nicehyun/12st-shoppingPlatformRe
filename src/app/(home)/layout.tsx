@@ -8,7 +8,7 @@ import { ReactNode } from "react"
 const HomeLayout = async ({ children }: { children: ReactNode }) => {
   return (
     <>
-      {/* <Header isShowCart={true} /> */}
+      <Header isShowCart={true} />
 
       <PageLayout classNames="px-0">{children}</PageLayout>
 
