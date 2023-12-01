@@ -1,13 +1,14 @@
 "use client"
 
 import { ChangeEvent, useEffect } from "react"
-import { useEmailDuplicationCheckMutaion } from "../hooks/useEmailDuplicationCheckMutaion"
+
 import { useFeedbackModal } from "../../../common/hooks/useFeedbackModal"
 import { useUserInput } from "../../../common/hooks/useUserInput"
 import { emailValidator } from "../utils/validation"
 import SignUpFeedback from "../../../common/views/Feedback"
 import SignUpInputLayout from "./SignUpInputLayout"
 import SignUpVerificationInput from "./SignUpVerificationInput"
+import { useEmailDuplicationCheckMutation } from "../hooks/useEmailDuplicationCheckMutaion"
 
 export interface ISignUpEmailInput {
   activeStep: number
@@ -36,7 +37,7 @@ const SignUpEmailInput = ({
   const {
     isLoading: isEmailDuplicateCheckLoading,
     mutateAsync: emailDuplicateCheckMutateAsync,
-  } = useEmailDuplicationCheckMutaion(emailInputValue)
+  } = useEmailDuplicationCheckMutation()
 
   const handleEmailInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     resetEmailDuplicateCheck()
@@ -44,9 +45,9 @@ const SignUpEmailInput = ({
   }
 
   const handleEmailDuplicationCheck = async () => {
-    const isExistedEmail = await emailDuplicateCheckMutateAsync()
+    const isExistedEmail = await emailDuplicateCheckMutateAsync(emailInputValue)
 
-    if (isExistedEmail) {
+    if (isExistedEmail.isExistedEmail) {
       showFeedbackModalWithContent("사용할 수 없는 이메일입니다.")
       return
     }

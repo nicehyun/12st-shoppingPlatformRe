@@ -113,7 +113,7 @@ const SignUpForm = () => {
       },
     })) as Response
 
-    if (!response.ok) {
+    if (response.status === 500) {
       showFeedbackModalWithContent(
         "회원가입에 실패했습니다. 오류가 계속되면 고객센터에 문의해주세요."
       )
@@ -167,7 +167,6 @@ const SignUpForm = () => {
       onSubmit={handleSignUpSubmit}
       className="sm:w-[400px] md:w-[400px] w-4/5 max-w-[800px] mx-auto h-[500px]"
     >
-      <button type="submit">sad</button>
       <h2 className="mb-[20px] text-[20px] font-bold text-center">회원가입</h2>
 
       <Stage {...stageProps} />

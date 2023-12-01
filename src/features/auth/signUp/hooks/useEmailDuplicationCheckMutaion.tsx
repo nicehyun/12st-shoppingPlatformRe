@@ -1,10 +1,19 @@
-import { useMutation } from "@tanstack/react-query"
+import {
+  UseMutationOptions,
+  UseMutationResult,
+  useMutation,
+} from "@tanstack/react-query"
 import { signUpAPI } from "../models/signUpAPI"
 
-export const useEmailDuplicationCheckMutaion = (email: string) => {
-  const emailDuplicateCheckMutaion = useMutation(() =>
-    signUpAPI.emailDuplicateCheck(email)
+type EmailDuplicationCheckResult = { isExistedEmail: boolean }
+
+export const useEmailDuplicationCheckMutation = (
+  options?: UseMutationOptions<EmailDuplicationCheckResult, Error, string>
+): UseMutationResult<EmailDuplicationCheckResult, Error, string> => {
+  const emailDuplicateCheckMutation = useMutation(
+    (email: string) => signUpAPI.emailDuplicateCheck(email),
+    options
   )
 
-  return emailDuplicateCheckMutaion
+  return emailDuplicateCheckMutation
 }

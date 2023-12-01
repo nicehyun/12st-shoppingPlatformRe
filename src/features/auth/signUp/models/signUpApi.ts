@@ -8,30 +8,46 @@ const db = getFirestore(firebaseApp)
 
 export const signUpAPI = {
   signUp: async (props: IRequestSignUp) => {
-    try {
-      const response = await fetch("/api/auth/signUp", {
-        method: "POST",
-        body: JSON.stringify(props),
-      })
+    const response = await fetch(`/api/auth/signUp`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(props),
+      next: { revalidate: 0 },
+    })
 
-      return response
-    } catch (error) {
-      console.error(error)
-    }
+    return response.json()
   },
-  emailDuplicateCheck: async function emailDuplicateCheck(email: string) {
-    try {
-      const userRef = doc(db, "user", email)
-      const userDoc = await getDoc(userRef)
+  emailDuplicateCheck: async (email: string) => {
+    const response = await fetch(`/api/auth/signUp/emailDuplicateCheck`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+      next: { revalidate: 0 },
+    })
 
-      if (userDoc.exists()) {
-        return true
-      } else {
-        return false
+    return response.json()
+  },
+  requestPhoneVerification: async (
+    phone: string,
+    isRequestCode: boolean = false
+  ) => {
+    const response = await fetch(
+      `/api/auth/signUp/verificatePhone/requestPhoneVerification`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ phone, isRequestCode }),
+        next: { revalidate: 0 },
       }
-    } catch (error) {
-      throw new Error("🚨 Error fetching sign-in methods for email")
-    }
+    )
+
+    return response.json()
   },
   addUserInfo: async (data: UserInfo) => {
     const userInfoIncludingMile = { ...data, mile: 0 }

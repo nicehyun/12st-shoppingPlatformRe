@@ -1,5 +1,4 @@
 import { UserInfo } from "@/features/common/types/user"
-
 import { IRequestSignUp } from "@/features/auth/signUp/types/signUp"
 import {
   emailValidator,
@@ -7,10 +6,9 @@ import {
   passwordValidator,
   phoneValidator,
 } from "@/features/auth/signUp/utils/validation"
-
 import bcrypt from "bcrypt"
 import { NextResponse } from "next/server"
-import { signUpAPI } from "@/features/auth/signUp/models/signUpApi"
+import { AxiosError } from "axios"
 
 export async function POST(request: Request) {
   const { userInfo, requireCheck }: IRequestSignUp = await request.json()
@@ -31,7 +29,26 @@ export async function POST(request: Request) {
     password: await bcrypt.hash(userInfo.password, 10),
   }
 
-  const response = await signUpAPI.addUserInfo(userInfoWithBcryptedPassword)
+  try {
+    await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/users`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      next: { revalidate: 0 },
+      body: JSON.stringify(userInfoWithBcryptedPassword),
+    }).then((res) => res.json())
 
-  return NextResponse.json(response)
+    return NextResponse.json({ status: 200 })
+  } catch (error) {
+    const { response } = error as unknown as AxiosError
+    if (response) {
+      console.error(`🚨 ${error}`)
+      console.error(`🚨 JSON SERVER POST API: ${response.data}`)
+    } else {
+      console.error(`🚨 Unexpected Error: ${error}`)
+    }
+
+    return new NextResponse(null, { status: 500 })
+  }
 }

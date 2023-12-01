@@ -9,9 +9,12 @@ type IndividualSectionProductList = {
 export const homeAPI = {
   getIndividualSectionProductList:
     async (): Promise<IndividualSectionProductList> => {
-      const response = await fetch(`${process.env.BASE_URL}/api/home`, {
-        next: { revalidate: 300 },
-      })
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/home`,
+        {
+          next: { revalidate: 300 },
+        }
+      )
 
       return response.json()
     },

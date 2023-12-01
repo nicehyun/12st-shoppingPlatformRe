@@ -1,6 +1,5 @@
 import * as bcrypt from "bcrypt"
 
-import { signInAPI } from "@/features/auth/signIn/model/signInAPI"
 import {
   emailValidator,
   passwordValidator,

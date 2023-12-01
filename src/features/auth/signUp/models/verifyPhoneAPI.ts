@@ -12,7 +12,6 @@ const database = getDatabase()
 let recaptchaVerifier: RecaptchaVerifier
 
 export const verifyPhoneAPI = {
-  // verificationId 저장
   saveVerificationId: async (phoneNumber: string, verificationId: string) => {
     try {
       await set(ref(database, `verifications/${phoneNumber}`), {

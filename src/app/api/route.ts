@@ -3,9 +3,12 @@ import { NextResponse } from "next/server"
 
 export async function GET() {
   try {
-    const productList = await fetch(`${process.env.DB_URL}/productList`, {
-      next: { revalidate: 300 },
-    }).then((res) => res.json())
+    const productList = await fetch(
+      `${process.env.NEXT_PUBLIC_DB_URL}/productList`,
+      {
+        next: { revalidate: 300 },
+      }
+    ).then((res) => res.json())
 
     return NextResponse.json(productList)
   } catch (error) {
