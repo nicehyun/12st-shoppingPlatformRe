@@ -12,7 +12,7 @@ export const signInAPI = {
     email: string,
     passwordValue: string
   ): Promise<SignInResponse | null> => {
-    const response = await fetch(`${process.env.BASE_URL}/api`, {
+    const response = await fetch(`/api/auth/signIn`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

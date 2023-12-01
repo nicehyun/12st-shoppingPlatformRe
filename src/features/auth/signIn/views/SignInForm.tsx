@@ -36,12 +36,14 @@ const SignInForm = () => {
 
     if (!isEmailValid || !isPasswordValid || isSignInLoading) return
 
-    const signInRes = await signInMutateAsync({
+    const response = await signInMutateAsync({
       email: emailValue,
       password: passwordValue,
     })
 
-    if (signInRes?.error) {
+    console.log(response?.status)
+
+    if (response?.status === 400) {
       return dispatch(
         showFeedbackModal({
           modalContent: "아이디와 비밀번호를 확인해주세요.",
@@ -49,8 +51,16 @@ const SignInForm = () => {
       )
     }
 
-    // dispatch(signIn())
-    // routeTo(ROUTE.HOME)
+    if (response?.status === 500) {
+      return dispatch(
+        showFeedbackModal({
+          modalContent: "오류가 계속되면 고객센터에 문의해주세요",
+        })
+      )
+    }
+
+    dispatch(signIn())
+    routeTo(ROUTE.HOME)
   }
 
   return (

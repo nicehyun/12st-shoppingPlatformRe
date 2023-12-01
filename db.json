@@ -10,12 +10,13 @@
       "mile": 1400
     },
     {
+      "id": 2,
       "email": "test@test.com",
       "password": "$2b$10$jTALx56WzJ4.N2FrlZSFxeo7Y3uCVuGUZDLv7duMXPY4xIc8.LSyO",
       "name": "이승현",
       "phone": "01012341234",
       "marketingClause": true,
-      "id": 2
+      "mile": 1400
     }
   ],
   "productList": [

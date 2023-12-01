@@ -19,19 +19,20 @@ export async function POST(request: Request) {
   const email = body.email
   const password = body.password
 
-  console.log(email, password)
-
   if (!emailValidator(email)) return
   if (!passwordValidator(password)) return
 
   try {
-    const user = await fetch(`${process.env.DB_URL}/users?email=${email}`, {
-      next: { revalidate: 0 },
-    }).then((res) => res.json())
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_DB_URL}/users?email=${email}`,
+      {
+        next: { revalidate: 0 },
+      }
+    ).then((res) => res.json())
 
-    if (user.length) {
-      console.log("user 있음")
+    const user = response[0]
 
+    if (user) {
       const { password, ...userInfoWithoutPassword } = user
 
       if (await bcrypt.compare(password, user.password)) {
@@ -41,19 +42,21 @@ export async function POST(request: Request) {
           ...userInfoWithoutPassword,
           accessToken,
         }
-        return NextResponse.json(result)
+
+        return NextResponse.json(result, { status: 200 })
       }
     }
 
-    console.log(user)
-
-    return NextResponse.json(null)
+    return NextResponse.json({ status: 400 })
   } catch (error) {
     const { response } = error as unknown as AxiosError
     if (response) {
       console.error(`🚨 ${error}`)
+      console.error(`🚨 JSON SERVER POST API: ${response.data}`)
+    } else {
+      console.error(`🚨 Unexpected Error: ${error}`)
     }
-    console.error(`🚨 JSON SERVER POST API : ${error}`)
+
     return new NextResponse(null, { status: 500 })
   }
 }
