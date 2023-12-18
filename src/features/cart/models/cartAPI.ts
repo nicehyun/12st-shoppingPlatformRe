@@ -5,6 +5,7 @@ import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore"
 
 const db = getFirestore(firebaseApp)
 
+// TODO :  , addProductToCart에서 getProductListInCart 재사용하기
 export const cartAPI = {
   getProductListInCart: async (email: string) => {
     if (email === "") {
@@ -29,37 +30,19 @@ export const cartAPI = {
     }
   },
   addProductToCart: async (email: string, productInfo: Product) => {
-    if (email === "") {
-      return
-    }
-
-    const productInfoInCart = { ...productInfo, amount: 1 }
-
-    try {
-      const cartRef = doc(db, "cart", email)
-      const cartDoc = await getDoc(cartRef)
-
-      if (cartDoc.exists()) {
-        const cartData = cartDoc.data()
-
-        const existingProductIndex = cartData.products.findIndex(
-          (product: Product) => product.id === productInfo.id
-        )
-
-        if (existingProductIndex !== -1) {
-          return cartData
-        }
-
-        cartData.products.push(productInfoInCart)
-
-        await setDoc(cartRef, cartData)
-      } else {
-        const newCartData = { products: [productInfoInCart] }
-        await setDoc(cartRef, newCartData)
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, productInfo }),
+        next: { revalidate: 0 },
       }
-    } catch (error) {
-      throw Error(`🚨 Error updating cart document : ${error}`)
-    }
+    )
+
+    return response.json()
   },
   removeProductFromCart: async (email: string, productId: string) => {
     if (email === "") {

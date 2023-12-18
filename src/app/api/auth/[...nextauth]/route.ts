@@ -21,7 +21,7 @@ const handler = NextAuth({
           return null
 
         const response = await fetch(
-          `${process.env.NEXTAUTH_URL}/api/auth/signIn`,
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/signIn`,
           {
             method: "POST",
             headers: {
@@ -31,6 +31,7 @@ const handler = NextAuth({
               email: credentials.email,
               password: credentials.password,
             }),
+            next: { revalidate: 0 },
           }
         )
 
@@ -47,7 +48,7 @@ const handler = NextAuth({
   session: {
     maxAge: 24 * 60 * 60,
   },
-  pages: { signIn: "/auth/signIn" },
+  pages: { signIn: "/signIn" },
   callbacks: {
     async jwt({ token, user }) {
       if (user) {

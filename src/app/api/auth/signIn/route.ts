@@ -17,10 +17,10 @@ export async function POST(request: Request) {
   const body: RequestBody = await request.json()
 
   const email = body.email
-  const password = body.password
+  const requestPassword = body.password
 
   if (!emailValidator(email)) return
-  if (!passwordValidator(password)) return
+  if (!passwordValidator(requestPassword)) return
 
   try {
     const response = await fetch(
@@ -35,7 +35,7 @@ export async function POST(request: Request) {
     if (user) {
       const { password, ...userInfoWithoutPassword } = user
 
-      if (await bcrypt.compare(password, user.password)) {
+      if (await bcrypt.compare(requestPassword, user.password)) {
         const accessToken = signJwtAccessToken(userInfoWithoutPassword)
 
         const result = {
@@ -43,11 +43,13 @@ export async function POST(request: Request) {
           accessToken,
         }
 
+        console.log(result)
+
         return NextResponse.json(result, { status: 200 })
       }
+    } else {
+      return NextResponse.json(null, { status: 400 })
     }
-
-    return NextResponse.json({ status: 400 })
   } catch (error) {
     const { response } = error as unknown as AxiosError
     if (response) {

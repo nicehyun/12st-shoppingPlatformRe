@@ -12,6 +12,8 @@ export const useAddToCartMutaion = (productInfo: Product) => {
 
   const { sessionQuery } = useSessionQuery()
 
+  console.log(sessionQuery?.user.email)
+
   const addMutaion = useMutation(
     () => cartAPI.addProductToCart(sessionQuery?.user.email ?? "", productInfo),
     {

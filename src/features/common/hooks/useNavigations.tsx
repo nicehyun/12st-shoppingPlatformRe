@@ -4,10 +4,10 @@ export enum ROUTE {
   CART = "/cart",
   MYPAGE = "/myPage",
   HOME = "/",
-  SIGNIN = "/signIn",
+
   CHECKOUT = "/checkout",
   CHECKOUTCOMFIRMED = "/checkoutConfirmed",
-  SIGNUP = "/signUp",
+
   FIND_EMAIL = "/find/email",
   FIND_PASSWORD = "/find/password",
   CHECKOUTLIST = "/myPage/checkoutList",
@@ -22,6 +22,10 @@ export enum ROUTE {
   HEARTPRODUCTLIST = "/myPage/heartProductList",
   PRODUCTINFO = "/productInfo/:path*",
   CATEGORYMANAGEMENT = "categoryManagement",
+
+  // auth 관련 routes
+  SIGNIN = "/signIn",
+  SIGNUP = "/signUp",
 
   // 상품 리스트 관련 routes
   BESTPRODUCTLIST = "/bestProductList",

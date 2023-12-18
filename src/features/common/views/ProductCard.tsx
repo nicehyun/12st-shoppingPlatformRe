@@ -1,7 +1,7 @@
 import { BiCommentDetail } from "react-icons/bi"
 import { MdOutlineSell } from "react-icons/md"
 import { BsFillCartDashFill, BsFillCartPlusFill } from "react-icons/bs"
-import { Product } from "../types/product"
+import { Product, Products } from "../types/product"
 
 import { checkingTheExistOfProduct } from "../utils/product"
 import { useProductListInCartQuery } from "@/features/cart/hooks/useProductListInCartQuery"
@@ -50,7 +50,7 @@ const ProductCard = ({ productInfo }: IProductCard) => {
   const handleAddProductInCartClick = async () => {
     authentication()
 
-    if (productListInCart.length >= 10) return
+    // if (productListInCart.length >= 10) return
 
     addMutaion.mutate()
   }
