@@ -1,3 +1,5 @@
+"use client"
+
 import { ROUTE, useNavigations } from "@/features/common/hooks/useNavigations"
 import Button from "@/features/common/views/Button"
 import { selectCheckedProductList } from "@/redux/features/cartSlice"

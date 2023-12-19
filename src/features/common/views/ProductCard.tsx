@@ -41,8 +41,6 @@ const ProductCard = ({ productInfo }: IProductCard) => {
 
   const { productListInCart } = useProductListInCartQuery()
 
-  console.log(productListInCart)
-
   const addMutaion = useAddToCartMutaion(productInfo)
 
   const removeMutaion = useRemoveFromCartMutation(productInfo)

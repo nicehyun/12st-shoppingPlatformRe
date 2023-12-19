@@ -13,11 +13,7 @@ export const useAddToCartMutaion = (productInfo: Product) => {
   const { sessionQuery } = useSessionQuery()
 
   const addMutaion = useMutation(
-    () =>
-      cartAPI.increaseProductToCart(
-        productInfo,
-        sessionQuery?.user.accessToken
-      ),
+    () => cartAPI.addProductToCart(productInfo, sessionQuery?.user.accessToken),
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["productListInCart"])

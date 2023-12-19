@@ -1,16 +1,18 @@
 import { verifyJwt } from "@/app/lib/jwt"
+import { ProductInCart } from "@/features/cart/types/cart"
 import { Product, Products } from "@/features/common/types/product"
 import { AxiosError } from "axios"
 import { NextResponse } from "next/server"
 
 type getCartResponse = {
   email: string
-  productList: Products
+  productList: ProductInCart[]
 }
 
 interface RequestBody {
-  productInfo: Product
-  direction: "increase" | "decrease" | "remove"
+  productInfo?: Product
+  productInCartInfo?: ProductInCart
+  direction: "increase" | "decrease" | "remove" | "add"
 }
 
 export async function GET(request: Request) {
@@ -53,12 +55,14 @@ export async function POST(request: Request) {
   const body: RequestBody = await request.json()
 
   const productInfo = body.productInfo
+  const productInCartInfo = body.productInCartInfo
   const direction = body.direction
 
   if (
     direction !== "increase" &&
     direction !== "decrease" &&
-    direction !== "remove"
+    direction !== "remove" &&
+    direction !== "add"
   )
     return
 
@@ -70,17 +74,24 @@ export async function POST(request: Request) {
 
   const email = verifyJwt(accessToken)?.email
 
-  const productInfoInCart = { ...productInfo, amount: 1 }
-
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_DB_URL}/cart?email=${email}`
   ).then((res) => res.json())
 
   const cartData: getCartResponse = response[0]
+  const cartId = response[0].id
 
   switch (direction) {
-    case "increase":
+    case "add":
+      if (!productInfo) {
+        return new Response(JSON.stringify({ error: "Not ProductInfo" }), {
+          status: 401,
+        })
+      }
+
       try {
+        const productInfoInCart = { ...productInfo, amount: 1 }
+
         if (!cartData) {
           await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart`, {
             method: "POST",
@@ -100,8 +111,6 @@ export async function POST(request: Request) {
           if (existedProduct) {
             return NextResponse.json({ status: 200 })
           }
-
-          const cartId = response[0].id
 
           await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart/${cartId}`, {
             method: "PATCH",
@@ -126,9 +135,51 @@ export async function POST(request: Request) {
         return new NextResponse(null, { status: 500 })
       }
 
-    case "decrease":
+    case "increase":
+      if (!productInCartInfo) {
+        return new Response(JSON.stringify({ error: "Not ProductInfo" }), {
+          status: 401,
+        })
+      }
+
+      try {
+        const updatedProductInCart = cartData.productList.map((product) => {
+          return product.id === productInCartInfo.id
+            ? { ...product, amount: product.amount + 1 }
+            : product
+        })
+
+        await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart/${cartId}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            productList: updatedProductInCart,
+          }),
+        })
+
+        return NextResponse.json({ status: 200 })
+      } catch (error) {
+        const { response } = error as unknown as AxiosError
+        if (response) {
+          console.error(`🚨 ${error}`)
+          console.error(`🚨 JSON SERVER POST API: ${response.data}`)
+        } else {
+          console.error(`🚨 Unexpected Error: ${error}`)
+        }
+
+        return new NextResponse(null, { status: 500 })
+      }
 
     case "remove":
+      if (!productInfo) {
+        return new Response(JSON.stringify({ error: "Not ProductInfo" }), {
+          status: 401,
+        })
+      }
+
       try {
         const existedProduct = cartData.productList.some(
           (product) => product.id === productInfo.id
@@ -154,6 +205,44 @@ export async function POST(request: Request) {
           },
           body: JSON.stringify({
             productList: updatedProductList,
+          }),
+        })
+
+        return NextResponse.json({ status: 200 })
+      } catch (error) {
+        const { response } = error as unknown as AxiosError
+        if (response) {
+          console.error(`🚨 ${error}`)
+          console.error(`🚨 JSON SERVER POST API: ${response.data}`)
+        } else {
+          console.error(`🚨 Unexpected Error: ${error}`)
+        }
+
+        return new NextResponse(null, { status: 500 })
+      }
+
+    case "decrease":
+      if (!productInCartInfo) {
+        return new Response(JSON.stringify({ error: "Not ProductInfo" }), {
+          status: 401,
+        })
+      }
+
+      try {
+        const updatedProductInCart = cartData.productList.map((product) => {
+          return product.id === productInCartInfo.id
+            ? { ...product, amount: product.amount - 1 }
+            : product
+        })
+
+        await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart/${cartId}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            productList: updatedProductInCart,
           }),
         })
 

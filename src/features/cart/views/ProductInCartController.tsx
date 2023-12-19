@@ -21,12 +21,12 @@ const ProductInCartController = ({
   const increaseMutaion = useIncreaseAmountMutation(productInfo)
   const decreaseMutaion = useDecreaseAmountMutation(productInfo)
 
-  const removeMutaion = useRemoveFromCartMutation()
+  const removeMutaion = useRemoveFromCartMutation(productInfo)
 
   const onClickRemoveProductFromCart = async () => {
     if (removeMutaion.isLoading) return
 
-    await removeMutaion.mutateAsync(productInfo.id)
+    await removeMutaion.mutateAsync()
     onEmptyCheckedProductList()
   }
 

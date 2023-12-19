@@ -6,7 +6,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { cartAPI } from "../models/cartAPI"
 import { ProductInCart } from "../types/cart"
 
-const useDecreaseAmountMutation = (productInfo: ProductInCart) => {
+const useDecreaseAmountMutation = (productInCartInfo: ProductInCart) => {
   const { sessionQuery } = useSessionQuery()
   const queryClient = useQueryClient()
   const dispatch = useAppDispatch()
@@ -14,8 +14,8 @@ const useDecreaseAmountMutation = (productInfo: ProductInCart) => {
   const decreaseMutaion = useMutation(
     () =>
       cartAPI.decreaseProductToCart(
-        sessionQuery?.user.email ?? "",
-        productInfo.id
+        productInCartInfo,
+        sessionQuery?.user.accessToken
       ),
     {
       onSuccess: () => {

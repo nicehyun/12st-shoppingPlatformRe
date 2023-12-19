@@ -21,7 +21,7 @@ export const cartAPI = {
 
     return response.json()
   },
-  increaseProductToCart: async (
+  addProductToCart: async (
     productInfo: Product,
     authorization: string | null | undefined
   ) => {
@@ -35,8 +35,27 @@ export const cartAPI = {
           "Content-Type": "application/json",
           authorization,
         },
-        body: JSON.stringify({ productInfo, direction: "increase" }),
-        next: { revalidate: 0 },
+        body: JSON.stringify({ productInfo, direction: "add" }),
+      }
+    )
+
+    return response.json()
+  },
+  increaseProductToCart: async (
+    productInCartInfo: ProductInCart,
+    authorization: string | null | undefined
+  ) => {
+    if (!authorization) return null
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization,
+        },
+        body: JSON.stringify({ productInCartInfo, direction: "increase" }),
       }
     )
 
@@ -57,7 +76,26 @@ export const cartAPI = {
           authorization,
         },
         body: JSON.stringify({ productInfo, direction: "remove" }),
-        next: { revalidate: 0 },
+      }
+    )
+
+    return response.json()
+  },
+  decreaseProductToCart: async (
+    productInCartInfo: ProductInCart,
+    authorization: string | null | undefined
+  ) => {
+    if (!authorization) return null
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization,
+        },
+        body: JSON.stringify({ productInCartInfo, direction: "decrease" }),
       }
     )
 
@@ -127,60 +165,4 @@ export const cartAPI = {
       throw Error(`🚨 Error updating cart document : ${error}`)
     }
   },
-  // increaseProductToCart: async (email: string, productId: string) => {
-  //   if (email === "") {
-  //     return
-  //   }
-
-  //   try {
-  //     const cartRef = doc(db, "cart", email)
-  //     const cartDoc = await getDoc(cartRef)
-
-  //     if (cartDoc.exists()) {
-  //       const cartData = cartDoc.data()
-
-  //       const existingProductIndex = cartData.products.findIndex(
-  //         (product: ProductInCart) => product.id === productId
-  //       )
-
-  //       if (existingProductIndex !== -1) {
-  //         cartData.products[existingProductIndex].amount += 1
-
-  //         await setDoc(cartRef, cartData)
-
-  //         return cartData
-  //       }
-  //     }
-  //   } catch (error) {
-  //     throw Error(`🚨 Error updating cart document : ${error}`)
-  //   }
-  // },
-  //   decreaseProductToCart: async (emailValue: string, productId: string) => {
-  //     if (emailValue === "") {
-  //       return
-  //     }
-
-  //     try {
-  //       const cartRef = doc(db, "cart", emailValue)
-  //       const cartDoc = await getDoc(cartRef)
-
-  //       if (cartDoc.exists()) {
-  //         const cartData = cartDoc.data()
-
-  //         const existingProductIndex = cartData.products.findIndex(
-  //           (product: ProductInCart) => product.id === productId
-  //         )
-
-  //         if (existingProductIndex !== -1) {
-  //           cartData.products[existingProductIndex].amount -= 1
-
-  //           await setDoc(cartRef, cartData)
-
-  //           return cartData
-  //         }
-  //       }
-  //     } catch (error) {
-  //       throw Error(`🚨 Error updating cart document : ${error}`)
-  //     }
-  //   },
 }

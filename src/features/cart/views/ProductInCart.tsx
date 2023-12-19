@@ -1,7 +1,6 @@
 import { numberToLocaleString } from "@/features/common/utils/price"
 import Image from "next/image"
 import { ProductInCart } from "../types/cart"
-import { addDaysToCurrentDate } from "../utils/date"
 import ProductInCartController from "./ProductInCartController"
 
 interface IProductInCart {
@@ -19,6 +18,7 @@ const ProductInCart = ({
 }: IProductInCart) => {
   const { image, name, discountedPrice, mallName, price, discount, id } =
     productInfo
+
   return (
     <li className="flex mb-[30px]">
       <input
@@ -39,10 +39,6 @@ const ProductInCart = ({
             sizes="100vw"
             className="h-full w-full"
           />
-
-          <span className="absolute left-[2px] top-[2px] p-[4px] text-[10px] md:text-[8px] sm:text-[8px] bg-black text-white rounded-[8px]">
-            {addDaysToCurrentDate(3)} 예약배송
-          </span>
         </div>
 
         <ProductInCartController

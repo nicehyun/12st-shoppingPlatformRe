@@ -1,5 +1,3 @@
-"use client"
-
 import Loading from "@/features/common/views/Loading"
 import { Suspense } from "react"
 import CartController from "./CartController"

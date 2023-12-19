@@ -1,3 +1,5 @@
+"use client"
+
 import { FaEquals, FaPlus } from "react-icons/fa"
 import useCheckoutPrice from "../../checkout/hooks/useCheckoutPrice"
 import CartPriceInfoEl from "./CartPriceInfoEl"
