@@ -1,11 +1,15 @@
 import jwt, { JwtPayload } from "jsonwebtoken"
 
+export interface ExtendedJwtPayload extends JwtPayload {
+  email: string | undefined
+}
+
 interface SignOption {
   expiresIn?: string | number
 }
 
 const DEFAULT_SIGN_OPTION: SignOption = {
-  expiresIn: "1h",
+  expiresIn: "24h",
 }
 
 // 토큰 생성
@@ -22,8 +26,10 @@ export function signJwtAccessToken(
 export function verifyJwt(token: string) {
   try {
     const secret_key = process.env.SECRET_KEY
+
     const decoded = jwt.verify(token, secret_key!)
-    return decoded as JwtPayload
+
+    return decoded as ExtendedJwtPayload
   } catch (error) {
     console.log(error)
     return null

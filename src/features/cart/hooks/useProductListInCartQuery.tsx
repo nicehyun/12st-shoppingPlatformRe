@@ -11,9 +11,8 @@ export const useProductListInCartQuery = () => {
     isLoading,
   } = useQuery(
     ["productListInCart"],
-    () => cartAPI.getProductListInCart(sessionQuery?.user.email ?? ""),
+    () => cartAPI.getProductListInCart(sessionQuery?.user.accessToken),
     {
-      // suspense: true,
       enabled: !!sessionQuery,
     }
   )

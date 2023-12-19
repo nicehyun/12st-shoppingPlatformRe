@@ -1,5 +1,69 @@
 {
-  "cart": [],
+  "cart": [
+    {
+      "email": "test@test.com",
+      "productList": [
+        {
+          "category3": "티셔츠",
+          "id": "83977523126",
+          "category1": "패션의류",
+          "name": "라코스테 반팔티 베이직 폴로 크루넥 카라티 라운드 티셔츠",
+          "reviewCount": 0,
+          "image": "https://shopping-phinf.pstatic.net/main_8397752/83977523126.jpg",
+          "price": 49900,
+          "sellCount": 60,
+          "mallName": "와썹마켓",
+          "category2": "남성의류",
+          "deliveryFree": 0,
+          "category4": "",
+          "discount": 22,
+          "discountedPrice": 38922,
+          "brand": "라코스테",
+          "maker": "라코스테",
+          "amount": 1
+        },
+        {
+          "discount": 22,
+          "category4": "스니커즈",
+          "mallName": "블리에이",
+          "name": "(국내매장판) 나이키 코르테즈 흰검 흰빨파 검흰 우먼스 토들러 키즈",
+          "deliveryFree": 0,
+          "discountedPrice": 62322,
+          "sellCount": 21,
+          "reviewCount": 0,
+          "category2": "여성신발",
+          "maker": "나이키",
+          "id": "82839027794",
+          "brand": "나이키",
+          "price": 79900,
+          "image": "https://shopping-phinf.pstatic.net/main_8283902/82839027794.7.jpg",
+          "category1": "패션잡화",
+          "category3": "단화",
+          "amount": 1
+        },
+        {
+          "discount": 22,
+          "price": 83180,
+          "brand": "꼼데가르송",
+          "reviewCount": 0,
+          "discountedPrice": 64880.4,
+          "id": "83169442152",
+          "category2": "여성의류",
+          "category1": "패션의류",
+          "deliveryFree": 0,
+          "sellCount": 21,
+          "mallName": "도쿄루꼬",
+          "maker": "꼼데가르송",
+          "category3": "티셔츠",
+          "name": "(국내당일) 꼼데가르송 원포인트 반팔티 여성용 남성용 선물포장",
+          "category4": "",
+          "image": "https://shopping-phinf.pstatic.net/main_8316944/83169442152.2.jpg",
+          "amount": 1
+        }
+      ],
+      "id": 1
+    }
+  ],
   "users": [
     {
       "id": 1,

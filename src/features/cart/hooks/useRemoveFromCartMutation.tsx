@@ -3,15 +3,19 @@ import { showFeedbackModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { cartAPI } from "../models/cartAPI"
+import { Product } from "@/features/common/types/product"
 
-const useRemoveFromCartMutation = () => {
+const useRemoveFromCartMutation = (productInfo: Product) => {
   const queryClient = useQueryClient()
   const { sessionQuery } = useSessionQuery()
   const dispatch = useAppDispatch()
 
   const removeMutaion = useMutation(
-    (productId: string) =>
-      cartAPI.removeProductFromCart(sessionQuery?.user.email ?? "", productId),
+    () =>
+      cartAPI.removeProductFromCart(
+        productInfo,
+        sessionQuery?.user.accessToken
+      ),
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["productListInCart"])

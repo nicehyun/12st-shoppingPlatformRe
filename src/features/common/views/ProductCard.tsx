@@ -1,7 +1,7 @@
 import { BiCommentDetail } from "react-icons/bi"
 import { MdOutlineSell } from "react-icons/md"
 import { BsFillCartDashFill, BsFillCartPlusFill } from "react-icons/bs"
-import { Product, Products } from "../types/product"
+import { Product } from "../types/product"
 
 import { checkingTheExistOfProduct } from "../utils/product"
 import { useProductListInCartQuery } from "@/features/cart/hooks/useProductListInCartQuery"
@@ -13,6 +13,8 @@ import { useAuthenticate } from "@/features/auth/signIn/hooks/useAuthenticate"
 import Button from "./Button"
 import Loading from "./Loading"
 import Link from "next/link"
+import { useAppDispatch } from "@/redux/hooks"
+import { showFeedbackModal } from "@/redux/features/modalSlice"
 
 interface IProductCard {
   productInfo: Product
@@ -20,6 +22,7 @@ interface IProductCard {
 
 const ProductCard = ({ productInfo }: IProductCard) => {
   const { authentication } = useAuthenticate()
+  const dispatch = useAppDispatch()
 
   const {
     brand,
@@ -38,9 +41,11 @@ const ProductCard = ({ productInfo }: IProductCard) => {
 
   const { productListInCart } = useProductListInCartQuery()
 
+  console.log(productListInCart)
+
   const addMutaion = useAddToCartMutaion(productInfo)
 
-  const removeMutaion = useRemoveFromCartMutation()
+  const removeMutaion = useRemoveFromCartMutation(productInfo)
 
   const isExistedProductInCart = checkingTheExistOfProduct(
     productListInCart,
@@ -50,13 +55,32 @@ const ProductCard = ({ productInfo }: IProductCard) => {
   const handleAddProductInCartClick = async () => {
     authentication()
 
-    // if (productListInCart.length >= 10) return
+    if (productListInCart.length >= 10) {
+      dispatch(
+        showFeedbackModal({
+          modalContent: "장바구니가 가득 찼습니다.",
+        })
+      )
+      return
+    }
+
+    dispatch(
+      showFeedbackModal({
+        modalContent: "장바구니에서 상품을 담았습니다.",
+      })
+    )
 
     addMutaion.mutate()
   }
 
   const handleRemoveProductFromCartClick = () => {
-    removeMutaion.mutate(id)
+    removeMutaion.mutate()
+
+    dispatch(
+      showFeedbackModal({
+        modalContent: "장바구니에서 상품이 제거되었습니다.",
+      })
+    )
   }
 
   const renderComponent = () => {
