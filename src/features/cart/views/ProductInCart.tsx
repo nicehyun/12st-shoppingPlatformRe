@@ -1,4 +1,7 @@
-import { numberToLocaleString } from "@/features/common/utils/price"
+import {
+  discountedProductPrice,
+  numberToLocaleString,
+} from "@/features/common/utils/price"
 import Image from "next/image"
 import { ProductInCart } from "../types/cart"
 import ProductInCartController from "./ProductInCartController"
@@ -56,7 +59,7 @@ const ProductInCart = ({
           </p>
           <p className="absolute right-[10px] text-[14px] md:text-[12px] sm:text-[12px] font-bold bottom-[20px] sm:bottom-[10px] md:bottom-[10px]">
             <span className="text-lightRed mr-[5px]">[{discount}%]</span>
-            {numberToLocaleString(discountedPrice)}
+            {numberToLocaleString(discountedProductPrice(price, discount))}
           </p>
         </ProductInCartController>
       </div>

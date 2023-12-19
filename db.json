@@ -39,7 +39,7 @@
           "category3": "샌들",
           "category1": "패션잡화",
           "id": "38887707618",
-          "amount": 1
+          "amount": 2
         },
         {
           "brand": "스투시",
@@ -58,7 +58,7 @@
           "mallName": "머스트잇",
           "image": "https://shopping-phinf.pstatic.net/main_3743467/37434677572.jpg",
           "sellCount": 100,
-          "amount": 1
+          "amount": 2
         },
         {
           "category4": "스니커즈",
@@ -77,7 +77,7 @@
           "discountedPrice": 38250,
           "category1": "패션잡화",
           "name": "나이키 코트 레거시 DA5380-102",
-          "amount": 1
+          "amount": 2
         },
         {
           "deliveryFree": 3000,
@@ -96,7 +96,7 @@
           "category4": "러닝화",
           "category2": "남성신발",
           "discountedPrice": 31848.8,
-          "amount": 1
+          "amount": 2
         },
         {
           "price": 19500,
@@ -115,7 +115,7 @@
           "name": "나이키 스우시 반바지 드라이핏",
           "category3": "트레이닝복",
           "deliveryFree": 0,
-          "amount": 1
+          "amount": 2
         }
       ],
       "id": 1
