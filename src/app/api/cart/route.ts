@@ -1,6 +1,6 @@
 import { verifyJwt } from "@/app/lib/jwt"
 import { ProductInCart } from "@/features/cart/types/cart"
-import { Product, Products } from "@/features/common/types/product"
+import { Product } from "@/features/common/types/product"
 import { AxiosError } from "axios"
 import { NextResponse } from "next/server"
 
@@ -12,7 +12,8 @@ type getCartResponse = {
 interface RequestBody {
   productInfo?: Product
   productInCartInfo?: ProductInCart
-  direction: "increase" | "decrease" | "remove" | "add"
+  checkedProductList?: ProductInCart[]
+  direction: "increase" | "decrease" | "remove" | "add" | "remove_checked"
 }
 
 export async function GET(request: Request) {
@@ -56,13 +57,15 @@ export async function POST(request: Request) {
 
   const productInfo = body.productInfo
   const productInCartInfo = body.productInCartInfo
+  const checkedProductList = body.checkedProductList
   const direction = body.direction
 
   if (
     direction !== "increase" &&
     direction !== "decrease" &&
     direction !== "remove" &&
-    direction !== "add"
+    direction !== "add" &&
+    direction !== "remove_checked"
   )
     return
 
@@ -234,6 +237,49 @@ export async function POST(request: Request) {
             ? { ...product, amount: product.amount - 1 }
             : product
         })
+
+        await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart/${cartId}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            productList: updatedProductInCart,
+          }),
+        })
+
+        return NextResponse.json({ status: 200 })
+      } catch (error) {
+        const { response } = error as unknown as AxiosError
+        if (response) {
+          console.error(`🚨 ${error}`)
+          console.error(`🚨 JSON SERVER POST API: ${response.data}`)
+        } else {
+          console.error(`🚨 Unexpected Error: ${error}`)
+        }
+
+        return new NextResponse(null, { status: 500 })
+      }
+
+    case "remove_checked":
+      if (!checkedProductList) {
+        return new Response(
+          JSON.stringify({ error: "Not checked ProductInfo" }),
+          {
+            status: 401,
+          }
+        )
+      }
+
+      try {
+        const updatedProductInCart = cartData.productList.filter(
+          (cartProduct) => {
+            return !checkedProductList.some(
+              (product) => product.id === cartProduct.id
+            )
+          }
+        )
 
         await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart/${cartId}`, {
           method: "PATCH",

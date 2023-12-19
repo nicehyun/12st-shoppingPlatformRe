@@ -13,8 +13,8 @@ export const useRemoveCheckedProduct = () => {
   const checkedProductRemoveMutaion = useMutation(
     (checkedProductList: ProductsInCart) =>
       cartAPI.removeCheckedProductsFromCart(
-        sessionQuery?.user.email ?? "",
-        checkedProductList
+        checkedProductList,
+        sessionQuery?.user.accessToken
       ),
     {
       onSuccess: () => {

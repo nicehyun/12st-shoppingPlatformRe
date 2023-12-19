@@ -26,8 +26,6 @@ const ProductListInCart = () => {
   const { productListInCart, isLoading: isCartFetchLoading } =
     useProductListInCartQuery()
 
-  console.log(productListInCart)
-
   const [isAllChecked, setIsAllChecked] = useState(false)
 
   const checkedProductRemoveMutaion = useRemoveCheckedProduct()

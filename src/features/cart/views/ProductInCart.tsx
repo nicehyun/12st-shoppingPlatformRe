@@ -19,8 +19,7 @@ const ProductInCart = ({
   onClickCheck,
   onEmptyCheckedProductList,
 }: IProductInCart) => {
-  const { image, name, discountedPrice, mallName, price, discount, id } =
-    productInfo
+  const { image, name, mallName, price, discount, id } = productInfo
 
   return (
     <li className="flex mb-[30px]">
