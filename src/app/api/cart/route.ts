@@ -4,7 +4,8 @@ import { Product } from "@/features/common/types/product"
 import { AxiosError } from "axios"
 import { NextResponse } from "next/server"
 
-type getCartResponse = {
+type GetCartResponse = {
+  id: number
   email: string
   productList: ProductInCart[]
 }
@@ -35,7 +36,7 @@ export async function GET(request: Request) {
       }
     ).then((res) => res.json())
 
-    const cartData: getCartResponse = response[0]
+    const cartData: GetCartResponse = response[0]
 
     return NextResponse.json(cartData.productList, { status: 200 })
   } catch (error) {
@@ -50,8 +51,6 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   const accessToken = request.headers.get("authorization")
-
-  console.log(accessToken)
 
   const body: RequestBody = await request.json()
 
@@ -77,12 +76,22 @@ export async function POST(request: Request) {
 
   const email = verifyJwt(accessToken)?.email
 
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_DB_URL}/cart?email=${email}`
-  ).then((res) => res.json())
+  let cartData: GetCartResponse
 
-  const cartData: getCartResponse = response[0]
-  const cartId = response[0].id
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_DB_URL}/cart?email=${email}`
+    ).then((res) => res.json())
+
+    cartData = response[0]
+  } catch (error) {
+    const { response } = error as unknown as AxiosError
+    if (response) {
+      console.error(`🚨 ${error}`)
+    }
+    console.error(`🚨 JSON SERVER GET API : ${error}`)
+    return new NextResponse(null, { status: 500 })
+  }
 
   switch (direction) {
     case "add":
@@ -115,7 +124,7 @@ export async function POST(request: Request) {
             return NextResponse.json({ status: 200 })
           }
 
-          await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart/${cartId}`, {
+          await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart/${cartData.id}`, {
             method: "PATCH",
             headers: {
               "Content-Type": "application/json",
@@ -152,7 +161,7 @@ export async function POST(request: Request) {
             : product
         })
 
-        await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart/${cartId}`, {
+        await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart/${cartData.id}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -195,13 +204,11 @@ export async function POST(request: Request) {
           })
         }
 
-        const cartId = response[0].id
-
         const updatedProductList = cartData.productList.filter(
           (product) => product.id !== productInfo.id
         )
 
-        await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart/${cartId}`, {
+        await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart/${cartData.id}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -238,7 +245,7 @@ export async function POST(request: Request) {
             : product
         })
 
-        await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart/${cartId}`, {
+        await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart/${cartData.id}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -281,7 +288,7 @@ export async function POST(request: Request) {
           }
         )
 
-        await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart/${cartId}`, {
+        await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart/${cartData.id}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",

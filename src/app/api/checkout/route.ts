@@ -1,4 +1,4 @@
-import { addressAPI } from "@/features/common/models/addressAPI"
+import { addressAPI } from "@/features/common/models/deliveryInfo"
 import { mileAPI } from "@/features/common/models/mileAPI"
 import { CheckoutList } from "@/features/common/types/checkout"
 import {

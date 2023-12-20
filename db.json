@@ -1,87 +1,91 @@
 {
+  "deliveryInfo": [
+    {
+      "email": "test@test.com",
+      "deliveryInfo": {
+        "deliveryName": "test",
+        "recipient": "test",
+        "zipcode": "test",
+        "address": "test",
+        "additionalAddress": "test",
+        "phone1": "test",
+        "phone2": "test"
+      },
+      "id": 1
+    }
+  ],
   "cart": [
     {
       "email": "test@test.com",
       "productList": [
         {
-          "category3": "스니커즈",
-          "image": "https://shopping-phinf.pstatic.net/main_3492489/34924895684.20221019101925.jpg",
           "discount": 22,
-          "brand": "나이키",
-          "id": "34924895684",
+          "category1": "패션잡화",
+          "id": "82425872317",
+          "name": "나이키 캄 슬라이드 오프코트 슬리퍼",
+          "sellCount": 35,
           "maker": "나이키",
-          "sellCount": 57,
           "category4": "",
-          "category1": "패션잡화",
-          "deliveryFree": 3000,
-          "discountedPrice": 99559.2,
-          "mallName": "네이버",
-          "name": "나이키 덩크 로우 범고래 DD1391-100",
+          "category3": "슬리퍼",
           "reviewCount": 0,
+          "deliveryFree": 0,
+          "price": 29900,
+          "image": "https://shopping-phinf.pstatic.net/main_8242587/82425872317.5.jpg",
+          "mallName": "슈커밍",
+          "brand": "나이키",
           "category2": "남성신발",
-          "price": 127640,
-          "amount": 2
+          "discountedPrice": 23322,
+          "amount": 1
         },
         {
-          "category4": "스니커즈",
-          "sellCount": 100,
-          "id": "34617800628",
-          "image": "https://shopping-phinf.pstatic.net/main_3461780/34617800628.20220912032134.jpg",
-          "category3": "단화",
-          "reviewCount": 0,
-          "price": 45000,
-          "deliveryFree": 3000,
-          "discount": 15,
+          "image": "https://shopping-phinf.pstatic.net/main_3354556/33545561712.20221018143131.jpg",
+          "maker": "뉴발란스",
           "category2": "여성신발",
-          "brand": "나이키",
-          "maker": "나이키",
-          "mallName": "네이버",
-          "discountedPrice": 38250,
+          "category3": "운동화",
+          "discount": 22,
           "category1": "패션잡화",
-          "name": "나이키 코트 레거시 DA5380-102",
-          "amount": 2
+          "reviewCount": 0,
+          "brand": "뉴발란스",
+          "name": "뉴발란스 574 WL574EVG",
+          "price": 65600,
+          "id": "33545561712",
+          "category4": "러닝화",
+          "mallName": "네이버",
+          "sellCount": 96,
+          "discountedPrice": 51168,
+          "deliveryFree": 0,
+          "amount": 1
         },
         {
-          "deliveryFree": 3000,
-          "sellCount": 100,
+          "discount": 22,
+          "category2": "남성의류",
           "reviewCount": 0,
-          "mallName": "네이버",
-          "price": 38840,
-          "discount": 18,
-          "id": "33197507754",
-          "maker": "나이키",
-          "name": "나이키 레볼루션 6 넥스트 네이처 DC3728-001",
-          "brand": "나이키",
-          "category3": "운동화",
-          "category1": "패션잡화",
-          "image": "https://shopping-phinf.pstatic.net/main_3319750/33197507754.20221017111653.jpg",
-          "category4": "러닝화",
-          "category2": "남성신발",
-          "discountedPrice": 31848.8,
-          "amount": 2
+          "maker": "",
+          "brand": "뉴문7",
+          "id": "83125161982",
+          "price": 21990,
+          "name": "2+1 빅사이즈 쿨티셔츠 기능성티셔츠 쿨론 남자 나시 민소매 쿨링 아이스 4XL 5XL",
+          "category3": "티셔츠",
+          "category1": "패션의류",
+          "deliveryFree": 0,
+          "sellCount": 60,
+          "image": "https://shopping-phinf.pstatic.net/main_8312516/83125161982.5.jpg",
+          "category4": "",
+          "discountedPrice": 17152.2,
+          "mallName": "NM SHOP",
+          "amount": 1
         }
-      ],
-      "id": 1
+      ]
     }
   ],
   "users": [
     {
-      "id": 1,
-      "email": "test123@test.com",
-      "password": "123123",
+      "email": "test@test.com",
+      "password": "$2b$10$MbhcSQ5G5AIomcZrW851meW4JhtCbUqM/K.1V1EqY73qXD26eG.si",
       "name": "승현",
       "phone": "01012341234",
-      "marketingClause": false,
-      "mile": 1400
-    },
-    {
-      "id": 2,
-      "email": "test@test.com",
-      "password": "$2b$10$jTALx56WzJ4.N2FrlZSFxeo7Y3uCVuGUZDLv7duMXPY4xIc8.LSyO",
-      "name": "이승현",
-      "phone": "01012341234",
       "marketingClause": true,
-      "mile": 1400
+      "id": 1
     }
   ],
   "productList": [

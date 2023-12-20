@@ -12,25 +12,26 @@ const db = getFirestore(firebaseApp)
 export const checkoutAPI = {
   checkout: async (
     checkoutInfo: CheckoutList,
-    email: string,
     isClauseCheck: Omit<CheckoutClauseCheck, "all">,
-    isUpdateDeliveryInfo: boolean
+    isUpdateDeliveryInfo: boolean,
+    authorization: string | null | undefined
   ) => {
-    try {
-      const response = await fetch("/api/checkout", {
-        method: "POST",
-        body: JSON.stringify({
-          checkoutInfo,
-          email,
-          isClauseCheck,
-          isUpdateDeliveryInfo,
-        }),
-      })
+    if (!authorization) return null
 
-      return response
-    } catch (error) {
-      console.error(error)
-    }
+    const response = await fetch("/api/checkout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization,
+      },
+      body: JSON.stringify({
+        checkoutInfo,
+        isClauseCheck,
+        isUpdateDeliveryInfo,
+      }),
+    })
+
+    return response.json()
   },
   addCheckoutList: async (email: string, checkoutListInfos: CheckoutList) => {
     if (email === "") return

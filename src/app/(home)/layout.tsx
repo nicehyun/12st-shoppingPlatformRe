@@ -12,7 +12,7 @@ const HomeLayout = async ({ children }: { children: ReactNode }) => {
 
       <PageLayout classNames="px-0">{children}</PageLayout>
 
-      {/* <NavigationAndCategory /> */}
+      <NavigationAndCategory />
     </>
   )
 }

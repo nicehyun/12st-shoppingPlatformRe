@@ -18,15 +18,15 @@ import Button from "@/features/common/views/Button"
 
 const DeliveryInfo = () => {
   const dispatch = useAppDispatch()
-  const { userDefalutDeliveryInfo } = useGetDefaultDeliveryInfoQuery()
+  const { deliveryInfo } = useGetDefaultDeliveryInfoQuery()
 
   const [deliveryTabValue, setDeliveryTabValue] = useState(1)
 
   useEffect(() => {
-    if (userDefalutDeliveryInfo) {
+    if (deliveryInfo) {
       setDeliveryTabValue(0)
     }
-  }, [userDefalutDeliveryInfo])
+  }, [deliveryInfo])
 
   const showDeliveryExplanationModal = () => {
     dispatch(
