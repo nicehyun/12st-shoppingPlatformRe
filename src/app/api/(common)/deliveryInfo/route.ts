@@ -43,7 +43,7 @@ export async function GET(request: Request) {
       )
       return new NextResponse(null, { status: response.status })
     }
-    console.error(`🚨 Unexpected Error: ${error}`)
+    console.error(`🚨 Unexpected Error (Get DeliveryInfo API) : ${error}`)
     return new NextResponse(null, { status: 500 })
   }
 }
@@ -87,7 +87,7 @@ export async function POST(request: Request) {
       )
       return new NextResponse(null, { status: response.status })
     }
-    console.error(`🚨 Unexpected Error: ${error}`)
+    console.error(`🚨 Unexpected Error (Get DeliveryInfo API) : ${error}`)
     return new NextResponse(null, { status: 500 })
   }
 
@@ -109,11 +109,11 @@ export async function POST(request: Request) {
       const { response } = error as unknown as AxiosError
       if (response) {
         console.error(
-          `🚨 JSON SERVER POST API (DeliveryInfo Add API) : ${response.data}`
+          `🚨 JSON SERVER POST API (Add DeliveryInfo API) : ${response.data}`
         )
         return new NextResponse(null, { status: response.status })
       } else {
-        console.error(`🚨 Unexpected Error: ${error}`)
+        console.error(`🚨 Unexpected Error (Add DeliveryInfo API) : ${error}`)
       }
 
       return new NextResponse(null, { status: 500 })
@@ -138,11 +138,13 @@ export async function POST(request: Request) {
       const { response } = error as unknown as AxiosError
       if (response) {
         console.error(
-          `🚨 JSON SERVER POST API (DeliveryInfo Update API) : ${response.data}`
+          `🚨 JSON SERVER POST API (Update DeliveryInfo API) : ${response.data}`
         )
         return new NextResponse(null, { status: response.status })
       } else {
-        console.error(`🚨 Unexpected Error: ${error}`)
+        console.error(
+          `🚨 Unexpected Error (Update DeliveryInfo API) : ${error}`
+        )
       }
 
       return new NextResponse(null, { status: 500 })

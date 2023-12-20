@@ -42,9 +42,12 @@ export async function GET(request: Request) {
   } catch (error) {
     const { response } = error as unknown as AxiosError
     if (response) {
-      console.error(`🚨 ${error}`)
+      console.error(
+        `🚨 JSON SERVER GET API (Get CartData API) : ${response.data}`
+      )
+      return new NextResponse(null, { status: response.status })
     }
-    console.error(`🚨 JSON SERVER GET API : ${error}`)
+    console.error(`🚨 Unexpected Error (Get CartData API) : ${error}`)
     return new NextResponse(null, { status: 500 })
   }
 }
@@ -87,9 +90,12 @@ export async function POST(request: Request) {
   } catch (error) {
     const { response } = error as unknown as AxiosError
     if (response) {
-      console.error(`🚨 ${error}`)
+      console.error(
+        `🚨 JSON SERVER GET API (Get CartData API) : ${response.data}`
+      )
+      return new NextResponse(null, { status: response.status })
     }
-    console.error(`🚨 JSON SERVER GET API : ${error}`)
+    console.error(`🚨 Unexpected Error (Get CartData API) : ${error}`)
     return new NextResponse(null, { status: 500 })
   }
 
@@ -138,12 +144,12 @@ export async function POST(request: Request) {
       } catch (error) {
         const { response } = error as unknown as AxiosError
         if (response) {
-          console.error(`🚨 ${error}`)
-          console.error(`🚨 JSON SERVER POST API: ${response.data}`)
-        } else {
-          console.error(`🚨 Unexpected Error: ${error}`)
+          console.error(
+            `🚨 JSON SERVER POST API (Add CartData API) : ${response.data}`
+          )
+          return new NextResponse(null, { status: response.status })
         }
-
+        console.error(`🚨 Unexpected Error (Add CartData API) : ${error}`)
         return new NextResponse(null, { status: 500 })
       }
 
@@ -176,12 +182,12 @@ export async function POST(request: Request) {
       } catch (error) {
         const { response } = error as unknown as AxiosError
         if (response) {
-          console.error(`🚨 ${error}`)
-          console.error(`🚨 JSON SERVER POST API: ${response.data}`)
-        } else {
-          console.error(`🚨 Unexpected Error: ${error}`)
+          console.error(
+            `🚨 JSON SERVER POST API (Increase CartData API) : ${response.data}`
+          )
+          return new NextResponse(null, { status: response.status })
         }
-
+        console.error(`🚨 Unexpected Error (Increase CartData API) : ${error}`)
         return new NextResponse(null, { status: 500 })
       }
 
@@ -222,12 +228,12 @@ export async function POST(request: Request) {
       } catch (error) {
         const { response } = error as unknown as AxiosError
         if (response) {
-          console.error(`🚨 ${error}`)
-          console.error(`🚨 JSON SERVER POST API: ${response.data}`)
-        } else {
-          console.error(`🚨 Unexpected Error: ${error}`)
+          console.error(
+            `🚨 JSON SERVER POST API (Remove CartData API) : ${response.data}`
+          )
+          return new NextResponse(null, { status: response.status })
         }
-
+        console.error(`🚨 Unexpected Error (Remove CartData API) : ${error}`)
         return new NextResponse(null, { status: 500 })
       }
 
@@ -260,12 +266,12 @@ export async function POST(request: Request) {
       } catch (error) {
         const { response } = error as unknown as AxiosError
         if (response) {
-          console.error(`🚨 ${error}`)
-          console.error(`🚨 JSON SERVER POST API: ${response.data}`)
-        } else {
-          console.error(`🚨 Unexpected Error: ${error}`)
+          console.error(
+            `🚨 JSON SERVER POST API (Decrease CartData API) : ${response.data}`
+          )
+          return new NextResponse(null, { status: response.status })
         }
-
+        console.error(`🚨 Unexpected Error (Decrease CartData API) : ${error}`)
         return new NextResponse(null, { status: 500 })
       }
 
@@ -303,12 +309,14 @@ export async function POST(request: Request) {
       } catch (error) {
         const { response } = error as unknown as AxiosError
         if (response) {
-          console.error(`🚨 ${error}`)
-          console.error(`🚨 JSON SERVER POST API: ${response.data}`)
-        } else {
-          console.error(`🚨 Unexpected Error: ${error}`)
+          console.error(
+            `🚨 JSON SERVER POST API (Remove_checked CartData API) : ${response.data}`
+          )
+          return new NextResponse(null, { status: response.status })
         }
-
+        console.error(
+          `🚨 Unexpected Error (Remove_checked CartData API) : ${error}`
+        )
         return new NextResponse(null, { status: 500 })
       }
   }
