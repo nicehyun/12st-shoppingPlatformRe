@@ -116,7 +116,7 @@ const ProductCard = ({ productInfo }: IProductCard) => {
     <div className="bg-white">
       <div className="overflow-hidden text-[12px] text-center aspect-w-1 aspect-h-1">
         <Link
-          href={`/productInfo/${productInfo.id}`}
+          href={`/productDetail/${productInfo.id}`}
           className={`cursor-pointer`}
         >
           <Image
@@ -136,7 +136,7 @@ const ProductCard = ({ productInfo }: IProductCard) => {
         </p>
 
         <Link
-          href={`/productInfo/${productInfo.id}`}
+          href={`/productDetail/${productInfo.id}`}
           className="text-[14px] sm:text-[12px] h-[42px] sm:h-[33.6px] truncate-2 mb-[10px] font-medium"
         >
           {name}

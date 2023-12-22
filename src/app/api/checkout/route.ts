@@ -13,14 +13,11 @@ import {
   nameValidator,
   phoneValidator,
 } from "@/features/auth/signUp/utils/validation"
-import { checkoutAPI } from "@/features/checkout/models/checkoutAPI"
 import { CheckoutClauseCheck } from "@/redux/features/checkoutSlice"
 import { NextRequest, NextResponse } from "next/server"
 import { verifyJwt } from "@/app/lib/jwt"
-import { userInfoAPI } from "@/features/common/models/userInfoAPI"
 import { AxiosError } from "axios"
 import { formatCheckoutNumber } from "@/features/checkout/utils/checkout"
-import { cartAPI } from "@/features/cart/models/cartAPI"
 import { GetCartResponse } from "@/features/cart/types/cart"
 import { GetUserInfoResponse } from "@/features/common/types/user"
 import { Product } from "@/features/common/types/product"

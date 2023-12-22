@@ -16,9 +16,9 @@ const CheckoutConfirmedInfoEl = ({
         !isEndEl ? "border-b-[1px] border-border" : ""
       }`}
     >
-      <h2 className="w-1/3 text-gray md:text-[14px] sm:text-[14px]">{title}</h2>
+      <h2 className="w-1/4 text-gray md:text-[14px] sm:text-[14px]">{title}</h2>
 
-      <div className="w-2/3 flex flex-col md:text-[14px] sm:text-[14px]">
+      <div className="w-3/4 flex flex-col md:text-[14px] sm:text-[14px]">
         {children}
       </div>
     </div>

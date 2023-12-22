@@ -6,7 +6,7 @@ import { ReactNode } from "react"
 const ProductInfolayout = ({ children }: { children: ReactNode }) => {
   return (
     <div>
-      {/* <Header isShowCart={true} /> */}
+      <Header isShowCart={true} />
 
       <PageLayout classNames="px-0">{children}</PageLayout>
 

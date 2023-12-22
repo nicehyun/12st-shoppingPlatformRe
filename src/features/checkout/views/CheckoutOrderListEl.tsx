@@ -2,6 +2,7 @@ import { numberToLocaleString } from "@/features/common/utils/price"
 import useSelectCoupon from "@/features/checkout/hooks/useSelectCoupon"
 import { ProductInCart } from "@/features/cart/types/cart"
 import Image from "next/image"
+import { accumulateDiscountPrice } from "@/features/common/models/product"
 
 interface ICheckoutOrderListEl {
   productInfo: ProductInCart
@@ -23,6 +24,7 @@ const CheckoutOrderListEl = ({
     amount,
     image,
     discountedPrice,
+    price,
   } = productInfo
 
   const productBrandInfo = brand || maker || mallName
@@ -38,7 +40,7 @@ const CheckoutOrderListEl = ({
 
         <p className="text-lightRed md:text-[14px] sm:text-[12px]">
           <span>[{discount}%]</span>{" "}
-          <span>{numberToLocaleString(discountedPrice)}원</span> /{" "}
+          <span>{accumulateDiscountPrice(price, discount)}원</span> /{" "}
           <span>수량 {amount}개</span>
         </p>
 

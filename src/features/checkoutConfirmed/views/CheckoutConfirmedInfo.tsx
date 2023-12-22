@@ -5,12 +5,21 @@ import { useGetCheckoutListQuery } from "@/features/checkout/hooks/useGetCheckou
 import { useCurrentCheckoutConfirmedPrice } from "../hooks/useCheckoutConfirmedPrice"
 import { getPaymentContent, Payment } from "../utils/payment"
 import CheckoutConfirmedInfoEl from "./CheckoutConfirmedInfoEl"
+import Loading from "@/features/common/views/Loading"
 
 const CheckoutConfirmedInfo = () => {
-  const { currentCheckoutList } = useGetCheckoutListQuery()
+  const { currentCheckoutList, isLoading } = useGetCheckoutListQuery()
   const { totalPrice } = useCurrentCheckoutConfirmedPrice()
 
-  console.log(currentCheckoutList)
+  if (isLoading) {
+    return (
+      <Loading
+        spinnerSize={{ width: "w-[50px]", height: "h-[50px]" }}
+        height="h-[400px]"
+        isFrame={false}
+      />
+    )
+  }
 
   const selectPayment =
     currentCheckoutList?.payment.creditName ??

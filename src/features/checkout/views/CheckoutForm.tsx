@@ -1,11 +1,13 @@
 "use client"
 
 import {
+  emptyCheckoutPendingProductList,
   selectCheckoutPaymentState,
+  selectCheckoutPendingProductListState,
   selectCheckoutPlannedUseMileState,
 } from "@/redux/features/checkoutSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { FormEventHandler, Suspense, useEffect, useState } from "react"
+import { FormEventHandler, Suspense } from "react"
 import CheckoutClause from "./CheckoutClause"
 import CheckoutCouponAndMile from "./CheckoutCouponAndMile"
 import CheckoutOrderListInfo from "./CheckoutOrderListInfo"
@@ -13,11 +15,6 @@ import CheckoutOrderListInfo from "./CheckoutOrderListInfo"
 import CheckoutTotalPriceInfo from "./CheckoutTotalPriceInfo"
 import DeliveryInfo from "./DeliveryInfo"
 import CheckoutButton from "./CheckoutButton"
-
-import {
-  emptyCheckedProductList,
-  selectCheckedProductList,
-} from "@/redux/features/cartSlice"
 
 import {
   CheckoutList,
@@ -33,14 +30,16 @@ import {
   phoneValidator,
 } from "@/features/auth/signUp/utils/validation"
 import { ROUTE, useNavigations } from "@/features/common/hooks/useNavigations"
+
 import useCheckoutPrice from "../hooks/useCheckoutPrice"
 import Loading from "@/features/common/views/Loading"
 
 const CheckoutForm = () => {
   const checkoutPaymentState = useAppSelector(selectCheckoutPaymentState)
   const { selectedCoupon } = useSelectCoupon()
-  const checkedProductList = useAppSelector(selectCheckedProductList)
-  const [isCheckoutCompleted, setIsCheckoutCompleted] = useState(false)
+  const checkoutPendingProductList = useAppSelector(
+    selectCheckoutPendingProductListState
+  )
 
   const checkoutPlannedUseMileState = useAppSelector(
     selectCheckoutPlannedUseMileState
@@ -187,11 +186,13 @@ const CheckoutForm = () => {
         ? (formData.get("phone2") as string)
         : null,
       deliveryMemo: handleDeliveryMemo(),
-      productList: checkedProductList,
+      productList: checkoutPendingProductList,
       coupon: selectedCoupon,
       useMile: checkoutPlannedUseMileState,
       getMile: 0,
       payment: checkoutPayment,
+      checkoutDate: "",
+      checkoutNumber: "",
     }
 
     const deliveryInfoTab = formData.get("deliveryInfo-tab") as "0" | "1"
@@ -210,8 +211,8 @@ const CheckoutForm = () => {
       })
 
       if (response?.status === 200) {
-        setIsCheckoutCompleted(true)
         routeTo(ROUTE.CHECKOUTCOMFIRMED, true)
+        dispatch(emptyCheckoutPendingProductList())
       }
     } catch (error) {
       dispatch(
@@ -223,14 +224,6 @@ const CheckoutForm = () => {
       return
     }
   }
-
-  useEffect(() => {
-    return () => {
-      if (isCheckoutCompleted) {
-        dispatch(emptyCheckedProductList())
-      }
-    }
-  }, [isCheckoutCompleted])
 
   return (
     <form onSubmit={handleCheckoutSubmit} className="max-w-[800px] mx-auto">
