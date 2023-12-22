@@ -1,18 +1,6 @@
-import { UserInfo } from "@/features/common/types/user"
-import { IRequestSignUp } from "@/features/auth/signUp/types/signUp"
-import {
-  emailValidator,
-  nameValidator,
-  passwordValidator,
-  phoneValidator,
-} from "@/features/auth/signUp/utils/validation"
-import bcrypt from "bcrypt"
 import { NextResponse } from "next/server"
 import { AxiosError } from "axios"
-import { PhoneAuthProvider, RecaptchaVerifier } from "firebase/auth"
 import { verifyPhoneAPI } from "@/features/auth/signUp/models/verifyPhoneAPI"
-
-let recaptchaVerifier: RecaptchaVerifier
 
 interface RequestBody {
   phone: string
