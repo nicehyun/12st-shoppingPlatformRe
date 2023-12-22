@@ -27,3 +27,20 @@ export const formatCheckoutNumber = (inputISOString: string) => {
 
   return formattedDateTime
 }
+
+export const parseISOString = (inputISOString: string) => {
+  if (inputISOString === null || inputISOString === undefined) {
+    throw new Error(
+      "🚨 Invalid input: inputISOString cannot be null or undefined"
+    )
+  }
+
+  const dateObject = new Date(inputISOString)
+
+  const year = dateObject.getFullYear()
+
+  const month = dateObject.getMonth() + 1
+  const date = dateObject.getDate()
+
+  return { year, month, date }
+}

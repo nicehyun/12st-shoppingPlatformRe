@@ -16,9 +16,13 @@ const MyPageCheckoutList = () => {
         />
         <MyPageTableHeaderEl
           headerContent="주문번호"
-          className="mx-[20px] w-2/3"
+          isStart
+          className="mx-[20px] w-1/5"
         />
-        <MyPageTableHeaderEl headerContent="주문내역" className="w-2/3" />
+        <MyPageTableHeaderEl
+          headerContent="주문내역"
+          className="w-2/3 md:w-1/3 sm:w-1/4"
+        />
         <MyPageTableHeaderEl
           headerContent="결제금액"
           isEnd

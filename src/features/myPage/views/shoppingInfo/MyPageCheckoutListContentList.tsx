@@ -7,6 +7,7 @@ import MyPageListNoneContents from "../MyPageListNoneContents"
 import { useGetCheckoutListQuery } from "@/features/checkout/hooks/useGetCheckoutListQuery"
 import MyPageListLoading from "../MyPageListLoading"
 import MyPageListContentLayout from "../MyPageListContentLayout"
+import { parseISOString } from "@/features/checkout/utils/checkout"
 
 const MyPageCheckoutListContentList = () => {
   const { checkoutList, isLoading } = useGetCheckoutListQuery()
@@ -27,7 +28,9 @@ const MyPageCheckoutListContentList = () => {
           className="cursor-pointer group"
         >
           <MyPageTableContentEl
-            content={`${checkoutListEl?.checkoutDate?.year}/${checkoutListEl?.checkoutDate?.month}/${checkoutListEl?.checkoutDate?.date}`}
+            content={`${parseISOString(checkoutListEl?.checkoutDate).year}/${
+              parseISOString(checkoutListEl?.checkoutDate).month
+            }/${parseISOString(checkoutListEl?.checkoutDate).date}`}
             NoCenter
             className="w-3/12"
           />
@@ -35,7 +38,7 @@ const MyPageCheckoutListContentList = () => {
           <MyPageTableContentEl
             content={`${checkoutListEl?.checkoutNumber}`}
             NoCenter
-            className="truncate-2 w-2/3 break-words mx-[20px]"
+            className="truncate-2 w-1/5 break-words mx-[20px]"
           />
 
           <MyPageTableContentEl
@@ -47,12 +50,14 @@ const MyPageCheckoutListContentList = () => {
                   {checkoutListEl.productList[0].name}
                 </span>
                 <span className="flex items-end font-bold whitespace-nowrap">
-                  외 {checkoutListEl.productList.length - 1}개
+                  {checkoutListEl.productList.length === 1
+                    ? ""
+                    : `외 ${checkoutListEl.productList.length - 1}개`}
                 </span>
               </div>
             }
             NoCenter
-            className="w-2/3"
+            className="w-2/3 md:w-1/3 sm:w-1/4"
           />
 
           <MyPageTableContentEl
