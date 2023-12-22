@@ -5,7 +5,7 @@ import {
   selectCheckoutPlannedUseMileState,
 } from "@/redux/features/checkoutSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { FormEventHandler, Suspense } from "react"
+import { FormEventHandler, Suspense, useEffect, useState } from "react"
 import CheckoutClause from "./CheckoutClause"
 import CheckoutCouponAndMile from "./CheckoutCouponAndMile"
 import CheckoutOrderListInfo from "./CheckoutOrderListInfo"
@@ -33,7 +33,6 @@ import {
   phoneValidator,
 } from "@/features/auth/signUp/utils/validation"
 import { ROUTE, useNavigations } from "@/features/common/hooks/useNavigations"
-import { useRemoveCheckedProduct } from "@/features/cart/hooks/useRemoveCheckedProduct"
 import useCheckoutPrice from "../hooks/useCheckoutPrice"
 import Loading from "@/features/common/views/Loading"
 
@@ -41,6 +40,7 @@ const CheckoutForm = () => {
   const checkoutPaymentState = useAppSelector(selectCheckoutPaymentState)
   const { selectedCoupon } = useSelectCoupon()
   const checkedProductList = useAppSelector(selectCheckedProductList)
+  const [isCheckoutCompleted, setIsCheckoutCompleted] = useState(false)
 
   const checkoutPlannedUseMileState = useAppSelector(
     selectCheckoutPlannedUseMileState
@@ -52,7 +52,6 @@ const CheckoutForm = () => {
   const { routeTo } = useNavigations()
 
   const { checkoutMutateAsync, isCheckoutLoading } = useCheckoutMutaion()
-  const checkedProductRemoveMutaion = useRemoveCheckedProduct()
 
   const handleCheckoutSubmit: FormEventHandler<HTMLFormElement> = async (
     event
@@ -211,8 +210,7 @@ const CheckoutForm = () => {
       })
 
       if (response?.status === 200) {
-        // await checkedProductRemoveMutaion.mutateAsync(checkedProductList)
-        dispatch(emptyCheckedProductList())
+        setIsCheckoutCompleted(true)
         routeTo(ROUTE.CHECKOUTCOMFIRMED, true)
       }
     } catch (error) {
@@ -225,6 +223,14 @@ const CheckoutForm = () => {
       return
     }
   }
+
+  useEffect(() => {
+    return () => {
+      if (isCheckoutCompleted) {
+        dispatch(emptyCheckedProductList())
+      }
+    }
+  }, [isCheckoutCompleted])
 
   return (
     <form onSubmit={handleCheckoutSubmit} className="max-w-[800px] mx-auto">

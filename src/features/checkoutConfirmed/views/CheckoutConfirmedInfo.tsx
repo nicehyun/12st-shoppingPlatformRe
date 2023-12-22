@@ -10,6 +10,8 @@ const CheckoutConfirmedInfo = () => {
   const { currentCheckoutList } = useGetCheckoutListQuery()
   const { totalPrice } = useCurrentCheckoutConfirmedPrice()
 
+  console.log(currentCheckoutList)
+
   const selectPayment =
     currentCheckoutList?.payment.creditName ??
     getPaymentContent(currentCheckoutList?.payment.selectedPayment as Payment)

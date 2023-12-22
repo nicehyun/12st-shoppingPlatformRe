@@ -8,12 +8,12 @@ export const useGetCheckoutListQuery = () => {
 
   const { data, isLoading } = useQuery(
     ["checkoutList"],
-    () => checkoutAPI.getCheckoutList(sessionQuery?.user.email ?? ""),
+    () => checkoutAPI.getCheckoutList(sessionQuery?.user.accessToken),
     {
       enabled: !!sessionQuery,
     }
   )
-  const checkoutList: CheckoutList[] = data ?? []
+  const checkoutList: CheckoutList[] = data?.checkoutList ?? []
 
   const currentCheckoutList = checkoutList[0]
 
