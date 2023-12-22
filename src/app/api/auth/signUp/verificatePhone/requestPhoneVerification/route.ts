@@ -22,11 +22,8 @@ interface RequestBody {
 export async function POST(request: Request) {
   const body: RequestBody = await request.json()
 
-  console.log(123)
   const phone = body.phone
   const isRequestCode = body.isRequestCode
-
-  console.log(phone, isRequestCode)
 
   try {
     verifyPhoneAPI.requestPhoneVerification(phone, isRequestCode)

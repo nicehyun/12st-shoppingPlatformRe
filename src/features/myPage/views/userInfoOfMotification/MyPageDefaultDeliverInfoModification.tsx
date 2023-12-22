@@ -1,7 +1,7 @@
 "use client"
 
 import { useUserInput } from "@/features/common/hooks/useUserInput"
-import { DeliveryInfo } from "@/features/common/types/address"
+import { DeliveryInfo } from "@/features/common/types/deliveryInfo"
 import Button from "@/features/common/views/Button"
 import Loading from "@/features/common/views/Loading"
 import { additionalAddressValidator } from "@/features/auth/signUp/utils/validation"

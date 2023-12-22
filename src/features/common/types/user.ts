@@ -6,6 +6,10 @@ export type UserInfo = {
   marketingClause: boolean
 }
 
-export type ResponseUserInfo = UserInfo & {
+export type UserInfoWithMile = UserInfo & {
   mile: number
+}
+
+export type GetUserInfoResponse = UserInfoWithMile & {
+  id: number
 }

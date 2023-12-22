@@ -1,26 +1,29 @@
-export const checkoutNumber = () => {
-  const now = new Date()
+export const formatCheckoutNumber = (inputISOString: string) => {
+  if (inputISOString === null || inputISOString === undefined) {
+    throw new Error(
+      "🚨 Invalid input: inputISOString cannot be null or undefined"
+    )
+  }
 
-  const year = now.getFullYear()
-  const month = now.getMonth() + 1
-  const day = now.getDate()
-  const hours = now.getHours()
-  const minutes = now.getMinutes()
+  const isValidInput = inputISOString === new Date(inputISOString).toISOString()
 
-  const formattedMonth = String(month).padStart(2, "0")
-  const formattedDay = String(day).padStart(2, "0")
-  const formattedHours = String(hours).padStart(2, "0")
-  const formattedMinutes = String(minutes).padStart(2, "0")
+  if (!isValidInput) {
+    throw new Error(
+      "🚨 Invalid input: inputISOString must be generated using new Date().toISOString()"
+    )
+  }
 
-  const characters =
-    "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-  const charactersLength = characters.length
+  const date = new Date(inputISOString)
 
-  const randomString = Array.from({ length: 20 }, () =>
-    characters.charAt(Math.floor(Math.random() * charactersLength))
-  ).join("")
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, "0")
+  const day = String(date.getDate()).padStart(2, "0")
 
-  const orderNumber = `${year}${formattedMonth}${formattedDay}${formattedHours}${formattedMinutes}${randomString}`
+  const hours = String(date.getHours()).padStart(2, "0")
+  const minutes = String(date.getMinutes()).padStart(2, "0")
+  const seconds = String(date.getSeconds()).padStart(2, "0")
 
-  return orderNumber
+  const formattedDateTime = `${year}${month}${day}-${hours}${minutes}${seconds}`
+
+  return formattedDateTime
 }

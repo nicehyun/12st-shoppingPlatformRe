@@ -8,31 +8,26 @@ import CheckoutRecipientInput from "./CheckoutRecipientInput"
 import DeliveryMemoSelect from "./DeliveryMemoSelect"
 
 const CheckoutDefalutDeliveryInfo = () => {
-  const { userDefalutDeliveryInfo } = useGetDefaultDeliveryInfoQuery()
+  const { deliveryInfo } = useGetDefaultDeliveryInfoQuery()
   const [isShowDeliveryInfo, setIsShowDeliveryInfo] = useState(false)
 
   return (
     <>
-      {isShowDeliveryInfo || userDefalutDeliveryInfo ? (
+      {isShowDeliveryInfo || deliveryInfo ? (
         <>
           <CheckoutDeliveryNameInput
-            defaultValue={userDefalutDeliveryInfo?.deliveryName}
+            defaultValue={deliveryInfo?.deliveryName}
           />
-          <CheckoutRecipientInput
-            defaultValue={userDefalutDeliveryInfo?.recipient}
-          />
+          <CheckoutRecipientInput defaultValue={deliveryInfo?.recipient} />
           <CheckoutAddressInput
             defaultValue={{
-              zipcode: userDefalutDeliveryInfo?.zipcode,
-              address: userDefalutDeliveryInfo?.address,
-              additionalAddress: userDefalutDeliveryInfo?.additionalAddress,
+              zipcode: deliveryInfo?.zipcode,
+              address: deliveryInfo?.address,
+              additionalAddress: deliveryInfo?.additionalAddress,
             }}
           />
-          <CheckoutPhoneInput
-            isRequired
-            defaultValue={userDefalutDeliveryInfo?.phone1}
-          />
-          <CheckoutPhoneInput defaultValue={userDefalutDeliveryInfo?.phone2} />
+          <CheckoutPhoneInput isRequired defaultValue={deliveryInfo?.phone1} />
+          <CheckoutPhoneInput defaultValue={deliveryInfo?.phone2} />
           <p className="max-w-[500px] ml-[100px] text-[14px] sm:text-[12px] mb-[20px] font-semibold">
             * 기본 배송지입니다. 주문 시 변경하신 내용으로 기본 배송지 주소가
             수정됩니다.

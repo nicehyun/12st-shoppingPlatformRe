@@ -1,4 +1,4 @@
-import { CheckoutList } from "@/features/common/types/checkout"
+import { CheckoutList } from "@/features/checkout/types/checkout"
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { useFeedbackModal } from "@/features/common/hooks/useFeedbackModal"
 import { CheckoutClauseCheck } from "@/redux/features/checkoutSlice"
@@ -22,9 +22,9 @@ export const useCheckoutMutaion = () => {
       ({ checkoutInfo, isClauseCheck, isUpdateDeliveryInfo }) =>
         checkoutAPI.checkout(
           checkoutInfo,
-          sessionQuery?.user.email ?? "",
           isClauseCheck,
-          isUpdateDeliveryInfo
+          isUpdateDeliveryInfo,
+          sessionQuery?.user.accessToken
         ),
       {
         onError: () => {

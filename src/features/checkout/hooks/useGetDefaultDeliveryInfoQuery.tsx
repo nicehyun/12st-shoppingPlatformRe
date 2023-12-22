@@ -1,4 +1,4 @@
-import { addressAPI } from "@/features/common/models/deliveryInfo"
+import { deliveryInfoAPI } from "@/features/common/models/deliveryInfoAPI"
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { useQuery } from "@tanstack/react-query"
 
@@ -7,7 +7,7 @@ export const useGetDefaultDeliveryInfoQuery = () => {
 
   const { data: deliveryInfo } = useQuery(
     ["deliveryInfo"],
-    () => addressAPI.getDeliveryInfo(sessionQuery?.user.accessToken),
+    () => deliveryInfoAPI.getDeliveryInfo(sessionQuery?.user.accessToken),
     {
       enabled: !!sessionQuery,
     }

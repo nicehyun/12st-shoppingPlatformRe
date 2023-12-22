@@ -43,8 +43,6 @@ export async function POST(request: Request) {
           accessToken,
         }
 
-        console.log(result)
-
         return NextResponse.json(result, { status: 200 })
       }
     } else {

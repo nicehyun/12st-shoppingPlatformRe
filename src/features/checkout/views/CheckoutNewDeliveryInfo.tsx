@@ -21,23 +21,8 @@ const CheckoutNewDeliveryInfo = () => {
   const [isDefalutAddressRegistration, setIsDefalutAddressRegistration] =
     useState(false)
 
-  const { sessionQuery } = useSessionQuery()
-
   const toggleDefalutAddressRegistration = () => {
     setIsDefalutAddressRegistration((prev) => !prev)
-
-    console.log("체크 클릭")
-
-    if (!sessionQuery?.user.accessToken) return
-
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/deliveryInfo`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: sessionQuery?.user.accessToken,
-      },
-      body: JSON.stringify({ updateDeliveryInfo: dummyDeliveryInfo }),
-    })
   }
 
   return (

@@ -5,7 +5,6 @@ import { NextResponse } from "next/server"
 export async function GET() {
   // const productList = await commonAPI.getProductList()
   // const bestProductList = getBestProductList(productList ?? [])
-  console.log("test")
 
   return NextResponse.json([])
 }

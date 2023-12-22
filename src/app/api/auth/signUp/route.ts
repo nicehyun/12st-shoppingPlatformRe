@@ -35,8 +35,18 @@ export async function POST(request: Request) {
       headers: {
         "Content-Type": "application/json",
       },
-      next: { revalidate: 0 },
-      body: JSON.stringify(userInfoWithBcryptedPassword),
+      body: JSON.stringify({ ...userInfoWithBcryptedPassword, mile: 0 }),
+    }).then((res) => res.json())
+
+    await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/checkout`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: userInfoWithBcryptedPassword.email,
+        checkoutList: [],
+      }),
     }).then((res) => res.json())
 
     return NextResponse.json({ status: 200 })

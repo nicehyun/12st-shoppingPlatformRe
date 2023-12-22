@@ -22,7 +22,7 @@ import {
 import {
   CheckoutList,
   CheckoutPaymentInfo,
-} from "@/features/common/types/checkout"
+} from "@/features/checkout/types/checkout"
 import CheckoutPayment from "./CheckoutPayment"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
 import useSelectCoupon from "@/features/checkout/hooks/useSelectCoupon"
@@ -199,17 +199,23 @@ const CheckoutForm = () => {
     const isUpdateDeliveryInfo =
       deliveryInfoTab === "0" || defalutAddressRegistration === "on"
 
-    const response = await checkoutMutateAsync({
-      checkoutInfo,
-      isClauseCheck: {
-        collectionOfUserInfo: !!collectionOfUserInfo,
-        provisionOfUserInfo: !!provisionOfUserInfo,
-        paymentAgency: !!paymentAgencyClause,
-      },
-      isUpdateDeliveryInfo,
-    })
+    try {
+      const response = await checkoutMutateAsync({
+        checkoutInfo,
+        isClauseCheck: {
+          collectionOfUserInfo: !!collectionOfUserInfo,
+          provisionOfUserInfo: !!provisionOfUserInfo,
+          paymentAgency: !!paymentAgencyClause,
+        },
+        isUpdateDeliveryInfo,
+      })
 
-    if (!response?.ok) {
+      if (response?.status === 200) {
+        // await checkedProductRemoveMutaion.mutateAsync(checkedProductList)
+        dispatch(emptyCheckedProductList())
+        routeTo(ROUTE.CHECKOUTCOMFIRMED, true)
+      }
+    } catch (error) {
       dispatch(
         showFeedbackModal({
           modalContent:
@@ -217,12 +223,6 @@ const CheckoutForm = () => {
         })
       )
       return
-    }
-
-    if (response?.ok) {
-      await checkedProductRemoveMutaion.mutateAsync(checkedProductList)
-      dispatch(emptyCheckedProductList())
-      routeTo(ROUTE.CHECKOUTCOMFIRMED, true)
     }
   }
 

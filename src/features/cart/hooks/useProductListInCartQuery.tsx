@@ -18,7 +18,7 @@ export const useProductListInCartQuery = () => {
   )
 
   return {
-    productListInCart: productListInCart ?? [],
+    productListInCart: productListInCart?.productList ?? [],
     isError,
     isLoading,
   }

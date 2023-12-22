@@ -1,10 +1,14 @@
 import { Product } from "@/features/common/types/product"
-import { ProductInCart, ProductsInCart } from "@/features/cart/types/cart"
+import {
+  GetCartResponse,
+  ProductInCart,
+  ProductsInCart,
+} from "@/features/cart/types/cart"
 
 export const cartAPI = {
   getProductListInCart: async (
     authorization: string | null | undefined
-  ): Promise<ProductsInCart | null> => {
+  ): Promise<GetCartResponse | null> => {
     if (!authorization) return null
 
     const response = await fetch(

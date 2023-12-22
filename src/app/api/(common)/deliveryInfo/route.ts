@@ -1,13 +1,10 @@
 import { verifyJwt } from "@/app/lib/jwt"
-import { DeliveryInfo } from "@/features/common/types/address"
+import {
+  DeliveryInfo,
+  GetDeliveryInfoResponse,
+} from "@/features/common/types/deliveryInfo"
 import { AxiosError } from "axios"
 import { NextResponse } from "next/server"
-
-type GetDeliveryInfoResponse = {
-  id: number
-  email: string
-  deliveryInfo: DeliveryInfo
-}
 
 interface RequestBody {
   updateDeliveryInfo: DeliveryInfo

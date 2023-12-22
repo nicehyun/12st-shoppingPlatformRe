@@ -1,7 +1,7 @@
 import {
   CheckoutDate,
   CheckoutPaymentInfo,
-} from "@/features/common/types/checkout"
+} from "@/features/checkout/types/checkout"
 
 export type CancelType = "all" | "cancel" | "change" | "return"
 

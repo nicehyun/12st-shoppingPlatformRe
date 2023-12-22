@@ -1,4 +1,4 @@
-import { CheckoutList } from "@/features/common/types/checkout"
+import { CheckoutList } from "@/features/checkout/types/checkout"
 import {
   accumulationOfProductsPrice,
   priceToUseCoupon,

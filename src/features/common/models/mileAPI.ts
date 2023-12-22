@@ -1,104 +1,46 @@
-import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore"
-import { ResponseUserInfo } from "@/features/common/types/user"
-import { junkOfNoMoreThanOneDigit } from "@/features/common/utils/price"
-import firebaseApp from "@/firebase/config"
-import { AxiosError } from "axios"
-
-const db = getFirestore(firebaseApp)
+import { NextResponse } from "next/server"
 
 export const mileAPI = {
-  checkoutUseMile: async (email: string, useMile: number) => {
-    if (email === "") {
-      return
-    }
+  checkoutMile: async (
+    useMile: number,
+    getMile: number,
+    authorization: string | null | undefined
+  ): Promise<NextResponse | null> => {
+    if (!authorization) return null
 
-    if (useMile <= 0) return
+    if (useMile < 0 || getMile < 0) return null
 
-    try {
-      const userRef = doc(db, "user", email)
-      const userDoc = await getDoc(userRef)
-
-      if (userDoc.exists()) {
-        const userData = userDoc.data() as ResponseUserInfo
-
-        await updateDoc(userRef, {
-          mile: userData.mile - useMile,
-        })
-      } else {
-        throw new Error("등록된 사용자가 확인되지 않습니다.")
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/mile`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization,
+        },
+        body: JSON.stringify({
+          useMile,
+          getMile,
+        }),
       }
+    )
 
-      return { result: "success" }
-    } catch (error) {
-      const { response } = error as unknown as AxiosError
-
-      if (response) {
-        throw Error(`🚨 firebase getDocs API : ${error}`)
-      }
-
-      throw Error(`🚨 Error updating user document: ${error}`)
-    }
+    return response.json()
   },
-  checkoutGetMile: async (email: string, checkoutPirce: number) => {
-    if (email === "") {
-      return
-    }
+  getUserMile: async (authorization: string | null | undefined) => {
+    if (!authorization) return null
 
-    if (checkoutPirce <= 0) return
-
-    try {
-      const userRef = doc(db, "user", email)
-      const userDoc = await getDoc(userRef)
-
-      if (userDoc.exists()) {
-        const userData = userDoc.data() as ResponseUserInfo
-
-        const getMile = junkOfNoMoreThanOneDigit(checkoutPirce * 0.01)
-
-        await updateDoc(userRef, {
-          mile: userData.mile + getMile,
-        })
-      } else {
-        throw new Error("등록된 사용자가 확인되지 않습니다.")
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/mile`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          authorization,
+        },
+        next: { revalidate: 0 },
       }
+    )
 
-      return { result: "success" }
-    } catch (error) {
-      const { response } = error as unknown as AxiosError
-
-      if (response) {
-        throw Error(`🚨 firebase getDocs API : ${error}`)
-      }
-
-      throw Error(`🚨 Error updating user document: ${error}`)
-    }
-  },
-  getUserMile: async (email: string) => {
-    if (email === "") {
-      return 0
-    }
-
-    try {
-      const userRef = doc(db, "user", email)
-
-      const userDoc = await getDoc(userRef)
-
-      if (userDoc.exists()) {
-        const userData = userDoc.data() as ResponseUserInfo
-
-        return userData.mile
-      } else {
-        console.log("User document not found for email:", email)
-        return 0
-      }
-    } catch (error) {
-      const { response } = error as unknown as AxiosError
-
-      if (response) {
-        throw Error(`🚨firebase getDocs API : ${error}`)
-      }
-
-      throw Error(`🚨getUserMile firebase API : ${error}`)
-    }
+    return response.json()
   },
 }

@@ -1,101 +1,71 @@
-import { CheckoutList } from "@/features/common/types/checkout"
+import {
+  CheckoutList,
+  GetCheckoutListResponse,
+} from "@/features/checkout/types/checkout"
+import { Product } from "@/features/common/types/product"
 import { CheckoutClauseCheck } from "@/redux/features/checkoutSlice"
-
-import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore"
-import { getCurrentDateTime } from "@/features/common/utils/time"
-import { AxiosError } from "axios"
-import firebaseApp from "@/firebase/config"
-import { checkoutNumber } from "../utils/checkout"
-
-const db = getFirestore(firebaseApp)
+import { NextResponse } from "next/server"
 
 export const checkoutAPI = {
+  getCheckoutList: async (
+    authorization: string | null | undefined
+  ): Promise<GetCheckoutListResponse | null> => {
+    if (!authorization) return null
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/checkout`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          authorization,
+        },
+        next: { revalidate: 0 },
+      }
+    )
+
+    return response.json()
+  },
   checkout: async (
     checkoutInfo: CheckoutList,
     isClauseCheck: Omit<CheckoutClauseCheck, "all">,
     isUpdateDeliveryInfo: boolean,
     authorization: string | null | undefined
-  ) => {
+  ): Promise<NextResponse | null> => {
     if (!authorization) return null
 
-    const response = await fetch("/api/checkout", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        authorization,
-      },
-      body: JSON.stringify({
-        checkoutInfo,
-        isClauseCheck,
-        isUpdateDeliveryInfo,
-      }),
-    })
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/checkout`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization,
+        },
+        body: JSON.stringify({
+          checkoutInfo,
+          isClauseCheck,
+          isUpdateDeliveryInfo,
+        }),
+      }
+    )
 
     return response.json()
   },
-  addCheckoutList: async (email: string, checkoutListInfos: CheckoutList) => {
-    if (email === "") return
 
-    try {
-      const checkoutRef = doc(db, "checkout", email)
-      const checkoutDoc = await getDoc(checkoutRef)
-
-      let updatedCheckoutList = []
-
-      if (checkoutDoc.exists()) {
-        const existingCheckoutData = checkoutDoc.data()
-        const existingCheckoutList = existingCheckoutData.checkoutList || []
-
-        updatedCheckoutList = [
-          {
-            ...checkoutListInfos,
-            checkoutDate: getCurrentDateTime(),
-            checkoutNumber: checkoutNumber(),
-          },
-          ...existingCheckoutList,
-        ]
-      } else {
-        updatedCheckoutList = [checkoutListInfos]
+  checkoutProductSellCountIncrease: async (productInfo: Product) => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/product`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          productInfo,
+        }),
       }
+    )
 
-      await setDoc(checkoutRef, {
-        checkoutList: updatedCheckoutList,
-      })
-
-      return { result: "success" }
-    } catch (error) {
-      const { response } = error as unknown as AxiosError
-      if (response) {
-        throw Error(`🚨firebase setDoc  API : ${error}`)
-      }
-
-      throw Error(`addCheckoutList firebase API : ${error}`)
-    }
-  },
-  getCheckoutList: async (email: string) => {
-    if (email === "") return null
-
-    try {
-      const checkoutRef = doc(db, "checkout", email)
-      const checkoutDoc = await getDoc(checkoutRef)
-
-      if (checkoutDoc.exists()) {
-        const checkoutData = checkoutDoc.data() as {
-          checkoutList: CheckoutList[]
-        }
-
-        return checkoutData.checkoutList
-      } else {
-        return null
-      }
-    } catch (error) {
-      const { response } = error as unknown as AxiosError
-
-      if (response) {
-        throw Error(`🚨firebase getDocs API : ${error}`)
-      }
-
-      throw Error(`getCheckoutList firebase API : ${error}`)
-    }
+    return response.json()
   },
 }

@@ -10,7 +10,7 @@ export const useUserMileQuery = () => {
 
   const { data: userMile, isLoading } = useQuery(
     ["userMile"],
-    () => mileAPI.getUserMile(sessionQuery?.user.email ?? ""),
+    () => mileAPI.getUserMile(sessionQuery?.user.accessToken),
     {
       enabled: !!sessionQuery,
     }

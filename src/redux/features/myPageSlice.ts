@@ -3,7 +3,7 @@ import { RootState } from "../types/store"
 import {
   CheckoutDate,
   CheckoutPaymentInfo,
-} from "@/features/common/types/checkout"
+} from "@/features/checkout/types/checkout"
 import { ProductInCart } from "@/features/cart/types/cart"
 import { CsType } from "@/features/myPage/types/myPage"
 

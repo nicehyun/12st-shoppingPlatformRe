@@ -1,15 +1,9 @@
 import { verifyJwt } from "@/app/lib/jwt"
-import { ProductInCart } from "@/features/cart/types/cart"
+import { GetCartResponse, ProductInCart } from "@/features/cart/types/cart"
 import { Product } from "@/features/common/types/product"
 import { AxiosError } from "axios"
 import { NextResponse } from "next/server"
-
-type GetCartResponse = {
-  id: number
-  email: string
-  productList: ProductInCart[]
-}
-
+// TODO : 장바구니 목록 안가져와짐
 interface RequestBody {
   productInfo?: Product
   productInCartInfo?: ProductInCart
@@ -38,7 +32,7 @@ export async function GET(request: Request) {
 
     const cartData: GetCartResponse = response[0]
 
-    return NextResponse.json(cartData.productList, { status: 200 })
+    return NextResponse.json(cartData, { status: 200 })
   } catch (error) {
     const { response } = error as unknown as AxiosError
     if (response) {
@@ -285,15 +279,15 @@ export async function POST(request: Request) {
         )
       }
 
-      try {
-        const updatedProductInCart = cartData.productList.filter(
-          (cartProduct) => {
-            return !checkedProductList.some(
-              (product) => product.id === cartProduct.id
-            )
-          }
-        )
+      const updatedProductInCart = cartData.productList.filter(
+        (cartProduct) => {
+          return !checkedProductList.some(
+            (product) => product.id === cartProduct.id
+          )
+        }
+      )
 
+      try {
         await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart/${cartData.id}`, {
           method: "PATCH",
           headers: {

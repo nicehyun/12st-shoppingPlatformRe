@@ -1,5 +1,5 @@
-import { DeliveryInfo } from "@/features/common/types/address"
-import { CheckoutList } from "@/features/common/types/checkout"
+import { DeliveryInfo } from "@/features/common/types/deliveryInfo"
+import { CheckoutList } from "@/features/checkout/types/checkout"
 import { ResponseUserInfo } from "@/features/common/types/user"
 import firebaseApp from "@/firebase/config"
 import { AxiosError } from "axios"

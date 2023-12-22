@@ -1,7 +1,9 @@
-import { DeliveryInfo } from "@/features/common/types/address"
+import { DeliveryInfo } from "@/features/common/types/deliveryInfo"
 
-export const addressAPI = {
-  getDeliveryInfo: async (authorization: string | null | undefined) => {
+export const deliveryInfoAPI = {
+  getDeliveryInfo: async (
+    authorization: string | null | undefined
+  ): Promise<DeliveryInfo | null> => {
     if (!authorization) return null
 
     const response = await fetch(
@@ -10,9 +12,9 @@ export const addressAPI = {
         headers: { authorization },
         next: { revalidate: 0 },
       }
-    )
+    ).then((res) => res.json())
 
-    return response.json()
+    return response.deliveryInfo
   },
   updateDeliveryInfo: async (
     updateDeliveryInfo: DeliveryInfo,
