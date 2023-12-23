@@ -9,3 +9,5 @@ export type AmountCoupon = {
   name: string
   discountAmount: number
 }
+
+export type GetCouponResponse = RateCoupon | (AmountCoupon & { id: number })[]

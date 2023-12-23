@@ -2,37 +2,45 @@ import {
   accumulationOfProductsPrice,
   priceToUseCoupon,
 } from "@/features/common/utils/price"
-import { selectCheckedProductList } from "@/redux/features/cartSlice"
+import { selectCheckoutPendingProductListState } from "@/redux/features/checkoutSlice"
 import { selectSelectedCoupon } from "@/redux/features/couponSlice"
 import { useAppSelector } from "@/redux/hooks"
 
 const useCheckoutPrice = () => {
-  const checkedProductList = useAppSelector(selectCheckedProductList)
+  const checkoutPendingProductList = useAppSelector(
+    selectCheckoutPendingProductListState
+  )
 
   const seletedCoupon = useAppSelector(selectSelectedCoupon)
 
-  const totalPriceOfCheckedProduct =
-    accumulationOfProductsPrice(checkedProductList)
+  const totalPriceOfCheckedProduct = accumulationOfProductsPrice(
+    checkoutPendingProductList
+  )
 
   const discountedPriceWithCoupon =
     seletedCoupon && totalPriceOfCheckedProduct
       ? priceToUseCoupon(seletedCoupon, totalPriceOfCheckedProduct)
       : 0
 
-  const totalDeliveryFee = checkedProductList.reduce((accumulator, product) => {
-    return accumulator + product.deliveryFree
-  }, 0)
+  const totalDeliveryFee = checkoutPendingProductList.reduce(
+    (accumulator, product) => {
+      return accumulator + product.deliveryFree
+    },
+    0
+  )
 
   const calculatingDiscountPerProduct = () => {
     const discountPerProduct =
-      Math.floor(discountedPriceWithCoupon / checkedProductList.length / 10) *
-      10
+      Math.floor(
+        discountedPriceWithCoupon / checkoutPendingProductList.length / 10
+      ) * 10
 
     const remainingDiscount =
-      discountedPriceWithCoupon - discountPerProduct * checkedProductList.length
+      discountedPriceWithCoupon -
+      discountPerProduct * checkoutPendingProductList.length
 
     const discountPerProductArr = []
-    for (let i = 0; i < checkedProductList.length; i++) {
+    for (let i = 0; i < checkoutPendingProductList.length; i++) {
       const adjustedDiscount =
         discountPerProduct + (i < remainingDiscount / 10 ? 10 : 0)
       discountPerProductArr.push(adjustedDiscount)

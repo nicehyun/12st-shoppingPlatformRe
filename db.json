@@ -357,6 +357,20 @@
       "id": 1
     }
   ],
+  "coupons": [
+    {
+      "id": 1,
+      "type": "amount",
+      "name": "5000원 할인 쿠폰",
+      "discountAmount": 5000
+    },
+    {
+      "id": 2,
+      "type": "rate",
+      "name": "10% 할인 쿠폰",
+      "discountRate": 10
+    }
+  ],
   "productList": [
     {
       "id": "10027645998",

@@ -8,7 +8,7 @@ interface ICheckoutOrderListEl {
   productInfo: ProductInCart
   discountPerProduct: number
 }
-
+// 쿠폰적용 오류 수정, 쿠폰 적용된 각 상품 가격
 const CheckoutOrderListEl = ({
   productInfo,
   discountPerProduct,
