@@ -5,9 +5,20 @@ import useCheckoutPrice from "../../checkout/hooks/useCheckoutPrice"
 import CartPriceInfoEl from "./CartPriceInfoEl"
 import CartPriceInfoHeaderEl from "./CartPriceInfoHeaderEl"
 import CartPriceOperation from "./CartPriceOperation"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { useEffect } from "react"
+import { selectCheckedProductList } from "@/redux/features/cartSlice"
+import { addCheckoutPendingProductList } from "@/redux/features/checkoutSlice"
 
 const CartPriceInfo = () => {
   const { totalDeliveryFee, totalPriceOfCheckedProduct } = useCheckoutPrice()
+  const checkedProductList = useAppSelector(selectCheckedProductList)
+
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(addCheckoutPendingProductList(checkedProductList))
+  }, [checkedProductList])
 
   return (
     <section className="mt-[50px] border-t-[3px] border-b-[1px] border-black dark:border-white sm:flex md:flex sm:h-[300px] md:h-[350px]">

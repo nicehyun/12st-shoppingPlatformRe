@@ -3,31 +3,26 @@ import useSelectCoupon from "@/features/checkout/hooks/useSelectCoupon"
 import { ProductInCart } from "@/features/cart/types/cart"
 import Image from "next/image"
 import { accumulateDiscountPrice } from "@/features/common/models/product"
+import useCheckoutPrice from "../hooks/useCheckoutPrice"
 
 interface ICheckoutOrderListEl {
   productInfo: ProductInCart
   discountPerProduct: number
 }
-// 쿠폰적용 오류 수정, 쿠폰 적용된 각 상품 가격
+
 const CheckoutOrderListEl = ({
   productInfo,
   discountPerProduct,
 }: ICheckoutOrderListEl) => {
   const { selectedCoupon } = useSelectCoupon()
 
-  const {
-    mallName,
-    brand,
-    maker,
-    name,
-    discount,
-    amount,
-    image,
-    discountedPrice,
-    price,
-  } = productInfo
+  const { mallName, brand, maker, name, discount, amount, image, price } =
+    productInfo
 
   const productBrandInfo = brand || maker || mallName
+
+  const productPrice = accumulateDiscountPrice(price, discount)
+
   return (
     <li className="py-[18px] flex justify-between border-t-[1px] border-border">
       <div className="grow">
@@ -40,14 +35,14 @@ const CheckoutOrderListEl = ({
 
         <p className="text-lightRed md:text-[14px] sm:text-[12px]">
           <span>[{discount}%]</span>{" "}
-          <span>{accumulateDiscountPrice(price, discount)}원</span> /{" "}
+          <span>{numberToLocaleString(productPrice)}원</span> /{" "}
           <span>수량 {amount}개</span>
         </p>
 
         {selectedCoupon && (
           <span className="text-lightRed md:text-[14px] sm:text-[12px] mt-[10px] inline-block">
             쿠폰적용가 :{" "}
-            {numberToLocaleString(discountedPrice - discountPerProduct)}원
+            {numberToLocaleString(productPrice - discountPerProduct)}원
           </span>
         )}
       </div>

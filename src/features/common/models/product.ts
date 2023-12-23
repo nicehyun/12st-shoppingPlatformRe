@@ -14,7 +14,7 @@ export const accumulateMile = (rawPrice: number, discount: number) => {
 }
 
 export const accumulateDiscountPrice = (rawPrice: number, discount: number) => {
-  return numberToLocaleString(discountedProductPrice(rawPrice, discount))
+  return discountedProductPrice(rawPrice, discount)
 }
 
 export const getBestProductList = (productList: Products) => {

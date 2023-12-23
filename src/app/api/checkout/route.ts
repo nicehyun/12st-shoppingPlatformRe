@@ -266,60 +266,63 @@ export async function POST(request: NextRequest) {
     return new NextResponse(null, { status: 500 })
   }
 
-  // update user mile api
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_DB_URL}/users?email=${email}`,
-      {
-        next: { revalidate: 0 },
-      }
-    ).then((res) => res.json())
+  // TODO : mile 적용하기
 
-    userInfo = response[0]
-    updatedMile = userInfo.mile + getMile - useMile
-  } catch (error) {
-    const { response } = error as unknown as AxiosError
-    if (response) {
-      console.error(
-        `🚨 JSON SERVER GET API (Get UserInfo API - Checkout) : ${response.data}`
-      )
-      return new NextResponse(null, { status: response.status })
-    }
-    console.error(
-      `🚨 Unexpected Error (Get UserInfo API - Checkout) : ${error}`
-    )
-    return new NextResponse(null, { status: 500 })
-  }
+  // // update user mile api
+  // try {
+  //   const response = await fetch(
+  //     `${process.env.NEXT_PUBLIC_DB_URL}/users?email=${email}`,
+  //     {
+  //       next: { revalidate: 0 },
+  //     }
+  //   ).then((res) => res.json())
 
-  try {
-    if (userInfo.mile < useMile) {
-      throw new Error(
-        `🚨 The mileage you are trying to use exceeds the available mileage!`
-      )
-    }
+  //   userInfo = response[0]
 
-    await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/users/${userInfo.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        mile: updatedMile,
-      }),
-    })
-  } catch (error) {
-    const { response } = error as unknown as AxiosError
-    if (response) {
-      console.error(
-        `🚨 JSON SERVER POST API (Update Mile API) : ${response.data}`
-      )
-      return new NextResponse(null, { status: response.status })
-    } else {
-      console.error(`🚨 Unexpected Error (Update Mile API) : ${error}`)
-    }
+  //   updatedMile = userInfo.mile + getMile - useMile
+  // } catch (error) {
+  //   const { response } = error as unknown as AxiosError
+  //   if (response) {
+  //     console.error(
+  //       `🚨 JSON SERVER GET API (Get UserInfo API - Checkout) : ${response.data}`
+  //     )
+  //     return new NextResponse(null, { status: response.status })
+  //   }
+  //   console.error(
+  //     `🚨 Unexpected Error (Get UserInfo API - Checkout) : ${error}`
+  //   )
+  //   return new NextResponse(null, { status: 500 })
+  // }
 
-    return new NextResponse(null, { status: 500 })
-  }
+  // try {
+  //   if (userInfo.mile < useMile) {
+  //     throw new Error(
+  //       `🚨 The mileage you are trying to use exceeds the available mileage!`
+  //     )
+  //   }
+
+  //   await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/users/${userInfo.id}`, {
+  //     method: "PATCH",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       mile: updatedMile,
+  //     }),
+  //   })
+  // } catch (error) {
+  //   const { response } = error as unknown as AxiosError
+  //   if (response) {
+  //     console.error(
+  //       `🚨 JSON SERVER POST API (Update Mile API) : ${response.data}`
+  //     )
+  //     return new NextResponse(null, { status: response.status })
+  //   } else {
+  //     console.error(`🚨 Unexpected Error (Update Mile API) : ${error}`)
+  //   }
+
+  //   return new NextResponse(null, { status: 500 })
+  // }
 
   // update product sell count api
   const updateProductSellCount = async (productInfo: Product) => {

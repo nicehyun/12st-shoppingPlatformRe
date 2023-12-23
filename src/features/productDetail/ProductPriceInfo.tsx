@@ -29,7 +29,7 @@ const ProductPriceInfo = ({ discount, price }: IProductPriceInfo) => {
         <p className="text-[16px]">
           <span className="text-lightRed">{discount}%</span>
           <span className="ml-[5px]">
-            {accumulateDiscountPrice(price, discount)}원
+            {numberToLocaleString(accumulateDiscountPrice(price, discount))}원
           </span>
         </p>
       </ProductMainInfoEl>

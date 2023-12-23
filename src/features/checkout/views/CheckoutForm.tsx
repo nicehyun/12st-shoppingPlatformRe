@@ -211,7 +211,7 @@ const CheckoutForm = () => {
       })
 
       if (response?.status === 200) {
-        // routeTo(ROUTE.CHECKOUTCOMFIRMED, true)
+        routeTo(ROUTE.CHECKOUTCOMFIRMED, true)
         dispatch(emptyCheckoutPendingProductList())
       }
     } catch (error) {
