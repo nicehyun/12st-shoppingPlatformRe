@@ -15,10 +15,11 @@ import { useGetDefaultDeliveryInfoQuery } from "../hooks/useGetDefaultDeliveryIn
 import CheckoutDefalutDeliveryInfo from "./CheckoutDefalutDeliveryInfo"
 import CheckoutNewDeliveryInfo from "./CheckoutNewDeliveryInfo"
 import Button from "@/features/common/views/Button"
+import Loading from "@/features/common/views/Loading"
 
 const DeliveryInfo = () => {
   const dispatch = useAppDispatch()
-  const { deliveryInfo } = useGetDefaultDeliveryInfoQuery()
+  const { deliveryInfo, isLoading } = useGetDefaultDeliveryInfoQuery()
 
   const [deliveryTabValue, setDeliveryTabValue] = useState(1)
 
@@ -89,30 +90,38 @@ const DeliveryInfo = () => {
         className="absolute transform translate-x-[9999px] hidden"
       />
 
-      <Box sx={{ width: "100%", bgcolor: "" }}>
-        <Box sx={{ borderBottom: 1, borderColor: "#d2d2d2" }}>
-          <Tabs
-            value={deliveryTabValue}
-            onChange={handleDeliveryTabvalueChange}
-            aria-label="checkout address teps"
-            sx={{
-              "& .MuiTabs-indicator": {
-                backgroundColor: "#ff4e0a",
-              },
-            }}
-          >
-            {renderTab()}
-          </Tabs>
+      {isLoading ? (
+        <Loading
+          spinnerSize={{ width: "w-[50px]", height: "h-[50px]" }}
+          height="h-[400px]"
+          isFrame={false}
+        />
+      ) : (
+        <Box sx={{ width: "100%", bgcolor: "" }}>
+          <Box sx={{ borderBottom: 1, borderColor: "#d2d2d2" }}>
+            <Tabs
+              value={deliveryTabValue}
+              onChange={handleDeliveryTabvalueChange}
+              aria-label="checkout address teps"
+              sx={{
+                "& .MuiTabs-indicator": {
+                  backgroundColor: "#ff4e0a",
+                },
+              }}
+            >
+              {renderTab()}
+            </Tabs>
+          </Box>
+
+          <TabPanel value={deliveryTabValue} index={0}>
+            <CheckoutDefalutDeliveryInfo />
+          </TabPanel>
+
+          <TabPanel value={deliveryTabValue} index={1}>
+            <CheckoutNewDeliveryInfo />
+          </TabPanel>
         </Box>
-
-        <TabPanel value={deliveryTabValue} index={0}>
-          <CheckoutDefalutDeliveryInfo />
-        </TabPanel>
-
-        <TabPanel value={deliveryTabValue} index={1}>
-          <CheckoutNewDeliveryInfo />
-        </TabPanel>
-      </Box>
+      )}
     </section>
   )
 }
