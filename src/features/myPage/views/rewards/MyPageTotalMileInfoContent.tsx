@@ -11,24 +11,29 @@ const MyPageTotalMileInfoContent = () => {
   const { userMile, totalGetMile, totalUseMile, isLoading } =
     useGetUseMileAndGetMile()
 
+  console.log(totalGetMile)
+
   if (isLoading) {
     return <MyPageListLoading />
   }
 
+  const fommatedUserMile = userMile
+    ? `${numberToLocaleString(userMile ?? 0)} mile`
+    : `0 mile`
+
+  const fommatedTotalGetMile = totalGetMile
+    ? `${numberToLocaleString(totalGetMile ?? 0)} mile`
+    : `0 mile`
+
+  const fommatedTotalUseMile = totalUseMile
+    ? `${numberToLocaleString(totalUseMile ?? 0)} mile`
+    : `0 mile`
+
   return (
     <MyPageListContentLayout>
-      <MyPageTableContentEl
-        className="w-1/3"
-        content={`${numberToLocaleString(userMile ?? 0)} mile`}
-      />
-      <MyPageTableContentEl
-        className="w-1/3"
-        content={`${numberToLocaleString(totalGetMile ?? 0)} mile`}
-      />
-      <MyPageTableContentEl
-        className="w-1/3"
-        content={`${numberToLocaleString(totalUseMile ?? 0)} mile`}
-      />
+      <MyPageTableContentEl className="w-1/3" content={fommatedUserMile} />
+      <MyPageTableContentEl className="w-1/3" content={fommatedTotalGetMile} />
+      <MyPageTableContentEl className="w-1/3" content={fommatedTotalUseMile} />
     </MyPageListContentLayout>
   )
 }

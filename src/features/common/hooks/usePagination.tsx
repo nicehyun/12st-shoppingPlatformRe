@@ -1,14 +1,14 @@
 import { Pagination, PaginationItem } from "@mui/material"
 import { ChangeEvent, useEffect, useState } from "react"
 
-const usePagination = (perPage: number, listLength: number) => {
+export const usePagination = (perPage: number, listLength: number) => {
   const [currentPage, setCurrentPage] = useState(1)
 
   const handlePageChange = (e: ChangeEvent<unknown>, page: number) => {
     setCurrentPage(page)
   }
 
-  const [productsPagination, setProductsPagination] = useState({
+  const [listPagination, setListPagination] = useState({
     indexOfLast: 0,
     indexOfFirst: 0,
   })
@@ -16,18 +16,14 @@ const usePagination = (perPage: number, listLength: number) => {
   const paginationCount = Math.ceil(listLength / perPage)
 
   useEffect(() => {
-    setProductsPagination((prev) => {
+    setListPagination((prev) => {
       return {
         ...prev,
         indexOfLast: currentPage * perPage,
-        indexOfFirst: productsPagination.indexOfLast - perPage,
+        indexOfFirst: listPagination.indexOfLast - perPage,
       }
     })
-  }, [
-    currentPage,
-    productsPagination.indexOfLast,
-    productsPagination.indexOfFirst,
-  ])
+  }, [currentPage, listPagination.indexOfLast, listPagination.indexOfFirst])
 
   const renderPaginationComponent = () => {
     return (
@@ -58,9 +54,7 @@ const usePagination = (perPage: number, listLength: number) => {
   }
 
   return {
-    productsPagination,
+    listPagination,
     renderPaginationComponent,
   }
 }
-
-export default usePagination

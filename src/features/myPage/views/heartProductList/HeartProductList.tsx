@@ -1,8 +1,8 @@
 "use client"
 
-import usePagination from "@/features/common/hooks/usePagination"
 import ProductCard from "@/features/common/views/ProductCard"
 import MyPageListNoneContents from "../MyPageListNoneContents"
+import { usePagination } from "@/features/common/hooks/usePagination"
 
 const testProducList: any[] = [
   {
@@ -99,7 +99,7 @@ const testProducList: any[] = [
 
 const HeartProductList = () => {
   const perPage = 12
-  const { productsPagination, renderPaginationComponent } = usePagination(
+  const { listPagination, renderPaginationComponent } = usePagination(
     perPage,
     testProducList.length
   )
@@ -113,10 +113,7 @@ const HeartProductList = () => {
     <>
       <div className="grid grid-cols-3 xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-[20px] mt-[50px]">
         {testProducList
-          .slice(
-            productsPagination.indexOfFirst,
-            productsPagination.indexOfLast
-          )
+          .slice(listPagination.indexOfFirst, listPagination.indexOfLast)
           .map((product, index) => (
             <ProductCard productInfo={product} key={`heart-product-${index}`} />
           ))}
