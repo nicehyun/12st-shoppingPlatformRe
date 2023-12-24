@@ -24,7 +24,7 @@ const ProductMainInfo = ({ productDetail }: IProductMainInfo) => {
       </div>
 
       <div className="w-1/2 md:w-full sm:w-full border-t-[2px] dark:border-white sm:mt-[20px] md:mt-[20px] flex-grow">
-        <ProductNameAndHeart name={productDetail.name} />
+        <ProductNameAndHeart productDetail={productDetail} />
         <ProductPriceInfo
           discount={productDetail.discount}
           price={productDetail.price}

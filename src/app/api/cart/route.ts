@@ -62,8 +62,11 @@ export async function POST(request: Request) {
     direction !== "remove" &&
     direction !== "add" &&
     direction !== "remove_checked"
-  )
-    return
+  ) {
+    return new Response(JSON.stringify({ error: "Invalid Direction" }), {
+      status: 401,
+    })
+  }
 
   if (!accessToken || !verifyJwt(accessToken)) {
     return new Response(JSON.stringify({ error: "No Authorization" }), {
