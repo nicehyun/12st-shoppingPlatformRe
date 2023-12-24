@@ -10,7 +10,7 @@ const CategoryProductManagementlayout = ({
 }) => {
   return (
     <div>
-      {/* <Header isShowCart={true} /> */}
+      <Header isShowCart={true} />
 
       <PageLayout classNames="px-0">{children}</PageLayout>
 

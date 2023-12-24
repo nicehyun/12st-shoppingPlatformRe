@@ -1557,7 +1557,27 @@
   "cart": [
     {
       "email": "test@test.com",
-      "productList": [],
+      "productList": [
+        {
+          "brand": "버켄스탁",
+          "discountedPrice": 99822.4,
+          "maker": "버켄스탁",
+          "price": 112160,
+          "category3": "슬리퍼",
+          "id": "22921071485",
+          "reviewCount": 0,
+          "category4": "",
+          "deliveryFree": 3000,
+          "image": "https://shopping-phinf.pstatic.net/main_2292107/22921071485.20200827153617.jpg",
+          "name": "버켄스탁 취리히 타우페 레귤러 슬리퍼 1009532",
+          "mallName": "네이버",
+          "category2": "남성신발",
+          "category1": "패션잡화",
+          "discount": 11,
+          "sellCount": 95,
+          "amount": 1
+        }
+      ],
       "id": 1
     }
   ],
@@ -1586,7 +1606,6 @@
       "discountRate": 10
     }
   ],
-
   "categories": [
     {
       "패션의류": {
@@ -1647,7 +1666,12 @@
           "슬립온",
           "기능화"
         ],
-        "여성신발": ["단화", "슬리퍼", "운동화", "샌들"]
+        "여성신발": [
+          "단화",
+          "슬리퍼",
+          "운동화",
+          "샌들"
+        ]
       }
     }
   ],
