@@ -1,10 +1,11 @@
 "use client"
 
 import { numberToLocaleString } from "@/features/common/utils/price"
-import useGetUseMileAndGetMile from "../../hooks/useGetUseMileAndGetMile"
+
 import MyPageTableContentEl from "../MyPageTableContentEl"
 import MyPageListContentLayout from "../MyPageListContentLayout"
 import MyPageListLoading from "../MyPageListLoading"
+import { useGetUseMileAndGetMile } from "../../hooks/useGetUseMileAndGetMile"
 
 const MyPageTotalMileInfoContent = () => {
   const { userMile, totalGetMile, totalUseMile, isLoading } =

@@ -14,6 +14,69 @@
           "deliveryMemo": null,
           "productList": [
             {
+              "id": "10027645998",
+              "discountedPrice": 23655,
+              "price": 28500,
+              "maker": "",
+              "name": "[당일발송] 5인치 밴딩 반바지 퓨어쇼츠 웨이브테크 나일론 쇼츠 화이트워터보이즈",
+              "deliveryFree": 0,
+              "sellCount": 142,
+              "discount": 17,
+              "mallName": "화이트워터보이즈",
+              "image": "https://shopping-phinf.pstatic.net/main_1002764/10027645998.13.jpg",
+              "category3": "바지",
+              "category2": "남성의류",
+              "reviewCount": 0,
+              "brand": "화이트워터보이즈",
+              "category1": "패션의류",
+              "category4": "",
+              "amount": 1
+            },
+            {
+              "deliveryFree": 3000,
+              "sellCount": 148,
+              "reviewCount": 0,
+              "mallName": "네이버",
+              "price": 38840,
+              "discount": 18,
+              "id": "33197507754",
+              "maker": "나이키",
+              "name": "나이키 레볼루션 6 넥스트 네이처 DC3728-001",
+              "brand": "나이키",
+              "category3": "운동화",
+              "category1": "패션잡화",
+              "image": "https://shopping-phinf.pstatic.net/main_3319750/33197507754.20221017111653.jpg",
+              "category4": "러닝화",
+              "category2": "남성신발",
+              "discountedPrice": 31848.8,
+              "amount": 2
+            }
+          ],
+          "coupon": {
+            "id": 1,
+            "type": "amount",
+            "name": "5000원 할인 쿠폰",
+            "discountAmount": 5000
+          },
+          "useMile": 3060,
+          "getMile": 0,
+          "payment": {
+            "selectedPayment": "SSGpay"
+          },
+          "checkoutDate": "2023-12-23T07:51:00.255Z",
+          "checkoutNumber": "20231223-165100"
+        },
+        {
+          "deliveryName": "새로운 배송지",
+          "recipient": "수령",
+          "zipcode": "16059",
+          "address": "경기 의왕시 전주남이길 1",
+          "additionalAddress": "123",
+          "phone1": "01012341234",
+          "phone2": null,
+          "deliveryMemo": null,
+          "productList": [
+            {
               "price": 19500,
               "reviewCount": 0,
               "id": "11854593913",
@@ -1066,15 +1129,41 @@
       "id": 1
     }
   ],
+  "customerCounseling": [
+    {
+      "email": "test@test.com",
+      "customerCounselingList": [
+        {
+          "csType": "system",
+          "counselingContent": "ttt",
+          "counselingTitle": "ttt",
+          "writeDate": "2023-12-23T14:24:44.037Z"
+        },
+        {
+          "csType": "refund",
+          "counselingContent": "ttt",
+          "counselingTitle": "ttt",
+          "checkoutDate": "2023-12-23T07:51:00.000Z",
+          "checkoutNumber": "20231223-165100",
+          "checkoutProductName": "[당일발송] 5인치 밴딩 반바지 퓨어쇼츠 웨이브테크 나일론 쇼츠 화이트워터보이즈",
+          "checkoutPayment": {
+            "selectedPayment": "SSG 페이"
+          },
+          "writeDate": "2023-12-23T14:24:16.334Z"
+        }
+      ],
+      "id": 1
+    }
+  ],
   "deliveryInfo": [
     {
       "email": "test@test.com",
       "deliveryInfo": {
-        "deliveryName": "새로운 배송지",
+        "deliveryName": "새로운 배송지123123",
         "recipient": "수령",
-        "additionalAddress": "123",
-        "address": "경기 의왕시 전주남이길 1",
         "zipcode": "16059",
+        "address": "경기 의왕시 전주남이길 1",
+        "additionalAddress": "123",
         "phone1": "01012341234",
         "phone2": null
       },
@@ -1084,46 +1173,7 @@
   "cart": [
     {
       "email": "test@test.com",
-      "productList": [
-        {
-          "id": "10027645998",
-          "discountedPrice": 23655,
-          "price": 28500,
-          "maker": "",
-          "name": "[당일발송] 5인치 밴딩 반바지 퓨어쇼츠 웨이브테크 나일론 쇼츠 화이트워터보이즈",
-          "deliveryFree": 0,
-          "sellCount": 142,
-          "discount": 17,
-          "mallName": "화이트워터보이즈",
-          "image": "https://shopping-phinf.pstatic.net/main_1002764/10027645998.13.jpg",
-          "category3": "바지",
-          "category2": "남성의류",
-          "reviewCount": 0,
-          "brand": "화이트워터보이즈",
-          "category1": "패션의류",
-          "category4": "",
-          "amount": 1
-        },
-        {
-          "deliveryFree": 3000,
-          "sellCount": 148,
-          "reviewCount": 0,
-          "mallName": "네이버",
-          "price": 38840,
-          "discount": 18,
-          "id": "33197507754",
-          "maker": "나이키",
-          "name": "나이키 레볼루션 6 넥스트 네이처 DC3728-001",
-          "brand": "나이키",
-          "category3": "운동화",
-          "category1": "패션잡화",
-          "image": "https://shopping-phinf.pstatic.net/main_3319750/33197507754.20221017111653.jpg",
-          "category4": "러닝화",
-          "category2": "남성신발",
-          "discountedPrice": 31848.8,
-          "amount": 2
-        }
-      ],
+      "productList": [],
       "id": 1
     }
   ],
@@ -1133,7 +1183,7 @@
       "password": "$2b$10$pgj8lXNIgXLK5niBOKi2f.0.7b/OWekYyh8.VT/J8kqMxcLGlEsra",
       "name": "승현",
       "phone": "01012341234",
-      "marketingClause": true,
+      "marketingClause": false,
       "mile": 3060,
       "id": 1
     }
@@ -1160,7 +1210,7 @@
       "maker": "",
       "name": "[당일발송] 5인치 밴딩 반바지 퓨어쇼츠 웨이브테크 나일론 쇼츠 화이트워터보이즈",
       "deliveryFree": 0,
-      "sellCount": 147,
+      "sellCount": 148,
       "discount": 17,
       "mallName": "화이트워터보이즈",
       "image": "https://shopping-phinf.pstatic.net/main_1002764/10027645998.13.jpg",
@@ -5295,7 +5345,7 @@
     },
     {
       "deliveryFree": 3000,
-      "sellCount": 152,
+      "sellCount": 153,
       "reviewCount": 0,
       "mallName": "네이버",
       "price": 38840,

@@ -25,10 +25,9 @@ const MyPageProductSearchContent = () => {
     },
     {
       id: "coustomweCounselingWrite-productInfo__price",
-      value:
-        numberToLocaleString(searchProductInfo?.price ?? 0) === "0"
-          ? ""
-          : numberToLocaleString(searchProductInfo?.price ?? 0),
+      value: searchProductInfo
+        ? numberToLocaleString(searchProductInfo?.price)
+        : "",
       label: "판매가",
     },
   ]

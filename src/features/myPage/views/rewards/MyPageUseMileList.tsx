@@ -1,10 +1,11 @@
 "use client"
 
 import { numberToLocaleString } from "@/features/common/utils/price"
-import useGetUseMileAndGetMile from "../../hooks/useGetUseMileAndGetMile"
+
 import MyPageListNoneContents from "../MyPageListNoneContents"
 import MyPageUseMileAndGetMileContentEl from "./MyPageUseMileAndGetMileContentEl"
 import MyPageListLoading from "../MyPageListLoading"
+import { useGetUseMileAndGetMile } from "../../hooks/useGetUseMileAndGetMile"
 
 const MyPageUseMileList = () => {
   const { useMileAndGetMileInfo, isLoading } = useGetUseMileAndGetMile()
@@ -20,7 +21,7 @@ const MyPageUseMileList = () => {
   if (!nonZeroUseMileList?.length)
     return <MyPageListNoneContents content="해당 마일리지 내역이 없습니다." />
 
-  return useMileAndGetMileInfo?.map((useMileAndGetMileEl) => (
+  return nonZeroUseMileList?.map((useMileAndGetMileEl) => (
     <MyPageUseMileAndGetMileContentEl
       key={`useMileAndGetMileInfo-use-${useMileAndGetMileEl.checkoutNumber}`}
       checkoutDate={useMileAndGetMileEl.checkoutDate}

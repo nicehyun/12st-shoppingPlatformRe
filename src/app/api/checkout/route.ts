@@ -47,9 +47,9 @@ export async function GET(request: Request) {
       }
     ).then((res) => res.json())
 
-    const responseData: GetCheckoutListResponse = response[0]
+    const checkoutData: GetCheckoutListResponse = response[0]
 
-    return NextResponse.json(responseData ?? null, { status: 200 })
+    return NextResponse.json(checkoutData?.checkoutList, { status: 200 })
   } catch (error) {
     const { response } = error as unknown as AxiosError
     if (response) {

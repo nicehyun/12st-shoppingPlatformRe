@@ -4,6 +4,7 @@ import { showFeedbackModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { myPageAPI } from "../models/myPageAPI"
+import { deliveryInfoAPI } from "@/features/common/models/deliveryInfoAPI"
 
 const useDefaultDeliveryinfoModificaitionMutation = () => {
   const { sessionQuery } = useSessionQuery()
@@ -13,9 +14,9 @@ const useDefaultDeliveryinfoModificaitionMutation = () => {
 
   const checkMarketingClauseMutaion = useMutation(
     (deliveryInfo: DeliveryInfo) =>
-      myPageAPI.modificatieDefaultAddress(
-        sessionQuery?.user.email ?? "",
-        deliveryInfo
+      deliveryInfoAPI.updateDeliveryInfo(
+        deliveryInfo,
+        sessionQuery?.user.accessToken
       ),
     {
       onSuccess: () => {

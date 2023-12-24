@@ -13,8 +13,8 @@ const useCheckMarketingClauseMutation = () => {
   const checkMarketingClauseMutaion = useMutation(
     (isChecked: boolean) =>
       myPageAPI.modificatieMarketingClause(
-        sessionQuery?.user.email ?? "",
-        isChecked
+        isChecked,
+        sessionQuery?.user.accessToken
       ),
     {
       onSuccess: () => {

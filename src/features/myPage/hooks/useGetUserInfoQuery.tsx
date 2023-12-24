@@ -1,6 +1,8 @@
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { useQuery } from "@tanstack/react-query"
 import { myPageAPI } from "../models/myPageAPI"
+import { commonAPI } from "@/features/common/models/commonAPI"
+import { userInfoAPI } from "@/features/common/models/userInfoAPI"
 
 export const useGetUserInfoQuery = () => {
   const { sessionQuery } = useSessionQuery()
@@ -11,7 +13,7 @@ export const useGetUserInfoQuery = () => {
     isLoading,
   } = useQuery(
     ["userInfo"],
-    () => myPageAPI.getUserInfo(sessionQuery?.user.email ?? ""),
+    () => userInfoAPI.getUserInfo(sessionQuery?.user.accessToken),
     {
       enabled: !!sessionQuery,
     }

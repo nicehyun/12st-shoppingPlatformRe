@@ -1,12 +1,12 @@
 import { useAppDispatch } from "@/redux/hooks"
 import { useMutation } from "@tanstack/react-query"
-import { myPageAPI } from "../models/myPageAPI"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
+import { productDeatilAPI } from "@/features/productDetail/productDetailAPI/productDetailAPI"
 
 export const useSearchProductInfoMutation = () => {
   const dispatch = useAppDispatch()
   const searchProductInfoMutation = useMutation(
-    (productId: string) => myPageAPI.getProductInfoByProductId(productId),
+    (productId: string) => productDeatilAPI.getProductInfo(productId),
     {
       onError: () =>
         dispatch(

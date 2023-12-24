@@ -10,9 +10,9 @@ const MyPageModalCheckoutList = () => {
       </p>
 
       <MyPageListHeaderLayout className="mt-[20px]">
-        <MyPageTableHeaderEl className="w-1/3" headerContent="주문번호" />
-        <MyPageTableHeaderEl className="w-1/3" headerContent="주문일자" />
-        <MyPageTableHeaderEl className="w-1/3" headerContent="상품명" />
+        <MyPageTableHeaderEl className="w-1/4" headerContent="주문번호" />
+        <MyPageTableHeaderEl className="w-1/4" headerContent="주문일자" />
+        <MyPageTableHeaderEl className="w-1/2" headerContent="상품명" />
       </MyPageListHeaderLayout>
 
       <MyPageCheckoutNumberToCheckoutPairList />

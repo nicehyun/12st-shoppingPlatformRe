@@ -1,7 +1,4 @@
-import {
-  CheckoutList,
-  GetCheckoutListResponse,
-} from "@/features/checkout/types/checkout"
+import { CheckoutList } from "@/features/checkout/types/checkout"
 import { Product } from "@/features/common/types/product"
 import { CheckoutClauseCheck } from "@/redux/features/checkoutSlice"
 import { NextResponse } from "next/server"
@@ -9,7 +6,7 @@ import { NextResponse } from "next/server"
 export const checkoutAPI = {
   getCheckoutList: async (
     authorization: string | null | undefined
-  ): Promise<GetCheckoutListResponse | null> => {
+  ): Promise<CheckoutList | null> => {
     if (!authorization) return null
 
     const response = await fetch(

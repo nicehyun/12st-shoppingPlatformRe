@@ -1,11 +1,6 @@
-import {
-  CheckoutDate,
-  CheckoutPaymentInfo,
-} from "@/features/checkout/types/checkout"
+import { CheckoutPaymentInfo } from "@/features/checkout/types/checkout"
 
 export type CancelType = "all" | "cancel" | "change" | "return"
-
-export type WriteDate = CheckoutDate
 
 export type CsType =
   | "delivery"
@@ -43,9 +38,15 @@ export type CustomerCounselingDetail = {
   counselingContent: string
   checkoutNumber?: string
   checkoutProductName?: string
-  checkoutDate?: CheckoutDate
+  checkoutDate?: string
   checkoutPayment?: CheckoutPaymentInfo
   productName?: string
   productPrice?: number
-  writeDate?: WriteDate
+  writeDate?: string
+}
+
+export type GetCustomerCounselingDetailResponse = {
+  id: number
+  email: string
+  customerCounselingList: CustomerCounselingDetail[]
 }

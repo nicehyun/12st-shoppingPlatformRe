@@ -13,7 +13,7 @@ export const useGetCheckoutListQuery = () => {
       enabled: !!sessionQuery,
     }
   )
-  const checkoutList: CheckoutList[] = data?.checkoutList ?? []
+  const checkoutList: CheckoutList[] = (data ?? []) as CheckoutList[]
 
   const currentCheckoutList = checkoutList[0]
 

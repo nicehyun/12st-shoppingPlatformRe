@@ -1,256 +1,84 @@
-import { DeliveryInfo } from "@/features/common/types/deliveryInfo"
-import { CheckoutList } from "@/features/checkout/types/checkout"
-import { ResponseUserInfo } from "@/features/common/types/user"
-import firebaseApp from "@/firebase/config"
-import { AxiosError } from "axios"
 import {
-  deleteDoc,
-  doc,
-  getDoc,
-  getFirestore,
-  setDoc,
-} from "firebase/firestore"
-import { UseMileAndGetMile } from "../types/mile"
-import { Product } from "@/features/common/types/product"
-import { CustomerCounselingDetail } from "../types/myPage"
-import { getCurrentDateTime } from "@/features/common/utils/time"
-
-const db = getFirestore(firebaseApp)
+  CustomerCounselingDetail,
+  GetCustomerCounselingDetailResponse,
+} from "../types/myPage"
 
 export const myPageAPI = {
-  getUserInfo: async (email: string) => {
-    if (email === "") return
-
-    try {
-      const userRef = doc(db, "user", email)
-      const userDoc = await getDoc(userRef)
-
-      if (userDoc.exists()) {
-        const userData = userDoc.data() as ResponseUserInfo
-        const { password, ...userInfoWithoutPassword } = userData
-
-        return userInfoWithoutPassword
-      } else {
-        return undefined
-      }
-    } catch (error) {
-      const { response } = error as unknown as AxiosError
-
-      if (response) {
-        throw Error(`🚨 firebase getDocs API : ${error}`)
-      }
-
-      throw Error(`🚨 getUserInfo firebase API : ${error}`)
-    }
-  },
-  modificatieMarketingClause: async (email: string, isChecked: boolean) => {
-    if (email === "") return
-
-    try {
-      const userRef = doc(db, "user", email)
-      const userDoc = await getDoc(userRef)
-
-      if (userDoc.exists()) {
-        const userData = userDoc.data() as ResponseUserInfo
-
-        if (userData.marketingClause === isChecked) return
-
-        const updatedUserInfo = { ...userData, marketingClause: isChecked }
-
-        await setDoc(userRef, updatedUserInfo)
-
-        return userData
-      } else {
-        return undefined
-      }
-    } catch (error) {
-      const { response } = error as unknown as AxiosError
-
-      if (response) {
-        throw Error(`🚨 firebase getDocs API : ${error}`)
-      }
-
-      throw Error(`🚨 modificatieMarketingClause firebase API : ${error}`)
-    }
-  },
-  modificatieDefaultAddress: async (
-    email: string,
-    deliveryInfo: DeliveryInfo
+  modificatieMarketingClause: async (
+    isChecked: boolean,
+    authorization: string | null | undefined
   ) => {
-    if (email === "") return
+    if (!authorization) return null
 
-    try {
-      const defaultDeliveryInfoRef = doc(db, "defaultDeliveryInfo", email)
-      const defaultDeliveryInfoDoc = await getDoc(defaultDeliveryInfoRef)
-
-      if (defaultDeliveryInfoDoc.exists()) {
-        const defaultDeliveryInfoData =
-          defaultDeliveryInfoDoc.data() as DeliveryInfo
-
-        if (
-          Object.keys(defaultDeliveryInfoData).every(
-            (key) => defaultDeliveryInfoData[key] === deliveryInfo[key]
-          )
-        )
-          return
-
-        await setDoc(defaultDeliveryInfoRef, deliveryInfo)
-      } else {
-        return undefined
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/userInfo`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json", authorization },
+        body: JSON.stringify({
+          isChecked,
+        }),
       }
-    } catch (error) {
-      const { response } = error as unknown as AxiosError
+    )
 
-      if (response) {
-        throw Error(`🚨 firebase getDocs API : ${error}`)
-      }
-
-      throw Error(`🚨 modificatieDefaultAddress firebase API : ${error}`)
-    }
+    return response.json()
   },
   memberTermination: async (email: string) => {
-    if (email === "") return
-
-    try {
-      const userRef = doc(db, "user", email)
-      const addressRef = doc(db, "address", email)
-      const cartRef = doc(db, "cart", email)
-      const checkoutRef = doc(db, "checkout", email)
-      const defaultDeliveryInfoRef = doc(db, "defaultDeliveryInfo", email)
-
-      await deleteDoc(userRef)
-      await deleteDoc(addressRef)
-      await deleteDoc(cartRef)
-      await deleteDoc(checkoutRef)
-      await deleteDoc(defaultDeliveryInfoRef)
-
-      return {
-        result: "success",
-      }
-    } catch (error) {
-      const { response } = error as unknown as AxiosError
-
-      if (response) {
-        throw Error(`🚨 firebase getDocs API : ${error}`)
-      }
-
-      throw Error(`🚨 memberTermination firebase API : ${error}`)
-    }
-  },
-  getUseMileAndGetMile: async (email: string) => {
-    if (email === "") return
-
-    try {
-      const checkoutRef = doc(db, "checkout", email)
-      const checkoutDoc = await getDoc(checkoutRef)
-
-      if (checkoutDoc.exists()) {
-        const checkoutData = checkoutDoc.data()
-        const checkoutList = checkoutData.checkoutList || []
-
-        const miles: UseMileAndGetMile[] = checkoutList.map(
-          (checkoutEl: CheckoutList) => {
-            const { getMile, useMile, checkoutNumber, checkoutDate } =
-              checkoutEl
-            return { getMile, useMile, checkoutNumber, checkoutDate }
-          }
-        )
-
-        return miles
-      }
-    } catch (error) {
-      const { response } = error as unknown as AxiosError
-
-      if (response) {
-        throw Error(`🚨 firebase getDocs API : ${error}`)
-      }
-
-      throw Error(`🚨 getUseMileAndGetMile firebase API : ${error}`)
-    }
-  },
-  getProductInfoByProductId: async (productId: string) => {
-    if (productId === "") return
-
-    try {
-      const productRef = doc(db, "products", productId)
-      const productDoc = await getDoc(productRef)
-
-      if (productDoc.exists()) {
-        const productData = productDoc.data() as Product
-
-        return productData
-      } else {
-        return undefined
-      }
-    } catch (error) {
-      const { response } = error as unknown as AxiosError
-
-      if (response) {
-        throw Error(`🚨 firebase getDocs API : ${error}`)
-      }
-
-      throw Error(`🚨 getProductInfoByProductId firebase API : ${error}`)
-    }
+    // if (email === "") return
+    // try {
+    //   const userRef = doc(db, "user", email)
+    //   const addressRef = doc(db, "address", email)
+    //   const cartRef = doc(db, "cart", email)
+    //   const checkoutRef = doc(db, "checkout", email)
+    //   const defaultDeliveryInfoRef = doc(db, "defaultDeliveryInfo", email)
+    //   await deleteDoc(userRef)
+    //   await deleteDoc(addressRef)
+    //   await deleteDoc(cartRef)
+    //   await deleteDoc(checkoutRef)
+    //   await deleteDoc(defaultDeliveryInfoRef)
+    //   return {
+    //     result: "success",
+    //   }
+    // } catch (error) {
+    //   const { response } = error as unknown as AxiosError
+    //   if (response) {
+    //     throw Error(`🚨 firebase getDocs API : ${error}`)
+    //   }
+    //   throw Error(`🚨 memberTermination firebase API : ${error}`)
+    // }
   },
   writeCoustomerCounseling: async (
-    userInfo: { email: string; name: string },
-    writeDetail: CustomerCounselingDetail
+    writeDetail: CustomerCounselingDetail,
+    authorization: string | null | undefined
   ) => {
-    if (userInfo.email === "") return
+    if (!authorization) return null
 
-    try {
-      const customerCounselingRef = doc(
-        db,
-        "customerCounseling",
-        userInfo.email
-      )
-      const customerCounselingDoc = await getDoc(customerCounselingRef)
-
-      let updatedCustomerCounselingList = []
-
-      if (customerCounselingDoc.exists()) {
-        const existingCustomerCounselingData = customerCounselingDoc.data()
-        const existingCustomerCounselingDataList =
-          existingCustomerCounselingData.customerCounselingList || []
-
-        updatedCustomerCounselingList = [
-          { ...writeDetail, writeDate: getCurrentDateTime() },
-          ...existingCustomerCounselingDataList,
-        ]
-      } else {
-        updatedCustomerCounselingList = [writeDetail]
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/myPage/customerCounseling`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json", authorization },
+        body: JSON.stringify({
+          writeDetail,
+        }),
       }
+    )
 
-      await setDoc(customerCounselingRef, {
-        customerCounselingList: updatedCustomerCounselingList,
-      })
-
-      return { result: "success" }
-    } catch (error) {
-      const { response } = error as unknown as AxiosError
-      if (response) {
-        throw Error(`🚨firebase setDoc API : ${error}`)
-      }
-
-      throw Error(`writeCoustomerCounseling firebase API : ${error}`)
-    }
+    return response.json()
   },
-  getCoutomerCounselingList: async (email: string) => {
-    if (email === "") return
+  getCoutomerCounselingList: async (
+    authorization: string | null | undefined
+  ): Promise<GetCustomerCounselingDetailResponse | null> => {
+    if (!authorization) return null
 
-    try {
-      const customerCounselingRef = doc(db, "customerCounseling", email)
-      const customerCounselingDoc = await getDoc(customerCounselingRef)
-
-      if (customerCounselingDoc) {
-        const existingCustomerCounselingData = customerCounselingDoc.data() as {
-          customerCounselingList: CustomerCounselingDetail[]
-        }
-
-        return existingCustomerCounselingData.customerCounselingList
-      } else {
-        return undefined
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/myPage/customerCounseling`,
+      {
+        headers: { authorization },
+        next: { revalidate: 0 },
       }
-    } catch (error) {}
+    )
+
+    return response.json()
   },
 }

@@ -8,7 +8,7 @@ export const getKoreanPaymentMethod = (payment: string) => {
     { kor: "카카오페이", eng: "kakaopay" },
     { kor: "삼성페이", eng: "samsungpay" },
     { kor: "페이코", eng: "payco" },
-    { kor: "SSG 페이", eng: "payco" },
+    { kor: "SSG 페이", eng: "SSGpay" },
     { kor: "무통장입금", eng: "deposit" },
   ]
 

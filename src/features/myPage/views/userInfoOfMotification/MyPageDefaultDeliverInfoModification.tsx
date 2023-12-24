@@ -18,23 +18,25 @@ import MyPageDefaultDeliveryNameAndRecipient, {
 import MyPageDefaultDeliveryPhoneModification, {
   IMyPageDefaultDeliveryPhoneModification,
 } from "./MyPageDefaultDeliveryPhoneModification"
+import MyPageListLoading from "../MyPageListLoading"
 
 const MyPageDefaultDeliverInfoModification = () => {
   const dispatch = useAppDispatch()
-  const { userDefalutDeliveryInfo } = useGetDefaultDeliveryInfoQuery()
+  const { deliveryInfo, isLoading: isGetDeliveryInfoLoading } =
+    useGetDefaultDeliveryInfoQuery()
   const { mutateAsync: defalutDeliveryInfoModificationMutateAsync, isLoading } =
     useDefaultDeliveryinfoModificaitionMutation()
 
   const additionalAddressInput = useUserInput(
     additionalAddressValidator,
-    userDefalutDeliveryInfo?.additionalAddress
+    deliveryInfo?.additionalAddress
   )
 
   const handleDefaultAddressModification = async (
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault()
-    if (!userDefalutDeliveryInfo) return
+    if (!deliveryInfo) return
 
     const formData = new FormData(event.currentTarget)
     const inputsToBeUpdated: DeliveryInfo = {
@@ -52,8 +54,8 @@ const MyPageDefaultDeliverInfoModification = () => {
     }
 
     if (
-      Object.keys(userDefalutDeliveryInfo).every(
-        (key) => userDefalutDeliveryInfo[key] === inputsToBeUpdated[key]
+      Object.keys(deliveryInfo).every(
+        (key) => deliveryInfo[key] === inputsToBeUpdated[key]
       )
     ) {
       dispatch(
@@ -70,27 +72,31 @@ const MyPageDefaultDeliverInfoModification = () => {
   const myPageDefaultDeliveryNameAndRecipientProps: IMyPageDefaultDeliveryNameAndRecipient =
     {
       deliveryInfo: {
-        deliveryName: userDefalutDeliveryInfo?.deliveryName ?? null,
-        recipient: userDefalutDeliveryInfo?.recipient ?? "",
+        deliveryName: deliveryInfo?.deliveryName ?? null,
+        recipient: deliveryInfo?.recipient ?? "",
       },
     }
 
   const myPageDefaultDeliveryPhoneModificationProps: IMyPageDefaultDeliveryPhoneModification =
     {
       phoneInfo: {
-        phone1: userDefalutDeliveryInfo?.phone1 ?? "",
-        phone2: userDefalutDeliveryInfo?.phone2 ?? null,
+        phone1: deliveryInfo?.phone1 ?? "",
+        phone2: deliveryInfo?.phone2 ?? null,
       },
     }
 
   const myPageDefaultDeliveryAddressModificationProps: IMyPageDefaultDeliveryAddressModification =
     {
       addressInfo: {
-        zipcode: userDefalutDeliveryInfo?.zipcode ?? "",
-        address: userDefalutDeliveryInfo?.address ?? "",
-        additionalAddress: userDefalutDeliveryInfo?.additionalAddress ?? "",
+        zipcode: deliveryInfo?.zipcode ?? "",
+        address: deliveryInfo?.address ?? "",
+        additionalAddress: deliveryInfo?.additionalAddress ?? "",
       },
     }
+
+  if (isGetDeliveryInfoLoading) {
+    return <MyPageListLoading />
+  }
 
   return (
     <form onSubmit={handleDefaultAddressModification}>

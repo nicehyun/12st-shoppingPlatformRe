@@ -1,16 +1,17 @@
-import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { useUserMileQuery } from "@/features/checkout/hooks/useGetUserMileQuery"
-import { useQuery } from "@tanstack/react-query"
-import { myPageAPI } from "../models/myPageAPI"
+import { useGetCheckoutListQuery } from "@/features/checkout/hooks/useGetCheckoutListQuery"
+import { UseMileAndGetMile } from "../types/mile"
+import { CheckoutList } from "@/features/checkout/types/checkout"
 
-const useGetUseMileAndGetMile = () => {
-  const { sessionQuery } = useSessionQuery()
-  const { userMile } = useUserMileQuery()
-  const { data: useMileAndGetMileInfo, isLoading } = useQuery(
-    ["useMileAndGetMileInfo"],
-    () => myPageAPI.getUseMileAndGetMile(sessionQuery?.user.email ?? ""),
-    {
-      enabled: !!sessionQuery,
+export const useGetUseMileAndGetMile = () => {
+  const { userMile, isLoading: isGetUserMile } = useUserMileQuery()
+  const { checkoutList, isLoading: isGetCheckoutList } =
+    useGetCheckoutListQuery()
+
+  const useMileAndGetMileInfo: UseMileAndGetMile[] = checkoutList.map(
+    (checkoutEl: CheckoutList) => {
+      const { getMile, useMile, checkoutNumber, checkoutDate } = checkoutEl
+      return { getMile, useMile, checkoutNumber, checkoutDate }
     }
   )
 
@@ -29,8 +30,6 @@ const useGetUseMileAndGetMile = () => {
     userMile,
     totalGetMile,
     totalUseMile,
-    isLoading,
+    isLoading: isGetUserMile && isGetCheckoutList,
   }
 }
-
-export default useGetUseMileAndGetMile

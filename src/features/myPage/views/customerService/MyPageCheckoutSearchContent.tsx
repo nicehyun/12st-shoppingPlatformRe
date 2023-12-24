@@ -8,18 +8,15 @@ import {
 } from "@/redux/features/myPageSlice"
 import { useEffect } from "react"
 import { getKoreanPaymentMethod } from "../../utils/payment"
+import { parseISOStringToDateTime } from "../../utils/date"
 
 const MyPageCheckoutSearchContent = () => {
   const dispatch = useAppDispatch()
   const selectedCheckoutInfo = useAppSelector(selectSelectedCheckoutInfo)
 
-  const selectedCheckoutDateList = [
-    selectedCheckoutInfo.checkoutDate?.year,
-    selectedCheckoutInfo.checkoutDate?.month,
-    selectedCheckoutInfo.checkoutDate?.date,
-    selectedCheckoutInfo.checkoutDate?.hour,
-    selectedCheckoutInfo.checkoutDate?.minute,
-  ]
+  const dateTime = selectedCheckoutInfo.checkoutDate
+    ? parseISOStringToDateTime(selectedCheckoutInfo.checkoutDate)
+    : null
 
   const selectedCheckoutPaymentList = [
     getKoreanPaymentMethod(selectedCheckoutInfo.payment?.selectedPayment ?? ""),
@@ -36,8 +33,8 @@ const MyPageCheckoutSearchContent = () => {
     {
       id: "coustomweCounselingWrite-checkoutInfo__checkoutDate",
       value: `${
-        selectedCheckoutDateList.every((checkoutDateEl) => !!checkoutDateEl)
-          ? selectedCheckoutDateList
+        dateTime?.every((checkoutDateEl) => !!checkoutDateEl)
+          ? dateTime
               .map(
                 (checkoutDateEl, index) =>
                   `${

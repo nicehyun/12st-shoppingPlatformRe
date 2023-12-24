@@ -11,6 +11,7 @@ import MyPageTableContentEl from "../MyPageTableContentEl"
 import MyPageListContentLayout from "../MyPageListContentLayout"
 import MyPageListLoading from "../MyPageListLoading"
 import MyPageListNoneContents from "../MyPageListNoneContents"
+import { parseISOString } from "@/features/checkout/utils/checkout"
 
 const MyPageCheckoutNumberToCheckoutPairList = () => {
   const dispatch = useAppDispatch()
@@ -44,17 +45,25 @@ const MyPageCheckoutNumberToCheckoutPairList = () => {
           >
             <MyPageTableContentEl
               content={checkoutNumberToCheckoutInfoPair.checkoutNumber ?? ""}
-              className="break-words group-hover:text-lightRed w-1/3"
-              NoCenter
+              className="break-words group-hover:text-lightRed w-1/4"
             />
 
             <MyPageTableContentEl
-              className="w-1/3 text-lightBlack"
-              content={`${checkoutNumberToCheckoutInfoPair.checkoutDate?.year}-${checkoutNumberToCheckoutInfoPair.checkoutDate?.month}-${checkoutNumberToCheckoutInfoPair.checkoutDate?.date}`}
+              className="w-1/4 text-lightBlack"
+              content={`${
+                parseISOString(checkoutNumberToCheckoutInfoPair.checkoutDate)
+                  .year
+              }-${
+                parseISOString(checkoutNumberToCheckoutInfoPair.checkoutDate)
+                  .month
+              }-${
+                parseISOString(checkoutNumberToCheckoutInfoPair.checkoutDate)
+                  .date
+              }`}
             />
             <MyPageTableContentEl
               content={checkoutNumberToCheckoutInfoPair.product.name}
-              className="truncate-2 w-1/3"
+              className="truncate-2 w-1/2"
               NoCenter
             />
           </MyPageListContentLayout>

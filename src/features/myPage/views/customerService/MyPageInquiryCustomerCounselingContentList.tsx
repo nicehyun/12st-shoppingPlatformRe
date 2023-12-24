@@ -1,5 +1,6 @@
 "use client"
 
+import { parseISOString } from "@/features/checkout/utils/checkout"
 import { useGetCustomerCounselingListQuery } from "../../hooks/useGetCustomerCounselingListQuery"
 import { getKoreanCsType } from "../../utils/csType"
 import MyPageListContentLayout from "../MyPageListContentLayout"
@@ -37,7 +38,11 @@ const MyPageInquiryCustomerCounselingContentList = () => {
           />
           <MyPageTableContentEl
             className="w-1/3 text-lightBlack"
-            content={`${customerCounselingEl.writeDate?.year}-${customerCounselingEl.writeDate?.month}-${customerCounselingEl.writeDate?.date}`}
+            content={`${
+              parseISOString(customerCounselingEl.writeDate ?? "").year
+            }-${parseISOString(customerCounselingEl.writeDate ?? "").month}-${
+              parseISOString(customerCounselingEl.writeDate ?? "").date
+            }`}
           />
 
           <MyPageTableContentEl className="w-1/3" content={"N"} />

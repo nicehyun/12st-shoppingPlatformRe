@@ -12,12 +12,13 @@ import { resetCsType, selectSelectedCsType } from "@/redux/features/myPageSlice"
 import MyPageCutsomerCounselingWriteUserInfoList from "./MyPageCustomerCounselingWriteUserInfoList"
 import { useEffect, useRef } from "react"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
-import { formatCheckoutDate, formatCheckoutPayment } from "../../utils/payment"
+import { formatCheckoutPayment } from "../../utils/payment"
 import { useCustomerCounselingWriteSubmitMutation } from "../../hooks/useCustomerCounselingWriteSubmitMutation"
 import { useFeedbackModal } from "@/features/common/hooks/useFeedbackModal"
 import { ROUTE, useNavigations } from "@/features/common/hooks/useNavigations"
 import Loading from "@/features/common/views/Loading"
-import { convertinglocaleStringToNumber } from "@/features/common/utils/price"
+import { parseLocaleStringToNumber } from "@/features/common/utils/price"
+import { parseDateTimeToISOString } from "../../utils/date"
 
 const MyPageInquiryCustomerCounselingWriteForm = () => {
   const { routeTo } = useNavigations()
@@ -43,14 +44,6 @@ const MyPageInquiryCustomerCounselingWriteForm = () => {
     "refund",
     "deposit",
   ]
-
-  const genernalRelationRadioValueListWithoutProduct = [
-    "userInfo",
-    "payment",
-    "couponAndMile",
-  ]
-
-  const etcRelationRadioValueList = ["system", "etc"]
 
   const handleCustomerCounselingWriteSubmit = async (
     event: React.FormEvent<HTMLFormElement>
@@ -144,64 +137,31 @@ const MyPageInquiryCustomerCounselingWriteForm = () => {
       return
     }
 
-    let response
-
-    if (checkoutRelationRadioValueList.includes(selectedCsType as string)) {
-      const writeDetail = {
-        csType: selectedCsType,
-        counselingContent,
-        counselingTitle,
-        checkoutProductName,
-        checkoutDate: formatCheckoutDate(checkoutDate),
-        checkoutNumber,
-        checkoutPayment: formatCheckoutPayment(checkoutPayment),
-      }
-
-      response = await customerCounselingWriteSubmitMutateAsync({
-        writeDetail,
-      })
+    const writeDetail = {
+      csType: selectedCsType,
+      counselingContent,
+      counselingTitle,
+      checkoutProductName,
+      checkoutDate: checkoutPayment
+        ? parseDateTimeToISOString(checkoutDate) ?? ""
+        : "",
+      productName,
+      productPrice: parseLocaleStringToNumber(productPrice),
+      checkoutNumber,
+      checkoutPayment: checkoutPayment
+        ? formatCheckoutPayment(checkoutPayment)
+        : {
+            selectedPayment: "",
+            creditName: "",
+            period: "",
+          },
     }
 
-    if (selectedCsType === "product") {
-      const writeDetail = {
-        csType: selectedCsType,
-        counselingContent,
-        counselingTitle,
-        productName,
-        productPrice: convertinglocaleStringToNumber(productPrice),
-      }
+    const response = await customerCounselingWriteSubmitMutateAsync({
+      writeDetail,
+    })
 
-      response = await customerCounselingWriteSubmitMutateAsync({
-        writeDetail,
-      })
-    }
-
-    if (
-      genernalRelationRadioValueListWithoutProduct.includes(selectedCsType) ||
-      etcRelationRadioValueList.includes(selectedCsType)
-    ) {
-      const writeDetail = {
-        csType: selectedCsType,
-        counselingContent,
-        counselingTitle,
-      }
-
-      response = await customerCounselingWriteSubmitMutateAsync({
-        writeDetail,
-      })
-    }
-
-    if (!response?.ok) {
-      dispatch(
-        showFeedbackModal({
-          modalContent:
-            "상품 주문에 실패했습니다. 오류가 계속되면 고객센터에 문의해주세요",
-        })
-      )
-      return
-    }
-
-    if (response?.ok) {
+    if (response?.status === 200) {
       routeTo(ROUTE.INQUIRYCUSTOMERCOUNSELING)
       showFeedbackModalWithContent("문의 등록이 완료되었습니다")
     }

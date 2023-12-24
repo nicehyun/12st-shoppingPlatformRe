@@ -14,7 +14,7 @@ export const discountedProductPrice = (rawPrice: number, discount: number) => {
 }
 
 export const numberToLocaleString = (number: number) => {
-  if (!number) return 0
+  if (!number) return ""
 
   return number.toLocaleString("ko-kr")
 }
@@ -27,6 +27,12 @@ export const accumulationOfProductsPrice = (productList: ProductInCart[]) =>
         curValue.amount,
     0
   )
+
+export const parseLocaleStringToNumber = (localeString: string) => {
+  if (!localeString) return 0
+
+  return parseFloat(localeString.replace(/,/g, ""))
+}
 
 /**
  * 숫자와 콤마로 구성된 문자열을 숫자로 변환

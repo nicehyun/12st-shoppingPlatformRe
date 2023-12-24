@@ -1,9 +1,9 @@
-import { CheckoutDate } from "@/features/checkout/types/checkout"
 import MyPageTableContentEl from "../MyPageTableContentEl"
 import MyPageListContentLayout from "../MyPageListContentLayout"
+import { parseISOString } from "@/features/checkout/utils/checkout"
 
 interface IMyPageUseMileAndGetMileContentEl {
-  checkoutDate: CheckoutDate
+  checkoutDate: string
   mile: string
   checkoutNumber: string
 }
@@ -13,19 +13,16 @@ const MyPageUseMileAndGetMileContentEl = ({
   checkoutNumber,
   checkoutDate,
 }: IMyPageUseMileAndGetMileContentEl) => {
-  const { date, month, year } = checkoutDate
   return (
     <MyPageListContentLayout>
       <MyPageTableContentEl
-        content={`${year}-${month}-${date}`}
+        content={`${parseISOString(checkoutDate).year}/${
+          parseISOString(checkoutDate).month
+        }/${parseISOString(checkoutDate).date}`}
         className="w-1/3 text-lightBlack"
       />
       <MyPageTableContentEl content={mile} className="w-1/3 font-bold" />
-      <MyPageTableContentEl
-        content={checkoutNumber}
-        className="w-1/3 break-words truncate-2"
-        NoCenter
-      />
+      <MyPageTableContentEl content={checkoutNumber} className="w-1/3" />
     </MyPageListContentLayout>
   )
 }
