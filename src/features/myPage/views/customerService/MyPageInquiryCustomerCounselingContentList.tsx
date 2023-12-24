@@ -24,7 +24,7 @@ const MyPageInquiryCustomerCounselingContentList = () => {
     <>
       {customerCounselingList?.map((customerCounselingEl, index) => (
         <MyPageListContentLayout
-          key={`customerCounselingList-${customerCounselingEl.csType}-${customerCounselingEl}-${index}`}
+          key={`customerCounselingList-${customerCounselingEl.csType}-${customerCounselingEl.writeDate}-${index}`}
         >
           <MyPageTableContentEl
             content={getKoreanCsType(customerCounselingEl.csType) ?? ""}

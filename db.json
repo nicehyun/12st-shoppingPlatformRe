@@ -1134,6 +1134,14 @@
       "email": "test@test.com",
       "customerCounselingList": [
         {
+          "csType": "product",
+          "counselingContent": "상품 문의드립니다!(제목)",
+          "counselingTitle": "상품 문의드립니다!상품 문의드립니다!상품 문의드립니다!상품 문의드립니다!상품 문의드립니다!상품 문의드립니다!상품 문의드립니다!상품 문의드립니다!",
+          "productName": "츄바스코 아즈텍 주안 오리지널 샌들 남자 여자 커플 여름 샌달",
+          "productPrice": 39000,
+          "writeDate": "2023-12-24T06:50:42.297Z"
+        },
+        {
           "csType": "system",
           "counselingContent": "ttt",
           "counselingTitle": "ttt",
