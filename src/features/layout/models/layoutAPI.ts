@@ -1,78 +1,28 @@
-import { Product, Products } from "@/features/common/types/product"
-import firebaseApp from "@/firebase/config"
-import { AxiosError } from "axios"
-import { collection, getDocs, getFirestore } from "firebase/firestore"
-
-type Categories = {
-  [key: string]: { [key: string]: string[] }
-}
-
-const db = getFirestore(firebaseApp)
+import { Products } from "@/features/common/types/product"
+import { Categories } from "../types/category"
 
 export const layoutAPI = {
-  getAllProducts: async (): Promise<Products> => {
-    const productsCollectionRef = collection(db, "products")
-    const productsSnapshot = await getDocs(productsCollectionRef)
-
-    const products: Products = []
-
-    productsSnapshot.forEach((doc) => {
-      const product = doc.data() as Product
-
-      products.push(product)
-    })
-
-    return products
-  },
-  getCategories: async (): Promise<Categories[]> => {
-    try {
-      const productsCollectionRef = collection(db, "products")
-      const productsSnapshot = await getDocs(productsCollectionRef)
-
-      const categories: Categories[] = []
-
-      productsSnapshot.forEach((doc) => {
-        if (doc.exists()) {
-          const product = doc.data() as Product
-
-          const { category1, category2, category3 } = product
-
-          const category1Index = categories.findIndex(
-            (categoryEntry) => categoryEntry[category1]
-          )
-
-          if (category1Index === -1) {
-            categories.push({
-              [category1]: {
-                [category2]: [category3],
-              },
-            })
-          } else {
-            const category1Data = categories[category1Index][category1]
-            const category2Index = Object.keys(category1Data).indexOf(category2)
-
-            if (category2Index === -1) {
-              category1Data[category2] = [category3]
-            } else {
-              const category3Array = category1Data[category2]
-
-              if (!category3Array.includes(category3)) {
-                category3Array.push(category3)
-              }
-            }
-          }
-        }
-      })
-
-      return categories
-    } catch (error) {
-      const { response } = error as unknown as AxiosError
-
-      if (response) {
-        throw Error(`🚨 Firestore API Error: ${error}`)
+  getFiltedProductListWithThridCategory: async (
+    categoriesPath: string
+  ): Promise<Products> => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/categoryManagement/${categoriesPath}`,
+      {
+        next: { revalidate: 10000 },
       }
+    )
 
-      throw Error(`🚨 getCategories Firestore API Error: ${error}`)
-    }
+    return response.json()
+  },
+
+  getCategories: async (): Promise<Categories[] | undefined> => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/categories`,
+      {
+        next: { revalidate: 10000 },
+      }
+    )
+
+    return response.json()
   },
 }

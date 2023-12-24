@@ -40,3 +40,21 @@ export const truncateText = (text: string, maxLength: number) => {
 export const sliceText = (text: string, endIndex: number) => {
   return text.slice(0, endIndex)
 }
+
+export const combineStrings = (string: string) => {
+  const parts = string.split(",")
+
+  return parts.join("/")
+}
+
+export const parseAndToSlice = (string: string) => {
+  const parts = string.split("/")
+
+  return parts.join("&")
+}
+
+export const parseSliceToAnd = (string: string) => {
+  const parts = string.split("&")
+
+  return parts.join("/")
+}

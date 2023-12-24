@@ -1,19 +1,10 @@
 import { AxiosError } from "axios"
 import { NextResponse } from "next/server"
 
-export async function GET(
-  request: Request,
-  { params }: { params: { productId: string } }
-) {
-  const productId = params.productId
-
-  if (!productId) {
-    throw new Error(`🚨 Not Product id!`)
-  }
-
+export async function GET(request: Request) {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_DB_URL}/productList/${productId}`,
+      `${process.env.NEXT_PUBLIC_DB_URL}/categories`,
       {
         next: { revalidate: 10000 },
       }
@@ -23,12 +14,10 @@ export async function GET(
   } catch (error) {
     const { response } = error as unknown as AxiosError
     if (response) {
-      console.error(
-        `🚨 JSON SERVER GET API (Get Product Detail Info) : ${response.data}`
-      )
+      console.error(`🚨 JSON SERVER GET API (Get Coupon) : ${response.data}`)
       return new NextResponse(null, { status: response.status })
     } else {
-      console.error(`🚨 Unexpected Error (Get Product Detail Info) : ${error}`)
+      console.error(`🚨 Unexpected Error (Get Coupon) : ${error}`)
     }
 
     return new NextResponse(null, { status: 500 })
