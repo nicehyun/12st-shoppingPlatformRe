@@ -5,8 +5,11 @@ import { Fragment } from "react"
 import Link from "next/link"
 import { Categories } from "../types/category"
 import { parseAndToSlice } from "@/features/common/utils/text"
+import { useAppDispatch } from "@/redux/hooks"
+import { hideCategory } from "@/redux/features/categorySlice"
 
 const CategoryList = () => {
+  const dispatch = useAppDispatch()
   const { categories } = useGetCategoriesQuery()
 
   const renderCategories = (categories: Categories[]) => {
@@ -14,6 +17,10 @@ const CategoryList = () => {
       const firstCategory = Object.keys(categoryData)[0]
 
       const subCategories = categoryData[firstCategory]
+
+      const handleCategoryLinkClick = () => {
+        dispatch(hideCategory())
+      }
 
       return (
         <Fragment key={`categories-first-${index}`}>
@@ -38,6 +45,7 @@ const CategoryList = () => {
                         href={`/categoryManagement/firstCategory=${firstCategory}/secondCategory=${secondCategory}/thirdCategory=${parseAndToSlice(
                           thirdCategory
                         )}`}
+                        onClick={handleCategoryLinkClick}
                         className="block text-lightBlack py-[10px] text-[14px] font-medium cursor-pointer hover:text-lightRed"
                       >
                         {thirdCategory}
