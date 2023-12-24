@@ -1,7 +1,7 @@
 import { useAppDispatch } from "@/redux/hooks"
 import { useMutation } from "@tanstack/react-query"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
-import { productDeatilAPI } from "@/features/productDetail/productDetailAPI/productDetailAPI"
+import { productDeatilAPI } from "@/features/productDetail/model/productDetailAPI"
 
 export const useSearchProductInfoMutation = () => {
   const dispatch = useAppDispatch()

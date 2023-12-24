@@ -11,8 +11,6 @@ const MyPageTotalMileInfoContent = () => {
   const { userMile, totalGetMile, totalUseMile, isLoading } =
     useGetUseMileAndGetMile()
 
-  console.log(totalGetMile)
-
   if (isLoading) {
     return <MyPageListLoading />
   }

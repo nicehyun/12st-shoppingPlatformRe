@@ -1,7 +1,7 @@
 import ProductMainInfo from "./ProductMainInfo"
 import ProductDetailInfo from "./ProductDetailInfo"
 import { use } from "react"
-import { productDeatilAPI } from "./productDetailAPI/productDetailAPI"
+import { productDeatilAPI } from "./model/productDetailAPI"
 
 interface IProductDetailLayout {
   productId: string

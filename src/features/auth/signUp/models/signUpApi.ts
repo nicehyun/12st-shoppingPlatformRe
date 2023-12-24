@@ -1,10 +1,4 @@
-import { UserInfo } from "@/features/common/types/user"
-import firebaseApp from "@/firebase/config"
-import { AxiosError } from "axios"
-import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore"
 import { IRequestSignUp } from "../types/signUp"
-
-const db = getFirestore(firebaseApp)
 
 export const signUpAPI = {
   signUp: async (props: IRequestSignUp) => {
@@ -48,28 +42,5 @@ export const signUpAPI = {
     )
 
     return response.json()
-  },
-  addUserInfo: async (data: UserInfo) => {
-    const userInfoIncludingMile = { ...data, mile: 0 }
-
-    try {
-      await setDoc(
-        doc(db, "user", userInfoIncludingMile.email),
-        userInfoIncludingMile,
-        {
-          merge: true,
-        }
-      )
-
-      return { result: "success" }
-    } catch (error) {
-      const { response } = error as unknown as AxiosError
-
-      if (response) {
-        throw Error(`🚨firebase setDocs API: ${error}`)
-      }
-
-      throw Error(`🚨addUserInfo firebase addUser API error : ${error}`)
-    }
   },
 }
