@@ -1,23 +1,19 @@
 "use client"
-import { use } from "react"
-import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io"
-import { productHeartAPI } from "../common/models/heartAPI"
-import useSessionQuery from "../auth/signIn/hooks/useSessionQuery"
-import { useHeartOfProductQuery } from "./hooks/useHeartOfProductQuery"
 
+import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io"
 import { Product } from "../common/types/product"
 import Button from "../common/views/Button"
 import { useAddHeartListMutation } from "./hooks/useAddHeartListMutation"
 import { useRemoveHeartListMutation } from "./hooks/useRemoveHeartListMutation"
 import Loading from "../common/views/Loading"
+import { useGetHeartListQuery } from "./hooks/useGetHeartListQuery"
 
 interface IProductNameAndHeart {
   productDetail: Product
 }
 
 const ProductNameAndHeart = ({ productDetail }: IProductNameAndHeart) => {
-  const { heartList, isLoading: isGetHeartListLoading } =
-    useHeartOfProductQuery()
+  const { heartList, isLoading: isGetHeartListLoading } = useGetHeartListQuery()
 
   const { addHeartListMutateAsync, isAddHeartListLoading } =
     useAddHeartListMutation(productDetail)

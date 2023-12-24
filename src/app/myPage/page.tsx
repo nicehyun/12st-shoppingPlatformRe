@@ -1,11 +1,11 @@
 import MyPageCheckoutList from "@/features/myPage/views/shoppingInfo/MyPageCheckoutList"
-import MyPageHeartList from "@/features/myPage/views/MyPageHeartList"
+import HeartProductListInfo from "@/features/myPage/views/heartProductList/HeartProductListInfo"
 
 const MyPagePage = () => {
   return (
     <>
       <MyPageCheckoutList />
-      <MyPageHeartList />
+      <HeartProductListInfo />
     </>
   )
 }

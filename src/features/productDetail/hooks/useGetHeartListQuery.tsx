@@ -2,7 +2,7 @@ import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { productHeartAPI } from "@/features/common/models/heartAPI"
 import { useQuery } from "@tanstack/react-query"
 
-export const useHeartOfProductQuery = () => {
+export const useGetHeartListQuery = () => {
   const { sessionQuery } = useSessionQuery()
   const { data, isLoading } = useQuery(
     ["heartList"],

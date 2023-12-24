@@ -16,7 +16,7 @@ const MyPageCheckoutListContentList = () => {
 
   const { checkoutList, isLoading } = useGetCheckoutListQuery()
 
-  const perPage = pathname === "myPage" ? 5 : 10
+  const perPage = pathname === "/myPage" ? 5 : 10
   const { listPagination, renderPaginationComponent } = usePagination(
     perPage,
     checkoutList.length
