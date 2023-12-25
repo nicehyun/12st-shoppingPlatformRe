@@ -29,7 +29,7 @@ const HomeBasicProductsSection = ({
         </div>
 
         <Link
-          href={`${process.env.BASE_URL}/${route}`}
+          href={`${route}`}
           className="absolute right-0 text-[14px] text-lightRed transition-3 font-bold"
         >
           + 더보기

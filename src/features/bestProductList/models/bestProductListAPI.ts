@@ -1,15 +1,13 @@
-// {
-//     next: { revalidate: 300 },
-//   }
-
 import { Products } from "@/features/common/types/product"
 
 export const bestProductListAPI = {
-  getBestProductList: async (): Promise<Products> => {
+  getBestProductListWithCategory: async (
+    categoriesPath: string[]
+  ): Promise<Products> => {
     const response = await fetch(
-      `${process.env.BASE_URL}/api/bestProductList`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/bestProductList/${categoriesPath}`,
       {
-        cache: "no-cache",
+        next: { revalidate: 10000 },
       }
     )
 

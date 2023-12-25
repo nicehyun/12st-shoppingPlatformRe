@@ -7,6 +7,7 @@ import { parseCategoriesObject } from "../models/category"
 import { useGetfiltedProductListQuery } from "@/features/layout/hooks/useGetfiltedProductListQuery"
 import Loading from "@/features/common/views/Loading"
 
+// TODO : categoriesPath 타입 수정
 interface ICategoryManagement {
   categoriesPath: string
 }

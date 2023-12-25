@@ -1351,6 +1351,16 @@
         }
       ],
       "id": 1
+    },
+    {
+      "email": "test@tsest.com",
+      "checkoutList": [],
+      "id": 2
+    },
+    {
+      "email": "test@test.com",
+      "checkoutList": [],
+      "id": 3
     }
   ],
   "customerCounseling": [
@@ -1584,11 +1594,11 @@
   "users": [
     {
       "email": "test@test.com",
-      "password": "$2b$10$pgj8lXNIgXLK5niBOKi2f.0.7b/OWekYyh8.VT/J8kqMxcLGlEsra",
+      "password": "$2b$10$C73gISfb0HoP3KY06WFS6exoA.u62YN6sfOEUa/M0bslZet4Vbh1W",
       "name": "승현",
       "phone": "01012341234",
-      "marketingClause": false,
-      "mile": 3060,
+      "marketingClause": true,
+      "mile": 0,
       "id": 1
     }
   ],

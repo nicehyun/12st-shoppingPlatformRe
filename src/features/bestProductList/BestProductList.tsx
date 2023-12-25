@@ -1,90 +1,55 @@
 "use client"
 
-import { use, useState } from "react"
-import { bestProductListAPI } from "./models/bestProductListAPI"
 import ProductCard from "../common/views/ProductCard"
-import MyPageSectionTitle from "../myPage/views/MyPageSectionTitle"
-import {
-  getSecondCategories,
-  getThridCategories,
-} from "../common/models/product"
-import { dummyProductList } from "../common/models/dummyData"
-import { commonAPI } from "../common/models/commonAPI"
+import { usePagination } from "../common/hooks/usePagination"
+import { useGetBestProductListQuery } from "./hooks/useGetBestProductListQuery"
+import Loading from "../common/views/Loading"
+import { Fragment } from "react"
 
-const BestProductList = () => {
-  // const bestProductList = use(bestProductListAPI.getBestProductList())
-  const productList = use(commonAPI.getProductList())
-  console.log(productList)
+interface IBestProductList {
+  categoriesPath: string[] | undefined
+}
 
-  // console.log(bestProductList)
-  // const bestProductList = dummyProductList.slice(0, 100)
+const BestProductList = ({ categoriesPath }: IBestProductList) => {
+  const fommatedCategoriesPath = categoriesPath ?? []
+  const { bestProductList, isLoading } = useGetBestProductListQuery(
+    fommatedCategoriesPath
+  )
 
-  // const top3ProductList = bestProductList.slice(0, 3)
-  // const ProductListWithoutTop3 = bestProductList.slice(3, 100)
+  const perPage = 12
+  const { listPagination, renderPaginationComponent } = usePagination(
+    perPage,
+    bestProductList.length
+  )
 
-  // const secondCategories = getSecondCategories(bestProductList)
-
-  // const thridCategories = getThridCategories(
-  //   bestProductList,
-  //   secondCategories[0]
-  // )
-
-  // console.log(secondCategories)
-
-  // const test = fetch("http://localhost:9999/posts")
-  //   .then((res) => res.json())
-  //   .then((result) => console.log(result))
+  if (isLoading) {
+    return (
+      <Loading
+        spinnerSize={{ width: "w-[50px]", height: "h-[50px]" }}
+        height="h-[400px]"
+        isFrame={false}
+      />
+    )
+  }
 
   return (
     <>
-      <MyPageSectionTitle title="BEST" />
-
-      <div className="border-[1px] bg-white mt-[50px] px-[10px] py-[20px]">
-        {/* <div className="mb-[20px] border-b-[1px] border-border pb-[20px]">
-          {firstCategories.map((category, index) => (
-            <span
-              key={`category-firstCategory__${category}`}
-              className={`relative text-[14px] ml-[10px] ${
-                index !== 0 ? "before:vertical-divider before:-mx-5" : ""
-              }  mr-10 text-lightBlack`}
-            >
-              {category}
-            </span>
+      <div className="grid grid-cols-3 xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-[20px] mt-[50px]">
+        {bestProductList
+          .slice(listPagination.indexOfFirst, listPagination.indexOfLast)
+          .map((product, index) => (
+            <Fragment key={`best-product-${product.id}`}>
+              <div className="relative">
+                <ProductCard productInfo={product} />
+                <span className="absolute top-0 left-0 bg-black w-[50px] h-[50px] flexCenter text-white text-[20px] font-bold">
+                  {index + 1}
+                </span>
+              </div>
+            </Fragment>
           ))}
-        </div> */}
-
-        {/* <div className="mb-[20px] border-b-[1px] border-border pb-[20px]">
-          {secondCategories.map((category, index) => (
-            <span
-              key={`category-secondCategory__${category}`}
-              className={`relative text-[14px] ml-[10px] ${
-                index !== 0 ? "before:vertical-divider before:-mx-5" : ""
-              }  mr-10 text-lightBlack`}
-            >
-              {category}
-            </span>
-          ))}
-        </div>
-
-        <div>
-          {thridCategories.map((category, index) => (
-            <span
-              key={`category-secondCategory__${category}`}
-              className={`relative text-[14px] ml-[10px] ${
-                index !== 0 ? "before:vertical-divider before:-mx-5" : ""
-              }  mr-10 text-lightBlack`}
-            >
-              {category}
-            </span>
-          ))}
-        </div> */}
       </div>
 
-      <div className="grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-[20px] mt-[50px]">
-        {[].map((product) => (
-          <ProductCard productInfo={product} key={`bestProduct-${product}`} />
-        ))}
-      </div>
+      <div className="mt-[30px]">{renderPaginationComponent()}</div>
     </>
   )
 }

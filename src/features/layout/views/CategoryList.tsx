@@ -16,7 +16,7 @@ const CategoryList = () => {
     return categories.map((categoryData, index) => {
       const firstCategory = Object.keys(categoryData)[0]
 
-      const subCategories = categoryData[firstCategory]
+      const secondCategories = categoryData[firstCategory]
 
       const handleCategoryLinkClick = () => {
         dispatch(hideCategory())
@@ -28,7 +28,7 @@ const CategoryList = () => {
             {firstCategory}
           </h3>
 
-          {Object.keys(subCategories).map((secondCategory, secondIndex) => (
+          {Object.keys(secondCategories).map((secondCategory, secondIndex) => (
             <Fragment key={`categories-second-${secondCategory}`}>
               <Accordion>
                 <AccordionSummary
@@ -39,7 +39,7 @@ const CategoryList = () => {
                 </AccordionSummary>
 
                 <AccordionDetails>
-                  {subCategories[secondCategory].map((thirdCategory) => (
+                  {secondCategories[secondCategory].map((thirdCategory) => (
                     <Fragment key={`categories-third-${thirdCategory}`}>
                       <Link
                         href={`/categoryManagement/firstCategory=${firstCategory}/secondCategory=${secondCategory}/thirdCategory=${parseAndToSlice(

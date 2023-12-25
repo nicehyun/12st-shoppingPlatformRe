@@ -1,9 +1,9 @@
 import { Products } from "@/features/common/types/product"
 
 type IndividualSectionProductList = {
-  bestProductList: Products | null
-  arrivalProductList: Products | null
-  topSaleProductList: Products | null
+  bestProductList: Products
+  arrivalProductList: Products
+  topSaleProductList: Products
 }
 
 export const homeAPI = {
@@ -12,7 +12,7 @@ export const homeAPI = {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/home`,
         {
-          next: { revalidate: 300 },
+          next: { revalidate: 10000 },
         }
       )
 

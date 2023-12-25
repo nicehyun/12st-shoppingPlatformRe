@@ -58,3 +58,14 @@ export const parseSliceToAnd = (string: string) => {
 
   return parts.join("/")
 }
+
+export const getAfterEquals = (string: string) => {
+  if (!string) return ""
+
+  const [, value] = string.split("=")
+  if (value !== undefined) {
+    return value
+  } else {
+    return string
+  }
+}

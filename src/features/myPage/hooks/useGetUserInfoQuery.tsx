@@ -1,7 +1,5 @@
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { useQuery } from "@tanstack/react-query"
-import { myPageAPI } from "../models/myPageAPI"
-import { commonAPI } from "@/features/common/models/commonAPI"
 import { userInfoAPI } from "@/features/common/models/userInfoAPI"
 
 export const useGetUserInfoQuery = () => {
