@@ -1,3 +1,5 @@
+"use client"
+
 import {
   getAfterEquals,
   parseAndToSlice,
@@ -16,11 +18,17 @@ const ThirdCategories = ({
   categoriesPath,
   linkDefaultHref,
 }: IThirdCategories) => {
+  const fommatedCategoriesPath = categoriesPath ?? []
+  const [firstCategoryPath, secondCategoryPath, thirdCategoryPath] =
+    fommatedCategoriesPath
+  const fommattedThirdCategory = parseSliceToAnd(
+    getAfterEquals(decodeURIComponent(thirdCategoryPath ?? ""))
+  )
   const categories = use(layoutAPI.getCategories()) ?? []
 
-  const firstCategory = getAfterEquals(decodeURIComponent(categoriesPath[0]))
+  const firstCategory = getAfterEquals(decodeURIComponent(firstCategoryPath))
   const seconCategory = parseSliceToAnd(
-    getAfterEquals(decodeURIComponent(categoriesPath[1]))
+    getAfterEquals(decodeURIComponent(secondCategoryPath))
   )
 
   if (!firstCategory || !seconCategory) return <></>
@@ -44,9 +52,13 @@ const ThirdCategories = ({
           href={`${linkDefaultHref}/firstCategory=${firstCategory}/secondCategory=${parseAndToSlice(
             seconCategory
           )}/thirdCategory=${parseAndToSlice(thirdCategory)}`}
-          className={`inline-block relative text-[14px] ml-[10px] ${
+          className={`inline-block relative text-[14px] ml-[10px] mr-[20px] text-lightBlack ${
             secondIndex !== 0 ? "before:vertical-divider before:-mx-[16px]" : ""
-          }  mr-[20px] text-lightBlack`}
+          }  ${
+            thirdCategory === fommattedThirdCategory
+              ? "text-lightRed font-semibold"
+              : ""
+          }`}
         >
           {thirdCategory}
         </Link>

@@ -37,7 +37,7 @@ export const layoutAPI = {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/searchProductList/${SearchPath}`,
       {
-        next: { revalidate: 0 },
+        next: { revalidate: 10000 },
       }
     )
 
