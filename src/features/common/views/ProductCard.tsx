@@ -1,3 +1,5 @@
+"use client"
+
 import { BiCommentDetail } from "react-icons/bi"
 import { MdOutlineSell } from "react-icons/md"
 import { BsFillCartDashFill, BsFillCartPlusFill } from "react-icons/bs"
@@ -8,6 +10,7 @@ import { useProductListInCartQuery } from "@/features/cart/hooks/useProductListI
 import { useAddToCartMutaion } from "@/features/cart/hooks/useAddToCartMutaion"
 import useRemoveFromCartMutation from "@/features/cart/hooks/useRemoveFromCartMutation"
 import { discountedProductPrice, numberToLocaleString } from "../utils/price"
+
 import Image from "next/image"
 import { useAuthenticate } from "@/features/auth/signIn/hooks/useAuthenticate"
 import Button from "./Button"

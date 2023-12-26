@@ -1,7 +1,7 @@
-import BestProductList from "@/features/bestProductList/BestProductListSection"
+import TopSaleProductListSection from "@/features/topSaleProductList/views/TopSaleProductListSection"
 
 const TopSaleProductListPage = () => {
-  return <BestProductList />
+  return <TopSaleProductListSection />
 }
 
 export default TopSaleProductListPage
