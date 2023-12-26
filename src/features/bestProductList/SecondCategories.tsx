@@ -1,34 +1,27 @@
-"use client"
-
 import { Fragment, use } from "react"
 import { layoutAPI } from "../layout/models/layoutAPI"
 import { Categories } from "../layout/types/category"
 import Link from "next/link"
 import { getAfterEquals, parseAndToSlice } from "../common/utils/text"
-import { useGetCategoriesQuery } from "../layout/hooks/useGetCategoriesQuery"
 
 interface ISecondCategories {
   categoriesPath: string[] | undefined
 }
-// TODO : Link 표시
+
 const SecondCategories = ({ categoriesPath }: ISecondCategories) => {
   const fommatedCategoriesPath = categoriesPath ?? []
 
-  // const categories = use(layoutAPI.getCategories()) ?? []
-  const { categories } = useGetCategoriesQuery()
+  const categories = use(layoutAPI.getCategories()) ?? []
 
-  const [firstCategoryPath, secondCategoryPath, thirdCategoryPath] =
-    fommatedCategoriesPath
+  const [, secondCategoryPath] = fommatedCategoriesPath
 
-  const firstCategory = getAfterEquals(firstCategoryPath)
-  const secondCategory = getAfterEquals(decodeURI(secondCategoryPath))
-  const thirdCategory = getAfterEquals(thirdCategoryPath)
-
-  console.log(decodeURI(secondCategoryPath))
+  const selectedSecondCategory = getAfterEquals(
+    decodeURIComponent(secondCategoryPath)
+  )
 
   const renderSecondCategories = (categories: Categories[]) => {
     let index = 0
-    return categories.map((categoryData) => {
+    return categories.map((categoryData: Categories) => {
       const firstCategory = Object.keys(categoryData)[0]
 
       const secondCategories = categoryData[firstCategory]
@@ -41,9 +34,12 @@ const SecondCategories = ({ categoriesPath }: ISecondCategories) => {
               href={`/bestProductList/firstCategory=${firstCategory}/secondCategory=${parseAndToSlice(
                 secondCategory
               )}`}
-              className={`inline-block relative text-[14px] ml-[10px] ${
-                index !== 1 ? "before:vertical-divider before:-mx-[16px]" : ""
-              }  mr-[20px] text-lightBlack`}
+              className={`inline-block relative text-[14px] ml-[10px] mr-[20px] text-lightBlack  before:vertical-divider before:-mx-[16px]
+               ${
+                 selectedSecondCategory === parseAndToSlice(secondCategory)
+                   ? "text-lightRed font-semibold"
+                   : ""
+               } `}
             >
               {secondCategory}
             </Link>
@@ -55,6 +51,16 @@ const SecondCategories = ({ categoriesPath }: ISecondCategories) => {
 
   return (
     <div className="border-[1px] bg-white mt-[50px] px-[10px] py-[20px]">
+      <Link
+        href={`/bestProductList`}
+        className={`inline-block relative text-[14px] ml-[10px] mr-[20px] text-lightBlack ${
+          fommatedCategoriesPath.length === 0
+            ? "text-lightRed font-semibold"
+            : ""
+        } `}
+      >
+        전체
+      </Link>
       {renderSecondCategories(categories)}
     </div>
   )
