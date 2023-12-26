@@ -2,14 +2,14 @@ import CategoryManagement from "@/features/categoryManagement/views/CategoryMana
 
 interface ICategoryProductManagementPageProps {
   params: {
-    categories: string
+    categories: string[]
   }
 }
 
 const CategoryProductManagementPage = ({
   params,
 }: ICategoryProductManagementPageProps) => {
-  return <CategoryManagement categoriesPath={params.categories} />
+  return <CategoryManagement categoriesPath={params.categories ?? ""} />
 }
 
 export default CategoryProductManagementPage

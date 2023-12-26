@@ -9,9 +9,13 @@ import { layoutAPI } from "../layout/models/layoutAPI"
 
 interface IThirdCategories {
   categoriesPath: string[]
+  linkDefaultHref: string
 }
 
-const ThirdCategories = ({ categoriesPath }: IThirdCategories) => {
+const ThirdCategories = ({
+  categoriesPath,
+  linkDefaultHref,
+}: IThirdCategories) => {
   const categories = use(layoutAPI.getCategories()) ?? []
 
   const firstCategory = getAfterEquals(decodeURIComponent(categoriesPath[0]))
@@ -36,8 +40,8 @@ const ThirdCategories = ({ categoriesPath }: IThirdCategories) => {
     <div className="border-[1px] bg-white mt-[50px] px-[10px] py-[20px]">
       {thirdCategories.map((thirdCategory, secondIndex) => (
         <Link
-          key={`bestProductList-categories-thrid-${thirdCategory}`}
-          href={`/bestProductList/firstCategory=${firstCategory}/secondCategory=${parseAndToSlice(
+          key={`product-categories-thrid-${thirdCategory}`}
+          href={`${linkDefaultHref}/firstCategory=${firstCategory}/secondCategory=${parseAndToSlice(
             seconCategory
           )}/thirdCategory=${parseAndToSlice(thirdCategory)}`}
           className={`inline-block relative text-[14px] ml-[10px] ${

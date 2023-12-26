@@ -6,9 +6,13 @@ import { getAfterEquals, parseAndToSlice } from "../common/utils/text"
 
 interface ISecondCategories {
   categoriesPath: string[] | undefined
+  linkDefaultHref: string
 }
 
-const SecondCategories = ({ categoriesPath }: ISecondCategories) => {
+const SecondCategories = ({
+  categoriesPath,
+  linkDefaultHref,
+}: ISecondCategories) => {
   const fommatedCategoriesPath = categoriesPath ?? []
 
   const categories = use(layoutAPI.getCategories()) ?? []
@@ -28,10 +32,11 @@ const SecondCategories = ({ categoriesPath }: ISecondCategories) => {
 
       return Object.keys(secondCategories).map((secondCategory) => {
         index += 1
+
         return (
-          <Fragment key={`bestProductList-categories-second-${secondCategory}`}>
+          <Fragment key={`product-categories-second-${secondCategory}`}>
             <Link
-              href={`/bestProductList/firstCategory=${firstCategory}/secondCategory=${parseAndToSlice(
+              href={`${linkDefaultHref}/firstCategory=${firstCategory}/secondCategory=${parseAndToSlice(
                 secondCategory
               )}`}
               className={`inline-block relative text-[14px] ml-[10px] mr-[20px] text-lightBlack  before:vertical-divider before:-mx-[16px]
@@ -52,7 +57,7 @@ const SecondCategories = ({ categoriesPath }: ISecondCategories) => {
   return (
     <div className="border-[1px] bg-white mt-[50px] px-[10px] py-[20px]">
       <Link
-        href={`/bestProductList`}
+        href={linkDefaultHref}
         className={`inline-block relative text-[14px] ml-[10px] mr-[20px] text-lightBlack ${
           fommatedCategoriesPath.length === 0
             ? "text-lightRed font-semibold"

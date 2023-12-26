@@ -1,62 +1,68 @@
-"use client"
-
 import ProductCard from "@/features/common/views/ProductCard"
 import MyPageSectionTitle from "@/features/myPage/views/MyPageSectionTitle"
-import { usePagination } from "@/features/common/hooks/usePagination"
-import { parseCategoriesObject } from "../models/category"
-import { useGetfiltedProductListQuery } from "@/features/layout/hooks/useGetfiltedProductListQuery"
-import Loading from "@/features/common/views/Loading"
+import { use } from "react"
+import { layoutAPI } from "@/features/layout/models/layoutAPI"
+import { combineStrings, getAfterEquals } from "@/features/common/utils/text"
+import SecondCategories from "@/features/bestProductList/SecondCategories"
+import ThirdCategories from "@/features/bestProductList/ThirdCategories"
 
-// TODO : categoriesPath 타입 수정
 interface ICategoryManagement {
-  categoriesPath: string
+  categoriesPath: string[]
 }
 
 const CategoryManagement = ({ categoriesPath }: ICategoryManagement) => {
-  const decodedCategories = decodeURIComponent(categoriesPath)
+  const [firstCategoryPath, secondCategoryPath, thirdCategoryPath] =
+    categoriesPath ?? []
 
-  const { firstCategory, secondCategory, thirdCategory } =
-    parseCategoriesObject(decodedCategories.split(","))
-
-  const { filtedProductList, isLoading } =
-    useGetfiltedProductListQuery(decodedCategories)
-
-  const perPage = 12
-  const { listPagination, renderPaginationComponent } = usePagination(
-    perPage,
-    filtedProductList.length
+  const decodedFirstCategory = getAfterEquals(
+    decodeURIComponent(firstCategoryPath ?? "")
+  )
+  const decodedSecondCategory = getAfterEquals(
+    decodeURIComponent(secondCategoryPath ?? "")
+  )
+  const decodedThirdCategory = getAfterEquals(
+    decodeURIComponent(thirdCategoryPath ?? "")
   )
 
-  if (isLoading) {
-    return (
-      <Loading
-        spinnerSize={{ width: "w-[50px]", height: "h-[50px]" }}
-        height="h-[400px]"
-        isFrame={false}
-      />
-    )
-  }
+  const filtedProductList =
+    use(
+      layoutAPI.getFiltedProductListWithThridCategory(
+        firstCategoryPath ? `/${combineStrings(categoriesPath.join(","))}` : ""
+      )
+    ) ?? []
+
+  const sectionTitle = decodedFirstCategory
+    ? decodedThirdCategory
+      ? `${decodedFirstCategory} > ${decodedSecondCategory} > ${decodedThirdCategory}`
+      : `${decodedFirstCategory} > ${decodedSecondCategory}`
+    : "CATEGORY"
 
   return (
-    <div>
+    <section>
       {/* TODO : MyPageSectionTitle common으로 수정하기 */}
-      <MyPageSectionTitle
-        title={`${firstCategory} > ${secondCategory} > ${thirdCategory}`}
+      <MyPageSectionTitle title={sectionTitle} />
+
+      <SecondCategories
+        categoriesPath={categoriesPath}
+        linkDefaultHref="/categoryManagement"
       />
 
-      <div className="grid grid-cols-3 xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-[20px] mt-[50px]">
-        {filtedProductList
-          .slice(listPagination.indexOfFirst, listPagination.indexOfLast)
-          .map((product, index) => (
-            <ProductCard
-              productInfo={product}
-              key={`category-${thirdCategory}-product-${index}`}
-            />
-          ))}
-      </div>
+      {categoriesPath && (
+        <ThirdCategories
+          categoriesPath={categoriesPath}
+          linkDefaultHref="/categoryManagement"
+        />
+      )}
 
-      <div className="mt-[30px]">{renderPaginationComponent()}</div>
-    </div>
+      <div className="grid grid-cols-3 xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-[20px] mt-[50px]">
+        {filtedProductList.map((product, index) => (
+          <ProductCard
+            productInfo={product}
+            key={`product-categogy-${product.id}`}
+          />
+        ))}
+      </div>
+    </section>
   )
 }
 

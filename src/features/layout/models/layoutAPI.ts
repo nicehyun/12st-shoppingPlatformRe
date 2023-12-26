@@ -11,7 +11,7 @@ export const layoutAPI = {
     categoriesPath: string
   ): Promise<Products> => {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/categoryManagement/${categoriesPath}`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/categoryManagement${categoriesPath}`,
       {
         next: { revalidate: 10000 },
       }

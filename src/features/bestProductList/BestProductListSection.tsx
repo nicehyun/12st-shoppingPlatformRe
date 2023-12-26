@@ -12,9 +12,17 @@ const BestProductListSection = ({ categoriesPath }: IBestProductList) => {
     <section>
       <MyPageSectionTitle title="BEST" />
 
-      <SecondCategories categoriesPath={categoriesPath} />
+      <SecondCategories
+        categoriesPath={categoriesPath}
+        linkDefaultHref="/bestProductList"
+      />
 
-      {categoriesPath && <ThirdCategories categoriesPath={categoriesPath} />}
+      {categoriesPath && (
+        <ThirdCategories
+          categoriesPath={categoriesPath}
+          linkDefaultHref="/bestProductList"
+        />
+      )}
 
       <BestProductList categoriesPath={categoriesPath} />
     </section>
