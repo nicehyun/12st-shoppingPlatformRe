@@ -4,9 +4,10 @@ import { useQuery } from "@tanstack/react-query"
 
 export const useGetHeartListQuery = () => {
   const { sessionQuery } = useSessionQuery()
+
   const { data, isLoading } = useQuery(
     ["heartList"],
-    () => productHeartAPI.getHeartList(sessionQuery?.user.accessToken),
+    () => productHeartAPI.getHeartList(sessionQuery?.user.accessToken ?? ""),
     {
       enabled: !!sessionQuery,
     }

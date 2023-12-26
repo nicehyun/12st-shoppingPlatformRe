@@ -7,13 +7,18 @@ import { useAddHeartListMutation } from "./hooks/useAddHeartListMutation"
 import { useRemoveHeartListMutation } from "./hooks/useRemoveHeartListMutation"
 import Loading from "../common/views/Loading"
 import { useGetHeartListQuery } from "./hooks/useGetHeartListQuery"
+import useSessionQuery from "../auth/signIn/hooks/useSessionQuery"
+import { useAuthenticate } from "../auth/signIn/hooks/useAuthenticate"
 
 interface IProductNameAndHeart {
   productDetail: Product
 }
 
 const ProductNameAndHeart = ({ productDetail }: IProductNameAndHeart) => {
-  const { heartList, isLoading: isGetHeartListLoading } = useGetHeartListQuery()
+  const { authentication } = useAuthenticate()
+  const { sessionQuery } = useSessionQuery()
+
+  const { heartList } = useGetHeartListQuery()
 
   const { addHeartListMutateAsync, isAddHeartListLoading } =
     useAddHeartListMutation(productDetail)
@@ -26,24 +31,28 @@ const ProductNameAndHeart = ({ productDetail }: IProductNameAndHeart) => {
   )
 
   const handleHeartClick = () => {
+    if (!sessionQuery) {
+      authentication()
+      return
+    }
+
     isExsitedHeartProduct
       ? removeHeartListMutateAsync()
       : addHeartListMutateAsync()
   }
 
-  const buttonContent =
-    isRemoveHeartListLoading ||
-    isGetHeartListLoading ||
-    isAddHeartListLoading ? (
-      <Loading
-        spinnerSize={{ height: "h-[26px]", width: "w-[26px]" }}
-        isFrame={false}
-      />
-    ) : isExsitedHeartProduct ? (
-      <IoMdHeart className={`text-lightRed`} />
-    ) : (
-      <IoMdHeartEmpty />
-    )
+  const isLoading = isRemoveHeartListLoading || isAddHeartListLoading
+
+  const buttonContent = isLoading ? (
+    <Loading
+      spinnerSize={{ height: "h-[26px]", width: "w-[26px]" }}
+      isFrame={false}
+    />
+  ) : isExsitedHeartProduct ? (
+    <IoMdHeart className={`text-lightRed`} />
+  ) : (
+    <IoMdHeartEmpty />
+  )
 
   return (
     <div className="flex justify-between min-h-[100px]">

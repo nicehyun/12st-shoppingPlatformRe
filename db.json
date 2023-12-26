@@ -239,12 +239,61 @@
         }
       ],
       "id": 1
+    },
+    {
+      "email": "test123@test.com",
+      "heartList": [],
+      "id": 2
     }
   ],
   "checkout": [
     {
       "email": "test@test.com",
       "checkoutList": [
+        {
+          "deliveryName": "새로운 배송지123123",
+          "recipient": "수령",
+          "zipcode": "16059",
+          "address": "경기 의왕시 전주남이길 1",
+          "additionalAddress": "123",
+          "phone1": "01012341234",
+          "phone2": null,
+          "deliveryMemo": null,
+          "productList": [
+            {
+              "deliveryFree": 3000,
+              "sellCount": 153,
+              "reviewCount": 0,
+              "mallName": "네이버",
+              "price": 38840,
+              "discount": 18,
+              "id": "33197507754",
+              "maker": "나이키",
+              "name": "나이키 레볼루션 6 넥스트 네이처 DC3728-001",
+              "brand": "나이키",
+              "category3": "운동화",
+              "category1": "패션잡화",
+              "image": "https://shopping-phinf.pstatic.net/main_3319750/33197507754.20221017111653.jpg",
+              "category4": "러닝화",
+              "category2": "남성신발",
+              "discountedPrice": 31848.8,
+              "amount": 1
+            }
+          ],
+          "coupon": {
+            "id": 1,
+            "type": "amount",
+            "name": "5000원 할인 쿠폰",
+            "discountAmount": 5000
+          },
+          "useMile": 0,
+          "getMile": 0,
+          "payment": {
+            "selectedPayment": "tosspay"
+          },
+          "checkoutDate": "2023-12-26T13:52:05.187Z",
+          "checkoutNumber": "20231226-225205"
+        },
         {
           "deliveryName": "새로운 배송지",
           "recipient": "수령",
@@ -1379,6 +1428,100 @@
       "email": "test@test.com",
       "checkoutList": [],
       "id": 3
+    },
+    {
+      "email": "test123@test.com",
+      "checkoutList": [
+        {
+          "deliveryName": "배송지명입니다.",
+          "recipient": "이라티",
+          "zipcode": "63503",
+          "address": "제주특별자치도 서귀포시 대정읍 대한로 632",
+          "additionalAddress": "123",
+          "phone1": "01012341234",
+          "phone2": null,
+          "deliveryMemo": "부재시 경비실에 맡겨 주세요.",
+          "productList": [
+            {
+              "deliveryFree": 3000,
+              "sellCount": 153,
+              "reviewCount": 0,
+              "mallName": "네이버",
+              "price": 38840,
+              "discount": 18,
+              "id": "33197507754",
+              "maker": "나이키",
+              "name": "나이키 레볼루션 6 넥스트 네이처 DC3728-001",
+              "brand": "나이키",
+              "category3": "운동화",
+              "category1": "패션잡화",
+              "image": "https://shopping-phinf.pstatic.net/main_3319750/33197507754.20221017111653.jpg",
+              "category4": "러닝화",
+              "category2": "남성신발",
+              "discountedPrice": 31848.8,
+              "amount": 1
+            }
+          ],
+          "coupon": {
+            "id": 2,
+            "type": "rate",
+            "name": "10% 할인 쿠폰",
+            "discountRate": 10
+          },
+          "useMile": 0,
+          "getMile": 0,
+          "payment": {
+            "selectedPayment": "payco"
+          },
+          "checkoutDate": "2023-12-26T14:13:31.602Z",
+          "checkoutNumber": "20231226-231331"
+        },
+        {
+          "deliveryName": "배송지명입니다.",
+          "recipient": "이라티",
+          "zipcode": "63503",
+          "address": "제주특별자치도 서귀포시 대정읍 대한로 632",
+          "additionalAddress": "123",
+          "phone1": "01012341234",
+          "phone2": null,
+          "deliveryMemo": "부재시 경비실에 맡겨 주세요.",
+          "productList": [
+            {
+              "deliveryFree": 3000,
+              "sellCount": 153,
+              "reviewCount": 0,
+              "mallName": "네이버",
+              "price": 38840,
+              "discount": 18,
+              "id": "33197507754",
+              "maker": "나이키",
+              "name": "나이키 레볼루션 6 넥스트 네이처 DC3728-001",
+              "brand": "나이키",
+              "category3": "운동화",
+              "category1": "패션잡화",
+              "image": "https://shopping-phinf.pstatic.net/main_3319750/33197507754.20221017111653.jpg",
+              "category4": "러닝화",
+              "category2": "남성신발",
+              "discountedPrice": 31848.8,
+              "amount": 1
+            }
+          ],
+          "coupon": {
+            "id": 2,
+            "type": "rate",
+            "name": "10% 할인 쿠폰",
+            "discountRate": 10
+          },
+          "useMile": 0,
+          "getMile": 0,
+          "payment": {
+            "selectedPayment": "payco"
+          },
+          "checkoutDate": "2023-12-26T14:13:27.573Z",
+          "checkoutNumber": "20231226-231327"
+        }
+      ],
+      "id": 4
     }
   ],
   "customerCounseling": [
@@ -1573,38 +1716,32 @@
       "deliveryInfo": {
         "deliveryName": "새로운 배송지123123",
         "recipient": "수령",
-        "zipcode": "16059",
-        "address": "경기 의왕시 전주남이길 1",
         "additionalAddress": "123",
+        "address": "경기 의왕시 전주남이길 1",
+        "zipcode": "16059",
         "phone1": "01012341234",
         "phone2": null
       },
       "id": 1
+    },
+    {
+      "email": "test123@test.com",
+      "deliveryInfo": {
+        "deliveryName": "배송지명입니다.",
+        "recipient": "이라티",
+        "additionalAddress": "123",
+        "address": "제주특별자치도 서귀포시 대정읍 대한로 632",
+        "zipcode": "63503",
+        "phone1": "01012341234",
+        "phone2": null
+      },
+      "id": 2
     }
   ],
   "cart": [
     {
       "email": "test@test.com",
       "productList": [
-        {
-          "deliveryFree": 3000,
-          "sellCount": 153,
-          "reviewCount": 0,
-          "mallName": "네이버",
-          "price": 38840,
-          "discount": 18,
-          "id": "33197507754",
-          "maker": "나이키",
-          "name": "나이키 레볼루션 6 넥스트 네이처 DC3728-001",
-          "brand": "나이키",
-          "category3": "운동화",
-          "category1": "패션잡화",
-          "image": "https://shopping-phinf.pstatic.net/main_3319750/33197507754.20221017111653.jpg",
-          "category4": "러닝화",
-          "category2": "남성신발",
-          "discountedPrice": 31848.8,
-          "amount": 1
-        },
         {
           "brand": "버켄스탁",
           "discountedPrice": 99822.4,
@@ -1637,6 +1774,15 @@
       "marketingClause": true,
       "mile": 0,
       "id": 1
+    },
+    {
+      "email": "test123@test.com",
+      "password": "$2b$10$VBwi0wjlwJUYu36T0tcWFOX31ibSH8y7jNoGHoA5/MsHaI6F8b7GW",
+      "name": "라티",
+      "phone": "01012341234",
+      "marketingClause": true,
+      "mile": 0,
+      "id": 2
     }
   ],
   "coupons": [
@@ -5865,7 +6011,7 @@
     },
     {
       "deliveryFree": 3000,
-      "sellCount": 153,
+      "sellCount": 154,
       "reviewCount": 0,
       "mallName": "네이버",
       "price": 38840,
