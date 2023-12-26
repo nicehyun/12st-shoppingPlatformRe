@@ -4,6 +4,24 @@
       "email": "test@test.com",
       "heartList": [
         {
+          "category2": "남성의류",
+          "deliveryFree": 0,
+          "reviewCount": 0,
+          "category1": "패션의류",
+          "category3": "바지",
+          "brand": "라코스테",
+          "image": "https://shopping-phinf.pstatic.net/main_4123670/41236707309.20230806032124.jpg",
+          "sellCount": 27,
+          "maker": "",
+          "price": 100170,
+          "mallName": "네이버",
+          "discount": 20,
+          "discountedPrice": 80136,
+          "name": "라코스테 반바지 남성 레귤러 핏 버뮤다 FH952E-53G 001",
+          "category4": "",
+          "id": "41236707309"
+        },
+        {
           "mallName": "Tiger66",
           "discount": 22,
           "deliveryFree": 0,
