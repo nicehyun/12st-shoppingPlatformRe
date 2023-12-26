@@ -41,7 +41,7 @@ const MyPageRewardsEl = ({
         </span>
       ) : (
         <span className="text-[30px] font-bold sm:text-[20px] md:text-[24px] text-white dark:text-black">
-          {numberToLocaleString(showRewardNumber)}
+          {showRewardNumber ? numberToLocaleString(showRewardNumber) : 0}
         </span>
       )}
     </div>

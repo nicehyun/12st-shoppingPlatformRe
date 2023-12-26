@@ -1587,6 +1587,25 @@
       "email": "test@test.com",
       "productList": [
         {
+          "deliveryFree": 3000,
+          "sellCount": 153,
+          "reviewCount": 0,
+          "mallName": "네이버",
+          "price": 38840,
+          "discount": 18,
+          "id": "33197507754",
+          "maker": "나이키",
+          "name": "나이키 레볼루션 6 넥스트 네이처 DC3728-001",
+          "brand": "나이키",
+          "category3": "운동화",
+          "category1": "패션잡화",
+          "image": "https://shopping-phinf.pstatic.net/main_3319750/33197507754.20221017111653.jpg",
+          "category4": "러닝화",
+          "category2": "남성신발",
+          "discountedPrice": 31848.8,
+          "amount": 1
+        },
+        {
           "brand": "버켄스탁",
           "discountedPrice": 99822.4,
           "maker": "버켄스탁",
@@ -1694,7 +1713,12 @@
           "슬립온",
           "기능화"
         ],
-        "여성신발": ["단화", "슬리퍼", "운동화", "샌들"]
+        "여성신발": [
+          "단화",
+          "슬리퍼",
+          "운동화",
+          "샌들"
+        ]
       }
     }
   ],

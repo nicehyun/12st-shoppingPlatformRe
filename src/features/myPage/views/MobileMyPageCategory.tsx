@@ -7,7 +7,7 @@ interface IMobileMyPageCategory {
 
 const MobileMyPageCategory = ({ onHideCategory }: IMobileMyPageCategory) => {
   return (
-    <div className="bg-white fixed top-0 left-0 z-50 h-screen w-screen px-[20px]">
+    <div className="bg-white fixed top-0 left-0 z-50 h-screen w-screen px-[20px] overflow-y-auto">
       <MyPageCategory />
 
       <Button

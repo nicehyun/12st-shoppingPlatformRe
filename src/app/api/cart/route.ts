@@ -3,7 +3,6 @@ import { GetCartResponse, ProductInCart } from "@/features/cart/types/cart"
 import { Product } from "@/features/common/types/product"
 import { AxiosError } from "axios"
 import { NextResponse } from "next/server"
-// TODO : 장바구니 목록 안가져와짐
 interface RequestBody {
   productInfo?: Product
   productInCartInfo?: ProductInCart
