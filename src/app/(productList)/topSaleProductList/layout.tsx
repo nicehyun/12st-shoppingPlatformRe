@@ -16,7 +16,7 @@ const TopSaleProductListLayout = async ({
 
       <PageLayout classNames="px-0">{children}</PageLayout>
 
-      {/* <NavigationAndCategory /> */}
+      <NavigationAndCategory />
     </>
   )
 }
