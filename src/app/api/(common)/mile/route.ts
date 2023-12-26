@@ -1,5 +1,6 @@
 import { verifyJwt } from "@/app/lib/jwt"
 import { userInfoAPI } from "@/features/common/models/userInfoAPI"
+import { UserInfo, UserInfoWithMile } from "@/features/common/types/user"
 import { AxiosError } from "axios"
 import { NextResponse } from "next/server"
 
@@ -17,10 +18,19 @@ export async function GET(request: Request) {
     })
   }
 
-  try {
-    const userInfo = await userInfoAPI.getUserInfo(accessToken)
+  const email = verifyJwt(accessToken)?.email
 
-    return NextResponse.json(userInfo?.mile, { status: 200 })
+  try {
+    const response: UserInfoWithMile[] = await fetch(
+      `${process.env.NEXT_PUBLIC_DB_URL}/users?email=${email}`,
+      {
+        next: { revalidate: 0 },
+      }
+    ).then((res) => res.json())
+
+    const userMile = response[0].mile
+
+    return NextResponse.json(userMile, { status: 200 })
   } catch (error) {
     const { response } = error as unknown as AxiosError
     if (response) {
