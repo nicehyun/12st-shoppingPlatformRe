@@ -31,7 +31,7 @@ export enum ROUTE {
   BESTPRODUCTLIST = "/bestProductList",
   ARRIVALPRODUCTLIST = "/arrivalProductList",
   TOPSALEPRODUCTLIST = "/topSaleProductList",
-  SEARCHPRODUCTLIST = "/searchProductList",
+  SEARCHPRODUCTLIST = "/searchProductList/product",
 }
 
 export const useNavigations = () => {
@@ -40,11 +40,7 @@ export const useNavigations = () => {
 
   const params = useSearchParams()
 
-  const routeTo = (
-    path: ROUTE,
-    isReplace = false,
-    dataToSend?: Record<string, any>
-  ) => {
+  const routeTo = (path: ROUTE, isReplace = false, dataToSend?: string) => {
     const newPath = dataToSend
       ? `${path}?data=${encodeURIComponent(JSON.stringify(dataToSend))}`
       : path

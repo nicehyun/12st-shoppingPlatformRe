@@ -1,4 +1,7 @@
+"use clinet"
+
 import Button from "@/features/common/views/Button"
+import { useRouter } from "next/navigation"
 import { FormEventHandler, useEffect, useRef } from "react"
 import { AiOutlineSearch } from "react-icons/ai"
 
@@ -7,6 +10,7 @@ interface ISearchButton {
 }
 
 const HeaderSearchForm = ({ onHideSearchForm }: ISearchButton) => {
+  const { push } = useRouter()
   const handleHeaderSearchSubmit: FormEventHandler<HTMLFormElement> = (
     event
   ) => {
@@ -16,7 +20,8 @@ const HeaderSearchForm = ({ onHideSearchForm }: ISearchButton) => {
 
     const searchValue = formData.get("search") as string
 
-    console.log(searchValue)
+    push(`/searchProductList/product/${searchValue}`)
+    onHideSearchForm()
   }
 
   const inputRef = useRef<HTMLInputElement | null>(null)
@@ -48,7 +53,6 @@ const HeaderSearchForm = ({ onHideSearchForm }: ISearchButton) => {
             type="submit"
             classNames="absolute top-[8px] text-[60px] md:text-[50px] sm:text-[40px] right-0 text-black"
             content={<AiOutlineSearch />}
-            // onClick={onHideSearchForm}
           />
         </div>
 
