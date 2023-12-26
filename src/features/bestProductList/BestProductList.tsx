@@ -27,6 +27,7 @@ const BestProductList = ({ categoriesPath }: IBestProductList) => {
           </div>
         </Fragment>
       ))}
+      {""}
     </div>
   )
 }
