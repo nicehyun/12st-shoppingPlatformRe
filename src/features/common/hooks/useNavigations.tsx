@@ -31,6 +31,7 @@ export enum ROUTE {
   BESTPRODUCTLIST = "/bestProductList",
   ARRIVALPRODUCTLIST = "/arrivalProductList",
   TOPSALEPRODUCTLIST = "/topSaleProductList",
+  SEARCHPRODUCTLIST = "/searchProductList",
 }
 
 export const useNavigations = () => {

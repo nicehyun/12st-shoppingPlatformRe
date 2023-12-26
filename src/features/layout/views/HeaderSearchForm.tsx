@@ -9,7 +9,15 @@ interface ISearchButton {
 const HeaderSearchForm = ({ onHideSearchForm }: ISearchButton) => {
   const handleHeaderSearchSubmit: FormEventHandler<HTMLFormElement> = (
     event
-  ) => {}
+  ) => {
+    event.preventDefault()
+
+    const formData = new FormData(event.currentTarget)
+
+    const searchValue = formData.get("search") as string
+
+    console.log(searchValue)
+  }
 
   const inputRef = useRef<HTMLInputElement | null>(null)
 
@@ -30,6 +38,7 @@ const HeaderSearchForm = ({ onHideSearchForm }: ISearchButton) => {
         >
           <input
             id="search"
+            name="search"
             ref={inputRef}
             placeholder="상품명 또는 브랜드를 검색해주세요"
             className="w-full h-full border-none text-[50px] md:text-[36px] sm:text-[30px] px-[10px] font-bold bg-opacity0 text-black placeholder:text-[30px] md:placeholder:text-[20px] sm:placeholder:text-[16px]"
@@ -39,7 +48,7 @@ const HeaderSearchForm = ({ onHideSearchForm }: ISearchButton) => {
             type="submit"
             classNames="absolute top-[8px] text-[60px] md:text-[50px] sm:text-[40px] right-0 text-black"
             content={<AiOutlineSearch />}
-            onClick={onHideSearchForm}
+            // onClick={onHideSearchForm}
           />
         </div>
 

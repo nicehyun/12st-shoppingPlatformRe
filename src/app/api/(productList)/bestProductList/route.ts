@@ -5,8 +5,6 @@ import { NextRequest, NextResponse } from "next/server"
 export async function GET(request: NextRequest) {
   let productList: Products | undefined
 
-  console.log("실행")
-
   try {
     const response: Products = await fetch(
       `${process.env.NEXT_PUBLIC_DB_URL}/productList`,
