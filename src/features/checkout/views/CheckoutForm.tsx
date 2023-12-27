@@ -210,10 +210,10 @@ const CheckoutForm = () => {
         isUpdateDeliveryInfo,
       })
 
-      if (response?.status === 200) {
-        routeTo(ROUTE.CHECKOUTCOMFIRMED, true)
-        dispatch(emptyCheckoutPendingProductList())
-      }
+      // if (response?.status === 200) {
+      //   routeTo(ROUTE.CHECKOUTCOMFIRMED, true)
+      //   dispatch(emptyCheckoutPendingProductList())
+      // }
     } catch (error) {
       dispatch(
         showFeedbackModal({

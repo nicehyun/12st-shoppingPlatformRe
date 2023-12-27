@@ -1,5 +1,5 @@
 import { deliveryInfoAPI } from "@/features/common/models/deliveryInfoAPI"
-
+// TODO : 오류 발생
 import {
   CheckoutList,
   GetCheckoutListResponse,
@@ -73,6 +73,9 @@ export async function POST(request: NextRequest) {
   }
 
   const email = verifyJwt(accessToken)?.email
+
+  const userId = verifyJwt(accessToken)?.id
+  const userMile = verifyJwt(accessToken)?.mile ?? 0
 
   const { checkoutInfo, isClauseCheck, isUpdateDeliveryInfo }: RequestBody =
     await request.json()
@@ -156,7 +159,7 @@ export async function POST(request: NextRequest) {
     await fetch(
       `${process.env.NEXT_PUBLIC_DB_URL}/checkout/${checkoutListResponse.id}`,
       {
-        method: "PATCH",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -211,60 +214,60 @@ export async function POST(request: NextRequest) {
     return new NextResponse(null, { status: 500 })
   }
 
-  // delete cart api
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_DB_URL}/cart?email=${email}`,
-      { next: { revalidate: 0 } }
-    ).then((res) => res.json())
+  // // delete cart api
+  // try {
+  //   const response = await fetch(
+  //     `${process.env.NEXT_PUBLIC_DB_URL}/cart?email=${email}`,
+  //     { next: { revalidate: 0 } }
+  //   ).then((res) => res.json())
 
-    cartResponse = response[0]
-  } catch (error) {
-    const { response } = error as unknown as AxiosError
-    if (response) {
-      console.error(
-        `🚨 JSON SERVER GET API (Get CartData API - Checkout) : ${response.data}`
-      )
-      return new NextResponse(null, { status: response.status })
-    }
-    console.error(
-      `🚨 Unexpected Error (Get CartData API - Checkout) : ${error}`
-    )
-    return new NextResponse(null, { status: 500 })
-  }
+  //   cartResponse = response[0]
+  // } catch (error) {
+  //   const { response } = error as unknown as AxiosError
+  //   if (response) {
+  //     console.error(
+  //       `🚨 JSON SERVER GET API (Get CartData API - Checkout) : ${response.data}`
+  //     )
+  //     return new NextResponse(null, { status: response.status })
+  //   }
+  //   console.error(
+  //     `🚨 Unexpected Error (Get CartData API - Checkout) : ${error}`
+  //   )
+  //   return new NextResponse(null, { status: 500 })
+  // }
 
-  const updatedProductInCart = cartResponse.productList.filter(
-    (cartProduct) => {
-      return !checkoutInfo.productList.some(
-        (product) => product.id === cartProduct.id
-      )
-    }
-  )
+  // const updatedProductInCart = cartResponse.productList.filter(
+  //   (cartProduct) => {
+  //     return !checkoutInfo.productList.some(
+  //       (product) => product.id === cartProduct.id
+  //     )
+  //   }
+  // )
 
-  try {
-    await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart/${cartResponse.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-        productList: updatedProductInCart,
-      }),
-    })
-  } catch (error) {
-    const { response } = error as unknown as AxiosError
-    if (response) {
-      console.error(
-        `🚨 JSON SERVER POST API (Delete Checkout ProductList In Cart API) : ${response.data}`
-      )
-      return new NextResponse(null, { status: response.status })
-    }
-    console.error(
-      `🚨 Unexpected Error (Delete Checkout ProductList In Cart API) : ${error}`
-    )
-    return new NextResponse(null, { status: 500 })
-  }
+  // try {
+  //   await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart/${cartResponse.id}`, {
+  //     method: "PATCH",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       email,
+  //       productList: updatedProductInCart,
+  //     }),
+  //   })
+  // } catch (error) {
+  //   const { response } = error as unknown as AxiosError
+  //   if (response) {
+  //     console.error(
+  //       `🚨 JSON SERVER POST API (Delete Checkout ProductList In Cart API) : ${response.data}`
+  //     )
+  //     return new NextResponse(null, { status: response.status })
+  //   }
+  //   console.error(
+  //     `🚨 Unexpected Error (Delete Checkout ProductList In Cart API) : ${error}`
+  //   )
+  //   return new NextResponse(null, { status: 500 })
+  // }
 
   // TODO : mile 적용하기
 
@@ -294,35 +297,35 @@ export async function POST(request: NextRequest) {
   //   return new NextResponse(null, { status: 500 })
   // }
 
-  // try {
-  //   if (userInfo.mile < useMile) {
-  //     throw new Error(
-  //       `🚨 The mileage you are trying to use exceeds the available mileage!`
-  //     )
-  //   }
+  try {
+    if (userMile < useMile) {
+      throw new Error(
+        `🚨 The mileage you are trying to use exceeds the available mileage!`
+      )
+    }
 
-  //   await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/users/${userInfo.id}`, {
-  //     method: "PATCH",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       mile: updatedMile,
-  //     }),
-  //   })
-  // } catch (error) {
-  //   const { response } = error as unknown as AxiosError
-  //   if (response) {
-  //     console.error(
-  //       `🚨 JSON SERVER POST API (Update Mile API) : ${response.data}`
-  //     )
-  //     return new NextResponse(null, { status: response.status })
-  //   } else {
-  //     console.error(`🚨 Unexpected Error (Update Mile API) : ${error}`)
-  //   }
+    await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/users/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        mile: userMile + getMile - useMile,
+      }),
+    })
+  } catch (error) {
+    const { response } = error as unknown as AxiosError
+    if (response) {
+      console.error(
+        `🚨 JSON SERVER POST API (Update Mile API) : ${response.data}`
+      )
+      return new NextResponse(null, { status: response.status })
+    } else {
+      console.error(`🚨 Unexpected Error (Update Mile API) : ${error}`)
+    }
 
-  //   return new NextResponse(null, { status: 500 })
-  // }
+    return new NextResponse(null, { status: 500 })
+  }
 
   // update product sell count api
   const updateProductSellCount = async (productInfo: Product) => {

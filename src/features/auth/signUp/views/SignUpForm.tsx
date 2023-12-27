@@ -113,7 +113,7 @@ const SignUpForm = () => {
       },
     })) as Response
 
-    if (response.status === 500) {
+    if (response.status >= 400) {
       showFeedbackModalWithContent(
         "회원가입에 실패했습니다. 오류가 계속되면 고객센터에 문의해주세요."
       )

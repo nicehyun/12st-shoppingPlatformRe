@@ -2,6 +2,11 @@ import jwt, { JwtPayload } from "jsonwebtoken"
 
 export interface ExtendedJwtPayload extends JwtPayload {
   email: string | undefined
+  id: string | undefined
+  name: string
+  phone: "01012341234"
+  marketingClause: boolean
+  mile: number
 }
 
 interface SignOption {
