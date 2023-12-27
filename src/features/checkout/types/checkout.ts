@@ -29,4 +29,4 @@ export type GetCheckoutListResponse = {
   id: number
   email: string
   checkoutList: CheckoutList[]
-} | null
+}

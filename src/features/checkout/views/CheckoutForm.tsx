@@ -7,7 +7,7 @@ import {
   selectCheckoutPlannedUseMileState,
 } from "@/redux/features/checkoutSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { FormEventHandler, Suspense } from "react"
+import { FormEventHandler, Suspense, useEffect } from "react"
 import CheckoutClause from "./CheckoutClause"
 import CheckoutCouponAndMile from "./CheckoutCouponAndMile"
 import CheckoutOrderListInfo from "./CheckoutOrderListInfo"
@@ -33,6 +33,8 @@ import { ROUTE, useNavigations } from "@/features/common/hooks/useNavigations"
 
 import useCheckoutPrice from "../hooks/useCheckoutPrice"
 import Loading from "@/features/common/views/Loading"
+import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
+import { verifyJwt } from "@/app/lib/jwt"
 
 const CheckoutForm = () => {
   const checkoutPaymentState = useAppSelector(selectCheckoutPaymentState)
@@ -210,10 +212,10 @@ const CheckoutForm = () => {
         isUpdateDeliveryInfo,
       })
 
-      // if (response?.status === 200) {
-      //   routeTo(ROUTE.CHECKOUTCOMFIRMED, true)
-      //   dispatch(emptyCheckoutPendingProductList())
-      // }
+      if (response?.status === 200) {
+        routeTo(ROUTE.CHECKOUTCOMFIRMED, true)
+        dispatch(emptyCheckoutPendingProductList())
+      }
     } catch (error) {
       dispatch(
         showFeedbackModal({

@@ -31,39 +31,44 @@ export async function POST(request: Request) {
 
   const { email } = userInfoWithBcryptedPassword
 
-  const userPromise = fetch(`${process.env.NEXT_PUBLIC_DB_URL}/users`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ ...userInfoWithBcryptedPassword, mile: 0 }),
-  })
+  const createUserPromise = async () => {
+    await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/users`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...userInfoWithBcryptedPassword, mile: 0 }),
+    })
+  }
 
-  const checkoutPromise = fetch(`${process.env.NEXT_PUBLIC_DB_URL}/checkout`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email: email,
-      checkoutList: [],
-    }),
-  })
+  const createCheckoutPromise = async () => {
+    await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/checkout`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        checkoutList: [],
+      }),
+    })
+  }
 
-  const heartPromise = fetch(`${process.env.NEXT_PUBLIC_DB_URL}/heart`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email: email,
-      heartList: [],
-    }),
-  })
+  const createHeartPromise = async () => {
+    await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/heart`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        heartList: [],
+      }),
+    })
+  }
 
-  const counselingPromise = fetch(
-    `${process.env.NEXT_PUBLIC_DB_URL}/customerCounseling`,
-    {
+  const createCounselingPromise = async () => {
+    await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/customerCounseling`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -72,27 +77,29 @@ export async function POST(request: Request) {
         email: email,
         customerCounselingList: [],
       }),
-    }
-  )
+    })
+  }
 
-  const cartPromise = fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email: email,
-      productList: [],
-    }),
-  })
+  const cteateCartPromise = async () => {
+    await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        productList: [],
+      }),
+    })
+  }
 
   try {
     await Promise.all([
-      userPromise,
-      checkoutPromise,
-      heartPromise,
-      counselingPromise,
-      cartPromise,
+      createUserPromise(),
+      createCheckoutPromise(),
+      createHeartPromise(),
+      createCounselingPromise(),
+      cteateCartPromise(),
     ])
 
     return NextResponse.json({ status: 200 })
@@ -105,17 +112,4 @@ export async function POST(request: Request) {
     console.error(`🚨 Unexpected Error - Sign Up : ${error}`)
     return new NextResponse(null, { status: 500 })
   }
-
-  return NextResponse.json({ status: 200 })
-  // } catch (error) {
-  //   const { response } = error as unknown as AxiosError
-  //   if (response) {
-  //     console.error(
-  //       `🚨 JSON SERVER GET API () : ${response.data}`
-  //     )
-  //     return new NextResponse(null, { status: response.status })
-  //   }
-  //   console.error(`🚨 Unexpected Error () : ${error}`)
-  //   return new NextResponse(null, { status: 500 })
-  // }
 }

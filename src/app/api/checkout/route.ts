@@ -1,5 +1,3 @@
-import { deliveryInfoAPI } from "@/features/common/models/deliveryInfoAPI"
-// TODO : 오류 발생
 import {
   CheckoutList,
   GetCheckoutListResponse,
@@ -19,8 +17,9 @@ import { verifyJwt } from "@/app/lib/jwt"
 import { AxiosError } from "axios"
 import { formatCheckoutNumber } from "@/features/checkout/utils/checkout"
 import { GetCartResponse } from "@/features/cart/types/cart"
-import { GetUserInfoResponse } from "@/features/common/types/user"
 import { Product } from "@/features/common/types/product"
+import { GetDeliveryInfoResponse } from "@/features/common/types/deliveryInfo"
+import { UserInfoWithMile } from "@/features/common/types/user"
 
 interface RequestBody {
   checkoutInfo: CheckoutList
@@ -73,31 +72,26 @@ export async function POST(request: NextRequest) {
   }
 
   const email = verifyJwt(accessToken)?.email
-
   const userId = verifyJwt(accessToken)?.id
-  const userMile = verifyJwt(accessToken)?.mile ?? 0
 
   const { checkoutInfo, isClauseCheck, isUpdateDeliveryInfo }: RequestBody =
     await request.json()
 
-  if (!nameValidator(checkoutInfo.recipient)) return
-  if (!checkoutInfo.zipcode) return
-  if (!checkoutInfo.address) return
-  if (!additionalAddressValidator(checkoutInfo.additionalAddress)) return
-  if (!phoneValidator(checkoutInfo.phone1)) return
-
-  if (
-    checkoutInfo.payment.selectedPayment === "credit" &&
-    !checkoutInfo.payment.creditName
-  )
-    return
-
-  if (
-    !isClauseCheck.collectionOfUserInfo ||
-    !isClauseCheck.paymentAgency ||
-    !isClauseCheck.provisionOfUserInfo
-  )
-    return
+  if (!nameValidator(checkoutInfo.recipient)) {
+    throw new Error(`🚨 The recipient name is invalid!`)
+  }
+  if (!checkoutInfo.zipcode) {
+    throw new Error(`🚨 The zipcode is invalid!`)
+  }
+  if (!checkoutInfo.address) {
+    throw new Error(`🚨 The address is invalid!`)
+  }
+  if (!additionalAddressValidator(checkoutInfo.additionalAddress)) {
+    throw new Error(`🚨 The additional address is invalid!`)
+  }
+  if (!phoneValidator(checkoutInfo.phone1)) {
+    throw new Error(`🚨 The phone number is invalid!`)
+  }
 
   const totalPrice = accumulationOfProductsPrice(checkoutInfo.productList)
   const getMile = junkOfNoMoreThanOneDigit(
@@ -105,232 +99,152 @@ export async function POST(request: NextRequest) {
   )
   const useMile = checkoutInfo.useMile
 
-  if (isUpdateDeliveryInfo) {
-    await deliveryInfoAPI.updateDeliveryInfo(
-      {
-        deliveryName: checkoutInfo.deliveryName,
-        recipient: checkoutInfo.recipient,
-        additionalAddress: checkoutInfo.additionalAddress,
-        address: checkoutInfo.address,
-        zipcode: checkoutInfo.zipcode,
-        phone1: checkoutInfo.phone1,
-        phone2: checkoutInfo.phone2,
-      },
-      accessToken
+  const getUserInfoResponse: UserInfoWithMile[] = await fetch(
+    `${process.env.NEXT_PUBLIC_DB_URL}/users?email=${email}`,
+    {
+      next: { revalidate: 0 },
+    }
+  ).then((res) => res.json())
+
+  const userMile = getUserInfoResponse[0].mile
+
+  const updatedMile = userMile + getMile - useMile
+
+  if (userMile < useMile) {
+    throw new Error(
+      `🚨 The mileage you are trying to use exceeds the available mileage!`
     )
   }
 
-  let cartResponse: GetCartResponse
-  let checkoutListResponse: GetCheckoutListResponse
-  let userInfo: GetUserInfoResponse
-  let updatedMile: number
-  const checkoutDate = new Date().toISOString()
-  const updatedCheckoutList = {
-    ...checkoutInfo,
-    checkoutDate,
-    checkoutNumber: formatCheckoutNumber(checkoutDate),
+  if (
+    checkoutInfo.payment.selectedPayment === "credit" &&
+    !checkoutInfo.payment.creditName
+  ) {
+    throw new Error(
+      `🚨 Credit card information is required when selecting 'credit' payment method!`
+    )
   }
 
-  // add checkout list api
-  try {
+  if (
+    !isClauseCheck.collectionOfUserInfo ||
+    !isClauseCheck.paymentAgency ||
+    !isClauseCheck.provisionOfUserInfo
+  ) {
+    throw new Error(`🚨 Purchase agreements must be checked before proceeding!`)
+  }
+
+  const updateDeliveryInfo = {
+    deliveryName: checkoutInfo.deliveryName,
+    recipient: checkoutInfo.recipient,
+    additionalAddress: checkoutInfo.additionalAddress,
+    address: checkoutInfo.address,
+    zipcode: checkoutInfo.zipcode,
+    phone1: checkoutInfo.phone1,
+    phone2: checkoutInfo.phone2,
+  }
+
+  const updateDeliveryInfoPromise = async () => {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_DB_URL}/checkout?email=${email}`,
+      `${process.env.NEXT_PUBLIC_DB_URL}/deliveryInfo?email=${email}`,
       {
         next: { revalidate: 0 },
       }
     ).then((res) => res.json())
 
-    checkoutListResponse = response[0]
-  } catch (error) {
-    const { response } = error as unknown as AxiosError
-    if (response) {
-      console.error(
-        `🚨 JSON SERVER GET API (Get Checkout List API - Checkout) : ${response.data}`
-      )
-      return new NextResponse(null, { status: response.status })
-    }
-    console.error(
-      `🚨 Unexpected Error (Get Checkout List API - Checkout) : ${error}`
-    )
-    return new NextResponse(null, { status: 500 })
-  }
+    const deliveryInfo: GetDeliveryInfoResponse = response[0]
 
-  if (checkoutListResponse) {
-    await fetch(
-      `${process.env.NEXT_PUBLIC_DB_URL}/checkout/${checkoutListResponse.id}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          checkoutList: [
-            updatedCheckoutList,
-            ...checkoutListResponse.checkoutList,
-          ],
-        }),
-      }
-    )
-  }
-
-  try {
-    if (!checkoutListResponse?.checkoutList) {
-      await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/checkout`, {
+    if (!deliveryInfo) {
+      await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/deliveryInfo`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email,
-          checkoutList: [updatedCheckoutList],
+          deliveryInfo: updateDeliveryInfo,
         }),
       })
     } else {
       await fetch(
-        `${process.env.NEXT_PUBLIC_DB_URL}/checkout/${checkoutListResponse.id}`,
+        `${process.env.NEXT_PUBLIC_DB_URL}/deliveryInfo/${deliveryInfo.id}`,
         {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            checkoutList: [
-              updatedCheckoutList,
-              ...checkoutListResponse.checkoutList,
-            ],
+            deliveryInfo: updateDeliveryInfo,
           }),
         }
       )
     }
-  } catch (error) {
-    const { response } = error as unknown as AxiosError
-    if (response) {
-      console.error(
-        `🚨 JSON SERVER GET API (Add Checkout API) : ${response.data}`
-      )
-      return new NextResponse(null, { status: response.status })
-    }
-    console.error(`🚨 Unexpected Error (Add Checkout API) : ${error}`)
-    return new NextResponse(null, { status: 500 })
   }
 
-  // // delete cart api
-  // try {
-  //   const response = await fetch(
-  //     `${process.env.NEXT_PUBLIC_DB_URL}/cart?email=${email}`,
-  //     { next: { revalidate: 0 } }
-  //   ).then((res) => res.json())
+  const updateCheckoutPromise = async () => {
+    const getCheckoutResponse: GetCheckoutListResponse[] = await fetch(
+      `${process.env.NEXT_PUBLIC_DB_URL}/checkout?email=${email}`,
+      { next: { revalidate: 0 } }
+    ).then((res) => res.json())
 
-  //   cartResponse = response[0]
-  // } catch (error) {
-  //   const { response } = error as unknown as AxiosError
-  //   if (response) {
-  //     console.error(
-  //       `🚨 JSON SERVER GET API (Get CartData API - Checkout) : ${response.data}`
-  //     )
-  //     return new NextResponse(null, { status: response.status })
-  //   }
-  //   console.error(
-  //     `🚨 Unexpected Error (Get CartData API - Checkout) : ${error}`
-  //   )
-  //   return new NextResponse(null, { status: 500 })
-  // }
+    const prevCheckoutList = getCheckoutResponse[0].checkoutList
 
-  // const updatedProductInCart = cartResponse.productList.filter(
-  //   (cartProduct) => {
-  //     return !checkoutInfo.productList.some(
-  //       (product) => product.id === cartProduct.id
-  //     )
-  //   }
-  // )
-
-  // try {
-  //   await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart/${cartResponse.id}`, {
-  //     method: "PATCH",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       email,
-  //       productList: updatedProductInCart,
-  //     }),
-  //   })
-  // } catch (error) {
-  //   const { response } = error as unknown as AxiosError
-  //   if (response) {
-  //     console.error(
-  //       `🚨 JSON SERVER POST API (Delete Checkout ProductList In Cart API) : ${response.data}`
-  //     )
-  //     return new NextResponse(null, { status: response.status })
-  //   }
-  //   console.error(
-  //     `🚨 Unexpected Error (Delete Checkout ProductList In Cart API) : ${error}`
-  //   )
-  //   return new NextResponse(null, { status: 500 })
-  // }
-
-  // TODO : mile 적용하기
-
-  // // update user mile api
-  // try {
-  //   const response = await fetch(
-  //     `${process.env.NEXT_PUBLIC_DB_URL}/users?email=${email}`,
-  //     {
-  //       next: { revalidate: 0 },
-  //     }
-  //   ).then((res) => res.json())
-
-  //   userInfo = response[0]
-
-  //   updatedMile = userInfo.mile + getMile - useMile
-  // } catch (error) {
-  //   const { response } = error as unknown as AxiosError
-  //   if (response) {
-  //     console.error(
-  //       `🚨 JSON SERVER GET API (Get UserInfo API - Checkout) : ${response.data}`
-  //     )
-  //     return new NextResponse(null, { status: response.status })
-  //   }
-  //   console.error(
-  //     `🚨 Unexpected Error (Get UserInfo API - Checkout) : ${error}`
-  //   )
-  //   return new NextResponse(null, { status: 500 })
-  // }
-
-  try {
-    if (userMile < useMile) {
-      throw new Error(
-        `🚨 The mileage you are trying to use exceeds the available mileage!`
-      )
+    const checkoutDate = new Date().toISOString()
+    const updatedCheckoutList = {
+      ...checkoutInfo,
+      checkoutDate,
+      checkoutNumber: formatCheckoutNumber(checkoutDate),
     }
 
+    await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/checkout/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        checkoutList: [updatedCheckoutList, ...prevCheckoutList],
+      }),
+    })
+  }
+
+  const updateCartPromise = async () => {
+    const getCartResponse: GetCartResponse[] = await fetch(
+      `${process.env.NEXT_PUBLIC_DB_URL}/cart?email=${email}`,
+      { next: { revalidate: 0 } }
+    ).then((res) => res.json())
+
+    const productListInCart = getCartResponse[0].productList
+    const updatedProductInCart = productListInCart.filter((cartProduct) => {
+      return !checkoutInfo.productList.some(
+        (product) => product.id === cartProduct.id
+      )
+    })
+
+    await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        productList: updatedProductInCart,
+      }),
+    })
+  }
+
+  const updateMilePromise = async () => {
     await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/users/${userId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        mile: userMile + getMile - useMile,
+        mile: updatedMile,
       }),
     })
-  } catch (error) {
-    const { response } = error as unknown as AxiosError
-    if (response) {
-      console.error(
-        `🚨 JSON SERVER POST API (Update Mile API) : ${response.data}`
-      )
-      return new NextResponse(null, { status: response.status })
-    } else {
-      console.error(`🚨 Unexpected Error (Update Mile API) : ${error}`)
-    }
-
-    return new NextResponse(null, { status: 500 })
   }
 
-  // update product sell count api
   const updateProductSellCount = async (productInfo: Product) => {
     try {
-      const productInfoResponse = await fetch(
+      const productInfoResponse: Product = await fetch(
         `${process.env.NEXT_PUBLIC_DB_URL}/productList/${productInfo.id}`,
         {
           next: { revalidate: 0 },
@@ -366,9 +280,36 @@ export async function POST(request: NextRequest) {
     }
   }
 
-  await Promise.all(
-    checkoutInfo.productList.map((product) => updateProductSellCount(product))
-  )
+  try {
+    if (isUpdateDeliveryInfo) {
+      await Promise.all([
+        updateDeliveryInfoPromise(),
+        updateCheckoutPromise(),
+        updateCartPromise(),
+        updateMilePromise(),
+        ...checkoutInfo.productList.map((product) =>
+          updateProductSellCount(product)
+        ),
+      ])
+    } else {
+      await Promise.all([
+        updateCheckoutPromise(),
+        updateCartPromise(),
+        updateMilePromise(),
+        ...checkoutInfo.productList.map((product) =>
+          updateProductSellCount(product)
+        ),
+      ])
+    }
 
-  return NextResponse.json({ status: 200 })
+    return NextResponse.json({ status: 200 })
+  } catch (error) {
+    const { response } = error as unknown as AxiosError
+    if (response) {
+      console.error(`🚨 JSON SERVER POST API - Checkout : ${response.data}`)
+      return new NextResponse(null, { status: response.status })
+    }
+    console.error(`🚨 Unexpected Error - Checkout : ${error}`)
+    return new NextResponse(null, { status: 500 })
+  }
 }
