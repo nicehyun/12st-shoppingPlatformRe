@@ -1,7 +1,6 @@
 "use client"
 
 import {
-  emptyCheckoutPendingProductList,
   selectCheckoutPaymentState,
   selectCheckoutPendingProductListState,
   selectCheckoutPlannedUseMileState,
@@ -33,8 +32,6 @@ import { ROUTE, useNavigations } from "@/features/common/hooks/useNavigations"
 
 import useCheckoutPrice from "../hooks/useCheckoutPrice"
 import Loading from "@/features/common/views/Loading"
-import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
-import { verifyJwt } from "@/app/lib/jwt"
 
 const CheckoutForm = () => {
   const checkoutPaymentState = useAppSelector(selectCheckoutPaymentState)
@@ -201,29 +198,20 @@ const CheckoutForm = () => {
     const isUpdateDeliveryInfo =
       deliveryInfoTab === "0" || defalutAddressRegistration === "on"
 
-    try {
-      const response = await checkoutMutateAsync({
-        checkoutInfo,
-        isClauseCheck: {
-          collectionOfUserInfo: !!collectionOfUserInfo,
-          provisionOfUserInfo: !!provisionOfUserInfo,
-          paymentAgency: !!paymentAgencyClause,
-        },
-        isUpdateDeliveryInfo,
-      })
+    const response = await checkoutMutateAsync({
+      checkoutInfo,
+      isClauseCheck: {
+        collectionOfUserInfo: !!collectionOfUserInfo,
+        provisionOfUserInfo: !!provisionOfUserInfo,
+        paymentAgency: !!paymentAgencyClause,
+      },
+      isUpdateDeliveryInfo,
+    })
 
-      if (response?.status === 200) {
-        routeTo(ROUTE.CHECKOUTCOMFIRMED, true)
-        dispatch(emptyCheckoutPendingProductList())
-      }
-    } catch (error) {
-      dispatch(
-        showFeedbackModal({
-          modalContent:
-            "상품 주문에 실패했습니다. 오류가 계속되면 고객센터에 문의해주세요.",
-        })
-      )
-      return
+    if (response?.status === 200) {
+      routeTo(ROUTE.CHECKOUTCOMFIRMED, true)
+    } else {
+      routeTo(ROUTE.HOME, true)
     }
   }
 

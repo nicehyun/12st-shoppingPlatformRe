@@ -6,10 +6,18 @@ import { useCurrentCheckoutConfirmedPrice } from "../hooks/useCheckoutConfirmedP
 import { getPaymentContent, Payment } from "../utils/payment"
 import CheckoutConfirmedInfoEl from "./CheckoutConfirmedInfoEl"
 import Loading from "@/features/common/views/Loading"
+import { useEffect } from "react"
+import { useAppDispatch } from "@/redux/hooks"
+import { emptyCheckoutPendingProductList } from "@/redux/features/checkoutSlice"
 
 const CheckoutConfirmedInfo = () => {
+  const dispatch = useAppDispatch()
   const { currentCheckoutList, isLoading } = useGetCheckoutListQuery()
   const { totalPrice } = useCurrentCheckoutConfirmedPrice()
+
+  useEffect(() => {
+    dispatch(emptyCheckoutPendingProductList())
+  }, [])
 
   if (isLoading) {
     return (
