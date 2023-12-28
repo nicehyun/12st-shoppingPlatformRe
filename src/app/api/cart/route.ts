@@ -75,8 +75,6 @@ export async function POST(request: Request) {
 
   const email = verifyJwt(accessToken)?.email
 
-  let cartData: GetCartResponse
-
   const getCartPromise: Promise<GetCartResponse[]> = fetch(
     `${process.env.NEXT_PUBLIC_DB_URL}/cart?email=${email}`
   ).then((res) => res.json())
