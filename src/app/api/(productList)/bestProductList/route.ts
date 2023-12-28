@@ -3,7 +3,6 @@ import { AxiosError } from "axios"
 import { NextRequest, NextResponse } from "next/server"
 
 export async function GET(request: NextRequest) {
-  console.log("/ 실행")
   try {
     const response: Products = await fetch(
       `${process.env.NEXT_PUBLIC_DB_URL}/productList?_sort=sellCount&_order=desc`,

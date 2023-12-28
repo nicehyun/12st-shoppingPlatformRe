@@ -51,19 +51,15 @@ export async function GET(
     )
 
   if (thirdCategory) {
-    const sortedProductList = filtedProductListWithThirdCategory
-      .sort((a, b) => b.sellCount - a.sellCount)
-      .slice(0, 100)
+    const ProductList = filtedProductListWithThirdCategory.slice(0, 100)
 
-    return NextResponse.json(sortedProductList, {
+    return NextResponse.json(ProductList, {
       status: 200,
     })
   } else {
-    const sortedProductList = filtedProductListWithSecondCategory
-      .sort((a, b) => b.sellCount - a.sellCount)
-      .slice(0, 100)
+    const ProductList = filtedProductListWithSecondCategory.slice(0, 100)
 
-    return NextResponse.json(sortedProductList, {
+    return NextResponse.json(ProductList, {
       status: 200,
     })
   }
