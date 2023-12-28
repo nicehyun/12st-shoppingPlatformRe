@@ -65,30 +65,17 @@ export async function POST(request: Request) {
     })
   }
 
-  let deliveryInfo: GetDeliveryInfoResponse
-
-  try {
-    const response = await fetch(
+  const getDeliveryInfoPromise: Promise<GetDeliveryInfoResponse[]> =
+    await fetch(
       `${process.env.NEXT_PUBLIC_DB_URL}/deliveryInfo?email=${email}`,
       {
         next: { revalidate: 0 },
       }
     ).then((res) => res.json())
 
-    deliveryInfo = response[0]
-  } catch (error) {
-    const { response } = error as unknown as AxiosError
-    if (response) {
-      console.error(
-        `🚨 JSON SERVER GET API (Get DeliveryInfo API) : ${response.data}`
-      )
-      return new NextResponse(null, { status: response.status })
-    }
-    console.error(`🚨 Unexpected Error (Get DeliveryInfo API) : ${error}`)
-    return new NextResponse(null, { status: 500 })
-  }
+  const getDeliveryInfoResponse = await getDeliveryInfoPromise
 
-  if (!deliveryInfo) {
+  if (getDeliveryInfoResponse.length === 0) {
     try {
       await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/deliveryInfo`, {
         method: "POST",
@@ -106,11 +93,13 @@ export async function POST(request: Request) {
       const { response } = error as unknown as AxiosError
       if (response) {
         console.error(
-          `🚨 JSON SERVER POST API (Add DeliveryInfo API) : ${response.data}`
+          `🚨 JSON SERVER POST API (Create DeliveryInfo API) : ${response.data}`
         )
         return new NextResponse(null, { status: response.status })
       } else {
-        console.error(`🚨 Unexpected Error (Add DeliveryInfo API) : ${error}`)
+        console.error(
+          `🚨 Unexpected Error (Create DeliveryInfo API) : ${error}`
+        )
       }
 
       return new NextResponse(null, { status: 500 })
@@ -118,14 +107,13 @@ export async function POST(request: Request) {
   } else {
     try {
       await fetch(
-        `${process.env.NEXT_PUBLIC_DB_URL}/deliveryInfo/${deliveryInfo.id}`,
+        `${process.env.NEXT_PUBLIC_DB_URL}/deliveryInfo/${getDeliveryInfoResponse[0].id}`,
         {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            email,
             deliveryInfo: updateDeliveryInfo,
           }),
         }

@@ -1,21 +1,21 @@
 import {
-  getBestProductList,
   getRandomArrivalProductList,
   getTopSaleProductList,
 } from "@/features/common/models/product"
+import { Products } from "@/features/common/types/product"
 import { AxiosError } from "axios"
 import { NextRequest, NextResponse } from "next/server"
 
 export async function GET(request: NextRequest) {
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_DB_URL}/productList`,
+    const response: Products = await fetch(
+      `${process.env.NEXT_PUBLIC_DB_URL}/productList?_sort=sellCount&_order=desc`,
       {
         next: { revalidate: 10000 },
       }
     ).then((res) => res.json())
 
-    const bestProductList = getBestProductList(response ?? [])
+    const bestProductList = response.slice(0, 100)
     const arrivalProductList = getRandomArrivalProductList(response ?? [])
     const topSaleProductList = getTopSaleProductList(response ?? [])
 

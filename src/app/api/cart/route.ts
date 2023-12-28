@@ -77,23 +77,9 @@ export async function POST(request: Request) {
 
   let cartData: GetCartResponse
 
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_DB_URL}/cart?email=${email}`
-    ).then((res) => res.json())
-
-    cartData = response[0]
-  } catch (error) {
-    const { response } = error as unknown as AxiosError
-    if (response) {
-      console.error(
-        `🚨 JSON SERVER GET API (Get CartData API) : ${response.data}`
-      )
-      return new NextResponse(null, { status: response.status })
-    }
-    console.error(`🚨 Unexpected Error (Get CartData API) : ${error}`)
-    return new NextResponse(null, { status: 500 })
-  }
+  const getCartPromise: Promise<GetCartResponse[]> = fetch(
+    `${process.env.NEXT_PUBLIC_DB_URL}/cart?email=${email}`
+  ).then((res) => res.json())
 
   switch (direction) {
     case "add":
@@ -106,36 +92,33 @@ export async function POST(request: Request) {
       try {
         const productInfoInCart = { ...productInfo, amount: 1 }
 
-        if (!cartData) {
-          await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email,
-              productList: [productInfoInCart],
-            }),
-          })
-        } else {
-          const existedProduct = cartData.productList.some(
-            (product) => product.id === productInfo.id
-          )
+        const getCartResponse = await getCartPromise
+        const prevProductListInCart = getCartResponse[0]
 
-          if (existedProduct) {
-            return NextResponse.json({ status: 200 })
-          }
+        const existedProduct = prevProductListInCart.productList.find(
+          (product) => product.id === productInfo.id
+        )
 
-          await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart/${cartData.id}`, {
+        if (existedProduct) {
+          return NextResponse.json({ status: 200 })
+        }
+
+        await fetch(
+          `${process.env.NEXT_PUBLIC_DB_URL}/cart/${prevProductListInCart.id}`,
+          {
             method: "PATCH",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              productList: [productInfoInCart, ...cartData.productList],
+              productList: [
+                productInfoInCart,
+                ...prevProductListInCart.productList,
+              ],
             }),
-          })
-        }
+          }
+        )
+
         return NextResponse.json({ status: 200 })
       } catch (error) {
         const { response } = error as unknown as AxiosError
@@ -157,22 +140,30 @@ export async function POST(request: Request) {
       }
 
       try {
-        const updatedProductInCart = cartData.productList.map((product) => {
-          return product.id === productInCartInfo.id
-            ? { ...product, amount: product.amount + 1 }
-            : product
-        })
+        const getCartResponse = await getCartPromise
+        const prevProductListInCart = getCartResponse[0]
 
-        await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart/${cartData.id}`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email,
-            productList: updatedProductInCart,
-          }),
-        })
+        const updatedProductInCart = prevProductListInCart.productList.map(
+          (product) => {
+            return product.id === productInCartInfo.id
+              ? { ...product, amount: product.amount + 1 }
+              : product
+          }
+        )
+
+        await fetch(
+          `${process.env.NEXT_PUBLIC_DB_URL}/cart/${prevProductListInCart.id}`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email,
+              productList: updatedProductInCart,
+            }),
+          }
+        )
 
         return NextResponse.json({ status: 200 })
       } catch (error) {
@@ -195,41 +186,44 @@ export async function POST(request: Request) {
       }
 
       try {
-        const existedProduct = cartData.productList.some(
+        const getCartResponse = await getCartPromise
+        const prevProductListInCart = getCartResponse[0]
+
+        const existedProduct = prevProductListInCart.productList.find(
           (product) => product.id === productInfo.id
         )
 
         if (!existedProduct) {
-          return NextResponse.json({
-            status: 404,
-            error: "상품을 찾을 수 없습니다.",
-          })
+          return NextResponse.json({ status: 200 })
         }
 
-        const updatedProductList = cartData.productList.filter(
+        const updatedProductList = prevProductListInCart.productList.filter(
           (product) => product.id !== productInfo.id
         )
 
-        await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart/${cartData.id}`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            productList: updatedProductList,
-          }),
-        })
+        await fetch(
+          `${process.env.NEXT_PUBLIC_DB_URL}/cart/${prevProductListInCart.id}`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              productList: updatedProductList,
+            }),
+          }
+        )
 
         return NextResponse.json({ status: 200 })
       } catch (error) {
         const { response } = error as unknown as AxiosError
         if (response) {
           console.error(
-            `🚨 JSON SERVER POST API (Remove CartData API) : ${response.data}`
+            `🚨 JSON SERVER POST API (Delete CartData API) : ${response.data}`
           )
           return new NextResponse(null, { status: response.status })
         }
-        console.error(`🚨 Unexpected Error (Remove CartData API) : ${error}`)
+        console.error(`🚨 Unexpected Error (Delete CartData API) : ${error}`)
         return new NextResponse(null, { status: 500 })
       }
 
@@ -241,22 +235,30 @@ export async function POST(request: Request) {
       }
 
       try {
-        const updatedProductInCart = cartData.productList.map((product) => {
-          return product.id === productInCartInfo.id
-            ? { ...product, amount: product.amount - 1 }
-            : product
-        })
+        const getCartResponse = await getCartPromise
+        const prevProductListInCart = getCartResponse[0]
 
-        await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart/${cartData.id}`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email,
-            productList: updatedProductInCart,
-          }),
-        })
+        const updatedProductInCart = prevProductListInCart.productList.map(
+          (product) => {
+            return product.id === productInCartInfo.id
+              ? { ...product, amount: product.amount - 1 }
+              : product
+          }
+        )
+
+        await fetch(
+          `${process.env.NEXT_PUBLIC_DB_URL}/cart/${prevProductListInCart.id}`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email,
+              productList: updatedProductInCart,
+            }),
+          }
+        )
 
         return NextResponse.json({ status: 200 })
       } catch (error) {
@@ -281,37 +283,43 @@ export async function POST(request: Request) {
         )
       }
 
-      const updatedProductInCart = cartData.productList.filter(
-        (cartProduct) => {
-          return !checkedProductList.some(
-            (product) => product.id === cartProduct.id
-          )
-        }
-      )
-
       try {
-        await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart/${cartData.id}`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email,
-            productList: updatedProductInCart,
-          }),
-        })
+        const getCartResponse = await getCartPromise
+        const prevProductListInCart = getCartResponse[0]
+
+        const updatedProductInCart = prevProductListInCart.productList.filter(
+          (cartProduct) => {
+            return !checkedProductList.some(
+              (product) => product.id === cartProduct.id
+            )
+          }
+        )
+
+        await fetch(
+          `${process.env.NEXT_PUBLIC_DB_URL}/cart/${prevProductListInCart.id}`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email,
+              productList: updatedProductInCart,
+            }),
+          }
+        )
 
         return NextResponse.json({ status: 200 })
       } catch (error) {
         const { response } = error as unknown as AxiosError
         if (response) {
           console.error(
-            `🚨 JSON SERVER POST API (Remove_checked CartData API) : ${response.data}`
+            `🚨 JSON SERVER POST API (Delete Checked Product In Cart API) : ${response.data}`
           )
           return new NextResponse(null, { status: response.status })
         }
         console.error(
-          `🚨 Unexpected Error (Remove_checked CartData API) : ${error}`
+          `🚨 Unexpected Error (Delete Checked Product In Cart API) : ${error}`
         )
         return new NextResponse(null, { status: 500 })
       }

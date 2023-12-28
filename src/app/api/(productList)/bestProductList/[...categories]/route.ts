@@ -18,13 +18,13 @@ export async function GET(
 
   try {
     const response: Products = await fetch(
-      `${process.env.NEXT_PUBLIC_DB_URL}/productList`,
+      `${process.env.NEXT_PUBLIC_DB_URL}/productList?_sort=sellCount&_order=desc`,
       {
         next: { revalidate: 10000 },
       }
     ).then((res) => res.json())
 
-    productList = response.sort((a, b) => b.sellCount - a.sellCount)
+    productList = response
   } catch (error) {
     const { response } = error as unknown as AxiosError
     if (response) {
@@ -41,28 +41,30 @@ export async function GET(
     return new NextResponse(null, { status: 500 })
   }
 
-  const filtedProductListWithFirstCategory = productList.filter(
-    (product) => product.category1 === firstCategory
+  const filtedProductListWithSecondCategory = productList.filter(
+    (product) => product.category2 === secondCategory
   )
-
-  const filtedProductListWithSecondCategory =
-    filtedProductListWithFirstCategory.filter(
-      (product) => product.category2 === secondCategory
-    )
 
   const filtedProductListWithThirdCategory =
     filtedProductListWithSecondCategory.filter(
       (product) => product.category3 === thirdCategory
     )
 
-  const finalFilteredProductList =
-    filtedProductListWithThirdCategory.length > 0
-      ? filtedProductListWithThirdCategory
-      : filtedProductListWithSecondCategory.length > 0
-      ? filtedProductListWithSecondCategory
-      : filtedProductListWithFirstCategory
+  if (thirdCategory) {
+    const sortedProductList = filtedProductListWithThirdCategory
+      .sort((a, b) => b.sellCount - a.sellCount)
+      .slice(0, 100)
 
-  return NextResponse.json(finalFilteredProductList.slice(0, 100), {
-    status: 200,
-  })
+    return NextResponse.json(sortedProductList, {
+      status: 200,
+    })
+  } else {
+    const sortedProductList = filtedProductListWithSecondCategory
+      .sort((a, b) => b.sellCount - a.sellCount)
+      .slice(0, 100)
+
+    return NextResponse.json(sortedProductList, {
+      status: 200,
+    })
+  }
 }

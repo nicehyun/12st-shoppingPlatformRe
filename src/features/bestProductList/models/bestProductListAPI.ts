@@ -7,7 +7,7 @@ export const bestProductListAPI = {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/bestProductList/${categoriesPath}`,
       {
-        next: { revalidate: 10000 },
+        next: { revalidate: 0 },
       }
     )
 

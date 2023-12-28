@@ -14,10 +14,12 @@ export async function GET(request: Request) {
   } catch (error) {
     const { response } = error as unknown as AxiosError
     if (response) {
-      console.error(`🚨 JSON SERVER GET API (Get Coupon) : ${response.data}`)
+      console.error(
+        `🚨 JSON SERVER GET API (Get Categories) : ${response.data}`
+      )
       return new NextResponse(null, { status: response.status })
     } else {
-      console.error(`🚨 Unexpected Error (Get Coupon) : ${error}`)
+      console.error(`🚨 Unexpected Error (Get Categories) : ${error}`)
     }
 
     return new NextResponse(null, { status: 500 })

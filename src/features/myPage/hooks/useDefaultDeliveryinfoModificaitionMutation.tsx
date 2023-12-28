@@ -20,7 +20,7 @@ const useDefaultDeliveryinfoModificaitionMutation = () => {
       ),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(["userInfo"])
+        queryClient.invalidateQueries(["deliveryInfo"])
       },
       onError: () =>
         dispatch(

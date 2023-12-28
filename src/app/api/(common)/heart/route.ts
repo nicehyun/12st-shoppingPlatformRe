@@ -1,6 +1,7 @@
 import { verifyJwt } from "@/app/lib/jwt"
+import { GetHeartListResponse } from "@/features/common/types/heart"
 import { Product } from "@/features/common/types/product"
-import { GetHeartListResponse } from "@/features/productDetail/types/heartProduct"
+
 import { AxiosError } from "axios"
 import { NextResponse } from "next/server"
 
@@ -57,7 +58,6 @@ export async function POST(request: Request) {
   const body: RequestBody = await request.json()
   const direction = body.direction
   const productInfo = body.productInfo
-  let userHeartListData: GetHeartListResponse
 
   if (direction !== "remove" && direction !== "add") {
     return new Response(JSON.stringify({ error: "Invalid Direction" }), {
@@ -65,62 +65,33 @@ export async function POST(request: Request) {
     })
   }
 
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_DB_URL}/heart?email=${email}`,
-      {
-        next: { revalidate: 0 },
-      }
-    ).then((res) => res.json())
-
-    userHeartListData = response[0]
-  } catch (error) {
-    const { response } = error as unknown as AxiosError
-    if (response) {
-      console.error(
-        `🚨 JSON SERVER GET API (Get Heart List) - Update : ${response.data}`
-      )
-      return new NextResponse(null, { status: response.status })
-    } else {
-      console.error(`🚨 Unexpected Error (Get Heart List) - Update  : ${error}`)
+  const getHeartListPromise: Promise<GetHeartListResponse[]> = fetch(
+    `${process.env.NEXT_PUBLIC_DB_URL}/heart?email=${email}`,
+    {
+      next: { revalidate: 0 },
     }
-
-    return new NextResponse(null, { status: 500 })
-  }
+  ).then((res) => res.json())
 
   switch (direction) {
     case "add":
       try {
-        if (userHeartListData) {
-          const updateHeartList =
-            userHeartListData.heartList.length !== 0
-              ? [productInfo, ...userHeartListData.heartList]
-              : [productInfo]
+        const getHeartListResponse = await getHeartListPromise
+        const prevHeartList = getHeartListResponse[0]
 
-          await fetch(
-            `${process.env.NEXT_PUBLIC_DB_URL}/heart/${userHeartListData.id}`,
-            {
-              method: "PATCH",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                heartList: updateHeartList,
-              }),
-            }
-          )
-        } else {
-          await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/heart`, {
-            method: "POST",
+        const updateHeartList = [productInfo, ...prevHeartList.heartList]
+
+        await fetch(
+          `${process.env.NEXT_PUBLIC_DB_URL}/heart/${prevHeartList.id}`,
+          {
+            method: "PATCH",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              email,
-              heartList: [productInfo],
+              heartList: updateHeartList,
             }),
-          })
-        }
+          }
+        )
       } catch (error) {
         const { response } = error as unknown as AxiosError
         if (response) {
@@ -140,22 +111,40 @@ export async function POST(request: Request) {
       break
 
     case "remove":
-      const updateHeartList = userHeartListData.heartList.filter(
-        (product) => product.id !== productInfo.id
-      )
+      try {
+        const getHeartListResponse = await getHeartListPromise
+        const prevHeartList = getHeartListResponse[0]
+        const updateHeartList = prevHeartList.heartList.filter(
+          (product) => product.id !== productInfo.id
+        )
 
-      await fetch(
-        `${process.env.NEXT_PUBLIC_DB_URL}/heart/${userHeartListData.id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            heartList: updateHeartList,
-          }),
+        await fetch(
+          `${process.env.NEXT_PUBLIC_DB_URL}/heart/${prevHeartList.id}`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              heartList: updateHeartList,
+            }),
+          }
+        )
+      } catch (error) {
+        const { response } = error as unknown as AxiosError
+        if (response) {
+          console.error(
+            `🚨 JSON SERVER POST API (Update Heart List API) : ${response.data}`
+          )
+          return new NextResponse(null, { status: response.status })
+        } else {
+          console.error(
+            `🚨 Unexpected Error (Update Heart List API) : ${error}`
+          )
         }
-      )
+
+        return new NextResponse(null, { status: 500 })
+      }
 
       break
   }

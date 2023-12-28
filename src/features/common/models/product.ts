@@ -17,14 +17,6 @@ export const accumulateDiscountPrice = (rawPrice: number, discount: number) => {
   return discountedProductPrice(rawPrice, discount)
 }
 
-export const getBestProductList = (productList: Products) => {
-  const sortedProductList = productList.sort(
-    (a, b) => b.sellCount - a.sellCount
-  )
-
-  return sortedProductList?.slice(0, 100)
-}
-
 export const getRandomArrivalProductList = (productList: Products) => {
   const shuffledArray = productList.sort(() => Math.random() - 0.5)
 

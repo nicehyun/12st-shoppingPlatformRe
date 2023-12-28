@@ -1,4 +1,4 @@
-import { Products } from "@/features/common/types/product"
+import { Products } from "./product"
 
 export type GetHeartListResponse = {
   id: number

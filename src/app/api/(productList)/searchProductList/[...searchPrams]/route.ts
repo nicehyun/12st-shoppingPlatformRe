@@ -10,7 +10,7 @@ export async function GET(
 
   try {
     const response: Products = await fetch(
-      `${process.env.NEXT_PUBLIC_DB_URL}/productList`,
+      `${process.env.NEXT_PUBLIC_DB_URL}/productList?_sort=sellCount&_order=desc`,
       {
         next: { revalidate: 10000 },
       }
