@@ -20,8 +20,13 @@ export async function POST(request: Request) {
     const { response } = error as unknown as AxiosError
     if (response) {
       console.error(`🚨 ${error}`)
+      console.error(
+        `🚨 JSON SERVER POST API ( Phone Verificate ) : ${response.data}`
+      )
+    } else {
+      console.error(`🚨 Unexpected Error ( Phone Verificate ) : ${error}`)
     }
-    console.error(`🚨 JSON SERVER POST API : ${error}`)
+
     return new NextResponse(null, { status: 500 })
   }
 }

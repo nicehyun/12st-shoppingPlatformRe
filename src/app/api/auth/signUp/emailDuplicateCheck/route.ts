@@ -36,8 +36,13 @@ export async function POST(request: Request): Promise<boolean | unknown> {
     const { response } = error as unknown as AxiosError
     if (response) {
       console.error(`🚨 ${error}`)
+      console.error(
+        `🚨 JSON SERVER POST API ( Email Duplicate ) : ${response.data}`
+      )
+    } else {
+      console.error(`🚨 Unexpected Error ( Email Duplicate ) : ${error}`)
     }
-    console.error(`🚨 JSON SERVER GET API : ${error}`)
+
     return new NextResponse(null, { status: 500 })
   }
 }
