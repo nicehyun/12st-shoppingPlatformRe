@@ -4,7 +4,7 @@ export interface ExtendedJwtPayload extends JwtPayload {
   email: string | undefined
   id: string | undefined
   name: string
-  phone: "01012341234"
+  phone: string
   marketingClause: boolean
   mile: number
 }

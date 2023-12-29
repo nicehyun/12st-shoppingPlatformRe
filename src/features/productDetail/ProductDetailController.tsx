@@ -7,6 +7,7 @@ import { useAppDispatch } from "@/redux/hooks"
 import { showRouteModal } from "@/redux/features/modalSlice"
 import { ROUTE, useNavigations } from "../common/hooks/useNavigations"
 import { addCheckoutPendingProductList } from "@/redux/features/checkoutSlice"
+import { useAuthenticate } from "../auth/signIn/hooks/useAuthenticate"
 
 interface IProductDetailController {
   productDetail: Product
@@ -18,8 +19,10 @@ const ProductDetailController = ({
   const { sessionQuery } = useSessionQuery()
   const dispatch = useAppDispatch()
   const { routeTo } = useNavigations()
-
+  const { authentication } = useAuthenticate()
   const handleAddCartClick = () => {
+    authentication()
+
     cartAPI.addProductToCart(productDetail, sessionQuery?.user.accessToken)
     dispatch(
       dispatch(
@@ -35,8 +38,12 @@ const ProductDetailController = ({
   }
 
   const handleCheckoutClick = () => {
-    dispatch(addCheckoutPendingProductList([{ ...productDetail, amount: 1 }]))
-    routeTo(ROUTE.CHECKOUT)
+    authentication()
+
+    if (sessionQuery) {
+      dispatch(addCheckoutPendingProductList([{ ...productDetail, amount: 1 }]))
+      routeTo(ROUTE.CHECKOUT)
+    }
   }
 
   return (

@@ -1,46 +1,10 @@
 import { getToken } from "next-auth/jwt"
 import { NextRequest, NextResponse } from "next/server"
-import { ROUTE } from "./features/common/hooks/useNavigations"
 
 export { default } from "next-auth/middleware"
 
+// TODO : 로그인 제한 페이지
 export async function middleware(request: NextRequest) {
-  const pageList: string[] = [
-    ROUTE.HOME,
-    ROUTE.SIGNIN,
-    ROUTE.SIGNUP,
-    ROUTE.CART,
-    ROUTE.CHECKOUT,
-    ROUTE.CHECKOUTCOMFIRMED,
-    ROUTE.MYPAGE,
-    ROUTE.CHECKOUTLIST,
-    ROUTE.CHECKOUTCANCELLIST,
-    ROUTE.CHECKOUTREVIEWLIST,
-    ROUTE.USERINFOOFMODIFICATION,
-    ROUTE.COUPONS,
-    ROUTE.Mile,
-    ROUTE.INQUIRYCUSTOMERCOUNSELING,
-    ROUTE.COUNSELINGWRITE,
-    ROUTE.PRODUCTQNA,
-    ROUTE.HEARTPRODUCTLIST,
-    ROUTE.PRODUCTINFO,
-  ]
-  const withAuthPageList: string[] = [
-    ROUTE.CART,
-    ROUTE.CHECKOUT,
-    ROUTE.CHECKOUTCOMFIRMED,
-    ROUTE.MYPAGE,
-    ROUTE.CHECKOUTLIST,
-    ROUTE.CHECKOUTCANCELLIST,
-    ROUTE.CHECKOUTREVIEWLIST,
-    ROUTE.USERINFOOFMODIFICATION,
-    ROUTE.COUPONS,
-    ROUTE.Mile,
-    ROUTE.INQUIRYCUSTOMERCOUNSELING,
-    ROUTE.COUNSELINGWRITE,
-    ROUTE.PRODUCTQNA,
-    ROUTE.HEARTPRODUCTLIST,
-  ]
   const { pathname } = request.nextUrl
   const secret = process.env.NEXTAUTH_SECRET
   const token = await getToken({
@@ -49,22 +13,62 @@ export async function middleware(request: NextRequest) {
     cookieName: "next-auth.session-token",
   })
 
-  const isWithoutAuth = withAuthPageList.includes(pathname)
-  const isIncludePageList = pageList.includes(pathname)
+  const isCategoryManagementPage = (pathname: string) =>
+    pathname.startsWith("/categoryManagement")
 
-  // if (!isIncludePageList)
-  //   return NextResponse.redirect(new URL("/", request.url))
+  const isProductDetailPage = (pathname: string) =>
+    pathname.startsWith("/productDetail")
 
-  // if (isWithoutAuth && !token)
-  //   return NextResponse.redirect(new URL("/signIn", request.url))
+  const wholePage = [
+    "/signIn",
+    "/signUp",
+    "/",
+    "/arrivalProductList",
+    "/bestProductList",
+    "/searchProductList",
+    "/topSaleProductList",
+    "/cart",
+    "/categoryManagement",
+    "/checkout",
+    "/checkoutConfirmed",
+    "/myPage",
+    "/myPage/checkoutList",
+    "/myPage/checkoutCancelList",
+    "/myPage/reviewList",
+    "/myPage/userInfoOfModification",
+    "/myPage/coupons",
+    "/myPage/mile",
+    "/myPage/inquiryCustomerCounseling",
+    "/myPage/inquiryCustomerCounseling/write",
+    "/myPage/productQnAList",
+    "/productDetail",
+  ]
 
-  // if (request.nextUrl.pathname.startsWith("/signIn") && !!token)
-  //   return NextResponse.redirect(new URL("/", request.url))
+  if (
+    !wholePage.includes(request.nextUrl.pathname) &&
+    !isCategoryManagementPage(request.nextUrl.pathname) &&
+    !isProductDetailPage(request.nextUrl.pathname)
+  ) {
+    return NextResponse.redirect(new URL("/", request.url))
+  }
+
+  if (token) {
+    if (
+      request.nextUrl.pathname.startsWith("/signIn") ||
+      request.nextUrl.pathname.startsWith("/signUp")
+    ) {
+      return NextResponse.redirect(new URL("/", request.url))
+    }
+  } else if (
+    ["/cart", "/checkout", "/checkoutConfirmed"].includes(
+      request.nextUrl.pathname
+    ) ||
+    request.nextUrl.pathname.startsWith("/myPage")
+  ) {
+    return NextResponse.redirect(new URL("/signIn", request.url))
+  }
 }
 
 export const config = {
-  matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico).*)",
-    "/productInfo/:path*",
-  ],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 }

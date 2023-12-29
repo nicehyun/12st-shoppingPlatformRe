@@ -18,12 +18,15 @@ import Loading from "./Loading"
 import Link from "next/link"
 import { useAppDispatch } from "@/redux/hooks"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
+import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 
 interface IProductCard {
   productInfo: Product
 }
 
 const ProductCard = ({ productInfo }: IProductCard) => {
+  const { sessionQuery } = useSessionQuery()
+
   const { authentication } = useAuthenticate()
   const dispatch = useAppDispatch()
 
@@ -54,7 +57,10 @@ const ProductCard = ({ productInfo }: IProductCard) => {
   )
 
   const handleAddProductInCartClick = async () => {
-    authentication()
+    if (!sessionQuery) {
+      authentication()
+      return
+    }
 
     if (productListInCart.length >= 10) {
       dispatch(
