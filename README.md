@@ -207,3 +207,8 @@ Home Page에서는 판매량이 가장 높은 상품, 새로운 상품, 할인�
 ![bestProductPage](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/a4e2ced0-b8fc-43d8-8ffe-92c24f8fe73f)
 </br>
 Best ProductList Page에서는 각 카테고리 별 판매량이 가장 높은 상품을 최대 100개까지 확인할 수 있습니다.
+
+### 👍🏻 Arrival ProductList Page </br>
+![arrivalPage](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/938f9e1f-e259-446a-a26b-b14853e74bfb)
+</br>
+Best ProductList Page에서는 새로운 상품을 확인할 수 있습니다. (상품을 랜덤으로 추렸습니다.)
