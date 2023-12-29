@@ -1,4 +1,4 @@
-# Shopping Platform
+![bestProduct_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/0a7245bc-8e04-44cc-9bd0-b550c778ba04)# Shopping Platform
 
 ![12st](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/5fb5b2d6-b0a9-4dbd-aded-9e75a31c248f)
 
@@ -204,11 +204,11 @@ Home Page에서는 판매량이 가장 높은 상품, 새로운 상품, 할인�
 </br></br>
 
 ### 👍🏻 Best ProductList Page </br>
-![bestProductPage (1)](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/df69cc34-af75-4946-b1ab-654a9d6322c4)
+![bestProduct_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/149ac868-5231-468d-8e7a-e84ae6276d74)
 </br>
 Best ProductList Page에서는 각 카테고리 별 판매량이 가장 높은 상품을 최대 100개까지 확인할 수 있습니다.
 
-### 👍🏻 Arrival ProductList Page </br>
-![arrivalPage](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/938f9e1f-e259-446a-a26b-b14853e74bfb)
+### 🎉 Arrival ProductList Page </br>
+![arrial_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/cc1510db-85b8-4241-83bf-88f4cb92ebe5)
 </br>
-Best ProductList Page에서는 새로운 상품을 확인할 수 있습니다. (상품을 랜덤으로 추렸습니다.)
+Arrival ProductList Page에서는 새로운 상품을 확인할 수 있습니다. (상품을 랜덤으로 추렸습니다.)
