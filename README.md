@@ -106,7 +106,7 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 ```plaintext
 ├── 📂 app ✅ App Directory
 │   		├── 📂 api ✅ Route Handler
-│   		│   		├── 📂 (common) ✅ Common Route Handler
+│   		│   		├── 📂 (common)
 │   		│   		│   		├── 📂 categories
 │   		│   		│   		├── 📂 coupons
 │   		│   		│   		├── 📂 deliveryInfo
@@ -115,42 +115,42 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 │   		│   		│   		├── 📂 product
 │   		│   		│   		│   	└── 📂 [productId]
 │   		│   		│   		└── 📂 userInfo
-│   		│   		├── 📂 (productList) ✅ ProductList Route Handler
+│   		│   		├── 📂 (productList)
 │   		│   		│   		├── 📂 bestProductList
 │   		│   		│   		│   	└── 📂 [...categories]
 │   		│   		│   		├── 📂 categoryManagement
 │   		│   		│   		│   	└── 📂 [[...categories]]
 │   		│   		│   		└── 📂 searchProductList
 │   		│   		│       	└── 📂 [...searchPrams]
-│   		│   		├── 📂 auth ✅ Auth Route Handler
+│   		│   		├── 📂 auth
 │   		│   		│   		├── 📂 [...nextauth]
 │   		│   		│   		├── 📂 signIn
 │   		│   		│   		└── 📂 signUp
 │   		│   		│       		├── 📂 emailDuplicateCheck
 │   		│   		│       		└── 📂 verificatePhone
 │   		│   		│           		└── 📂 requestPhoneVerification
-│   		│   		├── 📂 cart ✅ Cart Route Handler
-│   		│   		├── 📂 checkout ✅ Checkout Route Handler
-│   		│   		├── 📂 home ✅ Home Route Handler
-│   		│   		└── 📂 myPage ✅ MyPage Route Handler
+│   		│   		├── 📂 cart
+│   		│   		├── 📂 checkout
+│   		│   		├── 📂 home
+│   		│   		└── 📂 myPage
 │   		│       		└── 📂 customerCounseling
-│   		├── 📂 (auth) ✅ Auth Page
+│   		├── 📂 (auth) ✅ Page
 │   		│   	├── 📂 signIn
 │   		│   	└── 📂 signUp
-│   		├── 📂 (home) ✅ Home Page
-│   		├── 📂 (productList) ✅ ProductList Page
+│   		├── 📂 (home)
+│   		├── 📂 (productList)
 │   		│   	├── 📂 arrivalProductList
 │   		│   	├── 📂 bestProductList
 │   		│   	│   └── 📂 [[...categories]]
 │   		│   	├── 📂 searchProductList
 │   		│   	│   └── 📂 [...searchPrams]
 │   		│   	└── 📂 topSaleProductList     		
-│   		├── 📂 cart ✅ Cart Page
-│   		├── 📂 categoryManagement ✅ CategoryManagement Page
+│   		├── 📂 cart
+│   		├── 📂 categoryManagement
 │   		│   ├── [[...categories]]
-│   		├── 📂 checkout ✅ Checkout Page
-│   		├── 📂 checkoutConfirmed ✅ CheckoutConfirmed Page
-│   		├── 📂 myPage ✅ MyPage Page
+│   		├── 📂 checkout
+│   		├── 📂 checkoutConfirmed
+│   		├── 📂 myPage
 │   		│   ├── 📂 checkoutCancelList
 │   		│   ├── 📂 checkoutList
 │   		│   ├── 📂 coupons
@@ -161,7 +161,7 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 │   		│   ├── 📂 productQnAList
 │   		│   ├── 📂 reviewList
 │   		│   └── 📂 userInfoOfModification
-│   		└── 📂 productDetail ✅ ProductDetail Page
+│   		└── 📂 productDetail
 │       		└── 📂 [productId]
 │
 │
