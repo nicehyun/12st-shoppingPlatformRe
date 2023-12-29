@@ -55,23 +55,23 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 ```
 </br></br>
 
-## 📚기술스택
+## ⚙️ 기술스택
 ### 프레임워크
-<img src="https://img.shields.io/badge/next-000000?style=for-the-badge&logo=nextdotjs&logoColor=white"> 
+<img src="https://img.shields.io/badge/next.js 13.4.12-000000?style=for-the-badge&logo=nextdotjs&logoColor=white"> 
 
 ### UI 라이브러리
 <div> 
-  <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white">
-  <img src="https://img.shields.io/badge/mui-007FFF?style=for-the-badge&logo=mui&logoColor=white">
-  <img src="https://img.shields.io/badge/tailwindcss 5.14.1-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white">
+  <img src="https://img.shields.io/badge/react 18.2.5-61DAFB?style=for-the-badge&logo=react&logoColor=white">
+  <img src="https://img.shields.io/badge/mui 5.14.1-007FFF?style=for-the-badge&logo=mui&logoColor=white">
+  <img src="https://img.shields.io/badge/tailwindcss 3.3.3-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white">
 </div>
 </br>
 
 ### 상태 관리 라이브러리
 <div>
-  <img src="https://img.shields.io/badge/reactquery-0088CC?style=for-the-badge&logo=reactquery&logoColor=white"> 
-  <img src="https://img.shields.io/badge/redux-764ABC?style=for-the-badge&logo=redux&logoColor=white">
-  <p>* Redux Toolkit을 사용했습니다.</p>
+  <img src="https://img.shields.io/badge/tanstack-query 4.32.0-0088CC?style=for-the-badge&logo=reactquery&logoColor=white"> 
+  <img src="https://img.shields.io/badge/redux 8.1.1-764ABC?style=for-the-badge&logo=redux&logoColor=white">
+  <img src="https://img.shields.io/badge/redux-toolkit 1.9.5-764ABC?style=for-the-badge&logo=redux&logoColor=white">
 </div>
 </br>
 
