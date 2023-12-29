@@ -3,7 +3,6 @@ import { NextRequest, NextResponse } from "next/server"
 
 export { default } from "next-auth/middleware"
 
-// TODO : 로그인 제한 페이지
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
   const secret = process.env.NEXTAUTH_SECRET
@@ -45,25 +44,20 @@ export async function middleware(request: NextRequest) {
   ]
 
   if (
-    !wholePage.includes(request.nextUrl.pathname) &&
-    !isCategoryManagementPage(request.nextUrl.pathname) &&
-    !isProductDetailPage(request.nextUrl.pathname)
+    !wholePage.includes(pathname) &&
+    !isCategoryManagementPage(pathname) &&
+    !isProductDetailPage(pathname)
   ) {
     return NextResponse.redirect(new URL("/", request.url))
   }
 
   if (token) {
-    if (
-      request.nextUrl.pathname.startsWith("/signIn") ||
-      request.nextUrl.pathname.startsWith("/signUp")
-    ) {
+    if (pathname.startsWith("/signIn") || pathname.startsWith("/signUp")) {
       return NextResponse.redirect(new URL("/", request.url))
     }
   } else if (
-    ["/cart", "/checkout", "/checkoutConfirmed"].includes(
-      request.nextUrl.pathname
-    ) ||
-    request.nextUrl.pathname.startsWith("/myPage")
+    ["/cart", "/checkout", "/checkoutConfirmed"].includes(pathname) ||
+    pathname.startsWith("/myPage")
   ) {
     return NextResponse.redirect(new URL("/signIn", request.url))
   }
