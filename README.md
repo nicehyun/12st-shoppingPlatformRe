@@ -23,7 +23,7 @@
 > git clone https://github.com/nicehyun/12st-shoppingPlatformRe.git
 
 # 의존성 패키지 설치
-> npm install
+> npm i
 ```
 
 ### 환경 변수 설정
