@@ -81,7 +81,14 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
 </br>
 
-### 
+### Back End
+
+<div>
+  <img src="https://img.shields.io/badge/firebase 10.1.0-FFCA28?style=for-the-badge&logo=firebase&logoColor=white">
+  <img src="https://img.shields.io/badge/firebase-admin 11.10.1-FFCA28?style=for-the-badge&logo=firebase&logoColor=white">
+  <img src="https://img.shields.io/badge/json server 0.17.4-FF0000?style=for-the-badge">
+</div>
+</br>
 
 ### 기타 라이브러리
 <div>
