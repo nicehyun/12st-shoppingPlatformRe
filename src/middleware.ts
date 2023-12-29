@@ -18,13 +18,17 @@ export async function middleware(request: NextRequest) {
   const isProductDetailPage = (pathname: string) =>
     pathname.startsWith("/productDetail")
 
+  const isSearchProductListToProductPage = (pathname: string) =>
+    pathname.startsWith("/searchProductList/product")
+  const isSearchProductListToBrandPage = (pathname: string) =>
+    pathname.startsWith("/searchProductList/brand")
+
   const wholePage = [
     "/signIn",
     "/signUp",
     "/",
     "/arrivalProductList",
     "/bestProductList",
-    "/searchProductList",
     "/topSaleProductList",
     "/cart",
     "/categoryManagement",
@@ -46,7 +50,9 @@ export async function middleware(request: NextRequest) {
   if (
     !wholePage.includes(pathname) &&
     !isCategoryManagementPage(pathname) &&
-    !isProductDetailPage(pathname)
+    !isProductDetailPage(pathname) &&
+    !isSearchProductListToProductPage(pathname) &&
+    !isSearchProductListToBrandPage
   ) {
     return NextResponse.redirect(new URL("/", request.url))
   }
