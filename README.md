@@ -8,15 +8,17 @@
 2. [설치 및 실행](#install)
 3. [기술 스택](#stack)
 4. [디렉토리 구조](#directory)
+5. [주요 기능](#feature)
+6. [Troubleshooting](#troubleshooting)
 
 
 ## <span id="introduce">프로젝트 소개</span>
 - 기존 팀프로젝트를 리팩토링한 풀 스택 프로젝트입니다.
 - 다양한 브랜드의 상품을 구매할 수 있는 이커머스 웹 프로젝트입니다.
 
-## 설치 및 실행
+## <span id="install">🗣️ 설치 및 실행</span>
 
-### <span id="install">설치 및 실행</span>
+### 설치
 ```bash
 # 프로젝트 클론
 > git clone https://github.com/nicehyun/12st-shoppingPlatformRe.git
@@ -190,6 +192,8 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 ├── 📂 redux ✅ Redux 설정, Feature 별 Slice
 └── 📂 types ✅ next-auth.d.ts
 ```
+</br></br>
 
+## <span id="feature">📍 주요 기능</span>
 
 
