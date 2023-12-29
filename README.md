@@ -54,6 +54,8 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 > npm run dev
 ```
 
+## 기술스택
+<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
 
 
 
