@@ -64,7 +64,7 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
   <img src="https://img.shields.io/badge/react 18.2.5-61DAFB?style=for-the-badge&logo=react&logoColor=white">
   <img src="https://img.shields.io/badge/mui 5.14.1-007FFF?style=for-the-badge&logo=mui&logoColor=white">
   <img src="https://img.shields.io/badge/tailwindcss 3.3.3-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white">
-</div>
+<img src="https://img.shields.io/badge/swiper 10.3.1-#6332F6?style=for-the-badge&logo=swiper&logoColor=white">
  <img src="https://img.shields.io/badge/react icons 4.10.1-06B6D4?style=for-the-badge">
 </div>
 </br>
@@ -73,7 +73,7 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 <div>
   <img src="https://img.shields.io/badge/tanstackquery 4.32.0-0088CC?style=for-the-badge&logo=reactquery&logoColor=white"> 
   <img src="https://img.shields.io/badge/redux 8.1.1-764ABC?style=for-the-badge&logo=redux&logoColor=white">
-  <img src="https://img.shields.io/badge/reduxtoolkit 1.9.5-764ABC?style=for-the-badge&logo=redux&logoColor=white">
+  <img src="https://img.shields.io/badge/redux toolkit 1.9.5-764ABC?style=for-the-badge&logo=redux&logoColor=white">
 </div>
 </br>
 
@@ -85,9 +85,13 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 
 ### 기타 라이브러리
 <div>
- <img src="https://img.shields.io/badge/lodash-06B6D4?style=for-the-badge&logo=lodash&logoColor=white">
-<img src="https://img.shields.io/badge/lodash-06B6D4?style=for-the-badge&logo=lodash&logoColor=white">
-<img src="https://img.shields.io/badge/lodash-06B6D4?style=for-the-badge&logo=lodash&logoColor=white"> 
+ <img src="https://img.shields.io/badge/eslint 8.45.0-4B32C3?style=for-the-badge&logo=eslint&logoColor=white">
+<img src="https://img.shields.io/badge/prettier 2.8.7-F7B93E?style=for-the-badge&logo=prettier&logoColor=white">
+<img src="https://img.shields.io/badge/lodash 4.17.21-06B6D4?style=for-the-badge&logo=lodash&logoColor=white">
+<img src="https://img.shields.io/badge/axios 1.4.0-5A29E4?style=for-the-badge&logo=axios&logoColor=white">
+<img src="https://img.shields.io/badge/jsonwebtokens 9.0.1-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white"> 
+  <img src="https://img.shields.io/badge/bcrypt 5.1.1-06B6D4?style=for-the-badge">
+   <img src="https://img.shields.io/badge/daum-postcode 3.1.3-5A29E4?style=for-the-badge"> 
 </div>
 </br></br>
   
