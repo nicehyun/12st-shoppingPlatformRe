@@ -12,7 +12,7 @@ interface IReactQueryProvider {
   children: ReactNode
 }
 
-const ReactQueryProvider = ({ children }: IReactQueryProvider) => {
+const TanstackQueryProvider = ({ children }: IReactQueryProvider) => {
   const [queryClient] = useState(
     new QueryClient({
       defaultOptions: {
@@ -31,4 +31,4 @@ const ReactQueryProvider = ({ children }: IReactQueryProvider) => {
   )
 }
 
-export default ReactQueryProvider
+export default TanstackQueryProvider

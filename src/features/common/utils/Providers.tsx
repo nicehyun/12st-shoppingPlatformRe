@@ -2,7 +2,7 @@ import AuthenticationCheck from "@/features/auth/signIn/views/AuthenticationChec
 
 import ReduxProvider from "@/redux/utils/ReduxProvider"
 
-import ReactQueryProvider from "../../../tanstackQuery/utils/ReactQueryProvider"
+import TanstackQueryProvider from "../../../tanstackQuery/utils/TanstackQueryProvider"
 import Sessionprovider from "./SessionProvider"
 import Themeprovider from "./ThemeProvider"
 
@@ -12,7 +12,7 @@ interface IProviders {
 
 const Providers = ({ children }: IProviders) => {
   return (
-    <ReactQueryProvider>
+    <TanstackQueryProvider>
       <Sessionprovider>
         <ReduxProvider>
           <Themeprovider>
@@ -21,7 +21,7 @@ const Providers = ({ children }: IProviders) => {
           </Themeprovider>
         </ReduxProvider>
       </Sessionprovider>
-    </ReactQueryProvider>
+    </TanstackQueryProvider>
   )
 }
 
