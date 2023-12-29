@@ -223,8 +223,13 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 ![product_detail_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/55ee41aa-9020-4255-b96a-6a94e029e5bb)
 </br>
 - Product Detail Page에서는 상품의 상세 정보를 확인할 수 있습니다.
-- 로그인을 하지 않고 장바구니 담기, 바로 구매하기 버튼을 클릭할 겨우
+- 로그인을 하지 않고 장바구니 담기, 바로 구매하기 버튼을 클릭 시 피드백 모달이 Mount 됩니다.
 </br></br>
 
-
+### 🔎 Product Detail Page </br>
+![product_detail_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/55ee41aa-9020-4255-b96a-6a94e029e5bb)
+</br>
+- Product Detail Page에서는 상품의 상세 정보를 확인할 수 있습니다.
+- 로그인을 하지 않고 장바구니 담기, 바로 구매하기 버튼을 클릭 시 피드백 모달이 Mount 됩니다.
+</br></br>
 
