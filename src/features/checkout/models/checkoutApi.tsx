@@ -1,7 +1,6 @@
 import { CheckoutList } from "@/features/checkout/types/checkout"
 import { Product } from "@/features/common/types/product"
 import { CheckoutClauseCheck } from "@/redux/features/checkoutSlice"
-import { NextResponse } from "next/server"
 
 export const checkoutAPI = {
   getCheckoutList: async (
