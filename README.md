@@ -7,6 +7,7 @@
 1. [프로젝트 소개](#introduce)
 2. [설치 및 실행](#install)
 3. [기술 스택](#stack)
+4. [디렉토리 구조](#directory)
 
 
 ## <span id="introduce">프로젝트 소개</span>
@@ -101,8 +102,94 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 </div>
 </br></br>
   
-## 설치 및 실행
-
+## <span id="directory">📂 디렉토리 구조</span>
+```plaintext
+├── 📂 app ➡️ App Directory
+│   		├── 📂 api ➡️ Route Handler
+│   		│   		├── 📂 (common) ➡️ Common Route Handler
+│   		│   		│   		├── 📂 categories
+│   		│   		│   		├── 📂 coupons
+│   		│   		│   		├── 📂 deliveryInfo
+│   		│   		│   		├── 📂 heart
+│   		│   		│   		├── 📂 mile
+│   		│   		│   		├── 📂 product
+│   		│   		│   		│   		├── 📂 [productId]
+│   		│   		│   		└── 📂 userInfo
+│   		│   		├── 📂 (productList) ➡️ ProductList Route Handler
+│   		│   		│   		├── 📂 bestProductList
+│   		│   		│   		│   		├── 📂 [...categories]
+│   		│   		│   		├── 📂 categoryManagement
+│   		│   		│   		│   		└── 📂 [[...categories]]
+│   		│   		│   		└── 📂 searchProductList
+│   		│   		│       	└── 📂 [...searchPrams]
+│   		│   		├── 📂 auth ➡️ Auth Route Handler
+│   		│   		│   		├── 📂 [...nextauth]
+│   		│   		│   		├── 📂 signIn
+│   		│   		│   		└── 📂 signUp
+│   		│   		│       			├── 📂 emailDuplicateCheck
+│   		│   		│       			└── 📂 verificatePhone
+│   		│   		│           			└── 📂 requestPhoneVerification
+│   		│   		├── 📂 cart ➡️ Cart Route Handler
+│   		│   		├── 📂 checkout
+│   		│   		├── 📂 home
+│   		│   		└── 📂 myPage
+│   		│       			└── 📂 customerCounseling
+│   		├── 📂 (auth) ➡️ Auth Page
+│   		│   		├── 📂 signIn
+│   		│   		└── 📂 signUp
+│   		├── 📂 (home) ➡️ Home Page
+│   		├── 📂 (productList) ➡️ ProductList Page
+│   		│   		├── 📂 arrivalProductList
+│   		│   		├── 📂 bestProductList
+│   		│   		│   		├── 📂 [[...categories]]
+│   		│   		├── 📂 searchProductList
+│   		│   		│   		├── 📂 [...searchPrams]
+│   		│   		└── 📂 topSaleProductList     		
+│   		├── 📂 cart ➡️ Cart Page
+│   		├── 📂 categoryManagement ➡️ CategoryManagement Page
+│   		│   		├── [[...categories]]
+│   		├── 📂 checkout ➡️ Checkout Page
+│   		├── 📂 checkoutConfirmed ➡️ CheckoutConfirmed Page
+│   		├── 📂 myPage ➡️ MyPage Page
+│   		│   		├── 📂 checkoutCancelList
+│   		│   		├── 📂 checkoutList
+│   		│   		├── 📂 coupons
+│   		│   		├── 📂 heartProductList
+│   		│   		├── 📂 inquiryCustomerCounseling
+│   		│   		│   		└── 📂 write
+│   		│   		├── 📂 mile
+│   		│   		├── 📂 productQnAList
+│   		│   		├── 📂 reviewList
+│   		│   		└── 📂 userInfoOfModification
+│   		└── 📂 productDetail ➡️ ProductDetail Page
+│       			└── 📂 [productId]
+│
+│
+│
+├── 📂 features ➡️ Feature 별 Model, View, Hook, Util, Type 관리
+│   		├── 📂 arrivalProductList
+│   		├── 📂 auth
+│   		│   		├── 📂 signIn
+│   		│   		└── 📂 signUp
+│   		├── 📂 bestProductList
+│   		├── 📂 cart
+│   		├── 📂 categoryManagement
+│   		├── 📂 checkout
+│   		├── 📂 checkoutConfirmed
+│   		├── 📂 common
+│   		├── 📂 home
+│   		├── 📂 layout
+│   		├── 📂 myPage
+│   		├── 📂 productDetail
+│   		├── 📂 searchResultList
+│   		└── 📂 topSaleProductList
+│
+├── 📂 firebase ➡️ Firebase Config 
+├── 📃 middleware.ts ➡️ Next Middleware 설정
+├── 📂 tanstackQuery ➡️ Tnstack 설정
+├── 📂 redux ➡️ Redux 설정, Feature 별 Slice
+└── 📂 types ➡️ next-auth.d.ts
+```
 
 
 
