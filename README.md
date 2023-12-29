@@ -59,21 +59,26 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 ### 프레임워크
 <img src="https://img.shields.io/badge/next-000000?style=for-the-badge&logo=nextdotjs&logoColor=white"> 
 
-### 라이브러리
+### UI 라이브러리
 <div> 
-  
   <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white">
+  <img src="https://img.shields.io/badge/tailwindcss-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white">
+</div>
+</br>
+
+### 상태 관리 라이브러리
+<div>
+  <img src="https://img.shields.io/badge/reactquery-0088CC?style=for-the-badge&logo=reactquery&logoColor=white"> 
+  <img src="https://img.shields.io/badge/redux-764ABC?style=for-the-badge&logo=redux&logoColor=white">
+</div>
+* Redux Toolkit을 사용했습니다.
+</br>
+
+  
+
+  <img src="https://img.shields.io/badge/lodash-06B6D4?style=for-the-badge&logo=lodash&logoColor=white"> 
   <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"> 
   </br>
-  
-  <img src="https://img.shields.io/badge/reactquery-0088CC?style=for-the-badge&logo=reactquery&logoColor=white"> 
-  <img src="https://img.shields.io/badge/lodash-06B6D4?style=for-the-badge&logo=lodash&logoColor=white"> 
-  </br>
-
-  <img src="https://img.shields.io/badge/tailwindcss-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white">
-  </div>
-
-
 
 
 
