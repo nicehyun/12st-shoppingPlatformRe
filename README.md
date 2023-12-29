@@ -59,6 +59,10 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 ### 프레임워크
 <img src="https://img.shields.io/badge/next.js 13.4.12-000000?style=for-the-badge&logo=nextdotjs&logoColor=white"> 
 
+### 언어 
+<img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
+</br>
+
 ### UI 라이브러리
 <div> 
   <img src="https://img.shields.io/badge/react 18.2.5-61DAFB?style=for-the-badge&logo=react&logoColor=white">
@@ -77,12 +81,9 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 </div>
 </br>
 
-### 언어 
-<img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
-</br>
 
-### Back End
 
+### Back End 라이브러리
 <div>
   <img src="https://img.shields.io/badge/firebase 10.1.0-FFCA28?style=for-the-badge&logo=firebase&logoColor=white">
   <img src="https://img.shields.io/badge/firebase admin 11.10.1-FFCA28?style=for-the-badge&logo=firebase&logoColor=white">
