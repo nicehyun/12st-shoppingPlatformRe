@@ -122,55 +122,55 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 │   		│   		│   		│   	└── 📂 [[...categories]]
 │   		│   		│   		└── 📂 searchProductList
 │   		│   		│       	└── 📂 [...searchPrams]
-│   		│   		├── 📂 auth ➡️ Auth Route Handler
+│   		│   		├── 📂 auth ✅ Auth Route Handler
 │   		│   		│   		├── 📂 [...nextauth]
 │   		│   		│   		├── 📂 signIn
 │   		│   		│   		└── 📂 signUp
-│   		│   		│       			├── 📂 emailDuplicateCheck
-│   		│   		│       			└── 📂 verificatePhone
-│   		│   		│           			└── 📂 requestPhoneVerification
-│   		│   		├── 📂 cart ➡️ Cart Route Handler
-│   		│   		├── 📂 checkout
-│   		│   		├── 📂 home
-│   		│   		└── 📂 myPage
-│   		│       			└── 📂 customerCounseling
-│   		├── 📂 (auth) ➡️ Auth Page
-│   		│   		├── 📂 signIn
-│   		│   		└── 📂 signUp
-│   		├── 📂 (home) ➡️ Home Page
-│   		├── 📂 (productList) ➡️ ProductList Page
-│   		│   		├── 📂 arrivalProductList
-│   		│   		├── 📂 bestProductList
-│   		│   		│   		├── 📂 [[...categories]]
-│   		│   		├── 📂 searchProductList
-│   		│   		│   		├── 📂 [...searchPrams]
-│   		│   		└── 📂 topSaleProductList     		
-│   		├── 📂 cart ➡️ Cart Page
-│   		├── 📂 categoryManagement ➡️ CategoryManagement Page
-│   		│   		├── [[...categories]]
-│   		├── 📂 checkout ➡️ Checkout Page
-│   		├── 📂 checkoutConfirmed ➡️ CheckoutConfirmed Page
-│   		├── 📂 myPage ➡️ MyPage Page
-│   		│   		├── 📂 checkoutCancelList
-│   		│   		├── 📂 checkoutList
-│   		│   		├── 📂 coupons
-│   		│   		├── 📂 heartProductList
-│   		│   		├── 📂 inquiryCustomerCounseling
-│   		│   		│   		└── 📂 write
-│   		│   		├── 📂 mile
-│   		│   		├── 📂 productQnAList
-│   		│   		├── 📂 reviewList
-│   		│   		└── 📂 userInfoOfModification
-│   		└── 📂 productDetail ➡️ ProductDetail Page
-│       			└── 📂 [productId]
+│   		│   		│       		├── 📂 emailDuplicateCheck
+│   		│   		│       		└── 📂 verificatePhone
+│   		│   		│           		└── 📂 requestPhoneVerification
+│   		│   		├── 📂 cart ✅ Cart Route Handler
+│   		│   		├── 📂 checkout ✅ Checkout Route Handler
+│   		│   		├── 📂 home ✅ Home Route Handler
+│   		│   		└── 📂 myPage ✅ MyPage Route Handler
+│   		│       		└── 📂 customerCounseling
+│   		├── 📂 (auth) ✅ Auth Page
+│   		│   	├── 📂 signIn
+│   		│   	└── 📂 signUp
+│   		├── 📂 (home) ✅ Home Page
+│   		├── 📂 (productList) ✅ ProductList Page
+│   		│   	├── 📂 arrivalProductList
+│   		│   	├── 📂 bestProductList
+│   		│   	│   └── 📂 [[...categories]]
+│   		│   	├── 📂 searchProductList
+│   		│   	│   └── 📂 [...searchPrams]
+│   		│   	└── 📂 topSaleProductList     		
+│   		├── 📂 cart ✅ Cart Page
+│   		├── 📂 categoryManagement ✅ CategoryManagement Page
+│   		│   ├── [[...categories]]
+│   		├── 📂 checkout ✅ Checkout Page
+│   		├── 📂 checkoutConfirmed ✅ CheckoutConfirmed Page
+│   		├── 📂 myPage ✅ MyPage Page
+│   		│   ├── 📂 checkoutCancelList
+│   		│   ├── 📂 checkoutList
+│   		│   ├── 📂 coupons
+│   		│   ├── 📂 heartProductList
+│   		│   ├── 📂 inquiryCustomerCounseling
+│   		│   │   └── 📂 write
+│   		│   ├── 📂 mile
+│   		│   ├── 📂 productQnAList
+│   		│   ├── 📂 reviewList
+│   		│   └── 📂 userInfoOfModification
+│   		└── 📂 productDetail ✅ ProductDetail Page
+│       		└── 📂 [productId]
 │
 │
 │
-├── 📂 features ➡️ Feature 별 Model, View, Hook, Util, Type 관리
+├── 📂 features ✅ Feature 별 Model, View, Hook, Util, Type 관리
 │   		├── 📂 arrivalProductList
 │   		├── 📂 auth
-│   		│   		├── 📂 signIn
-│   		│   		└── 📂 signUp
+│   		│   ├── 📂 signIn
+│   		│   └── 📂 signUp
 │   		├── 📂 bestProductList
 │   		├── 📂 cart
 │   		├── 📂 categoryManagement
@@ -184,11 +184,11 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 │   		├── 📂 searchResultList
 │   		└── 📂 topSaleProductList
 │
-├── 📂 firebase ➡️ Firebase Config 
-├── 📃 middleware.ts ➡️ Next Middleware 설정
-├── 📂 tanstackQuery ➡️ Tnstack 설정
-├── 📂 redux ➡️ Redux 설정, Feature 별 Slice
-└── 📂 types ➡️ next-auth.d.ts
+├── 📂 firebase ✅ Firebase Config 
+├── 📃 middleware.ts ✅ Next Middleware 설정
+├── 📂 tanstackQuery ✅ Tnstack 설정
+├── 📂 redux ✅ Redux 설정, Feature 별 Slice
+└── 📂 types ✅ next-auth.d.ts
 ```
 
 
