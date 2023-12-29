@@ -226,10 +226,13 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 - 로그인을 하지 않고 장바구니 담기, 바로 구매하기 버튼을 클릭 시 피드백 모달이 Mount 됩니다.
 </br></br>
 
-### 🔎 Product Detail Page </br>
-![product_detail_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/55ee41aa-9020-4255-b96a-6a94e029e5bb)
+### 🔎 Sign Up Page </br>
+![sign_up_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/33ee53f9-08ba-409f-a5cc-9b65466b4db5)
 </br>
-- Product Detail Page에서는 상품의 상세 정보를 확인할 수 있습니다.
-- 로그인을 하지 않고 장바구니 담기, 바로 구매하기 버튼을 클릭 시 피드백 모달이 Mount 됩니다.
+- Sign Up Page에서는 각각의 Step에서 유효성 검사를 통과해야 다음 Step으로 넘어갈 수 있습니다.
+- Email Step - 사용하고자 하는 Email의 유효성을 검사하고, 중복 검사를 진행합니다.
+- Password Step - 사용하고자 하는 Password의 유효성을 검사하고, 재확인 합니다.
+- Name Step - 사용자 이름의 유효성을 검사합니다.
+- Phone Verificate Step - Firebase Authentication을 이용해 입력한 번호로 인증 문자를 보내고, 받은 인증 번호를 입력합니다.
 </br></br>
 
