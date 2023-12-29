@@ -69,9 +69,9 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 
 ### 상태 관리 라이브러리
 <div>
-  <img src="https://img.shields.io/badge/tanstack-query 4.32.0-0088CC?style=for-the-badge&logo=reactquery&logoColor=white"> 
+  <img src="https://img.shields.io/badge/tanstackquery 4.32.0-0088CC?style=for-the-badge&logo=reactquery&logoColor=white"> 
   <img src="https://img.shields.io/badge/redux 8.1.1-764ABC?style=for-the-badge&logo=redux&logoColor=white">
-  <img src="https://img.shields.io/badge/redux-toolkit 1.9.5-764ABC?style=for-the-badge&logo=redux&logoColor=white">
+  <img src="https://img.shields.io/badge/reduxtoolkit 1.9.5-764ABC?style=for-the-badge&logo=redux&logoColor=white">
 </div>
 </br>
 
