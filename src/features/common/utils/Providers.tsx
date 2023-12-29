@@ -3,8 +3,8 @@ import AuthenticationCheck from "@/features/auth/signIn/views/AuthenticationChec
 import ReduxProvider from "@/redux/utils/ReduxProvider"
 
 import TanstackQueryProvider from "../../../tanstackQuery/utils/TanstackQueryProvider"
-import Sessionprovider from "./SessionProvider"
-import Themeprovider from "./ThemeProvider"
+import Sessionprovider from "../views/SessionProvider"
+import Themeprovider from "../views/ThemeProvider"
 
 interface IProviders {
   children: React.ReactNode
