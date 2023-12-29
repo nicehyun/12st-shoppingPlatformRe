@@ -13,7 +13,7 @@ import {
 } from "@/features/auth/signUp/utils/validation"
 import { CheckoutClauseCheck } from "@/redux/features/checkoutSlice"
 import { NextRequest, NextResponse } from "next/server"
-import { verifyJwt } from "@/app/lib/jwt"
+import { verifyJwt } from "@/features/common/utils/jwt"
 import { AxiosError } from "axios"
 import { formatCheckoutNumber } from "@/features/checkout/utils/checkout"
 import { GetCartResponse } from "@/features/cart/types/cart"

@@ -6,7 +6,7 @@ import {
 } from "@/features/auth/signUp/utils/validation"
 import { AxiosError } from "axios"
 import { NextResponse } from "next/server"
-import { signJwtAccessToken } from "@/app/lib/jwt"
+import { signJwtAccessToken } from "@/features/common/utils/jwt"
 
 interface RequestBody {
   email: string

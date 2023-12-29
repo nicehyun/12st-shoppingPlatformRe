@@ -1,4 +1,4 @@
-import { verifyJwt } from "@/app/lib/jwt"
+import { verifyJwt } from "@/features/common/utils/jwt"
 import { GetHeartListResponse } from "@/features/common/types/heart"
 import { Product } from "@/features/common/types/product"
 

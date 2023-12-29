@@ -1,4 +1,4 @@
-import { verifyJwt } from "@/app/lib/jwt"
+import { verifyJwt } from "@/features/common/utils/jwt"
 import { GetCartResponse, ProductInCart } from "@/features/cart/types/cart"
 import { Product } from "@/features/common/types/product"
 import { AxiosError } from "axios"

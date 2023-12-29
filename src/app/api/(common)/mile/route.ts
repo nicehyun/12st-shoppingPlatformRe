@@ -1,4 +1,4 @@
-import { verifyJwt } from "@/app/lib/jwt"
+import { verifyJwt } from "@/features/common/utils/jwt"
 import { UserInfoWithMile } from "@/features/common/types/user"
 import { AxiosError } from "axios"
 import { NextResponse } from "next/server"
