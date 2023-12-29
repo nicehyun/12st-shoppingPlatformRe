@@ -225,7 +225,8 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 - Product Detail Page에서는 상품의 상세 정보를 확인할 수 있습니다.
 - 로그인을 하지 않고 장바구니 담기, 바로 구매하기 버튼을 클릭 시 피드백 모달이 Mount 됩니다.
 </br>
-![productDetail_with_auth_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/01e83ac3-bf2a-474b-abd8-3241958eb42a)
+
+![productDetail_with_auth_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/16a04111-5808-4828-bf52-0f0a9204768b)
 </br>
 - 로그인 시 장바구니에 상품 추가가 가능합니다.
 - 로그인 시 상품 '좋아요'가 가능합니다.
