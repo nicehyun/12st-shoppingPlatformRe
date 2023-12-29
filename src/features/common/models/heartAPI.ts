@@ -1,4 +1,4 @@
-import { GetHeartListResponse } from "@/features/productDetail/types/heartProduct"
+import { GetHeartListResponse } from "../types/heart"
 import { Product } from "../types/product"
 
 export const productHeartAPI = {

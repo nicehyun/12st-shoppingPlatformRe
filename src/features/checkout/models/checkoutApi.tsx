@@ -27,7 +27,7 @@ export const checkoutAPI = {
     isClauseCheck: Omit<CheckoutClauseCheck, "all">,
     isUpdateDeliveryInfo: boolean,
     authorization: string | null | undefined
-  ): Promise<NextResponse | null> => {
+  ) => {
     if (!authorization) return null
 
     const response = await fetch(
