@@ -224,6 +224,12 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 </br>
 - Product Detail Page에서는 상품의 상세 정보를 확인할 수 있습니다.
 - 로그인을 하지 않고 장바구니 담기, 바로 구매하기 버튼을 클릭 시 피드백 모달이 Mount 됩니다.
+</br>
+![productDetail_with_auth_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/01e83ac3-bf2a-474b-abd8-3241958eb42a)
+</br>
+- 로그인 시 장바구니에 상품 추가가 가능합니다.
+- 로그인 시 상품 '좋아요'가 가능합니다.
+- 로그인 시 바로 구매하기가 가능합니다.
 </br></br>
 
 ### 🔐 Sign Up Page </br>
@@ -242,9 +248,11 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 - Sign In Page에서는 회원가입한 Email과 Password를 이용하여 로그인이 가능합니다.
 </br></br>
 
-### 🔐 Sign In Page </br>
-![sign_In_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/ee4b312e-0819-4e7e-bb03-1976f17b30e7)
+### 👀 Search ProductList Page </br>
+![search_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/7b3f5ff9-0483-427c-85d3-9466b6d82f8d)
 </br>
-- Sign In Page에서는 회원가입한 Email과 Password를 이용하여 로그인이 가능합니다.
+- Search ProductList Page에서는 검색어와 일치하는 상품을 확인할 수 있습니다.
+- 검색어와 일치하는 상품과 브랜드를 구분해서 확인이 가능합니다.
 </br></br>
+
 
