@@ -23,30 +23,7 @@ export const myPageAPI = {
 
     return response.json()
   },
-  memberTermination: async (email: string) => {
-    // if (email === "") return
-    // try {
-    //   const userRef = doc(db, "user", email)
-    //   const addressRef = doc(db, "address", email)
-    //   const cartRef = doc(db, "cart", email)
-    //   const checkoutRef = doc(db, "checkout", email)
-    //   const defaultDeliveryInfoRef = doc(db, "defaultDeliveryInfo", email)
-    //   await deleteDoc(userRef)
-    //   await deleteDoc(addressRef)
-    //   await deleteDoc(cartRef)
-    //   await deleteDoc(checkoutRef)
-    //   await deleteDoc(defaultDeliveryInfoRef)
-    //   return {
-    //     result: "success",
-    //   }
-    // } catch (error) {
-    //   const { response } = error as unknown as AxiosError
-    //   if (response) {
-    //     throw Error(`🚨 firebase getDocs API : ${error}`)
-    //   }
-    //   throw Error(`🚨 memberTermination firebase API : ${error}`)
-    // }
-  },
+  memberTermination: async (email: string) => {},
   writeCoustomerCounseling: async (
     writeDetail: CustomerCounselingDetail,
     authorization: string | null | undefined

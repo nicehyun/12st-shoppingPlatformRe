@@ -2,7 +2,80 @@
   "heart": [
     {
       "email": "test@test.com",
-      "heartList": [],
+      "heartList": [
+        {
+          "price": 19500,
+          "reviewCount": 0,
+          "id": "11854593913",
+          "discount": 21,
+          "brand": "나이키",
+          "category1": "패션의류",
+          "discountedPrice": 15405,
+          "maker": "나이키",
+          "mallName": "스트릿스포츠",
+          "image": "https://shopping-phinf.pstatic.net/main_1185459/11854593913.jpg",
+          "sellCount": 115,
+          "category4": "",
+          "category2": "남성의류",
+          "name": "나이키 스우시 반바지 드라이핏",
+          "category3": "트레이닝복",
+          "deliveryFree": 0
+        },
+        {
+          "mallName": "네이버",
+          "discount": 14,
+          "category1": "패션잡화",
+          "discountedPrice": 7310,
+          "maker": "",
+          "price": 8500,
+          "category2": "남성신발",
+          "id": "35046582757",
+          "name": "로로스키니 남자 여름 아쿠아 샌들 슬리퍼 슈즈 사무실 물놀이 신발 남성 쪼리",
+          "reviewCount": 0,
+          "category4": "",
+          "sellCount": 138,
+          "deliveryFree": 3000,
+          "category3": "슬리퍼",
+          "brand": "",
+          "image": "https://shopping-phinf.pstatic.net/main_3504658/35046582757.20230704070054.jpg"
+        },
+        {
+          "id": "10027645998",
+          "discountedPrice": 23655,
+          "price": 28500,
+          "maker": "",
+          "name": "[당일발송] 5인치 밴딩 반바지 퓨어쇼츠 웨이브테크 나일론 쇼츠 화이트워터보이즈",
+          "deliveryFree": 0,
+          "sellCount": 148,
+          "discount": 17,
+          "mallName": "화이트워터보이즈",
+          "image": "https://shopping-phinf.pstatic.net/main_1002764/10027645998.13.jpg",
+          "category3": "바지",
+          "category2": "남성의류",
+          "reviewCount": 0,
+          "brand": "화이트워터보이즈",
+          "category1": "패션의류",
+          "category4": ""
+        },
+        {
+          "deliveryFree": 3000,
+          "sellCount": 168,
+          "reviewCount": 0,
+          "mallName": "네이버",
+          "price": 38840,
+          "discount": 18,
+          "id": "33197507754",
+          "maker": "나이키",
+          "name": "나이키 레볼루션 6 넥스트 네이처 DC3728-001",
+          "brand": "나이키",
+          "category3": "운동화",
+          "category1": "패션잡화",
+          "image": "https://shopping-phinf.pstatic.net/main_3319750/33197507754.20221017111653.jpg",
+          "category4": "러닝화",
+          "category2": "남성신발",
+          "discountedPrice": 31848.8
+        }
+      ],
       "id": 1
     }
   ],
@@ -203,7 +276,27 @@
   "cart": [
     {
       "email": "test@test.com",
-      "productList": [],
+      "productList": [
+        {
+          "mallName": "네이버",
+          "discount": 14,
+          "category1": "패션잡화",
+          "discountedPrice": 7310,
+          "maker": "",
+          "price": 8500,
+          "category2": "남성신발",
+          "id": "35046582757",
+          "name": "로로스키니 남자 여름 아쿠아 샌들 슬리퍼 슈즈 사무실 물놀이 신발 남성 쪼리",
+          "reviewCount": 0,
+          "category4": "",
+          "sellCount": 139,
+          "deliveryFree": 3000,
+          "category3": "슬리퍼",
+          "brand": "",
+          "image": "https://shopping-phinf.pstatic.net/main_3504658/35046582757.20230704070054.jpg",
+          "amount": 1
+        }
+      ],
       "id": 1
     }
   ],

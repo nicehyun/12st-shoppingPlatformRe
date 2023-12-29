@@ -2,7 +2,7 @@ import AuthenticationCheck from "@/features/auth/signIn/views/AuthenticationChec
 
 import ReduxProvider from "@/redux/utils/ReduxProvider"
 
-import ReactQueryProvider from "../../../reactQuery/utils/ReactQueryProvider"
+import ReactQueryProvider from "../../../tanstackQuery/utils/ReactQueryProvider"
 import Sessionprovider from "./SessionProvider"
 import Themeprovider from "./ThemeProvider"
 
