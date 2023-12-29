@@ -191,6 +191,7 @@ export async function POST(request: NextRequest) {
     const checkoutDate = new Date().toISOString()
     const updatedCheckoutList = {
       ...checkoutInfo,
+      getMile,
       checkoutDate,
       checkoutNumber: formatCheckoutNumber(checkoutDate),
     }
