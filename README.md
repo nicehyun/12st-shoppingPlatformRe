@@ -196,5 +196,7 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 </br></br>
 
 ## <span id="feature">📍 주요 기능</span>
+### 🏠 Home</br>
+![homepage](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/839ee048-debd-4087-b6ea-0fc357b597be)
 
 
