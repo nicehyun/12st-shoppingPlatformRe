@@ -104,22 +104,22 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
   
 ## <span id="directory">📂 디렉토리 구조</span>
 ```plaintext
-├── 📂 app ➡️ App Directory
-│   		├── 📂 api ➡️ Route Handler
-│   		│   		├── 📂 (common) ➡️ Common Route Handler
+├── 📂 app ✅ App Directory
+│   		├── 📂 api ✅ Route Handler
+│   		│   		├── 📂 (common) ✅ Common Route Handler
 │   		│   		│   		├── 📂 categories
 │   		│   		│   		├── 📂 coupons
 │   		│   		│   		├── 📂 deliveryInfo
 │   		│   		│   		├── 📂 heart
 │   		│   		│   		├── 📂 mile
 │   		│   		│   		├── 📂 product
-│   		│   		│   		│   		├── 📂 [productId]
+│   		│   		│   		│   	└── 📂 [productId]
 │   		│   		│   		└── 📂 userInfo
-│   		│   		├── 📂 (productList) ➡️ ProductList Route Handler
+│   		│   		├── 📂 (productList) ✅ ProductList Route Handler
 │   		│   		│   		├── 📂 bestProductList
-│   		│   		│   		│   		├── 📂 [...categories]
+│   		│   		│   		│   	└── 📂 [...categories]
 │   		│   		│   		├── 📂 categoryManagement
-│   		│   		│   		│   		└── 📂 [[...categories]]
+│   		│   		│   		│   	└── 📂 [[...categories]]
 │   		│   		│   		└── 📂 searchProductList
 │   		│   		│       	└── 📂 [...searchPrams]
 │   		│   		├── 📂 auth ➡️ Auth Route Handler
