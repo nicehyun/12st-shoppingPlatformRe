@@ -85,7 +85,7 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 
 <div>
   <img src="https://img.shields.io/badge/firebase 10.1.0-FFCA28?style=for-the-badge&logo=firebase&logoColor=white">
-  <img src="https://img.shields.io/badge/firebase-admin 11.10.1-FFCA28?style=for-the-badge&logo=firebase&logoColor=white">
+  <img src="https://img.shields.io/badge/firebase admin 11.10.1-FFCA28?style=for-the-badge&logo=firebase&logoColor=white">
   <img src="https://img.shields.io/badge/json server 0.17.4-FF0000?style=for-the-badge">
 </div>
 </br>
