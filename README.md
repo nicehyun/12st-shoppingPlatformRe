@@ -196,7 +196,14 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 </br></br>
 
 ## <span id="feature">📍 주요 기능</span>
-### 🏠 Home</br>
+### 🏠 Home Page</br>
 ![homepage](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/839ee048-debd-4087-b6ea-0fc357b597be)
+</br>
+Home Page에서는 판매량이 가장 높은 상품, 새로운 상품, 할인율이 가장 높은 상품을 각 섹션별로 확인할 수 있습니다.
+각 섹션의 더보기 버튼을 클릭하면 관련 페이지로 이동합니다.
+</br></br>
 
-
+### 👍🏻 Best ProductList Page </br>
+![bestProductPage](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/a4e2ced0-b8fc-43d8-8ffe-92c24f8fe73f)
+</br>
+Best ProductList Page에서는 각 카테고리 별 판매량이 가장 높은 상품을 최대 100개까지 확인할 수 있습니다.
