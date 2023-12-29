@@ -17,14 +17,44 @@
 
 ## 설치 및 실행
 
-### 프로젝
+### 설치
 ```bash
 # 프로젝트 클론
-git clone https://github.com/your-username/your-project.git
-
-# 프로젝트 폴더로 이동
-cd your-project
+> git clone https://github.com/nicehyun/12st-shoppingPlatformRe.git
 
 # 의존성 패키지 설치
-npm install
+> npm install
 ```
+
+### 환경 변수 설정
+```bash
+# 회원가입 본인인증 시 Firebase Authentication을 사용
+NEXT_PUBLIC_FIREBASE_API_KEY="Your_Authentication_API_Key"
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN="Your_Firebase_App_Domain"
+NEXT_PUBLIC_FIREBASE_PROJECT_ID="Your_Firebase_Project_ID"
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET="Your_Firebase_Storage_Bucket"
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID="Your_Firebase_Messaging_Sender_ID"
+NEXT_PUBLIC_FIREBASE_APP_ID="Your_Firebase_App_ID"
+NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID="Your_Firebase_Measurement_ID"
+
+# Middleware에서 Next-Auth Session-Token 인증에 사용하는 Secret Key
+NEXTAUTH_SECRET="Your_Next_Auth_Secret_Key"
+
+# JWT Token 생성과 인증에 사용하는 Key
+SECRET_KEY="Your_Token_Secret_Key"
+
+# 현재 NEXT_PUBLIC_BASE_URL은 localhost:3000, NEXT_PUBLIC_DB_URL은 localhost:8080 사용 중입니다.
+NEXT_PUBLIC_BASE_URL="http://localhost:3000"
+NEXT_PUBLIC_DB_URL="http://localhost:8080"
+```
+
+### 실행
+```bash
+# 개발 환경에서 프로젝트 실행
+> npm run dev
+```
+
+
+
+
+
