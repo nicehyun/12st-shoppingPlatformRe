@@ -4,20 +4,18 @@
 
 ## 목차
 
-1. [프로젝트 소개](#프로젝트-소개)
-2. [설치 및 실행](#설치-및-실행)
-3. [사용 방법](#사용-방법)
-4. [기술 스택](#기술-스택)
-5. [기여 방법](#기여-방법)
-6. [라이센스](#라이센스)
+1. [프로젝트 소개](#introduce)
+2. [설치 및 실행](#install)
+3. [기술 스택](#stack)
 
-## 프로젝트 소개
+
+## <span id="introduce">프로젝트 소개</span>
 - 기존 팀프로젝트를 리팩토링한 풀 스택 프로젝트입니다.
 - 다양한 브랜드의 상품을 구매할 수 있는 이커머스 웹 프로젝트입니다.
 
 ## 설치 및 실행
 
-### 설치
+### <span id="install">설치 및 실행</span>
 ```bash
 # 프로젝트 클론
 > git clone https://github.com/nicehyun/12st-shoppingPlatformRe.git
@@ -55,7 +53,7 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 ```
 </br></br>
 
-## ⚙️ 기술스택
+## <span id="stack">⚙️ 기술스택</span>
 ### 프레임워크
 <img src="https://img.shields.io/badge/next.js 13.4.12-000000?style=for-the-badge&logo=nextdotjs&logoColor=white"> 
 
@@ -103,7 +101,7 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 </div>
 </br></br>
   
-
+## 설치 및 실행
 
 
 
