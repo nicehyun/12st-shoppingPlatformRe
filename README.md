@@ -62,7 +62,8 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 ### UI 라이브러리
 <div> 
   <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white">
-  <img src="https://img.shields.io/badge/tailwindcss-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white">
+  <img src="https://img.shields.io/badge/mui-007FFF?style=for-the-badge&logo=mui&logoColor=white">
+  <img src="https://img.shields.io/badge/tailwindcss 5.14.1-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white">
 </div>
 </br>
 
@@ -70,14 +71,22 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 <div>
   <img src="https://img.shields.io/badge/reactquery-0088CC?style=for-the-badge&logo=reactquery&logoColor=white"> 
   <img src="https://img.shields.io/badge/redux-764ABC?style=for-the-badge&logo=redux&logoColor=white">
+  <p>* Redux Toolkit을 사용했습니다.</p>
 </div>
-* Redux Toolkit을 사용했습니다.
 </br>
 
-  
+### 타입 관리 
+<img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
+</br>
 
-  <img src="https://img.shields.io/badge/lodash-06B6D4?style=for-the-badge&logo=lodash&logoColor=white"> 
-  <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"> 
+### 기타 라이브러리
+<div>
+ <img src="https://img.shields.io/badge/lodash-06B6D4?style=for-the-badge&logo=lodash&logoColor=white">
+<img src="https://img.shields.io/badge/lodash-06B6D4?style=for-the-badge&logo=lodash&logoColor=white">
+<img src="https://img.shields.io/badge/lodash-06B6D4?style=for-the-badge&logo=lodash&logoColor=white"> 
+</div>
+  
+  
   </br>
 
 
