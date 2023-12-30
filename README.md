@@ -104,6 +104,9 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 </br></br>
   
 ## <span id="directory">📂 디렉토리 구조</span>
+<details>
+  
+  <summary><h3>디렉토리 구조 살펴보기</h3></br></summary>
 ```plaintext
 ├── 📂 app ✅ App Directory
 │   		├── 📂 api ✅ Route Handler
@@ -192,6 +195,7 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 └── 📂 types ✅ next-auth.d.ts
 ```
 </br></br>
+</details>
 
 ## <span id="feature">📍 주요 기능</span>
 
