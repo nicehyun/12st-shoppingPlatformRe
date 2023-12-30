@@ -290,29 +290,29 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 </br></br>
 
 ### 📚 Checkout Page </br>
- ![checkout_Invalid_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/fe14dff7-d03a-4197-8764-d908107768fa)
+![checkout_Invalid_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/fe14dff7-d03a-4197-8764-d908107768fa)
 </br>
 - Checkout Page에서는 수령인, 배송지, 연락처1, 결제방법, 결제 약관에 대한 유효성 검사를 진행하며, 미진행 시 Feedback Modal을 통헤 사용자에게 Feedback을 전달합니다.
 - Layout Navigation은 해당 페이지에서 사용되지 않습니다.
 </br>
 
- ![checkout_productIndo_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/81a3d1d6-ed77-43de-92dd-7a65c0a10b15)
+![checkout_productIndo_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/81a3d1d6-ed77-43de-92dd-7a65c0a10b15)
 </br></br>
 - 주문상품 정보에서 주문하고자 하는 하나의 상품 정보를 확인할 수 있으며, '펼치기' 버튼 클릭 시 주문하는 모든 상품의 정보를 확인할 수 있습니다.
 - Coupon 적용 시 주문상품 정보에서 할인액이 각 상품이 얼마나 할인 받는지 확인이 가능합니다.
 </br></br>
 
- ![checkout_info_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/cab047bf-ce56-43d9-8a18-e8b573db5bb6)
+![checkout_info_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/cab047bf-ce56-43d9-8a18-e8b573db5bb6)
 </br>
 - '?'버튼 클릭 시 각 센션에 대한 섦명을 Modal을 통해 확인이 가능합니다.
 </br></br>
 
- ![checkout_deliveryInfo_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/09121938-0f69-4f74-bf36-9559ff379f54)
+![checkout_deliveryInfo_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/09121938-0f69-4f74-bf36-9559ff379f54)
 </br>
 - '기존배송지로 등록하기' 체크 후 결제하기 버튼 클릭 시 이후 주문에서 입력했던 배송지 정보를 불러와 사용합니다.
 </br></br>
 
-  ![checkout_mile_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/a6325ea4-91ea-4201-a780-7e9e090fed88)
+![checkout_mile_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/a6325ea4-91ea-4201-a780-7e9e090fed88)
 </br>
 - 보유한 마일리지보다 많은 숫자를 입력할 경우 0으로 Reset이 되며, '모두 사용' 버튼 클릭 시 보유한 마일리지를 모두 사용합니다.
 - 결제 금액에 대한 적립 마일리지는 1%이며, 사용한 마일리지를 제외한 결제금액의 1%가 적립됩니다.
