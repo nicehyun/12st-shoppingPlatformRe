@@ -241,6 +241,20 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 - Password Step - 사용하고자 하는 Password의 유효성을 검사하고, 재확인 합니다.
 - Name Step - 사용자 이름의 유효성을 검사합니다.
 - Phone Verificate Step - Firebase Authentication을 이용해 입력한 번호로 인증 문자를 보내고, 받은 인증 번호를 입력합니다.
+
+```bash
+# 회원가입 시 DB에 저장된 Data
+   {
+      "email": "test123@test.com",
+      "password": "$2b$10$OwvOLasDDdK88F5TNtXhIO3e8/FmceSD2o.XOBU2AhprfgjtirGHS",
+      "name": "이름",
+      "phone": "01012341234",
+      "marketingClause": true,
+      "mile": 0,
+      "id": 2
+    }
+```
+- 회원가입 시 DB에 저장되는 Data 중 Password는 암호화 되어 저장됩니다.
 </br></br>
 
 ### 🔐 Sign In Page </br>
@@ -272,5 +286,24 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 - 카테고리를 선택하지 않은 경우 '전체' 상품들을 확인할 수 있습니다.
 - 중분류 선택 시 해당 중분류에 해당하는 상품들을, 소분류 선택 시 해당 소분류에 해당하는 상품들을 세부적으로 확인할 수 있습니다.
 - 선택한 카테고리는 Section의 Title에서 확인이 가능합니다.
+</br></br>
+
+### 📚 Checkout Page </br>
+![checkout_Invalid_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/fe14dff7-d03a-4197-8764-d908107768fa)
+</br>
+- Checkout Page에서는 수령인, 배송지, 연락처1, 결제방법, 결제 약관에 대한 유효성 검사를 진행하며, 미진행 시 Feedback Modal을 통헤 사용자에게 Feedback을 전달합니다.
+</br>
+![checkout_productIndo_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/81a3d1d6-ed77-43de-92dd-7a65c0a10b15)
+</br></br>
+- 주문상품 정보에서 주문하고자 하는 하나의 상품 정보를 확인할 수 있으며, '펼치기' 버튼 클릭 시 주문하는 모든 상품의 정보를 확인할 수 있습니다.
+- Coupon 적용 시 주문상품 정보에서 할인액이 각 상품이 얼마나 할인 받는지 확인이 가능합니다.
+</br></br>
+![checkout_info_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/cab047bf-ce56-43d9-8a18-e8b573db5bb6)
+</br>
+- '?'버튼 클릭 시 각 센션에 대한 섦명을 Modal을 통해 확인이 가능합니다.
+</br></br>
+![checkout_deliveryInfo_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/09121938-0f69-4f74-bf36-9559ff379f54)
+</br>
+- '기존배송지로 등록하기' 체크 후 결제하기 버튼 클릭 시 이후 주문에서 입력했던 배송지 정보를 불러와 사용합니다.
 </br></br>
 
