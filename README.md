@@ -365,7 +365,7 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 
 <details>
   
-  <summary><h3> 📚 Checkout Page </h3></br></summary>
+  <summary><h3> 💰 Checkout Page </h3></br></summary>
 
 ![checkout_Invalid_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/fe14dff7-d03a-4197-8764-d908107768fa)
 </br>
