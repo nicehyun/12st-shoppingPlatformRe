@@ -197,7 +197,7 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 
 <details>
   
-  <summary>### 🏠 Home Page</summary>
+  <summary><h3> 🏠 Home Page </h3></br></summary>
 
   
 ![home_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/debfd3a2-78e8-4b56-afcc-522c01a7b7c0)
@@ -208,25 +208,42 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 
 </details>
 
-### 👍🏻 Best ProductList Page </br>
+<details>
+  
+  <summary><h3> 👍🏻 Best ProductList Page </h3></br></summary>
+
+
 ![bestProduct_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/149ac868-5231-468d-8e7a-e84ae6276d74)
 </br>
 - Best ProductList Page에서는 각 카테고리 별 판매량이 가장 높은 상품을 최대 100개까지 확인할 수 있습니다.
 </br></br>
 
-### 🎉 Arrival ProductList Page </br>
+</details>
+
+<details>
+  
+  <summary><h3> 🎉 Arrival ProductList Page </h3></br></summary>
+
 ![arrival_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/bc0f78b6-1247-4cce-95ad-4687fc765808)
 </br>
 - Arrival ProductList Page에서는 새로운 상품을 확인할 수 있습니다. (상품을 랜덤으로 추렸습니다.)
 </br></br>
+</details>
 
-### 🏷️ Top Sale ProductList Page </br>
+<details>
+  
+  <summary><h3> 🏷️ Top Sale ProductList Page </h3></br></summary>
+
 ![topsale_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/b34013e4-1769-487f-9a27-788adf464aac)
 </br>
 - Top Sale ProductList Page에서는 할인율이 가장 높은 상품 100개를 확인할 수 있습니다.
 </br></br>
+</details>
 
-### 🔎 Product Detail Page </br>
+<details>
+  
+  <summary><h3> 🔎 Product Detail Page </h3></br></summary>
+
 ![product_detail_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/55ee41aa-9020-4255-b96a-6a94e029e5bb)
 </br>
 - Product Detail Page에서는 상품의 상세 정보를 확인할 수 있습니다.
@@ -239,8 +256,12 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 - 로그인 시 상품 '좋아요'가 가능합니다.
 - 로그인 시 바로 구매하기가 가능합니다.
 </br></br>
+</details>
 
-### 🔐 Sign Up Page </br>
+<details>
+  
+  <summary><h3> 🔐 Sign Up Page </h3></br></summary>
+
 ![sign_up_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/33ee53f9-08ba-409f-a5cc-9b65466b4db5)
 </br>
 - Sign Up Page에서는 각각의 Step에서 유효성 검사를 통과해야 다음 Step으로 넘어갈 수 있습니다.
@@ -263,22 +284,36 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 ```
 - 회원가입 시 DB에 저장되는 Data 중 Password는 암호화 되어 저장됩니다.
 </br></br>
+</details>
 
-### 🔐 Sign In Page </br>
+<details>
+  
+  <summary><h3> 🔐 Sign In Page </h3></br></summary>
+
+
 ![sign_In_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/ee4b312e-0819-4e7e-bb03-1976f17b30e7)
 </br>
 - Sign In Page에서는 회원가입한 Email과 Password를 이용하여 로그인이 가능합니다.
 - - Layout Navigation, Header는 해당 페이지에서 사용되지 않습니다.
 </br></br>
+</details>
 
-### 👀 Search ProductList Page </br>
+<details>
+  
+  <summary><h3> 👀 Search ProductList Page </h3></br></summary>
+
 ![search_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/7b3f5ff9-0483-427c-85d3-9466b6d82f8d)
 </br>
 - Search ProductList Page에서는 검색어와 일치하는 상품을 확인할 수 있습니다.
 - 검색어와 일치하는 상품과 브랜드를 구분해서 확인이 가능합니다.
 </br></br>
+</details>
 
-### 🛒 Cart Page </br>
+<details>
+  
+  <summary><h3> 🛒 Cart Page </h3></br></summary>
+
+
 ![cart_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/5d6808c5-4810-4e13-8831-b4bb99137405)
 </br>
 - 장바구니에 상품을 추가하는 방법은 상품 카드에서 담기 버튼 클릭과 상품 상세 페이지에서 장바구니 담기 버튼 클릭을 하는 두 가지 방법이 있습니다.
@@ -286,8 +321,13 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 - Cart Page에서는 상품의 수량 조정, 선택 삭제, 개별 삭제가 가능합니다.
 - 장바구니에 담긴 상품과 각 상품에 수량에 대한 총 주문금액, 총 배송비, 총 결제금액을 확인할 수 있습니다.
 </br></br>
+</details>
 
-### 📚 Category Management Page </br>
+
+<details>
+  
+  <summary><h3>📚 Category Management Page </h3></br></summary>
+
 ![category_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/9d04c593-2bdd-4e45-a2ea-9412f54d3054)
 </br>
 - Layout Navigation의 카테고리 버튼 클릭으로 Category Management Page로 이동이 가능합니다.
@@ -295,8 +335,12 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 - 중분류 선택 시 해당 중분류에 해당하는 상품들을, 소분류 선택 시 해당 소분류에 해당하는 상품들을 세부적으로 확인할 수 있습니다.
 - 선택한 카테고리는 Section의 Title에서 확인이 가능합니다.
 </br></br>
+</details>
 
-### 📚 Checkout Page </br>
+<details>
+  
+  <summary><h3> 📚 Checkout Page </h3></br></summary>
+
 ![checkout_Invalid_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/fe14dff7-d03a-4197-8764-d908107768fa)
 </br>
 - Checkout Page에서는 수령인, 배송지, 연락처1, 결제방법, 결제 약관에 대한 유효성 검사를 진행하며, 미진행 시 Feedback Modal을 통헤 사용자에게 Feedback을 전달합니다.
@@ -324,14 +368,22 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 - 보유한 마일리지보다 많은 숫자를 입력할 경우 0으로 Reset이 되며, '모두 사용' 버튼 클릭 시 보유한 마일리지를 모두 사용합니다.
 - 결제 금액에 대한 적립 마일리지는 1%이며, 사용한 마일리지를 제외한 결제금액의 1%가 적립됩니다.
 </br></br>
+</details>
 
-### 🧾 Checkout Confirmed Page </br>
+<details>
+  
+  <summary><h3> 🧾 Checkout Confirmed Page </h3></br></summary>
+
 ![confirmed_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/98cb493c-45d2-4cd7-b593-1cfdf24ec198)
 </br>
 - Checkout Confirmed Page에서는 완료된 주문에 대한 정보를 확인할 수 있습니다.
 </br>
+</details>
 
-### 💁🏻‍♂️ My Page </br>
+<details>
+  
+  <summary><h3> 💁🏻‍♂️ My Page </h3></br></summary>
+
 ![mypage_main_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/015aa04c-76da-495d-84db-4965c9172ffe)
 </br>
 - My Page는 Layout Navigation의 '유저' 버튼 클릭을 통해 이용이 가능합니다.
@@ -398,6 +450,7 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 </br>
 - 좌측 '상품 Q&A내역' 클릭 시 상품에 대한 문의 내역만 확인이 가능합니다.
 </br></br>
+</details>
 
 
 
