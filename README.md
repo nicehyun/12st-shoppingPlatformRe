@@ -77,6 +77,8 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 ```bash
 # 개발 환경에서 프로젝트 실행
 > npm run dev
+# json-server의 Port는 NEXT_PUBLIC_DB_URL와 일치
+> npx json-server --port 8080 --watch db.json
 ```
 </br></br>
 
