@@ -323,3 +323,50 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 </br>
 - Checkout Confirmed Page에서는 완료된 주문에 대한 정보를 확인할 수 있습니다.
 </br>
+
+### 💁🏻‍♂️ My Page </br>
+![mypage_main_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/015aa04c-76da-495d-84db-4965c9172ffe)
+</br>
+- My Page는 Layout Navigation의 '유저' 버튼 클릭을 통해 이용이 가능합니다.
+- My Page 좌측의 Category 미선택 시 5개의 주문내역, 6개의 '좋아요'를 누른 상품을 Pagination을 통해 간단하게 확인이 가능합니다.
+</br></br>
+
+![mypage_coupon_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/e74436f5-40c0-409e-8abd-a71784da9e84)
+</br>
+- '쿠폰 >' 버튼 클릭 시 사용 가능한 쿠폰 정보를 확인할 수 있습니다.
+</br></br>
+
+
+![mypage_heart_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/a29e61b0-3db7-469d-a179-57baf60eaeb3)
+</br>
+- '🩷' 버튼 클릭 시 페이지 당 12개의 '좋아요'를 누른 상품을 Pagination을 통해 확인할 수 있습니다.
+</br></br>
+
+![mypage_checkoutList_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/4e8b1eb4-22e6-4047-a850-a431ac9b9e38)
+</br>
+- 좌측 '주문내역' 클릭 시 페이지당 10개의 주문내역을 Pagination을 통해 확인할 수 있습니다.
+</br></br>
+
+![mypage_cancel_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/2ea84686-5051-45a9-878c-9dcecdc580ed)
+</br>
+- 좌측 '취소/교환/반품 내역' 클릭 시 모든 내역, 취소 내역, 반품 내역, 교환 내역을 확인할 수 있습니다.
+- Pannel UI를 통해 간편한 내역 선택이 가능합니다.
+</br></br>
+
+![mypage_userInfo_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/8f56e403-5471-49a6-b046-02cb4981db9a)=
+</br>
+- 좌측 '회원정보수정' 클릭 시 사용자의 정보 확인이 가능합니다.
+- 기본배송지 수정 시 변경 사항이 없는데 '저장하기' 버튼 클릭 시 Modal을 사용한 Feedback을 사용자에게 전달합니다.
+- 약관동의 변경이 있는 경우만 '저장하기' 버튼 클릭이 가능합니다.
+- Pannel UI를 통해 간편한 선택이 가능합니다.
+</br></br>
+
+![mypage_userInfo_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/8f56e403-5471-49a6-b046-02cb4981db9a)=
+</br>
+- 좌측 '회원정보수정' 클릭 시 사용자의 정보 확인이 가능합니다.
+- 기본배송지 수정 시 변경 사항이 없는데 '저장하기' 버튼 클릭 시 Modal을 사용한 Feedback을 사용자에게 전달합니다.
+- 약관동의 변경이 있는 경우만 '저장하기' 버튼 클릭이 가능합니다.
+- Pannel UI를 통해 간편한 선택이 가능합니다.
+</br></br>
+  
+
