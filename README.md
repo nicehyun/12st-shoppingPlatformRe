@@ -1,5 +1,3 @@
-# Shopping Platform
-
 ![12st](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/5fb5b2d6-b0a9-4dbd-aded-9e75a31c248f)
 
 ## 목차
@@ -196,5 +194,75 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 </br></br>
 
 ## <span id="feature">📍 주요 기능</span>
+### 🏠 Home Page</br>
+![home_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/debfd3a2-78e8-4b56-afcc-522c01a7b7c0)
+</br>
+- Home Page에서는 판매량이 가장 높은 상품, 새로운 상품, 할인율이 가장 높은 상품을 각 섹션별로 확인할 수 있습니다.</br>
+- 각 섹션의 더보기 버튼을 클릭하면 관련 페이지로 이동합니다.
+</br></br>
+
+### 👍🏻 Best ProductList Page </br>
+![bestProduct_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/149ac868-5231-468d-8e7a-e84ae6276d74)
+</br>
+- Best ProductList Page에서는 각 카테고리 별 판매량이 가장 높은 상품을 최대 100개까지 확인할 수 있습니다.
+</br></br>
+
+### 🎉 Arrival ProductList Page </br>
+![arrival_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/bc0f78b6-1247-4cce-95ad-4687fc765808)
+</br>
+- Arrival ProductList Page에서는 새로운 상품을 확인할 수 있습니다. (상품을 랜덤으로 추렸습니다.)
+</br></br>
+
+### 🏷️ Top Sale ProductList Page </br>
+![topsale_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/b34013e4-1769-487f-9a27-788adf464aac)
+</br>
+- Top Sale ProductList Page에서는 할인율이 가장 높은 상품 100개를 확인할 수 있습니다.
+</br></br>
+
+### 🔎 Product Detail Page </br>
+![product_detail_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/55ee41aa-9020-4255-b96a-6a94e029e5bb)
+</br>
+- Product Detail Page에서는 상품의 상세 정보를 확인할 수 있습니다.
+- 로그인을 하지 않고 좋아요, 장바구니 담기, 바로 구매하기 버튼을 클릭 시 피드백 모달이 Mount 됩니다.
+</br>
+
+![productDetail_with_auth_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/16a04111-5808-4828-bf52-0f0a9204768b)
+</br>
+- 로그인 시 장바구니에 상품 추가가 가능합니다.
+- 로그인 시 상품 '좋아요'가 가능합니다.
+- 로그인 시 바로 구매하기가 가능합니다.
+</br></br>
+
+### 🔐 Sign Up Page </br>
+![sign_up_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/33ee53f9-08ba-409f-a5cc-9b65466b4db5)
+</br>
+- Sign Up Page에서는 각각의 Step에서 유효성 검사를 통과해야 다음 Step으로 넘어갈 수 있습니다.
+- Email Step - 사용하고자 하는 Email의 유효성을 검사하고, 중복 검사를 진행합니다.
+- Password Step - 사용하고자 하는 Password의 유효성을 검사하고, 재확인 합니다.
+- Name Step - 사용자 이름의 유효성을 검사합니다.
+- Phone Verificate Step - Firebase Authentication을 이용해 입력한 번호로 인증 문자를 보내고, 받은 인증 번호를 입력합니다.
+</br></br>
+
+### 🔐 Sign In Page </br>
+![sign_In_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/ee4b312e-0819-4e7e-bb03-1976f17b30e7)
+</br>
+- Sign In Page에서는 회원가입한 Email과 Password를 이용하여 로그인이 가능합니다.
+</br></br>
+
+### 👀 Search ProductList Page </br>
+![search_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/7b3f5ff9-0483-427c-85d3-9466b6d82f8d)
+</br>
+- Search ProductList Page에서는 검색어와 일치하는 상품을 확인할 수 있습니다.
+- 검색어와 일치하는 상품과 브랜드를 구분해서 확인이 가능합니다.
+</br></br>
+
+### 🛒 Cart Page </br>
+![cart_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/5d6808c5-4810-4e13-8831-b4bb99137405)
+</br>
+- 장바구니에 상품을 추가하는 방법은 상품 카드에서 담기 버튼 클릭과 상품 상세 페이지에서 장바구니 담기 버튼 클릭을 하는 두 가지 방법이 있습니다.
+- 상품 카드에서 담기 버튼 클릭 시 제거 버튼이 Mount 됩니다.
+- Cart Page에서는 상품의 수량 조정, 선택 삭제, 개별 삭제가 가능합니다.
+- 장바구니에 담긴 상품과 각 상품에 수량에 대한 총 주문금액, 총 배송비, 총 결제금액을 확인할 수 있습니다.
+</br></br>
 
 
