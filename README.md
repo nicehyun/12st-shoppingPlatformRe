@@ -265,4 +265,11 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 - 장바구니에 담긴 상품과 각 상품에 수량에 대한 총 주문금액, 총 배송비, 총 결제금액을 확인할 수 있습니다.
 </br></br>
 
+### 📚 Category Management Page </br>
+![category_mangement_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/fc24cd6d-fac0-4d53-a4b7-2267d908ffe7)
+</br>
+- Layout Navigation의 카테고리를 선택하여 Category Management Page로 이동이 가능합니다.
+- 선택한 카테고리는 Section의 Title에서 확인이 가능합니다.
+- 중분류 선택 시 해당 중분류에 해당하는 상품들을, 소분류 선택 시 해당 소분류에 해당하는 상품들을 확인할 수 있습니다.
+</br></br>
 
