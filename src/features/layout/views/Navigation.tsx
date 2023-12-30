@@ -15,9 +15,6 @@ import {
 import { ROUTE, useNavigations } from "@/features/common/hooks/useNavigations"
 import { removeSlashFromPath } from "@/features/common/utils/path"
 
-import { useAppDispatch } from "@/redux/hooks"
-import { showCategory } from "@/redux/features/categorySlice"
-
 type NavigationActionContent = {
   icon: {
     selected: JSX.Element
@@ -33,7 +30,6 @@ type NavigationActionContents = NavigationActionContent[]
 
 const Navigation = () => {
   const { routeTo, pathname } = useNavigations()
-  const dispatch = useAppDispatch()
 
   const currentPath = removeSlashFromPath(pathname)
 
@@ -54,8 +50,7 @@ const Navigation = () => {
       },
       label: "CATEGORIES",
       value: "categories",
-      route: null,
-      onClickFn: () => dispatch(showCategory()),
+      route: ROUTE.CATEGORYMANAGEMENT,
     },
     {
       icon: {

@@ -1,7 +1,7 @@
 import FeedbackModal from "@/features/common/views/FeedbackModal"
 import PageLayout from "@/features/common/views/PageLayout"
 import Header from "@/features/layout/views/Header"
-import NavigationAndCategory from "@/features/layout/views/NavigationAndCategory"
+import Navigation from "@/features/layout/views/Navigation"
 import MyPageLayout from "@/features/myPage/views/MyPageLayout"
 import { ReactNode } from "react"
 
@@ -13,7 +13,7 @@ const MypageLayout = ({ children }: { children: ReactNode }) => {
         <MyPageLayout>{children}</MyPageLayout>
       </PageLayout>
 
-      <NavigationAndCategory />
+      <Navigation />
       <FeedbackModal />
     </>
   )

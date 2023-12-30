@@ -1,6 +1,6 @@
 import PageLayout from "@/features/common/views/PageLayout"
 import Header from "@/features/layout/views/Header"
-import NavigationAndCategory from "@/features/layout/views/NavigationAndCategory"
+import Navigation from "@/features/layout/views/Navigation"
 import { ReactNode } from "react"
 
 const CheckoutConfirmedLayout = ({ children }: { children: ReactNode }) => {
@@ -9,7 +9,7 @@ const CheckoutConfirmedLayout = ({ children }: { children: ReactNode }) => {
       <Header isShowCart={true} />
       <PageLayout>{children}</PageLayout>
 
-      <NavigationAndCategory />
+      <Navigation />
     </>
   )
 }

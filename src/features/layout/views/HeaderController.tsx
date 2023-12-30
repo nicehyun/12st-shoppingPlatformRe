@@ -1,6 +1,6 @@
 import HeaderControllerEl from "./HeaderControllerEl"
 
-import { FaUserTag, FaHeart } from "react-icons/fa"
+import { FaHeart } from "react-icons/fa"
 import { FiLogIn, FiLogOut } from "react-icons/fi"
 import HeaderCartButton from "./HeaderCartButton"
 import { ROUTE, useNavigations } from "@/features/common/hooks/useNavigations"
@@ -37,18 +37,11 @@ const HeaderController = ({
         />
 
         <HeaderControllerEl
-          title="MY PAGE"
-          icon={<FaUserTag />}
-          isShowPromotion={isShowPromotion}
-          classNames="before:vertical-divider hidden xl:block"
-          onClick={() => {}}
-        />
-        <HeaderControllerEl
           title="MY LIKE"
           icon={<FaHeart />}
           isShowPromotion={isShowPromotion}
           classNames="before:vertical-divider hidden xl:block"
-          onClick={() => {}}
+          onClick={() => routeTo(ROUTE.HEARTPRODUCTLIST)}
         />
 
         {isShowCart && (

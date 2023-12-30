@@ -7,7 +7,6 @@ import PromotionBar from "./PromotionBar"
 import MPromotionModal from "./mobile/MPromotionModal"
 import HeaderSearchForm from "./HeaderSearchForm"
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
-import { useGetCategoriesQuery } from "../hooks/useGetCategoriesQuery"
 
 interface IHeader {
   isShowCart: boolean
@@ -17,7 +16,6 @@ const Header = ({ isShowCart }: IHeader) => {
   const [isShowPromotion, setIsShowPromotion] = useState(true)
   const [isShowPromotionModal, setIsShowPromotionModal] = useState(false)
   const [isShowSeachForm, setIsShowSearchForm] = useState(false)
-  useGetCategoriesQuery()
 
   const handleSearchFormShow = () => {
     setIsShowSearchForm(true)
