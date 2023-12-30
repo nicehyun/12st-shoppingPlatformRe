@@ -321,5 +321,5 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 ### 🧾 Checkout Confirmed Page </br>
 ![confirmed_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/98cb493c-45d2-4cd7-b593-1cfdf24ec198)
 </br>
-- Checkout Confirmed Page에서는 완료된 주문정보를 한번 더 확인할 수 있습니다.
+- Checkout Confirmed Page에서는 완료된 주문에 대한 정보를 확인할 수 있습니다.
 </br>
