@@ -266,10 +266,11 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 </br></br>
 
 ### 📚 Category Management Page </br>
-![category_mangement_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/fc24cd6d-fac0-4d53-a4b7-2267d908ffe7)
+![category_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/9d04c593-2bdd-4e45-a2ea-9412f54d3054)
 </br>
-- Layout Navigation의 카테고리를 선택하여 Category Management Page로 이동이 가능합니다.
+- Layout Navigation의 카테고리 버튼 클릭으로 Category Management Page로 이동이 가능합니다.
+- 카테고리를 선택하지 않은 경우 '전체' 상품들을 확인할 수 있습니다.
+- 중분류 선택 시 해당 중분류에 해당하는 상품들을, 소분류 선택 시 해당 소분류에 해당하는 상품들을 세부적으로 확인할 수 있습니다.
 - 선택한 카테고리는 Section의 Title에서 확인이 가능합니다.
-- 중분류 선택 시 해당 중분류에 해당하는 상품들을, 소분류 선택 시 해당 소분류에 해당하는 상품들을 확인할 수 있습니다.
 </br></br>
 
