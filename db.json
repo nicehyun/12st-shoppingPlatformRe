@@ -77,6 +77,30 @@
         }
       ],
       "id": 1
+    },
+    {
+      "email": "test123@test.com",
+      "heartList": [
+        {
+          "deliveryFree": 3000,
+          "sellCount": 170,
+          "reviewCount": 0,
+          "mallName": "네이버",
+          "price": 38840,
+          "discount": 18,
+          "id": "33197507754",
+          "maker": "나이키",
+          "name": "나이키 레볼루션 6 넥스트 네이처 DC3728-001",
+          "brand": "나이키",
+          "category3": "운동화",
+          "category1": "패션잡화",
+          "image": "https://shopping-phinf.pstatic.net/main_3319750/33197507754.20221017111653.jpg",
+          "category4": "러닝화",
+          "category2": "남성신발",
+          "discountedPrice": 31848.8
+        }
+      ],
+      "id": 2
     }
   ],
   "checkout": [
@@ -327,6 +351,11 @@
         }
       ],
       "id": 1
+    },
+    {
+      "email": "test123@test.com",
+      "checkoutList": [],
+      "id": 2
     }
   ],
   "customerCounseling": [
@@ -334,6 +363,11 @@
       "email": "test@test.com",
       "customerCounselingList": [],
       "id": 1
+    },
+    {
+      "email": "test123@test.com",
+      "customerCounselingList": [],
+      "id": 2
     }
   ],
   "deliveryInfo": [
@@ -376,6 +410,11 @@
         }
       ],
       "id": 1
+    },
+    {
+      "email": "test123@test.com",
+      "productList": [],
+      "id": 2
     }
   ],
   "users": [
@@ -387,6 +426,15 @@
       "marketingClause": true,
       "mile": 1550,
       "id": 1
+    },
+    {
+      "email": "test123@test.com",
+      "password": "$2b$10$OwvOLasDDdK88F5TNtXhIO3e8/FmceSD2o.XOBU2AhprfgjtirGHS",
+      "name": "이름",
+      "phone": "01012341234",
+      "marketingClause": true,
+      "mile": 0,
+      "id": 2
     }
   ],
   "coupons": [

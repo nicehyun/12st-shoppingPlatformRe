@@ -8,6 +8,7 @@ import { showRouteModal } from "@/redux/features/modalSlice"
 import { ROUTE, useNavigations } from "../common/hooks/useNavigations"
 import { addCheckoutPendingProductList } from "@/redux/features/checkoutSlice"
 import { useAuthenticate } from "../auth/signIn/hooks/useAuthenticate"
+import { useAddToCartMutaion } from "../cart/hooks/useAddToCartMutaion"
 
 interface IProductDetailController {
   productDetail: Product
@@ -17,18 +18,20 @@ const ProductDetailController = ({
   productDetail,
 }: IProductDetailController) => {
   const { sessionQuery } = useSessionQuery()
+  const { mutateAsync: addToCartMutateAsync } =
+    useAddToCartMutaion(productDetail)
   const dispatch = useAppDispatch()
   const { routeTo } = useNavigations()
   const { authentication } = useAuthenticate()
   const handleAddCartClick = () => {
     authentication()
 
-    cartAPI.addProductToCart(productDetail, sessionQuery?.user.accessToken)
+    addToCartMutateAsync()
     dispatch(
       dispatch(
         showRouteModal({
           modalId: "signIn-route-modal",
-          modalTitle: "로그인",
+          modalTitle: "",
           modalContent:
             "장바구니에 상품을 담았습니다. 장바구니로 이동하시겠습니까?",
           route: ROUTE.CART,
