@@ -261,6 +261,7 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 ![sign_In_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/ee4b312e-0819-4e7e-bb03-1976f17b30e7)
 </br>
 - Sign In Page에서는 회원가입한 Email과 Password를 이용하여 로그인이 가능합니다.
+- - Layout Navigation, Header는 해당 페이지에서 사용되지 않습니다.
 </br></br>
 
 ### 👀 Search ProductList Page </br>
@@ -292,6 +293,7 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
  ![checkout_Invalid_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/fe14dff7-d03a-4197-8764-d908107768fa)
 </br>
 - Checkout Page에서는 수령인, 배송지, 연락처1, 결제방법, 결제 약관에 대한 유효성 검사를 진행하며, 미진행 시 Feedback Modal을 통헤 사용자에게 Feedback을 전달합니다.
+- Layout Navigation은 해당 페이지에서 사용되지 않습니다.
 </br>
 
  ![checkout_productIndo_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/81a3d1d6-ed77-43de-92dd-7a65c0a10b15)
@@ -310,3 +312,14 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 - '기존배송지로 등록하기' 체크 후 결제하기 버튼 클릭 시 이후 주문에서 입력했던 배송지 정보를 불러와 사용합니다.
 </br></br>
 
+  ![checkout_mile_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/a6325ea4-91ea-4201-a780-7e9e090fed88)
+</br>
+- 보유한 마일리지보다 많은 숫자를 입력할 경우 0으로 Reset이 되며, '모두 사용' 버튼 클릭 시 보유한 마일리지를 모두 사용합니다.
+- 결제 금액에 대한 적립 마일리지는 1%이며, 사용한 마일리지를 제외한 결제금액의 1%가 적립됩니다.
+</br></br>
+
+### 🧾 Checkout Confirmed Page </br>
+![confirmed_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/98cb493c-45d2-4cd7-b593-1cfdf24ec198)
+</br>
+- Checkout Confirmed Page에서는 완료된 주문정보를 한번 더 확인할 수 있습니다.
+</br>
