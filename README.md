@@ -353,7 +353,7 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 - Pannel UI를 통해 간편한 내역 선택이 가능합니다.
 </br></br>
 
-![mypage_userInfo_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/8f56e403-5471-49a6-b046-02cb4981db9a)=
+![mypage_userInfo_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/8f56e403-5471-49a6-b046-02cb4981db9a)
 </br>
 - 좌측 '회원정보수정' 클릭 시 사용자의 정보 확인이 가능합니다.
 - 기본배송지 수정 시 변경 사항이 없는데 '저장하기' 버튼 클릭 시 Modal을 사용한 Feedback을 사용자에게 전달합니다.
@@ -361,12 +361,35 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 - Pannel UI를 통해 간편한 선택이 가능합니다.
 </br></br>
 
-![mypage_userInfo_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/8f56e403-5471-49a6-b046-02cb4981db9a)=
+![mypage_mile_coupon_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/600f2605-ac6b-483f-a422-558e4c93a53f)
 </br>
-- 좌측 '회원정보수정' 클릭 시 사용자의 정보 확인이 가능합니다.
-- 기본배송지 수정 시 변경 사항이 없는데 '저장하기' 버튼 클릭 시 Modal을 사용한 Feedback을 사용자에게 전달합니다.
-- 약관동의 변경이 있는 경우만 '저장하기' 버튼 클릭이 가능합니다.
-- Pannel UI를 통해 간편한 선택이 가능합니다.
+- 좌측 '쿠폰' 클릭 시 사용 가능한 쿠폰 정보를 확인할 수 있습니다.
+- 좌측 '마일리지' 클릭과 상단 '마일리지 >' 버튼 클릭을 통해 마일리지에 대한 정보를 확인할 수 있습니다.
+- '마일리지 현황' Section에서는 보유 마일리지, 총 적립 마일리지, 총 사용 마일리지에 대한 정보를 확인할 수 있습니다.
+- '마일리지 적립 및 사용' Section에서는 Pannel UI를 통해 '마일리지 적립 내역'과 '사용 마일리지'에 대한 상세 정보를 확인할 수 있습니다.
+</br></br>
+
+![mypage_counselling_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/ccc4c3b6-82dc-4f1c-8fe7-d001acebb052)
+</br>
+- 좌측 '1:1 문의 내역' 클릭 시 작성한 전체 문의 내역을 확인할 수 있으며, '1:1 문의 작성' 버튼을 클릭하면 문의 작성 페이지로 이동합니다.
+- 문의유형 선택, 문의 제목, 문의 내용에 대한 유효성 검사를 진행하며, 미완료시 Modal을 통해 사용자에게 Feedback을 전달합니다.
+</br></br>
+
+![mypage_counselling_checkout_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/c245e049-6126-4feb-a7e5-ee809fc6284d)
+</br>
+- 구매관련문의 유형 선택 시 주문번호조회 유효성이 추가되며, 주문번호에 해당하는 각 상품 선택이 가능합니다.
+- 조회한 주문 상품에 해당하는 주문번호, 상품명, 주문일자, 결제방법이 반영되어 사용자 확인이 가능합니다.
+</br></br>
+
+![mypage_counselling_product_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/e2c9343e-9ab0-4695-9930-ce9b1f93d273)
+</br>
+- 일반상담문의 유형 중 '상품문의' 선택 시 상품번호조회 유효성이 추가됩니다.
+- 조회한 상품에 해당하는 상품명, 판매가 반영되어 사용자 확인이 가능합니다.
+</br></br>
+
+![mypage_counselling_product_page](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/e2c9343e-9ab0-4695-9930-ce9b1f93d273)
+</br>
+- 좌측 '상품 Q&A내역' 클릭 시 상품에 대한 문의 내역만 확인이 가능합니다.
 </br></br>
   
 
