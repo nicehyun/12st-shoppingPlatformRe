@@ -7,7 +7,7 @@ export const deliveryInfoAPI = {
     if (!authorization) return null
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/deliveryInfo`,
+      `${process.env.NEXTAUTH_URL}/api/deliveryInfo`,
       {
         headers: { authorization },
         next: { revalidate: 0 },
@@ -23,7 +23,7 @@ export const deliveryInfoAPI = {
     if (!authorization) return null
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/deliveryInfo`,
+      `${process.env.NEXTAUTH_URL}/api/deliveryInfo`,
       {
         method: "POST",
         headers: {

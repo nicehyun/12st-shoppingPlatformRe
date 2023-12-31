@@ -21,7 +21,7 @@ const handler = NextAuth({
           return null
 
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/signIn`,
+          `${process.env.NEXTAUTH_URL}/api/auth/signIn`,
           {
             method: "POST",
             headers: {

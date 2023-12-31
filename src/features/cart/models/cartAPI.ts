@@ -11,13 +11,10 @@ export const cartAPI = {
   ): Promise<GetCartResponse | null> => {
     if (!authorization) return null
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart`,
-      {
-        headers: { authorization },
-        next: { revalidate: 0 },
-      }
-    )
+    const response = await fetch(`${process.env.NEXTAUTH_URL}/api/cart`, {
+      headers: { authorization },
+      next: { revalidate: 0 },
+    })
 
     return response.json()
   },
@@ -27,17 +24,14 @@ export const cartAPI = {
   ) => {
     if (!authorization) return null
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization,
-        },
-        body: JSON.stringify({ productInfo, direction: "add" }),
-      }
-    )
+    const response = await fetch(`${process.env.NEXTAUTH_URL}/api/cart`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization,
+      },
+      body: JSON.stringify({ productInfo, direction: "add" }),
+    })
 
     return response.json()
   },
@@ -47,17 +41,14 @@ export const cartAPI = {
   ) => {
     if (!authorization) return null
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization,
-        },
-        body: JSON.stringify({ productInCartInfo, direction: "increase" }),
-      }
-    )
+    const response = await fetch(`${process.env.NEXTAUTH_URL}/api/cart`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization,
+      },
+      body: JSON.stringify({ productInCartInfo, direction: "increase" }),
+    })
 
     return response.json()
   },
@@ -67,17 +58,14 @@ export const cartAPI = {
   ) => {
     if (!authorization) return null
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization,
-        },
-        body: JSON.stringify({ productInfo, direction: "remove" }),
-      }
-    )
+    const response = await fetch(`${process.env.NEXTAUTH_URL}/api/cart`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization,
+      },
+      body: JSON.stringify({ productInfo, direction: "remove" }),
+    })
 
     return response.json()
   },
@@ -87,17 +75,14 @@ export const cartAPI = {
   ) => {
     if (!authorization) return null
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization,
-        },
-        body: JSON.stringify({ productInCartInfo, direction: "decrease" }),
-      }
-    )
+    const response = await fetch(`${process.env.NEXTAUTH_URL}/api/cart`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization,
+      },
+      body: JSON.stringify({ productInCartInfo, direction: "decrease" }),
+    })
 
     return response.json()
   },
@@ -107,20 +92,17 @@ export const cartAPI = {
   ) => {
     if (!authorization) return null
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization,
-        },
-        body: JSON.stringify({
-          checkedProductList,
-          direction: "remove_checked",
-        }),
-      }
-    )
+    const response = await fetch(`${process.env.NEXTAUTH_URL}/api/cart`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization,
+      },
+      body: JSON.stringify({
+        checkedProductList,
+        direction: "remove_checked",
+      }),
+    })
 
     return response.json()
   },

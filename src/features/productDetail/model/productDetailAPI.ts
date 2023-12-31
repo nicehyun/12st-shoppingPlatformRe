@@ -5,7 +5,7 @@ export const productDeatilAPI = {
     if (!productId) return null
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/product/${productId}`,
+      `${process.env.NEXTAUTH_URL}/api/product/${productId}`,
       {
         next: { revalidate: 300 },
       }
