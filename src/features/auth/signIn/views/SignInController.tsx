@@ -15,7 +15,6 @@ const SignInController = () => {
       <div className="w-[400px] text-center text-gray dark:text-lightGray text-[12px]">
         <Button
           classNames="relative mr-[10px] after:vertical-divider after:mx-[10px]"
-          onClick={() => routeTo(ROUTE.FIND_EMAIL)}
           content="이메일 찾기"
         />
 
