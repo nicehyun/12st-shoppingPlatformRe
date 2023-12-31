@@ -1,10 +1,14 @@
+"use client"
+
 import { use } from "react"
 import HomeBasicProductsSection from "./HomeBasicProductsSection"
 import { homeAPI } from "../models/homeAPI"
 import { ROUTE } from "@/features/common/hooks/useNavigations"
+import { useGetIndiviualProductListQuery } from "../hooks/useGetIndiviualProductListQuery"
 
 const HomeTopSaleProductListSection = () => {
-  const { topSaleProductList } = use(homeAPI.getIndividualSectionProductList())
+  // const { topSaleProductList } = use(homeAPI.getIndividualSectionProductList())
+  const { topSaleProductList } = useGetIndiviualProductListQuery()
 
   return (
     <HomeBasicProductsSection
