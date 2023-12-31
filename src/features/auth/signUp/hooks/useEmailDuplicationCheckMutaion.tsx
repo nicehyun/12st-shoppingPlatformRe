@@ -3,7 +3,7 @@ import {
   UseMutationResult,
   useMutation,
 } from "@tanstack/react-query"
-import { signUpAPI } from "../models/signUpAPI"
+import { signUpAPI } from "@/features/auth/signUp/models/signUpAPI"
 
 type EmailDuplicationCheckResult = { isExistedEmail: boolean }
 

@@ -1,7 +1,7 @@
 import { CheckoutList } from "@/features/checkout/types/checkout"
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { useQuery } from "@tanstack/react-query"
-import { checkoutAPI } from "@/features/checkout/models/checkoutAPI"
+import { checkoutAPI } from "../models/checkoutAPI"
 
 export const useGetCheckoutListQuery = () => {
   const { sessionQuery } = useSessionQuery()
