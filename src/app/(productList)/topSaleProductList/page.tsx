@@ -8,5 +8,3 @@ export const metadata: Metadata = {
 const TopSaleProductListPage = () => {
   return <TopSaleProductListSection />
 }
-
-export default TopSaleProductListPage
