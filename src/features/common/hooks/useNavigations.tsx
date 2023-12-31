@@ -47,19 +47,8 @@ export const useNavigations = () => {
     isReplace ? replace(newPath) : push(newPath)
   }
 
-  const getParams = () => {
-    const paramsData = params.get("data")
-
-    if (paramsData) {
-      return JSON.parse(paramsData)
-    } else {
-      return null
-    }
-  }
-
   return {
     pathname,
     routeTo,
-    getParams,
   }
 }
