@@ -1,7 +1,13 @@
 import { CheckoutClauseCheck } from "../features/checkoutSlice"
-import { Clause } from "../features/signUpSlice"
 
-export const checkToAllAgreeClause = (clauseState: Clause) => {
+type CheckoutState = {
+  age: boolean
+  marketing: boolean
+  privacy: boolean
+  term: boolean
+}
+
+export const checkToAllAgreeClause = (clauseState: CheckoutState) => {
   const { age, marketing, privacy, term } = clauseState
 
   if (age && marketing && privacy && term) {
