@@ -13,3 +13,5 @@ interface IBastProductListPageProps {
 const BastProductListPage = ({ params }: IBastProductListPageProps) => {
   return <BestProductListSection categoriesPath={params.categories} />
 }
+
+export default BastProductListPage

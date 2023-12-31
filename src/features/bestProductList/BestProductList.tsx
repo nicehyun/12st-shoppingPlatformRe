@@ -1,3 +1,5 @@
+"use client"
+
 import ProductCard from "../common/views/ProductCard"
 import { Fragment, use } from "react"
 

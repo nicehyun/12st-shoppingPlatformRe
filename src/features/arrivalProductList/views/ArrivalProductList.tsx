@@ -1,3 +1,5 @@
+"use client"
+
 import ProductCard from "@/features/common/views/ProductCard"
 import { homeAPI } from "@/features/home/models/homeAPI"
 import { Fragment, use } from "react"
