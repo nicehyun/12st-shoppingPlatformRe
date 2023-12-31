@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic"
-
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material"
 import { FaSortDown } from "react-icons/fa"
 import { useGetCategoriesQuery } from "../hooks/useGetCategoriesQuery"

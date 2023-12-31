@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic"
-
 import { Fragment, use } from "react"
 import { layoutAPI } from "../layout/models/layoutAPI"
 import { Categories } from "../layout/types/category"
