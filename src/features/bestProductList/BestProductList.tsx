@@ -4,6 +4,7 @@ import ProductCard from "../common/views/ProductCard"
 import { Fragment, use } from "react"
 
 import { bestProductListAPI } from "./models/bestProductListAPI"
+import { useGetBestProductListWithCategoryQuery } from "./hooks/useGetBestProductListWithCategoryQuery"
 
 interface IBestProductList {
   categoriesPath: string[] | undefined
@@ -12,14 +13,12 @@ interface IBestProductList {
 const BestProductList = ({ categoriesPath }: IBestProductList) => {
   const fommatedCategoriesPath = categoriesPath ?? []
 
-  const bestProductList =
-    use(
-      bestProductListAPI.getBestProductListWithCategory(fommatedCategoriesPath)
-    ) ?? []
+  const { bestProductListWithCategory } =
+    useGetBestProductListWithCategoryQuery(fommatedCategoriesPath)
 
   return (
     <div className="grid grid-cols-3 xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-[20px] mt-[50px]">
-      {bestProductList.map((product, index) => (
+      {bestProductListWithCategory.map((product, index) => (
         <Fragment key={`best-product-${product.id}`}>
           <div className="relative">
             <ProductCard productInfo={product} />

@@ -1,11 +1,10 @@
 "use client"
 
 import ProductCard from "@/features/common/views/ProductCard"
-import { homeAPI } from "@/features/home/models/homeAPI"
-import { use } from "react"
+import { useGetIndiviualProductListQuery } from "@/features/home/hooks/useGetIndiviualProductListQuery"
 
 const SaleProductList = () => {
-  const { topSaleProductList } = use(homeAPI.getIndividualSectionProductList())
+  const { topSaleProductList } = useGetIndiviualProductListQuery()
   return (
     <div className="grid grid-cols-3 xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-[20px] mt-[50px]">
       {topSaleProductList.map((product) => (

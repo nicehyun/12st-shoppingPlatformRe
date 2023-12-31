@@ -1,11 +1,12 @@
 "use client"
 
 import ProductCard from "@/features/common/views/ProductCard"
+import { useGetIndiviualProductListQuery } from "@/features/home/hooks/useGetIndiviualProductListQuery"
 import { homeAPI } from "@/features/home/models/homeAPI"
 import { Fragment, use } from "react"
 
 const ArrivalProductList = () => {
-  const { arrivalProductList } = use(homeAPI.getIndividualSectionProductList())
+  const { arrivalProductList } = useGetIndiviualProductListQuery()
   return (
     <div className="grid grid-cols-3 xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-[20px] mt-[50px]">
       {arrivalProductList.map((product) => (
