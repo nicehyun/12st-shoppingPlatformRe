@@ -1,15 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { RootState } from "../types/store"
-import {
-  CheckoutDate,
-  CheckoutPaymentInfo,
-} from "@/features/checkout/types/checkout"
+import { CheckoutPaymentInfo } from "@/features/checkout/types/checkout"
 import { ProductInCart } from "@/features/cart/types/cart"
 import { CsType } from "@/features/myPage/types/myPage"
 
 export type SelectedCheckoutInfo = {
   checkoutNumber: string | null
-  checkoutDate: CheckoutDate | null
+  checkoutDate: string | null
   product: ProductInCart | null
   payment: CheckoutPaymentInfo | null
 }
