@@ -27,11 +27,6 @@ const MyPageMemberTermination = () => {
     if (isMemberTerminationLoading) return
 
     const memberTerminationResult = await memberTerminationMutateAsync()
-
-    if (memberTerminationResult?.result === "success") {
-      handleAlertModalHide()
-      signOut()
-    }
   }
 
   return (

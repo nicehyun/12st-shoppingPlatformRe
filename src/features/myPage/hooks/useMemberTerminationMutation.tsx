@@ -10,7 +10,7 @@ export const useMemberTerminationMutation = () => {
   const dispatch = useAppDispatch()
 
   const memberTerminationMutation = useMutation(
-    () => myPageAPI.memberTermination(sessionQuery?.user.email ?? ""),
+    () => myPageAPI.memberTermination(sessionQuery?.user.accessToken),
     {
       onError: () =>
         dispatch(

@@ -23,7 +23,7 @@ export const myPageAPI = {
 
     return response.json()
   },
-  memberTermination: async (email: string) => {},
+  memberTermination: async (authorization: string | null | undefined) => {},
   writeCoustomerCounseling: async (
     writeDetail: CustomerCounselingDetail,
     authorization: string | null | undefined
