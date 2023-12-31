@@ -10,13 +10,16 @@ export const myPageAPI = {
   ) => {
     if (!authorization) return null
 
-    const response = await fetch(`${process.env.NEXTAUTH_URL}/api/userInfo`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", authorization },
-      body: JSON.stringify({
-        isChecked,
-      }),
-    })
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/userInfo`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json", authorization },
+        body: JSON.stringify({
+          isChecked,
+        }),
+      }
+    )
 
     return response.json()
   },
@@ -28,7 +31,7 @@ export const myPageAPI = {
     if (!authorization) return null
 
     const response = await fetch(
-      `${process.env.NEXTAUTH_URL}/api/myPage/customerCounseling`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/myPage/customerCounseling`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json", authorization },
@@ -46,7 +49,7 @@ export const myPageAPI = {
     if (!authorization) return null
 
     const response = await fetch(
-      `${process.env.NEXTAUTH_URL}/api/myPage/customerCounseling`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/myPage/customerCounseling`,
       {
         headers: { authorization },
         next: { revalidate: 0 },

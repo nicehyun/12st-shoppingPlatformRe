@@ -80,7 +80,7 @@ SECRET_KEY="Your_Token_Secret_Key"
 
 # 현재 NEXT_PUBLIC_BASE_URL은 localhost:3000, NEXT_PUBLIC_DB_URL은 localhost:8080 사용 중입니다.
 # 3000, 8080 Port를 사용하고 있으신 경우 수정해주세요.
-NEXTAUTH_URL="http://localhost:3000"
+NEXT_PUBLIC_BASE_URL="http://localhost:3000"
 NEXT_PUBLIC_DB_URL="http://localhost:8080"
 ```
 

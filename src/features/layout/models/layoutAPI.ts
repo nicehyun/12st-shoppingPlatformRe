@@ -11,7 +11,7 @@ export const layoutAPI = {
     categoriesPath: string
   ): Promise<Products> => {
     const response = await fetch(
-      `${process.env.NEXTAUTH_URL}/api/categoryManagement${categoriesPath}`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/categoryManagement${categoriesPath}`,
       {
         next: { revalidate: 0 },
       }
@@ -21,9 +21,12 @@ export const layoutAPI = {
   },
 
   getCategories: async (): Promise<Categories[] | undefined> => {
-    const response = await fetch(`${process.env.NEXTAUTH_URL}/api/categories`, {
-      next: { revalidate: 10000 },
-    })
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/categories`,
+      {
+        next: { revalidate: 10000 },
+      }
+    )
 
     return response.json()
   },
@@ -32,7 +35,7 @@ export const layoutAPI = {
     SearchPath: string
   ): Promise<getSearchResultResponse> => {
     const response = await fetch(
-      `${process.env.NEXTAUTH_URL}/api/searchProductList/${SearchPath}`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/searchProductList/${SearchPath}`,
       {
         next: { revalidate: 10000 },
       }

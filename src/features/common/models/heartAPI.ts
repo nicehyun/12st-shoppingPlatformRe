@@ -7,13 +7,16 @@ export const productHeartAPI = {
   ): Promise<GetHeartListResponse | null> => {
     if (!authorization) return null
 
-    const response = await fetch(`${process.env.NEXTAUTH_URL}/api/heart`, {
-      headers: {
-        "Content-Type": "application/json",
-        authorization,
-      },
-      next: { revalidate: 0 },
-    })
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/heart`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          authorization,
+        },
+        next: { revalidate: 0 },
+      }
+    )
 
     return response.json()
   },
@@ -24,14 +27,17 @@ export const productHeartAPI = {
   ) => {
     if (!authorization) return null
 
-    const response = await fetch(`${process.env.NEXTAUTH_URL}/api/heart`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        authorization,
-      },
-      body: JSON.stringify({ productInfo, direction }),
-    })
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/heart`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization,
+        },
+        body: JSON.stringify({ productInfo, direction }),
+      }
+    )
 
     return response.json()
   },
