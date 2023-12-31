@@ -11,7 +11,7 @@ const MyPageCancelListHeader = () => {
     { title: "완료", id: "completeDate", width: "w-1/12" },
   ]
   return (
-    <MyPageListHeaderLayout isTopBorder={false}>
+    <MyPageListHeaderLayout>
       {cancelHeaderList.map((headerEl, index) => (
         <MyPageTableHeaderEl
           key={`table-header__${headerEl.id}`}
