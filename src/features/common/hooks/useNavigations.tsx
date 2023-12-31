@@ -7,9 +7,6 @@ export enum ROUTE {
 
   CHECKOUT = "/checkout",
   CHECKOUTCOMFIRMED = "/checkoutConfirmed",
-
-  FIND_EMAIL = "/find/email",
-  FIND_PASSWORD = "/find/password",
   CHECKOUTLIST = "/myPage/checkoutList",
   CHECKOUTCANCELLIST = "/myPage/checkoutCancelList",
   CHECKOUTREVIEWLIST = "/myPage/reviewList",
@@ -37,8 +34,6 @@ export enum ROUTE {
 export const useNavigations = () => {
   const { push, replace } = useRouter()
   const pathname = usePathname()
-
-  const params = useSearchParams()
 
   const routeTo = (path: ROUTE, isReplace = false, dataToSend?: string) => {
     const newPath = dataToSend
