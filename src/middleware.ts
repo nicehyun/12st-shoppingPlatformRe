@@ -45,15 +45,14 @@ export async function middleware(request: NextRequest) {
     "/myPage/inquiryCustomerCounseling",
     "/myPage/inquiryCustomerCounseling/write",
     "/myPage/productQnAList",
-    "/productDetail",
   ]
-
+  // path 수정하기
   if (
-    !wholePage.includes(pathname) &&
     !isCategoryManagementPage(pathname) &&
     !isProductDetailPage(pathname) &&
     !isSearchProductListToProductPage(pathname) &&
-    !isSearchProductListToBrandPage
+    !isSearchProductListToBrandPage(pathname) &&
+    !wholePage.includes(pathname)
   ) {
     return NextResponse.redirect(new URL("/", request.url))
   }
