@@ -16,7 +16,7 @@ interface IProductSwiper {
 }
 
 const RenderProductList = ({ products, isSwiper = false }: IProductSwiper) => {
-  const [slidesPerView, setSlidesPerView] = useState<number>(1.2)
+  const [slidesPerView, setSlidesPerView] = useState<number>()
 
   useEffect(() => {
     const handleResize = () => {

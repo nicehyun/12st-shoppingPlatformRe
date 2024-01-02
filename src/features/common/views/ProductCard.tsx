@@ -122,7 +122,7 @@ const ProductCard = ({ productInfo }: IProductCard) => {
   }
 
   return (
-    <div className="bg-white">
+    <div>
       <div className="overflow-hidden text-[12px] text-center aspect-w-1 aspect-h-1">
         <Link
           href={`/productDetail/${productInfo.id}`}
@@ -139,8 +139,8 @@ const ProductCard = ({ productInfo }: IProductCard) => {
         </Link>
       </div>
 
-      <div className="py-[15px]">
-        <p className="text-[14px] sm:text-[12px] mb-[15px] text-gray dark:text-white font-semibold">
+      <div className="py-[15px] dark:text-white">
+        <p className="text-[14px] sm:text-[12px] mb-[15px] text-gray dark:text-border font-semibold">
           {productBrandInfo}
         </p>
 
