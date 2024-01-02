@@ -6,8 +6,8 @@ import { ROUTE } from "@/features/common/hooks/useNavigations"
 import { useGetIndiviualProductListQuery } from "../hooks/useGetIndiviualProductListQuery"
 
 const HomeBestProductListSection = () => {
-  // const { bestProductList } = use(homeAPI.getIndividualSectionProductList())
-  const { bestProductList } = useGetIndiviualProductListQuery()
+  const { bestProductList } = use(homeAPI.getIndividualSectionProductList())
+  // const { bestProductList } = useGetIndiviualProductListQuery()
 
   return (
     <HomeBasicProductsSection
