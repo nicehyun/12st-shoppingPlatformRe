@@ -19,8 +19,29 @@ const HomeLayout = () => {
         <HomeBestProductListSection />
       </Suspense>
 
-      <HomeArrivalProductListSection />
-      <HomeTopSaleProductListSection />
+      <Suspense
+        fallback={
+          <Loading
+            spinnerSize={{ width: "w-[50px]", height: "h-[50px]" }}
+            height="h-[400px]"
+            isFrame={false}
+          />
+        }
+      >
+        <HomeArrivalProductListSection />
+      </Suspense>
+
+      <Suspense
+        fallback={
+          <Loading
+            spinnerSize={{ width: "w-[50px]", height: "h-[50px]" }}
+            height="h-[400px]"
+            isFrame={false}
+          />
+        }
+      >
+        <HomeTopSaleProductListSection />
+      </Suspense>
     </>
   )
 }
