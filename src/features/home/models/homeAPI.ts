@@ -9,7 +9,6 @@ type IndividualSectionProductList = {
 export const homeAPI = {
   getIndividualSectionProductList:
     async (): Promise<IndividualSectionProductList> => {
-      console.log(process.env.NEXT_PUBLIC_BASE_URL)
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/home`,
         {

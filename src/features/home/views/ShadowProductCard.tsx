@@ -33,7 +33,7 @@ const ShadowProductCard = ({ productInfo }: IArrivalProductCard) => {
         </Link>
       </div>
 
-      <div className="flex flex-col text-[14px] md:text-[12px]">
+      <div className="flex flex-col text-[14px] md:text-[12px] dark:text-white">
         <div className="h-[80px]">
           <span className="font-bold mb-[5px]">{productBrandInfo}</span>
           <span className="truncate-2 mb-[5px] font-medium">{name}</span>
