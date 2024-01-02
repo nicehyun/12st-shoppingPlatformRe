@@ -48,15 +48,15 @@ export async function middleware(request: NextRequest) {
     "/productDetail",
   ]
 
-  if (
-    !wholePage.includes(pathname) &&
-    !isCategoryManagementPage(pathname) &&
-    !isProductDetailPage(pathname) &&
-    !isSearchProductListToProductPage(pathname) &&
-    !isSearchProductListToBrandPage
-  ) {
-    return NextResponse.redirect(new URL("/", request.url))
-  }
+  // if (
+  //   !wholePage.includes(pathname) &&
+  //   !isCategoryManagementPage(pathname) &&
+  //   !isProductDetailPage(pathname) &&
+  //   !isSearchProductListToProductPage(pathname) &&
+  //   !isSearchProductListToBrandPage
+  // ) {
+  //   return NextResponse.redirect(new URL("/", request.url))
+  // }
 
   if (token) {
     if (pathname.startsWith("/signIn") || pathname.startsWith("/signUp")) {
