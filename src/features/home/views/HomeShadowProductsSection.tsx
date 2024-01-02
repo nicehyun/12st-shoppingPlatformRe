@@ -1,4 +1,3 @@
-import { Products } from "@/features/common/types/product"
 import RenderProductList from "./RenderProductList"
 import { ROUTE } from "@/features/common/hooks/useNavigations"
 import SectionSuspense from "@/features/common/views/SectionSuspense"
@@ -7,7 +6,6 @@ import SectionSubTitle from "./SectionSubTitle"
 import SectionMoreLink from "./SectionMoreLink"
 
 interface IHomeShadowProductsSection {
-  products: Products
   sectionTitle: string
   sectionSubTitle: string
   route: ROUTE
@@ -15,7 +13,6 @@ interface IHomeShadowProductsSection {
 
 const HomeShadowProductsSection = ({
   route,
-  products,
   sectionSubTitle,
   sectionTitle,
 }: IHomeShadowProductsSection) => {
@@ -33,7 +30,7 @@ const HomeShadowProductsSection = ({
       </div>
 
       <SectionSuspense>
-        <RenderProductList isSwiper products={products} />
+        <RenderProductList sectionType="arrival" />
       </SectionSuspense>
     </section>
   )

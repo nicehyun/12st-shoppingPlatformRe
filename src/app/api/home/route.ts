@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
     const response: Products = await fetch(
       `${process.env.NEXT_PUBLIC_DB_URL}/productList?_sort=sellCount&_order=desc`,
       {
-        next: { revalidate: 10000 },
+        next: { revalidate: 0 },
       }
     ).then((res) => res.json())
 
@@ -29,13 +29,17 @@ export async function GET(request: NextRequest) {
       console.error(
         `🚨 JSON SERVER GET API (Get Individual Section ProductList) : ${response.data}`
       )
-      return new NextResponse(null, { status: response.status })
+      return new NextResponse(null, {
+        status: response.status,
+      })
     } else {
       console.error(
         `🚨 Unexpected Error (Get Individual Section ProductList) : ${error}`
       )
     }
 
-    return new NextResponse(null, { status: 500 })
+    return new NextResponse(null, {
+      status: 500,
+    })
   }
 }

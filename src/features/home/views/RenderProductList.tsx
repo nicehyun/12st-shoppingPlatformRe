@@ -1,76 +1,44 @@
 "use client"
 
-import { Swiper, SwiperSlide } from "swiper/react"
-import { Scrollbar } from "swiper/modules"
-import { Product, Products } from "@/features/common/types/product"
-import ArrivalProductCard from "./ShadowProductCard"
+import { Product } from "@/features/common/types/product"
 import ProductCard from "@/features/common/views/ProductCard"
+import SwiperProductList from "./SwiperProductList"
+import { useGetIndiviualProductListQuery } from "../hooks/useGetIndiviualProductListQuery"
+import FourGridProductList from "./FourGridProductList"
 
-import "swiper/css"
-import "swiper/css/scrollbar"
-import { useEffect, useState } from "react"
-
-interface IProductSwiper {
-  products: Products
-  isSwiper?: boolean
+interface IRenderProductList {
+  sectionType: "best" | "arrival" | "big_sale"
 }
 
-const RenderProductList = ({ products, isSwiper = false }: IProductSwiper) => {
-  const [slidesPerView, setSlidesPerView] = useState<number>()
+const RenderProductList = ({ sectionType }: IRenderProductList) => {
+  const { arrivalProductList, bestProductList, topSaleProductList } =
+    useGetIndiviualProductListQuery()
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1200) {
-        setSlidesPerView(3.2)
-      }
-
-      if (window.innerWidth < 1000) {
-        setSlidesPerView(2.8)
-      }
-
-      if (window.innerWidth < 800) {
-        setSlidesPerView(1.2)
-      }
-    }
-
-    window.addEventListener("resize", handleResize)
-
-    return () => {
-      window.removeEventListener("resize", handleResize)
-    }
-  }, [])
-
-  const renderSwiperProductList = () => {
+  if (sectionType === "best") {
     return (
-      <Swiper
-        slidesPerView={slidesPerView}
-        grabCursor={true}
-        spaceBetween={30}
-        modules={[Scrollbar]}
-      >
-        {products?.map((product: Product) => (
-          <SwiperSlide
-            key={`ProductEl-${product.id}`}
-            className="swiper-slide flex"
-          >
-            <ArrivalProductCard productInfo={product} />
-          </SwiperSlide>
+      <FourGridProductList>
+        {bestProductList.map((product: Product) => (
+          <ProductCard key={`productEl-${product.id}`} productInfo={product} />
         ))}
-      </Swiper>
+      </FourGridProductList>
     )
   }
 
-  if (isSwiper) {
-    return renderSwiperProductList()
+  if (sectionType === "big_sale") {
+    return (
+      <FourGridProductList>
+        {topSaleProductList.map((product: Product) => (
+          <ProductCard key={`productEl-${product.id}`} productInfo={product} />
+        ))}
+      </FourGridProductList>
+    )
   }
 
-  return (
-    <div className="grid grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-[20px]">
-      {products.map((product: Product) => (
-        <ProductCard key={`productEl-${product.id}`} productInfo={product} />
-      ))}
-    </div>
-  )
+  if (sectionType === "arrival") {
+    return <SwiperProductList productList={arrivalProductList} />
+  }
+
+  return <></>
 }
 
 export default RenderProductList
