@@ -1,7 +1,8 @@
 ![12st](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/5fb5b2d6-b0a9-4dbd-aded-9e75a31c248f)
 <br/><br/>
 
-## <a href="https://12st-shopping-platform-re-git-main-ish1610.vercel.app" target="_blank">프로젝트 데모</a>
+### <a href="https://12st-shopping-platform-re-git-main-ish1610.vercel.app" target="_blank"><u>🛒 프로젝트 데모</u></a>
+<br/><br/>
 
 ## 목차
 
