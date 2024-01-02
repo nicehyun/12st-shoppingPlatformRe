@@ -1,4 +1,8 @@
 ![12st](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/5fb5b2d6-b0a9-4dbd-aded-9e75a31c248f)
+<br/><br/>
+
+### <u><a href="https://12st-shopping-platform-re-git-main-ish1610.vercel.app" target="_blank">🛒 프로젝트 데모</a></u>
+<br/><br/>
 
 ## 목차
 
@@ -78,10 +82,28 @@ NEXTAUTH_SECRET="Your_Next_Auth_Secret_Key"
 # JWT Token 생성과 인증에 사용하는 Key
 SECRET_KEY="Your_Token_Secret_Key"
 
-# 현재 NEXT_PUBLIC_BASE_URL은 localhost:3000, NEXT_PUBLIC_DB_URL은 localhost:8080 사용 중입니다.
-# 3000, 8080 Port를 사용하고 있으신 경우 수정해주세요.
+# Application 실행 Port 번호
 NEXT_PUBLIC_BASE_URL="http://localhost:3000"
+# Json Server 실행 Port 번호
 NEXT_PUBLIC_DB_URL="http://localhost:8080"
+```
+### Middleware 수정
+```bash
+# middleware.ts 수정하기
+
+# Product에서 Next-Auth Session에 저장된 Token의 cookieName은 __Secure-next-auth.session-token입니다.
+ const token = await getToken({
+    req: request,
+    secret: secret,
+    cookieName: "__Secure-next-auth.session-token",
+  })
+
+# Development에서 사용 시 cookieName을 next-auth.session-token으로 수정해주세요.
+  const token = await getToken({
+    req: request,
+    secret: secret,
+    cookieName: "next-auth.session-token",
+  })
 ```
 
 ### 실행
