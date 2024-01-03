@@ -4,12 +4,15 @@ import { Scrollbar } from "swiper/modules"
 import { Products } from "@/features/common/types/product"
 import ShadowProductCard from "./ShadowProductCard"
 
+import "swiper/css"
+import "swiper/css/scrollbar"
+
 interface ISwiperProductList {
   productList: Products
 }
 
 const SwiperProductList = ({ productList }: ISwiperProductList) => {
-  const [slidesPerView, setSlidesPerView] = useState<number>()
+  const [slidesPerView, setSlidesPerView] = useState<number>(1.2)
 
   useEffect(() => {
     const handleResize = () => {
@@ -39,7 +42,7 @@ const SwiperProductList = ({ productList }: ISwiperProductList) => {
       spaceBetween={30}
       modules={[Scrollbar]}
     >
-      {productList?.map((product) => (
+      {productList.slice(0, 12).map((product) => (
         <SwiperSlide
           key={`ProductEl-${product.id}`}
           className="swiper-slide flex"

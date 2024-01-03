@@ -17,7 +17,7 @@ const RenderProductList = ({ sectionType }: IRenderProductList) => {
   if (sectionType === "best") {
     return (
       <FourGridProductList>
-        {bestProductList.map((product: Product) => (
+        {bestProductList.slice(0, 12).map((product: Product) => (
           <ProductCard key={`productEl-${product.id}`} productInfo={product} />
         ))}
       </FourGridProductList>
@@ -27,7 +27,7 @@ const RenderProductList = ({ sectionType }: IRenderProductList) => {
   if (sectionType === "big_sale") {
     return (
       <FourGridProductList>
-        {topSaleProductList.map((product: Product) => (
+        {topSaleProductList.slice(0, 12).map((product: Product) => (
           <ProductCard key={`productEl-${product.id}`} productInfo={product} />
         ))}
       </FourGridProductList>

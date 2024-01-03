@@ -46,7 +46,7 @@ export async function middleware(request: NextRequest) {
     "/myPage/inquiryCustomerCounseling/write",
     "/myPage/productQnAList",
   ]
-  // path 수정하기
+
   if (
     !isCategoryManagementPage(pathname) &&
     !isProductDetailPage(pathname) &&
