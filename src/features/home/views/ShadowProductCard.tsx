@@ -31,7 +31,7 @@ const ShadowProductCard = ({
             priority={isPriority}
             src={image}
             alt={`상품사진이 준비되지 않았습니다. - ${name}`}
-            sizes="100vw"
+            sizes="(max-width: 767px) 50vw, 25vw"
           />
         </Link>
       </div>

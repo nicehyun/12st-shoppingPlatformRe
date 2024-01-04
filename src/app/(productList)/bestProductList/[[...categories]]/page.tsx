@@ -2,7 +2,8 @@ import BestProductListSection from "@/features/bestProductList/BestProductListSe
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "베스트 - 쇼핑 플랫폼 12ST",
+  title: "12ST",
+  description: "Best 상품",
 }
 interface IBastProductListPageProps {
   params: {
