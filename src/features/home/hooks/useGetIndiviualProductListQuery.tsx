@@ -13,7 +13,7 @@ export const useGetIndiviualProductListQuery = () => {
         dispatch(
           showFeedbackModal({
             modalContent:
-              "다시 한번 시도해주세요. 오류가 계속되면 고객센터에 문의해주세요.",
+              "상품 정보를 가져오지 못 했습니다. 오류가 계속되면 고객센터에 문의해주세요.",
           })
         ),
       cacheTime: Infinity,

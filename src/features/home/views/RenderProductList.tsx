@@ -4,7 +4,7 @@ import { Product } from "@/features/common/types/product"
 import ProductCard from "@/features/common/views/ProductCard"
 import SwiperProductList from "./SwiperProductList"
 import { useGetIndiviualProductListQuery } from "../hooks/useGetIndiviualProductListQuery"
-import FourGridProductList from "./FourGridProductList"
+import FourGridProductList from "../../common/views/FourGridProductList"
 
 interface IRenderProductList {
   sectionType: "best" | "arrival" | "big_sale"

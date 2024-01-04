@@ -19,6 +19,9 @@ export async function middleware(request: NextRequest) {
   const isProductDetailPage = (pathname: string) =>
     pathname.startsWith("/productDetail")
 
+  const isBestProductPage = (pathname: string) =>
+    pathname.startsWith("/bestProductList")
+
   const isSearchProductListToProductPage = (pathname: string) =>
     pathname.startsWith("/searchProductList/product")
   const isSearchProductListToBrandPage = (pathname: string) =>
@@ -29,7 +32,6 @@ export async function middleware(request: NextRequest) {
     "/signUp",
     "/",
     "/arrivalProductList",
-    "/bestProductList",
     "/topSaleProductList",
     "/cart",
     "/categoryManagement",
@@ -48,6 +50,7 @@ export async function middleware(request: NextRequest) {
   ]
 
   if (
+    !isBestProductPage(pathname) &&
     !isCategoryManagementPage(pathname) &&
     !isProductDetailPage(pathname) &&
     !isSearchProductListToProductPage(pathname) &&

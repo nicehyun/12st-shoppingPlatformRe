@@ -23,9 +23,14 @@ import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 interface IProductCard {
   productInfo: Product
   isPriority?: boolean
+  label?: string | number
 }
 
-const ProductCard = ({ productInfo, isPriority = false }: IProductCard) => {
+const ProductCard = ({
+  productInfo,
+  isPriority = false,
+  label,
+}: IProductCard) => {
   const { sessionQuery } = useSessionQuery()
 
   const { authentication } = useAuthenticate()
@@ -127,7 +132,7 @@ const ProductCard = ({ productInfo, isPriority = false }: IProductCard) => {
       <div className="relative overflow-hidden text-[12px] text-center aspect-w-1 aspect-h-1">
         <Link
           href={`/productDetail/${productInfo.id}`}
-          className={`cursor-pointer`}
+          className={`cursor-pointer `}
         >
           <Image
             fill
@@ -136,6 +141,12 @@ const ProductCard = ({ productInfo, isPriority = false }: IProductCard) => {
             alt={`상품사진이 준비되지 않았습니다. - ${name}`}
             sizes="(max-width: 767px) 50vw, 25vw"
           />
+
+          {label && (
+            <span className="absolute top-0 left-0 bg-black w-[50px] h-[50px] flexCenter text-white text-[20px] font-bold">
+              {label}
+            </span>
+          )}
         </Link>
       </div>
 
