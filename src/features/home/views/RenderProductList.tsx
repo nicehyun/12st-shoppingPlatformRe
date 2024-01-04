@@ -18,7 +18,11 @@ const RenderProductList = ({ sectionType }: IRenderProductList) => {
     return (
       <FourGridProductList>
         {bestProductList.slice(0, 12).map((product: Product) => (
-          <ProductCard key={`productEl-${product.id}`} productInfo={product} />
+          <ProductCard
+            key={`productEl-${product.id}`}
+            productInfo={product}
+            isPriority
+          />
         ))}
       </FourGridProductList>
     )
@@ -28,7 +32,11 @@ const RenderProductList = ({ sectionType }: IRenderProductList) => {
     return (
       <FourGridProductList>
         {topSaleProductList.slice(0, 12).map((product: Product) => (
-          <ProductCard key={`productEl-${product.id}`} productInfo={product} />
+          <ProductCard
+            key={`productEl-${product.id}`}
+            productInfo={product}
+            isPriority
+          />
         ))}
       </FourGridProductList>
     )

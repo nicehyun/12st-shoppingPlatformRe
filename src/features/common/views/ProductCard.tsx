@@ -22,9 +22,10 @@ import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 
 interface IProductCard {
   productInfo: Product
+  isPriority?: boolean
 }
 
-const ProductCard = ({ productInfo }: IProductCard) => {
+const ProductCard = ({ productInfo, isPriority = false }: IProductCard) => {
   const { sessionQuery } = useSessionQuery()
 
   const { authentication } = useAuthenticate()
@@ -123,18 +124,17 @@ const ProductCard = ({ productInfo }: IProductCard) => {
 
   return (
     <div>
-      <div className="overflow-hidden text-[12px] text-center aspect-w-1 aspect-h-1">
+      <div className="relative overflow-hidden text-[12px] text-center aspect-w-1 aspect-h-1">
         <Link
           href={`/productDetail/${productInfo.id}`}
           className={`cursor-pointer`}
         >
           <Image
+            fill
+            priority={isPriority}
             src={image}
             alt={`상품사진이 준비되지 않았습니다. - ${name}`}
-            width={0}
-            height={0}
             sizes="100vw"
-            className="h-full w-full"
           />
         </Link>
       </div>

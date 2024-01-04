@@ -18,7 +18,9 @@ const HomeBasicProductsSection = ({
   route,
 }: IHomeBasicProductsSection) => {
   return (
-    <section className={`py-[50px] text-black px-[50px] sm:px-0 md:px-0`}>
+    <section
+      className={`py-[50px] min-h-[1500px] text-black xl:px-[50px] lg:px-[50px] sm:px-0 md:px-0`}
+    >
       <div className="relative flex items-center mb-[30px]">
         <div>
           <SectionTitle title={sectionTitle} />

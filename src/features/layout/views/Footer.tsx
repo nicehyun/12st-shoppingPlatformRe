@@ -1,10 +1,9 @@
-import React from "react"
 import FooterPlatformInfoEl from "./FooterPlatformInfoEl"
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-black text-white/50 text-[12px] sm:text-[10px] py-[80px] px-[40px] leading-relaxed dark:border-t-[1px]">
-      <p className="font-bold text-white">고객센터</p>
+    <footer className="w-full min-h-[350px] bg-black text-white/50 text-[12px] sm:text-[10px] px-[40px] leading-relaxed dark:border-t-[1px]">
+      <p className="font-bold text-white mt-[80px]">고객센터</p>
       <p className="text-[20px] text-white font-bold my-[10px]">1600 - 1600</p>
 
       <p className="font-bold mb-[10px] text-white">
@@ -49,7 +48,9 @@ const Footer = () => {
         부담합니다.
       </p>
 
-      <p className="font-bold mt-[50px]">&copy; 2023. All rights reserved</p>
+      <p className="font-bold mt-[50px] mb-[80px]">
+        &copy; 2023. All rights reserved
+      </p>
     </footer>
   )
 }

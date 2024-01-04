@@ -8,27 +8,30 @@ import Link from "next/link"
 
 interface IArrivalProductCard {
   productInfo: Product
+  isPriority?: boolean
 }
 
-const ShadowProductCard = ({ productInfo }: IArrivalProductCard) => {
+const ShadowProductCard = ({
+  productInfo,
+  isPriority = false,
+}: IArrivalProductCard) => {
   const { brand, maker, mallName, name, image, price, discount } = productInfo
 
   const productBrandInfo = brand || maker || mallName
 
   return (
-    <div className="m-w-[500px]">
-      <div className="overflow-hidden rounded-[8px] mb-[20px] aspect-w-1 aspect-h-1 text-[12px] cardShadow">
+    <div>
+      <div className="relative overflow-hidden rounded-[8px] mb-[20px] aspect-w-1 aspect-h-1 text-[12px] cardShadow">
         <Link
           href={`/productDetail/${productInfo.id}`}
           className={`cursor-pointer`}
         >
           <Image
+            fill
+            priority={isPriority}
             src={image}
             alt={`상품사진이 준비되지 않았습니다. - ${name}`}
-            width={0}
-            height={0}
             sizes="100vw"
-            className="h-full w-full"
           />
         </Link>
       </div>

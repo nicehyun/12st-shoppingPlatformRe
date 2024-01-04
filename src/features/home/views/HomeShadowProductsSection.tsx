@@ -17,7 +17,7 @@ const HomeShadowProductsSection = ({
 }: IHomeShadowProductsSection) => {
   return (
     <section
-      className={`py-[50px] text-black px-[50px] md:px-0 sm:px-0 border-y-[2px] dark:border-white`}
+      className={`py-[50px] min-h-[476px] text-black lg:px-[50px] xl:px-[50px] md:px-0 sm:px-0 border-y-[2px] dark:border-white`}
     >
       <div className="relative flex items-center mb-[30px]">
         <div>

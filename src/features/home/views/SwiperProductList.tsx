@@ -1,7 +1,6 @@
 import "swiper/css"
 import "swiper/css/scrollbar"
 
-import { useEffect, useState } from "react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Scrollbar } from "swiper/modules"
 import { Products } from "@/features/common/types/product"
@@ -12,42 +11,16 @@ interface ISwiperProductList {
 }
 
 const SwiperProductList = ({ productList }: ISwiperProductList) => {
-  const [slidesPerView, setSlidesPerView] = useState<number>(2.8)
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1200) {
-        setSlidesPerView(3.2)
-      }
-
-      if (window.innerWidth < 1000) {
-        setSlidesPerView(2.8)
-      }
-
-      if (window.innerWidth < 800) {
-        setSlidesPerView(1.2)
-      }
-    }
-
-    window.addEventListener("resize", handleResize)
-
-    return () => {
-      window.removeEventListener("resize", handleResize)
-    }
-  }, [])
   return (
     <Swiper
-      slidesPerView={slidesPerView}
+      slidesPerView={2.4}
       grabCursor={true}
       spaceBetween={30}
       modules={[Scrollbar]}
     >
-      {productList.slice(0, 12).map((product) => (
-        <SwiperSlide
-          key={`ProductEl-${product.id}`}
-          className="swiper-slide flex"
-        >
-          <ShadowProductCard productInfo={product} />
+      {productList.slice(0, 12).map((product, index) => (
+        <SwiperSlide key={`ProductEl-${product.id}`}>
+          <ShadowProductCard productInfo={product} isPriority={index <= 2} />
         </SwiperSlide>
       ))}
     </Swiper>
