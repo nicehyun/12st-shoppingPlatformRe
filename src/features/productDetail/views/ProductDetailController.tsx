@@ -1,6 +1,5 @@
 "use client"
 import Button from "@/features/common/views/Button"
-import { cartAPI } from "../../cart/models/cartAPI"
 import { Product } from "../../common/types/product"
 import useSessionQuery from "../../auth/signIn/hooks/useSessionQuery"
 import { useAppDispatch } from "@/redux/hooks"
@@ -9,6 +8,7 @@ import { ROUTE, useNavigations } from "../../common/hooks/useNavigations"
 import { addCheckoutPendingProductList } from "@/redux/features/checkoutSlice"
 import { useAuthenticate } from "../../auth/signIn/hooks/useAuthenticate"
 import { useAddToCartMutaion } from "../../cart/hooks/useAddToCartMutaion"
+import Loading from "@/features/common/views/Loading"
 
 interface IProductDetailController {
   productDetail: Product
@@ -18,15 +18,17 @@ const ProductDetailController = ({
   productDetail,
 }: IProductDetailController) => {
   const { sessionQuery } = useSessionQuery()
-  const { mutateAsync: addToCartMutateAsync } =
+  const { mutateAsync: addToCartMutateAsync, isLoading } =
     useAddToCartMutaion(productDetail)
   const dispatch = useAppDispatch()
   const { routeTo } = useNavigations()
   const { authentication } = useAuthenticate()
-  const handleAddCartClick = () => {
+  const handleAddCartClick = async () => {
+    if (isLoading) return
+
     authentication()
 
-    addToCartMutateAsync()
+    await addToCartMutateAsync()
     dispatch(
       dispatch(
         showRouteModal({
@@ -53,7 +55,17 @@ const ProductDetailController = ({
     <div className="mt-[20px] grid grid-cols-2 gap-[10px] h-[50px] font-bold">
       <Button
         onClick={handleAddCartClick}
-        content="장바구니 담기"
+        isDisabled={isLoading}
+        content={
+          isLoading ? (
+            <Loading
+              spinnerSize={{ height: "h-[26px]", width: "w-[26px]" }}
+              isFrame={false}
+            />
+          ) : (
+            `장바구니 담기`
+          )
+        }
         classNames="border-border border-[1px]"
       />
       <Button
