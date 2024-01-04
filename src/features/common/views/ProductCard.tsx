@@ -2,23 +2,10 @@
 
 import { BiCommentDetail } from "react-icons/bi"
 import { MdOutlineSell } from "react-icons/md"
-import { BsFillCartDashFill, BsFillCartPlusFill } from "react-icons/bs"
 import { Product } from "../types/product"
-
-import { checkingTheExistOfProduct } from "../utils/product"
-import { useProductListInCartQuery } from "@/features/cart/hooks/useProductListInCartQuery"
-import { useAddToCartMutaion } from "@/features/cart/hooks/useAddToCartMutaion"
-import useRemoveFromCartMutation from "@/features/cart/hooks/useRemoveFromCartMutation"
 import { discountedProductPrice, numberToLocaleString } from "../utils/price"
-
 import Image from "next/image"
-import { useAuthenticate } from "@/features/auth/signIn/hooks/useAuthenticate"
-import Button from "./Button"
-import Loading from "./Loading"
 import Link from "next/link"
-import { useAppDispatch } from "@/redux/hooks"
-import { showFeedbackModal } from "@/redux/features/modalSlice"
-import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 
 interface IProductCard {
   productInfo: Product
@@ -31,11 +18,6 @@ const ProductCard = ({
   isPriority = false,
   label,
 }: IProductCard) => {
-  const { sessionQuery } = useSessionQuery()
-
-  const { authentication } = useAuthenticate()
-  const dispatch = useAppDispatch()
-
   const {
     brand,
     maker,
@@ -50,82 +32,6 @@ const ProductCard = ({
   } = productInfo
 
   const productBrandInfo = brand || maker || mallName
-
-  const { productListInCart } = useProductListInCartQuery()
-
-  const addMutaion = useAddToCartMutaion(productInfo)
-
-  const removeMutaion = useRemoveFromCartMutation(productInfo)
-
-  const isExistedProductInCart = checkingTheExistOfProduct(
-    productListInCart,
-    id
-  )
-
-  const handleAddProductInCartClick = async () => {
-    if (!sessionQuery) {
-      authentication()
-      return
-    }
-
-    if (productListInCart.length >= 10) {
-      dispatch(
-        showFeedbackModal({
-          modalContent: "장바구니가 가득 찼습니다.",
-        })
-      )
-      return
-    }
-
-    dispatch(
-      showFeedbackModal({
-        modalContent: "장바구니에서 상품을 담았습니다.",
-      })
-    )
-
-    addMutaion.mutate()
-  }
-
-  const handleRemoveProductFromCartClick = () => {
-    removeMutaion.mutate()
-
-    dispatch(
-      showFeedbackModal({
-        modalContent: "장바구니에서 상품이 제거되었습니다.",
-      })
-    )
-  }
-
-  const renderComponent = () => {
-    if (removeMutaion.isLoading || addMutaion.isLoading) {
-      return (
-        <div className="absolute right-[8px] text-border">
-          <Loading
-            spinnerSize={{ width: "w-[15px]", height: "h-[15px]" }}
-            isFrame={false}
-          />
-        </div>
-      )
-    }
-
-    if (isExistedProductInCart) {
-      return (
-        <Button
-          onClick={handleRemoveProductFromCartClick}
-          classNames="text-[18px] sm:text-[16px] absolute right-[8px]"
-          content={<BsFillCartDashFill />}
-        />
-      )
-    }
-
-    return (
-      <Button
-        onClick={handleAddProductInCartClick}
-        classNames="text-[18px] sm:text-[16px] absolute right-[8px]"
-        content={<BsFillCartPlusFill />}
-      />
-    )
-  }
 
   return (
     <div>
@@ -172,13 +78,11 @@ const ProductCard = ({
           {numberToLocaleString(discountedProductPrice(price, discount))}
         </p>
 
-        <div className="relative flex items-center text-[14px] sm:text-[12px]">
+        <div className="flex items-center text-[14px] sm:text-[12px]">
           <MdOutlineSell />
           <span className="ml-[3px] mr-[8px] text-[10px]">{sellCount}</span>
           <BiCommentDetail />
           <span className="ml-[3px] text-[10px]">{reviewCount}</span>
-
-          {renderComponent()}
         </div>
       </div>
     </div>
