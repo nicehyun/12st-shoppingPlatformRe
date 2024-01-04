@@ -1,18 +1,18 @@
+import "swiper/css"
+import "swiper/css/scrollbar"
+
 import { useEffect, useState } from "react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Scrollbar } from "swiper/modules"
 import { Products } from "@/features/common/types/product"
 import ShadowProductCard from "./ShadowProductCard"
 
-import "swiper/css"
-import "swiper/css/scrollbar"
-
 interface ISwiperProductList {
   productList: Products
 }
 
 const SwiperProductList = ({ productList }: ISwiperProductList) => {
-  const [slidesPerView, setSlidesPerView] = useState<number>(1.2)
+  const [slidesPerView, setSlidesPerView] = useState<number>(2.8)
 
   useEffect(() => {
     const handleResize = () => {

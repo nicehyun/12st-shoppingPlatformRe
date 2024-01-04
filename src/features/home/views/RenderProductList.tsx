@@ -37,8 +37,6 @@ const RenderProductList = ({ sectionType }: IRenderProductList) => {
   if (sectionType === "arrival") {
     return <SwiperProductList productList={arrivalProductList} />
   }
-
-  return <></>
 }
 
 export default RenderProductList

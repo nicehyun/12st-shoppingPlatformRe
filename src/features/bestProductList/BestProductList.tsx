@@ -1,9 +1,7 @@
 "use client"
 
 import ProductCard from "../common/views/ProductCard"
-import { Fragment, use } from "react"
-
-import { bestProductListAPI } from "./models/bestProductListAPI"
+import { Fragment } from "react"
 import { useGetBestProductListWithCategoryQuery } from "./hooks/useGetBestProductListWithCategoryQuery"
 
 interface IBestProductList {

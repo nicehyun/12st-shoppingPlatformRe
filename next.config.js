@@ -8,6 +8,7 @@ const nextConfig = {
   },
   images: {
     domains: ["shopping-phinf.pstatic.net"],
+    formats: ["image/avif", "image/webp"],
   },
 }
 

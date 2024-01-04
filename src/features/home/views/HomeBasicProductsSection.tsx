@@ -3,7 +3,6 @@ import { ROUTE } from "@/features/common/hooks/useNavigations"
 import SectionMoreLink from "./SectionMoreLink"
 import SectionTitle from "./SectionTitle"
 import SectionSubTitle from "./SectionSubTitle"
-import SectionSuspense from "@/features/common/views/SectionSuspense"
 
 interface IHomeBasicProductsSection {
   sectionType: "best" | "big_sale"
@@ -29,9 +28,7 @@ const HomeBasicProductsSection = ({
         <SectionMoreLink route={route} />
       </div>
 
-      <SectionSuspense>
-        <RenderProductList sectionType={sectionType} />
-      </SectionSuspense>
+      <RenderProductList sectionType={sectionType} />
     </section>
   )
 }

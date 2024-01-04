@@ -2,8 +2,7 @@
 
 import ProductCard from "@/features/common/views/ProductCard"
 import { useGetIndiviualProductListQuery } from "@/features/home/hooks/useGetIndiviualProductListQuery"
-import { homeAPI } from "@/features/home/models/homeAPI"
-import { Fragment, use } from "react"
+import { Fragment } from "react"
 
 const ArrivalProductList = () => {
   const { arrivalProductList } = useGetIndiviualProductListQuery()
@@ -13,7 +12,7 @@ const ArrivalProductList = () => {
         <Fragment key={`new-product-${product.id}`}>
           <div className="relative">
             <ProductCard productInfo={product} />
-            <span className="absolute top-0 left-0 bg-black w-[50px] h-[50px] flexCenter text-white text-[16px] font-bold">
+            <span className="absolute top-0 left-0 bg-black w-[50px] h-[50px] flexCenter text-white text-[16px] font-bold dark:bg-white dark:text-black">
               NEW
             </span>
           </div>

@@ -1,6 +1,5 @@
 import RenderProductList from "./RenderProductList"
 import { ROUTE } from "@/features/common/hooks/useNavigations"
-import SectionSuspense from "@/features/common/views/SectionSuspense"
 import SectionTitle from "./SectionTitle"
 import SectionSubTitle from "./SectionSubTitle"
 import SectionMoreLink from "./SectionMoreLink"
@@ -29,9 +28,7 @@ const HomeShadowProductsSection = ({
         <SectionMoreLink route={route} />
       </div>
 
-      <SectionSuspense>
-        <RenderProductList sectionType="arrival" />
-      </SectionSuspense>
+      <RenderProductList sectionType="arrival" />
     </section>
   )
 }
