@@ -1,12 +1,26 @@
 import ArrivalProductListSection from "@/features/arrivalProductList/views/ArrivalProductListSection"
+import { homeAPI } from "@/features/home/models/homeAPI"
+import { getQueryClient } from "@/tanstackQuery/utils/getQueryClient"
+import { Hydrate, dehydrate } from "@tanstack/react-query"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "쇼핑 플랫폼 12ST",
+  title: "12ST",
+  description: "Shopping Platform",
 }
 
-const ArrivalProductListPage = () => {
-  return <ArrivalProductListSection />
+const ArrivalProductListPage = async () => {
+  const queryClient = getQueryClient()
+  await queryClient.prefetchQuery(["indiviualProductList"], () =>
+    homeAPI.getIndividualSectionProductList()
+  )
+  const dehydratedState = dehydrate(queryClient)
+
+  return (
+    <Hydrate state={dehydratedState}>
+      <ArrivalProductListSection />
+    </Hydrate>
+  )
 }
 
 export default ArrivalProductListPage

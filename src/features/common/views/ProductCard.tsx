@@ -143,7 +143,7 @@ const ProductCard = ({
           />
 
           {label && (
-            <span className="absolute top-0 left-0 bg-black w-[50px] h-[50px] flexCenter text-white text-[20px] font-bold">
+            <span className="absolute top-0 left-0 bg-black dark:bg-white w-[50px] h-[50px] flexCenter text-white dark:text-black text-[20px] font-bold">
               {label}
             </span>
           )}

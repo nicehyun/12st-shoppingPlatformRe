@@ -1,24 +1,22 @@
 "use client"
 
+import FourGridProductList from "@/features/common/views/FourGridProductList"
 import ProductCard from "@/features/common/views/ProductCard"
 import { useGetIndiviualProductListQuery } from "@/features/home/hooks/useGetIndiviualProductListQuery"
-import { Fragment } from "react"
 
 const ArrivalProductList = () => {
   const { arrivalProductList } = useGetIndiviualProductListQuery()
   return (
-    <div className="grid grid-cols-3 xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-[20px] mt-[50px]">
-      {arrivalProductList.map((product) => (
-        <Fragment key={`new-product-${product.id}`}>
-          <div className="relative">
-            <ProductCard productInfo={product} />
-            <span className="absolute top-0 left-0 bg-black w-[50px] h-[50px] flexCenter text-white text-[16px] font-bold dark:bg-white dark:text-black">
-              NEW
-            </span>
-          </div>
-        </Fragment>
+    <FourGridProductList className="mt-[50px]">
+      {arrivalProductList.map((product, index) => (
+        <ProductCard
+          key={`new-product-${product.id}`}
+          productInfo={product}
+          label={"NEW"}
+          isPriority
+        />
       ))}
-    </div>
+    </FourGridProductList>
   )
 }
 
