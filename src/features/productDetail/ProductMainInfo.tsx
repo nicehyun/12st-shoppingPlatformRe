@@ -12,7 +12,7 @@ interface IProductMainInfo {
 const ProductMainInfo = ({ productDetail }: IProductMainInfo) => {
   return (
     <section className="flex md:flex-col sm:flex-col mb-[50px]">
-      <div className="overflow-hidden text-[12px] text-center mr-[20px] w-1/2 md:w-full sm:w-full">
+      <div className="overflow-hidden text-[12px] text-center mr-[20px] w-1/2 md:w-full sm:w-full min-h-[300px]">
         <Image
           src={productDetail.image}
           alt={`상품사진이 준비되지 않았습니다. - ${productDetail.name}`}
@@ -20,6 +20,7 @@ const ProductMainInfo = ({ productDetail }: IProductMainInfo) => {
           height={0}
           sizes="100vw"
           className="h-full w-full"
+          priority
         />
       </div>
 

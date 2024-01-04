@@ -1,14 +1,18 @@
+"use client"
+
 import ProductMainInfo from "./ProductMainInfo"
 import ProductDetailInfo from "./ProductDetailInfo"
-import { use } from "react"
 import { productDeatilAPI } from "./model/productDetailAPI"
+import { use } from "react"
+import { useGetProductDetailQuery } from "./hooks/useGetProductDetailQuery"
 
 interface IProductDetailLayout {
   productId: string
 }
 
 const ProductDetail = ({ productId }: IProductDetailLayout) => {
-  const productDetail = use(productDeatilAPI.getProductInfo(productId))
+  // const productDetail = use(productDeatilAPI.getProductInfo(productId))
+  const { productDetail } = useGetProductDetailQuery(productId)
 
   return (
     <div>

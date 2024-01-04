@@ -1,10 +1,12 @@
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { productHeartAPI } from "@/features/common/models/heartAPI"
+import { useAppDispatch } from "@/redux/hooks"
 import { useQuery } from "@tanstack/react-query"
 
 // 로그인 안돼있을 경우 api 요청 ㄴㄴ
 export const useGetHeartListQuery = () => {
   const { sessionQuery } = useSessionQuery()
+  const dispatch = useAppDispatch()
 
   const { data, isLoading } = useQuery(
     ["heartList"],
