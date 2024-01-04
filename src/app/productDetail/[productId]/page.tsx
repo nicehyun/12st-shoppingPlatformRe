@@ -1,9 +1,9 @@
 import { Product } from "@/features/common/types/product"
-import ProductDetail from "@/features/productDetail/ProductDetail"
+import ProductDetail from "@/features/productDetail/views/ProductDetail"
 import { productDeatilAPI } from "@/features/productDetail/model/productDetailAPI"
 import { getQueryClient } from "@/tanstackQuery/utils/getQueryClient"
 import { Hydrate, dehydrate } from "@tanstack/react-query"
-import { Metadata, ResolvingMetadata } from "next"
+import { Metadata } from "next"
 
 interface IProductDetailPageParams {
   params: {
@@ -11,23 +11,20 @@ interface IProductDetailPageParams {
   }
 }
 
-export async function generateMetadata(
-  { params }: IProductDetailPageParams,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: IProductDetailPageParams): Promise<Metadata> {
   const productId = params.productId
 
   const product: Product = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/product/${productId}`
   ).then((res) => res.json())
 
-  const previousImages = (await parent).openGraph?.images || []
-
   return {
     title: `${product.name} - 12ST`,
     description: product.name,
     openGraph: {
-      images: [product.image, ...previousImages],
+      images: [product.image],
     },
   }
 }

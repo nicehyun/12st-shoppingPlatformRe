@@ -2,16 +2,13 @@
 
 import ProductMainInfo from "./ProductMainInfo"
 import ProductDetailInfo from "./ProductDetailInfo"
-import { productDeatilAPI } from "./model/productDetailAPI"
-import { use } from "react"
-import { useGetProductDetailQuery } from "./hooks/useGetProductDetailQuery"
+import { useGetProductDetailQuery } from "../hooks/useGetProductDetailQuery"
 
 interface IProductDetailLayout {
   productId: string
 }
 
 const ProductDetail = ({ productId }: IProductDetailLayout) => {
-  // const productDetail = use(productDeatilAPI.getProductInfo(productId))
   const { productDetail } = useGetProductDetailQuery(productId)
 
   return (

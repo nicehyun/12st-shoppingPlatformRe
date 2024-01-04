@@ -1,14 +1,14 @@
 "use client"
 
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io"
-import { Product } from "../common/types/product"
-import Button from "../common/views/Button"
-import { useAddHeartListMutation } from "./hooks/useAddHeartListMutation"
-import { useRemoveHeartListMutation } from "./hooks/useRemoveHeartListMutation"
-import Loading from "../common/views/Loading"
-import { useGetHeartListQuery } from "./hooks/useGetHeartListQuery"
-import useSessionQuery from "../auth/signIn/hooks/useSessionQuery"
-import { useAuthenticate } from "../auth/signIn/hooks/useAuthenticate"
+import { Product } from "../../common/types/product"
+import Button from "../../common/views/Button"
+import { useAddHeartListMutation } from "../hooks/useAddHeartListMutation"
+import { useRemoveHeartListMutation } from "../hooks/useRemoveHeartListMutation"
+import Loading from "../../common/views/Loading"
+import { useGetHeartListQuery } from "../hooks/useGetHeartListQuery"
+import useSessionQuery from "../../auth/signIn/hooks/useSessionQuery"
+import { useAuthenticate } from "../../auth/signIn/hooks/useAuthenticate"
 
 interface IProductNameAndHeart {
   productDetail: Product

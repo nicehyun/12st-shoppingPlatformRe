@@ -1,14 +1,14 @@
 "use client"
 import Button from "@/features/common/views/Button"
-import { cartAPI } from "../cart/models/cartAPI"
-import { Product } from "../common/types/product"
-import useSessionQuery from "../auth/signIn/hooks/useSessionQuery"
+import { cartAPI } from "../../cart/models/cartAPI"
+import { Product } from "../../common/types/product"
+import useSessionQuery from "../../auth/signIn/hooks/useSessionQuery"
 import { useAppDispatch } from "@/redux/hooks"
 import { showRouteModal } from "@/redux/features/modalSlice"
-import { ROUTE, useNavigations } from "../common/hooks/useNavigations"
+import { ROUTE, useNavigations } from "../../common/hooks/useNavigations"
 import { addCheckoutPendingProductList } from "@/redux/features/checkoutSlice"
-import { useAuthenticate } from "../auth/signIn/hooks/useAuthenticate"
-import { useAddToCartMutaion } from "../cart/hooks/useAddToCartMutaion"
+import { useAuthenticate } from "../../auth/signIn/hooks/useAuthenticate"
+import { useAddToCartMutaion } from "../../cart/hooks/useAddToCartMutaion"
 
 interface IProductDetailController {
   productDetail: Product

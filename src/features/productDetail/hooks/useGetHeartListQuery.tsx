@@ -1,9 +1,9 @@
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { productHeartAPI } from "@/features/common/models/heartAPI"
+import { showFeedbackModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
 import { useQuery } from "@tanstack/react-query"
 
-// 로그인 안돼있을 경우 api 요청 ㄴㄴ
 export const useGetHeartListQuery = () => {
   const { sessionQuery } = useSessionQuery()
   const dispatch = useAppDispatch()
@@ -12,6 +12,14 @@ export const useGetHeartListQuery = () => {
     ["heartList"],
     () => productHeartAPI.getHeartList(sessionQuery?.user.accessToken ?? ""),
     {
+      onError: () =>
+        dispatch(
+          showFeedbackModal({
+            modalContent:
+              "상품 정보를 가져오지 못 했습니다. 오류가 계속되면 고객센터에 문의해주세요.",
+          })
+        ),
+      staleTime: 60 * 60 * 1000,
       enabled: !!sessionQuery,
     }
   )

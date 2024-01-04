@@ -1,5 +1,6 @@
 import { getToken } from "next-auth/jwt"
 import { NextRequest, NextResponse } from "next/server"
+import { productDeatilAPI } from "./features/productDetail/model/productDetailAPI"
 
 export { default } from "next-auth/middleware"
 
@@ -58,6 +59,21 @@ export async function middleware(request: NextRequest) {
     !wholePage.includes(pathname)
   ) {
     return NextResponse.redirect(new URL("/", request.url))
+  }
+
+  if (isProductDetailPage(pathname)) {
+    const [, , productId] = pathname.split("/")
+
+    const productDetail = await fetch(
+      `${process.env.NEXT_PUBLIC_DB_URL}/productList/${productId}`,
+      {
+        next: { revalidate: 10000 },
+      }
+    ).then((res) => res.json())
+
+    if (Object.keys(productDetail).length === 0) {
+      return NextResponse.redirect(new URL("/", request.url))
+    }
   }
 
   if (token) {

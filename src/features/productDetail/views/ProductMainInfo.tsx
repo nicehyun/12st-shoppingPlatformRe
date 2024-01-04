@@ -3,7 +3,7 @@ import ProductDetailController from "./ProductDetailController"
 import ProductDeliveryInfo from "./ProductDeliveryInfo"
 import ProductPriceInfo from "./ProductPriceInfo"
 import ProductNameAndHeart from "./ProductNameAndHeart"
-import { Product } from "../common/types/product"
+import { Product } from "../../common/types/product"
 
 interface IProductMainInfo {
   productDetail: Product
