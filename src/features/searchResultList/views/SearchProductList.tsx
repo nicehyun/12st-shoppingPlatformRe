@@ -1,7 +1,8 @@
+"use client"
+
 import ProductCard from "@/features/common/views/ProductCard"
-import { layoutAPI } from "@/features/layout/models/layoutAPI"
-import { use } from "react"
 import NoneSearchResult from "./NoneSearchResult"
+import { useGetSearchResultQuery } from "../hooks/useGetSearchResultQuery"
 
 interface ISearchProductList {
   searchPath: string[]
@@ -9,12 +10,10 @@ interface ISearchProductList {
 
 const SearchProductList = ({ searchPath }: ISearchProductList) => {
   const [classification, searchPrams] = searchPath
-
   const decodedsearchPrams = decodeURIComponent(searchPrams)
 
-  const { filteredProductsMatchingName, filteredProductsMatchingBrand } = use(
-    layoutAPI.getSearchResult(decodedsearchPrams)
-  )
+  const { filteredProductsMatchingBrand, filteredProductsMatchingName } =
+    useGetSearchResultQuery(searchPath)
 
   if (classification === "brand") {
     return filteredProductsMatchingBrand.length === 0 ? (
@@ -23,7 +22,7 @@ const SearchProductList = ({ searchPath }: ISearchProductList) => {
       <div className="grid grid-cols-3 xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-[20px] mt-[50px]">
         {filteredProductsMatchingBrand.map((product) => (
           <ProductCard
-            key={`sale-product-${product.id}`}
+            key={`search-brand-${product.id}`}
             productInfo={product}
           />
         ))}
@@ -38,7 +37,7 @@ const SearchProductList = ({ searchPath }: ISearchProductList) => {
       <div className="grid grid-cols-3 xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-[20px] mt-[50px]">
         {filteredProductsMatchingName.map((product) => (
           <ProductCard
-            key={`sale-product-${product.id}`}
+            key={`search-product-${product.id}`}
             productInfo={product}
           />
         ))}

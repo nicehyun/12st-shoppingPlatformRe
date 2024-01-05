@@ -1,15 +1,19 @@
+import SectionSuspense from "@/features/common/views/SectionSuspense"
 import SearchProductList from "./SearchProductList"
 import SearchResultInfo from "./SearchResultInfo"
 
 interface ISearchResultSection {
-  searchPath: string[]
+  searchParams: string[]
 }
 
-const SearchResultSection = ({ searchPath }: ISearchResultSection) => {
+const SearchResultSection = ({ searchParams }: ISearchResultSection) => {
   return (
     <section>
-      <SearchResultInfo searchPath={searchPath} />
-      <SearchProductList searchPath={searchPath} />
+      <SearchResultInfo searchPath={searchParams} />
+
+      <SectionSuspense>
+        <SearchProductList searchPath={searchParams} />
+      </SectionSuspense>
     </section>
   )
 }

@@ -19,7 +19,12 @@ const BastProductListPage = async ({ params }: IBastProductListPageProps) => {
   await queryClient.prefetchQuery(
     ["bestProductListWithCategory", params.categories ?? []],
     () =>
-      bestProductListAPI.getBestProductListWithCategory(params.categories ?? [])
+      bestProductListAPI.getBestProductListWithCategory(
+        params.categories ?? []
+      ),
+    {
+      cacheTime: 60 * 60 * 1000,
+    }
   )
   const dehydratedState = dehydrate(queryClient)
 

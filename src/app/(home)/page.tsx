@@ -16,8 +16,7 @@ export default async function Home() {
     ["indiviualProductList"],
     () => homeAPI.getIndividualSectionProductList(),
     {
-      staleTime: 60 * 60 * 1000,
-      cacheTime: Infinity,
+      cacheTime: 60 * 60 * 1000,
     }
   )
   const dehydratedState = dehydrate(queryClient)
