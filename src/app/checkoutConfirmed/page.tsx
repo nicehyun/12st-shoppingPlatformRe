@@ -2,7 +2,8 @@ import CheckoutConfirmed from "@/features/checkoutConfirmed/views/CheckoutConfir
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "결제 완료 - 쇼핑 플랫폼 12ST",
+  title: "결제 완료 - 12ST",
+  description: "상품 결제 완료",
 }
 
 const CheckoutConfirmedPage = () => {

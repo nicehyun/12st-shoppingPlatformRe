@@ -1,27 +1,18 @@
 import MyPageSectionTitle from "@/features/myPage/views/MyPageSectionTitle"
-import { getAfterEquals } from "@/features/common/utils/text"
+
 import SecondCategories from "@/features/bestProductList/SecondCategories"
 import ThirdCategories from "@/features/bestProductList/ThirdCategories"
 
 import FiltedProcutList from "./FiltedProcutList"
+import { decodedCategoriesWithPathArray } from "../utils/category"
 
 interface ICategoryManagement {
   categoriesPath: string[]
 }
 
 const CategoryManagement = ({ categoriesPath }: ICategoryManagement) => {
-  const [firstCategoryPath, secondCategoryPath, thirdCategoryPath] =
-    categoriesPath ?? []
-
-  const decodedFirstCategory = getAfterEquals(
-    decodeURIComponent(firstCategoryPath ?? "")
-  )
-  const decodedSecondCategory = getAfterEquals(
-    decodeURIComponent(secondCategoryPath ?? "")
-  )
-  const decodedThirdCategory = getAfterEquals(
-    decodeURIComponent(thirdCategoryPath ?? "")
-  )
+  const { decodedFirstCategory, decodedSecondCategory, decodedThirdCategory } =
+    decodedCategoriesWithPathArray(categoriesPath)
 
   const sectionTitle = decodedFirstCategory
     ? decodedThirdCategory

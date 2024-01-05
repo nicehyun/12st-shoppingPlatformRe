@@ -3,7 +3,7 @@ import { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "장바구니 - 12ST",
-  description: "Shopping Platform Cart",
+  description: "장바구니",
 }
 
 const CartPage = () => {

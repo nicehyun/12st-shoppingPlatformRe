@@ -4,7 +4,6 @@ import { productDeatilAPI } from "@/features/productDetail/model/productDetailAP
 import { getQueryClient } from "@/tanstackQuery/utils/getQueryClient"
 import { Hydrate, dehydrate } from "@tanstack/react-query"
 import { Metadata } from "next"
-import { redirect } from "next/navigation"
 
 interface IProductDetailPageParams {
   params: {

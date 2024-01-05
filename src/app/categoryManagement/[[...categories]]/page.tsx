@@ -1,3 +1,4 @@
+import { decodedCategoriesWithPathArray } from "@/features/categoryManagement/utils/category"
 import CategoryManagement from "@/features/categoryManagement/views/CategoryManagement"
 import { Metadata } from "next"
 
@@ -7,8 +8,22 @@ interface ICategoryProductManagementPageProps {
   }
 }
 
-export const metadata: Metadata = {
-  title: "카테고리 별 상품 - 쇼핑 플랫폼 12ST",
+export async function generateMetadata({
+  params,
+}: ICategoryProductManagementPageProps): Promise<Metadata> {
+  const { decodedSecondCategory, decodedThirdCategory } =
+    decodedCategoriesWithPathArray(params.categories)
+
+  const selctedCategory = decodedThirdCategory
+    ? decodedThirdCategory
+    : decodedSecondCategory
+    ? decodedSecondCategory
+    : "전체"
+
+  return {
+    title: `${selctedCategory} 카테고리 상품 - 12ST`,
+    description: `${selctedCategory}에 대한 카테고리 상품`,
+  }
 }
 
 const CategoryProductManagementPage = ({
