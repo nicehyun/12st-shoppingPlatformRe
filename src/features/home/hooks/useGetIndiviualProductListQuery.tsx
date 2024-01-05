@@ -1,7 +1,7 @@
 import { showFeedbackModal } from "@/redux/features/modalSlice"
 import { homeAPI } from "../models/homeAPI"
-import { useQuery } from "@tanstack/react-query"
 import { useAppDispatch } from "@/redux/hooks"
+import { useQuery } from "@tanstack/react-query"
 
 export const useGetIndiviualProductListQuery = () => {
   const dispatch = useAppDispatch()

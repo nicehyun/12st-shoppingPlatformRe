@@ -1,6 +1,6 @@
-import SectionSuspense from "@/features/common/views/SectionSuspense"
 import SearchProductList from "./SearchProductList"
 import SearchResultInfo from "./SearchResultInfo"
+import SuspenseIncludingFallback from "@/features/common/views/SuspenseIncludingFallback"
 
 interface ISearchResultSection {
   searchParams: string[]
@@ -11,9 +11,9 @@ const SearchResultSection = ({ searchParams }: ISearchResultSection) => {
     <section>
       <SearchResultInfo searchPath={searchParams} />
 
-      <SectionSuspense>
+      <SuspenseIncludingFallback>
         <SearchProductList searchPath={searchParams} />
-      </SectionSuspense>
+      </SuspenseIncludingFallback>
     </section>
   )
 }

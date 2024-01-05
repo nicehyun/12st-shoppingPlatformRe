@@ -5,7 +5,7 @@ import ThirdCategories from "@/features/bestProductList/ThirdCategories"
 
 import FiltedProcutList from "./FiltedProcutList"
 import { decodedCategoriesWithPathArray } from "../utils/category"
-import SectionSuspense from "@/features/common/views/SectionSuspense"
+import SectionSuspense from "@/features/common/views/SuspenseIncludingFallback"
 
 interface ICategoryManagement {
   categoriesPath: string[]
@@ -23,7 +23,6 @@ const CategoryManagement = ({ categoriesPath }: ICategoryManagement) => {
 
   return (
     <section>
-      {/* TODO : SectionTitle common으로 수정하기 */}
       <SectionTitle title={sectionTitle} />
 
       <SecondCategories

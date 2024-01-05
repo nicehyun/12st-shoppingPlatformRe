@@ -1,14 +1,14 @@
 import { layoutAPI } from "@/features/layout/models/layoutAPI"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
-import { useSuspenseQuery } from "@suspensive/react-query"
+import { useQuery } from "@tanstack/react-query"
 
 export const useGetSearchResultQuery = (searchParams: string[]) => {
   const [, searchPrams] = searchParams
 
   const decodedsearchPrams = decodeURIComponent(searchPrams)
   const dispatch = useAppDispatch()
-  const { data } = useSuspenseQuery(
+  const { data } = useQuery(
     ["searchResult", searchParams],
     () => layoutAPI.getSearchResult(decodedsearchPrams),
     {
@@ -20,6 +20,7 @@ export const useGetSearchResultQuery = (searchParams: string[]) => {
           })
         ),
       cacheTime: 60 * 60 * 1000,
+      suspense: true,
     }
   )
 
