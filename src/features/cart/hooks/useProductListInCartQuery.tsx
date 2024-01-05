@@ -13,6 +13,7 @@ export const useProductListInCartQuery = () => {
     ["productListInCart"],
     () => cartAPI.getProductListInCart(sessionQuery?.user.accessToken),
     {
+      staleTime: 60 * 60 * 1000,
       enabled: !!sessionQuery,
     }
   )

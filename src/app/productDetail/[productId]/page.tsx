@@ -4,6 +4,7 @@ import { productDeatilAPI } from "@/features/productDetail/model/productDetailAP
 import { getQueryClient } from "@/tanstackQuery/utils/getQueryClient"
 import { Hydrate, dehydrate } from "@tanstack/react-query"
 import { Metadata } from "next"
+import { redirect } from "next/navigation"
 
 interface IProductDetailPageParams {
   params: {
@@ -22,7 +23,7 @@ export async function generateMetadata({
 
   return {
     title: `${product.name} - 12ST`,
-    description: product.name,
+    description: `${product.name}-${product.id} 상세 보기`,
     openGraph: {
       images: [product.image],
     },

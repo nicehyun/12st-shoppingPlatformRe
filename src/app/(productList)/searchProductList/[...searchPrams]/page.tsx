@@ -7,8 +7,16 @@ interface ISearchResultPage {
   }
 }
 
-export const metadata: Metadata = {
-  title: "검색 - 쇼핑 플랫폼 12ST",
+export async function generateMetadata({
+  params,
+}: ISearchResultPage): Promise<Metadata> {
+  const [, searchPrams] = params.searchPrams
+  const decodedSearchPrams = decodeURIComponent(searchPrams)
+
+  return {
+    title: `${decodedSearchPrams} 검색 - 12ST`,
+    description: `${decodedSearchPrams}에 대한 검색 결과`,
+  }
 }
 
 const SearchResultPage = ({ params }: ISearchResultPage) => {

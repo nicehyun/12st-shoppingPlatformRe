@@ -8,6 +8,7 @@ import FeedbackModal from "@/features/common/views/FeedbackModal"
 import Footer from "@/features/layout/views/Footer"
 import LayoutSettingDial from "@/features/layout/views/LayoutSettingDial"
 import RouteModal from "@/features/common/views/RouteModal"
+import { Metadata } from "next"
 
 const roboto = Roboto({
   weight: ["400", "500", "700"],
@@ -16,6 +17,10 @@ const roboto = Roboto({
   display: "swap",
   variable: "--font-roboto",
 })
+
+export const metadata: Metadata = {
+  title: { default: "12ST", template: "%s | Shopping Platform" },
+}
 
 export default async function RootLayout({
   children,

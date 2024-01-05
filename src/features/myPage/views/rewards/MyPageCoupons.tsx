@@ -8,8 +8,6 @@ import MyPageListLoading from "../MyPageListLoading"
 const MyPageCoupons = () => {
   const { coupons, isLoading } = useCouponQuery()
 
-  console.log(coupons)
-
   if (isLoading) {
     return <MyPageListLoading />
   }
