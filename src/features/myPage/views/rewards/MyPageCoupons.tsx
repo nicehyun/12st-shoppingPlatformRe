@@ -1,7 +1,7 @@
 "use client"
 
 import useCouponQuery from "@/features/checkout/hooks/useCouponQuery"
-import MyPageSectionTitle from "../MyPageSectionTitle"
+import SectionTitle from "../SectionTitle"
 import MyPageCouponEl from "./MyPageCouponEl"
 import MyPageListLoading from "../MyPageListLoading"
 
@@ -14,7 +14,7 @@ const MyPageCoupons = () => {
 
   return (
     <section>
-      <MyPageSectionTitle title="사용 가능한 쿠폰" />
+      <SectionTitle title="사용 가능한 쿠폰" />
 
       {coupons?.map((coupon) => (
         <MyPageCouponEl

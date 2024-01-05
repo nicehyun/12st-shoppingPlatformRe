@@ -1,4 +1,4 @@
-import MyPageSectionTitle from "../myPage/views/MyPageSectionTitle"
+import SectionTitle from "../myPage/views/SectionTitle"
 import BestProductList from "./BestProductList"
 import SecondCategories from "./SecondCategories"
 import ThirdCategories from "./ThirdCategories"
@@ -10,7 +10,7 @@ interface IBestProductList {
 const BestProductListSection = ({ categoriesPath }: IBestProductList) => {
   return (
     <section>
-      <MyPageSectionTitle title="BEST" />
+      <SectionTitle title="BEST" />
 
       <SecondCategories
         categoriesPath={categoriesPath}

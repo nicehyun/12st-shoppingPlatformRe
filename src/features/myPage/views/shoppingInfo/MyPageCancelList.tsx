@@ -1,6 +1,6 @@
 "use client"
 
-import MyPageSectionTitle from "../MyPageSectionTitle"
+import SectionTitle from "../SectionTitle"
 import MyPageTabs from "../MyPageTabs"
 import MyPageCancelTebPanel from "./MyPageCancelTebPanel"
 import { useTabValueHandler } from "@/features/checkout/hooks/useTabValueHandler"
@@ -17,7 +17,7 @@ const MyPageCancelList = () => {
 
   return (
     <section>
-      <MyPageSectionTitle title="취소/반품/교환 내역" />
+      <SectionTitle title="취소/반품/교환 내역" />
 
       <Box sx={{ width: "100%" }}>
         <MyPageTabs

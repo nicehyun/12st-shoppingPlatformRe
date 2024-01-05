@@ -2,7 +2,7 @@
 
 import { usePagination } from "@/features/common/hooks/usePagination"
 import ProductCard from "@/features/common/views/ProductCard"
-import useGetFiltedProductListWithCategory from "@/features/layout/hooks/useGetFiltedProductListWithCategory"
+import { useGetFiltedProductListWithCategoryQuery } from "@/features/layout/hooks/useGetFiltedProductListWithCategoryQuery"
 
 interface IFiltedProcutList {
   categoriesPath: string[]
@@ -10,7 +10,7 @@ interface IFiltedProcutList {
 
 const FiltedProcutList = ({ categoriesPath }: IFiltedProcutList) => {
   const { filtedProductList } =
-    useGetFiltedProductListWithCategory(categoriesPath)
+    useGetFiltedProductListWithCategoryQuery(categoriesPath)
 
   const perPage = 48
   const { listPagination, renderPaginationComponent } = usePagination(
@@ -26,6 +26,7 @@ const FiltedProcutList = ({ categoriesPath }: IFiltedProcutList) => {
             <ProductCard
               productInfo={product}
               key={`product-categogy-${product.id}`}
+              isPriority={index < 48}
             />
           ))}
       </div>

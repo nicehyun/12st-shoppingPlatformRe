@@ -1,10 +1,10 @@
-import MyPageSectionTitle from "../MyPageSectionTitle"
+import SectionTitle from "../SectionTitle"
 import HeartProductList from "./HeartProductList"
 
 const HeartProductListInfo = () => {
   return (
     <section>
-      <MyPageSectionTitle title="HEART" />
+      <SectionTitle title="HEART" />
 
       <HeartProductList />
     </section>

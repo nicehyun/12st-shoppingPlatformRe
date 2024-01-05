@@ -1,10 +1,10 @@
-import MyPageSectionTitle from "@/features/myPage/views/MyPageSectionTitle"
+import SectionTitle from "@/features/myPage/views/SectionTitle"
 import SaleProductList from "./SaleProductList"
 
 const TopSaleProductListSection = () => {
   return (
     <section>
-      <MyPageSectionTitle title="BIG SALE" />
+      <SectionTitle title="BIG SALE" />
 
       <SaleProductList />
     </section>

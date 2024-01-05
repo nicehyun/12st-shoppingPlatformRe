@@ -1,11 +1,11 @@
-import MyPageSectionTitle from "../MyPageSectionTitle"
+import SectionTitle from "../SectionTitle"
 import MyPageInquiryCustomerCounselingAnnouncement from "./MyPageInquiryCustomerCounselingAnnouncement"
 import MyPageInquiryCustomerCounselingList from "./MyPageInquiryCustomerCounselingList"
 
 const MyPageInquiryCustomerCounseling = () => {
   return (
     <section>
-      <MyPageSectionTitle title="1:1 문의내역" />
+      <SectionTitle title="1:1 문의내역" />
       <MyPageInquiryCustomerCounselingAnnouncement />
 
       <MyPageInquiryCustomerCounselingList />

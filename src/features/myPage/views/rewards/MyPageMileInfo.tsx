@@ -1,4 +1,4 @@
-import MyPageSectionTitle from "../MyPageSectionTitle"
+import SectionTitle from "../SectionTitle"
 import MyPageMileAnnouncement from "./MyPageMileAnnouncement"
 import MyPageTotalMileInfo from "./MyPageTotalMileInfo"
 import MyPageUseMileAndGetMileInfo from "./MyPageUseMileAndGetMileInfo"
@@ -6,7 +6,7 @@ import MyPageUseMileAndGetMileInfo from "./MyPageUseMileAndGetMileInfo"
 const MyPageMileInfo = () => {
   return (
     <section>
-      <MyPageSectionTitle title="마일리지" />
+      <SectionTitle title="마일리지" />
 
       <MyPageTotalMileInfo />
 

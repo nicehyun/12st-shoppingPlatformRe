@@ -12,8 +12,13 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   const queryClient = getQueryClient()
-  await queryClient.prefetchQuery(["indiviualProductList"], () =>
-    homeAPI.getIndividualSectionProductList()
+  await queryClient.prefetchQuery(
+    ["indiviualProductList"],
+    () => homeAPI.getIndividualSectionProductList(),
+    {
+      staleTime: 60 * 60 * 1000,
+      cacheTime: Infinity,
+    }
   )
   const dehydratedState = dehydrate(queryClient)
 

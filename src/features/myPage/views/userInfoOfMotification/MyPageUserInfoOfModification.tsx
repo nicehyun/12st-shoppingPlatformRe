@@ -1,6 +1,6 @@
 "use client"
 
-import MyPageSectionTitle from "../MyPageSectionTitle"
+import SectionTitle from "../SectionTitle"
 import MyPageUserInfoTebPanel from "./MyPageUserInfoTebPanel"
 import { useTabValueHandler } from "@/features/checkout/hooks/useTabValueHandler"
 import { Box } from "@mui/material"
@@ -17,7 +17,7 @@ const MyPageUserInfoOfModification = () => {
   ]
   return (
     <section>
-      <MyPageSectionTitle title="회원정보 수정" />
+      <SectionTitle title="회원정보 수정" />
 
       <Box sx={{ width: "100%" }}>
         <MyPageTabs

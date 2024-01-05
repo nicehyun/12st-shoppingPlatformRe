@@ -1,12 +1,12 @@
 import MyPageTableHeaderEl from "../MyPageTableHeaderEl"
-import MyPageSectionTitle from "../MyPageSectionTitle"
+import SectionTitle from "../SectionTitle"
 import MyPageListHeaderLayout from "../MyPageListHeaderLayout"
 import MyPageProductQnAContentList from "./MyPageProductQnAContentList"
 
 const MyPageProductQnAInfo = () => {
   return (
     <section>
-      <MyPageSectionTitle title="상품 Q&A 내역" />
+      <SectionTitle title="상품 Q&A 내역" />
       <MyPageListHeaderLayout>
         <MyPageTableHeaderEl headerContent="상품명" className="w-1/4" isStart />
         <MyPageTableHeaderEl

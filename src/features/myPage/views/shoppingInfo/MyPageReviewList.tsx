@@ -1,6 +1,6 @@
 "use client"
 
-import MyPageSectionTitle from "../MyPageSectionTitle"
+import SectionTitle from "../SectionTitle"
 import { Box } from "@mui/material"
 import MyPageReviewTebPanel from "./MyPageReviewTebPanel"
 import { useTabValueHandler } from "@/features/checkout/hooks/useTabValueHandler"
@@ -15,7 +15,7 @@ const MyPageReviewList = () => {
 
   return (
     <section>
-      <MyPageSectionTitle title="상품 리뷰" />
+      <SectionTitle title="상품 리뷰" />
 
       <Box sx={{ width: "100%", padding: 0 }}>
         <MyPageTabs
