@@ -1,6 +1,5 @@
 import HeaderControllerEl from "./HeaderControllerEl"
 
-import { FaHeart } from "react-icons/fa"
 import { FiLogIn, FiLogOut } from "react-icons/fi"
 import HeaderCartButton from "./HeaderCartButton"
 import { ROUTE, useNavigations } from "@/features/common/hooks/useNavigations"
@@ -36,16 +35,8 @@ const HeaderController = ({
           onClick={onShowSearchForm}
         />
 
-        <HeaderControllerEl
-          title="MY LIKE"
-          icon={<FaHeart />}
-          isShowPromotion={isShowPromotion}
-          classNames="before:vertical-divider hidden xl:block"
-          onClick={() => routeTo(ROUTE.HEARTPRODUCTLIST)}
-        />
-
         {isShowCart && (
-          <li className="relative xl:before:vertical-divider">
+          <li className="before:vertical-divider">
             <HeaderCartButton />
           </li>
         )}
@@ -55,7 +46,7 @@ const HeaderController = ({
             title="SIGN OUT"
             icon={<FiLogOut />}
             isShowPromotion={isShowPromotion}
-            classNames={isShowCart ? "before:vertical-divider" : ""}
+            classNames="before:vertical-divider"
             onClick={() => signOut()}
           />
         ) : (
