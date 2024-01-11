@@ -1,22 +1,38 @@
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { Product } from "@/features/common/types/product"
-import { showFeedbackModal } from "@/redux/features/modalSlice"
+import { showFeedbackModal, showRouteModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
 
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { cartAPI } from "../models/cartAPI"
+import { ROUTE } from "@/features/common/hooks/useNavigations"
+import { useAuthenticate } from "@/features/auth/signIn/hooks/useAuthenticate"
 
 export const useAddToCartMutaion = (productInfo: Product) => {
   const queryClient = useQueryClient()
   const dispatch = useAppDispatch()
 
   const { sessionQuery } = useSessionQuery()
+  const { authentication } = useAuthenticate()
 
   const addMutaion = useMutation(
     () => cartAPI.addProductToCart(productInfo, sessionQuery?.user.accessToken),
     {
+      onMutate: () => {
+        authentication()
+      },
       onSuccess: () => {
         queryClient.invalidateQueries(["productListInCart"])
+
+        dispatch(
+          showRouteModal({
+            modalId: "signIn-route-modal",
+            modalTitle: "",
+            modalContent:
+              "장바구니에 상품을 담았습니다. 장바구니로 이동하시겠습니까?",
+            route: ROUTE.CART,
+          })
+        )
       },
       onError: () => {
         dispatch(
@@ -29,5 +45,11 @@ export const useAddToCartMutaion = (productInfo: Product) => {
     }
   )
 
-  return addMutaion
+  const addMutate = async () => {
+    if (addMutaion.isLoading) return
+
+    addMutaion.mutate()
+  }
+
+  return { addMutate, isLoading: addMutaion.isLoading }
 }
