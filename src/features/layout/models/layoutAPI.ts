@@ -10,37 +10,48 @@ export const layoutAPI = {
   getFiltedProductListWithThridCategory: async (
     categoriesPath: string
   ): Promise<Products> => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/categoryManagement${categoriesPath}`,
-      {
-        next: { revalidate: 10000 },
-      }
-    )
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/categoryManagement${categoriesPath}`,
+        {
+          next: { revalidate: 0 },
+        }
+      )
 
-    return response.json()
+      return response.json()
+    } catch (error: any) {
+      throw new Error(error)
+    }
   },
 
   getCategories: async (): Promise<Categories[] | undefined> => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/categories`,
-      {
-        next: { revalidate: 10000 },
-      }
-    )
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/categories`,
+        {
+          next: { revalidate: 0 },
+        }
+      )
 
-    return response.json()
+      return response.json()
+    } catch (error: any) {
+      throw new Error(error)
+    }
   },
-
   getSearchResult: async (
     SearchPath: string
   ): Promise<getSearchResultResponse> => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/searchProductList/${SearchPath}`,
-      {
-        next: { revalidate: 10000 },
-      }
-    )
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/searchProductList/${SearchPath}`,
+        {
+          next: { revalidate: 0 },
+        }
+      )
 
-    return response.json()
+      return response.json()
+    } catch (error: any) {
+      throw new Error(error)
+    }
   },
 }
