@@ -5,7 +5,7 @@ import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 export const useGetCustomerCounselingListQuery = () => {
   const { sessionQuery } = useSessionQuery()
 
-  const { data, isLoading, isError } = useQuery(
+  const { data, isLoading, isError, isFetching } = useQuery(
     ["customerCounselingList"],
     () => myPageAPI.getCoutomerCounselingList(sessionQuery?.user.accessToken),
     {
@@ -13,11 +13,13 @@ export const useGetCustomerCounselingListQuery = () => {
     }
   )
 
+  const isInitialLoading = isLoading && isFetching
+
   const customerCounselingList = data?.customerCounselingList ?? []
 
   return {
     customerCounselingList: customerCounselingList,
-    isLoading,
+    isInitialLoading,
     isError,
   }
 }

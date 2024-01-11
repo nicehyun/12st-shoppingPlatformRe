@@ -19,10 +19,11 @@ export const useProductListInCartQuery = () => {
     }
   )
 
+  const isInitialLoading = isLoading && isFetching
+
   return {
     productListInCart: productListInCart?.productList ?? [],
     isError,
-    isLoading,
-    isFetching,
+    isInitialLoading,
   }
 }

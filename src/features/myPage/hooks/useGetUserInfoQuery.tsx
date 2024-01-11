@@ -9,6 +9,7 @@ export const useGetUserInfoQuery = () => {
     data: userInfo,
     isError,
     isLoading,
+    isFetching,
   } = useQuery(
     ["userInfo"],
     () => userInfoAPI.getUserInfo(sessionQuery?.user.accessToken),
@@ -17,9 +18,11 @@ export const useGetUserInfoQuery = () => {
     }
   )
 
+  const isInitialLoading = isLoading && isFetching
+
   return {
     userInfo,
     isError,
-    isLoading,
+    isInitialLoading,
   }
 }

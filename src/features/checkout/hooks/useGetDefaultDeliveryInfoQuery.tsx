@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query"
 export const useGetDefaultDeliveryInfoQuery = () => {
   const { sessionQuery } = useSessionQuery()
 
-  const { data: deliveryInfo, isLoading } = useQuery(
+  const { data: deliveryInfo, isLoading, isFetching } = useQuery(
     ["deliveryInfo"],
     () => deliveryInfoAPI.getDeliveryInfo(sessionQuery?.user.accessToken),
     {
@@ -13,5 +13,7 @@ export const useGetDefaultDeliveryInfoQuery = () => {
     }
   )
 
-  return { deliveryInfo, isLoading }
+  const isInitialLoading = isLoading && isFetching
+
+  return { deliveryInfo, isInitialLoading }
 }

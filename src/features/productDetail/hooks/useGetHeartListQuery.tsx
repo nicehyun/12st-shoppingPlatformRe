@@ -8,7 +8,7 @@ export const useGetHeartListQuery = () => {
   const { sessionQuery } = useSessionQuery()
   const dispatch = useAppDispatch()
 
-  const { data, isLoading } = useQuery(
+  const { data, isLoading, isFetching } = useQuery(
     ["heartList"],
     () => productHeartAPI.getHeartList(sessionQuery?.user.accessToken ?? ""),
     {
@@ -24,6 +24,8 @@ export const useGetHeartListQuery = () => {
     }
   )
 
+  const isInitialLoading = isLoading && isFetching
+
   const heartList = data?.heartList ?? []
-  return { heartList, isLoading }
+  return { heartList, isInitialLoading }
 }
