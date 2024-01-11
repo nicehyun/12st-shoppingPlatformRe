@@ -8,7 +8,7 @@ export const productDeatilAPI = {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/product/${productId}`,
         {
-          next: { revalidate: false },
+          next: { revalidate: 0 },
         }
       )
 
