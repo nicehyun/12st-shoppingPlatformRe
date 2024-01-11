@@ -6,14 +6,18 @@ export const userInfoAPI = {
   ): Promise<GetUserInfoResponse | null> => {
     if (!authorization) return null
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/userInfo`,
-      {
-        headers: { authorization },
-        next: { revalidate: 0 },
-      }
-    )
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/userInfo`,
+        {
+          headers: { authorization },
+          next: { revalidate: 0 },
+        }
+      )
 
-    return response.json()
+      return response.json()
+    } catch (error: any) {
+      throw new Error(error)
+    }
   },
 }

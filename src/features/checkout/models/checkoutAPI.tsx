@@ -8,18 +8,22 @@ export const checkoutAPI = {
   ): Promise<CheckoutList | null> => {
     if (!authorization) return null
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/checkout`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          authorization,
-        },
-        next: { revalidate: 0 },
-      }
-    )
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/checkout`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            authorization,
+          },
+          next: { revalidate: 0 },
+        }
+      )
 
-    return response.json()
+      return response.json()
+    } catch (error: any) {
+      throw new Error(error)
+    }
   },
   checkout: async (
     checkoutInfo: CheckoutList,
@@ -28,40 +32,47 @@ export const checkoutAPI = {
     authorization: string | null | undefined
   ) => {
     if (!authorization) return null
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/checkout`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            authorization,
+          },
+          body: JSON.stringify({
+            checkoutInfo,
+            isClauseCheck,
+            isUpdateDeliveryInfo,
+          }),
+        }
+      )
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/checkout`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization,
-        },
-        body: JSON.stringify({
-          checkoutInfo,
-          isClauseCheck,
-          isUpdateDeliveryInfo,
-        }),
-      }
-    )
-
-    return response.json()
+      return response.json()
+    } catch (error: any) {
+      throw new Error(error)
+    }
   },
 
   checkoutProductSellCountIncrease: async (productInfo: Product) => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/product`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          productInfo,
-        }),
-      }
-    )
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/product`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            productInfo,
+          }),
+        }
+      )
 
-    return response.json()
+      return response.json()
+    } catch (error: any) {
+      throw new Error(error)
+    }
   },
 }
