@@ -15,7 +15,7 @@ export async function GET(
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_DB_URL}/productList/${productId}`,
       {
-        next: { revalidate: 10000 },
+        next: { revalidate: 0 },
       }
     ).then((res) => res.json())
 

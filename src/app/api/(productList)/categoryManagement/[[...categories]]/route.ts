@@ -12,7 +12,7 @@ export async function GET(
     const response: Products = await fetch(
       `${process.env.NEXT_PUBLIC_DB_URL}/productList?_sort=sellCount&_order=desc`,
       {
-        next: { revalidate: false },
+        next: { revalidate: 0 },
       }
     ).then((res) => res.json())
 

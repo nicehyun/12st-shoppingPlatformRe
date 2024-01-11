@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
     const response: Products = await fetch(
       `${process.env.NEXT_PUBLIC_DB_URL}/productList?_sort=sellCount&_order=desc`,
       {
-        next: { revalidate: 100000 },
+        next: { revalidate: 0 },
       }
     ).then((res) => res.json())
 

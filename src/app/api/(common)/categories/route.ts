@@ -6,7 +6,7 @@ export async function GET(request: Request) {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_DB_URL}/categories`,
       {
-        next: { revalidate: 10000 },
+        next: { revalidate: 0 },
       }
     ).then((res) => res.json())
 
