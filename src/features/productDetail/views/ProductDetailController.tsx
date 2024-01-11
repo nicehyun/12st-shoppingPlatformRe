@@ -9,6 +9,7 @@ import { useAuthenticate } from "../../auth/signIn/hooks/useAuthenticate"
 import { useAddToCartMutaion } from "../../cart/hooks/useAddToCartMutaion"
 import Loading from "@/features/common/views/Loading"
 
+// TODO : 수정코드 테스츠하기
 interface IProductDetailController {
   productDetail: Product
 }
@@ -38,13 +39,13 @@ const ProductDetailController = ({
   // )
   // }
 
-  const handleCheckoutClick = () => {
-   authentication()
+  const handleCheckoutClick = async () => {
+    await authentication()
 
-    if (sessionQuery) {
-      dispatch(addCheckoutPendingProductList([{ ...productDetail, amount: 1 }]))
-      routeTo(ROUTE.CHECKOUT)
-    }
+    // if (sessionQuery) {
+    dispatch(addCheckoutPendingProductList([{ ...productDetail, amount: 1 }]))
+    routeTo(ROUTE.CHECKOUT)
+    // }
   }
 
   return (
