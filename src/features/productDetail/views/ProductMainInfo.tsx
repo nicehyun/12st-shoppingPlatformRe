@@ -1,7 +1,6 @@
 "use client"
 
 import Image from "next/image"
-import ProductDetailController from "./ProductDetailController"
 import ProductDeliveryInfo from "./ProductDeliveryInfo"
 import ProductPriceInfo from "./ProductPriceInfo"
 import ProductNameAndHeart from "./ProductNameAndHeart"
@@ -20,7 +19,6 @@ const ProductMainInfo = ({ productId }: IProductMainInfo) => {
 
   return (
     <section className="flex md:flex-col sm:flex-col mb-[50px]">
-      {/* TODO : 컴포넌트 분리 */}
       <div className="overflow-hidden text-[12px] text-center mr-[20px] w-1/2 md:w-full sm:w-full min-h-[300px]">
         <Image
           src={productDetail?.image ?? ""}
@@ -33,7 +31,6 @@ const ProductMainInfo = ({ productId }: IProductMainInfo) => {
         />
       </div>
 
-      {/* TODO : 컴포넌트 분리 */}
       <div className="w-1/2 md:w-full sm:w-full border-t-[2px] dark:border-white sm:mt-[20px] md:mt-[20px] flex-grow">
         <ProductNameAndHeart productDetail={productDetail} />
         <ProductPriceInfo
@@ -43,10 +40,10 @@ const ProductMainInfo = ({ productId }: IProductMainInfo) => {
 
         <ProductDeliveryInfo deliveryFree={productDetail.deliveryFree} />
 
-        <ProductDetailController>
+        <div className="mt-[20px] grid grid-cols-2 gap-[10px] h-[50px] font-bold">
           <AddProductInCartButton productDetail={productDetail} />
           <DirectCheckoutRouteButton productDetail={productDetail} />
-        </ProductDetailController>
+        </div>
       </div>
     </section>
   )
