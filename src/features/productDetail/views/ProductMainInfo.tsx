@@ -1,21 +1,27 @@
+"use client"
+
 import Image from "next/image"
 import ProductDetailController from "./ProductDetailController"
 import ProductDeliveryInfo from "./ProductDeliveryInfo"
 import ProductPriceInfo from "./ProductPriceInfo"
 import ProductNameAndHeart from "./ProductNameAndHeart"
-import { Product } from "../../common/types/product"
+import { useGetProductDetailQuery } from "../hooks/useGetProductDetailQuery"
 
 interface IProductMainInfo {
-  productDetail: Product
+  productId: string
 }
 
-const ProductMainInfo = ({ productDetail }: IProductMainInfo) => {
+const ProductMainInfo = ({ productId }: IProductMainInfo) => {
+  const { productDetail } = useGetProductDetailQuery(productId)
+  
+  if(!productDetail) return <></>
+  
   return (
     <section className="flex md:flex-col sm:flex-col mb-[50px]">
       <div className="overflow-hidden text-[12px] text-center mr-[20px] w-1/2 md:w-full sm:w-full min-h-[300px]">
         <Image
-          src={productDetail.image}
-          alt={`상품사진이 준비되지 않았습니다. - ${productDetail.name}`}
+          src={productDetail?.image ?? ""}
+          alt={`상품사진이 준비되지 않았습니다. - ${productDetail?.name}`}
           width={0}
           height={0}
           sizes="100vw"

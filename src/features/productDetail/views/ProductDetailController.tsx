@@ -53,8 +53,7 @@ const ProductDetailController = ({
 
   return (
     <div className="mt-[20px] grid grid-cols-2 gap-[10px] h-[50px] font-bold">
-      <Button
-        onClick={handleAddCartClick}
+      <ButtohandleAddCartClick}
         isDisabled={isLoading}
         content={
           isLoading ? (

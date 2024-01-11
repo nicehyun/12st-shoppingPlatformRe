@@ -33,6 +33,7 @@ const ProductCard = ({
 
   const productBrandInfo = brand || maker || mallName
 
+  // TODO : conditioal skeleton UI 적용해서 쉬프트 없애기
   return (
     <div>
       <div className="relative overflow-hidden text-[12px] text-center aspect-w-1 aspect-h-1">
