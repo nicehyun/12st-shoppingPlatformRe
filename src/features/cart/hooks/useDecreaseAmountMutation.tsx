@@ -5,11 +5,13 @@ import { useAppDispatch } from "@/redux/hooks"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { cartAPI } from "../models/cartAPI"
 import { ProductInCart } from "../types/cart"
+import { useAuthenticate } from "@/features/auth/signIn/hooks/useAuthenticate"
 
 const useDecreaseAmountMutation = (productInCartInfo: ProductInCart) => {
   const { sessionQuery } = useSessionQuery()
   const queryClient = useQueryClient()
   const dispatch = useAppDispatch()
+  const { authentication } = useAuthenticate()
 
   const decreaseMutaion = useMutation(
     () =>
@@ -18,6 +20,9 @@ const useDecreaseAmountMutation = (productInCartInfo: ProductInCart) => {
         sessionQuery?.user.accessToken
       ),
     {
+      onMutate: () => {
+        authentication()
+      },
       onSuccess: () => {
         queryClient.invalidateQueries(["productListInCart"])
       },
@@ -31,7 +36,13 @@ const useDecreaseAmountMutation = (productInCartInfo: ProductInCart) => {
     }
   )
 
-  return decreaseMutaion
+  const decreaseMutate = async () => {
+    if (decreaseMutaion.isLoading) return
+
+    decreaseMutaion.mutate()
+  }
+
+  return { decreaseMutate, isLoading: decreaseMutaion.isLoading }
 }
 
 export default useDecreaseAmountMutation

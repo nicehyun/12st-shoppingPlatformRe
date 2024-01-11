@@ -4,11 +4,13 @@ import { useAppDispatch } from "@/redux/hooks"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { cartAPI } from "../models/cartAPI"
 import { Product } from "@/features/common/types/product"
+import { useAuthenticate } from "@/features/auth/signIn/hooks/useAuthenticate"
 
 const useRemoveFromCartMutation = (productInfo: Product) => {
   const queryClient = useQueryClient()
   const { sessionQuery } = useSessionQuery()
   const dispatch = useAppDispatch()
+  const { authentication } = useAuthenticate()
 
   const removeMutaion = useMutation(
     () =>
@@ -17,6 +19,9 @@ const useRemoveFromCartMutation = (productInfo: Product) => {
         sessionQuery?.user.accessToken
       ),
     {
+      onMutate: () => {
+        authentication()
+      },
       onSuccess: () => {
         queryClient.invalidateQueries(["productListInCart"])
       },
@@ -30,7 +35,14 @@ const useRemoveFromCartMutation = (productInfo: Product) => {
       },
     }
   )
-  return removeMutaion
+
+  const removeMutate = async () => {
+    if (removeMutaion.isLoading) return
+
+    removeMutaion.mutate()
+  }
+
+  return { removeMutate, isLoading: removeMutaion.isLoading }
 }
 
 export default useRemoveFromCartMutation

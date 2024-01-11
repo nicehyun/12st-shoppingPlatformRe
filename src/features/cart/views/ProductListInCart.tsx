@@ -18,7 +18,7 @@ import { useRemoveCheckedProduct } from "../hooks/useRemoveCheckedProduct"
 import { ProductInCart as IProductInCart, ProductsInCart } from "../types/cart"
 
 import ProductInCart from "./ProductInCart"
-
+// TODO : 컴포넌트 분리
 const ProductListInCart = () => {
   const dispatch = useAppDispatch()
   const checkedProductList = useAppSelector(selectCheckedProductList)

@@ -5,11 +5,13 @@ import { useAppDispatch } from "@/redux/hooks"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { cartAPI } from "../models/cartAPI"
 import { ProductInCart } from "../types/cart"
+import { useAuthenticate } from "@/features/auth/signIn/hooks/useAuthenticate"
 
 const useIncreaseAmountMutation = (productInCartInfo: ProductInCart) => {
   const { sessionQuery } = useSessionQuery()
   const queryClient = useQueryClient()
   const dispatch = useAppDispatch()
+  const { authentication } = useAuthenticate()
 
   const increaseMutaion = useMutation(
     () =>
@@ -18,6 +20,9 @@ const useIncreaseAmountMutation = (productInCartInfo: ProductInCart) => {
         sessionQuery?.user.accessToken
       ),
     {
+      onMutate: () => {
+        authentication()
+      },
       onSuccess: () => {
         queryClient.invalidateQueries(["productListInCart"])
       },
@@ -32,7 +37,14 @@ const useIncreaseAmountMutation = (productInCartInfo: ProductInCart) => {
     }
   )
 
-  return increaseMutaion
+  const increaseMutate = () => {
+    d
+    if (increaseMutaion.isLoading) return
+
+    increaseMutaion.mutate()
+  }
+
+  return { increaseMutate, isLoading: increaseMutaion.isLoading }
 }
 
 export default useIncreaseAmountMutation
