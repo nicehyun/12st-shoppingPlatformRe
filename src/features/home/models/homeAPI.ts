@@ -13,7 +13,7 @@ export const homeAPI = {
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_BASE_URL}/api/home`,
           {
-            next: { revalidate: 10000 },
+            next: { revalidate: 0 },
           }
         )
 
