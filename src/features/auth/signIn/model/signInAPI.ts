@@ -12,15 +12,18 @@ export const signInAPI = {
     email: string,
     passwordValue: string
   ): Promise<SignInResponse | null> => {
-    const response = await fetch(`/api/auth/signIn`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, passwordValue }),
-      next: { revalidate: 600 },
-    })
+    try {
+      const response = await fetch(`/api/auth/signIn`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, passwordValue }),
+      })
 
-    return response.json()
+      return response.json()
+    } catch (error: any) {
+      throw new Error(error)
+    }
   },
 }
