@@ -9,6 +9,7 @@ export const useProductListInCartQuery = () => {
     data: productListInCart,
     isError,
     isLoading,
+    isFetching,
   } = useQuery(
     ["productListInCart"],
     () => cartAPI.getProductListInCart(sessionQuery?.user.accessToken),
@@ -22,5 +23,6 @@ export const useProductListInCartQuery = () => {
     productListInCart: productListInCart?.productList ?? [],
     isError,
     isLoading,
+    isFetching,
   }
 }

@@ -11,15 +11,19 @@ export const cartAPI = {
   ): Promise<GetCartResponse | null> => {
     if (!authorization) return null
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart`,
-      {
-        headers: { authorization },
-        next: { revalidate: 0 },
-      }
-    )
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart`,
+        {
+          headers: { authorization },
+          next: { revalidate: 0 },
+        }
+      )
 
-    return response.json()
+      return response.json()
+    } catch (error: any) {
+      throw new Error(error)
+    }
   },
   addProductToCart: async (
     productInfo: Product,
@@ -27,19 +31,23 @@ export const cartAPI = {
   ) => {
     if (!authorization) return null
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization,
-        },
-        body: JSON.stringify({ productInfo, direction: "add" }),
-      }
-    )
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            authorization,
+          },
+          body: JSON.stringify({ productInfo, direction: "add" }),
+        }
+      )
 
-    return response.json()
+      return response.json()
+    } catch (error: any) {
+      throw new Error(error)
+    }
   },
   increaseProductToCart: async (
     productInCartInfo: ProductInCart,
@@ -47,19 +55,23 @@ export const cartAPI = {
   ) => {
     if (!authorization) return null
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization,
-        },
-        body: JSON.stringify({ productInCartInfo, direction: "increase" }),
-      }
-    )
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            authorization,
+          },
+          body: JSON.stringify({ productInCartInfo, direction: "increase" }),
+        }
+      )
 
-    return response.json()
+      return response.json()
+    } catch (error: any) {
+      throw new Error(error)
+    }
   },
   removeProductFromCart: async (
     productInfo: Product,
@@ -67,19 +79,23 @@ export const cartAPI = {
   ) => {
     if (!authorization) return null
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization,
-        },
-        body: JSON.stringify({ productInfo, direction: "remove" }),
-      }
-    )
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            authorization,
+          },
+          body: JSON.stringify({ productInfo, direction: "remove" }),
+        }
+      )
 
-    return response.json()
+      return response.json()
+    } catch (error: any) {
+      throw new Error(error)
+    }
   },
   decreaseProductToCart: async (
     productInCartInfo: ProductInCart,
@@ -87,19 +103,23 @@ export const cartAPI = {
   ) => {
     if (!authorization) return null
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization,
-        },
-        body: JSON.stringify({ productInCartInfo, direction: "decrease" }),
-      }
-    )
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            authorization,
+          },
+          body: JSON.stringify({ productInCartInfo, direction: "decrease" }),
+        }
+      )
 
-    return response.json()
+      return response.json()
+    } catch (error: any) {
+      throw new Error(error)
+    }
   },
   removeCheckedProductsFromCart: async (
     checkedProductList: ProductsInCart,
@@ -107,21 +127,25 @@ export const cartAPI = {
   ) => {
     if (!authorization) return null
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization,
-        },
-        body: JSON.stringify({
-          checkedProductList,
-          direction: "remove_checked",
-        }),
-      }
-    )
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            authorization,
+          },
+          body: JSON.stringify({
+            checkedProductList,
+            direction: "remove_checked",
+          }),
+        }
+      )
 
-    return response.json()
+      return response.json()
+    } catch (error: any) {
+      throw new Error(error)
+    }
   },
 }
