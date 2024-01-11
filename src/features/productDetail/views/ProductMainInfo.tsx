@@ -6,6 +6,8 @@ import ProductDeliveryInfo from "./ProductDeliveryInfo"
 import ProductPriceInfo from "./ProductPriceInfo"
 import ProductNameAndHeart from "./ProductNameAndHeart"
 import { useGetProductDetailQuery } from "../hooks/useGetProductDetailQuery"
+import AddProductInCartButton from "./AddProductInCartButton"
+import DirectCheckoutRouteButton from "./DirectCheckoutRouteButton"
 
 interface IProductMainInfo {
   productId: string
@@ -13,11 +15,12 @@ interface IProductMainInfo {
 
 const ProductMainInfo = ({ productId }: IProductMainInfo) => {
   const { productDetail } = useGetProductDetailQuery(productId)
-  
-  if(!productDetail) return <></>
-  
+
+  if (!productDetail) return <></>
+
   return (
     <section className="flex md:flex-col sm:flex-col mb-[50px]">
+      {/* TODO : 컴포넌트 분리 */}
       <div className="overflow-hidden text-[12px] text-center mr-[20px] w-1/2 md:w-full sm:w-full min-h-[300px]">
         <Image
           src={productDetail?.image ?? ""}
@@ -30,6 +33,7 @@ const ProductMainInfo = ({ productId }: IProductMainInfo) => {
         />
       </div>
 
+      {/* TODO : 컴포넌트 분리 */}
       <div className="w-1/2 md:w-full sm:w-full border-t-[2px] dark:border-white sm:mt-[20px] md:mt-[20px] flex-grow">
         <ProductNameAndHeart productDetail={productDetail} />
         <ProductPriceInfo
@@ -39,7 +43,10 @@ const ProductMainInfo = ({ productId }: IProductMainInfo) => {
 
         <ProductDeliveryInfo deliveryFree={productDetail.deliveryFree} />
 
-        <ProductDetailController productDetail={productDetail} />
+        <ProductDetailController>
+          <AddProductInCartButton productDetail={productDetail} />
+          <DirectCheckoutRouteButton productDetail={productDetail} />
+        </ProductDetailController>
       </div>
     </section>
   )

@@ -8,20 +8,19 @@ import { addCheckoutPendingProductList } from "@/redux/features/checkoutSlice"
 import { useAuthenticate } from "../../auth/signIn/hooks/useAuthenticate"
 import { useAddToCartMutaion } from "../../cart/hooks/useAddToCartMutaion"
 import Loading from "@/features/common/views/Loading"
+import { ReactNode } from "react"
 
 // TODO : 수정코드 테스츠하기
 interface IProductDetailController {
-  productDetail: Product
+  children: ReactNode
 }
 
-const ProductDetailController = ({
-  productDetail,
-}: IProductDetailController) => {
-  const { sessionQuery } = useSessionQuery()
-  const { addMutate, isLoading } = useAddToCartMutaion(productDetail)
-  const dispatch = useAppDispatch()
-  const { routeTo } = useNavigations()
-  const { authentication } = useAuthenticate()
+const ProductDetailController = ({ children }: IProductDetailController) => {
+  // const { sessionQuery } = useSessionQuery()
+  // const { addMutate, isLoading } = useAddToCartMutaion(productDetail)
+  // const dispatch = useAppDispatch()
+  // const { routeTo } = useNavigations()
+  // const { authentication } = useAuthenticate()
   // const handleAddCartClick = async () => {
   // if (isLoading) return
 
@@ -39,37 +38,18 @@ const ProductDetailController = ({
   // )
   // }
 
-  const handleCheckoutClick = async () => {
-    await authentication()
+  // const handleCheckoutClick = async () => {
+  //   await authentication()
 
-    // if (sessionQuery) {
-    dispatch(addCheckoutPendingProductList([{ ...productDetail, amount: 1 }]))
-    routeTo(ROUTE.CHECKOUT)
-    // }
-  }
+  //   // if (sessionQuery) {
+  //   dispatch(addCheckoutPendingProductList([{ ...productDetail, amount: 1 }]))
+  //   routeTo(ROUTE.CHECKOUT)
+  //   // }
+  // }
 
   return (
     <div className="mt-[20px] grid grid-cols-2 gap-[10px] h-[50px] font-bold">
-      <Button
-        onClick={addMutate}
-        isDisabled={isLoading}
-        content={
-          isLoading ? (
-            <Loading
-              spinnerSize={{ height: "h-[26px]", width: "w-[26px]" }}
-              isFrame={false}
-            />
-          ) : (
-            `장바구니 담기`
-          )
-        }
-        classNames="border-border border-[1px]"
-      />
-      <Button
-        onClick={handleCheckoutClick}
-        content="바로 구매하기"
-        classNames="bg-black text-white dark:bg-white dark:text-black shadow dark:shadow-whiteShadow"
-      />
+      {children}
     </div>
   )
 }
