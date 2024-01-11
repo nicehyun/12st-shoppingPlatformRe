@@ -4,24 +4,21 @@ import { useAppDispatch } from "@/redux/hooks"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { cartAPI } from "../models/cartAPI"
 import { Product } from "@/features/common/types/product"
-import { useAuthenticate } from "@/features/auth/signIn/hooks/useAuthenticate"
+import { useConditionalSignInRoute } from "@/features/common/hooks/useConditionalSignInRoute"
 
-const useRemoveFromCartMutation = (productInfo: Product) => {
+export const useRemoveFromCartMutation = (productInfo: Product) => {
   const queryClient = useQueryClient()
   const { sessionQuery } = useSessionQuery()
   const dispatch = useAppDispatch()
-  const { authentication } = useAuthenticate()
+  const { shouldProceedWithRouting } = useConditionalSignInRoute()
 
-  const removeMutaion = useMutation(
+  const { mutate, isLoading } = useMutation(
     () =>
       cartAPI.removeProductFromCart(
         productInfo,
         sessionQuery?.user.accessToken
       ),
     {
-      onMutate: () => {
-        authentication()
-      },
       onSuccess: () => {
         queryClient.invalidateQueries(["productListInCart"])
       },
@@ -37,12 +34,12 @@ const useRemoveFromCartMutation = (productInfo: Product) => {
   )
 
   const removeMutate = async () => {
-    if (removeMutaion.isLoading) return
+    if (isLoading) return
 
-    removeMutaion.mutate()
+    if (shouldProceedWithRouting(!!sessionQuery)) {
+      mutate()
+    }
   }
 
-  return { removeMutate, isLoading: removeMutaion.isLoading }
+  return { removeMutate, isLoading }
 }
-
-export default useRemoveFromCartMutation

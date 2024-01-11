@@ -14,7 +14,7 @@ import {
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { useEffect, useState } from "react"
 import { useProductListInCartQuery } from "../hooks/useProductListInCartQuery"
-import { useRemoveCheckedProduct } from "../hooks/useRemoveCheckedProduct"
+import { useRemoveCheckedProductMutation } from "../hooks/useRemoveCheckedProductMutation"
 import { ProductInCart as IProductInCart, ProductsInCart } from "../types/cart"
 
 import ProductInCart from "./ProductInCart"
@@ -28,7 +28,10 @@ const ProductListInCart = () => {
 
   const [isAllChecked, setIsAllChecked] = useState(false)
 
-  const checkedProductRemoveMutaion = useRemoveCheckedProduct()
+  const {
+    isLoading: isRemoveCheckedProductLoading,
+    removeCheckedProductMutateAsync,
+  } = useRemoveCheckedProductMutation()
 
   const handleCheckedProductListEmpty = () => {
     if (!productListInCart.length) return
@@ -62,10 +65,7 @@ const ProductListInCart = () => {
   const handleCheckedProductRemove = async (
     checkedProductList: ProductsInCart
   ) => {
-    if (checkedProductList.length === 0) return
-    if (checkedProductRemoveMutaion.isLoading) return
-
-    await checkedProductRemoveMutaion.mutateAsync(checkedProductList)
+    await removeCheckedProductMutateAsync(checkedProductList)
     handleCheckedProductListEmpty()
   }
 
@@ -112,6 +112,7 @@ const ProductListInCart = () => {
               선택 {checkedProductList.length}개
             </span>
             <Button
+              isDisabled={isRemoveCheckedProductLoading}
               onClick={() => handleCheckedProductRemove(checkedProductList)}
               classNames="absolute right-0 text-border transition-3 hover:text-lightRed text-[14px] md:text-[12px] sm:text-[10px]"
               content="선택 삭제"

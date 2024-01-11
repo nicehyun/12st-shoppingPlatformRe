@@ -5,24 +5,21 @@ import { useAppDispatch } from "@/redux/hooks"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { cartAPI } from "../models/cartAPI"
 import { ProductInCart } from "../types/cart"
-import { useAuthenticate } from "@/features/auth/signIn/hooks/useAuthenticate"
+import { useConditionalSignInRoute } from "@/features/common/hooks/useConditionalSignInRoute"
 
-const useDecreaseAmountMutation = (productInCartInfo: ProductInCart) => {
+export const useDecreaseAmountMutation = (productInCartInfo: ProductInCart) => {
   const { sessionQuery } = useSessionQuery()
   const queryClient = useQueryClient()
   const dispatch = useAppDispatch()
-  const { authentication } = useAuthenticate()
+  const { shouldProceedWithRouting } = useConditionalSignInRoute()
 
-  const decreaseMutaion = useMutation(
+  const { mutate, isLoading } = useMutation(
     () =>
       cartAPI.decreaseProductToCart(
         productInCartInfo,
         sessionQuery?.user.accessToken
       ),
     {
-      onMutate: () => {
-        authentication()
-      },
       onSuccess: () => {
         queryClient.invalidateQueries(["productListInCart"])
       },
@@ -37,12 +34,12 @@ const useDecreaseAmountMutation = (productInCartInfo: ProductInCart) => {
   )
 
   const decreaseMutate = async () => {
-    if (decreaseMutaion.isLoading) return
+    if (isLoading) return
 
-    decreaseMutaion.mutate()
+    if (shouldProceedWithRouting(!!sessionQuery)) {
+      mutate()
+    }
   }
 
-  return { decreaseMutate, isLoading: decreaseMutaion.isLoading }
+  return { decreaseMutate, isLoading }
 }
-
-export default useDecreaseAmountMutation

@@ -1,11 +1,12 @@
 import { ReactNode } from "react"
 import { HiMinus, HiPlus } from "react-icons/hi"
-import useIncreaseAmountMutation from "../hooks/useIncreaseAmountMutation"
-import useDecreaseAmountMutation from "../hooks/useDecreaseAmountMutation"
-import useRemoveFromCartMutation from "../hooks/useRemoveFromCartMutation"
+
 import { ProductInCart } from "../types/cart"
 import Button from "@/features/common/views/Button"
 import { AiOutlineClose } from "react-icons/ai"
+import { useRemoveFromCartMutation } from "../hooks/useRemoveFromCartMutation"
+import { useIncreaseAmountMutation } from "../hooks/useIncreaseAmountMutation"
+import { useDecreaseAmountMutation } from "../hooks/useDecreaseAmountMutation"
 
 interface IProductInCartController {
   children: ReactNode
@@ -22,7 +23,6 @@ const ProductInCartController = ({
     useIncreaseAmountMutation(productInfo)
   const { decreaseMutate, isLoading: isDecreaseMutateLoading } =
     useDecreaseAmountMutation(productInfo)
-
   const { removeMutate, isLoading: isRemoveMutateLoading } =
     useRemoveFromCartMutation(productInfo)
 
@@ -33,16 +33,6 @@ const ProductInCartController = ({
     await removeMutaion.mutateAsync()
     onEmptyCheckedProductList()
   }
-
-  // const handleAmoutIncrease = () => {
-  //   increaseMutaion.mutate()
-  // }
-
-  // const handleAmoutDecrease = () => {
-  //   if (productInfo.amount === 1) return
-
-  //   decreaseMutaion.mutate()
-  // }
 
   return (
     <div className="relative py-[10px] pr-[10px] flex flex-col grow text-black">

@@ -8,8 +8,8 @@ import {
 export const cartAPI = {
   getProductListInCart: async (
     authorization: string | null | undefined
-  ): Promise<GetCartResponse | null> => {
-    if (!authorization) return null
+  ): Promise<GetCartResponse | undefined> => {
+    if (!authorization) return
 
     try {
       const response = await fetch(
@@ -29,7 +29,7 @@ export const cartAPI = {
     productInfo: Product,
     authorization: string | null | undefined
   ) => {
-    if (!authorization) return null
+    if (!authorization) return
 
     try {
       const response = await fetch(

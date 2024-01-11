@@ -1,3 +1,5 @@
+"use client"
+
 import { useAddToCartMutaion } from "@/features/cart/hooks/useAddToCartMutaion"
 import { Product } from "@/features/common/types/product"
 import Button from "@/features/common/views/Button"

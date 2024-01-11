@@ -1,28 +1,24 @@
 import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
-
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { cartAPI } from "../models/cartAPI"
 import { ProductInCart } from "../types/cart"
-import { useAuthenticate } from "@/features/auth/signIn/hooks/useAuthenticate"
+import { useConditionalSignInRoute } from "@/features/common/hooks/useConditionalSignInRoute"
 
-const useIncreaseAmountMutation = (productInCartInfo: ProductInCart) => {
+export const useIncreaseAmountMutation = (productInCartInfo: ProductInCart) => {
   const { sessionQuery } = useSessionQuery()
   const queryClient = useQueryClient()
   const dispatch = useAppDispatch()
-  const { authentication } = useAuthenticate()
+  const { shouldProceedWithRouting } = useConditionalSignInRoute()
 
-  const increaseMutaion = useMutation(
+  const { mutate, isLoading } = useMutation(
     () =>
       cartAPI.increaseProductToCart(
         productInCartInfo,
         sessionQuery?.user.accessToken
       ),
     {
-      onMutate: () => {
-        authentication()
-      },
       onSuccess: () => {
         queryClient.invalidateQueries(["productListInCart"])
       },
@@ -38,13 +34,12 @@ const useIncreaseAmountMutation = (productInCartInfo: ProductInCart) => {
   )
 
   const increaseMutate = () => {
-    d
-    if (increaseMutaion.isLoading) return
+    if (isLoading) return
 
-    increaseMutaion.mutate()
+    if (shouldProceedWithRouting(!!sessionQuery)) {
+      mutate()
+    }
   }
 
-  return { increaseMutate, isLoading: increaseMutaion.isLoading }
+  return { increaseMutate, isLoading }
 }
-
-export default useIncreaseAmountMutation
