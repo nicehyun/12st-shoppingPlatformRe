@@ -110,7 +110,6 @@ const handler = NextAuth({
     },
 
     async session({ session, token }) {
-      console.log(token)
       session.user.accessToken = token.access_token as string | null | undefined
 
       return session

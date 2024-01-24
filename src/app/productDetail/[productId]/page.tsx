@@ -17,7 +17,10 @@ export async function generateMetadata({
   const productId = params.productId
 
   const product: Product = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/product/${productId}`
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/product/${productId}`,
+    {
+      next: { revalidate: 60 * 5 },
+    }
   ).then((res) => res.json())
 
   return {

@@ -7,7 +7,6 @@ export async function GET(
   request: NextRequest,
   { params }: { params: { categories: string[] } }
 ) {
-  console.log(params.categories)
   try {
     const response: Products = await fetch(
       `${process.env.NEXT_PUBLIC_DB_URL}/productList?_sort=sellCount&_order=desc`,

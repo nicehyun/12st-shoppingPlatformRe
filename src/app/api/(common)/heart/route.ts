@@ -54,7 +54,6 @@ export async function POST(request: Request) {
     })
   }
 
-  console.log(verifyAccessToken(accessToken))
   const email = verifyAccessToken(accessToken)?.email
   const body: RequestBody = await request.json()
   const direction = body.direction

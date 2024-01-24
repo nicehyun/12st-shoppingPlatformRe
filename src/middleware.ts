@@ -66,7 +66,7 @@ export async function middleware(request: NextRequest) {
     const productDetail = await fetch(
       `${process.env.NEXT_PUBLIC_DB_URL}/productList/${productId}`,
       {
-        next: { revalidate: 10000 },
+        next: { revalidate: 60 * 5 },
       }
     ).then((res) => res.json())
 
