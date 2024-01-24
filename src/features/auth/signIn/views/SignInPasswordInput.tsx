@@ -20,7 +20,8 @@ const SignInPasswordInput = () => {
         type="password"
         name="password"
         id="password"
-        value={passwordInputValue}
+        // value={passwordInputValue}
+        value={"test123123!"}
         onChange={handlePasswordInputValueChange}
         onBlur={handlePasswordInputBlur}
         placeholder="비밀번호를 입력해주세요"

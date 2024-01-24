@@ -12,7 +12,6 @@ import Button from "@/features/common/views/Button"
 import { FaRegArrowAltCircleLeft } from "react-icons/fa"
 import SignInEmailInput from "./SignInEmailInput"
 import SignInPasswordInput from "./SignInPasswordInput"
-import { signIn } from "@/redux/features/signInSlice"
 
 const SignInForm = () => {
   const { routeTo } = useNavigations()
@@ -57,8 +56,7 @@ const SignInForm = () => {
       )
     }
 
-    dispatch(signIn())
-    routeTo(ROUTE.HOME)
+    // routeTo(ROUTE.HOME)
   }
 
   return (

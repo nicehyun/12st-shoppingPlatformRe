@@ -18,7 +18,8 @@ const SignInEmailInput = () => {
         type="text"
         name="email"
         id="email"
-        value={emailInputValue}
+        // value={emailInputValue}
+        value={"test@test.com"}
         onChange={handleEmailInputValueChange}
         onBlur={handleEmailInputBlur}
         placeholder="이메일을 입력해주세요"

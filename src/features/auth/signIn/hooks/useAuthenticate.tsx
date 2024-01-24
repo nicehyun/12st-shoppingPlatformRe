@@ -1,15 +1,15 @@
 import { ROUTE } from "@/features/common/hooks/useNavigations"
 import { showRouteModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
-import useSessionQuery from "./useSessionQuery"
+import { useSessionQuery } from "./useSessionQuery"
 
 export const useAuthenticate = () => {
-  const { sessionQuery } = useSessionQuery()
+  const { session } = useSessionQuery()
   const dispatch = useAppDispatch()
 
   const authentication = async () => {
     return new Promise((resolve) => {
-      if (!sessionQuery) {
+      if (!session) {
         dispatch(
           showRouteModal({
             modalId: "signIn-route-modal",

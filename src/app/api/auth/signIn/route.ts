@@ -6,7 +6,11 @@ import {
 } from "@/features/auth/signUp/utils/validation"
 import { AxiosError } from "axios"
 import { NextResponse } from "next/server"
-import { signJwtAccessToken } from "@/features/common/utils/jwt"
+import {
+  generateAccessToken,
+  generateRefreshToken,
+} from "@/features/common/utils/jwt"
+import { GetUserInfoResponse } from "@/features/common/types/user"
 
 interface RequestBody {
   email: string
@@ -30,17 +34,26 @@ export async function POST(request: Request) {
       }
     ).then((res) => res.json())
 
-    const user = response[0]
+    const user: GetUserInfoResponse = response[0]
 
     if (user) {
       const { password, ...userInfoWithoutPassword } = user
 
       if (await bcrypt.compare(requestPassword, user.password)) {
-        const accessToken = signJwtAccessToken(userInfoWithoutPassword)
+        const accessToken = await generateAccessToken({
+          email: userInfoWithoutPassword.email,
+          id: userInfoWithoutPassword.id,
+        })
+
+        const refreshToken = await generateRefreshToken({
+          email: userInfoWithoutPassword.email,
+          id: userInfoWithoutPassword.id,
+        })
 
         const result = {
-          ...userInfoWithoutPassword,
           accessToken,
+          refreshToken,
+          ...userInfoWithoutPassword,
         }
 
         return NextResponse.json(result, { status: 200 })

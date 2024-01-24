@@ -1,13 +1,12 @@
 import { getToken } from "next-auth/jwt"
 import { NextRequest, NextResponse } from "next/server"
-import { productDeatilAPI } from "./features/productDetail/model/productDetailAPI"
 
 export { default } from "next-auth/middleware"
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
   const secret = process.env.NEXTAUTH_SECRET
-  const token = await getToken({
+  const accessToken = await getToken({
     req: request,
     secret: secret,
     cookieName: "next-auth.session-token",
@@ -76,7 +75,7 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  if (token) {
+  if (accessToken) {
     if (pathname.startsWith("/signIn") || pathname.startsWith("/signUp")) {
       return NextResponse.redirect(new URL("/", request.url))
     }

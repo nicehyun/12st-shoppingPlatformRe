@@ -3,9 +3,9 @@ import HeaderControllerEl from "./HeaderControllerEl"
 import { FiLogIn, FiLogOut } from "react-icons/fi"
 import HeaderCartButton from "./HeaderCartButton"
 import { ROUTE, useNavigations } from "@/features/common/hooks/useNavigations"
-import { signOut } from "next-auth/react"
 import { AiOutlineSearch } from "react-icons/ai"
-import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
+import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
+import { useSignOut } from "@/features/auth/signIn/hooks/useSignOut"
 
 interface IHeaderController {
   isShowPromotion: boolean
@@ -19,7 +19,8 @@ const HeaderController = ({
   onShowSearchForm,
 }: IHeaderController) => {
   const { routeTo } = useNavigations()
-  const { sessionQuery } = useSessionQuery()
+  const { session } = useSessionQuery()
+  const { signOut } = useSignOut()
 
   return (
     <div
@@ -41,7 +42,7 @@ const HeaderController = ({
           </li>
         )}
 
-        {sessionQuery ? (
+        {session ? (
           <HeaderControllerEl
             title="SIGN OUT"
             icon={<FiLogOut />}

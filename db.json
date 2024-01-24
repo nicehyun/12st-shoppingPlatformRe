@@ -371,15 +371,6 @@
   ],
   "users": [
     {
-      "email": "test@test.com",
-      "password": "$2b$10$zTz7k7D0Odpslc.X3.RCVO9awFvlyM/3QO7iB5lIHzoi1MrbCSAMm",
-      "name": "승현",
-      "phone": "01012341234",
-      "marketingClause": true,
-      "mile": 1550,
-      "id": 1
-    },
-    {
       "email": "test123@test.com",
       "password": "$2b$10$OwvOLasDDdK88F5TNtXhIO3e8/FmceSD2o.XOBU2AhprfgjtirGHS",
       "name": "이름",
@@ -463,12 +454,7 @@
           "슬립온",
           "기능화"
         ],
-        "여성신발": [
-          "단화",
-          "슬리퍼",
-          "운동화",
-          "샌들"
-        ]
+        "여성신발": ["단화", "슬리퍼", "운동화", "샌들"]
       }
     }
   ],

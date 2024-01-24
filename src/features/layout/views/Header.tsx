@@ -6,7 +6,7 @@ import HeaderController from "./HeaderController"
 import PromotionBar from "./PromotionBar"
 import MPromotionModal from "./mobile/MPromotionModal"
 import HeaderSearchForm from "./HeaderSearchForm"
-import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
+import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
 
 interface IHeader {
   isShowCart: boolean
@@ -25,8 +25,8 @@ const Header = ({ isShowCart }: IHeader) => {
     setIsShowSearchForm(false)
   }
 
-  const { sessionQuery } = useSessionQuery()
-  const isSignIn = !!sessionQuery?.user ?? false
+  const { session } = useSessionQuery()
+  const isSignIn = !!session?.user ?? false
 
   const isShowCartController = isSignIn && isShowCart
 

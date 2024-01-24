@@ -1,5 +1,3 @@
-import AuthenticationCheck from "@/features/auth/signIn/views/AuthenticationCheck"
-
 import ReduxProvider from "@/redux/utils/ReduxProvider"
 
 import TanstackQueryProvider from "../../../tanstackQuery/utils/TanstackQueryProvider"
@@ -15,10 +13,7 @@ const Providers = ({ children }: IProviders) => {
     <TanstackQueryProvider>
       <Sessionprovider>
         <ReduxProvider>
-          <Themeprovider>
-            <AuthenticationCheck />
-            {children}
-          </Themeprovider>
+          <Themeprovider>{children}</Themeprovider>
         </ReduxProvider>
       </Sessionprovider>
     </TanstackQueryProvider>

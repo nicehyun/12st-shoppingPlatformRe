@@ -1,10 +1,7 @@
 import "./globals.css"
-
 import { Roboto } from "next/font/google"
 import Providers from "../features/common/utils/Providers"
-
 import FeedbackModal from "@/features/common/views/FeedbackModal"
-
 import Footer from "@/features/layout/views/Footer"
 import LayoutSettingDial from "@/features/layout/views/LayoutSettingDial"
 import RouteModal from "@/features/common/views/RouteModal"

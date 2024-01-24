@@ -1,5 +1,16 @@
+import { GetUserInfoResponse } from "@/features/common/types/user"
+import {
+  getRefreshAccessToken,
+  setRefreshTokenCookies,
+  verifyAccessToken,
+} from "@/features/common/utils/jwt"
 import NextAuth from "next-auth/next"
 import CredentialsProvider from "next-auth/providers/credentials"
+import { cookies } from "next/dist/client/components/headers"
+
+export type UserInfoWithToken = GetUserInfoResponse & {
+  refreshToken: string
+}
 
 const handler = NextAuth({
   providers: [
@@ -46,21 +57,61 @@ const handler = NextAuth({
     }),
   ],
   session: {
-    maxAge: 24 * 60 * 60,
+    maxAge: 15 * 60,
   },
   pages: { signIn: "/signIn" },
   callbacks: {
+    // TODO : setRefreshTokenCookies, session callback 동시 실행안됨
     async jwt({ token, user }) {
       if (user) {
-        token.email = user.email
-        token.accessToken = user.accessToken
+        const { accessToken, refreshToken } = user
+
+        if (refreshToken) {
+          setRefreshTokenCookies(refreshToken)
+        }
+
+        if (accessToken) {
+          const accessTokenPayload = verifyAccessToken(accessToken)
+
+          return {
+            ...token,
+            access_token: accessToken,
+            expires_at: accessTokenPayload?.exp,
+          }
+        }
       }
+
+      if (
+        typeof token.expires_at === "number" &&
+        Date.now() / 1000 < token.expires_at
+      ) {
+        return token
+      } else {
+        const exsistedRefreshToken = cookies().get("auth-token")
+
+        if (exsistedRefreshToken) {
+          const { accessToken, refreshToken } = await getRefreshAccessToken(
+            exsistedRefreshToken.value
+          )
+
+          const accessTokenPayload = verifyAccessToken(accessToken)
+
+          setRefreshTokenCookies(refreshToken)
+
+          return {
+            ...token,
+            access_token: accessToken,
+            expires_at: accessTokenPayload?.exp,
+          }
+        }
+      }
+
       return token
     },
 
     async session({ session, token }) {
-      session.user.email = token.email
-      session.user.accessToken = token.accessToken as string | null | undefined
+      console.log(token)
+      session.user.accessToken = token.access_token as string | null | undefined
 
       return session
     },
