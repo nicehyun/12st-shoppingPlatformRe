@@ -56,7 +56,7 @@ const SignInForm = () => {
       )
     }
 
-    // routeTo(ROUTE.HOME)
+    routeTo(ROUTE.HOME)
   }
 
   return (

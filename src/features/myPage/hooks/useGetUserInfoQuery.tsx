@@ -1,9 +1,9 @@
-import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { useQuery } from "@tanstack/react-query"
 import { userInfoAPI } from "@/features/common/models/userInfoAPI"
+import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
 
 export const useGetUserInfoQuery = () => {
-  const { sessionQuery } = useSessionQuery()
+  const { session } = useSessionQuery()
 
   const {
     data: userInfo,
@@ -12,9 +12,9 @@ export const useGetUserInfoQuery = () => {
     isFetching,
   } = useQuery(
     ["userInfo"],
-    () => userInfoAPI.getUserInfo(sessionQuery?.user.accessToken),
+    () => userInfoAPI.getUserInfo(session?.user.accessToken),
     {
-      enabled: !!sessionQuery,
+      enabled: !!session,
     }
   )
 

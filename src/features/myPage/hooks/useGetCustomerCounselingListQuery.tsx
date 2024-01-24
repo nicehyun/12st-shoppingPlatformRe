@@ -1,15 +1,15 @@
 import { useQuery } from "@tanstack/react-query"
 import { myPageAPI } from "../models/myPageAPI"
-import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
+import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
 
 export const useGetCustomerCounselingListQuery = () => {
-  const { sessionQuery } = useSessionQuery()
+  const { session } = useSessionQuery()
 
   const { data, isLoading, isError, isFetching } = useQuery(
     ["customerCounselingList"],
-    () => myPageAPI.getCoutomerCounselingList(sessionQuery?.user.accessToken),
+    () => myPageAPI.getCoutomerCounselingList(session?.user.accessToken),
     {
-      enabled: !!sessionQuery,
+      enabled: !!session,
     }
   )
 

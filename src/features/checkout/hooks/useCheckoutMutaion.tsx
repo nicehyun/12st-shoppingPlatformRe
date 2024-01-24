@@ -1,13 +1,13 @@
 import { CheckoutList } from "@/features/checkout/types/checkout"
-import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { useFeedbackModal } from "@/features/common/hooks/useFeedbackModal"
 import { CheckoutClauseCheck } from "@/redux/features/checkoutSlice"
 import { useMutation } from "@tanstack/react-query"
 import { checkoutAPI } from "@/features/checkout/models/checkoutAPI"
+import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
 
 export const useCheckoutMutaion = () => {
   const { showFeedbackModalWithContent } = useFeedbackModal()
-  const { sessionQuery } = useSessionQuery()
+  const { session } = useSessionQuery()
 
   const { isLoading: isCheckoutLoading, mutateAsync: checkoutMutateAsync } =
     useMutation<
@@ -24,7 +24,7 @@ export const useCheckoutMutaion = () => {
           checkoutInfo,
           isClauseCheck,
           isUpdateDeliveryInfo,
-          sessionQuery?.user.accessToken
+          session?.user.accessToken
         ),
       {
         onError: () => {

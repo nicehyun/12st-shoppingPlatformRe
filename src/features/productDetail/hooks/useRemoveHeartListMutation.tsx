@@ -1,4 +1,4 @@
-import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
+import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
 import { productHeartAPI } from "@/features/common/models/heartAPI"
 import { Product } from "@/features/common/types/product"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
@@ -9,7 +9,7 @@ export const useRemoveHeartListMutation = (productInfo: Product) => {
   const queryClient = useQueryClient()
   const dispatch = useAppDispatch()
 
-  const { sessionQuery } = useSessionQuery()
+  const { session } = useSessionQuery()
 
   const {
     mutateAsync: removeHeartListMutateAsync,
@@ -19,7 +19,7 @@ export const useRemoveHeartListMutation = (productInfo: Product) => {
       productHeartAPI.heartOfProduct(
         productInfo,
         "remove",
-        sessionQuery?.user.accessToken
+        session?.user.accessToken
       ),
     {
       onSuccess: () => {

@@ -1,18 +1,18 @@
 "use client"
 
 import { numberToLocaleString } from "@/features/common/utils/price"
-import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import useCouponQuery from "@/features/checkout/hooks/useCouponQuery"
 import { useUserMileQuery } from "@/features/checkout/hooks/useGetUserMileQuery"
+import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
 
 const MyPageTerminationContent = () => {
-  const { sessionQuery } = useSessionQuery()
+  const { session } = useSessionQuery()
   const { userMile } = useUserMileQuery()
   const { coupons } = useCouponQuery()
   return (
     <div className="">
       <h3 className="text-[24px] inline-block text-center">
-        <span className="font-bold mr-[5px]">{sessionQuery?.user.name}</span>
+        <span className="font-bold mr-[5px]">{session?.user.name}</span>
         회원님,
         <br />
         사용할 수 있는 혜택을 포기하실 건가요😢

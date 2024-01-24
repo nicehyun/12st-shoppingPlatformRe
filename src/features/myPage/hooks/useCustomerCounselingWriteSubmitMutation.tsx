@@ -1,12 +1,12 @@
 import { useFeedbackModal } from "@/features/common/hooks/useFeedbackModal"
-import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { useMutation } from "@tanstack/react-query"
 import { CustomerCounselingDetail } from "../types/myPage"
 import { myPageAPI } from "../models/myPageAPI"
+import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
 
 export const useCustomerCounselingWriteSubmitMutation = () => {
   const { showFeedbackModalWithContent } = useFeedbackModal()
-  const { sessionQuery } = useSessionQuery()
+  const { session } = useSessionQuery()
 
   const {
     isLoading: isCustomerCounselingWriteLoading,
@@ -21,7 +21,7 @@ export const useCustomerCounselingWriteSubmitMutation = () => {
     ({ writeDetail }: { writeDetail: CustomerCounselingDetail }) =>
       myPageAPI.writeCoustomerCounseling(
         writeDetail,
-        sessionQuery?.user.accessToken
+        session?.user.accessToken
       ),
     {
       onError: () => {

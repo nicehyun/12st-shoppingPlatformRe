@@ -1,4 +1,3 @@
-import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { Product } from "@/features/common/types/product"
 import { showFeedbackModal, showRouteModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
@@ -7,15 +6,16 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { cartAPI } from "../models/cartAPI"
 import { ROUTE } from "@/features/common/hooks/useNavigations"
 import { useConditionalSignInRoute } from "@/features/common/hooks/useConditionalSignInRoute"
+import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
 
 export const useAddToCartMutaion = (productInfo: Product) => {
   const queryClient = useQueryClient()
   const dispatch = useAppDispatch()
 
-  const { sessionQuery } = useSessionQuery()
+  const { session } = useSessionQuery()
   const { shouldProceedWithRouting } = useConditionalSignInRoute()
   const { mutate, isLoading } = useMutation(
-    () => cartAPI.addProductToCart(productInfo, sessionQuery?.user.accessToken),
+    () => cartAPI.addProductToCart(productInfo, session?.user.accessToken),
 
     {
       onSuccess: () => {
@@ -45,7 +45,7 @@ export const useAddToCartMutaion = (productInfo: Product) => {
   const addMutate = () => {
     if (isLoading) return
 
-    if (shouldProceedWithRouting(!!sessionQuery)) {
+    if (shouldProceedWithRouting(!!session)) {
       mutate()
     }
   }

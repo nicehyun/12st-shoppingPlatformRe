@@ -1,16 +1,16 @@
-import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
 import { useMutation } from "@tanstack/react-query"
 import { myPageAPI } from "../models/myPageAPI"
+import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
 
 export const useMemberTerminationMutation = () => {
-  const { sessionQuery } = useSessionQuery()
+  const { session } = useSessionQuery()
 
   const dispatch = useAppDispatch()
 
   const memberTerminationMutation = useMutation(
-    () => myPageAPI.memberTermination(sessionQuery?.user.accessToken),
+    () => myPageAPI.memberTermination(session?.user.accessToken),
     {
       onError: () =>
         dispatch(

@@ -1,12 +1,12 @@
 "use client"
 
-import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import MyPageWriteTable from "./MyPageWriteTable"
 import PcConditionComponent from "@/features/common/views/PcConditionComponent"
 import MobileViewConditionComponent from "@/features/common/views/MobileViewConditionComponent"
+import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
 
 const MyPageCutsomerCounselingWriteUserInfoList = () => {
-  const { sessionQuery } = useSessionQuery()
+  const { session } = useSessionQuery()
   return (
     <>
       <MobileViewConditionComponent
@@ -14,12 +14,12 @@ const MyPageCutsomerCounselingWriteUserInfoList = () => {
           <>
             <MyPageWriteTable
               tableTitle="성명"
-              tableContent={sessionQuery?.user.name}
+              tableContent={session?.user.name}
               className="border-border border-t-[1px]"
             />
             <MyPageWriteTable
               tableTitle="이메일"
-              tableContent={sessionQuery?.user.email}
+              tableContent={session?.user.email}
               className="border-border border-t-[1px]"
             />
           </>
@@ -31,12 +31,12 @@ const MyPageCutsomerCounselingWriteUserInfoList = () => {
           <>
             <MyPageWriteTable
               tableTitle="성명"
-              tableContent={sessionQuery?.user.name}
+              tableContent={session?.user.name}
               className="border-border border-t-[1px]"
             />
             <MyPageWriteTable
               tableTitle="이메일"
-              tableContent={sessionQuery?.user.email}
+              tableContent={session?.user.email}
               className="border-border border-t-[1px]"
             />
           </>

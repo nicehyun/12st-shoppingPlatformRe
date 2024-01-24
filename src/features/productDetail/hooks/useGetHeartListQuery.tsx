@@ -1,16 +1,16 @@
-import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
+import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
 import { productHeartAPI } from "@/features/common/models/heartAPI"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
 import { useQuery } from "@tanstack/react-query"
 
 export const useGetHeartListQuery = () => {
-  const { sessionQuery } = useSessionQuery()
+  const { session } = useSessionQuery()
   const dispatch = useAppDispatch()
 
   const { data, isLoading, isFetching } = useQuery(
     ["heartList"],
-    () => productHeartAPI.getHeartList(sessionQuery?.user.accessToken ?? ""),
+    () => productHeartAPI.getHeartList(session?.user.accessToken ?? ""),
     {
       onError: () =>
         dispatch(
@@ -20,7 +20,7 @@ export const useGetHeartListQuery = () => {
           })
         ),
       staleTime: 60 * 60 * 1000,
-      enabled: !!sessionQuery,
+      enabled: !!session,
     }
   )
 

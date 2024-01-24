@@ -1,11 +1,11 @@
-import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { myPageAPI } from "../models/myPageAPI"
+import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
 
 const useCheckMarketingClauseMutation = () => {
-  const { sessionQuery } = useSessionQuery()
+  const { session } = useSessionQuery()
   const queryClient = useQueryClient()
 
   const dispatch = useAppDispatch()
@@ -14,7 +14,7 @@ const useCheckMarketingClauseMutation = () => {
     (isChecked: boolean) =>
       myPageAPI.modificatieMarketingClause(
         isChecked,
-        sessionQuery?.user.accessToken
+        session?.user.accessToken
       ),
     {
       onSuccess: () => {

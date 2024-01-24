@@ -1,4 +1,3 @@
-import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
 
@@ -6,9 +5,10 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { cartAPI } from "../models/cartAPI"
 import { ProductInCart } from "../types/cart"
 import { useConditionalSignInRoute } from "@/features/common/hooks/useConditionalSignInRoute"
+import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
 
 export const useDecreaseAmountMutation = (productInCartInfo: ProductInCart) => {
-  const { sessionQuery } = useSessionQuery()
+  const { session } = useSessionQuery()
   const queryClient = useQueryClient()
   const dispatch = useAppDispatch()
   const { shouldProceedWithRouting } = useConditionalSignInRoute()
@@ -17,7 +17,7 @@ export const useDecreaseAmountMutation = (productInCartInfo: ProductInCart) => {
     () =>
       cartAPI.decreaseProductToCart(
         productInCartInfo,
-        sessionQuery?.user.accessToken
+        session?.user.accessToken
       ),
     {
       onSuccess: () => {
@@ -36,7 +36,7 @@ export const useDecreaseAmountMutation = (productInCartInfo: ProductInCart) => {
   const decreaseMutate = async () => {
     if (isLoading) return
 
-    if (shouldProceedWithRouting(!!sessionQuery)) {
+    if (shouldProceedWithRouting(!!session)) {
       mutate()
     }
   }

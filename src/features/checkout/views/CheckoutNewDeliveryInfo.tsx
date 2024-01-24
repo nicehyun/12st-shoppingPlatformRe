@@ -5,17 +5,6 @@ import CheckoutDeliveryNameInput from "./CheckoutDeliveryNameInput"
 import CheckoutPhoneInput from "./CheckoutPhoneInput"
 import CheckoutRecipientInput from "./CheckoutRecipientInput"
 import DeliveryMemoSelect from "./DeliveryMemoSelect"
-import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
-
-const dummyDeliveryInfo = {
-  deliveryName: "test",
-  recipient: "test",
-  zipcode: "test",
-  address: "test",
-  additionalAddress: "test",
-  phone1: "test",
-  phone2: "test",
-}
 
 const CheckoutNewDeliveryInfo = () => {
   const [isDefalutAddressRegistration, setIsDefalutAddressRegistration] =

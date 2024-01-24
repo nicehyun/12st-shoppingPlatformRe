@@ -1,11 +1,11 @@
 import { mileAPI } from "@/features/common/models/mileAPI"
 import { junkOfNoMoreThanOneDigit } from "@/features/common/utils/price"
-import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { useQuery } from "@tanstack/react-query"
 import useCheckoutPrice from "./useCheckoutPrice"
+import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
 
 export const useUserMileQuery = () => {
-  const { sessionQuery } = useSessionQuery()
+  const { session } = useSessionQuery()
   const { totalPriceOfCheckedProduct } = useCheckoutPrice()
 
   const {
@@ -14,9 +14,9 @@ export const useUserMileQuery = () => {
     isFetching,
   } = useQuery(
     ["userMile"],
-    () => mileAPI.getUserMile(sessionQuery?.user.accessToken),
+    () => mileAPI.getUserMile(session?.user.accessToken),
     {
-      enabled: !!sessionQuery,
+      enabled: !!session,
     }
   )
 

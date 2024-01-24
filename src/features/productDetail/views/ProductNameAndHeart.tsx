@@ -7,8 +7,9 @@ import { useAddHeartListMutation } from "../hooks/useAddHeartListMutation"
 import { useRemoveHeartListMutation } from "../hooks/useRemoveHeartListMutation"
 import Loading from "../../common/views/Loading"
 import { useGetHeartListQuery } from "../hooks/useGetHeartListQuery"
-import useSessionQuery from "../../auth/signIn/hooks/useSessionQuery"
+
 import { useAuthenticate } from "../../auth/signIn/hooks/useAuthenticate"
+import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
 
 interface IProductNameAndHeart {
   productDetail: Product
@@ -16,7 +17,7 @@ interface IProductNameAndHeart {
 
 const ProductNameAndHeart = ({ productDetail }: IProductNameAndHeart) => {
   const { authentication } = useAuthenticate()
-  const { sessionQuery } = useSessionQuery()
+  const { session } = useSessionQuery()
 
   const { heartList } = useGetHeartListQuery()
 
@@ -31,7 +32,7 @@ const ProductNameAndHeart = ({ productDetail }: IProductNameAndHeart) => {
   )
 
   const handleHeartClick = () => {
-    if (!sessionQuery) {
+    if (!session) {
       authentication()
       return
     }
