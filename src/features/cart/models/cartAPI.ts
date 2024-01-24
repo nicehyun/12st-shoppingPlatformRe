@@ -8,7 +8,7 @@ import {
 export const cartAPI = {
   getProductListInCart: async (
     authorization: string | null | undefined
-  ): Promise<GetCartResponse | undefined> => {
+  ): Promise<ProductsInCart | undefined> => {
     if (!authorization) return
 
     try {
@@ -29,7 +29,9 @@ export const cartAPI = {
     productInfo: Product,
     authorization: string | null | undefined
   ) => {
-    if (!authorization) return
+    if (!authorization) {
+      throw new Error("No Authorization")
+    }
 
     try {
       const response = await fetch(
@@ -53,7 +55,9 @@ export const cartAPI = {
     productInCartInfo: ProductInCart,
     authorization: string | null | undefined
   ) => {
-    if (!authorization) return null
+    if (!authorization) {
+      throw new Error("No Authorization")
+    }
 
     try {
       const response = await fetch(
@@ -77,7 +81,9 @@ export const cartAPI = {
     productInfo: Product,
     authorization: string | null | undefined
   ) => {
-    if (!authorization) return null
+    if (!authorization) {
+      throw new Error("No Authorization")
+    }
 
     try {
       const response = await fetch(
@@ -101,7 +107,9 @@ export const cartAPI = {
     productInCartInfo: ProductInCart,
     authorization: string | null | undefined
   ) => {
-    if (!authorization) return null
+    if (!authorization) {
+      throw new Error("No Authorization")
+    }
 
     try {
       const response = await fetch(
@@ -125,7 +133,9 @@ export const cartAPI = {
     checkedProductList: ProductsInCart,
     authorization: string | null | undefined
   ) => {
-    if (!authorization) return null
+    if (!authorization) {
+      throw new Error("No Authorization")
+    }
 
     try {
       const response = await fetch(

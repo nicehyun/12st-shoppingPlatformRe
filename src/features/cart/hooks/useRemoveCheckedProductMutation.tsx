@@ -1,14 +1,14 @@
-import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { cartAPI } from "../models/cartAPI"
 import { ProductsInCart } from "../types/cart"
 import { useConditionalSignInRoute } from "@/features/common/hooks/useConditionalSignInRoute"
+import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
 
 export const useRemoveCheckedProductMutation = () => {
   const queryClient = useQueryClient()
-  const { sessionQuery } = useSessionQuery()
+  const { session } = useSessionQuery()
   const dispatch = useAppDispatch()
   const { shouldProceedWithRouting } = useConditionalSignInRoute()
 
@@ -16,11 +16,17 @@ export const useRemoveCheckedProductMutation = () => {
     (checkedProductList: ProductsInCart) =>
       cartAPI.removeCheckedProductsFromCart(
         checkedProductList,
-        sessionQuery?.user.accessToken
+        session?.user.accessToken
       ),
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["productListInCart"])
+
+        dispatch(
+          showFeedbackModal({
+            modalContent: "장바구니에서 선택한 상품을 제거하였습니다.",
+          })
+        )
       },
       onError: () => {
         dispatch(
@@ -38,7 +44,7 @@ export const useRemoveCheckedProductMutation = () => {
   ) => {
     if (isLoading && checkedProductList.length === 0) return
 
-    if (shouldProceedWithRouting(!!sessionQuery)) {
+    if (shouldProceedWithRouting(!!session)) {
       mutateAsync(checkedProductList)
     }
   }

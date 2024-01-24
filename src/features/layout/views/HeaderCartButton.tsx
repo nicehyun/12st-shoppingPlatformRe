@@ -10,7 +10,7 @@ const HeaderCartButton = () => {
   const [isCartHightlighted, setIsCartHightlighted] = useState(false)
   const { routeTo } = useNavigations()
 
-  const { productListInCart } = useProductListInCartQuery()
+  const { productListInCart, isCartLimited } = useProductListInCartQuery()
 
   useEffect(() => {
     if (!productListInCart || !productListInCart.length) return
@@ -33,11 +33,7 @@ const HeaderCartButton = () => {
       content={
         <>
           <span className={`${isCartHightlighted && "text-lightRed"} mr-[5px]`}>
-            {productListInCart?.length ?? 0 < 10 ? (
-              <BsFillCartFill />
-            ) : (
-              <BsFillCartXFill />
-            )}
+            {isCartLimited ? <BsFillCartXFill /> : <BsFillCartFill />}
           </span>
           <span
             className={`${isCartHightlighted && "text-lightRed"} text-[10px]`}
@@ -50,7 +46,7 @@ const HeaderCartButton = () => {
               isCartHightlighted && "text-lightRed bg-black"
             } border border-border rounded-lg text-[8px] ml-[8px] py-[1px] px-[3px] font-bold bg-white text-black group-hover:text-lightRed`}
           >
-            {productListInCart?.length ?? 0}
+            {productListInCart.length}
           </span>
         </>
       }

@@ -1,12 +1,12 @@
 import { Product } from "@/features/common/types/product"
 import { showFeedbackModal, showRouteModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
-
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { cartAPI } from "../models/cartAPI"
 import { ROUTE } from "@/features/common/hooks/useNavigations"
 import { useConditionalSignInRoute } from "@/features/common/hooks/useConditionalSignInRoute"
 import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
+import { ProductsInCart } from "../types/cart"
 
 export const useAddToCartMutaion = (productInfo: Product) => {
   const queryClient = useQueryClient()
@@ -14,9 +14,10 @@ export const useAddToCartMutaion = (productInfo: Product) => {
 
   const { session } = useSessionQuery()
   const { shouldProceedWithRouting } = useConditionalSignInRoute()
+  const CART_LIMIT = 10
+
   const { mutate, isLoading } = useMutation(
     () => cartAPI.addProductToCart(productInfo, session?.user.accessToken),
-
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["productListInCart"])
@@ -44,6 +45,23 @@ export const useAddToCartMutaion = (productInfo: Product) => {
 
   const addMutate = () => {
     if (isLoading) return
+
+    const previousProductListInCart: ProductsInCart | undefined =
+      queryClient.getQueryData(["productListInCart"]) ?? []
+
+    if (CART_LIMIT <= previousProductListInCart?.length) {
+      dispatch(
+        showRouteModal({
+          modalId: "signIn-route-modal",
+          modalTitle: "",
+          modalContent:
+            "장바구니에 상품이 가득 찼습니다. 장바구니로 이동하시겠습니까?",
+          route: ROUTE.CART,
+        })
+      )
+
+      return
+    }
 
     if (shouldProceedWithRouting(!!session)) {
       mutate()

@@ -31,7 +31,7 @@ export async function GET(request: Request) {
 
     const cartData: GetCartResponse = response[0]
 
-    return NextResponse.json(cartData, { status: 200 })
+    return NextResponse.json(cartData.productList, { status: 200 })
   } catch (error) {
     const { response } = error as unknown as AxiosError
     if (response) {

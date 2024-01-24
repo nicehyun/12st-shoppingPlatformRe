@@ -5,12 +5,7 @@ import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
 export const useProductListInCartQuery = () => {
   const { session } = useSessionQuery()
 
-  const {
-    data: productListInCart,
-    isError,
-    isLoading,
-    isFetching,
-  } = useQuery(
+  const { data, isError, isLoading, isFetching } = useQuery(
     ["productListInCart"],
     () => cartAPI.getProductListInCart(session?.user.accessToken),
     {
@@ -21,9 +16,16 @@ export const useProductListInCartQuery = () => {
 
   const isInitialLoading = isLoading && isFetching
 
+  const productListInCart = data ?? []
+
+  const CART_LIMIT = 10
+
+  const isCartLimited = productListInCart.length <= CART_LIMIT
+
   return {
-    productListInCart: productListInCart?.productList ?? [],
+    productListInCart,
     isError,
     isInitialLoading,
+    isCartLimited,
   }
 }

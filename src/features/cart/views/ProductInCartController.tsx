@@ -23,14 +23,11 @@ const ProductInCartController = ({
     useIncreaseAmountMutation(productInfo)
   const { decreaseMutate, isLoading: isDecreaseMutateLoading } =
     useDecreaseAmountMutation(productInfo)
-  const { removeMutate, isLoading: isRemoveMutateLoading } =
+  const { removeMutateAsync, isLoading: isRemoveMutateLoading } =
     useRemoveFromCartMutation(productInfo)
 
   const onClickRemoveProductFromCart = async () => {
-    // if (removeMutaion.isLoading) return
-
-    // TODO : 비동기로 받던 해해결하기
-    await removeMutaion.mutateAsync()
+    await removeMutateAsync()
     onEmptyCheckedProductList()
   }
 

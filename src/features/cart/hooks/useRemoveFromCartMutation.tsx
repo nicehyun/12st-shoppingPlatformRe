@@ -12,11 +12,17 @@ export const useRemoveFromCartMutation = (productInfo: Product) => {
   const dispatch = useAppDispatch()
   const { shouldProceedWithRouting } = useConditionalSignInRoute()
 
-  const { mutate, isLoading } = useMutation(
+  const { mutateAsync, isLoading } = useMutation(
     () => cartAPI.removeProductFromCart(productInfo, session?.user.accessToken),
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["productListInCart"])
+
+        dispatch(
+          showFeedbackModal({
+            modalContent: "장바구니에서 상품을 제거하였습니다.",
+          })
+        )
       },
       onError: () => {
         dispatch(
@@ -29,13 +35,13 @@ export const useRemoveFromCartMutation = (productInfo: Product) => {
     }
   )
 
-  const removeMutate = async () => {
+  const removeMutateAsync = async () => {
     if (isLoading) return
 
     if (shouldProceedWithRouting(!!session)) {
-      mutate()
+      mutateAsync()
     }
   }
 
-  return { removeMutate, isLoading }
+  return { removeMutateAsync, isLoading }
 }
