@@ -7,6 +7,7 @@ interface ILoadingButton {
   isLoading: boolean
   onClick: () => void
   content: ReactNode
+  spinnerSize?: "sm" | "md"
 }
 
 const LoadingButton = ({
@@ -14,17 +15,20 @@ const LoadingButton = ({
   isLoading,
   onClick,
   content,
+  spinnerSize = "md",
 }: ILoadingButton) => {
+  const loadingSpinnerSize =
+    spinnerSize === "sm"
+      ? { height: "h-[26px]", width: "w-[26px]" }
+      : { height: "h-[26px]", width: "w-[26px]" }
+
   return (
     <Button
       onClick={onClick}
       isDisabled={isLoading}
       content={
         isLoading ? (
-          <Loading
-            spinnerSize={{ height: "h-[26px]", width: "w-[26px]" }}
-            isFrame={false}
-          />
+          <Loading spinnerSize={loadingSpinnerSize} isFrame={false} />
         ) : (
           content
         )

@@ -22,17 +22,22 @@ const MPromotionEl = ({
   )
   return (
     <div
-      className={`${classNames} w-80 h-[120px] bg-no-repeat  bg-center bg-cover rounded-lg relative cursor-pointer border-[1px] border-black`}
-      style={{ backgroundImage: "url('/ticket.png')" }}
+      className={`${classNames} flex items-center  w-[400px] h-[120px] rounded-lg cursor-pointer border-[1px] border-black dark:bg-white`}
     >
-      <span className="absolute top-2 right-24 text-sm text-lightRed font-bold">
-        {promotingCompany}
-      </span>
-      <p className="absolute text-sm top-11 right-6 w-[200px] leading-relaxed">
-        {beforeText}
-        <span className="text-lightRed">{highlightedText}</span>
-        {afterText}
-      </p>
+      <div className="w-[100px] h-full flexCenter  bg-black dark:bg-lightRed text-white mr-[20px] rounded-l-lg">
+        <span className="-rotate-90">PROMOTION</span>
+      </div>
+
+      <div className="flex-1">
+        <span className="text-sm text-lightRed font-bold">
+          {promotingCompany}
+        </span>
+        <p className="w-full leading-relaxed">
+          {beforeText}
+          <span className="text-lightRed">{highlightedText}</span>
+          {afterText}
+        </p>
+      </div>
     </div>
   )
 }
