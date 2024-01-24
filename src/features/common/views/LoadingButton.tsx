@@ -5,9 +5,10 @@ import Loading from "./Loading"
 interface ILoadingButton {
   className?: string
   isLoading: boolean
-  onClick: () => void
+  onClick?: () => void
   content: ReactNode
   spinnerSize?: "sm" | "md"
+  type?: "button" | "submit"
 }
 
 const LoadingButton = ({
@@ -16,6 +17,7 @@ const LoadingButton = ({
   onClick,
   content,
   spinnerSize = "md",
+  type = "button",
 }: ILoadingButton) => {
   const loadingSpinnerSize =
     spinnerSize === "sm"
@@ -24,6 +26,7 @@ const LoadingButton = ({
 
   return (
     <Button
+      type={type}
       onClick={onClick}
       isDisabled={isLoading}
       content={

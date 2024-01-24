@@ -16,14 +16,13 @@ import { useEffect, useState } from "react"
 import { useProductListInCartQuery } from "../hooks/useProductListInCartQuery"
 import { useRemoveCheckedProductMutation } from "../hooks/useRemoveCheckedProductMutation"
 import { ProductInCart as IProductInCart, ProductsInCart } from "../types/cart"
-
 import ProductInCart from "./ProductInCart"
-// TODO : 컴포넌트 분리
+
 const ProductListInCart = () => {
   const dispatch = useAppDispatch()
   const checkedProductList = useAppSelector(selectCheckedProductList)
 
-  const { productListInCart, isLoading: isCartFetchLoading } =
+  const { productListInCart, isInitialLoading: isCartFetchLoading } =
     useProductListInCartQuery()
 
   const [isAllChecked, setIsAllChecked] = useState(false)

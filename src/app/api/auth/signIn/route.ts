@@ -57,19 +57,19 @@ export async function POST(request: Request) {
         }
 
         return NextResponse.json(result, { status: 200 })
+      } else {
+        return NextResponse.json({
+          status: 401,
+          error: "비밀번호가 일치하지 않습니다.",
+        })
       }
     } else {
-      return NextResponse.json(null, { status: 400 })
+      return NextResponse.json({
+        status: 401,
+        error: "해당 이메일로 등록된 계정이 없습니다.",
+      })
     }
-  } catch (error) {
-    const { response } = error as unknown as AxiosError
-    if (response) {
-      console.error(`🚨 ${error}`)
-      console.error(`🚨 JSON SERVER POST API: ${response.data}`)
-    } else {
-      console.error(`🚨 Unexpected Error: ${error}`)
-    }
-
-    return new NextResponse(null, { status: 500 })
+  } catch (error: any) {
+    throw new Error(error.message)
   }
 }

@@ -1,67 +1,19 @@
 "use client"
 import { ROUTE, useNavigations } from "@/features/common/hooks/useNavigations"
-import Loading from "@/features/common/views/Loading"
-import { showFeedbackModal } from "@/redux/features/modalSlice"
-import { useAppDispatch } from "@/redux/hooks"
-import {
-  emailValidator,
-  passwordValidator,
-} from "../../signUp/utils/validation"
-import useSignInMutaion from "../hooks/useSIgnInMutaion"
 import Button from "@/features/common/views/Button"
 import { FaRegArrowAltCircleLeft } from "react-icons/fa"
-import SignInEmailInput from "./SignInEmailInput"
-import SignInPasswordInput from "./SignInPasswordInput"
+import { useSignInMutaion } from "../hooks/useSIgnInMutaion"
+import Input from "@/features/common/views/Input"
+import LoadingButton from "@/features/common/views/LoadingButton"
 
 const SignInForm = () => {
   const { routeTo } = useNavigations()
-  const dispatch = useAppDispatch()
 
-  const { isLoading: isSignInLoading, mutateAsync: signInMutateAsync } =
-    useSignInMutaion()
-
-  const handleSignInSubmit = async (
-    event: React.FormEvent<HTMLFormElement>
-  ) => {
-    event.preventDefault()
-
-    const formData = new FormData(event.currentTarget)
-
-    const emailValue = formData.get("email") as string
-    const passwordValue = formData.get("password") as string
-
-    const isEmailValid = emailValidator(emailValue)
-    const isPasswordValid = passwordValidator(passwordValue)
-
-    if (!isEmailValid || !isPasswordValid || isSignInLoading) return
-
-    const response = await signInMutateAsync({
-      email: emailValue,
-      password: passwordValue,
-    })
-
-    if (response?.status === 500 || response?.status === undefined) {
-      return dispatch(
-        showFeedbackModal({
-          modalContent: "오류가 계속되면 고객센터에 문의해주세요",
-        })
-      )
-    }
-
-    if (response?.status >= 400 && response?.status < 500) {
-      return dispatch(
-        showFeedbackModal({
-          modalContent: "아이디와 비밀번호를 확인해주세요.",
-        })
-      )
-    }
-
-    routeTo(ROUTE.HOME)
-  }
+  const { isLoading, signInMutateAsync } = useSignInMutaion()
 
   return (
     <form
-      onSubmit={handleSignInSubmit}
+      onSubmit={signInMutateAsync}
       className={`flexCenter flex-col mb-[50px]`}
     >
       <Button
@@ -75,26 +27,30 @@ const SignInForm = () => {
       </h2>
 
       <div className="w-[400px] mb-[10px]">
-        <SignInEmailInput />
+        <Input
+          type="text"
+          name="email"
+          id="email"
+          value={"test@test.com"}
+          placeholder="이메일을 입력해주세요"
+        />
       </div>
 
       <div className="w-[400px] mb-[20px]">
-        <SignInPasswordInput />
+        <Input
+          type="password"
+          name="password"
+          id="password"
+          value={"test123123!"}
+          placeholder="비밀번호를 입력해주세요"
+        />
       </div>
 
-      <Button
+      <LoadingButton
         type="submit"
-        classNames="w-[400px] text-[14px] tracking-[8px] h-[50px] bg-black dark:bg-white dark:text-black text-white"
-        content={
-          isSignInLoading ? (
-            <Loading
-              spinnerSize={{ height: "h-[20px]", width: "w-[20px]" }}
-              isFrame={false}
-            />
-          ) : (
-            "로그인"
-          )
-        }
+        isLoading={isLoading}
+        content="로그인"
+        className="w-[400px] text-[14px] tracking-[8px] h-[50px] bg-black dark:bg-white dark:text-black text-white"
       />
     </form>
   )

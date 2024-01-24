@@ -31,27 +31,29 @@ const handler = NextAuth({
         if (!credentials || !credentials.email || !credentials.password)
           return null
 
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/signIn`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email: credentials.email,
-              password: credentials.password,
-            }),
-            next: { revalidate: 0 },
+        try {
+          const response = await fetch(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/signIn`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                email: credentials.email,
+                password: credentials.password,
+              }),
+              next: { revalidate: 0 },
+            }
+          ).then((response) => response.json())
+
+          if (response.status === 401) {
+            throw new Error(response.error)
           }
-        )
 
-        const user = await response.json()
-
-        if (user) {
-          return user
-        } else {
-          return null
+          return response
+        } catch (error: any) {
+          throw new Error(error.message)
         }
       },
     }),
@@ -62,6 +64,7 @@ const handler = NextAuth({
   pages: { signIn: "/signIn" },
   callbacks: {
     // TODO : setRefreshTokenCookies, session callback 동시 실행안됨
+
     async jwt({ token, user }) {
       if (user) {
         const { accessToken, refreshToken } = user
