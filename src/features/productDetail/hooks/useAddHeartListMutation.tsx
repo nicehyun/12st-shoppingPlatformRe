@@ -1,4 +1,5 @@
 import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
+import { useConditionalSignInRoute } from "@/features/common/hooks/useConditionalSignInRoute"
 import { productHeartAPI } from "@/features/common/models/heartAPI"
 import { Product } from "@/features/common/types/product"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
@@ -8,13 +9,10 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 export const useAddHeartListMutation = (productInfo: Product) => {
   const queryClient = useQueryClient()
   const dispatch = useAppDispatch()
-
+  const { shouldProceedWithRouting } = useConditionalSignInRoute()
   const { session } = useSessionQuery()
 
-  const {
-    mutateAsync: addHeartListMutateAsync,
-    isLoading: isAddHeartListLoading,
-  } = useMutation(
+  const { mutateAsync, isLoading: isAddHeartListLoading } = useMutation(
     () =>
       productHeartAPI.heartOfProduct(
         productInfo,
@@ -24,6 +22,12 @@ export const useAddHeartListMutation = (productInfo: Product) => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["heartList"])
+
+        dispatch(
+          showFeedbackModal({
+            modalContent: "상품이 HEART에 추가되었습니다.",
+          })
+        )
       },
       onError: () => {
         dispatch(
@@ -35,6 +39,14 @@ export const useAddHeartListMutation = (productInfo: Product) => {
       },
     }
   )
+
+  const addHeartListMutateAsync = async () => {
+    if (isAddHeartListLoading) return
+
+    if (shouldProceedWithRouting(!!session)) {
+      mutateAsync()
+    }
+  }
 
   return { addHeartListMutateAsync, isAddHeartListLoading }
 }

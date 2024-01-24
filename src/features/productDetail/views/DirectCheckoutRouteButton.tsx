@@ -18,7 +18,6 @@ const DirectCheckoutRouteButton = ({
 
   const handleCheckoutClick = async () => {
     await authentication()
-
     dispatch(addCheckoutPendingProductList([{ ...productDetail, amount: 1 }]))
     routeTo(ROUTE.CHECKOUT)
   }

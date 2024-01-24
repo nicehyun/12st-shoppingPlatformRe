@@ -1,6 +1,6 @@
-import { verifyJwt } from "@/features/common/utils/jwt"
 import { GetHeartListResponse } from "@/features/common/types/heart"
 import { Product } from "@/features/common/types/product"
+import { verifyAccessToken } from "@/features/common/utils/jwt"
 
 import { AxiosError } from "axios"
 import { NextResponse } from "next/server"
@@ -13,13 +13,13 @@ interface RequestBody {
 export async function GET(request: Request) {
   const accessToken = request.headers.get("authorization")
 
-  if (!accessToken || !verifyJwt(accessToken)) {
+  if (!accessToken || !verifyAccessToken(accessToken)) {
     return new Response(JSON.stringify({ error: "Not Authorization" }), {
       status: 401,
     })
   }
 
-  const email = verifyJwt(accessToken)?.email
+  const email = verifyAccessToken(accessToken)?.email
 
   try {
     const response = await fetch(
@@ -48,13 +48,14 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   const accessToken = request.headers.get("authorization")
 
-  if (!accessToken || !verifyJwt(accessToken)) {
+  if (!accessToken || !verifyAccessToken(accessToken)) {
     return new Response(JSON.stringify({ error: "Not Authorization" }), {
       status: 401,
     })
   }
 
-  const email = verifyJwt(accessToken)?.email
+  console.log(verifyAccessToken(accessToken))
+  const email = verifyAccessToken(accessToken)?.email
   const body: RequestBody = await request.json()
   const direction = body.direction
   const productInfo = body.productInfo

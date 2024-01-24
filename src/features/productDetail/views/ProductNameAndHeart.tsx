@@ -2,24 +2,17 @@
 
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io"
 import { Product } from "../../common/types/product"
-import Button from "../../common/views/Button"
 import { useAddHeartListMutation } from "../hooks/useAddHeartListMutation"
 import { useRemoveHeartListMutation } from "../hooks/useRemoveHeartListMutation"
-import Loading from "../../common/views/Loading"
 import { useGetHeartListQuery } from "../hooks/useGetHeartListQuery"
-
-import { useAuthenticate } from "../../auth/signIn/hooks/useAuthenticate"
-import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
+import LoadingButton from "@/features/common/views/LoadingButton"
 
 interface IProductNameAndHeart {
   productDetail: Product
 }
 
 const ProductNameAndHeart = ({ productDetail }: IProductNameAndHeart) => {
-  const { authentication } = useAuthenticate()
-  const { session } = useSessionQuery()
-
-  const { heartList } = useGetHeartListQuery()
+  const { heartList, isInitialLoading } = useGetHeartListQuery()
 
   const { addHeartListMutateAsync, isAddHeartListLoading } =
     useAddHeartListMutation(productDetail)
@@ -32,28 +25,13 @@ const ProductNameAndHeart = ({ productDetail }: IProductNameAndHeart) => {
   )
 
   const handleHeartClick = () => {
-    if (!session) {
-      authentication()
-      return
-    }
-
     isExsitedHeartProduct
       ? removeHeartListMutateAsync()
       : addHeartListMutateAsync()
   }
 
-  const isLoading = isRemoveHeartListLoading || isAddHeartListLoading
-
-  const buttonContent = isLoading ? (
-    <Loading
-      spinnerSize={{ height: "h-[26px]", width: "w-[26px]" }}
-      isFrame={false}
-    />
-  ) : isExsitedHeartProduct ? (
-    <IoMdHeart className={`text-lightRed`} />
-  ) : (
-    <IoMdHeartEmpty />
-  )
+  const isLoading =
+    isInitialLoading || isRemoveHeartListLoading || isAddHeartListLoading
 
   return (
     <div className="flex justify-between min-h-[100px]">
@@ -61,10 +39,17 @@ const ProductNameAndHeart = ({ productDetail }: IProductNameAndHeart) => {
         {productDetail.name}
       </h3>
 
-      <Button
+      <LoadingButton
+        isLoading={isLoading}
         onClick={handleHeartClick}
-        classNames="block min-h-[100px] w-[100px] flexCenter text-[24px] border-l-border border-l-[1px]"
-        content={buttonContent}
+        content={
+          isExsitedHeartProduct ? (
+            <IoMdHeart className={`text-lightRed`} />
+          ) : (
+            <IoMdHeartEmpty />
+          )
+        }
+        className="block min-h-[100px] w-[100px] flexCenter text-[24px] border-l-border border-l-[1px]"
       />
     </div>
   )

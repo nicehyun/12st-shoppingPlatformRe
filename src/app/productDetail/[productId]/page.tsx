@@ -31,7 +31,7 @@ export async function generateMetadata({
 
 const ProductDetailPage = async ({ params }: IProductDetailPageParams) => {
   const queryClient = getQueryClient()
-  await queryClient.prefetchQuery(["productDetail", params.productId], () =>
+  await queryClient.prefetchQuery(["product", params.productId], () =>
     productDeatilAPI.getProductInfo(params.productId)
   )
   const dehydratedState = dehydrate(queryClient)

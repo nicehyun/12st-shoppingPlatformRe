@@ -5,10 +5,12 @@ import { showFeedbackModal } from "@/redux/features/modalSlice"
 
 export const useGetProductDetailQuery = (productId: string) => {
   const dispatch = useAppDispatch()
+
   const { data, isLoading, isError } = useQuery(
-    ["productDetail", productId],
+    ["product", productId],
     () => productDeatilAPI.getProductInfo(productId),
     {
+      enabled: !!productId,
       onError: () =>
         dispatch(
           showFeedbackModal({
