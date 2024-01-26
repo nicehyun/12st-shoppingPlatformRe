@@ -1,8 +1,6 @@
 "use client"
 
 import { ChangeEvent, useEffect } from "react"
-
-import { useFeedbackModal } from "../../../common/hooks/useFeedbackModal"
 import { useUserInput } from "../../../common/hooks/useUserInput"
 import { emailValidator } from "../utils/validation"
 import SignUpFeedback from "../../../common/views/Feedback"
@@ -23,8 +21,6 @@ const SignUpEmailInput = ({
   isVerificationChecked,
   activeStep,
 }: ISignUpEmailInput) => {
-  const { showFeedbackModalWithContent } = useFeedbackModal()
-
   const {
     value: emailInputValue,
     handleValueChange: handleEmailInputValueChange,
@@ -34,31 +30,22 @@ const SignUpEmailInput = ({
     reset,
   } = useUserInput(emailValidator)
 
-  const {
-    isLoading: isEmailDuplicateCheckLoading,
-    mutateAsync: emailDuplicateCheckMutateAsync,
-  } = useEmailDuplicationCheckMutation()
+  const handleEmailAvailableCb = () => {
+    checkEmailDuplication()
+  }
+
+  const { emailDuplicationCheckMutateAsync, isLoading } =
+    useEmailDuplicationCheckMutation(emailInputValue, handleEmailAvailableCb)
 
   const handleEmailInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     resetEmailDuplicateCheck()
     handleEmailInputValueChange(event)
   }
 
-  const handleEmailDuplicationCheck = async () => {
-    const isExistedEmail = await emailDuplicateCheckMutateAsync(emailInputValue)
-
-    if (isExistedEmail.isExistedEmail) {
-      showFeedbackModalWithContent("사용할 수 없는 이메일입니다.")
-      return
-    }
-
-    checkEmailDuplication()
-    showFeedbackModalWithContent("시용 가능한 이메일입니다.")
-  }
-
   useEffect(() => {
     if (activeStep === 0) {
       reset()
+      resetEmailDuplicateCheck()
       return
     }
   }, [activeStep])
@@ -70,19 +57,23 @@ const SignUpEmailInput = ({
         id="signUp-email"
         buttonContent={isVerificationChecked ? "확인완료" : "중복확인"}
         isChecked={isVerificationChecked}
-        isDisabledButton={
-          !isEmailValid || isVerificationChecked || isEmailDuplicateCheckLoading
-        }
+        isDisabledButton={!isEmailValid || isVerificationChecked}
         inputValue={emailInputValue}
         onBlurInput={handleEmailInputBlur}
         onChangeInputValue={handleEmailInputChange}
-        onClickVerificationButton={handleEmailDuplicationCheck}
+        onClickVerificationButton={emailDuplicationCheckMutateAsync}
         isShowFeedback={hasErrorEmail}
-        isLoading={isEmailDuplicateCheckLoading}
+        isLoading={isLoading}
       />
-      {hasErrorEmail && (
-        <SignUpFeedback content="이메일 형식을 입력해주세요." />
-      )}
+
+      <SignUpFeedback
+        isValid={isEmailValid}
+        content="example@example.com 형식의 이메일"
+      />
+      <SignUpFeedback
+        isValid={isVerificationChecked}
+        content="이메일 중복 검사"
+      />
     </SignUpInputLayout>
   )
 }

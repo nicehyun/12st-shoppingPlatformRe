@@ -10,7 +10,11 @@ import {
   useUserInput,
   useUserInputWithRePassword,
 } from "../../../common/hooks/useUserInput"
-import { passwordValidator } from "../utils/validation"
+import {
+  passwordLengthValidator,
+  passwordValidator,
+  specialCharacterValidator,
+} from "../utils/validation"
 import SignUpFeedback from "../../../common/views/Feedback"
 import SignUpInput from "./SignUpInput"
 import SignUpInputLayout from "./SignUpInputLayout"
@@ -30,6 +34,9 @@ const SignUpPasswordInput = ({ activeStep }: ISignUpPasswordInput) => {
     isValid: isPasswordValid,
     reset: resetPassword,
   } = useUserInput(passwordValidator)
+
+  const isSpecialCharacterValid = specialCharacterValidator(passwordInputValue)
+  const isPasswordLengthValid = passwordLengthValidator(passwordInputValue)
 
   const {
     value: repasswordInputValue,
@@ -67,10 +74,6 @@ const SignUpPasswordInput = ({ activeStep }: ISignUpPasswordInput) => {
         isShowFeedback={hasErrorPassword}
       />
 
-      {hasErrorPassword && (
-        <SignUpFeedback content="영문, 숫자와 공백을 제외한 특수문자를 포함한 8~20자리를 입력해주세요." />
-      )}
-
       <SignUpInput
         id="signUp-repassword"
         classNames="mt-[10px]"
@@ -79,9 +82,13 @@ const SignUpPasswordInput = ({ activeStep }: ISignUpPasswordInput) => {
         onBlurInput={handleRepasswordInputBlur}
         isShowFeedback={hasErrorRepassword}
       />
-      {hasErrorRepassword && (
-        <SignUpFeedback content="비밀번호가 일치하지 않습니다." />
-      )}
+
+      <SignUpFeedback
+        isValid={isSpecialCharacterValid}
+        content="영문, 숫자, 공백을 제외한 특수문자 사용"
+      />
+      <SignUpFeedback isValid={isPasswordLengthValid} content="8~20자리" />
+      <SignUpFeedback isValid={isRepasswordValid} content="비밀번호 일치" />
     </SignUpInputLayout>
   )
 }

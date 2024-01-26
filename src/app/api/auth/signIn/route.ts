@@ -4,7 +4,6 @@ import {
   emailValidator,
   passwordValidator,
 } from "@/features/auth/signUp/utils/validation"
-import { AxiosError } from "axios"
 import { NextResponse } from "next/server"
 import {
   generateAccessToken,

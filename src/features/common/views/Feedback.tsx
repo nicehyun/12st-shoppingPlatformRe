@@ -1,13 +1,20 @@
+import { AiOutlineExclamationCircle } from "react-icons/ai"
+
 interface ISignUpFeedback {
-  classNames?: string
+  isValid?: boolean
   content: string
 }
 
-const Feedback = ({ classNames, content }: ISignUpFeedback) => {
+const Feedback = ({ content, isValid = false }: ISignUpFeedback) => {
   return (
     <p
-      className={`${classNames} mt-[10px] max-w-[400px] text-[12px] text-error`}
+      className={`flex items-center mt-[10px] max-w-[400px] text-[12px] ${
+        isValid ? "text-success" : "text-error"
+      }`}
     >
+      <span className="mr-[5px]">
+        <AiOutlineExclamationCircle />
+      </span>{" "}
       {content}
     </p>
   )

@@ -5,6 +5,7 @@ import Loading from "./Loading"
 interface ILoadingButton {
   className?: string
   isLoading: boolean
+  isDisabled?: boolean
   onClick?: () => void
   content: ReactNode
   spinnerSize?: "sm" | "md"
@@ -14,6 +15,7 @@ interface ILoadingButton {
 const LoadingButton = ({
   className,
   isLoading,
+  isDisabled,
   onClick,
   content,
   spinnerSize = "md",
@@ -28,7 +30,7 @@ const LoadingButton = ({
     <Button
       type={type}
       onClick={onClick}
-      isDisabled={isLoading}
+      isDisabled={isLoading || isDisabled}
       content={
         isLoading ? (
           <Loading spinnerSize={loadingSpinnerSize} isFrame={false} />

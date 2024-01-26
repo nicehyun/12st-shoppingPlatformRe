@@ -48,7 +48,7 @@ const SignUpNameInput = ({ activeStep }: ISignUpNameInput) => {
         onBlurInput={handleNameInputBlur}
         isShowFeedback={hasErrorName}
       />
-      {hasErrorName && <SignUpFeedback content="올바른 이름을 입력해주세요." />}
+      <SignUpFeedback isValid={isNameValid} content=" 2~4글자의 한글" />
     </SignUpInputLayout>
   )
 }

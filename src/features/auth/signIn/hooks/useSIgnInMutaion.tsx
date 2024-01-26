@@ -7,12 +7,14 @@ import {
   passwordValidator,
 } from "../../signUp/utils/validation"
 import { ROUTE, useNavigations } from "@/features/common/hooks/useNavigations"
+import { useFeedbackModal } from "@/features/common/hooks/useFeedbackModal"
 
 export const useSignInMutaion = () => {
   const dispatch = useAppDispatch()
   const { routeTo } = useNavigations()
+  const { showFeedbackModalWithContent } = useFeedbackModal()
 
-  const { data, isLoading, mutateAsync } = useMutation(
+  const { isLoading, mutateAsync } = useMutation(
     (params: { email: string; password: string }) =>
       signIn("user-credentials", {
         email: params.email,
@@ -42,11 +44,8 @@ export const useSignInMutaion = () => {
     }
 
     if (!isPasswordValid) {
-      dispatch(
-        showFeedbackModal({
-          modalContent:
-            "비밀번호는 영문, 숫자, 공백을 제외한 특수문자를 포함한 8~20자리를 입력해주세요.",
-        })
+      showFeedbackModalWithContent(
+        "비밀번호는 영문, 숫자, 공백을 제외한 특수문자를 포함한 8~20자리를 입력해주세요."
       )
 
       return
@@ -55,12 +54,10 @@ export const useSignInMutaion = () => {
     const signInResponse = await mutateAsync({ email, password })
 
     if (signInResponse?.status === 401) {
-      dispatch(
-        showFeedbackModal({
-          modalContent: signInResponse.error
-            ? signInResponse.error
-            : "로그인에 실패했습니다. 오류가 계속되면 고객센터에 문의해주세요.",
-        })
+      showFeedbackModalWithContent(
+        signInResponse.error
+          ? signInResponse.error
+          : "로그인에 실패했습니다. 오류가 계속되면 고객센터에 문의해주세요."
       )
     }
 

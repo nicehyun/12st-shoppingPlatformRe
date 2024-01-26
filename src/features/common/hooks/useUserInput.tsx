@@ -84,7 +84,8 @@ export const useUserInputWithRePassword = (passwordValue: string) => {
     Reducer<InitialInputState, InputStateReducerAction>
   >(inputStateReducer, initialInputState)
 
-  const valueIsValid = passwordValue === inputState.value
+  const valueIsValid =
+    inputState.value !== "" && passwordValue === inputState.value
   const hasError = !valueIsValid && inputState.isTouched
 
   const handleValueChange = (event: ChangeEvent<HTMLInputElement>) => {

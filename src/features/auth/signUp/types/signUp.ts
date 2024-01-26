@@ -1,12 +1,10 @@
 import { UserInfo } from "@/features/common/types/user"
 
-export interface IRequestSignUp {
+export type SignUpVerification = {
+  isEmailChecked: boolean
+  isPhoneChecked: boolean
+}
+export interface ISignUpRequest {
   userInfo: UserInfo
-  requireCheck: {
-    email: boolean
-    phone: boolean
-    ageClause: boolean
-    termClause: boolean
-    privacyClause: boolean
-  }
+  verification: SignUpVerification
 }

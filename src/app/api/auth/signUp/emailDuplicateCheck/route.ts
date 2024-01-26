@@ -1,28 +1,24 @@
+import { emailValidator } from "@/features/auth/signUp/utils/validation"
 import { NextResponse } from "next/server"
-import { AxiosError } from "axios"
 
 interface RequestBody {
   email: string
 }
-
-type EmailDuplicateCheckResponse = [
-  {
-    email: string
-    password: string
-    name: string
-    phone: string
-    marketingClause: boolean
-    mile: number
-  }
-]
 
 export async function POST(request: Request): Promise<boolean | unknown> {
   const body: RequestBody = await request.json()
 
   const email = body.email
 
+  if (!emailValidator(email)) {
+    return NextResponse.json({
+      status: 401,
+      error: "유효한 이메일 형식 입력 후 중복확인을 진행해주세요.",
+    })
+  }
+
   try {
-    const response: EmailDuplicateCheckResponse = await fetch(
+    const response = await fetch(
       `${process.env.NEXT_PUBLIC_DB_URL}/users?email=${email}`,
       {
         next: { revalidate: 0 },
@@ -31,18 +27,15 @@ export async function POST(request: Request): Promise<boolean | unknown> {
 
     const isExistedEmail = !!response.length
 
-    return NextResponse.json({ isExistedEmail }, { status: 200 })
-  } catch (error) {
-    const { response } = error as unknown as AxiosError
-    if (response) {
-      console.error(`🚨 ${error}`)
-      console.error(
-        `🚨 JSON SERVER POST API ( Email Duplicate ) : ${response.data}`
-      )
-    } else {
-      console.error(`🚨 Unexpected Error ( Email Duplicate ) : ${error}`)
+    if (isExistedEmail) {
+      return NextResponse.json({
+        status: 409,
+        error: "이미 존재하는 이메일입니다.",
+      })
     }
 
-    return new NextResponse(null, { status: 500 })
+    return NextResponse.json({ status: 200 })
+  } catch (error: any) {
+    throw new Error(error)
   }
 }

@@ -3,26 +3,44 @@ export type InputValidator = (value: string) => boolean
 export type DayInputValidator = (month: string, day: string) => boolean
 
 export const emailValidator: InputValidator = (value) => {
-  const emailExp = /[\w]+@[\w]+\.[a-zA-Z]+/
+  const emailRegex = /[\w]+@[\w]+\.[a-zA-Z]+/
 
-  return emailExp.test(value)
+  return emailRegex.test(value)
 }
 
 export const passwordValidator: InputValidator = (value) => {
-  const passwordExp = /(?=.*[a-zA-ZS])(?=.*?[#?!@$%^&*-]).{8,20}/
+  const passwordRegex = /(?=.*[a-zA-ZS])(?=.*?[#?!@$%^&*-]).{8,20}/
 
-  return passwordExp.test(value)
+  return passwordRegex.test(value)
+}
+
+export const specialCharacterValidator: InputValidator = (value) => {
+  const specialCharRegex = /[^a-zA-Z0-9\s]/
+
+  return specialCharRegex.test(value)
+}
+export const passwordLengthValidator: InputValidator = (value) => {
+  return value.length >= 8 && value.length <= 20
 }
 
 export const nameValidator: InputValidator = (value) => {
-  const englishNameRegex = /^[a-zA-Z]+(([a-zA-Z ])?[a-zA-Z]*)*$/
   const koreanNameRegex = /^[가-힣]{2,4}$/
-  return koreanNameRegex.test(value) || englishNameRegex.test(value)
+  return koreanNameRegex.test(value)
 }
 
 export const phoneValidator: InputValidator = (value) => {
   const phoneRegex = /^(010|011|016|017|018|019)[1-9]\d{6,7}$/
   return phoneRegex.test(value)
+}
+
+export const phoneStartValidator: InputValidator = (phoneNumber) => {
+  const phoneStartRegex = /^(010|011|016|017|018|019)/
+
+  return phoneStartRegex.test(phoneNumber)
+}
+
+export const phoneLengthValidator: InputValidator = (value) => {
+  return value.length >= 10 && value.length <= 11
 }
 
 export const birthYearValidator: InputValidator = (value) => {

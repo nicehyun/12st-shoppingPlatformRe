@@ -1,10 +1,8 @@
 "use client"
 
-import Input, { InputType } from "@/features/common/views/Input"
+import Input from "@/features/common/views/Input"
 import SignUpSideButton from "@/features/auth/signUp/views/SignUpSideButton"
-
 import { ChangeEvent } from "react"
-import Loading from "@/features/common/views/Loading"
 import Timer from "@/features/common/views/TImer"
 
 interface ISignUpVerificationInput {
@@ -67,19 +65,10 @@ const SignUpVerificationInput = ({
       </Input>
 
       <SignUpSideButton
-        classNames={`ml-[10px]`}
+        isLoading={isLoading}
         onClick={onClickVerificationButton}
         isDisabled={isDisabledButton}
-        content={
-          isLoading ? (
-            <Loading
-              spinnerSize={{ height: "h-[20px]", width: "w-[20px]" }}
-              isFrame={false}
-            />
-          ) : (
-            buttonContent
-          )
-        }
+        content={buttonContent}
       />
     </div>
   )

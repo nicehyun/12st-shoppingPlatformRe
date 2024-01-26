@@ -1,5 +1,5 @@
 "use client"
-import { ROUTE, useNavigations } from "@/features/common/hooks/useNavigations"
+
 import Stage, { IStage } from "@/features/common/views/Stage"
 import {
   resetSignUpState,
@@ -7,11 +7,8 @@ import {
 } from "@/redux/features/signUpSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { useEffect, useState } from "react"
-import { useFeedbackModal } from "../../../common/hooks/useFeedbackModal"
 import { useSignUpClasue } from "../hooks/useSignUpClasue"
-import useSignUpMutation from "../hooks/useSignUpMutation"
 import useSignUpVerificationCheck from "../hooks/useSignUpVerificationCheck"
-
 import SignUpClause, { ISignUpClause } from "./SIgnUpClause"
 import SignUpEmailInput, { ISignUpEmailInput } from "./SignUpEmailInput"
 import SignUpNameInput from "./SignUpNameInput"
@@ -19,16 +16,15 @@ import SignUpPasswordInput from "./SignUpPasswordInput"
 import SignUpPhoneVerificationInput, {
   ISignUpPhoneVerificationInput,
 } from "./SignUpPhoneVerificationInput"
+import { useSignUpMutation } from "../hooks/useSignUpMutation"
 
 const SignUpForm = () => {
-  const { routeTo } = useNavigations()
-
   const dispatch = useAppDispatch()
-  const { showFeedbackModalWithContent } = useFeedbackModal()
 
-  const [activeStep, setActiveStep] = useState(0)
+  const [activeStep, setActiveStep] = useState(4)
   const { checkedClaseState, toggleClauseCheck, resetClauseCheck } =
     useSignUpClasue()
+
   const {
     checkEmailDuplication,
     checkPhoneVerification,
@@ -48,6 +44,7 @@ const SignUpForm = () => {
     activeStep,
     isVerificationChecked: verificationCheckedState.phone,
     checkPhoneVerification,
+    resetEmailDuplicateCheck,
   }
 
   const signUpClauseProps: ISignUpClause = {
@@ -66,8 +63,18 @@ const SignUpForm = () => {
     selectSignUpIsValidState
   )
 
-  const { isLoading: isSignUpLoading, mutateAsync: signUpMutateAsync } =
-    useSignUpMutation()
+  const { isLoading: isSignUpLoading, signUpMuatateAsync } = useSignUpMutation({
+    clause: {
+      isAgeClauseChecked: isAgeClauseCheck,
+      isMarketingClauseChecked: isMarketingClauseCheck,
+      isPrivacyClauseChecked: isPrivacyClauseCheck,
+      isTermClauseChecked: isTermClauseCheck,
+    },
+    verification: {
+      isEmailChecked: verificationCheckedState.email,
+      isPhoneChecked: verificationCheckedState.phone,
+    },
+  })
 
   const handleNextStepButtonClick = () => {
     setActiveStep((prev) => prev + 1)
@@ -85,46 +92,10 @@ const SignUpForm = () => {
   ) => {
     event.preventDefault()
 
-    if (!isAgeClauseCheck || !isPrivacyClauseCheck || !isTermClauseCheck) return
-
-    if (
-      !verificationCheckedState.email ||
-      !isPasswordValid ||
-      !isNameValid ||
-      !verificationCheckedState.phone
-    )
-      return
-
-    const formData = new FormData(event.currentTarget)
-
-    const response = (await signUpMutateAsync({
-      userInfo: {
-        email: formData.get("signUp-email") as string,
-        password: formData.get("signUp-password") as string,
-        name: formData.get("signUp-name") as string,
-        phone: formData.get("signUp-phone") as string,
-        marketingClause: isMarketingClauseCheck,
-      },
-      requireCheck: {
-        ...verificationCheckedState,
-        ageClause: isAgeClauseCheck,
-        termClause: isTermClauseCheck,
-        privacyClause: isPrivacyClauseCheck,
-      },
-    })) as Response
-
-    if (response.status >= 400) {
-      showFeedbackModalWithContent(
-        "회원가입에 실패했습니다. 오류가 계속되면 고객센터에 문의해주세요."
-      )
-
-      setActiveStep(0)
-      return
-    }
-
-    showFeedbackModalWithContent("회원가입을 축하합니다🎉")
+    await signUpMuatateAsync(event)
     dispatch(resetSignUpState())
-    routeTo(ROUTE.HOME)
+    setActiveStep(0)
+    resetClauseCheck()
   }
 
   const stageProps: IStage = {
