@@ -1,7 +1,7 @@
 import SectionTitle from "@/features/myPage/views/SectionTitle"
 
-import SecondCategories from "@/features/bestProductList/SecondCategories"
-import ThirdCategories from "@/features/bestProductList/ThirdCategories"
+import SecondCategories from "@/features/bestProductList/views/SecondCategories"
+import ThirdCategories from "@/features/bestProductList/views/ThirdCategories"
 
 import FiltedProcutList from "./FiltedProcutList"
 import { decodedCategoriesWithPathArray } from "../utils/category"

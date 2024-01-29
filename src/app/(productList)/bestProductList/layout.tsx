@@ -10,7 +10,7 @@ const BestProductListLayout = async ({ children }: { children: ReactNode }) => {
 
       <PageLayout classNames="px-0">{children}</PageLayout>
 
-      <Navigation />
+      {/* <Navigation /> */}
     </>
   )
 }
