@@ -46,14 +46,22 @@ const SignUpPhoneVerificationInput = ({
     isLoading: isRequestVerificationLoading,
     verificationCodeTimerEnd,
     requestVerificationMutateAsync,
-  } = useRequestVerificationMutation(phoneInputValue, isVerificationChecked)
+  } = useRequestVerificationMutation(
+    phoneInputValue,
+    isVerificationChecked,
+    handleRequestVerificationCb
+  )
 
   const {
     isLoading: isSendVerificationCodeLoading,
     sendVerificationCodeMutateAsync,
-  } = useSendVerificationCodeMutation(phoneInputValue, verificationCode)
+  } = useSendVerificationCodeMutation(
+    phoneInputValue,
+    verificationCode,
+    handleValidSendVerificationCode
+  )
 
-  const handleRequestVerificationCb = () => {
+  function handleRequestVerificationCb() {
     setIsShowVerificationCodeInput(true)
   }
 
@@ -62,7 +70,7 @@ const SignUpPhoneVerificationInput = ({
     setVerificationCode("")
   }
 
-  const handleValidSendVerificationCode = () => {
+  function handleValidSendVerificationCode() {
     handleVerficationCodeInputHide()
     checkPhoneVerification()
   }
@@ -100,9 +108,7 @@ const SignUpPhoneVerificationInput = ({
         isShowFeedback={hasErrorPhone}
         onBlurInput={handlePhoneInputBlur}
         onChangeInputValue={handlePhoneInputValueChange}
-        onClickVerificationButton={() =>
-          requestVerificationMutateAsync(handleRequestVerificationCb)
-        }
+        onClickVerificationButton={requestVerificationMutateAsync}
         isLoading={isRequestVerificationLoading}
         isReadOnly={isShowVerificationCodeInput || isVerificationChecked}
       />
@@ -118,9 +124,7 @@ const SignUpPhoneVerificationInput = ({
           onChangeInputValue={(event) =>
             setVerificationCode(event.target.value)
           }
-          onClickVerificationButton={() =>
-            sendVerificationCodeMutateAsync(handleValidSendVerificationCode)
-          }
+          onClickVerificationButton={sendVerificationCodeMutateAsync}
           isLoading={isSendVerificationCodeLoading}
           isNeedTimerComponent
           timerExpireFn={handleRequestTimerExpire}
