@@ -1,9 +1,10 @@
-import { bestProductListAPI } from "../models/bestProductListAPI"
-import { useNavigations } from "@/features/common/hooks/useNavigations"
 import { getAfterEquals, parseSliceToAnd } from "@/features/common/utils/text"
+import { categoryAPI } from "../models/categoryAPI"
 import { useCustomInfinityQuery } from "@/features/common/hooks/useCustomInfinityQuery"
+import { Product } from "@/features/common/types/product"
+import { useNavigations } from "@/features/common/hooks/useNavigations"
 
-export const useGetBestProductListWithCategoryInfiniteQuery = () => {
+export const useGetFiltedProductListWithCategoryInfinityQuery = () => {
   const { pathname } = useNavigations()
 
   const [, , firstCategoryPath, secondCategoryPath, thirdCategoryPath] =
@@ -18,34 +19,30 @@ export const useGetBestProductListWithCategoryInfiniteQuery = () => {
   )
 
   const queryKey = [
-    "bestProductListWithCategory",
+    "filtedProductListWithCategory",
     firstCategory,
     secondCategory,
     thirdCategory,
   ]
 
-  const getBestProductListWithCategoryPromiseFn = (pageParam: number) => {
-    return bestProductListAPI.getBestProductListWithCategory(
-      pathname,
-      pageParam
-    )
+  const getFiltedProductListWithCategoryPromiseFn = (pageParam: number) => {
+    return categoryAPI.getFiltedProductListWithCategory(pathname, pageParam)
   }
 
   const infinityQueryProps = {
     queryKey,
-    promiseFn: getBestProductListWithCategoryPromiseFn,
+    promiseFn: getFiltedProductListWithCategoryPromiseFn,
   }
 
   const { data, isLoading, loadMoreRef, isLoadMoreFetching } =
-    useCustomInfinityQuery({
+    useCustomInfinityQuery<Product>({
       ...infinityQueryProps,
     })
 
-  const bestProductList = data
   return {
-    bestProductList,
+    filtedProductList: data,
     isLoading,
-    isLoadMoreFetching,
     loadMoreRef,
+    isLoadMoreFetching,
   }
 }

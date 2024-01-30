@@ -1,38 +1,44 @@
 "use client"
 
-import { usePagination } from "@/features/common/hooks/usePagination"
 import ProductCard from "@/features/common/views/ProductCard"
-import { useGetFiltedProductListWithCategoryQuery } from "@/features/layout/hooks/useGetFiltedProductListWithCategoryQuery"
+import { useGetFiltedProductListWithCategoryInfinityQuery } from "@/features/categoryManagement/hooks/useGetFiltedProductListWithCategoryInfinityQuery"
+import FourGridProductList from "@/features/common/views/FourGridProductList"
+import SkeletonProductCard from "@/features/common/views/SkeletonProductCard"
 
-interface IFiltedProcutList {
-  categoriesPath: string[]
-}
+const FiltedProcutList = () => {
+  const { filtedProductList, isLoading, loadMoreRef, isLoadMoreFetching } =
+    useGetFiltedProductListWithCategoryInfinityQuery()
 
-const FiltedProcutList = ({ categoriesPath }: IFiltedProcutList) => {
-  const { filtedProductList } =
-    useGetFiltedProductListWithCategoryQuery(categoriesPath)
+  if (isLoading) {
+    return (
+      <FourGridProductList className="mt-[50px]">
+        {Array.from({ length: 8 }).map((_, index) => (
+          <SkeletonProductCard key={`skeleton-${index}`} />
+        ))}
+      </FourGridProductList>
+    )
+  }
 
-  const perPage = 48
-  const { listPagination, renderPaginationComponent } = usePagination(
-    perPage,
-    filtedProductList.length
-  )
   return (
-    <>
-      <div className="grid grid-cols-3 xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-[20px] mt-[50px]">
-        {filtedProductList
-          ?.slice(listPagination.indexOfFirst, listPagination.indexOfLast)
-          .map((product, index) => (
+    <FourGridProductList className="mt-[50px]">
+      {filtedProductList?.pages.flatMap((group) =>
+        group.map((product) => {
+          return (
             <ProductCard
+              key={`category-product-${product.id}`}
+              isPriority
               productInfo={product}
-              key={`product-categogy-${product.id}`}
-              isPriority={index < 48}
             />
-          ))}
-      </div>
+          )
+        })
+      )}
 
-      <div className="mt-[30px]">{renderPaginationComponent()}</div>
-    </>
+      {isLoadMoreFetching &&
+        Array.from({ length: 8 }).map((_, index) => (
+          <SkeletonProductCard key={`skeleton-fetching-${index}`} />
+        ))}
+      <div ref={loadMoreRef} />
+    </FourGridProductList>
   )
 }
 

@@ -7,23 +7,6 @@ type getSearchResultResponse = {
 }
 
 export const layoutAPI = {
-  getFiltedProductListWithThridCategory: async (
-    categoriesPath: string
-  ): Promise<Products> => {
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/categoryManagement${categoriesPath}`,
-        {
-          next: { revalidate: 0 },
-        }
-      )
-
-      return response.json()
-    } catch (error: any) {
-      throw new Error(error)
-    }
-  },
-
   getCategories: async (): Promise<Categories[] | undefined> => {
     try {
       const response = await fetch(

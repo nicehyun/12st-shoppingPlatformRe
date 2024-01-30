@@ -6,7 +6,7 @@ import FourGridProductList from "../../common/views/FourGridProductList"
 import SkeletonProductCard from "../../common/views/SkeletonProductCard"
 
 const BestProductList = () => {
-  const { bestProductList, isLoading, isFetching, loadMoreRef } =
+  const { bestProductList, isLoading, isLoadMoreFetching, loadMoreRef } =
     useGetBestProductListWithCategoryInfiniteQuery()
 
   if (isLoading) {
@@ -36,7 +36,7 @@ const BestProductList = () => {
         })
       )}
 
-      {isFetching &&
+      {isLoadMoreFetching &&
         Array.from({ length: 8 }).map((_, index) => (
           <SkeletonProductCard key={`skeleton-fetching-${index}`} />
         ))}

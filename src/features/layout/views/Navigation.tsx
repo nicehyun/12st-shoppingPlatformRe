@@ -49,7 +49,7 @@ const Navigation = () => {
         nonSelected: <BiCategory />,
       },
       label: "CATEGORIES",
-      value: "categories",
+      value: "categoryManagement",
       route: ROUTE.CATEGORYMANAGEMENT,
     },
     {
