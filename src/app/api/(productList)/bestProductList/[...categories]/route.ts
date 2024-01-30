@@ -16,6 +16,19 @@ export async function GET(
   const thirdCategory = parseSliceToAnd(getAfterEquals(thirdCategoryPath))
 
   try {
+    if (!firstCategory) {
+      const response: Products = await fetch(
+        `${process.env.NEXT_PUBLIC_DB_URL}/productList?_sort=sellCount&_order=desc&_limit=12&_page=${pageParam}`,
+        {
+          next: { revalidate: 0 },
+        }
+      ).then((res) => res.json())
+
+      return NextResponse.json(response, {
+        status: 200,
+      })
+    }
+
     if (secondCategory && !thirdCategory) {
       const response: Products = await fetch(
         `${process.env.NEXT_PUBLIC_DB_URL}/productList?category1=${firstCategory}&category2=${secondCategory}&_sort=sellCount&_order=desc&_limit=12&_page=${pageParam}`,
