@@ -1,13 +1,13 @@
 "use client"
 
 import ProductCard from "../../common/views/ProductCard"
-import { useGetBestProductListWithCategoryQuery } from "../hooks/useGetBestProductListWithCategoryQuery"
+import { useGetBestProductListWithCategoryInfiniteQuery } from "../hooks/useGetBestProductListWithCategoryInfiniteQuery"
 import FourGridProductList from "../../common/views/FourGridProductList"
 import SkeletonProductCard from "../../common/views/SkeletonProductCard"
 
 const BestProductList = () => {
-  const { bestProductListWithCategory, isLoading } =
-    useGetBestProductListWithCategoryQuery()
+  const { bestProductList, isLoading, isFetching, loadMoreRef } =
+    useGetBestProductListWithCategoryInfiniteQuery()
 
   if (isLoading) {
     return (
@@ -21,13 +21,26 @@ const BestProductList = () => {
 
   return (
     <FourGridProductList className="mt-[50px]">
-      {bestProductListWithCategory.map((product, index) => (
-        <ProductCard
-          key={`best-product-${product.id}`}
-          productInfo={product}
-          label={index + 1}
-        />
-      ))}
+      {bestProductList?.pages.flatMap((group, pageIndex) =>
+        group.map((product, index) => {
+          const globalIndex = pageIndex * group.length + index + 1
+
+          return (
+            <ProductCard
+              key={`best-product-${product.id}`}
+              isPriority
+              productInfo={product}
+              label={globalIndex}
+            />
+          )
+        })
+      )}
+
+      {isFetching &&
+        Array.from({ length: 8 }).map((_, index) => (
+          <SkeletonProductCard key={`skeleton-fetching-${index}`} />
+        ))}
+      <div ref={loadMoreRef} />
     </FourGridProductList>
   )
 }

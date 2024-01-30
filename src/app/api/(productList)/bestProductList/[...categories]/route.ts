@@ -6,7 +6,8 @@ export async function GET(
   request: NextRequest,
   { params }: { params: { categories: string[] } }
 ) {
-  console.log(params.categories)
+  const pageParam = request.headers.get("pageParam")
+
   const [, firstCategoryPath, secondCategoryPath, thirdCategoryPath] =
     params.categories
 
@@ -17,7 +18,7 @@ export async function GET(
   try {
     if (secondCategory && !thirdCategory) {
       const response: Products = await fetch(
-        `${process.env.NEXT_PUBLIC_DB_URL}/productList?category1=${firstCategory}&category2=${secondCategory}&_sort=sellCount&_order=desc&_limit=100`,
+        `${process.env.NEXT_PUBLIC_DB_URL}/productList?category1=${firstCategory}&category2=${secondCategory}&_sort=sellCount&_order=desc&_limit=12&_page=${pageParam}`,
         {
           next: { revalidate: 0 },
         }
@@ -30,7 +31,7 @@ export async function GET(
 
     if (secondCategory && thirdCategory) {
       const response: Products = await fetch(
-        `${process.env.NEXT_PUBLIC_DB_URL}/productList?category1=${firstCategory}&category2=${secondCategory}&category3=${thirdCategory}&_sort=sellCount&_order=desc&_limit=100`,
+        `${process.env.NEXT_PUBLIC_DB_URL}/productList?category1=${firstCategory}&category2=${secondCategory}&category3=${thirdCategory}&_sort=sellCount&_order=desc&_limit=12&_page=${pageParam}`,
         {
           next: { revalidate: 0 },
         }
