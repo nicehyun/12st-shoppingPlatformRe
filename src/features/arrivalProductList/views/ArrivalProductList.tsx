@@ -1,23 +1,21 @@
 "use client"
 
-import FourGridProductList from "@/features/common/views/FourGridProductList"
-import ProductCard from "@/features/common/views/ProductCard"
-import { useGetIndiviualProductListQuery } from "@/features/home/hooks/useGetIndiviualProductListQuery"
+import { useGetArrivalProductListInfinityQuery } from "../hooks/useGetArrivalProductListInfinityQuery"
+import InfiniteScrollProductList from "@/features/common/views/InfiniteScrollProductList"
 
 const ArrivalProductList = () => {
-  const { arrivalProductList } = useGetIndiviualProductListQuery()
-  return (
-    <FourGridProductList className="mt-[50px]">
-      {arrivalProductList.map((product, index) => (
-        <ProductCard
-          key={`new-product-${product.id}`}
-          productInfo={product}
-          label={"NEW"}
-          isPriority
-        />
-      ))}
-    </FourGridProductList>
-  )
+  const { arrivalProductList, isLoadMoreFetching, isLoading, loadMoreRef } =
+    useGetArrivalProductListInfinityQuery()
+
+  const infiniteScrollProductListProps = {
+    isLoading,
+    isLoadMoreFetching,
+    productList: arrivalProductList,
+    loadMoreRef,
+    sectionClassification: "arrival",
+  }
+
+  return <InfiniteScrollProductList {...infiniteScrollProductListProps} />
 }
 
 export default ArrivalProductList

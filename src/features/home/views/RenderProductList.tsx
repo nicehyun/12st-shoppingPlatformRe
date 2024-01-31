@@ -1,49 +1,53 @@
 "use client"
 
-import { Product } from "@/features/common/types/product"
-import ProductCard from "@/features/common/views/ProductCard"
 import SwiperProductList from "./SwiperProductList"
-import { useGetIndiviualProductListQuery } from "../hooks/useGetIndiviualProductListQuery"
-import FourGridProductList from "../../common/views/FourGridProductList"
+import { useGetArrivalProductListInfinityQuery } from "@/features/arrivalProductList/hooks/useGetArrivalProductListInfinityQuery"
+import { useGetBestProductListWithCategoryInfiniteQuery } from "@/features/bestProductList/hooks/useGetBestProductListWithCategoryInfiniteQuery"
+import { useGetTopSaleProductListInfinityQuery } from "@/features/topSaleProductList/hooks/useGetTopSaleProductListInfinityQuery"
+import HomeBasicProductList from "./HomeBasicProductList"
+import { SectionClassification } from "../types/section"
 
 interface IRenderProductList {
-  sectionType: "best" | "arrival" | "big_sale"
+  sectionClassification: SectionClassification
 }
 
-const RenderProductList = ({ sectionType }: IRenderProductList) => {
-  const { arrivalProductList, bestProductList, topSaleProductList } =
-    useGetIndiviualProductListQuery()
+const RenderProductList = ({ sectionClassification }: IRenderProductList) => {
+  const { arrivalProductList, isLoading: isGetArrivalProductListLoading } =
+    useGetArrivalProductListInfinityQuery()
 
-  if (sectionType === "best") {
+  const { bestProductList, isLoading: isGetBestProductListLoading } =
+    useGetBestProductListWithCategoryInfiniteQuery()
+
+  const { topSaleProductList, isLoading: isGetTopSaleProductListLoading } =
+    useGetTopSaleProductListInfinityQuery()
+
+  if (sectionClassification === "BEST") {
     return (
-      <FourGridProductList>
-        {bestProductList.slice(0, 12).map((product: Product) => (
-          <ProductCard
-            key={`productEl-${product.id}`}
-            productInfo={product}
-            isPriority
-          />
-        ))}
-      </FourGridProductList>
+      <HomeBasicProductList
+        isLoading={isGetArrivalProductListLoading}
+        productList={bestProductList}
+        sectionClassification="best"
+      />
     )
   }
 
-  if (sectionType === "big_sale") {
+  if (sectionClassification === "SALE") {
     return (
-      <FourGridProductList>
-        {topSaleProductList.slice(0, 12).map((product: Product) => (
-          <ProductCard
-            key={`productEl-${product.id}`}
-            productInfo={product}
-            isPriority
-          />
-        ))}
-      </FourGridProductList>
+      <HomeBasicProductList
+        isLoading={isGetTopSaleProductListLoading}
+        productList={topSaleProductList}
+        sectionClassification="sale"
+      />
     )
   }
 
-  if (sectionType === "arrival") {
-    return <SwiperProductList productList={arrivalProductList} />
+  if (sectionClassification === "ARRIVAL") {
+    return (
+      <SwiperProductList
+        productList={arrivalProductList}
+        isLoading={isGetBestProductListLoading}
+      />
+    )
   }
 }
 

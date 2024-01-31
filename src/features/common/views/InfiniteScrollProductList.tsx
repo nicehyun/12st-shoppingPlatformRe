@@ -32,7 +32,6 @@ const InfiniteScrollProductList = ({
             return (
               <ProductCard
                 key={`${sectionClassification}-product-${product.id}`}
-                isPriority
                 productInfo={product}
               />
             )

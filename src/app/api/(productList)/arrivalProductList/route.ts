@@ -5,7 +5,7 @@ export async function GET(request: NextRequest) {
 
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_DB_URL}/productList?_sort=discount&_order=desc&_limit=12&_page=${pageParam}`,
+      `${process.env.NEXT_PUBLIC_DB_URL}/productList?_limit=12&_page=${pageParam}`,
       {
         next: { revalidate: 0 },
       }

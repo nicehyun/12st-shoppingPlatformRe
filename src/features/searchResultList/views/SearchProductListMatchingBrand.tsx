@@ -13,7 +13,7 @@ const SearchProductListMatchingBrand = () => {
     totalCount,
   } = useGetSearchMatchingBrandInfinityQuery()
 
-  if (totalCount === 0) {
+  if (!isLoading && totalCount === 0) {
     return <NoneSearchResult />
   }
 

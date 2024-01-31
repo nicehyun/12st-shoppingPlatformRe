@@ -9,6 +9,9 @@ export const useGetBestProductListWithCategoryInfiniteQuery = () => {
   const [, , firstCategoryPath, secondCategoryPath, thirdCategoryPath] =
     pathname.split("/")
 
+  const categoriesPath =
+    "/" + firstCategoryPath + secondCategoryPath + thirdCategoryPath
+
   const firstCategory = decodeURIComponent(getAfterEquals(firstCategoryPath))
   const secondCategory = decodeURIComponent(
     parseSliceToAnd(getAfterEquals(secondCategoryPath))
@@ -26,7 +29,7 @@ export const useGetBestProductListWithCategoryInfiniteQuery = () => {
 
   const getBestProductListWithCategoryPromiseFn = (pageParam: number) => {
     return bestProductListAPI.getBestProductListWithCategory(
-      pathname,
+      categoriesPath,
       pageParam
     )
   }

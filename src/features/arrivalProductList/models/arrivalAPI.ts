@@ -1,8 +1,7 @@
 import { InfinityProductResponse } from "@/features/common/types/product"
 
-export const bestProductListAPI = {
-  getBestProductListWithCategory: async (
-    categoriesPath: string | undefined,
+export const arrivalAPI = {
+  getArrivalProductList: async (
     pageParam: number
   ): Promise<InfinityProductResponse> => {
     if (
@@ -21,7 +20,7 @@ export const bestProductListAPI = {
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/bestProductList${categoriesPath}`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/arrivalProductList`,
         {
           headers: { pageParam: fomattedPageParam },
           next: { revalidate: 0 },

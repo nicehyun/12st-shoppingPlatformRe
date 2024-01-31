@@ -13,7 +13,7 @@ const SearchProductListMatchingName = () => {
     totalCount,
   } = useGetSearchMatchingNameInfinityQuery()
 
-  if (totalCount === 0) {
+  if (!isLoading && totalCount === 0) {
     return <NoneSearchResult />
   }
 

@@ -3,8 +3,10 @@ import { ROUTE } from "@/features/common/hooks/useNavigations"
 import SectionTitle from "./SectionTitle"
 import SectionSubTitle from "./SectionSubTitle"
 import SectionMoreLink from "./SectionMoreLink"
+import { SectionClassification } from "../types/section"
 
 interface IHomeShadowProductsSection {
+  sectionClassification: SectionClassification
   sectionTitle: string
   sectionSubTitle: string
   route: ROUTE
@@ -14,6 +16,7 @@ const HomeShadowProductsSection = ({
   route,
   sectionSubTitle,
   sectionTitle,
+  sectionClassification,
 }: IHomeShadowProductsSection) => {
   return (
     <section
@@ -28,7 +31,7 @@ const HomeShadowProductsSection = ({
         <SectionMoreLink route={route} />
       </div>
 
-      <RenderProductList sectionType="arrival" />
+      <RenderProductList sectionClassification={sectionClassification} />
     </section>
   )
 }

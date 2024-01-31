@@ -1,9 +1,9 @@
 "use client"
 
 import Link from "next/link"
-
 import { useGetSearchMatchingNameInfinityQuery } from "../hooks/useGetSearchMatchingNameInfinityQuery"
 import { useGetSearchMatchingBrandInfinityQuery } from "../hooks/useGetSearchMatchingBrandInfinityQuery"
+import SkeletonSearchResultLinks from "./SkeletonSearchResultLinks"
 
 interface ISearchResultInfo {
   searchPath: string[]
@@ -14,10 +14,18 @@ const SearchResultLinks = ({ searchPath }: ISearchResultInfo) => {
 
   const decodedsearchPrams = decodeURIComponent(searchPrams)
 
-  const { totalCount: productTotalCount } =
-    useGetSearchMatchingNameInfinityQuery()
-  const { totalCount: BrandTotalCount } =
-    useGetSearchMatchingBrandInfinityQuery()
+  const {
+    totalCount: productTotalCount,
+    isLoading: isGetSearchMatchingNameLoading,
+  } = useGetSearchMatchingNameInfinityQuery()
+  const {
+    totalCount: BrandTotalCount,
+    isLoading: isGetSearchMatchingBrandLoading,
+  } = useGetSearchMatchingBrandInfinityQuery()
+
+  if (isGetSearchMatchingNameLoading || isGetSearchMatchingBrandLoading) {
+    return <SkeletonSearchResultLinks />
+  }
 
   return (
     <div className="border-b-[4px] h-[100px] mt-[50px] flexCenter">
@@ -29,7 +37,8 @@ const SearchResultLinks = ({ searchPath }: ISearchResultInfo) => {
             : "text-border font-thin"
         }`}
       >
-        PRODUCT({productTotalCount})
+        PRODUCT(
+        {productTotalCount})
       </Link>
       <Link
         href={`/searchProductList/brand/${decodedsearchPrams}`}
@@ -39,7 +48,8 @@ const SearchResultLinks = ({ searchPath }: ISearchResultInfo) => {
             : "text-border font-thin"
         }`}
       >
-        BRAND({BrandTotalCount})
+        BRAND(
+        {BrandTotalCount})
       </Link>
     </div>
   )

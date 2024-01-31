@@ -67,6 +67,10 @@
     display: none;
   }
 
+  .skeleton-slide {
+    width: calc(100% / 2.6);
+  }
+
   .cardShadow {
     box-shadow: 13px 23px 34px -5px rgba(0, 0, 0, 0.61);
     -webkit-box-shadow: 13px 23px 34px -5px rgba(0, 0, 0, 0.61);

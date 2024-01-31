@@ -12,7 +12,7 @@ const SaleProductList = () => {
     isLoadMoreFetching,
     productList: topSaleProductList,
     loadMoreRef,
-    sectionClassification: "topSale",
+    sectionClassification: "arrival",
   }
 
   return <InfiniteScrollProductList {...infiniteScrollProductListProps} />
