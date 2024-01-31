@@ -1,18 +1,21 @@
 "use client"
 
-import ProductCard from "@/features/common/views/ProductCard"
-import { useGetIndiviualProductListQuery } from "@/features/home/hooks/useGetIndiviualProductListQuery"
+import { useGetTopSaleProductListInfinityQuery } from "../hooks/useGetTopSaleProductListInfinityQuery"
+import InfiniteScrollProductList from "@/features/common/views/InfiniteScrollProductList"
 
 const SaleProductList = () => {
-  const { topSaleProductList } = useGetIndiviualProductListQuery()
+  const { topSaleProductList, isLoadMoreFetching, isLoading, loadMoreRef } =
+    useGetTopSaleProductListInfinityQuery()
 
-  return (
-    <div className="grid grid-cols-3 xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-[20px] mt-[50px]">
-      {topSaleProductList.map((product) => (
-        <ProductCard key={`sale-product-${product.id}`} productInfo={product} />
-      ))}
-    </div>
-  )
+  const infiniteScrollProductListProps = {
+    isLoading,
+    isLoadMoreFetching,
+    productList: topSaleProductList,
+    loadMoreRef,
+    sectionClassification: "topSale",
+  }
+
+  return <InfiniteScrollProductList {...infiniteScrollProductListProps} />
 }
 
 export default SaleProductList

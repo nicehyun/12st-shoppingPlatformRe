@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query"
-import { useEffect, useRef } from "react"
 import { useFeedbackModal } from "./useFeedbackModal"
 import { InfinityProductResponse } from "../types/product"
+import { useInfinityScrollIntersectionObserver } from "./useInfinityScrollIntersectionObserver"
 
 interface ICustomInfinityQuery {
   queryKey: string[]
@@ -16,7 +16,6 @@ export const useProductListInfinityQuery = ({
   cacheTime = 60 * 60 * 1000,
   staleTime = 60 * 60 * 1000,
 }: ICustomInfinityQuery) => {
-  const loadMoreRef = useRef<HTMLDivElement>(null)
   const { showFeedbackModalWithContent } = useFeedbackModal()
 
   const { data, fetchNextPage, hasNextPage, isLoading, isFetching } =
@@ -36,26 +35,11 @@ export const useProductListInfinityQuery = ({
       cacheTime,
     })
 
-  useEffect(() => {
-    const currentRef = loadMoreRef.current
-
-    if (!currentRef || !hasNextPage || isFetching) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) fetchNextPage()
-      },
-      { threshold: 1 }
-    )
-
-    observer.observe(currentRef)
-
-    return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef)
-      }
-    }
-  }, [fetchNextPage, hasNextPage, isFetching])
+  const { loadMoreRef } = useInfinityScrollIntersectionObserver({
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+  })
 
   const isLoadMoreFetching = isFetching && hasNextPage
 

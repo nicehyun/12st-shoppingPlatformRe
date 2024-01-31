@@ -1,10 +1,8 @@
 "use client"
 
-import ProductCard from "@/features/common/views/ProductCard"
 import { useGetSearchMatchingNameInfinityQuery } from "../hooks/useGetSearchMatchingNameInfinityQuery"
-import FourGridProductList from "@/features/common/views/FourGridProductList"
-import SkeletonProductList from "@/features/common/views/SkeletonProductList"
 import NoneSearchResult from "./NoneSearchResult"
+import InfiniteScrollProductList from "@/features/common/views/InfiniteScrollProductList"
 
 const SearchProductListMatchingName = () => {
   const {
@@ -15,35 +13,19 @@ const SearchProductListMatchingName = () => {
     totalCount,
   } = useGetSearchMatchingNameInfinityQuery()
 
-  if (isLoading) {
-    return <SkeletonProductList className="mt-[50px]" />
-  }
-
   if (totalCount === 0) {
     return <NoneSearchResult />
   }
 
-  return (
-    <>
-      <FourGridProductList className="mt-[50px]">
-        {productListMatchingName?.pages.flatMap((group) =>
-          group.productList.map((product) => {
-            return (
-              <ProductCard
-                key={`category-product-${product.id}`}
-                isPriority
-                productInfo={product}
-              />
-            )
-          })
-        )}
+  const infiniteScrollProductListProps = {
+    isLoading,
+    isLoadMoreFetching,
+    productList: productListMatchingName,
+    loadMoreRef,
+    sectionClassification: "topSale",
+  }
 
-        <div ref={loadMoreRef} />
-      </FourGridProductList>
-
-      {isLoadMoreFetching && <SkeletonProductList />}
-    </>
-  )
+  return <InfiniteScrollProductList {...infiniteScrollProductListProps} />
 }
 
 export default SearchProductListMatchingName
