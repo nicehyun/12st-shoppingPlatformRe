@@ -1,27 +1,28 @@
 import { useInfiniteQuery } from "@tanstack/react-query"
 import { useEffect, useRef } from "react"
 import { useFeedbackModal } from "./useFeedbackModal"
+import { InfinityProductResponse } from "../types/product"
 
-interface ICustomInfinityQuery<T> {
+interface ICustomInfinityQuery {
   queryKey: string[]
-  promiseFn: (pageParam: number) => Promise<T[]>
+  promiseFn: (pageParam: number) => Promise<InfinityProductResponse>
   staleTime?: number
   cacheTime?: number
 }
 
-export const useCustomInfinityQuery = <T,>({
+export const useProductListInfinityQuery = ({
   queryKey,
   promiseFn,
   cacheTime = 60 * 60 * 1000,
   staleTime = 60 * 60 * 1000,
-}: ICustomInfinityQuery<T>) => {
+}: ICustomInfinityQuery) => {
   const loadMoreRef = useRef<HTMLDivElement>(null)
   const { showFeedbackModalWithContent } = useFeedbackModal()
 
   const { data, fetchNextPage, hasNextPage, isLoading, isFetching } =
     useInfiniteQuery(queryKey, ({ pageParam = 1 }) => promiseFn(pageParam), {
       getNextPageParam: (lastPage, pages) => {
-        if (lastPage.length < 12) return false
+        if (lastPage.productList.length < 12) return false
 
         return pages.length + 1
       },

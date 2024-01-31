@@ -1,19 +1,23 @@
-import { layoutAPI } from "@/features/layout/models/layoutAPI"
+"use client"
+
 import Link from "next/link"
-import { use } from "react"
+
+import { useGetSearchMatchingNameInfinityQuery } from "../hooks/useGetSearchMatchingNameInfinityQuery"
+import { useGetSearchMatchingBrandInfinityQuery } from "../hooks/useGetSearchMatchingBrandInfinityQuery"
 
 interface ISearchResultInfo {
   searchPath: string[]
 }
 
-const SearchResultInfo = ({ searchPath }: ISearchResultInfo) => {
+const SearchResultLinks = ({ searchPath }: ISearchResultInfo) => {
   const [classification, searchPrams] = searchPath
 
   const decodedsearchPrams = decodeURIComponent(searchPrams)
 
-  const { filteredProductsMatchingName, filteredProductsMatchingBrand } = use(
-    layoutAPI.getSearchResult(decodedsearchPrams)
-  )
+  const { totalCount: productTotalCount } =
+    useGetSearchMatchingNameInfinityQuery()
+  const { totalCount: BrandTotalCount } =
+    useGetSearchMatchingBrandInfinityQuery()
 
   return (
     <div className="border-b-[4px] h-[100px] mt-[50px] flexCenter">
@@ -25,7 +29,7 @@ const SearchResultInfo = ({ searchPath }: ISearchResultInfo) => {
             : "text-border font-thin"
         }`}
       >
-        PRODUCT({filteredProductsMatchingName.length})
+        PRODUCT({productTotalCount})
       </Link>
       <Link
         href={`/searchProductList/brand/${decodedsearchPrams}`}
@@ -35,10 +39,10 @@ const SearchResultInfo = ({ searchPath }: ISearchResultInfo) => {
             : "text-border font-thin"
         }`}
       >
-        BRAND({filteredProductsMatchingBrand.length})
+        BRAND({BrandTotalCount})
       </Link>
     </div>
   )
 }
 
-export default SearchResultInfo
+export default SearchResultLinks

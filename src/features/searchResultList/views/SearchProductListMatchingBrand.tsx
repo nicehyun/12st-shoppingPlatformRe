@@ -1,22 +1,32 @@
 "use client"
 
-import ProductCard from "@/features/common/views/ProductCard"
-import { useGetFiltedProductListWithCategoryInfinityQuery } from "@/features/categoryManagement/hooks/useGetFiltedProductListWithCategoryInfinityQuery"
 import FourGridProductList from "@/features/common/views/FourGridProductList"
+import ProductCard from "@/features/common/views/ProductCard"
 import SkeletonProductList from "@/features/common/views/SkeletonProductList"
+import NoneSearchResult from "./NoneSearchResult"
+import { useGetSearchMatchingBrandInfinityQuery } from "../hooks/useGetSearchMatchingBrandInfinityQuery"
 
-const FiltedProcutList = () => {
-  const { filtedProductList, isLoading, loadMoreRef, isLoadMoreFetching } =
-    useGetFiltedProductListWithCategoryInfinityQuery()
+const SearchProductListMatchingBrand = () => {
+  const {
+    productListMatchingBrand,
+    isLoadMoreFetching,
+    isLoading,
+    loadMoreRef,
+    totalCount,
+  } = useGetSearchMatchingBrandInfinityQuery()
 
   if (isLoading) {
     return <SkeletonProductList className="mt-[50px]" />
   }
 
+  if (totalCount === 0) {
+    return <NoneSearchResult />
+  }
+
   return (
     <>
       <FourGridProductList className="mt-[50px]">
-        {filtedProductList?.pages.flatMap((group) =>
+        {productListMatchingBrand?.pages.flatMap((group) =>
           group.productList.map((product) => {
             return (
               <ProductCard
@@ -36,4 +46,4 @@ const FiltedProcutList = () => {
   )
 }
 
-export default FiltedProcutList
+export default SearchProductListMatchingBrand

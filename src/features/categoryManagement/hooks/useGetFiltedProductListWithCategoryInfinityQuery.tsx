@@ -1,7 +1,6 @@
 import { getAfterEquals, parseSliceToAnd } from "@/features/common/utils/text"
 import { categoryAPI } from "../models/categoryAPI"
-import { useCustomInfinityQuery } from "@/features/common/hooks/useCustomInfinityQuery"
-import { Product } from "@/features/common/types/product"
+import { useProductListInfinityQuery } from "@/features/common/hooks/useProductListInfinityQuery"
 import { useNavigations } from "@/features/common/hooks/useNavigations"
 
 export const useGetFiltedProductListWithCategoryInfinityQuery = () => {
@@ -35,7 +34,7 @@ export const useGetFiltedProductListWithCategoryInfinityQuery = () => {
   }
 
   const { data, isLoading, loadMoreRef, isLoadMoreFetching } =
-    useCustomInfinityQuery<Product>({
+    useProductListInfinityQuery({
       ...infinityQueryProps,
     })
 

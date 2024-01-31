@@ -1,4 +1,3 @@
-import { Products } from "@/features/common/types/product"
 import { getAfterEquals, parseSliceToAnd } from "@/features/common/utils/text"
 import { NextRequest, NextResponse } from "next/server"
 
@@ -17,40 +16,58 @@ export async function GET(
 
   try {
     if (!firstCategory) {
-      const response: Products = await fetch(
+      const response = await fetch(
         `${process.env.NEXT_PUBLIC_DB_URL}/productList?_sort=sellCount&_order=desc&_limit=12&_page=${pageParam}`,
         {
           next: { revalidate: 0 },
         }
-      ).then((res) => res.json())
+      )
 
-      return NextResponse.json(response, {
+      const totalCount = response.headers.get("X-Total-Count")
+
+      const productList = await response.json()
+
+      const result = { productList, totalCount }
+
+      return NextResponse.json(result, {
         status: 200,
       })
     }
 
     if (secondCategory && !thirdCategory) {
-      const response: Products = await fetch(
+      const response = await fetch(
         `${process.env.NEXT_PUBLIC_DB_URL}/productList?category1=${firstCategory}&category2=${secondCategory}&_sort=sellCount&_order=desc&_limit=12&_page=${pageParam}`,
         {
           next: { revalidate: 0 },
         }
-      ).then((res) => res.json())
+      )
 
-      return NextResponse.json(response, {
+      const totalCount = response.headers.get("X-Total-Count")
+
+      const productList = await response.json()
+
+      const result = { productList, totalCount }
+
+      return NextResponse.json(result, {
         status: 200,
       })
     }
 
     if (secondCategory && thirdCategory) {
-      const response: Products = await fetch(
+      const response = await fetch(
         `${process.env.NEXT_PUBLIC_DB_URL}/productList?category1=${firstCategory}&category2=${secondCategory}&category3=${thirdCategory}&_sort=sellCount&_order=desc&_limit=12&_page=${pageParam}`,
         {
           next: { revalidate: 0 },
         }
-      ).then((res) => res.json())
+      )
 
-      return NextResponse.json(response, {
+      const totalCount = response.headers.get("X-Total-Count")
+
+      const productList = await response.json()
+
+      const result = { productList, totalCount }
+
+      return NextResponse.json(result, {
         status: 200,
       })
     }

@@ -3,45 +3,39 @@
 import ProductCard from "../../common/views/ProductCard"
 import { useGetBestProductListWithCategoryInfiniteQuery } from "../hooks/useGetBestProductListWithCategoryInfiniteQuery"
 import FourGridProductList from "../../common/views/FourGridProductList"
-import SkeletonProductCard from "../../common/views/SkeletonProductCard"
+import SkeletonProductList from "@/features/common/views/SkeletonProductList"
 
 const BestProductList = () => {
   const { bestProductList, isLoading, isLoadMoreFetching, loadMoreRef } =
     useGetBestProductListWithCategoryInfiniteQuery()
 
   if (isLoading) {
-    return (
-      <FourGridProductList className="mt-[50px]">
-        {Array.from({ length: 8 }).map((_, index) => (
-          <SkeletonProductCard key={`skeleton-${index}`} />
-        ))}
-      </FourGridProductList>
-    )
+    return <SkeletonProductList className="mt-[50px]" />
   }
 
   return (
-    <FourGridProductList className="mt-[50px]">
-      {bestProductList?.pages.flatMap((group, pageIndex) =>
-        group.map((product, index) => {
-          const globalIndex = pageIndex * group.length + index + 1
+    <>
+      <FourGridProductList className="mt-[50px]">
+        {bestProductList?.pages.flatMap((group, pageIndex) =>
+          group.productList.map((product, index) => {
+            const globalIndex = pageIndex * group.productList.length + index + 1
 
-          return (
-            <ProductCard
-              key={`best-product-${product.id}`}
-              isPriority
-              productInfo={product}
-              label={globalIndex}
-            />
-          )
-        })
-      )}
+            return (
+              <ProductCard
+                key={`best-product-${product.id}`}
+                isPriority
+                productInfo={product}
+                label={globalIndex}
+              />
+            )
+          })
+        )}
 
-      {isLoadMoreFetching &&
-        Array.from({ length: 8 }).map((_, index) => (
-          <SkeletonProductCard key={`skeleton-fetching-${index}`} />
-        ))}
-      <div ref={loadMoreRef} />
-    </FourGridProductList>
+        <div ref={loadMoreRef} />
+      </FourGridProductList>
+
+      {isLoadMoreFetching && <SkeletonProductList />}
+    </>
   )
 }
 

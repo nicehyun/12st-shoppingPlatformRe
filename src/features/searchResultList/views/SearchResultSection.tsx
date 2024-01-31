@@ -1,19 +1,20 @@
-import SearchProductList from "./SearchProductList"
-import SearchResultInfo from "./SearchResultInfo"
-import SuspenseIncludingFallback from "@/features/common/views/SuspenseIncludingFallback"
+import SearchProductListMatchingBrand from "./SearchProductListMatchingBrand"
+import SearchProductListMatchingName from "./SearchProductListMatchingName"
+import SearchResultLinks from "./SearchResultLinks"
 
 interface ISearchResultSection {
   searchParams: string[]
 }
 
 const SearchResultSection = ({ searchParams }: ISearchResultSection) => {
+  const [classification] = searchParams
+
   return (
     <section>
-      <SearchResultInfo searchPath={searchParams} />
+      <SearchResultLinks searchPath={searchParams} />
 
-      <SuspenseIncludingFallback>
-        <SearchProductList searchPath={searchParams} />
-      </SuspenseIncludingFallback>
+      {classification === "product" && <SearchProductListMatchingName />}
+      {classification === "brand" && <SearchProductListMatchingBrand />}
     </section>
   )
 }

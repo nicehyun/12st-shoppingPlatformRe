@@ -1,11 +1,21 @@
-import { Products } from "@/features/common/types/product"
+import { InfinityProductResponse } from "@/features/common/types/product"
 
 export const bestProductListAPI = {
   getBestProductListWithCategory: async (
     categoriesPath: string,
     pageParam: number
-  ): Promise<Products> => {
-    if (pageParam === undefined) return []
+  ): Promise<InfinityProductResponse> => {
+    if (
+      pageParam === undefined ||
+      pageParam === null ||
+      typeof pageParam !== "number" ||
+      pageParam < 1
+    ) {
+      return {
+        productList: [],
+        totalCount: 0,
+      }
+    }
 
     const fomattedPageParam = pageParam.toString()
 

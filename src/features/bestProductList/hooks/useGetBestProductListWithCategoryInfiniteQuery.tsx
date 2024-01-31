@@ -1,7 +1,7 @@
 import { bestProductListAPI } from "../models/bestProductListAPI"
 import { useNavigations } from "@/features/common/hooks/useNavigations"
 import { getAfterEquals, parseSliceToAnd } from "@/features/common/utils/text"
-import { useCustomInfinityQuery } from "@/features/common/hooks/useCustomInfinityQuery"
+import { useProductListInfinityQuery } from "@/features/common/hooks/useProductListInfinityQuery"
 
 export const useGetBestProductListWithCategoryInfiniteQuery = () => {
   const { pathname } = useNavigations()
@@ -37,7 +37,7 @@ export const useGetBestProductListWithCategoryInfiniteQuery = () => {
   }
 
   const { data, isLoading, loadMoreRef, isLoadMoreFetching } =
-    useCustomInfinityQuery({
+    useProductListInfinityQuery({
       ...infinityQueryProps,
     })
 

@@ -1,23 +1,8 @@
 import { InfinityProductResponse } from "@/features/common/types/product"
-import { Categories } from "@/features/layout/types/category"
 
-export const categoryAPI = {
-  getCategories: async (): Promise<Categories[] | undefined> => {
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/categories`,
-        {
-          next: { revalidate: 0 },
-        }
-      )
-
-      return response.json()
-    } catch (error: any) {
-      throw new Error(error)
-    }
-  },
-  getFiltedProductListWithCategory: async (
-    categoriesPath: string,
+export const searchAPI = {
+  getSearchResultMatchingName: async (
+    searchParam: string,
     pageParam: number
   ): Promise<InfinityProductResponse> => {
     if (
@@ -28,7 +13,7 @@ export const categoryAPI = {
     ) {
       return {
         productList: [],
-        totalCount: 0,
+        totalCount: "0",
       }
     }
 
@@ -36,7 +21,39 @@ export const categoryAPI = {
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/categoryManagement${categoriesPath}`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/searchProductList/product/${searchParam}`,
+        {
+          headers: { pageParam: fomattedPageParam },
+          next: { revalidate: 0 },
+        }
+      )
+
+      return response.json()
+    } catch (error: any) {
+      throw new Error(error)
+    }
+  },
+  getSearchResultMatchingBrand: async (
+    searchParam: string,
+    pageParam: number
+  ): Promise<InfinityProductResponse> => {
+    if (
+      pageParam === undefined ||
+      pageParam === null ||
+      typeof pageParam !== "number" ||
+      pageParam < 1
+    ) {
+      return {
+        productList: [],
+        totalCount: "0",
+      }
+    }
+
+    const fomattedPageParam = pageParam.toString()
+
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/searchProductList/brand/${searchParam}`,
         {
           headers: { pageParam: fomattedPageParam },
           next: { revalidate: 0 },

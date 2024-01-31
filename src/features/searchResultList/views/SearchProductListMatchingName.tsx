@@ -1,22 +1,32 @@
 "use client"
 
 import ProductCard from "@/features/common/views/ProductCard"
-import { useGetFiltedProductListWithCategoryInfinityQuery } from "@/features/categoryManagement/hooks/useGetFiltedProductListWithCategoryInfinityQuery"
+import { useGetSearchMatchingNameInfinityQuery } from "../hooks/useGetSearchMatchingNameInfinityQuery"
 import FourGridProductList from "@/features/common/views/FourGridProductList"
 import SkeletonProductList from "@/features/common/views/SkeletonProductList"
+import NoneSearchResult from "./NoneSearchResult"
 
-const FiltedProcutList = () => {
-  const { filtedProductList, isLoading, loadMoreRef, isLoadMoreFetching } =
-    useGetFiltedProductListWithCategoryInfinityQuery()
+const SearchProductListMatchingName = () => {
+  const {
+    productListMatchingName,
+    isLoadMoreFetching,
+    isLoading,
+    loadMoreRef,
+    totalCount,
+  } = useGetSearchMatchingNameInfinityQuery()
 
   if (isLoading) {
     return <SkeletonProductList className="mt-[50px]" />
   }
 
+  if (totalCount === 0) {
+    return <NoneSearchResult />
+  }
+
   return (
     <>
       <FourGridProductList className="mt-[50px]">
-        {filtedProductList?.pages.flatMap((group) =>
+        {productListMatchingName?.pages.flatMap((group) =>
           group.productList.map((product) => {
             return (
               <ProductCard
@@ -36,4 +46,4 @@ const FiltedProcutList = () => {
   )
 }
 
-export default FiltedProcutList
+export default SearchProductListMatchingName

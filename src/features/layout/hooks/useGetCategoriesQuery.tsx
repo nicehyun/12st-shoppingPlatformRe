@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query"
-import { layoutAPI } from "../models/layoutAPI"
 import { useAppDispatch } from "@/redux/hooks"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
 import { useNavigations } from "@/features/common/hooks/useNavigations"
 import { getAfterEquals, parseSliceToAnd } from "@/features/common/utils/text"
+import { categoryAPI } from "@/features/categoryManagement/models/categoryAPI"
 
 export const useGetCategoriesQuery = () => {
   const dispatch = useAppDispatch()
@@ -22,7 +22,7 @@ export const useGetCategoriesQuery = () => {
 
   const { data, isLoading } = useQuery(
     ["categories"],
-    layoutAPI.getCategories,
+    categoryAPI.getCategories,
     {
       onError: () => {
         dispatch(

@@ -18,3 +18,8 @@ export type Product = {
 }
 
 export type Products = Product[]
+
+export type InfinityProductResponse = {
+  productList: Products
+  totalCount: string
+}
