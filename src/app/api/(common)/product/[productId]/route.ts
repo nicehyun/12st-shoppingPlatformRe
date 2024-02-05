@@ -1,4 +1,3 @@
-import { AxiosError } from "axios"
 import { NextResponse } from "next/server"
 
 export async function GET(
@@ -8,7 +7,10 @@ export async function GET(
   const productId = params.productId
 
   if (!productId) {
-    throw new Error(`🚨 Not Product id!`)
+    return NextResponse.json({
+      status: 401,
+      error: "상품번호가 필요합니다.",
+    })
   }
 
   try {
@@ -19,18 +21,15 @@ export async function GET(
       }
     ).then((res) => res.json())
 
-    return NextResponse.json(response, { status: 200 })
-  } catch (error) {
-    const { response } = error as unknown as AxiosError
-    if (response) {
-      console.error(
-        `🚨 JSON SERVER GET API (Get Product Detail Info) : ${response.data}`
-      )
-      return new NextResponse(null, { status: response.status })
-    } else {
-      console.error(`🚨 Unexpected Error (Get Product Detail Info) : ${error}`)
+    if (Object.keys(response).length === 0) {
+      return NextResponse.json({
+        status: 401,
+        error: "상품번호와 일치하는 상품이 존재하지 않습니다.",
+      })
     }
 
-    return new NextResponse(null, { status: 500 })
+    return NextResponse.json(response, { status: 200 })
+  } catch (error: any) {
+    throw new Error(error)
   }
 }

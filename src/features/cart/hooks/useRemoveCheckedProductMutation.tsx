@@ -1,51 +1,58 @@
-import { showFeedbackModal } from "@/redux/features/modalSlice"
-import { useAppDispatch } from "@/redux/hooks"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { cartAPI } from "../models/cartAPI"
-import { ProductsInCart } from "../types/cart"
 import { useConditionalSignInRoute } from "@/features/common/hooks/useConditionalSignInRoute"
 import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
+import { useFeedbackModal } from "@/features/common/hooks/useFeedbackModal"
+import { useFeedbackModalWithError } from "@/features/common/hooks/useFeedbackModalWithError"
+import {
+  emptyCheckedProductList,
+  selectCheckedProductList,
+} from "@/redux/features/cartSlice"
 
 export const useRemoveCheckedProductMutation = () => {
+  const dispatch = useAppDispatch()
   const queryClient = useQueryClient()
   const { session } = useSessionQuery()
-  const dispatch = useAppDispatch()
   const { shouldProceedWithRouting } = useConditionalSignInRoute()
+  const { showFeedbackModalWithContent } = useFeedbackModal()
+  const { showFeedbackModalWithErrorMessage } = useFeedbackModalWithError()
+
+  const checkedProductList = useAppSelector(selectCheckedProductList)
 
   const { mutateAsync, isLoading } = useMutation(
-    (checkedProductList: ProductsInCart) =>
-      cartAPI.removeCheckedProductsFromCart(
+    () =>
+      cartAPI.removeCheckedProductListInCart(
         checkedProductList,
         session?.user.accessToken
       ),
     {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["productListInCart"])
+      onSuccess: (data) => {
+        if (data.status === 200) {
+          queryClient.invalidateQueries(["productListInCart"])
+          showFeedbackModalWithContent("장바구니에서 상품을 제거하였습니다.")
+          dispatch(emptyCheckedProductList())
+          return
+        }
 
-        dispatch(
-          showFeedbackModal({
-            modalContent: "장바구니에서 선택한 상품을 제거하였습니다.",
-          })
-        )
+        if (data.status === 401) {
+          showFeedbackModalWithErrorMessage(data.error ?? "")
+          return
+        }
       },
       onError: () => {
-        dispatch(
-          showFeedbackModal({
-            modalContent:
-              "다시 한번 시도해주세요. 오류가 계속되면 고객센터에 문의해주세요.",
-          })
+        showFeedbackModalWithContent(
+          "다시 한번 시도해주세요. 오류가 계속되면 고객센터에 문의해주세요."
         )
       },
     }
   )
 
-  const removeCheckedProductMutateAsync = async (
-    checkedProductList: ProductsInCart
-  ) => {
+  const removeCheckedProductMutateAsync = async () => {
     if (isLoading && checkedProductList.length === 0) return
 
     if (shouldProceedWithRouting(!!session)) {
-      mutateAsync(checkedProductList)
+      await mutateAsync()
     }
   }
 

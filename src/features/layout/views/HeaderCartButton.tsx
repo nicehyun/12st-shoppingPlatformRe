@@ -2,7 +2,7 @@
 
 import { ROUTE, useNavigations } from "@/features/common/hooks/useNavigations"
 import Button from "@/features/common/views/Button"
-import { useProductListInCartQuery } from "@/features/cart/hooks/useProductListInCartQuery"
+import { useGetProductListInCartQuery } from "@/features/cart/hooks/useGetProductListInCartQuery"
 import { useEffect, useState } from "react"
 import { BsFillCartXFill, BsFillCartFill } from "react-icons/bs"
 
@@ -10,7 +10,7 @@ const HeaderCartButton = () => {
   const [isCartHightlighted, setIsCartHightlighted] = useState(false)
   const { routeTo } = useNavigations()
 
-  const { productListInCart, isCartLimited } = useProductListInCartQuery()
+  const { productListInCart, isCartLimited } = useGetProductListInCartQuery()
 
   useEffect(() => {
     if (!productListInCart || !productListInCart.length) return

@@ -27,7 +27,7 @@ export default function FeedbackModal() {
   const { isShowModal, modalContent } = useAppSelector(selectFeedbackModal)
   const dispatch = useAppDispatch()
 
-  const handleCloseFeedbackModal = () => {
+  const handleFeedbackModalClose = () => {
     dispatch(hideFeedbackModal())
   }
 
@@ -38,7 +38,7 @@ export default function FeedbackModal() {
       open={isShowModal}
       TransitionComponent={Transition}
       keepMounted
-      onClose={handleCloseFeedbackModal}
+      onClose={handleFeedbackModalClose}
       aria-describedby="alert-dialog-slide-description"
     >
       <DialogContent>
@@ -51,7 +51,7 @@ export default function FeedbackModal() {
       </DialogContent>
       <DialogActions>
         <Button
-          onClick={handleCloseFeedbackModal}
+          onClick={handleFeedbackModalClose}
           sx={{
             "&:hover": {
               backgroundColor: "rgba(255, 78, 10, 0.2)",

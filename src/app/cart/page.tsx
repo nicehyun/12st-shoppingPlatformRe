@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: "장바구니",
 }
 
-// TODO :  cart 최적화 진행 하기
+
 const CartPage = () => {
   return <CartLayout />
 }

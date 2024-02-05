@@ -65,7 +65,7 @@ export const verifyPhoneAPI = {
   // 휴대폰 인증 요청 함수 (인증 번호 재발송 포함)
   requestPhoneVerification: async (
     phoneNumber: string,
-    isRequestCode: boolean = false
+    isRequestCode: boolean
   ): Promise<VerificationResponse> => {
     if (!phoneValidator(phoneNumber)) {
       return {

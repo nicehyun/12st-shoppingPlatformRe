@@ -1,28 +1,18 @@
-import Loading from "@/features/common/views/Loading"
-import { Suspense } from "react"
-import CartController from "./CartController"
+import CartRouteController from "./CartRouteController"
 import CartPriceInfo from "./CartPriceInfo"
-
 import ProductListInCart from "./ProductListInCart"
+import ProductListInCartLayout from "./ProductListInCartLayout"
 
 const CartLayout = () => {
   return (
     <div className="max-w-[1050px] mx-auto">
-      <Suspense
-        fallback={
-          <Loading
-            spinnerSize={{ width: "w-[50px]", height: "h-[50px]" }}
-            height="h-[400px]"
-            isFrame={false}
-          />
-        }
-      >
+      <ProductListInCartLayout>
         <ProductListInCart />
-      </Suspense>
+      </ProductListInCartLayout>
 
       <CartPriceInfo />
 
-      <CartController />
+      <CartRouteController />
     </div>
   )
 }

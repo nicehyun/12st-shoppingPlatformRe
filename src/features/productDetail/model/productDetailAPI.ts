@@ -1,8 +1,10 @@
-import { Product } from "@/features/common/types/product"
-
 export const productDeatilAPI = {
-  getProductInfo: async (productId: string): Promise<Product | null> => {
-    if (!productId) return null
+  getProductInfo: async (productId: string) => {
+    if (!productId)
+      return {
+        status: 401,
+        error: "상품번호가 필요합니다.",
+      }
 
     try {
       const response = await fetch(

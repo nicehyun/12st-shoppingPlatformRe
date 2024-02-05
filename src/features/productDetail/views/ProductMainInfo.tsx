@@ -22,11 +22,11 @@ const ProductMainInfo = ({ productId }: IProductMainInfo) => {
       <div className="overflow-hidden text-[12px] text-center mr-[20px] w-1/2 md:w-full sm:w-full min-h-[300px]">
         <Image
           src={productDetail?.image ?? ""}
-          alt={`상품사진이 준비되지 않았습니다. - ${productDetail?.name}`}
+          alt={`상품사진이 준비되지 않았습니다.`}
           width={0}
           height={0}
           sizes="100vw"
-          className="h-full w-full"
+          className="h-full w-full flexCenter"
           priority
         />
       </div>

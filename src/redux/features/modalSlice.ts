@@ -3,6 +3,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 import { RootState } from "../types/store"
 
+interface ShowAlertModalPayload {
+  modalId: string
+  modalContent: string
+}
+
 interface ShowFeedbackModalPayload {
   modalContent: string
 }
@@ -40,10 +45,17 @@ type RouteModal = {
   route: ROUTE | null
 }
 
+type AlertModal = {
+  isShowModal: boolean
+  modalId: string
+  modalContent: string
+}
+
 type InitialModalState = {
   feedbackModal: FeedbackModal
   basicModal: BasicModal
   routeModal: RouteModal
+  alertModal: AlertModal
 }
 
 const initialModalState: InitialModalState = {
@@ -63,6 +75,11 @@ const initialModalState: InitialModalState = {
     modalTitle: "",
     modalContent: "",
     route: null,
+  },
+  alertModal: {
+    isShowModal: false,
+    modalId: "",
+    modalContent: "",
   },
 }
 
@@ -101,6 +118,15 @@ const modalSlice = createSlice({
       state.routeModal.modalContent = ""
       state.routeModal.route = null
     },
+    showAlertModal(state, actions: PayloadAction<ShowAlertModalPayload>) {
+      state.alertModal.isShowModal = true
+      state.alertModal.modalId = actions.payload.modalId
+      state.alertModal.modalContent = actions.payload.modalContent
+    },
+    hideAlertModal(state) {
+      state.alertModal.isShowModal = false
+      state.alertModal.modalContent = ""
+    },
   },
 })
 
@@ -111,6 +137,8 @@ export const {
   hideBasicModal,
   hideRouteModal,
   showRouteModal,
+  showAlertModal,
+  hideAlertModal,
 } = modalSlice.actions
 
 export const selectFeedbackModal = (state: RootState) =>
@@ -121,5 +149,7 @@ export const selectBasicModalState = (state: RootState) =>
 
 export const selectRouteModalState = (state: RootState) =>
   state.modal.routeModal
+
+export const selectAlertModal = (state: RootState) => state.modal.alertModal
 
 export default modalSlice.reducer

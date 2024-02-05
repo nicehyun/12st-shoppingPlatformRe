@@ -1,34 +1,39 @@
 import { ReactNode } from "react"
 import { HiMinus, HiPlus } from "react-icons/hi"
-
 import { ProductInCart } from "../types/cart"
 import Button from "@/features/common/views/Button"
 import { AiOutlineClose } from "react-icons/ai"
-import { useRemoveFromCartMutation } from "../hooks/useRemoveFromCartMutation"
 import { useIncreaseAmountMutation } from "../hooks/useIncreaseAmountMutation"
 import { useDecreaseAmountMutation } from "../hooks/useDecreaseAmountMutation"
+import { useAppDispatch } from "@/redux/hooks"
+import { addToRemovalProduct } from "@/redux/features/cartSlice"
+import { showAlertModal } from "@/redux/features/modalSlice"
 
 interface IProductInCartController {
   children: ReactNode
   productInfo: ProductInCart
-  onEmptyCheckedProductList: () => void
 }
 
 const ProductInCartController = ({
   children,
   productInfo,
-  onEmptyCheckedProductList,
 }: IProductInCartController) => {
+  const dispatch = useAppDispatch()
+
   const { increaseMutate, isLoading: isIncreaseMutateLoading } =
     useIncreaseAmountMutation(productInfo)
   const { decreaseMutate, isLoading: isDecreaseMutateLoading } =
     useDecreaseAmountMutation(productInfo)
-  const { removeMutateAsync, isLoading: isRemoveMutateLoading } =
-    useRemoveFromCartMutation(productInfo)
 
-  const onClickRemoveProductFromCart = async () => {
-    await removeMutateAsync()
-    onEmptyCheckedProductList()
+  const onClickRemoveProductFromCart = () => {
+    dispatch(addToRemovalProduct(productInfo))
+
+    dispatch(
+      showAlertModal({
+        modalContent: "상품을 장바구니에서 삭제하시겠습니까?",
+        modalId: "cart-remove",
+      })
+    )
   }
 
   return (

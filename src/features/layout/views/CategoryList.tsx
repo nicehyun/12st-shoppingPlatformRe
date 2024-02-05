@@ -1,6 +1,6 @@
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material"
 import { FaSortDown } from "react-icons/fa"
-import { useGetCategoriesQuery } from "../hooks/useGetCategoriesQuery"
+import { useGetCategoriesQuery } from "../../categoryManagement/hooks/useGetCategoriesQuery"
 import { Fragment } from "react"
 import Link from "next/link"
 import { Categories } from "../types/category"

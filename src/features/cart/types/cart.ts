@@ -4,8 +4,10 @@ export type ProductInCart = Product & { amount: number }
 
 export type ProductsInCart = ProductInCart[]
 
-export type GetCartResponse = {
-  id: number
-  email: string
-  productList: ProductInCart[]
-}
+export type GetCartResponse =
+  | {
+      id: number
+      email: string
+      productList: ProductInCart[]
+    }[]
+  | []

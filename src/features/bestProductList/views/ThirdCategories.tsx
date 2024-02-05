@@ -1,6 +1,6 @@
 "use client"
 
-import { useGetCategoriesQuery } from "@/features/layout/hooks/useGetCategoriesQuery"
+import { useGetCategoriesQuery } from "@/features/categoryManagement/hooks/useGetCategoriesQuery"
 import SkeletonCategoies from "./SkeletonCategoies"
 import ThirdCategoryLinks from "./ThirdCategoryLinks"
 

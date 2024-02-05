@@ -10,14 +10,12 @@ interface IProductInCart {
   productInfo: ProductInCart
   isChecked: boolean
   onClickCheck: () => void
-  onEmptyCheckedProductList: () => void
 }
 
 const ProductInCart = ({
   productInfo,
   isChecked,
   onClickCheck,
-  onEmptyCheckedProductList,
 }: IProductInCart) => {
   const { image, name, mallName, price, discount, id } = productInfo
 
@@ -32,7 +30,7 @@ const ProductInCart = ({
       />
 
       <div className="relative flex grow border-[1px] border-border rounded-[5px] overflow-hidden">
-        <div className="relative w-[200px] h-[200px] lg:w-[180px] lg:h-[180px] md:w-[130px] md:h-[130px] sm:w-[120px] sm:h-[120px] mr-[20px] border-r-[1px] border-border overflow-hidden">
+        <div className="w-[200px] h-[200px] lg:w-[180px] lg:h-[180px] md:w-[130px] md:h-[130px] sm:w-[120px] sm:h-[120px] mr-[20px] border-r-[1px] border-border overflow-hidden">
           <Image
             src={image}
             alt={`상품사진이 준비되지 않았습니다. - ${name}`}
@@ -43,10 +41,7 @@ const ProductInCart = ({
           />
         </div>
 
-        <ProductInCartController
-          productInfo={productInfo}
-          onEmptyCheckedProductList={onEmptyCheckedProductList}
-        >
+        <ProductInCartController productInfo={productInfo}>
           <p className="absolute top-[10px] left-0 text-lightGray text-[14px] md:text-[12px] sm:text-[10px] mb-[12px]">
             [ {mallName} ]
           </p>

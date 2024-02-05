@@ -3,20 +3,18 @@
 import { ROUTE, useNavigations } from "@/features/common/hooks/useNavigations"
 import Button from "@/features/common/views/Button"
 import { selectCheckedProductList } from "@/redux/features/cartSlice"
-import { addCheckoutPendingProductList } from "@/redux/features/checkoutSlice"
-import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { useAppSelector } from "@/redux/hooks"
 
-const CartController = () => {
+const CartRouteController = () => {
   const { routeTo } = useNavigations()
-  const dispatch = useAppDispatch()
   const checkedProductList = useAppSelector(selectCheckedProductList)
 
   const handleCheckout = () => {
     if (!checkedProductList.length) return
-    dispatch(addCheckoutPendingProductList(checkedProductList))
 
     routeTo(ROUTE.CHECKOUT)
   }
+
   return (
     <section className="mt-[120px] flexCenter">
       <Button
@@ -35,4 +33,4 @@ const CartController = () => {
   )
 }
 
-export default CartController
+export default CartRouteController

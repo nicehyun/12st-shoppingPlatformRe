@@ -1,4 +1,5 @@
-import { useAuthenticate } from "@/features/auth/signIn/hooks/useAuthenticate"
+import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
+import { useConditionalSignInRoute } from "@/features/common/hooks/useConditionalSignInRoute"
 import { ROUTE, useNavigations } from "@/features/common/hooks/useNavigations"
 import { Product } from "@/features/common/types/product"
 import Button from "@/features/common/views/Button"
@@ -13,13 +14,15 @@ const DirectCheckoutRouteButton = ({
   productDetail,
 }: IDirectCheckoutRouteButton) => {
   const dispatch = useAppDispatch()
+  const { session } = useSessionQuery()
+  const { shouldProceedWithRouting } = useConditionalSignInRoute()
   const { routeTo } = useNavigations()
-  const { authentication } = useAuthenticate()
 
   const handleCheckoutClick = async () => {
-    await authentication()
-    dispatch(addCheckoutPendingProductList([{ ...productDetail, amount: 1 }]))
-    routeTo(ROUTE.CHECKOUT)
+    if (shouldProceedWithRouting(!!session)) {
+      dispatch(addCheckoutPendingProductList([{ ...productDetail, amount: 1 }]))
+      routeTo(ROUTE.CHECKOUT)
+    }
   }
 
   return (
