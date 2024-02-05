@@ -56,7 +56,7 @@ export const useAddToCartMutaion = (productInfo: Product) => {
   const addMutate = () => {
     if (isLoading) return
 
-    const previousProductListInCart: ProductsInCart | undefined =
+    const previousProductListInCart: ProductsInCart =
       queryClient.getQueryData(["productListInCart"]) ?? []
 
     if (

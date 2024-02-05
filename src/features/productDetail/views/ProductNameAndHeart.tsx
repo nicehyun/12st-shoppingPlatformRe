@@ -2,36 +2,24 @@
 
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io"
 import { Product } from "../../common/types/product"
-import { useAddHeartListMutation } from "../hooks/useAddHeartListMutation"
-import { useRemoveHeartListMutation } from "../hooks/useRemoveHeartListMutation"
 import { useGetHeartListQuery } from "../hooks/useGetHeartListQuery"
 import LoadingButton from "@/features/common/views/LoadingButton"
+import { useHeartMutation } from "../hooks/useHeartMutation"
 
 interface IProductNameAndHeart {
   productDetail: Product
 }
 
 const ProductNameAndHeart = ({ productDetail }: IProductNameAndHeart) => {
-  const { heartList, isInitialLoading } = useGetHeartListQuery()
+  const { isLoading: isGetHeartListLoading } = useGetHeartListQuery()
 
-  const { addHeartListMutateAsync, isAddHeartListLoading } =
-    useAddHeartListMutation(productDetail)
+  const {
+    heartMutateAsync,
+    isLoading: isHeartMutateAsyncLoading,
+    isExsitedHeartProduct,
+  } = useHeartMutation(productDetail)
 
-  const { isRemoveHeartListLoading, removeHeartListMutateAsync } =
-    useRemoveHeartListMutation(productDetail)
-
-  const isExsitedHeartProduct = !!heartList.find(
-    (heartEl) => heartEl.id === productDetail.id
-  )
-
-  const handleHeartClick = () => {
-    isExsitedHeartProduct
-      ? removeHeartListMutateAsync()
-      : addHeartListMutateAsync()
-  }
-
-  const isLoading =
-    isInitialLoading || isRemoveHeartListLoading || isAddHeartListLoading
+  const isButtonLoading = isGetHeartListLoading || isHeartMutateAsyncLoading
 
   return (
     <div className="flex justify-between min-h-[100px]">
@@ -40,8 +28,8 @@ const ProductNameAndHeart = ({ productDetail }: IProductNameAndHeart) => {
       </h3>
 
       <LoadingButton
-        isLoading={isLoading}
-        onClick={handleHeartClick}
+        isLoading={isButtonLoading}
+        onClick={heartMutateAsync}
         content={
           isExsitedHeartProduct ? (
             <IoMdHeart className={`text-lightRed`} />

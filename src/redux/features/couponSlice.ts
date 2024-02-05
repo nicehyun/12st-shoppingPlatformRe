@@ -1,4 +1,4 @@
-import { AmountCoupon, RateCoupon } from "@/features/cart/types/coupon"
+import { AmountCoupon, RateCoupon } from "@/features/common/types/coupon"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { RootState } from "../types/store"
 

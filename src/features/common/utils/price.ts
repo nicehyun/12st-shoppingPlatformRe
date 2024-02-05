@@ -1,5 +1,5 @@
 import { ProductInCart } from "@/features/cart/types/cart"
-import { AmountCoupon, RateCoupon } from "@/features/cart/types/coupon"
+import { AmountCoupon, RateCoupon } from "@/features/common/types/coupon"
 
 export const junkOfNoMoreThandecimaPoint = (number: number) =>
   Math.floor(number)

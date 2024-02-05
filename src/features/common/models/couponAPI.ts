@@ -1,4 +1,4 @@
-import { AmountCoupon, RateCoupon } from "@/features/cart/types/coupon"
+import { AmountCoupon, RateCoupon } from "@/features/common/types/coupon"
 
 export const couponAPI = {
   getCoupon: async (): Promise<(RateCoupon | AmountCoupon)[]> => {

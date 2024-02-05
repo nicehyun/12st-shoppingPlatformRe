@@ -1,40 +1,41 @@
 import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
 import { useConditionalSignInRoute } from "@/features/common/hooks/useConditionalSignInRoute"
+import { useFeedbackModal } from "@/features/common/hooks/useFeedbackModal"
+import { useFeedbackModalWithError } from "@/features/common/hooks/useFeedbackModalWithError"
 import { productHeartAPI } from "@/features/common/models/heartAPI"
 import { Product } from "@/features/common/types/product"
-import { showFeedbackModal } from "@/redux/features/modalSlice"
-import { useAppDispatch } from "@/redux/hooks"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 
 export const useRemoveHeartListMutation = (productInfo: Product) => {
   const queryClient = useQueryClient()
-  const dispatch = useAppDispatch()
   const { shouldProceedWithRouting } = useConditionalSignInRoute()
   const { session } = useSessionQuery()
+  const { showFeedbackModalWithContent } = useFeedbackModal()
+  const { showFeedbackModalWithErrorMessage } = useFeedbackModalWithError()
 
   const { mutateAsync, isLoading: isRemoveHeartListLoading } = useMutation(
     () =>
-      productHeartAPI.heartOfProduct(
-        productInfo,
-        "remove",
-        session?.user.accessToken
+      productHeartAPI.removeProductInHeart(
+        session?.user.accessToken,
+        productInfo
       ),
     {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["heartList"])
+      onSuccess: (data) => {
+        if (data.status === 401) {
+          showFeedbackModalWithErrorMessage(data.error ?? "")
+          return
+        }
 
-        dispatch(
-          showFeedbackModal({
-            modalContent: "상품이 HEART에서 제거되었습니다.",
-          })
-        )
+        if (data.status === 200) {
+          queryClient.invalidateQueries(["heartList"])
+
+          showFeedbackModalWithContent("상품이 HEART에서 제거되었습니다.")
+          return
+        }
       },
       onError: () => {
-        dispatch(
-          showFeedbackModal({
-            modalContent:
-              "다시 한번 시도해주세요. 오류가 계속되면 고객센터에 문의해주세요.",
-          })
+        showFeedbackModalWithContent(
+          "다시 한번 시도해주세요. 오류가 계속되면 고객센터에 문의해주세요."
         )
       },
     }

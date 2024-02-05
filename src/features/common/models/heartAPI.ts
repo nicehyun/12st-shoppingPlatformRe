@@ -1,11 +1,15 @@
-import { GetHeartListResponse } from "../types/heart"
-import { Product } from "../types/product"
+import { POSTResponse } from "../types/fetch"
+import { Product, Products } from "../types/product"
 
 export const productHeartAPI = {
   getHeartList: async (
     authorization: string | null | undefined
-  ): Promise<GetHeartListResponse | null> => {
-    if (!authorization) return null
+  ): Promise<Products | POSTResponse> => {
+    if (!authorization)
+      return {
+        status: 401,
+        error: "유효하지 않은 AccessToken입니다.",
+      }
 
     try {
       const response = await fetch(
@@ -24,22 +28,49 @@ export const productHeartAPI = {
       throw new Error(error)
     }
   },
-  heartOfProduct: async (
-    productInfo: Product,
-    direction: "add" | "remove",
-    authorization: string | null | undefined
-  ) => {
-    if (!authorization) return null
+  addProductInHeart: async (
+    authorization: string | null | undefined,
+    productInfo: Product
+  ): Promise<POSTResponse> => {
+    if (!authorization)
+      return {
+        status: 401,
+        error: "유효하지 않은 AccessToken입니다.",
+      }
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/heart`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/heart/add`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           authorization,
         },
-        body: JSON.stringify({ productInfo, direction }),
+        body: JSON.stringify({ productInfo }),
+      }
+    )
+
+    return response.json()
+  },
+  removeProductInHeart: async (
+    authorization: string | null | undefined,
+    productInfo: Product
+  ): Promise<POSTResponse> => {
+    if (!authorization)
+      return {
+        status: 401,
+        error: "유효하지 않은 AccessToken입니다.",
+      }
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/heart/remove`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization,
+        },
+        body: JSON.stringify({ productInfo }),
       }
     )
 
