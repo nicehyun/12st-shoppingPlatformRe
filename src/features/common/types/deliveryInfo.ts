@@ -14,9 +14,3 @@ export type DeliveryInfo = {
   phone2: string | null
   [key: string]: string | string | null
 }
-
-export type GetDeliveryInfoResponse = {
-  id: number
-  email: string
-  deliveryInfo: DeliveryInfo
-}

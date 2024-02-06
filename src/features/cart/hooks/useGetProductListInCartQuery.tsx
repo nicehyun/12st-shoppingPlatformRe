@@ -32,8 +32,11 @@ export const useGetProductListInCartQuery = () => {
 
   const productListInCart = !isFeedbackError(data) && data ? data : []
 
+  const isCartLimited = productListInCart.length >= 10
+
   return {
     isLoading,
     productListInCart,
+    isCartLimited,
   }
 }

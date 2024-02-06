@@ -11,7 +11,7 @@ import TabPanel from "@/features/common/views/TabPanel"
 
 import { showBasicModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
-import { useGetDefaultDeliveryInfoQuery } from "../hooks/useGetDefaultDeliveryInfoQuery"
+import { useGetDeliveryInfoQuery } from "../../common/hooks/useGetDeliveryInfoQuery"
 import CheckoutDefalutDeliveryInfo from "./CheckoutDefalutDeliveryInfo"
 import CheckoutNewDeliveryInfo from "./CheckoutNewDeliveryInfo"
 import Button from "@/features/common/views/Button"
@@ -19,7 +19,7 @@ import Loading from "@/features/common/views/Loading"
 
 const DeliveryInfo = () => {
   const dispatch = useAppDispatch()
-  const { deliveryInfo, isLoading } = useGetDefaultDeliveryInfoQuery()
+  const { deliveryInfo, isLoading } = useGetDeliveryInfoQuery()
 
   const [deliveryTabValue, setDeliveryTabValue] = useState(1)
 

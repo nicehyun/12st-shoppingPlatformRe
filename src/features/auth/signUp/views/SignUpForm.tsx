@@ -21,7 +21,7 @@ import { useSignUpMutation } from "../hooks/useSignUpMutation"
 const SignUpForm = () => {
   const dispatch = useAppDispatch()
 
-  const [activeStep, setActiveStep] = useState(4)
+  const [activeStep, setActiveStep] = useState(0)
   const { checkedClaseState, toggleClauseCheck, resetClauseCheck } =
     useSignUpClasue()
 

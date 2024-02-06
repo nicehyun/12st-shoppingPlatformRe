@@ -21,9 +21,11 @@ export async function GET(request: Request) {
       }
     ).then((res) => res.json())
 
-    const productList = response[0].productList
-
-    return NextResponse.json(productList, { status: 200 })
+    if (response[0] === undefined) {
+      return NextResponse.json([], { status: 200 })
+    } else {
+      return NextResponse.json(response[0].productList, { status: 200 })
+    }
   } catch (error: any) {
     throw new Error(error)
   }

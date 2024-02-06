@@ -1,7 +1,4 @@
-import {
-  CheckoutList,
-  GetCheckoutListResponse,
-} from "@/features/checkout/types/checkout"
+import { CheckoutList } from "@/features/checkout/types/checkout"
 import {
   accumulationOfProductsPrice,
   junkOfNoMoreThanOneDigit,
@@ -14,17 +11,14 @@ import {
 import { CheckoutClauseCheck } from "@/redux/features/checkoutSlice"
 import { NextRequest, NextResponse } from "next/server"
 import { verifyAccessToken } from "@/features/common/utils/jwt"
-import { AxiosError } from "axios"
 import { formatCheckoutNumber } from "@/features/checkout/utils/checkout"
-import { GetCartResponse } from "@/features/cart/types/cart"
+import { ProductInCart } from "@/features/cart/types/cart"
 import { Product } from "@/features/common/types/product"
-import { GetDeliveryInfoResponse } from "@/features/common/types/deliveryInfo"
 import { UserInfoWithMile } from "@/features/common/types/user"
 
 interface RequestBody {
   checkoutInfo: CheckoutList
   isClauseCheck: Omit<CheckoutClauseCheck, "all">
-  isUpdateDeliveryInfo: boolean
 }
 
 export async function GET(request: Request) {
@@ -46,19 +40,11 @@ export async function GET(request: Request) {
       }
     ).then((res) => res.json())
 
-    const checkoutData: GetCheckoutListResponse = response[0]
+    const checkoutData = response[0]
 
     return NextResponse.json(checkoutData?.checkoutList, { status: 200 })
-  } catch (error) {
-    const { response } = error as unknown as AxiosError
-    if (response) {
-      console.error(
-        `🚨 JSON SERVER GET API (Get Checkout List API) : ${response.data}`
-      )
-      return new NextResponse(null, { status: response.status })
-    }
-    console.error(`🚨 Unexpected Error (Get Checkout List API) : ${error}`)
-    return new NextResponse(null, { status: 500 })
+  } catch (error: any) {
+    throw new Error(error)
   }
 }
 
@@ -72,57 +58,52 @@ export async function POST(request: NextRequest) {
   }
 
   const email = verifyAccessToken(accessToken)?.email
-  const userId = verifyAccessToken(accessToken)?.id
+  const id = verifyAccessToken(accessToken)?.id
 
-  const { checkoutInfo, isClauseCheck, isUpdateDeliveryInfo }: RequestBody =
-    await request.json()
+  const { checkoutInfo, isClauseCheck }: RequestBody = await request.json()
+
+  let userInfo: UserInfoWithMile
 
   if (!nameValidator(checkoutInfo.recipient)) {
-    throw new Error(`🚨 The recipient name is invalid!`)
+    return NextResponse.json({
+      status: 401,
+      error: "올바른 수령인 이름을 입력해주세요.",
+    })
   }
+
   if (!checkoutInfo.zipcode) {
-    throw new Error(`🚨 The zipcode is invalid!`)
+    return NextResponse.json({
+      status: 401,
+      error: "우편번호를 입력해주세요.",
+    })
   }
   if (!checkoutInfo.address) {
-    throw new Error(`🚨 The address is invalid!`)
+    return NextResponse.json({
+      status: 401,
+      error: "배송지 주소를 입력해주세요.",
+    })
   }
   if (!additionalAddressValidator(checkoutInfo.additionalAddress)) {
-    throw new Error(`🚨 The additional address is invalid!`)
+    return NextResponse.json({
+      status: 401,
+      error: "올바른 배송지 상세 주소를 입력해주세요.",
+    })
   }
   if (!phoneValidator(checkoutInfo.phone1)) {
-    throw new Error(`🚨 The phone number is invalid!`)
-  }
-
-  const totalPrice = accumulationOfProductsPrice(checkoutInfo.productList)
-  const getMile = junkOfNoMoreThanOneDigit(
-    (totalPrice - checkoutInfo.useMile) * 0.01
-  )
-  const useMile = checkoutInfo.useMile
-
-  const getUserInfoResponse: UserInfoWithMile[] = await fetch(
-    `${process.env.NEXT_PUBLIC_DB_URL}/users?email=${email}`,
-    {
-      next: { revalidate: 0 },
-    }
-  ).then((res) => res.json())
-
-  const userMile = getUserInfoResponse[0].mile
-
-  const updatedMile = userMile + getMile - useMile
-
-  if (userMile < useMile) {
-    throw new Error(
-      `🚨 The mileage you are trying to use exceeds the available mileage!`
-    )
+    return NextResponse.json({
+      status: 401,
+      error: "올바른 연락처를 입력해주세요.",
+    })
   }
 
   if (
     checkoutInfo.payment.selectedPayment === "credit" &&
     !checkoutInfo.payment.creditName
   ) {
-    throw new Error(
-      `🚨 Credit card information is required when selecting 'credit' payment method!`
-    )
+    return NextResponse.json({
+      status: 401,
+      error: "카드사를 선택해주세요.",
+    })
   }
 
   if (
@@ -130,109 +111,128 @@ export async function POST(request: NextRequest) {
     !isClauseCheck.paymentAgency ||
     !isClauseCheck.provisionOfUserInfo
   ) {
-    throw new Error(`🚨 Purchase agreements must be checked before proceeding!`)
+    return NextResponse.json({
+      status: 401,
+      error: "결제를 위해 필수사항에 모두 동의해주세요.",
+    })
   }
 
-  const updateDeliveryInfo = {
-    deliveryName: checkoutInfo.deliveryName,
-    recipient: checkoutInfo.recipient,
-    additionalAddress: checkoutInfo.additionalAddress,
-    address: checkoutInfo.address,
-    zipcode: checkoutInfo.zipcode,
-    phone1: checkoutInfo.phone1,
-    phone2: checkoutInfo.phone2,
-  }
+  const useMile = checkoutInfo.useMile
 
-  const updateDeliveryInfoPromise = async () => {
+  // User Info fetch
+  try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_DB_URL}/deliveryInfo?email=${email}`,
+      `${process.env.NEXT_PUBLIC_DB_URL}/users?email=${email}`,
       {
         next: { revalidate: 0 },
       }
     ).then((res) => res.json())
 
-    const deliveryInfo: GetDeliveryInfoResponse = response[0]
+    userInfo = response[0]
 
-    if (!deliveryInfo) {
-      await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/deliveryInfo`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          deliveryInfo: updateDeliveryInfo,
-        }),
+    if (userInfo.mile < useMile) {
+      return NextResponse.json({
+        status: 401,
+        error:
+          "사용하려는 마일리지가 보유 마일리지를 넘지 않는지 확인해 주세요.",
       })
-    } else {
-      await fetch(
-        `${process.env.NEXT_PUBLIC_DB_URL}/deliveryInfo/${deliveryInfo.id}`,
+    }
+  } catch (error: any) {
+    throw new Error(error)
+  }
+
+  const totalPrice = accumulationOfProductsPrice(checkoutInfo.productList)
+  const getMile = junkOfNoMoreThanOneDigit(
+    (totalPrice - checkoutInfo.useMile) * 0.01
+  )
+
+  const checkoutDate = new Date().toISOString()
+  const updatedCheckoutList = {
+    ...checkoutInfo,
+    getMile,
+    checkoutDate,
+    checkoutNumber: formatCheckoutNumber(checkoutDate),
+  }
+
+  const updatedMile = userInfo.mile + getMile - useMile
+
+  // Update Checkout fetch
+  const checkoutPromise = async () => {
+    try {
+      const getCheckoutResponse = await fetch(
+        `${process.env.NEXT_PUBLIC_DB_URL}/checkout?email=${email}`,
         {
+          next: { revalidate: 0 },
+        }
+      ).then((res) => res.json())
+
+      const prevCheckoutList = getCheckoutResponse[0]
+
+      if (prevCheckoutList === undefined) {
+        await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/checkout`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            checkoutList: [updatedCheckoutList],
+          }),
+        })
+      } else {
+        await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/checkout/${id}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            deliveryInfo: updateDeliveryInfo,
+            checkoutList: [
+              updatedCheckoutList,
+              ...prevCheckoutList.checkoutList,
+            ],
           }),
+        })
+      }
+    } catch (error: any) {
+      throw new Error(error)
+    }
+  }
+
+  // Update Cart fetch
+  const updateCartPromise = async () => {
+    try {
+      const getCartResponse = await fetch(
+        `${process.env.NEXT_PUBLIC_DB_URL}/cart?email=${email}`,
+        {
+          next: { revalidate: 0 },
+        }
+      ).then((res) => res.json())
+
+      const productListInCart = getCartResponse[0].productList
+      const updatedProductInCart = productListInCart.filter(
+        (cartProduct: ProductInCart) => {
+          return !checkoutInfo.productList.some(
+            (product) => product.id === cartProduct.id
+          )
         }
       )
+
+      await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          productList: updatedProductInCart,
+        }),
+      })
+    } catch (error: any) {
+      throw new Error(error)
     }
   }
 
-  const updateCheckoutPromise = async () => {
-    const getCheckoutResponse: GetCheckoutListResponse[] = await fetch(
-      `${process.env.NEXT_PUBLIC_DB_URL}/checkout?email=${email}`,
-      { next: { revalidate: 0 } }
-    ).then((res) => res.json())
-
-    const prevCheckoutList = getCheckoutResponse[0].checkoutList
-
-    const checkoutDate = new Date().toISOString()
-    const updatedCheckoutList = {
-      ...checkoutInfo,
-      getMile,
-      checkoutDate,
-      checkoutNumber: formatCheckoutNumber(checkoutDate),
-    }
-
-    await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/checkout/${userId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        checkoutList: [updatedCheckoutList, ...prevCheckoutList],
-      }),
-    })
-  }
-
-  const updateCartPromise = async () => {
-    const getCartResponse: GetCartResponse[] = await fetch(
-      `${process.env.NEXT_PUBLIC_DB_URL}/cart?email=${email}`,
-      { next: { revalidate: 0 } }
-    ).then((res) => res.json())
-
-    const productListInCart = getCartResponse[0].productList
-    const updatedProductInCart = productListInCart.filter((cartProduct) => {
-      return !checkoutInfo.productList.some(
-        (product) => product.id === cartProduct.id
-      )
-    })
-
-    await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart/${userId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        productList: updatedProductInCart,
-      }),
-    })
-  }
-
+  // Update Mile fetch
   const updateMilePromise = async () => {
-    await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/users/${userId}`, {
+    await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/users/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -243,6 +243,7 @@ export async function POST(request: NextRequest) {
     })
   }
 
+  // Product Sell Count Increase fetch
   const updateProductSellCount = async (productInfo: Product) => {
     try {
       const productInfoResponse: Product = await fetch(
@@ -264,53 +265,24 @@ export async function POST(request: NextRequest) {
           }),
         }
       )
-    } catch (error) {
-      const { response } = error as unknown as AxiosError
-      if (response) {
-        console.error(
-          `🚨 JSON SERVER POST API (Add Product Sell Count API) : ${response.data}`
-        )
-        return new NextResponse(null, { status: response.status })
-      } else {
-        console.error(
-          `🚨 Unexpected Error (Add Product Sell Count API) : ${error}`
-        )
-      }
-
-      return new NextResponse(null, { status: 500 })
+    } catch (error: any) {
+      throw new Error(error)
     }
   }
 
   try {
-    if (isUpdateDeliveryInfo) {
-      await Promise.all([
-        updateDeliveryInfoPromise(),
-        updateCheckoutPromise(),
-        updateCartPromise(),
-        updateMilePromise(),
-        ...checkoutInfo.productList.map((product) =>
-          updateProductSellCount(product)
-        ),
-      ])
-    } else {
-      await Promise.all([
-        updateCheckoutPromise(),
-        updateCartPromise(),
-        updateMilePromise(),
-        ...checkoutInfo.productList.map((product) =>
-          updateProductSellCount(product)
-        ),
-      ])
-    }
+    await checkoutPromise()
+
+    await Promise.all([
+      updateCartPromise(),
+      updateMilePromise(),
+      ...checkoutInfo.productList.map((product) =>
+        updateProductSellCount(product)
+      ),
+    ])
 
     return NextResponse.json({ status: 200 })
-  } catch (error) {
-    const { response } = error as unknown as AxiosError
-    if (response) {
-      console.error(`🚨 JSON SERVER POST API - Checkout : ${response.data}`)
-      return new NextResponse(null, { status: response.status })
-    }
-    console.error(`🚨 Unexpected Error - Checkout : ${error}`)
-    return new NextResponse(null, { status: 500 })
+  } catch (error: any) {
+    throw new Error(error)
   }
 }

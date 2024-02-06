@@ -1,4 +1,5 @@
 import { CheckoutList } from "@/features/checkout/types/checkout"
+import { POSTResponse } from "@/features/common/types/fetch"
 import { Product } from "@/features/common/types/product"
 import { CheckoutClauseCheck } from "@/redux/features/checkoutSlice"
 
@@ -26,12 +27,16 @@ export const checkoutAPI = {
     }
   },
   checkout: async (
+    authorization: string | null | undefined,
     checkoutInfo: CheckoutList,
-    isClauseCheck: Omit<CheckoutClauseCheck, "all">,
-    isUpdateDeliveryInfo: boolean,
-    authorization: string | null | undefined
-  ) => {
-    if (!authorization) return null
+    isClauseCheck: Omit<CheckoutClauseCheck, "all">
+  ): Promise<POSTResponse> => {
+    if (!authorization)
+      return {
+        status: 401,
+        error: "유효하지 않은 AccessToken입니다.",
+      }
+
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/checkout`,
@@ -44,7 +49,6 @@ export const checkoutAPI = {
           body: JSON.stringify({
             checkoutInfo,
             isClauseCheck,
-            isUpdateDeliveryInfo,
           }),
         }
       )

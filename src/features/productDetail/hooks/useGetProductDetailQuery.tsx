@@ -24,7 +24,7 @@ export const useGetProductDetailQuery = (productId: string) => {
         )
       },
 
-      cacheTime: 60 * 60 * 1000,
+      staleTime: 60 * 60 * 1000,
     }
   )
 

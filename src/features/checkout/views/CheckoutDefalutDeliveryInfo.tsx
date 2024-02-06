@@ -1,14 +1,15 @@
 import Button from "@/features/common/views/Button"
 import { useState } from "react"
-import { useGetDefaultDeliveryInfoQuery } from "../hooks/useGetDefaultDeliveryInfoQuery"
+
 import CheckoutAddressInput from "./CheckoutAddressInput"
 import CheckoutDeliveryNameInput from "./CheckoutDeliveryNameInput"
 import CheckoutPhoneInput from "./CheckoutPhoneInput"
 import CheckoutRecipientInput from "./CheckoutRecipientInput"
 import DeliveryMemoSelect from "./DeliveryMemoSelect"
+import { useGetDeliveryInfoQuery } from "@/features/common/hooks/useGetDeliveryInfoQuery"
 
 const CheckoutDefalutDeliveryInfo = () => {
-  const { deliveryInfo } = useGetDefaultDeliveryInfoQuery()
+  const { deliveryInfo } = useGetDeliveryInfoQuery()
   const [isShowDeliveryInfo, setIsShowDeliveryInfo] = useState(false)
 
   return (

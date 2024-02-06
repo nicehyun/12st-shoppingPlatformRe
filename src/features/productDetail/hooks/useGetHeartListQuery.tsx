@@ -16,7 +16,7 @@ export const useGetHeartListQuery = () => {
           "HEART 정보를 가져오지 못 했습니다. 오류가 계속되면 고객센터에 문의해주세요."
         )
       },
-      cacheTime: 60 * 60 * 1000,
+      staleTime: 60 * 60 * 1000,
       enabled: !!session,
     }
   )

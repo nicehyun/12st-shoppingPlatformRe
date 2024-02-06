@@ -24,9 +24,3 @@ export type CheckoutList = {
   checkoutDate: string
   checkoutNumber: string
 }
-
-export type GetCheckoutListResponse = {
-  id: number
-  email: string
-  checkoutList: CheckoutList[]
-}
