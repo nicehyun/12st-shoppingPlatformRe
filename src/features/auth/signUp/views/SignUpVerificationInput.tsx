@@ -1,7 +1,7 @@
 "use client"
 
 import Input from "@/features/common/views/Input"
-import SignUpSideButton from "@/features/auth/signUp/views/SignUpSideButton"
+import RightFetchButton from "@/features/common/views/RightFetchButton"
 import { ChangeEvent } from "react"
 import Timer from "@/features/common/views/TImer"
 
@@ -64,7 +64,7 @@ const SignUpVerificationInput = ({
         )}
       </Input>
 
-      <SignUpSideButton
+      <RightFetchButton
         isLoading={isLoading}
         onClick={onClickVerificationButton}
         isDisabled={isDisabledButton}

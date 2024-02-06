@@ -1,5 +1,5 @@
 import { DeliveryInfo } from "@/features/common/types/deliveryInfo"
-import CheckoutPhoneInput from "@/features/checkout/views/CheckoutPhoneInput"
+import CheckoutPhoneInput from "@/features/checkout/views/delivery/PhoneInput"
 import MyPageSectionSubTitle from "../MyPageSectionSubTitle"
 
 export interface IMyPageDefaultDeliveryPhoneModification {

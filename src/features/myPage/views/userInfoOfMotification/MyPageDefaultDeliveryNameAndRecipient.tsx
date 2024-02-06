@@ -1,6 +1,6 @@
 import { DeliveryInfo } from "@/features/common/types/deliveryInfo"
-import CheckoutDeliveryNameInput from "@/features/checkout/views/CheckoutDeliveryNameInput"
-import CheckoutRecipientInput from "@/features/checkout/views/CheckoutRecipientInput"
+import CheckoutDeliveryNameInput from "@/features/checkout/views/delivery/DeliveryNameInput"
+import CheckoutRecipientInput from "@/features/checkout/views/delivery/RecipientInput"
 import MyPageSectionSubTitle from "../MyPageSectionSubTitle"
 export interface IMyPageDefaultDeliveryNameAndRecipient {
   deliveryInfo: Pick<DeliveryInfo, "deliveryName"> &

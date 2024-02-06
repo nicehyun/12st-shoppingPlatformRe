@@ -4,7 +4,7 @@ import { POSTResponse } from "../types/fetch"
 export const deliveryInfoAPI = {
   getDeliveryInfo: async (
     authorization: string | null | undefined
-  ): Promise<DeliveryInfo | undefined | POSTResponse> => {
+  ): Promise<DeliveryInfo | null | POSTResponse> => {
     if (!authorization)
       return {
         status: 401,

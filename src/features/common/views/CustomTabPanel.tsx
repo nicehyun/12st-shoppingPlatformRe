@@ -7,7 +7,7 @@ interface ITabPanel {
   index: number
 }
 
-const TabPanel = ({ children, index, value }: ITabPanel) => {
+const CustomTabPanel = ({ children, index, value }: ITabPanel) => {
   return (
     <div
       role="tabpanel"
@@ -19,4 +19,4 @@ const TabPanel = ({ children, index, value }: ITabPanel) => {
     </div>
   )
 }
-export default TabPanel
+export default CustomTabPanel

@@ -27,7 +27,7 @@ export async function GET(request: Request) {
     ).then((res) => res.json())
 
     if (response[0] === undefined) {
-      return NextResponse.json(undefined, { status: 200 })
+      return NextResponse.json(null, { status: 200 })
     } else {
       return NextResponse.json(response[0].deliveryInfo, { status: 200 })
     }

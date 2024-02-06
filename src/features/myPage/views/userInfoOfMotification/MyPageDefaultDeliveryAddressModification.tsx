@@ -1,6 +1,6 @@
 import { useUserInput } from "@/features/common/hooks/useUserInput"
 import { Address } from "@/features/common/types/deliveryInfo"
-import AddressInfo from "@/features/common/views/AddressInfo"
+import AddressInfo from "@/features/checkout/views/delivery/AddressInputLayout"
 import { additionalAddressValidator } from "@/features/auth/signUp/utils/validation"
 import MyPageSectionSubTitle from "../MyPageSectionSubTitle"
 

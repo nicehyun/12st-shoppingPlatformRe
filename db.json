@@ -29,6 +29,84 @@
     {
       "checkoutList": [
         {
+          "deliveryName": "배송지명",
+          "recipient": "수령인",
+          "zipcode": "61663",
+          "address": "광주 남구 제중로 20",
+          "additionalAddress": "123",
+          "phone1": "01012341234",
+          "phone2": null,
+          "deliveryMemo": null,
+          "productList": [
+            {
+              "deliveryFree": 3000,
+              "sellCount": 177,
+              "reviewCount": 0,
+              "mallName": "네이버",
+              "price": 38840,
+              "discount": 18,
+              "id": "33197507754",
+              "maker": "나이키",
+              "name": "나이키 레볼루션 6 넥스트 네이처 DC3728-001",
+              "brand": "나이키",
+              "category3": "운동화",
+              "category1": "패션잡화",
+              "image": "https://shopping-phinf.pstatic.net/main_3319750/33197507754.20221017111653.jpg",
+              "category4": "러닝화",
+              "category2": "남성신발",
+              "discountedPrice": 31848.8,
+              "amount": 1
+            }
+          ],
+          "coupon": null,
+          "useMile": 0,
+          "payment": {
+            "selectedPayment": "tosspay"
+          },
+          "getMile": 310,
+          "checkoutDate": "2024-02-06T13:54:15.061Z",
+          "checkoutNumber": "20240206-225415"
+        },
+        {
+          "deliveryName": "배송지명",
+          "recipient": "수령인",
+          "zipcode": "63534",
+          "address": "제주특별자치도 서귀포시 가가로 14",
+          "additionalAddress": "123",
+          "phone1": "01012341234",
+          "phone2": "01012341234",
+          "deliveryMemo": null,
+          "productList": [
+            {
+              "deliveryFree": 3000,
+              "sellCount": 176,
+              "reviewCount": 0,
+              "mallName": "네이버",
+              "price": 38840,
+              "discount": 18,
+              "id": "33197507754",
+              "maker": "나이키",
+              "name": "나이키 레볼루션 6 넥스트 네이처 DC3728-001",
+              "brand": "나이키",
+              "category3": "운동화",
+              "category1": "패션잡화",
+              "image": "https://shopping-phinf.pstatic.net/main_3319750/33197507754.20221017111653.jpg",
+              "category4": "러닝화",
+              "category2": "남성신발",
+              "discountedPrice": 31848.8,
+              "amount": 1
+            }
+          ],
+          "coupon": null,
+          "useMile": 0,
+          "payment": {
+            "selectedPayment": "tosspay"
+          },
+          "getMile": 310,
+          "checkoutDate": "2024-02-06T13:52:30.128Z",
+          "checkoutNumber": "20240206-225230"
+        },
+        {
           "deliveryName": null,
           "recipient": "수령",
           "zipcode": "06035",
@@ -115,11 +193,11 @@
     {
       "email": "test@test.com",
       "deliveryInfo": {
-        "deliveryName": null,
-        "recipient": "수령",
+        "deliveryName": "배송지명",
+        "recipient": "수령인",
         "additionalAddress": "123",
-        "address": "서울 강남구 가로수길 5",
-        "zipcode": "06035",
+        "address": "광주 남구 제중로 20",
+        "zipcode": "61663",
         "phone1": "01012341234",
         "phone2": null
       },
@@ -130,17 +208,37 @@
     {
       "email": "test@test.com",
       "id": 1,
-      "productList": []
+      "productList": [
+        {
+          "deliveryFree": 3000,
+          "sellCount": 177,
+          "reviewCount": 0,
+          "mallName": "네이버",
+          "price": 38840,
+          "discount": 18,
+          "id": "33197507754",
+          "maker": "나이키",
+          "name": "나이키 레볼루션 6 넥스트 네이처 DC3728-001",
+          "brand": "나이키",
+          "category3": "운동화",
+          "category1": "패션잡화",
+          "image": "https://shopping-phinf.pstatic.net/main_3319750/33197507754.20221017111653.jpg",
+          "category4": "러닝화",
+          "category2": "남성신발",
+          "discountedPrice": 31848.8,
+          "amount": 1
+        }
+      ]
     }
   ],
   "users": [
     {
       "email": "test@test.com",
-      "password": "$2b$10$bo2C/aljxDB2NdFAycSFZOysIPGIfmn/lp7lRHDFnt.l.2d0DLCUK",
-      "name": "이승현",
+      "password": "$2b$10$nqu6Xq.ksiEcbN5bcXx4jOWye1SdBtfZ37Gc357iPN.M8gM/mMrCm",
+      "name": "승현",
       "phone": "01012341234",
       "marketingClause": true,
-      "mile": 1240,
+      "mile": 310,
       "id": 1
     }
   ],
@@ -4370,7 +4468,7 @@
     },
     {
       "deliveryFree": 3000,
-      "sellCount": 176,
+      "sellCount": 177,
       "reviewCount": 0,
       "mallName": "네이버",
       "price": 38840,

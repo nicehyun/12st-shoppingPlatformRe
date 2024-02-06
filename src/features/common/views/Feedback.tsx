@@ -1,11 +1,11 @@
 import { AiOutlineExclamationCircle } from "react-icons/ai"
 
-interface ISignUpFeedback {
+interface IFeedback {
   isValid?: boolean
   content: string
 }
 
-const Feedback = ({ content, isValid = false }: ISignUpFeedback) => {
+const Feedback = ({ content, isValid = false }: IFeedback) => {
   return (
     <p
       className={`flex items-center mt-[10px] max-w-[400px] text-[12px] ${

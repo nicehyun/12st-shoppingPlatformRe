@@ -23,14 +23,15 @@ export const useGetDeliveryInfoQuery = () => {
       },
       onError: () => {
         showFeedbackModalWithContent(
-          "상품 정보를 가져오지 못 했습니다. 오류가 계속되면 고객센터에 문의해주세요."
+          "배송지 정보를 가져오지 못 했습니다. 오류가 계속되면 고객센터에 문의해주세요."
         )
       },
       enabled: !!session,
+      staleTime: 1000 * 60 * 60,
     }
   )
 
-  const deliveryInfo = !isFeedbackError(data) && data ? data : undefined
+  const deliveryInfo = !isFeedbackError(data) && data ? data : null
 
   return { deliveryInfo, isLoading, isFetching }
 }

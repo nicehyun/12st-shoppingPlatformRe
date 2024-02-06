@@ -2,7 +2,7 @@ import { Payment } from "@/features/checkout/views/PaymentButton"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { RootState } from "../types/store"
 import { checkToAllAgreeClauseByCheckout } from "../utils/clause"
-import { ProductInCart, ProductsInCart } from "@/features/cart/types/cart"
+import { ProductsInCart } from "@/features/cart/types/cart"
 
 export type CheckoutPayment = {
   value: string
@@ -21,6 +21,7 @@ type InitialCheckoutState = {
   payment: CheckoutPayment
   plannedUseMile: number
   checkoutPendingProductList: ProductsInCart
+  deliveryTabValue: number
 }
 
 const initialCartState: InitialCheckoutState = {
@@ -36,6 +37,7 @@ const initialCartState: InitialCheckoutState = {
     paymentAgency: false,
   },
   checkoutPendingProductList: [],
+  deliveryTabValue: 1,
 }
 
 const checkoutSlice = createSlice({
@@ -118,6 +120,9 @@ const checkoutSlice = createSlice({
     emptyCheckoutPendingProductList(state) {
       state.checkoutPendingProductList = []
     },
+    deliveryTabValueChange(state, actions: PayloadAction<number>) {
+      state.deliveryTabValue = actions.payload
+    },
   },
 })
 
@@ -133,6 +138,7 @@ export const {
   toggleprovisionOfUserInfoClause,
   addCheckoutPendingProductList,
   emptyCheckoutPendingProductList,
+  deliveryTabValueChange,
 } = checkoutSlice.actions
 
 export const selectCheckoutClauseState = (state: RootState) =>
@@ -146,5 +152,8 @@ export const selectCheckoutPlannedUseMileState = (state: RootState) =>
 
 export const selectCheckoutPendingProductListState = (state: RootState) =>
   state.checkout.checkoutPendingProductList
+
+export const selectDeliveryTabValueState = (state: RootState) =>
+  state.checkout.deliveryTabValue
 
 export default checkoutSlice.reducer
