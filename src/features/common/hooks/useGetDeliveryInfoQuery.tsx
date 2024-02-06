@@ -1,14 +1,15 @@
 import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
 import { deliveryInfoAPI } from "@/features/common/models/deliveryInfoAPI"
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { useFeedbackModal } from "./useFeedbackModal"
-import { useFeedbackModalWithError } from "./useFeedbackModalWithError"
 import { isFeedbackError } from "../utils/error"
 
-export const useGetDeliveryInfoQuery = () => {
+export const useGetDeliveryInfoQuery = (
+  isShowSuccessFeedbackModal: boolean
+) => {
+  const queryClient = useQueryClient()
   const { session } = useSessionQuery()
   const { showFeedbackModalWithContent } = useFeedbackModal()
-  const { showFeedbackModalWithErrorMessage } = useFeedbackModalWithError()
 
   const { data, isLoading, isFetching } = useQuery(
     ["deliveryInfo"],
@@ -16,15 +17,15 @@ export const useGetDeliveryInfoQuery = () => {
     {
       onSuccess: (data) => {
         if (data?.status === 401) {
-          showFeedbackModalWithErrorMessage(data.error ?? "")
+          queryClient.setQueryData(["deliveryInfo"], null)
+        }
 
-          return
+        if (isShowSuccessFeedbackModal) {
+          showFeedbackModalWithContent("배송지 수정이 완료되었습니다.")
         }
       },
       onError: () => {
-        showFeedbackModalWithContent(
-          "배송지 정보를 가져오지 못 했습니다. 오류가 계속되면 고객센터에 문의해주세요."
-        )
+        queryClient.setQueryData(["deliveryInfo"], null)
       },
       enabled: !!session,
       staleTime: 1000 * 60 * 60,

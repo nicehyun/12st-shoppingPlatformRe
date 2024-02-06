@@ -3,17 +3,16 @@ import useSelectCoupon from "@/features/checkout/hooks/useSelectCoupon"
 import { ProductInCart } from "@/features/cart/types/cart"
 import Image from "next/image"
 import { accumulateDiscountPrice } from "@/features/common/models/product"
-import useCheckoutPrice from "../hooks/useCheckoutPrice"
 
-interface ICheckoutOrderListEl {
+interface ICheckoutPendingProduct {
   productInfo: ProductInCart
   discountPerProduct: number
 }
 
-const CheckoutOrderListEl = ({
+const CheckoutPendingProduct = ({
   productInfo,
   discountPerProduct,
-}: ICheckoutOrderListEl) => {
+}: ICheckoutPendingProduct) => {
   const { selectedCoupon } = useSelectCoupon()
 
   const { mallName, brand, maker, name, discount, amount, image, price } =
@@ -60,4 +59,4 @@ const CheckoutOrderListEl = ({
   )
 }
 
-export default CheckoutOrderListEl
+export default CheckoutPendingProduct

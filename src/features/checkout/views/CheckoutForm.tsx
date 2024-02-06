@@ -2,7 +2,7 @@
 
 import CheckoutClause from "./CheckoutClause"
 import CheckoutCouponAndMile from "./CheckoutCouponAndMile"
-import CheckoutOrderListInfo from "./CheckoutOrderListInfo"
+import CheckoutOrderListInfo from "./productList/CheckoutOrderListInfo"
 import CheckoutTotalPriceInfo from "./CheckoutTotalPriceInfo"
 import DeliveryInfo from "./delivery/DeliveryInfo"
 import CheckoutButton from "./CheckoutButton"

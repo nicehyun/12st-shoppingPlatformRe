@@ -12,7 +12,7 @@ import { selectDeliveryTabValueState } from "@/redux/features/checkoutSlice"
 
 export const useDeliveryInfoInputContollers = () => {
   const deliveryTabValueState = useAppSelector(selectDeliveryTabValueState)
-  const { deliveryInfo, isLoading } = useGetDeliveryInfoQuery()
+  const { deliveryInfo, isLoading } = useGetDeliveryInfoQuery(false)
 
   const [deliveryName, setDeliveryName] = useState("")
 

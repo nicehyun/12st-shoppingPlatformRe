@@ -6,13 +6,14 @@ import DeliverySectionHeader from "./DeliverySectionHeader"
 import CustomTabPanel from "@/features/common/views/CustomTabPanel"
 import DefalutDeliveryInfo from "./DefalutDeliveryInfo"
 import NewDeliveryInfo from "./NewDeliveryInfo"
+import CheckoutSection from "../CheckoutSection"
 
 const DeliveryInfo = () => {
   const { deliveryTabValue, handleDeliveryTabvalueChange, tabs } =
     useDeliveryTabs()
 
   return (
-    <section className="border-t-[2px] border-black dark:border-white">
+    <CheckoutSection>
       <DeliverySectionHeader />
 
       <CustomTabs
@@ -28,7 +29,7 @@ const DeliveryInfo = () => {
       <CustomTabPanel value={deliveryTabValue} index={1}>
         <NewDeliveryInfo />
       </CustomTabPanel>
-    </section>
+    </CheckoutSection>
   )
 }
 
