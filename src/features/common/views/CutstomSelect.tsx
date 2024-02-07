@@ -12,9 +12,11 @@ interface ICutstomSelect {
   onOpenSelect: () => void
   selectedValue: string
   onChangeSelect: (event: SelectChangeEvent<unknown>) => void
-  noSelectedRenderValue: string
+  noSelectedRenderValue?: string
   isDisabled?: boolean
   selectArray: { renderValue: string; [key: string]: any }[]
+  className?: string
+  isShowNoneSelectItem?: boolean
 }
 
 const CutstomSelect = ({
@@ -27,11 +29,13 @@ const CutstomSelect = ({
   noSelectedRenderValue,
   isDisabled,
   selectArray,
+  className,
+  isShowNoneSelectItem = true,
 }: ICutstomSelect) => {
   return (
     <Select
-      id="coupon-select"
-      name="coupon-select"
+      id={`${id}-select`}
+      name={`${id}-select`}
       open={isSelectOpen}
       onClose={onCloseSelect}
       onOpen={onOpenSelect}
@@ -62,14 +66,17 @@ const CutstomSelect = ({
           border: "rgb(180, 180, 180)",
         },
       }}
-      className={`h-[50px] sm:h-[40px] md:h-[44px] sm:text-[12px] md:text-[14px] w-full bg-white dark:bg-border `}
+      className={`${className} h-[50px] sm:h-[40px] md:h-[44px] sm:text-[12px] md:text-[14px] w-full bg-white dark:bg-border `}
     >
-      <MenuItem
-        value=""
-        className="text-lightBlack sm:text-[12px] md:text-[14px]"
-      >
-        선택안함
-      </MenuItem>
+      {isShowNoneSelectItem && (
+        <MenuItem
+          value=""
+          className="text-lightBlack sm:text-[12px] md:text-[14px]"
+        >
+          선택안함
+        </MenuItem>
+      )}
+
       {selectArray?.map((selectEl, index) => (
         <MenuItem key={`select-${id}-${index}`} value={selectEl.renderValue}>
           {selectEl.renderValue}

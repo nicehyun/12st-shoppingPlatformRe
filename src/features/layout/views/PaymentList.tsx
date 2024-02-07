@@ -1,4 +1,4 @@
-import PaymentButton from "../../checkout/views/PaymentButton"
+import PaymentButton from "../../checkout/views/payment/PaymentButton"
 
 const PaymentList = () => {
   return (

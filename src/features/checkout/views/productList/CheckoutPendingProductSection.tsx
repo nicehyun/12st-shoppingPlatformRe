@@ -4,7 +4,7 @@ import { useCheckoutPendingProductList } from "../../hooks/useCheckoutPendingPro
 import CheckoutPendingProduct from "./CheckoutPendingProduct"
 import DetailButton from "./DetailButton"
 
-const CheckoutPendingProductLayout = () => {
+const CheckoutPendingProductSection = () => {
   const {
     showCheckoutPendingProductList,
     checkoutPendingProductList,
@@ -39,4 +39,4 @@ const CheckoutPendingProductLayout = () => {
   )
 }
 
-export default CheckoutPendingProductLayout
+export default CheckoutPendingProductSection

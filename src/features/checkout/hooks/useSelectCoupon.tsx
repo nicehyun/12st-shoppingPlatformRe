@@ -6,27 +6,21 @@ import {
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { SelectChangeEvent } from "@mui/material"
 import { useCouponQuery } from "./useCouponQuery"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import useCheckoutPrice from "./useCheckoutPrice"
+import { useSelect } from "@/features/common/hooks/useSelect"
 
 export const useSelectCoupon = () => {
-  const [isSelectOpen, setIsSelectOpen] = useState(false)
   const dispatch = useAppDispatch()
   const selectedCoupon = useAppSelector(selectSelectedCoupon)
   const { totalPriceOfCheckedProduct } = useCheckoutPrice()
+
+  const { handleSelectClose, handleSelectOpen, isSelectOpen } = useSelect()
 
   const { coupons, isLoading } = useCouponQuery()
 
   const resetSelectedCoupon = () => {
     dispatch(resetCoupon())
-  }
-
-  const handleSelectClose = () => {
-    setIsSelectOpen(false)
-  }
-
-  const handleSelectOpen = () => {
-    setIsSelectOpen(true)
   }
 
   const handleSelectChange = (event: SelectChangeEvent<unknown>) => {

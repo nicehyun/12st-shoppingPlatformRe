@@ -1,21 +1,23 @@
 "use client"
 
 import ClauseCheckbox from "@/features/common/views/ClauseCheckbox"
-import {
-  resetClause,
-  selectCheckoutClauseState,
-  toggleAgreeToAllClause,
-  toggleCollectionOfUserInfoClause,
-  togglePaymentAgencyClause,
-  toggleprovisionOfUserInfoClause,
-} from "@/redux/features/checkoutSlice"
 import { showBasicModal } from "@/redux/features/modalSlice"
-import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { useEffect } from "react"
+import { useAppDispatch } from "@/redux/hooks"
+import CheckoutSection from "../CheckoutSection"
+import { useCheckoutClause } from "../../hooks/useCheckoutClause"
 
-const CheckoutClause = () => {
-  const { all, collectionOfUserInfo, paymentAgency, provisionOfUserInfo } =
-    useAppSelector(selectCheckoutClauseState)
+const CheckoutClauseSection = () => {
+  const {
+    isAllClauseCheck,
+    isCheckedUserInfoClause,
+    isCheckedPaymentAgencyClause,
+    isCheckedProvisionOfUserInfoClause,
+    toggleAllCheckedClause,
+    togglePaymentAgencyClause,
+    toggleProvisionOfUserInfoClause,
+    toggleUserInfoClause,
+  } = useCheckoutClause()
+
   const dispatch = useAppDispatch()
 
   const handleColletionOfUserInfoClauseClick = () => {
@@ -42,24 +44,20 @@ const CheckoutClause = () => {
     window.open(href)
   }
 
-  useEffect(() => {
-    dispatch(resetClause())
-  }, [])
-
   return (
-    <section className="border-t-[2px] border-black">
+    <CheckoutSection>
       <div className="flex justify-between font-bold border-border">
         <ClauseCheckbox
           clauseType="all"
           label="주문 내용을 확인했으며, 아래 내용에 모두 동의합니다."
           isClause={false}
           classNames="border-b-[1px] border-lightBlack text-[16px]"
-          isChecked={all}
+          isChecked={isAllClauseCheck}
           peer="peer/checkout-all"
           peerChecked={{
             borderColor: "peer-checked/checkout-all:after:border-lightRed",
           }}
-          onClickClauseLabel={() => dispatch(toggleAgreeToAllClause())}
+          onClickClauseLabel={toggleAllCheckedClause}
         />
       </div>
 
@@ -67,14 +65,14 @@ const CheckoutClause = () => {
         clauseType="collectionOfUserInfo"
         label="개인정보 수집/이용 동의"
         isClause={true}
-        isChecked={collectionOfUserInfo}
+        isChecked={isCheckedUserInfoClause}
         isRequired={true}
         peer="peer/checkout-collectionOfUserInfo"
         peerChecked={{
           borderColor:
             "peer-checked/checkout-collectionOfUserInfo:after:border-lightRed",
         }}
-        onClickClauseLabel={() => dispatch(toggleCollectionOfUserInfoClause())}
+        onClickClauseLabel={toggleUserInfoClause}
         onClickDetailClause={handleColletionOfUserInfoClauseClick}
       />
 
@@ -82,14 +80,14 @@ const CheckoutClause = () => {
         clauseType="provisionOfUserInfo"
         label="개인정보 제3자 제공 동의"
         isClause={true}
-        isChecked={provisionOfUserInfo}
+        isChecked={isCheckedProvisionOfUserInfoClause}
         isRequired={true}
         peer="peer/checkout-provisionOfUserInfo"
         peerChecked={{
           borderColor:
             "peer-checked/checkout-provisionOfUserInfo:after:border-lightRed",
         }}
-        onClickClauseLabel={() => dispatch(toggleprovisionOfUserInfoClause())}
+        onClickClauseLabel={toggleProvisionOfUserInfoClause}
         onClickDetailClause={handleProvisionOfUserInfoClauseClick}
       />
 
@@ -97,20 +95,20 @@ const CheckoutClause = () => {
         clauseType="paymentAgencyClause"
         label="결제대행 서비스 이용약관"
         isClause={true}
-        isChecked={paymentAgency}
+        isChecked={isCheckedPaymentAgencyClause}
         isRequired={true}
         peer="peer/checkout-paymentAgencyClause"
         peerChecked={{
           borderColor:
             "peer-checked/checkout-paymentAgencyClause:after:border-lightRed",
         }}
-        onClickClauseLabel={() => dispatch(togglePaymentAgencyClause())}
+        onClickClauseLabel={togglePaymentAgencyClause}
         onClickDetailClause={() =>
           handlePaymentAgencyClauseClick("https://www.inicis.com/terms")
         }
       />
-    </section>
+    </CheckoutSection>
   )
 }
 
-export default CheckoutClause
+export default CheckoutClauseSection

@@ -8,7 +8,7 @@ import DefalutDeliveryInfo from "./DefalutDeliveryInfo"
 import NewDeliveryInfo from "./NewDeliveryInfo"
 import CheckoutSection from "../CheckoutSection"
 
-const DeliveryInfo = () => {
+const DeliveryInfoSection = () => {
   const { deliveryTabValue, handleDeliveryTabvalueChange, tabs } =
     useDeliveryTabs()
 
@@ -33,4 +33,4 @@ const DeliveryInfo = () => {
   )
 }
 
-export default DeliveryInfo
+export default DeliveryInfoSection

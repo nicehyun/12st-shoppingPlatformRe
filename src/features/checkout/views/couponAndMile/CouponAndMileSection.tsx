@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import CouponSelect from "./CouponSelect"
 import CouponAndMileWrap from "./CouponAndMileWrap"
 import CheckoutSection from "../CheckoutSection"
@@ -9,24 +8,24 @@ import CouponAndMileHeader from "./CouponAndMileHeader"
 import OpecityContainer from "../OpecityContainer"
 import MileInput from "./MileInput"
 import AvailableMileInfo from "./AvailableMileInfo"
+import ArrowToggleButton from "../ArrowToggleButton"
+import { useToggle } from "../../hooks/useToggle"
 
-const CouponAndMileLayout = () => {
-  const [isShowDetail, setIsShowDetail] = useState(true)
-
-  const toggleShowDetail = () => {
-    setIsShowDetail((prev) => !prev)
-  }
+const CouponAndMileSection = () => {
+  const { isShowDetail, toggleShowDetail } = useToggle()
 
   return (
     <CheckoutSection>
       <CouponAndMileHeader>
-        <SelectedCouponAndMileInfo
-          isShowDetail={isShowDetail}
-          toggleShowDetail={toggleShowDetail}
-        />
+        <SelectedCouponAndMileInfo>
+          <ArrowToggleButton
+            isShowDetail={isShowDetail}
+            toggleShowDetail={toggleShowDetail}
+          />
+        </SelectedCouponAndMileInfo>
       </CouponAndMileHeader>
 
-      <OpecityContainer isShowDetail={isShowDetail}>
+      <OpecityContainer isShowDetail={isShowDetail} maxHeight={300}>
         <CouponAndMileWrap classification="쿠폰">
           <CouponSelect />
         </CouponAndMileWrap>
@@ -40,4 +39,4 @@ const CouponAndMileLayout = () => {
   )
 }
 
-export default CouponAndMileLayout
+export default CouponAndMileSection

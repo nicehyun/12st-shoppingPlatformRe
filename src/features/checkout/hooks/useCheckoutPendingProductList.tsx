@@ -2,7 +2,8 @@ import { useFeedbackModal } from "@/features/common/hooks/useFeedbackModal"
 import { ROUTE, useNavigations } from "@/features/common/hooks/useNavigations"
 import { selectCheckoutPendingProductListState } from "@/redux/features/checkoutSlice"
 import { useAppSelector } from "@/redux/hooks"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
+import { useToggle } from "./useToggle"
 
 export const useCheckoutPendingProductList = () => {
   const { routeTo } = useNavigations()
@@ -11,15 +12,11 @@ export const useCheckoutPendingProductList = () => {
     selectCheckoutPendingProductListState
   )
 
-  const [isShowDetail, setIsShowDetail] = useState(false)
+  const { isShowDetail, toggleShowDetail } = useToggle()
 
   const showCheckoutPendingProductList = isShowDetail
     ? checkoutPendingProductList
     : checkoutPendingProductList.slice(0, 1)
-
-  const toggleShowDetail = () => {
-    setIsShowDetail((prev) => !prev)
-  }
 
   useEffect(() => {
     if (checkoutPendingProductList.length === 0) {

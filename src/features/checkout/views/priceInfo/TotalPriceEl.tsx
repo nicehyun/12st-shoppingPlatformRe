@@ -6,6 +6,7 @@ interface ITotalPriceEl {
   icon?: ReactNode
   isFinalPrice?: boolean
   price: number
+  className?: string
 }
 
 const TotalPriceEl = ({
@@ -13,9 +14,10 @@ const TotalPriceEl = ({
   isFinalPrice,
   price,
   individualTitle,
+  className,
 }: ITotalPriceEl) => {
   return (
-    <div className="flex justify-between mb-[10px] items-center">
+    <div className={`${className} flex justify-between mb-[10px] items-center`}>
       <span className="sm:text-[12px] md:text-[14px]">{individualTitle}</span>
       <span
         className={`${

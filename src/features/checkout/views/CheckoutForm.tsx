@@ -1,25 +1,25 @@
 "use client"
 
-import CheckoutClause from "./CheckoutClause"
-import CouponAndMileLayout from "./couponAndMile/CouponAndMileLayout"
-import CheckoutTotalPriceInfo from "./CheckoutTotalPriceInfo"
-import DeliveryInfo from "./delivery/DeliveryInfo"
+import CheckoutClauseSection from "./checkoutClause/CheckoutClauseSection"
+import CouponAndMileSection from "./couponAndMile/CouponAndMileSection"
+import TotalPriceSection from "./priceInfo/TotalPriceSection"
+import DeliveryInfoSection from "./delivery/DeliveryInfoSection"
 import CheckoutButton from "./CheckoutButton"
-import CheckoutPayment from "./CheckoutPayment"
+import PaymentSection from "./payment/PaymentSection"
 import { useCheckoutMutaion } from "../hooks/useCheckoutMutaion"
-import CheckoutPendingProductLayout from "./productList/CheckoutPendingProductLayout"
+import CheckoutPendingProductSection from "./productList/CheckoutPendingProductSection"
 
 const CheckoutForm = () => {
   const { checkoutMutateAsync, isCheckoutLoading } = useCheckoutMutaion()
 
   return (
     <form onSubmit={checkoutMutateAsync} className="max-w-[800px] mx-auto">
-      <DeliveryInfo />
-      <CheckoutPendingProductLayout />
-      <CouponAndMileLayout />
-      <CheckoutPayment />
-      <CheckoutTotalPriceInfo />
-      <CheckoutClause />
+      <DeliveryInfoSection />
+      <CheckoutPendingProductSection />
+      <CouponAndMileSection />
+      <PaymentSection />
+      <TotalPriceSection />
+      <CheckoutClauseSection />
       <CheckoutButton isCheckoutLoading={isCheckoutLoading} />
     </form>
   )
