@@ -10,9 +10,7 @@ export const couponAPI = {
         }
       )
 
-      const coupons = await response.json()
-
-      return coupons
+      return response.json()
     } catch (error: any) {
       throw new Error(error)
     }

@@ -8,7 +8,7 @@ interface IInput {
   id: string
   classNames?: string
   placeholder?: string
-  value?: string
+  value?: string | number
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void
   onBlur?: () => void
   isReadOnly?: boolean

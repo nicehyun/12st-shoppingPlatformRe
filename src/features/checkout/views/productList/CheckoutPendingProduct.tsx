@@ -1,8 +1,8 @@
 import { numberToLocaleString } from "@/features/common/utils/price"
-import useSelectCoupon from "@/features/checkout/hooks/useSelectCoupon"
 import { ProductInCart } from "@/features/cart/types/cart"
 import Image from "next/image"
 import { accumulateDiscountPrice } from "@/features/common/models/product"
+import { useSelectCoupon } from "../../hooks/useSelectCoupon"
 
 interface ICheckoutPendingProduct {
   productInfo: ProductInCart
@@ -38,12 +38,12 @@ const CheckoutPendingProduct = ({
           <span>수량 {amount}개</span>
         </p>
 
-        {selectedCoupon && (
-          <span className="text-lightRed md:text-[14px] sm:text-[12px] mt-[10px] inline-block">
-            쿠폰적용가 :{" "}
-            {numberToLocaleString(productPrice - discountPerProduct)}원
-          </span>
-        )}
+        <span className="text-lightRed h-[28px] w-full md:text-[14px] sm:text-[12px] mt-[10px] block">
+          {selectedCoupon &&
+            `쿠폰적용가 : ${numberToLocaleString(
+              productPrice - discountPerProduct
+            )}원`}
+        </span>
       </div>
 
       <div className="relative w-[200px] h-[200px] lg:w-[180px] lg:h-[180px] md:w-[130px] md:h-[130px] sm:w-[120px] sm:h-[120px] ml-[20px]">

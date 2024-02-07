@@ -4,7 +4,7 @@ import { useCheckoutPendingProductList } from "../../hooks/useCheckoutPendingPro
 import CheckoutPendingProduct from "./CheckoutPendingProduct"
 import DetailButton from "./DetailButton"
 
-const CheckoutOrderListInfo = () => {
+const CheckoutPendingProductLayout = () => {
   const {
     showCheckoutPendingProductList,
     checkoutPendingProductList,
@@ -17,6 +17,7 @@ const CheckoutOrderListInfo = () => {
   return (
     <CheckoutSection>
       <h3 className="py-[18px] font-bold">주문상품 정보</h3>
+
       <ul>
         {showCheckoutPendingProductList?.map((product, index) => (
           <CheckoutPendingProduct
@@ -38,4 +39,4 @@ const CheckoutOrderListInfo = () => {
   )
 }
 
-export default CheckoutOrderListInfo
+export default CheckoutPendingProductLayout

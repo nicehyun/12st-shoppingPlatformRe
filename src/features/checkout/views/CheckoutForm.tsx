@@ -1,13 +1,13 @@
 "use client"
 
 import CheckoutClause from "./CheckoutClause"
-import CheckoutCouponAndMile from "./CheckoutCouponAndMile"
-import CheckoutOrderListInfo from "./productList/CheckoutOrderListInfo"
+import CouponAndMileLayout from "./couponAndMile/CouponAndMileLayout"
 import CheckoutTotalPriceInfo from "./CheckoutTotalPriceInfo"
 import DeliveryInfo from "./delivery/DeliveryInfo"
 import CheckoutButton from "./CheckoutButton"
 import CheckoutPayment from "./CheckoutPayment"
 import { useCheckoutMutaion } from "../hooks/useCheckoutMutaion"
+import CheckoutPendingProductLayout from "./productList/CheckoutPendingProductLayout"
 
 const CheckoutForm = () => {
   const { checkoutMutateAsync, isCheckoutLoading } = useCheckoutMutaion()
@@ -15,8 +15,8 @@ const CheckoutForm = () => {
   return (
     <form onSubmit={checkoutMutateAsync} className="max-w-[800px] mx-auto">
       <DeliveryInfo />
-      <CheckoutOrderListInfo />
-      <CheckoutCouponAndMile />
+      <CheckoutPendingProductLayout />
+      <CouponAndMileLayout />
       <CheckoutPayment />
       <CheckoutTotalPriceInfo />
       <CheckoutClause />

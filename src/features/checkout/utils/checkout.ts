@@ -92,6 +92,8 @@ export const parseCheckoutForm = (event: FormEvent<HTMLFormElement>) => {
   const provisionOfUserInfo = formData.get("provisionOfUserInfo") as string
   const paymentAgencyClause = formData.get("paymentAgencyClause") as string
 
+  const useMile = formData.get("useMile") as string
+
   return {
     deliveryName,
     additionalAddress,
@@ -108,5 +110,6 @@ export const parseCheckoutForm = (event: FormEvent<HTMLFormElement>) => {
     collectionOfUserInfo,
     provisionOfUserInfo,
     paymentAgencyClause,
+    useMile,
   }
 }

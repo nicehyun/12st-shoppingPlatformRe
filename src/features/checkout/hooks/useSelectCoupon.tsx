@@ -5,15 +5,31 @@ import {
 } from "@/redux/features/couponSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { SelectChangeEvent } from "@mui/material"
-import useCouponQuery from "./useCouponQuery"
+import { useCouponQuery } from "./useCouponQuery"
+import { useEffect, useState } from "react"
+import useCheckoutPrice from "./useCheckoutPrice"
 
-const useSelectCoupon = () => {
+export const useSelectCoupon = () => {
+  const [isSelectOpen, setIsSelectOpen] = useState(false)
   const dispatch = useAppDispatch()
   const selectedCoupon = useAppSelector(selectSelectedCoupon)
+  const { totalPriceOfCheckedProduct } = useCheckoutPrice()
 
-  const { coupons } = useCouponQuery()
+  const { coupons, isLoading } = useCouponQuery()
 
-  const handleSelectedCoupon = (event: SelectChangeEvent<unknown>) => {
+  const resetSelectedCoupon = () => {
+    dispatch(resetCoupon())
+  }
+
+  const handleSelectClose = () => {
+    setIsSelectOpen(false)
+  }
+
+  const handleSelectOpen = () => {
+    setIsSelectOpen(true)
+  }
+
+  const handleSelectChange = (event: SelectChangeEvent<unknown>) => {
     const findedCoupon = coupons?.find(
       (coupon) => coupon.name === event.target.value
     )
@@ -21,18 +37,24 @@ const useSelectCoupon = () => {
     findedCoupon
       ? dispatch(selectCoupon(findedCoupon))
       : dispatch(resetCoupon())
+
+    handleSelectClose()
   }
 
-  const resetSelectedCoupon = () => {
-    dispatch(resetCoupon())
-  }
+  const isAvaliableSelectCoupon = totalPriceOfCheckedProduct > 15000
+
+  useEffect(() => {
+    resetSelectedCoupon()
+  }, [])
 
   return {
     availableCoupons: coupons,
     selectedCoupon,
-    handleSelectedCoupon,
-    resetSelectedCoupon,
+    isSelectOpen,
+    handleSelectClose,
+    handleSelectOpen,
+    handleSelectChange,
+    isLoading,
+    isAvaliableSelectCoupon,
   }
 }
-
-export default useSelectCoupon

@@ -6,8 +6,9 @@ export async function GET(request: Request) {
   const accessToken = request.headers.get("authorization")
 
   if (!accessToken || !verifyAccessToken(accessToken)) {
-    return new Response(JSON.stringify({ error: "Not Authorization" }), {
+    return NextResponse.json({
       status: 401,
+      error: "유효하지 않은 AccessToken입니다.",
     })
   }
 
