@@ -1,10 +1,10 @@
 import {
+  CheckoutClauseCheck,
   CheckoutList,
   CheckoutPaymentInfo,
 } from "@/features/checkout/types/checkout"
 import { useFeedbackModal } from "@/features/common/hooks/useFeedbackModal"
 import {
-  CheckoutClauseCheck,
   selectCheckoutPaymentState,
   selectCheckoutPendingProductListState,
   selectCheckoutPlannedUseMileState,
@@ -25,8 +25,10 @@ import useCheckoutPrice from "./useCheckoutPrice"
 import { parseCheckoutForm } from "../utils/checkout"
 import { useUpdateDeliveryInfoMutation } from "@/features/common/hooks/useUpdateDeliveryInfoMutation"
 import { useSelectCoupon } from "./useSelectCoupon"
+import { ROUTE, useNavigations } from "@/features/common/hooks/useNavigations"
 
 export const useCheckoutMutaion = () => {
+  const { routeTo } = useNavigations()
   const { updateDeliveryInfoMutateAsync } = useUpdateDeliveryInfoMutation(false)
   const queryClient = useQueryClient()
   const { session } = useSessionQuery()
@@ -69,6 +71,8 @@ export const useCheckoutMutaion = () => {
           queryClient.invalidateQueries(["checkoutList"])
           queryClient.invalidateQueries(["deliveryInfo"])
           queryClient.invalidateQueries(["userMile"])
+
+          routeTo(ROUTE.CHECKOUTCOMFIRMED)
 
           return
         }

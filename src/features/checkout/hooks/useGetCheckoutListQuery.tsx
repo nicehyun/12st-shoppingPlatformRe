@@ -1,16 +1,17 @@
 import { CheckoutList } from "@/features/checkout/types/checkout"
-import useSessionQuery from "@/features/auth/signIn/hooks/useSessionQuery"
+
 import { useQuery } from "@tanstack/react-query"
 import { checkoutAPI } from "../models/checkoutAPI"
+import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
 
 export const useGetCheckoutListQuery = () => {
-  const { sessionQuery } = useSessionQuery()
+  const { session } = useSessionQuery()
 
   const { data, isLoading, isFetching } = useQuery(
     ["checkoutList"],
-    () => checkoutAPI.getCheckoutList(sessionQuery?.user.accessToken),
+    () => checkoutAPI.getCheckoutList(session?.user.accessToken),
     {
-      enabled: !!sessionQuery,
+      enabled: !!session,
     }
   )
   const checkoutList: CheckoutList[] = (data ?? []) as CheckoutList[]

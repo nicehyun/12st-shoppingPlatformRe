@@ -13,7 +13,7 @@ interface IProductMainInfo {
 }
 
 const ProductMainInfo = ({ productId }: IProductMainInfo) => {
-  const { productDetail } = useGetProductDetailQuery(productId)
+  const { productDetail, isLoading } = useGetProductDetailQuery(productId)
 
   if (!productDetail) return <></>
 
@@ -41,8 +41,14 @@ const ProductMainInfo = ({ productId }: IProductMainInfo) => {
         <ProductDeliveryInfo deliveryFree={productDetail.deliveryFree} />
 
         <div className="mt-[20px] grid grid-cols-2 gap-[10px] h-[50px] font-bold">
-          <AddProductInCartButton productDetail={productDetail} />
-          <DirectCheckoutRouteButton productDetail={productDetail} />
+          <AddProductInCartButton
+            productDetail={productDetail}
+            isLoading={isLoading}
+          />
+          <DirectCheckoutRouteButton
+            productDetail={productDetail}
+            isLoading={isLoading}
+          />
         </div>
       </div>
     </section>

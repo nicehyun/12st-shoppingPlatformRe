@@ -6,14 +6,20 @@ import LoadingButton from "@/features/common/views/LoadingButton"
 
 interface IAddProductInCartButton {
   productDetail: Product
+  isLoading: boolean
 }
 
-const AddProductInCartButton = ({ productDetail }: IAddProductInCartButton) => {
-  const { addMutate, isLoading } = useAddToCartMutaion(productDetail)
+const AddProductInCartButton = ({
+  productDetail,
+  isLoading,
+}: IAddProductInCartButton) => {
+  const { addMutate, isLoading: isAddToCartLoading } =
+    useAddToCartMutaion(productDetail)
 
   return (
     <LoadingButton
-      isLoading={isLoading}
+      isDisabled={isLoading}
+      isLoading={isAddToCartLoading}
       onClick={addMutate}
       content="장바구니 담기"
       className="border-border border-[1px]"

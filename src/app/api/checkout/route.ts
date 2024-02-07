@@ -1,4 +1,7 @@
-import { CheckoutList } from "@/features/checkout/types/checkout"
+import {
+  CheckoutClauseCheck,
+  CheckoutList,
+} from "@/features/checkout/types/checkout"
 import {
   accumulationOfProductsPrice,
   junkOfNoMoreThanOneDigit,
@@ -8,7 +11,7 @@ import {
   nameValidator,
   phoneValidator,
 } from "@/features/auth/signUp/utils/validation"
-import { CheckoutClauseCheck } from "@/redux/features/checkoutSlice"
+
 import { NextRequest, NextResponse } from "next/server"
 import { verifyAccessToken } from "@/features/common/utils/jwt"
 import { formatCheckoutNumber } from "@/features/checkout/utils/checkout"
@@ -40,9 +43,13 @@ export async function GET(request: Request) {
       }
     ).then((res) => res.json())
 
-    const checkoutData = response[0]
+    const prevCheckoutList = response[0]
 
-    return NextResponse.json(checkoutData?.checkoutList, { status: 200 })
+    if (prevCheckoutList === undefined) {
+      return NextResponse.json([], { status: 200 })
+    } else {
+      return NextResponse.json(prevCheckoutList.checkoutList, { status: 200 })
+    }
   } catch (error: any) {
     throw new Error(error)
   }

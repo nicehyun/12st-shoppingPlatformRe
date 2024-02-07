@@ -1,13 +1,19 @@
-import { CheckoutList } from "@/features/checkout/types/checkout"
+import {
+  CheckoutClauseCheck,
+  CheckoutList,
+} from "@/features/checkout/types/checkout"
 import { POSTResponse } from "@/features/common/types/fetch"
 import { Product } from "@/features/common/types/product"
-import { CheckoutClauseCheck } from "@/redux/features/checkoutSlice"
 
 export const checkoutAPI = {
   getCheckoutList: async (
     authorization: string | null | undefined
-  ): Promise<CheckoutList | null> => {
-    if (!authorization) return null
+  ): Promise<CheckoutList | POSTResponse> => {
+    if (!authorization)
+      return {
+        status: 401,
+        error: "유효하지 않은 AccessToken입니다.",
+      }
 
     try {
       const response = await fetch(

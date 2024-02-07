@@ -8,10 +8,12 @@ import { useAppDispatch } from "@/redux/hooks"
 
 interface IDirectCheckoutRouteButton {
   productDetail: Product
+  isLoading: boolean
 }
 
 const DirectCheckoutRouteButton = ({
   productDetail,
+  isLoading,
 }: IDirectCheckoutRouteButton) => {
   const dispatch = useAppDispatch()
   const { session } = useSessionQuery()
@@ -27,6 +29,7 @@ const DirectCheckoutRouteButton = ({
 
   return (
     <Button
+      isDisabled={isLoading}
       onClick={handleCheckoutClick}
       content="바로 구매하기"
       classNames="bg-black text-white dark:bg-white dark:text-black shadow dark:shadow-whiteShadow"
