@@ -1,7 +1,7 @@
 import SectionTitle from "../SectionTitle"
 import HeartProductList from "./HeartProductList"
 
-const HeartProductListInfo = () => {
+const HeartProductListInfoSection = () => {
   return (
     <section>
       <SectionTitle title="HEART" />
@@ -11,4 +11,4 @@ const HeartProductListInfo = () => {
   )
 }
 
-export default HeartProductListInfo
+export default HeartProductListInfoSection

@@ -33,58 +33,39 @@
           "recipient": "수령인",
           "zipcode": "61663",
           "address": "광주 남구 제중로 20",
-          "additionalAddress": "123dadssad",
-          "phone1": "01012341111",
-          "phone2": "01012341234",
+          "additionalAddress": "123",
+          "phone1": "01012341234",
+          "phone2": null,
           "deliveryMemo": null,
           "productList": [
             {
-              "id": "10027645998",
-              "discountedPrice": 23655,
-              "price": 28500,
-              "maker": "",
-              "name": "[당일발송] 5인치 밴딩 반바지 퓨어쇼츠 웨이브테크 나일론 쇼츠 화이트워터보이즈",
-              "deliveryFree": 0,
-              "sellCount": 156,
-              "discount": 17,
-              "mallName": "화이트워터보이즈",
-              "image": "https://shopping-phinf.pstatic.net/main_1002764/10027645998.13.jpg",
-              "category3": "바지",
-              "category2": "남성의류",
-              "reviewCount": 0,
-              "brand": "화이트워터보이즈",
-              "category1": "패션의류",
-              "category4": "",
-              "amount": 1
-            },
-            {
-              "deliveryFree": 3000,
-              "sellCount": 177,
-              "reviewCount": 0,
+              "price": 68790,
               "mallName": "네이버",
-              "price": 38840,
-              "discount": 18,
-              "id": "33197507754",
-              "maker": "나이키",
-              "name": "나이키 레볼루션 6 넥스트 네이처 DC3728-001",
-              "brand": "나이키",
-              "category3": "운동화",
-              "category1": "패션잡화",
-              "image": "https://shopping-phinf.pstatic.net/main_3319750/33197507754.20221017111653.jpg",
               "category4": "러닝화",
+              "id": "27944544597",
+              "maker": "나이키",
+              "discount": 22,
+              "brand": "나이키",
+              "image": "https://shopping-phinf.pstatic.net/main_2794454/27944544597.20221027165253.jpg",
+              "deliveryFree": 3000,
+              "category1": "패션잡화",
+              "category3": "운동화",
+              "sellCount": 86,
+              "reviewCount": 0,
+              "name": "나이키 에어맥스 AP CU4826-100",
+              "discountedPrice": 53656.2,
               "category2": "남성신발",
-              "discountedPrice": 31848.8,
               "amount": 1
             }
           ],
           "coupon": null,
-          "useMile": 310,
+          "useMile": 0,
           "payment": {
-            "selectedPayment": "tosspay"
+            "selectedPayment": "naverpay"
           },
-          "getMile": 550,
-          "checkoutDate": "2024-02-07T12:42:18.384Z",
-          "checkoutNumber": "20240207-214218"
+          "getMile": 530,
+          "checkoutDate": "2024-02-09T08:04:18.671Z",
+          "checkoutNumber": "20240209-170418"
         },
         {
           "deliveryName": "배송지명",
@@ -98,7 +79,7 @@
           "productList": [
             {
               "deliveryFree": 3000,
-              "sellCount": 177,
+              "sellCount": 178,
               "reviewCount": 0,
               "mallName": "네이버",
               "price": 38840,
@@ -122,22 +103,22 @@
             "selectedPayment": "tosspay"
           },
           "getMile": 310,
-          "checkoutDate": "2024-02-06T13:54:15.061Z",
-          "checkoutNumber": "20240206-225415"
+          "checkoutDate": "2024-02-09T08:03:51.149Z",
+          "checkoutNumber": "20240209-170351"
         },
         {
           "deliveryName": "배송지명",
           "recipient": "수령인",
-          "zipcode": "63534",
-          "address": "제주특별자치도 서귀포시 가가로 14",
+          "zipcode": "61663",
+          "address": "광주 남구 제중로 20",
           "additionalAddress": "123",
           "phone1": "01012341234",
-          "phone2": "01012341234",
+          "phone2": null,
           "deliveryMemo": null,
           "productList": [
             {
               "deliveryFree": 3000,
-              "sellCount": 176,
+              "sellCount": 178,
               "reviewCount": 0,
               "mallName": "네이버",
               "price": 38840,
@@ -161,86 +142,8 @@
             "selectedPayment": "tosspay"
           },
           "getMile": 310,
-          "checkoutDate": "2024-02-06T13:52:30.128Z",
-          "checkoutNumber": "20240206-225230"
-        },
-        {
-          "deliveryName": null,
-          "recipient": "수령",
-          "zipcode": "06035",
-          "address": "서울 강남구 가로수길 5",
-          "additionalAddress": "123",
-          "phone1": "01012341234",
-          "phone2": null,
-          "deliveryMemo": null,
-          "productList": [
-            {
-              "deliveryFree": 3000,
-              "sellCount": 175,
-              "reviewCount": 0,
-              "mallName": "네이버",
-              "price": 38840,
-              "discount": 18,
-              "id": "33197507754",
-              "maker": "나이키",
-              "name": "나이키 레볼루션 6 넥스트 네이처 DC3728-001",
-              "brand": "나이키",
-              "category3": "운동화",
-              "category1": "패션잡화",
-              "image": "https://shopping-phinf.pstatic.net/main_3319750/33197507754.20221017111653.jpg",
-              "category4": "러닝화",
-              "category2": "남성신발",
-              "discountedPrice": 31848.8,
-              "amount": 1
-            }
-          ],
-          "coupon": null,
-          "useMile": 0,
-          "payment": {
-            "selectedPayment": "payco"
-          },
-          "getMile": 310,
-          "checkoutDate": "2024-02-06T07:06:41.218Z",
-          "checkoutNumber": "20240206-160641"
-        },
-        {
-          "deliveryName": null,
-          "recipient": "수령인",
-          "zipcode": "04766",
-          "address": "서울 성동구 서울숲길 17",
-          "additionalAddress": "123",
-          "phone1": "01012341234",
-          "phone2": null,
-          "deliveryMemo": null,
-          "productList": [
-            {
-              "deliveryFree": 3000,
-              "sellCount": 175,
-              "reviewCount": 0,
-              "mallName": "네이버",
-              "price": 38840,
-              "discount": 18,
-              "id": "33197507754",
-              "maker": "나이키",
-              "name": "나이키 레볼루션 6 넥스트 네이처 DC3728-001",
-              "brand": "나이키",
-              "category3": "운동화",
-              "category1": "패션잡화",
-              "image": "https://shopping-phinf.pstatic.net/main_3319750/33197507754.20221017111653.jpg",
-              "category4": "러닝화",
-              "category2": "남성신발",
-              "discountedPrice": 31848.8,
-              "amount": 1
-            }
-          ],
-          "coupon": null,
-          "useMile": 0,
-          "payment": {
-            "selectedPayment": "tosspay"
-          },
-          "getMile": 310,
-          "checkoutDate": "2024-02-06T07:02:45.523Z",
-          "checkoutNumber": "20240206-160245"
+          "checkoutDate": "2024-02-09T08:03:37.684Z",
+          "checkoutNumber": "20240209-170337"
         }
       ],
       "id": 1
@@ -276,7 +179,7 @@
       "name": "승현",
       "phone": "01012341234",
       "marketingClause": true,
-      "mile": 550,
+      "mile": 1700,
       "id": 1
     }
   ],

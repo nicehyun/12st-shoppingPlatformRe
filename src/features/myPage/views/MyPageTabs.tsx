@@ -39,6 +39,7 @@ const MyPageTabs = ({
       />
     ))
   }
+
   return (
     <Box sx={{ borderColor: "#d2d2d2" }}>
       <Tabs

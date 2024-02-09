@@ -1,6 +1,7 @@
 import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
 import { useFeedbackModal } from "@/features/common/hooks/useFeedbackModal"
 import { productHeartAPI } from "@/features/common/models/heartAPI"
+import { isFeedbackError } from "@/features/common/utils/error"
 import { useQuery } from "@tanstack/react-query"
 
 export const useGetHeartListQuery = () => {
@@ -21,7 +22,7 @@ export const useGetHeartListQuery = () => {
     }
   )
 
-  const heartList = data ?? []
+  const heartList = !isFeedbackError(data) && data ? data : []
 
   return { heartList, isLoading, isFetching }
 }

@@ -1,7 +1,7 @@
-import MyPageListHeaderLayout from "../MyPageListHeaderLayout"
+import MyPageListHeaderLayout from "../MyPageListTableHeader"
 import MyPageTableHeaderEl from "../MyPageTableHeaderEl"
 
-const MyPageCancelListHeader = () => {
+const CancelListHeader = () => {
   const cancelHeaderList = [
     { title: "CS구분", id: "CSType", width: "w-1/12" },
     { title: "주문번호", id: "checkoutNumber", width: "w-1/3" },
@@ -25,4 +25,4 @@ const MyPageCancelListHeader = () => {
   )
 }
 
-export default MyPageCancelListHeader
+export default CancelListHeader

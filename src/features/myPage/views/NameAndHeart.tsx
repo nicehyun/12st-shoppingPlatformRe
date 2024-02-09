@@ -5,10 +5,15 @@ import { ROUTE, useNavigations } from "@/features/common/hooks/useNavigations"
 import Button from "@/features/common/views/Button"
 
 import { BsFillSuitHeartFill } from "react-icons/bs"
+import SekeletonNameAndHeart from "./SekeletonNameAndHeart"
 
-const MyPageNameAndHeart = () => {
-  const { session } = useSessionQuery()
+const NameAndHeart = () => {
+  const { session, isSessionCheckLoading } = useSessionQuery()
   const { routeTo } = useNavigations()
+
+  if (isSessionCheckLoading) {
+    return <SekeletonNameAndHeart />
+  }
 
   return (
     <section className="flex sm:items-center md:items-center justify-between dark:bg-white sm:bg-black md:bg-black lg:dark:bg-black xl:dark:bg-black sm:text-white md:text-white dark:text-black h-[120px] w-full sm:px-[20px] md:px-[20px] sm:border-b-[1px] md:border-b-[1px] sm:border-border md:border-border">
@@ -28,4 +33,4 @@ const MyPageNameAndHeart = () => {
   )
 }
 
-export default MyPageNameAndHeart
+export default NameAndHeart

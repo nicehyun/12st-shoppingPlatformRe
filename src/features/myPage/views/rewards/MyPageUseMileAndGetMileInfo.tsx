@@ -3,7 +3,7 @@
 import { Box } from "@mui/material"
 import MyPageSectionSubTitle from "../MyPageSectionSubTitle"
 import MyPageMileTebPanel from "./MyPageUseMileTebPanel"
-import { useTabValueHandler } from "@/features/checkout/hooks/useTabValueHandler"
+import { useTabValueHandler } from "@/features/common/hooks/useTabValueHandler"
 import MyPageTabs from "../MyPageTabs"
 
 const MyPageUseMileAndGetMileInfo = () => {

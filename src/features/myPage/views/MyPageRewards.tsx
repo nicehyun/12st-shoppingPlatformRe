@@ -1,8 +1,8 @@
 "use client"
 import { ROUTE, useNavigations } from "@/features/common/hooks/useNavigations"
-import useCouponQuery from "@/features/checkout/hooks/useCouponQuery"
 import { useUserMileQuery } from "@/features/checkout/hooks/useGetUserMileQuery"
 import MyPageRewardsEl from "./MyPageRewardsEl"
+import { useCouponQuery } from "@/features/checkout/hooks/useCouponQuery"
 
 const MyPageRewards = () => {
   const { coupons, isLoading: isCouponsLoading } = useCouponQuery()

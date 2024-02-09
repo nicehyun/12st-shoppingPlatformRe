@@ -1,4 +1,4 @@
-import HeartProductListInfo from "@/features/myPage/views/heartProductList/HeartProductListInfo"
+import HeartProductListInfo from "@/features/myPage/views/heartProductList/HeartProductListInfoSection"
 
 const MyPageHeartProductListSection = () => {
   return <HeartProductListInfo />

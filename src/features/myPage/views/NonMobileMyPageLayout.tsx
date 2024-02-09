@@ -1,7 +1,7 @@
-import { ReactNode } from "react"
 import MyPageCategory from "./MyPageCategory"
-import MyPageNameAndHeart from "./MyPageNameAndHeart"
+import NameAndHeart from "./NameAndHeart"
 import MyPageRewards from "./MyPageRewards"
+import { ReactNode } from "react"
 
 interface INonMobileMyPageLayout {
   children: ReactNode
@@ -9,17 +9,18 @@ interface INonMobileMyPageLayout {
 
 const NonMobileMyPageLayout = ({ children }: INonMobileMyPageLayout) => {
   return (
-    <>
+    <div className="flex sm:hidden md:hidden sm:opacity-0 md:opacity-0">
       <div className="w-[200px] h-full mr-[40px]">
-        <MyPageNameAndHeart />
+        <NameAndHeart />
         <MyPageCategory />
       </div>
 
       <div className="w-full">
         <MyPageRewards />
+
         {children}
       </div>
-    </>
+    </div>
   )
 }
 

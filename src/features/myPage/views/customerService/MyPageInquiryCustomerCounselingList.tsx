@@ -1,4 +1,4 @@
-import MyPageListHeaderLayout from "../MyPageListHeaderLayout"
+import MyPageListHeaderLayout from "../MyPageListTableHeader"
 import MyPageTableHeaderEl from "../MyPageTableHeaderEl"
 import MyPageInquiryCustomerCounselingContentList from "./MyPageInquiryCustomerCounselingContentList"
 import MyPageInquiryCustomerCounselingWriteButton from "./MyPageInquiryCustomerCounselingWriteButton"

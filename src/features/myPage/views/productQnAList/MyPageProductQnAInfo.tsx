@@ -1,6 +1,6 @@
 import MyPageTableHeaderEl from "../MyPageTableHeaderEl"
 import SectionTitle from "../SectionTitle"
-import MyPageListHeaderLayout from "../MyPageListHeaderLayout"
+import MyPageListHeaderLayout from "../MyPageListTableHeader"
 import MyPageProductQnAContentList from "./MyPageProductQnAContentList"
 
 const MyPageProductQnAInfo = () => {

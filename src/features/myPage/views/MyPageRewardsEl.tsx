@@ -1,6 +1,6 @@
 import { numberToLocaleString } from "@/features/common/utils/price"
 import Button from "@/features/common/views/Button"
-import Loading from "@/features/common/views/Loading"
+import SpanSkeletonUI from "@/features/common/views/SpanSkeletonUI"
 import { AiOutlineRight } from "react-icons/ai"
 
 interface IMyPageRewardsLi {
@@ -33,12 +33,7 @@ const MyPageRewardsEl = ({
       />
 
       {isLoading ? (
-        <span className="w-[25px]">
-          <Loading
-            spinnerSize={{ height: "h-[25px]", width: "w-[25px]" }}
-            isFrame={false}
-          />
-        </span>
+        <SpanSkeletonUI className="w-[80px] h-[36px]" />
       ) : (
         <span className="text-[30px] font-bold sm:text-[20px] md:text-[24px] text-white dark:text-black">
           {showRewardNumber ? numberToLocaleString(showRewardNumber) : 0}

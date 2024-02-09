@@ -2,7 +2,7 @@
 
 import SectionTitle from "../SectionTitle"
 import MyPageUserInfoTebPanel from "./MyPageUserInfoTebPanel"
-import { useTabValueHandler } from "@/features/checkout/hooks/useTabValueHandler"
+import { useTabValueHandler } from "@/features/common/hooks/useTabValueHandler"
 import { Box } from "@mui/material"
 import MyPageTabs from "../MyPageTabs"
 

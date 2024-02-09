@@ -1,5 +1,5 @@
 import MyPageTableHeaderEl from "../MyPageTableHeaderEl"
-import MyPageListHeaderLayout from "../MyPageListHeaderLayout"
+import MyPageListHeaderLayout from "../MyPageListTableHeader"
 import MyPageUseMileList from "./MyPageUseMileList"
 import MyPageGetMileList from "./MyPageGetMileList"
 

@@ -5,7 +5,7 @@ interface IMyPageListHeaderLayout {
   className?: string
 }
 
-const MyPageListHeaderLayout = ({
+const MyPageListTableHeader = ({
   children,
   className,
 }: IMyPageListHeaderLayout) => {
@@ -18,4 +18,4 @@ const MyPageListHeaderLayout = ({
   )
 }
 
-export default MyPageListHeaderLayout
+export default MyPageListTableHeader

@@ -1,4 +1,3 @@
-import { Pagination, PaginationItem } from "@mui/material"
 import { ChangeEvent, useEffect, useState } from "react"
 
 export const usePagination = (perPage: number, listLength: number) => {
@@ -25,36 +24,10 @@ export const usePagination = (perPage: number, listLength: number) => {
     })
   }, [currentPage, listPagination.indexOfLast, listPagination.indexOfFirst])
 
-  const renderPaginationComponent = () => {
-    return (
-      <Pagination
-        count={paginationCount}
-        page={currentPage}
-        onChange={handlePageChange}
-        size="medium"
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          padding: "15px 0",
-        }}
-        renderItem={(item) => (
-          <PaginationItem
-            {...item}
-            sx={{
-              fontSize: 12,
-              "&.Mui-selected": {
-                backgroundColor: "#ff4e0a",
-                color: "#fff",
-              },
-            }}
-          />
-        )}
-      />
-    )
-  }
-
   return {
+    paginationCount,
+    currentPage,
+    handlePageChange,
     listPagination,
-    renderPaginationComponent,
   }
 }

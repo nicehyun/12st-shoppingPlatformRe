@@ -1,6 +1,5 @@
-import MyPageCheckoutList from "@/features/myPage/views/shoppingInfo/MyPageCheckoutList"
-import HeartProductListInfo from "@/features/myPage/views/heartProductList/HeartProductListInfo"
 import { Metadata } from "next"
+import MyPapeLayout from "@/features/myPage/views/MyPapeLayout"
 
 export const metadata: Metadata = {
   title: "마이페이지 - 12ST",
@@ -10,8 +9,7 @@ export const metadata: Metadata = {
 const MyPagePage = () => {
   return (
     <>
-      <MyPageCheckoutList />
-      <HeartProductListInfo />
+      <MyPapeLayout />
     </>
   )
 }

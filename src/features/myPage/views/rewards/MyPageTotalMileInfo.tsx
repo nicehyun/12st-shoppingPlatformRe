@@ -1,4 +1,4 @@
-import MyPageListHeaderLayout from "../MyPageListHeaderLayout"
+import MyPageListHeaderLayout from "../MyPageListTableHeader"
 import MyPageSectionSubTitle from "../MyPageSectionSubTitle"
 import MyPageTableContentEl from "../MyPageTableContentEl"
 import MyPageTotalMileInfoContent from "./MyPageTotalMileInfoContent"

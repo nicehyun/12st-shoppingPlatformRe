@@ -1,7 +1,7 @@
-import MyPageReviewList from "@/features/myPage/views/shoppingInfo/MyPageReviewList"
+import ReviewListSection from "@/features/myPage/views/shoppingInfo/ReviewListSection"
 
 const MyPageReviewSection = () => {
-  return <MyPageReviewList />
+  return <ReviewListSection />
 }
 
 export default MyPageReviewSection

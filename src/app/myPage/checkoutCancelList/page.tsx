@@ -1,7 +1,7 @@
-import MyPageCancelList from "@/features/myPage/views/shoppingInfo/MyPageCancelList"
+import CancelListSection from "@/features/myPage/views/shoppingInfo/CancelListSection"
 
 const MyPageCheckoutCancelListSection = () => {
-  return <MyPageCancelList />
+  return <CancelListSection />
 }
 
 export default MyPageCheckoutCancelListSection

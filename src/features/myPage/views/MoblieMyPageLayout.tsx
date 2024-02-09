@@ -1,11 +1,9 @@
 "use client"
 
-import { ReactNode, useEffect, useState } from "react"
+import { ReactNode, useState } from "react"
 import MoblieMyPageCategoryConroller from "./MoblieMyPageCategoryConroller"
-
-import MyPageNameAndHeart from "./MyPageNameAndHeart"
+import MyPageNameAndHeart from "./NameAndHeart"
 import MyPageRewards from "./MyPageRewards"
-import { useNavigations } from "@/features/common/hooks/useNavigations"
 
 interface IMoblieMyPageLayout {
   children: ReactNode
@@ -16,16 +14,16 @@ const MoblieMyPageLayout = ({ children }: IMoblieMyPageLayout) => {
 
   const handleCatgoryShow = () => {
     setIsShowCategory(true)
-    document.body.style.overflow = "hidden" // 페이지 스크롤 막기
+    document.body.style.overflow = "hidden"
   }
 
   const handleCatgoryHide = () => {
     setIsShowCategory(false)
-    document.body.style.overflow = "auto" // 페이지 스크롤 허용
+    document.body.style.overflow = "auto"
   }
 
   return (
-    <>
+    <div className="lg:hidden xl:hidden lg:opacity-0 xl:opacity-0">
       <MyPageNameAndHeart />
       <MyPageRewards />
       <MoblieMyPageCategoryConroller
@@ -33,8 +31,9 @@ const MoblieMyPageLayout = ({ children }: IMoblieMyPageLayout) => {
         onHideCatgory={handleCatgoryHide}
         onShowCatgory={handleCatgoryShow}
       />
+
       {children}
-    </>
+    </div>
   )
 }
 

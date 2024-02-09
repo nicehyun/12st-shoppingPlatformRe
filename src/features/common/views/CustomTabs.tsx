@@ -8,8 +8,26 @@ interface ICustomTabs {
 }
 
 const CustomTabs = ({ onChangeTabs, tabs, tabsValue, id }: ICustomTabs) => {
+  const renderTab = () => {
+    return tabs.map((label, index) => (
+      <Tab
+        key={`${id}-tab-${index}`}
+        label={label}
+        id={`${id}-tab-${index}`}
+        aria-controls={`${id}-tabpanel-${index}`}
+        sx={{
+          "&.Mui-selected": {
+            color: "#ff4e0a",
+          },
+          color: "#ccc",
+          width: `${100 / tabs.length}%`,
+        }}
+      />
+    ))
+  }
+
   return (
-    <Box sx={{ borderBottom: 1, borderColor: "#d2d2d2" }}>
+    <Box sx={{ borderColor: "#d2d2d2" }}>
       <Tabs
         value={tabsValue}
         onChange={onChangeTabs}
@@ -20,20 +38,7 @@ const CustomTabs = ({ onChangeTabs, tabs, tabsValue, id }: ICustomTabs) => {
           },
         }}
       >
-        {tabs.map((label, index) => (
-          <Tab
-            key={`${id}-tab-${index}`}
-            label={label}
-            id={`${id}-tab-${index}`}
-            aria-controls={`${id}-tabpanel-${index}`}
-            sx={{
-              "&.Mui-selected": {
-                color: "#ff4e0a",
-              },
-              color: "#ccc",
-            }}
-          />
-        ))}
+        {renderTab()}
       </Tabs>
     </Box>
   )

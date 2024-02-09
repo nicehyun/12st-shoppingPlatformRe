@@ -1,10 +1,10 @@
 import MyPageListNoneContents from "../MyPageListNoneContents"
-import MyPageCancelListHeader from "./MyPageCancelListHeader"
+import CancelListHeader from "./CancelListHeader"
 
-const MyPageReturnCancelList = () => {
+const ReturnList = () => {
   return (
     <>
-      <MyPageCancelListHeader />
+      <CancelListHeader />
 
       <ul>
         <MyPageListNoneContents content="반품 내역이 없습니다" />
@@ -13,4 +13,4 @@ const MyPageReturnCancelList = () => {
   )
 }
 
-export default MyPageReturnCancelList
+export default ReturnList
