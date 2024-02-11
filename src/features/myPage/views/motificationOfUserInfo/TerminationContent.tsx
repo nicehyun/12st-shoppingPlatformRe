@@ -1,11 +1,11 @@
 "use client"
 
 import { numberToLocaleString } from "@/features/common/utils/price"
-import useCouponQuery from "@/features/checkout/hooks/useCouponQuery"
 import { useUserMileQuery } from "@/features/checkout/hooks/useGetUserMileQuery"
 import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
+import { useCouponQuery } from "@/features/checkout/hooks/useCouponQuery"
 
-const MyPageTerminationContent = () => {
+const TerminationContent = () => {
   const { session } = useSessionQuery()
   const { userMile } = useUserMileQuery()
   const { coupons } = useCouponQuery()
@@ -35,4 +35,4 @@ const MyPageTerminationContent = () => {
   )
 }
 
-export default MyPageTerminationContent
+export default TerminationContent

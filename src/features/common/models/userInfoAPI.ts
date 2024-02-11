@@ -1,10 +1,15 @@
-import { GetUserInfoResponse } from "../types/user"
+import { POSTResponse } from "../types/fetch"
+import { UserInfoWithMile } from "../types/user"
 
 export const userInfoAPI = {
   getUserInfo: async (
     authorization: string | null | undefined
-  ): Promise<GetUserInfoResponse | null> => {
-    if (!authorization) return null
+  ): Promise<UserInfoWithMile | POSTResponse> => {
+    if (!authorization)
+      return {
+        status: 401,
+        error: "유효하지 않은 AccessToken입니다.",
+      }
 
     try {
       const response = await fetch(

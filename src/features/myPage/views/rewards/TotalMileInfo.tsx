@@ -3,7 +3,7 @@ import MyPageSectionSubTitle from "../MyPageSectionSubTitle"
 import MyPageTableContentEl from "../MyPageTableContentEl"
 import MyPageTotalMileInfoContent from "./MyPageTotalMileInfoContent"
 
-const MyPageTotalMileInfo = () => {
+const TotalMileInfo = () => {
   return (
     <MyPageSectionSubTitle subtitle="마일리지 현황" className="mt-[50px]">
       <MyPageListHeaderLayout>
@@ -17,4 +17,4 @@ const MyPageTotalMileInfo = () => {
   )
 }
 
-export default MyPageTotalMileInfo
+export default TotalMileInfo

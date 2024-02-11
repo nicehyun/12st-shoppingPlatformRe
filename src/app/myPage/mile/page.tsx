@@ -1,7 +1,7 @@
-import MyPageMileInfo from "@/features/myPage/views/rewards/MyPageMileInfo"
+import MileInfoSection from "@/features/myPage/views/rewards/MileInfoSection"
 
 const MyPageMileSection = () => {
-  return <MyPageMileInfo />
+  return <MileInfoSection />
 }
 
 export default MyPageMileSection

@@ -13,10 +13,10 @@ const CancelListSection = () => {
   const { handleTabValueChange, tabValue, tabs } = useCancelListTabs()
 
   const cancelListComponents = [
-    <AllCancelList key="mypae_cancelList_all" />,
-    <CancelList key="mypae_cancelList_cancel" />,
-    <ReturnList key="mypae_cancelList_return" />,
-    <ChangeList key="mypae_cancelList_change" />,
+    <AllCancelList key="mypage-cancelList__all" />,
+    <CancelList key="mypage-cancelList__cancel" />,
+    <ReturnList key="mypage-cancelList__return" />,
+    <ChangeList key="mypage-cancelList__change" />,
   ]
 
   return (

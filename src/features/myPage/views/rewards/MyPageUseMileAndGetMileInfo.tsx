@@ -1,16 +1,18 @@
 "use client"
 
-import { Box } from "@mui/material"
 import MyPageSectionSubTitle from "../MyPageSectionSubTitle"
-import MyPageMileTebPanel from "./MyPageUseMileTebPanel"
-import { useTabValueHandler } from "@/features/common/hooks/useTabValueHandler"
-import MyPageTabs from "../MyPageTabs"
+import { useGetMileAndUseMileTabs } from "../../hooks/useGetMileAndUseMileTabs"
+import UseMileList from "./UseMileList"
+import CustomTabs from "@/features/common/views/CustomTabs"
+import CustomTabPanel from "@/features/common/views/CustomTabPanel"
+import GetMileList from "./GetMileList"
 
 const MyPageUseMileAndGetMileInfo = () => {
-  const { handleTabValueChange, tabValue } = useTabValueHandler()
-  const tabList = [
-    { label: "적립 마일리지", id: "get" },
-    { label: "사용 마일리지", id: "use" },
+  const { handleTabValueChange, tabValue, tabs } = useGetMileAndUseMileTabs()
+
+  const useMileAndGetMileComponents = [
+    <GetMileList key="mypage-mile-info__get" />,
+    <UseMileList key="mypage-mile-info__use" />,
   ]
 
   return (
@@ -18,17 +20,20 @@ const MyPageUseMileAndGetMileInfo = () => {
       subtitle="마일리지 적립 및 사용"
       className="mt-[80px]"
     >
-      <Box sx={{ width: "100%", padding: 0 }}>
-        <MyPageTabs
-          tabId="mileList"
-          onChangeTabValue={handleTabValueChange}
-          tabValue={tabValue}
-          tabs={tabList}
-        />
+      <CustomTabs
+        id="mileList"
+        onChangeTabs={handleTabValueChange}
+        tabs={tabs}
+        tabsValue={tabValue}
+      />
 
-        {tabValue === 0 && <MyPageMileTebPanel mileType="get" />}
-        {tabValue === 1 && <MyPageMileTebPanel mileType="use" />}
-      </Box>
+      {useMileAndGetMileComponents.map((modificationEl, index) => (
+        <>
+          <CustomTabPanel value={tabValue} index={index}>
+            {modificationEl}
+          </CustomTabPanel>
+        </>
+      ))}
     </MyPageSectionSubTitle>
   )
 }

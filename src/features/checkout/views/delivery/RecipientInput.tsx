@@ -4,6 +4,7 @@ import DeliveryInfoInput from "./DeliveryInfoInput"
 
 const RecipientInput = () => {
   const { recipient, isLoading } = useDeliveryInfoInputContollers()
+
   return (
     <DeliveryInputLayout label="수령인" id="recipient" isRequired>
       <DeliveryInfoInput

@@ -1,7 +1,7 @@
-import MyPageUserInfoOfModification from "@/features/myPage/views/userInfoOfMotification/MyPageUserInfoOfModification"
+import ModificationOfUserInfoSection from "@/features/myPage/views/motificationOfUserInfo/ModificationOfUserInfoSection"
 
-const UserInfoOfModificationSection = () => {
-  return <MyPageUserInfoOfModification />
+const userInfoOfModificationPage = () => {
+  return <ModificationOfUserInfoSection />
 }
 
-export default UserInfoOfModificationSection
+export default userInfoOfModificationPage

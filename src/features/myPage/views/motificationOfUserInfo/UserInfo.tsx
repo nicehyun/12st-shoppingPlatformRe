@@ -1,13 +1,13 @@
 "use client"
 
 import { useGetUserInfoQuery } from "../../hooks/useGetUserInfoQuery"
-import MyPageListLoading from "../MyPageListLoading"
+import SkeletonUserInfo from "./SkeletonUserInfo"
 
 const MyPageUserInfo = () => {
   const { userInfo, isLoading } = useGetUserInfoQuery()
 
   if (isLoading) {
-    return <MyPageListLoading />
+    return <SkeletonUserInfo />
   }
 
   return (

@@ -1,14 +1,14 @@
 import SectionTitle from "../SectionTitle"
 import MyPageMileAnnouncement from "./MyPageMileAnnouncement"
-import MyPageTotalMileInfo from "./MyPageTotalMileInfo"
+import TotalMileInfo from "./TotalMileInfo"
 import MyPageUseMileAndGetMileInfo from "./MyPageUseMileAndGetMileInfo"
 
-const MyPageMileInfo = () => {
+const MileInfoSection = () => {
   return (
     <section>
       <SectionTitle title="마일리지" />
 
-      <MyPageTotalMileInfo />
+      <TotalMileInfo />
 
       <MyPageUseMileAndGetMileInfo />
 
@@ -17,4 +17,4 @@ const MyPageMileInfo = () => {
   )
 }
 
-export default MyPageMileInfo
+export default MileInfoSection

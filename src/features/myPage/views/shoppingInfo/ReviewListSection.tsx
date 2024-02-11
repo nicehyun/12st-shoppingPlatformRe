@@ -11,11 +11,11 @@ const ReviewListSection = () => {
 
   const reviewListComponents = [
     <MyPageListNoneContents
-      key="mypae_cancelList_all"
+      key="mypage-review__available"
       content="아직 리뷰를 작성할 수 있는 주문내역이 없습니다"
     />,
     <MyPageListNoneContents
-      key="mypae_cancelList_cancel"
+      key="mypage-review__previous"
       content="작성한 리뷰가 없습니다"
     />,
   ]

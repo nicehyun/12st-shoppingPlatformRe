@@ -9,7 +9,3 @@ export type UserInfo = {
 export type UserInfoWithMile = UserInfo & {
   mile: number
 }
-
-export type GetUserInfoResponse = UserInfoWithMile & {
-  id: number
-}

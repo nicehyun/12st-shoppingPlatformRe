@@ -2,7 +2,7 @@ interface IMyPageCouponEl {
   couponName: string
 }
 
-const MyPageCouponEl = ({ couponName }: IMyPageCouponEl) => {
+const Coupon = ({ couponName }: IMyPageCouponEl) => {
   return (
     <div className=" flex h-[140px] mt-[20px] rounded-[8px] bg-white shadow max-w-[600px]">
       <div className="bg-lightRed h-full rounded-s-[8px]">
@@ -22,4 +22,4 @@ const MyPageCouponEl = ({ couponName }: IMyPageCouponEl) => {
   )
 }
 
-export default MyPageCouponEl
+export default Coupon

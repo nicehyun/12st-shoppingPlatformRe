@@ -9,8 +9,10 @@ import { useUserInput } from "@/features/common/hooks/useUserInput"
 import { ChangeEvent, useEffect, useState } from "react"
 import { useAppSelector } from "@/redux/hooks"
 import { selectDeliveryTabValueState } from "@/redux/features/checkoutSlice"
+import { useNavigations } from "@/features/common/hooks/useNavigations"
 
 export const useDeliveryInfoInputContollers = () => {
+  const { pathname } = useNavigations()
   const deliveryTabValueState = useAppSelector(selectDeliveryTabValueState)
   const { deliveryInfo, isLoading } = useGetDeliveryInfoQuery()
 
@@ -60,7 +62,10 @@ export const useDeliveryInfoInputContollers = () => {
   }
 
   useEffect(() => {
-    if (deliveryTabValueState === 1) {
+    if (
+      deliveryTabValueState === 1 &&
+      pathname !== "/myPage/userInfoOfModification"
+    ) {
       recipientInput.reset()
       additionalInput.reset()
       changeZipcodeValue("")
@@ -71,7 +76,10 @@ export const useDeliveryInfoInputContollers = () => {
   }, [deliveryTabValueState])
 
   useEffect(() => {
-    if (deliveryTabValueState === 0) {
+    if (
+      deliveryTabValueState === 0 ||
+      pathname === "/myPage/userInfoOfModification"
+    ) {
       if (deliveryInfo?.deliveryName) {
         setDeliveryName(deliveryInfo.deliveryName)
       }

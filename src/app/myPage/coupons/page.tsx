@@ -1,7 +1,7 @@
-import MyPageCoupons from "@/features/myPage/views/rewards/MyPageCoupons"
+import CouponsSection from "@/features/myPage/views/rewards/Coupons"
 
 const MyPageCouponsSection = () => {
-  return <MyPageCoupons />
+  return <CouponsSection />
 }
 
 export default MyPageCouponsSection

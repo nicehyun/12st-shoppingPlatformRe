@@ -3,37 +3,37 @@
 import { numberToLocaleString } from "@/features/common/utils/price"
 import MyPageListNoneContents from "../MyPageListNoneContents"
 import MyPageUseMileAndGetMileContentEl from "./MyPageUseMileAndGetMileContentEl"
-import SkeletonMileList from "./SkeletonMileList"
-import { useGetMilePagination } from "../../hooks/useGetMilePagination"
+import { useUseMilePagination } from "../../hooks/useUseMilePagination"
 import CustomPagination from "@/features/common/views/CustomPagination"
+import SkeletonMileList from "./SkeletonMileList"
 
-const MyPageGetMileList = () => {
+const UseMileListContents = () => {
   const {
     currentPage,
     handlePageChange,
     isLoading,
     paginationCount,
-    renderGetMileList,
-  } = useGetMilePagination()
+    renderUseMileList,
+  } = useUseMilePagination()
 
   if (isLoading) {
     return <SkeletonMileList count={5} />
   }
 
-  if (renderGetMileList?.length === 0)
+  if (renderUseMileList?.length === 0)
     return <MyPageListNoneContents content="해당 마일리지 내역이 없습니다." />
 
   return (
     <>
-      {renderGetMileList.map((useMileAndGetMileEl, index) => (
+      {renderUseMileList.map((useMileAndGetMileEl, index) => (
         <MyPageUseMileAndGetMileContentEl
-          key={`useMileAndGetMileInfo-get-${useMileAndGetMileEl.checkoutNumber}__${index}`}
+          key={`useMileAndGetMileInfo-use-${useMileAndGetMileEl.checkoutNumber}__${index}`}
           checkoutDate={useMileAndGetMileEl.checkoutDate}
           checkoutNumber={useMileAndGetMileEl.checkoutNumber}
           mile={
-            useMileAndGetMileEl.getMile === 0
+            useMileAndGetMileEl.useMile === 0
               ? "0 mile"
-              : `${numberToLocaleString(useMileAndGetMileEl.getMile)} mile`
+              : `${numberToLocaleString(useMileAndGetMileEl.useMile)} mile`
           }
         />
       ))}
@@ -48,4 +48,4 @@ const MyPageGetMileList = () => {
   )
 }
 
-export default MyPageGetMileList
+export default UseMileListContents

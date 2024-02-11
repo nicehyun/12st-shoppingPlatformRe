@@ -5,6 +5,7 @@ import MyPageListNoneContents from "../MyPageListNoneContents"
 import { useHeartProductPagination } from "../../hooks/useHeartProductPagination"
 import CustomPagination from "@/features/common/views/CustomPagination"
 import SkeletonHeartProductList from "./SkeletonHeartProductList"
+import ThreeGridProductList from "@/features/common/views/ThreeGridProductList"
 
 const HeartProductList = () => {
   const {
@@ -25,14 +26,14 @@ const HeartProductList = () => {
 
   return (
     <>
-      <div className="grid grid-cols-3 xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-[20px] mt-[50px]">
+      <ThreeGridProductList>
         {renderHeartProductList.map((product) => (
           <ProductCard
             productInfo={product}
             key={`heart-product-${product.id}`}
           />
         ))}
-      </div>
+      </ThreeGridProductList>
 
       <CustomPagination
         page={currentPage}

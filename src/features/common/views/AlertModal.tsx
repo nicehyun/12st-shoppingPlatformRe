@@ -4,7 +4,7 @@ import Dialog from "@mui/material/Dialog"
 import DialogActions from "@mui/material/DialogActions"
 import DialogContent from "@mui/material/DialogContent"
 import { TransitionProps } from "@mui/material/transitions"
-import { ReactElement, forwardRef } from "react"
+import { ReactElement, ReactNode, forwardRef } from "react"
 import Loading from "./Loading"
 
 interface IAlertModal<T> {
@@ -14,6 +14,7 @@ interface IAlertModal<T> {
   onAgreeFn: T
   onCancelFn: () => void
   isLoading?: boolean
+  children: ReactNode
 }
 
 const Transition = forwardRef(function Transition(
@@ -32,6 +33,7 @@ const AlertModal = <T extends (...args: any[]) => any>({
   onAgreeFn,
   onCancelFn,
   isLoading = false,
+  children,
 }: IAlertModal<T>) => {
   return (
     <Dialog
@@ -56,7 +58,9 @@ const AlertModal = <T extends (...args: any[]) => any>({
           className="text-black text-[14px]"
         >
           {modalContent}
+          {children}
         </DialogContent>
+
         <DialogActions>
           <Button
             onClick={onAgreeFn}

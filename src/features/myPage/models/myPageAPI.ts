@@ -1,3 +1,4 @@
+import { POSTResponse } from "@/features/common/types/fetch"
 import {
   CustomerCounselingDetail,
   GetCustomerCounselingDetailResponse,
@@ -5,10 +6,14 @@ import {
 
 export const myPageAPI = {
   modificatieMarketingClause: async (
-    isChecked: boolean,
-    authorization: string | null | undefined
-  ) => {
-    if (!authorization) return null
+    authorization: string | null | undefined,
+    isChecked: boolean
+  ): Promise<POSTResponse> => {
+    if (!authorization)
+      return {
+        status: 401,
+        error: "유효하지 않은 AccessToken입니다.",
+      }
 
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/userInfo`,
@@ -23,7 +28,26 @@ export const myPageAPI = {
 
     return response.json()
   },
-  memberTermination: async (authorization: string | null | undefined) => {},
+
+  memberTermination: async (
+    authorization: string | null | undefined
+  ): Promise<POSTResponse> => {
+    if (!authorization)
+      return {
+        status: 401,
+        error: "유효하지 않은 AccessToken입니다.",
+      }
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/memberTermination`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json", authorization },
+      }
+    )
+
+    return response.json()
+  },
   writeCoustomerCounseling: async (
     writeDetail: CustomerCounselingDetail,
     authorization: string | null | undefined
