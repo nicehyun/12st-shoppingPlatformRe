@@ -31,7 +31,6 @@ const SignInForm = () => {
           type="text"
           name="email"
           id="email"
-          value={"test@test.com"}
           placeholder="이메일을 입력해주세요"
         />
       </div>
@@ -41,7 +40,6 @@ const SignInForm = () => {
           type="password"
           name="password"
           id="password"
-          value={"test123123!"}
           placeholder="비밀번호를 입력해주세요"
         />
       </div>

@@ -22,7 +22,6 @@ const MoblieMyPageCategoryConroller = ({
     onHideCatgory()
   }, [pathname])
 
-  useEffect(() => {}, [isShowCategory])
   return (
     <>
       <Button

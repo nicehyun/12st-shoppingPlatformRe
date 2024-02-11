@@ -127,9 +127,7 @@ export default function Stage({
         <Box sx={{ flex: "1 1 auto" }} />
         <CustomButton
           type={activeStep === stages.length - 1 ? "submit" : "button"}
-          onClick={
-            activeStep === stages.length - 1 ? () => {} : handleNextButton
-          }
+          onClick={handleNextButton}
           classNames="min-w-[57px] rounded-[5px] px-[16px] py-[8px] text-lightRed bg-white border-[1px] border-lightRed text-[14px] md:text-[12px] sm:text-[10px] hover:bg-lightRed hover:text-white disabled:bg-border dark:disabled:bg-border disabled:cursor-not-allowed disabled:border-border disabled:text-lightBlack dark:bg-lightRed dark:text-white tracking-[3px]"
           isDisabled={disabledNextButton[activeStep]}
           content={buttonContent}

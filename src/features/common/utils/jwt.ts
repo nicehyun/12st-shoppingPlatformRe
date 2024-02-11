@@ -27,7 +27,6 @@ export async function generateRefreshToken(payload: JwtPayload) {
   return refreshToken
 }
 
-// TODO : 배포 시 secure true로 수정
 export const setRefreshTokenCookies = async (value: string) => {
   cookies().set({
     name: "auth-token",
