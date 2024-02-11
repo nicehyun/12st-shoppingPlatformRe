@@ -26,12 +26,12 @@ export async function POST(request: Request, response: Response) {
     const email = decoded?.email
     const id = decoded?.id
 
-    const newAccessToken = generateAccessToken({
+    const newAccessToken = await generateAccessToken({
       email,
       id,
     })
 
-    const newRefreshToken = generateRefreshToken({
+    const newRefreshToken = await generateRefreshToken({
       email,
       id,
     })

@@ -1,4 +1,4 @@
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 
 export enum ROUTE {
   CART = "/cart",
@@ -7,6 +7,10 @@ export enum ROUTE {
 
   CHECKOUT = "/checkout",
   CHECKOUTCOMFIRMED = "/checkoutConfirmed",
+  PRODUCTINFO = "/productInfo/:path*",
+  CATEGORYMANAGEMENT = "/categoryManagement",
+
+  // myPage 관련 routes
   CHECKOUTLIST = "/myPage/checkoutList",
   CHECKOUTCANCELLIST = "/myPage/checkoutCancelList",
   CHECKOUTREVIEWLIST = "/myPage/reviewList",
@@ -17,8 +21,6 @@ export enum ROUTE {
   COUNSELINGWRITE = "/myPage/inquiryCustomerCounseling/write",
   PRODUCTQNA = "/myPage/productQnAList",
   HEARTPRODUCTLIST = "/myPage/heartProductList",
-  PRODUCTINFO = "/productInfo/:path*",
-  CATEGORYMANAGEMENT = "categoryManagement",
 
   // auth 관련 routes
   SIGNIN = "/signIn",

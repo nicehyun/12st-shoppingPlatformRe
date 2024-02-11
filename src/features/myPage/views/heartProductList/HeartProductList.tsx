@@ -26,7 +26,7 @@ const HeartProductList = () => {
 
   return (
     <>
-      <ThreeGridProductList>
+      <ThreeGridProductList className="mt-[50px]">
         {renderHeartProductList.map((product) => (
           <ProductCard
             productInfo={product}

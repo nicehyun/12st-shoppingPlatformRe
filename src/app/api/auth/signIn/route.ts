@@ -4,19 +4,18 @@ import {
   emailValidator,
   passwordValidator,
 } from "@/features/auth/signUp/utils/validation"
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import {
   generateAccessToken,
   generateRefreshToken,
 } from "@/features/common/utils/jwt"
-import { GetUserInfoResponse } from "@/features/common/types/user"
 
 interface RequestBody {
   email: string
   password: string
 }
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   const body: RequestBody = await request.json()
 
   const email = body.email
@@ -33,7 +32,7 @@ export async function POST(request: Request) {
       }
     ).then((res) => res.json())
 
-    const user: GetUserInfoResponse = response[0]
+    const user = response[0]
 
     if (user) {
       const { password, ...userInfoWithoutPassword } = user

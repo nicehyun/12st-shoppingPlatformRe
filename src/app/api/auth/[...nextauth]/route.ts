@@ -1,4 +1,3 @@
-import { GetUserInfoResponse } from "@/features/common/types/user"
 import {
   getRefreshAccessToken,
   setRefreshTokenCookies,
@@ -7,10 +6,6 @@ import {
 import NextAuth from "next-auth/next"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { cookies } from "next/dist/client/components/headers"
-
-export type UserInfoWithToken = GetUserInfoResponse & {
-  refreshToken: string
-}
 
 const handler = NextAuth({
   providers: [
@@ -63,21 +58,16 @@ const handler = NextAuth({
   },
   pages: { signIn: "/signIn" },
   callbacks: {
-    // TODO : setRefreshTokenCookies, session callback 동시 실행안됨
-
     async jwt({ token, user }) {
       if (user) {
         const { accessToken, refreshToken } = user
-
-        if (refreshToken) {
-          setRefreshTokenCookies(refreshToken)
-        }
 
         if (accessToken) {
           const accessTokenPayload = verifyAccessToken(accessToken)
 
           return {
             ...token,
+            refreshToken,
             access_token: accessToken,
             expires_at: accessTokenPayload?.exp,
           }
@@ -93,16 +83,19 @@ const handler = NextAuth({
         const exsistedRefreshToken = cookies().get("auth-token")
 
         if (exsistedRefreshToken) {
+          console.log("token 갱신")
+
           const { accessToken, refreshToken } = await getRefreshAccessToken(
             exsistedRefreshToken.value
           )
 
           const accessTokenPayload = verifyAccessToken(accessToken)
 
-          setRefreshTokenCookies(refreshToken)
+          await setRefreshTokenCookies(refreshToken)
 
           return {
             ...token,
+            refreshToken,
             access_token: accessToken,
             expires_at: accessTokenPayload?.exp,
           }
@@ -113,6 +106,12 @@ const handler = NextAuth({
     },
 
     async session({ session, token }) {
+      const exsistedRefreshToken = cookies().get("auth-token")
+
+      if (!exsistedRefreshToken) {
+        setRefreshTokenCookies(token.refreshToken as string)
+      }
+
       session.user.accessToken = token.access_token as string | null | undefined
 
       return session

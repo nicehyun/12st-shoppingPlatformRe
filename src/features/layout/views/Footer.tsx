@@ -2,7 +2,7 @@ import FooterPlatformInfoEl from "./FooterPlatformInfoEl"
 
 const Footer = () => {
   return (
-    <footer className="w-full min-h-[350px] bg-black text-white/50 text-[12px] sm:text-[10px] px-[40px] leading-relaxed dark:border-t-[1px]">
+    <footer className="w-full min-h-[350px] py-[50px] bg-black text-white/50 text-[12px] sm:text-[10px] px-[40px] leading-relaxed dark:border-t-[1px]">
       <p className="font-bold text-white mt-[80px]">고객센터</p>
       <p className="text-[20px] text-white font-bold my-[10px]">1600 - 1600</p>
 

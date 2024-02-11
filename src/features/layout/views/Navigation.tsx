@@ -22,8 +22,7 @@ type NavigationActionContent = {
   }
   label: string
   value: string
-  route: ROUTE | null
-  onClickFn?: () => void
+  route: ROUTE
 }
 
 type NavigationActionContents = NavigationActionContent[]
@@ -72,42 +71,11 @@ const Navigation = () => {
     },
   ]
 
-  const findRouteByValue = (selectedValue: string) => {
-    const foundBottomNavigationContent = navigationActionContents.find(
-      (navigationActionContent) =>
-        navigationActionContent.value === selectedValue
-    )
-    return foundBottomNavigationContent
-      ? foundBottomNavigationContent.route
-      : null
-  }
-
-  const findOnclickFnByValue = (selectedValue: string) => {
-    const foundBottomNavigationContent = navigationActionContents.find(
-      (navigationActionContent) =>
-        navigationActionContent.value === selectedValue
-    )
-    return foundBottomNavigationContent
-      ? foundBottomNavigationContent.onClickFn
-      : null
-  }
-
-  const handleNavChange = (
-    event: React.SyntheticEvent,
-    selectedValue: string
-  ) => {
-    const route = findRouteByValue(selectedValue)
-    const onClickFn = findOnclickFnByValue(selectedValue)
-
-    if (route) routeTo(route)
-
-    if (onClickFn) onClickFn()
-  }
-
   const renderBottomNavigationActions = () => {
     return navigationActionContents.map(
       (navigationActionContent: NavigationActionContent) => (
         <BottomNavigationAction
+          onClick={() => routeTo(navigationActionContent.route)}
           key={`bottomNavigation-${navigationActionContent.value}`}
           label={
             <span
@@ -154,7 +122,6 @@ const Navigation = () => {
           bottom: 0,
         }}
         value={currentPath}
-        onChange={handleNavChange}
       >
         {renderBottomNavigationActions()}
       </BottomNavigation>

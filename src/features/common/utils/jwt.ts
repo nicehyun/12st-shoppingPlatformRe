@@ -1,10 +1,18 @@
 import jwt, { JwtPayload } from "jsonwebtoken"
 import { cookies } from "next/dist/client/components/headers"
 
+type GetRefreshAccessToken = {
+  accessToken: string
+  refreshToken: string
+  expiresIn: number
+}
+
 export async function generateAccessToken(payload: JwtPayload) {
   const secret_key = process.env.NEXTAUTH_SECRET
 
-  const accessToken = jwt.sign(payload, secret_key!, { expiresIn: "15m" })
+  const accessToken = jwt.sign(payload, secret_key!, {
+    expiresIn: "15m",
+  })
 
   return accessToken
 }
@@ -20,7 +28,7 @@ export async function generateRefreshToken(payload: JwtPayload) {
 }
 
 // TODO : 배포 시 secure true로 수정
-export const setRefreshTokenCookies = (value: string) => {
+export const setRefreshTokenCookies = async (value: string) => {
   cookies().set({
     name: "auth-token",
     value,
@@ -31,32 +39,29 @@ export const setRefreshTokenCookies = (value: string) => {
   })
 }
 
-export async function getRefreshAccessToken(refreshToken: string) {
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/refreshToken`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ refreshToken }),
+export const getRefreshAccessToken = async (
+  refreshToken: string
+): Promise<GetRefreshAccessToken> => {
+  {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/refreshToken`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ refreshToken }),
+        }
+      ).then((res) => res.json())
+
+      return {
+        accessToken: response.accessToken,
+        refreshToken: response.refreshToken,
+        expiresIn: response.expiresIn,
       }
-    )
-
-    const refreshedTokens = await response.json()
-
-    return {
-      accessToken: refreshedTokens.accessToken,
-      refreshToken: refreshedTokens.refreshToken,
-      expiresIn: refreshedTokens.expiresIn,
-    }
-  } catch (error) {
-    console.error("Error refreshing access token: ", error)
-    return {
-      accessToken: null,
-      refreshToken: null,
-      expiresIn: 0,
+    } catch (error: any) {
+      throw new Error(error)
     }
   }
 }
