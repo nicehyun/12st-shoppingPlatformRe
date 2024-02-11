@@ -1,6 +1,6 @@
 import MyPageTableHeaderEl from "../MyPageTableHeaderEl"
 import MyPageListHeaderLayout from "../MyPageListTableHeader"
-import MyPageGetMileList from "./MyPageGetMileList"
+import GetMileListContents from "./GetMileListContents"
 
 const GetMileList = () => {
   return (
@@ -11,7 +11,7 @@ const GetMileList = () => {
         <MyPageTableHeaderEl className="w-1/3" headerContent="관련주문번호" />
       </MyPageListHeaderLayout>
 
-      <MyPageGetMileList />
+      <GetMileListContents />
     </>
   )
 }

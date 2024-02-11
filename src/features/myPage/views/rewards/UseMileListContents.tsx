@@ -2,7 +2,7 @@
 
 import { numberToLocaleString } from "@/features/common/utils/price"
 import MyPageListNoneContents from "../MyPageListNoneContents"
-import MyPageUseMileAndGetMileContentEl from "./MyPageUseMileAndGetMileContentEl"
+import MyPageUseMileAndGetMileContentEl from "./UseMileAndGetMileContentEl"
 import { useUseMilePagination } from "../../hooks/useUseMilePagination"
 import CustomPagination from "@/features/common/views/CustomPagination"
 import SkeletonMileList from "./SkeletonMileList"

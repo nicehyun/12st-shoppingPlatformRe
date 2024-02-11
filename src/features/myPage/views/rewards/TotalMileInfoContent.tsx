@@ -6,7 +6,7 @@ import MyPageListContentLayout from "../MyPageListContentLayout"
 import { useGetUseMileAndGetMile } from "../../hooks/useGetUseMileAndGetMile"
 import SkeletonTotalMileContent from "./SkeletonMileContent"
 
-const MyPageTotalMileInfoContent = () => {
+const TotalMileInfoContent = () => {
   const { userMile, totalGetMile, totalUseMile, isLoading } =
     useGetUseMileAndGetMile()
 
@@ -35,4 +35,4 @@ const MyPageTotalMileInfoContent = () => {
   )
 }
 
-export default MyPageTotalMileInfoContent
+export default TotalMileInfoContent

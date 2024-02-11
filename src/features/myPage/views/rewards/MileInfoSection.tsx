@@ -1,5 +1,5 @@
 import SectionTitle from "../SectionTitle"
-import MyPageMileAnnouncement from "./MyPageMileAnnouncement"
+import MileAnnouncement from "./MileAnnouncement"
 import TotalMileInfo from "./TotalMileInfo"
 import MyPageUseMileAndGetMileInfo from "./MyPageUseMileAndGetMileInfo"
 
@@ -12,7 +12,7 @@ const MileInfoSection = () => {
 
       <MyPageUseMileAndGetMileInfo />
 
-      <MyPageMileAnnouncement />
+      <MileAnnouncement />
     </section>
   )
 }

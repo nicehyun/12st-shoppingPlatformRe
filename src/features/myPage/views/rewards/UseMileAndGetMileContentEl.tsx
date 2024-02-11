@@ -8,7 +8,7 @@ interface IMyPageUseMileAndGetMileContentEl {
   checkoutNumber: string
 }
 
-const MyPageUseMileAndGetMileContentEl = ({
+const UseMileAndGetMileContentEl = ({
   mile,
   checkoutNumber,
   checkoutDate,
@@ -27,4 +27,4 @@ const MyPageUseMileAndGetMileContentEl = ({
   )
 }
 
-export default MyPageUseMileAndGetMileContentEl
+export default UseMileAndGetMileContentEl

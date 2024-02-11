@@ -2,12 +2,12 @@
 
 import { numberToLocaleString } from "@/features/common/utils/price"
 import MyPageListNoneContents from "../MyPageListNoneContents"
-import MyPageUseMileAndGetMileContentEl from "./MyPageUseMileAndGetMileContentEl"
+import UseMileAndGetMileContentEl from "./UseMileAndGetMileContentEl"
 import SkeletonMileList from "./SkeletonMileList"
 import { useGetMilePagination } from "../../hooks/useGetMilePagination"
 import CustomPagination from "@/features/common/views/CustomPagination"
 
-const MyPageGetMileList = () => {
+const GetMileListContents = () => {
   const {
     currentPage,
     handlePageChange,
@@ -26,7 +26,7 @@ const MyPageGetMileList = () => {
   return (
     <>
       {renderGetMileList.map((useMileAndGetMileEl, index) => (
-        <MyPageUseMileAndGetMileContentEl
+        <UseMileAndGetMileContentEl
           key={`useMileAndGetMileInfo-get-${useMileAndGetMileEl.checkoutNumber}__${index}`}
           checkoutDate={useMileAndGetMileEl.checkoutDate}
           checkoutNumber={useMileAndGetMileEl.checkoutNumber}
@@ -48,4 +48,4 @@ const MyPageGetMileList = () => {
   )
 }
 
-export default MyPageGetMileList
+export default GetMileListContents

@@ -1,7 +1,7 @@
 import MyPageListHeaderLayout from "../MyPageListTableHeader"
 import MyPageSectionSubTitle from "../MyPageSectionSubTitle"
 import MyPageTableContentEl from "../MyPageTableContentEl"
-import MyPageTotalMileInfoContent from "./MyPageTotalMileInfoContent"
+import TotalMileInfoContent from "./TotalMileInfoContent"
 
 const TotalMileInfo = () => {
   return (
@@ -12,7 +12,7 @@ const TotalMileInfo = () => {
         <MyPageTableContentEl content="총 사용 마일리지" className="w-1/3" />
       </MyPageListHeaderLayout>
 
-      <MyPageTotalMileInfoContent />
+      <TotalMileInfoContent />
     </MyPageSectionSubTitle>
   )
 }
