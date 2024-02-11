@@ -1,8 +1,5 @@
 import { POSTResponse } from "@/features/common/types/fetch"
-import {
-  CustomerCounselingDetail,
-  GetCustomerCounselingDetailResponse,
-} from "../types/myPage"
+import { CustomerCounselingDetail } from "../types/myPage"
 
 export const myPageAPI = {
   modificatieMarketingClause: async (
@@ -49,10 +46,14 @@ export const myPageAPI = {
     return response.json()
   },
   writeCoustomerCounseling: async (
-    writeDetail: CustomerCounselingDetail,
-    authorization: string | null | undefined
-  ) => {
-    if (!authorization) return null
+    authorization: string | null | undefined,
+    writeDetail: CustomerCounselingDetail
+  ): Promise<POSTResponse> => {
+    if (!authorization)
+      return {
+        status: 401,
+        error: "유효하지 않은 AccessToken입니다.",
+      }
 
     try {
       const response = await fetch(
@@ -73,8 +74,12 @@ export const myPageAPI = {
   },
   getCoutomerCounselingList: async (
     authorization: string | null | undefined
-  ): Promise<GetCustomerCounselingDetailResponse | null> => {
-    if (!authorization) return null
+  ): Promise<CustomerCounselingDetail[] | POSTResponse> => {
+    if (!authorization)
+      return {
+        status: 401,
+        error: "유효하지 않은 AccessToken입니다.",
+      }
 
     try {
       const response = await fetch(

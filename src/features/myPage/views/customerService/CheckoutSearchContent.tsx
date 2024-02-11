@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import MyPageSearchInputAndButton from "./MyPageSearchInputAndButton"
+import MyPageSearchInputAndButton from "./SearchInputAndButton"
 import MyPageSearchResultEl from "./MyPageSearchResultEl"
 import { showBasicModal } from "@/redux/features/modalSlice"
 import {
@@ -10,7 +10,7 @@ import { useEffect } from "react"
 import { getKoreanPaymentMethod } from "../../utils/payment"
 import { parseISOStringToDateTime } from "../../utils/date"
 
-const MyPageCheckoutSearchContent = () => {
+const CheckoutSearchContent = () => {
   const dispatch = useAppDispatch()
   const selectedCheckoutInfo = useAppSelector(selectSelectedCheckoutInfo)
 
@@ -78,6 +78,7 @@ const MyPageCheckoutSearchContent = () => {
   return (
     <div className="w-full">
       <MyPageSearchInputAndButton
+        isLoading={false}
         id="coustomweCounselingWrite-checkoutInfo__checkoutNumber"
         placeholder="주문번호를 조회해주세요"
         buttonContent="주문번호조회"
@@ -99,4 +100,4 @@ const MyPageCheckoutSearchContent = () => {
   )
 }
 
-export default MyPageCheckoutSearchContent
+export default CheckoutSearchContent

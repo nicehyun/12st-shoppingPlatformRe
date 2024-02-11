@@ -1,7 +1,7 @@
-import MyPageInquiryCustomerCounselingWrite from "@/features/myPage/views/customerService/MyPageInquiryCustomerCounselingWrite"
+import InquiryCustomerCounselingWriteSection from "@/features/myPage/views/customerService/InquiryCustomerCounselingWriteSection"
 
 const counselingWriteSection = () => {
-  return <MyPageInquiryCustomerCounselingWrite />
+  return <InquiryCustomerCounselingWriteSection />
 }
 
 export default counselingWriteSection

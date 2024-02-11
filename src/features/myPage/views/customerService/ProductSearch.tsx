@@ -1,18 +1,17 @@
-import MyPageProductSearchContent from "./MyPageProductSearchContent"
+import ProductSearchContent from "./ProductSearchContent"
 import MyPageWriteTable from "./MyPageWriteTable"
 
-const MyPageProductSearch = () => {
+const ProductSearch = () => {
   return (
     <>
       <MyPageWriteTable
-        tableContent={<MyPageProductSearchContent />}
+        tableContent={<ProductSearchContent />}
         tableTitle="상품정보"
         className="border-border border-t-[1px]"
         maxWidth={500}
-        isNoneLiTag
       />
     </>
   )
 }
 
-export default MyPageProductSearch
+export default ProductSearch

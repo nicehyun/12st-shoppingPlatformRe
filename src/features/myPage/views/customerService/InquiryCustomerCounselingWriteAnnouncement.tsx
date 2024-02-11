@@ -1,4 +1,4 @@
-const MyPageInquiryCustomerCounselingWriteAnnouncement = () => {
+const InquiryCustomerCounselingWriteAnnouncement = () => {
   return (
     <p className="mt-[50px] text-black dark:text-white leading-[30px] text-[16px] sm:text-[14px] md:text-[14px] max-w-[1000px]">
       산업안전보건법 제 41조 시행령에 근거하여 2018년 10월 18일 부터
@@ -9,4 +9,4 @@ const MyPageInquiryCustomerCounselingWriteAnnouncement = () => {
   )
 }
 
-export default MyPageInquiryCustomerCounselingWriteAnnouncement
+export default InquiryCustomerCounselingWriteAnnouncement

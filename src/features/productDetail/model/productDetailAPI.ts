@@ -1,5 +1,10 @@
+import { POSTResponse } from "@/features/common/types/fetch"
+import { Product } from "@/features/common/types/product"
+
 export const productDeatilAPI = {
-  getProductInfo: async (productId: string) => {
+  getProductInfo: async (
+    productId: string
+  ): Promise<POSTResponse | Product> => {
     if (!productId)
       return {
         status: 401,

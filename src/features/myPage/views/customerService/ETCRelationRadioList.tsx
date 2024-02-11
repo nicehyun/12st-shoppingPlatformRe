@@ -13,9 +13,7 @@ interface IMyPageETCRelationRadioList {
   className?: string
 }
 
-const MyPageETCRelationRadioList = ({
-  className,
-}: IMyPageETCRelationRadioList) => {
+const ETCRelationRadioList = ({ className }: IMyPageETCRelationRadioList) => {
   const dispatch = useAppDispatch()
   const selectedCsType = useAppSelector(selectSelectedCsType)
 
@@ -61,4 +59,4 @@ const MyPageETCRelationRadioList = ({
   )
 }
 
-export default MyPageETCRelationRadioList
+export default ETCRelationRadioList

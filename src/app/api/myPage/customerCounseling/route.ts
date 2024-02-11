@@ -1,9 +1,5 @@
-import { verifyJwt } from "@/features/common/utils/jwt"
-import {
-  CustomerCounselingDetail,
-  GetCustomerCounselingDetailResponse,
-} from "@/features/myPage/types/myPage"
-import { AxiosError } from "axios"
+import { verifyAccessToken } from "@/features/common/utils/jwt"
+import { CustomerCounselingDetail } from "@/features/myPage/types/myPage"
 import { NextRequest, NextResponse } from "next/server"
 
 interface RequestBody {
@@ -12,14 +8,14 @@ interface RequestBody {
 
 export async function GET(request: Request) {
   const accessToken = request.headers.get("authorization")
-
-  if (!accessToken || !verifyJwt(accessToken)) {
-    return new Response(JSON.stringify({ error: "No Authorization" }), {
+  if (!accessToken || !verifyAccessToken(accessToken)) {
+    return NextResponse.json({
       status: 401,
+      error: "유효하지 않은 AccessToken입니다.",
     })
   }
 
-  const email = verifyJwt(accessToken)?.email
+  const email = verifyAccessToken(accessToken)?.email
 
   try {
     const response = await fetch(
@@ -29,35 +25,32 @@ export async function GET(request: Request) {
       }
     ).then((res) => res.json())
 
-    return NextResponse.json(response[0], { status: 200 })
-  } catch (error) {
-    const { response } = error as unknown as AxiosError
-    if (response) {
-      console.error(
-        `🚨 JSON SERVER GET API (Get Customer Counseling API) : ${response.data}`
-      )
-      return new NextResponse(null, { status: response.status })
+    if (response[0] === undefined) {
+      return NextResponse.json([], { status: 200 })
+    } else {
+      return NextResponse.json(response[0].customerCounselingList, {
+        status: 200,
+      })
     }
-    console.error(
-      `🚨 Unexpected Error (Get Customer Counseling API) : ${error}`
-    )
-    return new NextResponse(null, { status: 500 })
+  } catch (error: any) {
+    throw new Error(error)
   }
 }
 
 export async function POST(request: NextRequest) {
   const accessToken = request.headers.get("authorization")
-
-  if (!accessToken || !verifyJwt(accessToken)) {
-    return new Response(JSON.stringify({ error: "No Authorization" }), {
+  if (!accessToken || !verifyAccessToken(accessToken)) {
+    return NextResponse.json({
       status: 401,
+      error: "유효하지 않은 AccessToken입니다.",
     })
   }
 
-  const email = verifyJwt(accessToken)?.email
+  const email = verifyAccessToken(accessToken)?.email
+  const id = verifyAccessToken(accessToken)?.id
 
   let updatedWriteDetail: CustomerCounselingDetail | undefined
-  let customerCounseling: GetCustomerCounselingDetailResponse | undefined
+
   const { writeDetail }: RequestBody = await request.json()
 
   const {
@@ -95,7 +88,10 @@ export async function POST(request: NextRequest) {
       (commonValidEl) => commonValidEl
     )
   ) {
-    throw new Error("Not Counseling Title or Counseling Content")
+    return NextResponse.json({
+      status: 401,
+      error: "문의 제목과 내용을 작성해주세요",
+    })
   }
 
   if (checkoutRelationRadioValueList.includes(csType)) {
@@ -107,7 +103,10 @@ export async function POST(request: NextRequest) {
         !!checkoutPayment?.selectedPayment,
       ].every((checkoutRelationCsValidEl) => checkoutRelationCsValidEl)
     ) {
-      throw new Error("Not Checkout Info")
+      return NextResponse.json({
+        status: 401,
+        error: "구매 정보가 필요합니다.",
+      })
     }
 
     updatedWriteDetail = {
@@ -127,7 +126,10 @@ export async function POST(request: NextRequest) {
         (productRelationCsValidEl) => productRelationCsValidEl
       )
     ) {
-      throw new Error("Not product Info")
+      return NextResponse.json({
+        status: 401,
+        error: "상품번호를 조회해주세요.",
+      })
     }
 
     updatedWriteDetail = {
@@ -158,44 +160,7 @@ export async function POST(request: NextRequest) {
       }
     ).then((res) => res.json())
 
-    customerCounseling = response[0]
-  } catch (error) {
-    const { response } = error as unknown as AxiosError
-    if (response) {
-      console.error(
-        `🚨 JSON SERVER GET API (Get Customer Counseling API) : ${response.data}`
-      )
-      return new NextResponse(null, { status: response.status })
-    }
-    console.error(
-      `🚨 Unexpected Error (Get Customer Counseling API) : ${error}`
-    )
-    return new NextResponse(null, { status: 500 })
-  }
-
-  try {
-    if (customerCounseling) {
-      await fetch(
-        `${process.env.NEXT_PUBLIC_DB_URL}/customerCounseling/${customerCounseling.id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            customerCounselingList: [
-              {
-                ...updatedWriteDetail,
-                writeDate: new Date().toISOString(),
-              },
-              ...customerCounseling.customerCounselingList,
-            ],
-          }),
-        }
-      )
-
-      return NextResponse.json({ status: 200 })
-    } else {
+    if (response[0] === undefined) {
       await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/customerCounseling`, {
         method: "POST",
         headers: {
@@ -211,20 +176,29 @@ export async function POST(request: NextRequest) {
           ],
         }),
       })
-
-      return NextResponse.json({ status: 200 })
-    }
-  } catch (error) {
-    const { response } = error as unknown as AxiosError
-    if (response) {
-      console.error(
-        `🚨 JSON SERVER POST API (Create Customer Counseling API) : ${response.data}`
+    } else {
+      await fetch(
+        `${process.env.NEXT_PUBLIC_DB_URL}/customerCounseling/${id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            customerCounselingList: [
+              {
+                ...updatedWriteDetail,
+                writeDate: new Date().toISOString(),
+              },
+              ...response[0].customerCounselingList,
+            ],
+          }),
+        }
       )
-      return new NextResponse(null, { status: response.status })
     }
-    console.error(
-      `🚨 Unexpected Error (Create Customer Counselling API) : ${error}`
-    )
-    return new NextResponse(null, { status: 500 })
+
+    return NextResponse.json({ status: 200 })
+  } catch (error: any) {
+    throw new Error(error)
   }
 }

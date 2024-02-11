@@ -1,18 +1,17 @@
 import MyPageWriteTable from "./MyPageWriteTable"
-import MyPageCheckoutSearchContent from "./MyPageCheckoutSearchContent"
+import CheckoutSearchContent from "./CheckoutSearchContent"
 
-const MyPageCheckoutSearch = () => {
+const CheckoutSearch = () => {
   return (
     <>
       <MyPageWriteTable
-        tableContent={<MyPageCheckoutSearchContent />}
+        tableContent={<CheckoutSearchContent />}
         tableTitle="주문정보"
         className="border-border border-t-[1px]"
         maxWidth={500}
-        isNoneLiTag
       />
     </>
   )
 }
 
-export default MyPageCheckoutSearch
+export default CheckoutSearch

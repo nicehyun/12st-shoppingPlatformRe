@@ -3,7 +3,7 @@
 import { ROUTE, useNavigations } from "@/features/common/hooks/useNavigations"
 import Button from "@/features/common/views/Button"
 
-const MyPageInquiryCustomerCounselingWriteButton = () => {
+const InquiryCustomerCounselingWriteButton = () => {
   const { routeTo } = useNavigations()
   return (
     <div className="mb-[20px] text-end">
@@ -16,4 +16,4 @@ const MyPageInquiryCustomerCounselingWriteButton = () => {
   )
 }
 
-export default MyPageInquiryCustomerCounselingWriteButton
+export default InquiryCustomerCounselingWriteButton

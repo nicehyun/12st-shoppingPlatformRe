@@ -9,7 +9,7 @@ import {
 } from "@/redux/features/myPageSlice"
 import { CsRelationEl } from "../../types/myPage"
 
-const MyPageCheckoutRelationRadioList = () => {
+const CheckoutRelationRadioList = () => {
   const dispatch = useAppDispatch()
   const selectedCsType = useAppSelector(selectSelectedCsType)
 
@@ -94,12 +94,8 @@ const MyPageCheckoutRelationRadioList = () => {
   ))
 
   return (
-    <MyPageWriteTable
-      tableTitle="구매관련문의"
-      tableContent={tableContent}
-      isNoneLiTag
-    />
+    <MyPageWriteTable tableTitle="구매관련문의" tableContent={tableContent} />
   )
 }
 
-export default MyPageCheckoutRelationRadioList
+export default CheckoutRelationRadioList

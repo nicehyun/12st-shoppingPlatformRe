@@ -1,8 +1,8 @@
-import Button from "@/features/common/views/Button"
 import Input from "@/features/common/views/Input"
+import LoadingButton from "@/features/common/views/LoadingButton"
 import { ChangeEvent, ReactNode } from "react"
 
-interface IMyPageSearchInputAndButton {
+interface ISearchInputAndButton {
   id: string
   placeholder?: string
   buttonContent: ReactNode
@@ -10,10 +10,10 @@ interface IMyPageSearchInputAndButton {
   searchInputValue: string
   onChangeSearchInputValue?: (event: ChangeEvent<HTMLInputElement>) => void
   isReadOnly?: boolean
-  isDisabled?: boolean
+  isLoading: boolean
 }
 
-const MyPageSearchInputAndButton = ({
+const SearchInputAndButton = ({
   buttonContent,
   id,
   onClickSearchButton,
@@ -21,8 +21,8 @@ const MyPageSearchInputAndButton = ({
   searchInputValue,
   isReadOnly = true,
   onChangeSearchInputValue,
-  isDisabled,
-}: IMyPageSearchInputAndButton) => {
+  isLoading,
+}: ISearchInputAndButton) => {
   return (
     <div className="flex w-full">
       <Input
@@ -35,14 +35,15 @@ const MyPageSearchInputAndButton = ({
         value={searchInputValue}
         onChange={onChangeSearchInputValue}
       />
-      <Button
+
+      <LoadingButton
         onClick={onClickSearchButton}
         content={buttonContent}
-        isDisabled={isDisabled}
-        classNames="h-[38px] w-[140px] text-[14px] border-[1px] border-lightRed dark:bg-lightRed dark:text-white text-lightRed rounded-[5px]"
+        isLoading={isLoading}
+        className="h-[38px] w-[140px] text-[14px] border-[1px] border-lightRed dark:bg-lightRed dark:text-white text-lightRed rounded-[5px]"
       />
     </div>
   )
 }
 
-export default MyPageSearchInputAndButton
+export default SearchInputAndButton

@@ -1,4 +1,4 @@
-const MyPageInquiryCustomerCounselingAnnouncement = () => {
+const InquiryCustomerCounselingAnnouncement = () => {
   return (
     <div className="mt-[50px] text-[14px] sm:text-[12px] md:text-[12px]">
       <p className="mb-[10px]">* 한번 등록한 상담내용은 수정이 불가능합니다.</p>
@@ -9,4 +9,4 @@ const MyPageInquiryCustomerCounselingAnnouncement = () => {
   )
 }
 
-export default MyPageInquiryCustomerCounselingAnnouncement
+export default InquiryCustomerCounselingAnnouncement

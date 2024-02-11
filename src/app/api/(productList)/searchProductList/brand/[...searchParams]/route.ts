@@ -19,8 +19,6 @@ export async function GET(
 
     const productList = await response.json()
 
-    console.log(productList)
-
     const result = { productList, totalCount }
 
     return NextResponse.json(result, {

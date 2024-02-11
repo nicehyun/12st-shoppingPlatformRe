@@ -1,7 +1,7 @@
-import MyPageInquiryCustomerCounseling from "@/features/myPage/views/customerService/MyPageInquiryCustomerCounseling"
+import InquiryCustomerCounselingSection from "@/features/myPage/views/customerService/InquiryCustomerCounselingSection"
 
-const InquiryCustomerCounselingSection = () => {
-  return <MyPageInquiryCustomerCounseling />
+const InquiryCustomerCounselingPage = () => {
+  return <InquiryCustomerCounselingSection />
 }
 
-export default InquiryCustomerCounselingSection
+export default InquiryCustomerCounselingPage

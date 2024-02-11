@@ -44,9 +44,3 @@ export type CustomerCounselingDetail = {
   productPrice?: number
   writeDate?: string
 }
-
-export type GetCustomerCounselingDetailResponse = {
-  id: number
-  email: string
-  customerCounselingList: CustomerCounselingDetail[]
-}

@@ -1,8 +1,8 @@
 import MyPageTableHeaderEl from "../MyPageTableHeaderEl"
 import MyPageListHeaderLayout from "../MyPageListTableHeader"
-import MyPageCheckoutNumberToCheckoutPairList from "./MyPageCheckoutNumberToCheckoutPairList"
+import CheckoutNumberToCheckoutPairList from "./CheckoutNumberToCheckoutPairList"
 
-const MyPageModalCheckoutList = () => {
+const CheckoutListInModal = () => {
   return (
     <div>
       <p className="text-[16px] md:text-[14px] sm:text-[14px] font-semibold">
@@ -15,9 +15,9 @@ const MyPageModalCheckoutList = () => {
         <MyPageTableHeaderEl className="w-1/2" headerContent="상품명" />
       </MyPageListHeaderLayout>
 
-      <MyPageCheckoutNumberToCheckoutPairList />
+      <CheckoutNumberToCheckoutPairList />
     </div>
   )
 }
 
-export default MyPageModalCheckoutList
+export default CheckoutListInModal

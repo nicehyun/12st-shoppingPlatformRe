@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { cartAPI } from "../models/cartAPI"
-import { ProductInCart, ProductsInCart } from "../types/cart"
+import { ProductInCart } from "../types/cart"
 import { useConditionalSignInRoute } from "@/features/common/hooks/useConditionalSignInRoute"
 import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
 import { useFeedbackModal } from "@/features/common/hooks/useFeedbackModal"

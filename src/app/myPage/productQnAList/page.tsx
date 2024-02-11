@@ -1,7 +1,7 @@
-import MyPageProductQnAInfo from "@/features/myPage/views/productQnAList/MyPageProductQnAInfo"
+import ProductQnAInfoSection from "@/features/myPage/views/productQnAList/ProductQnAInfoSection"
 
 const productQnAListSection = () => {
-  return <MyPageProductQnAInfo />
+  return <ProductQnAInfoSection />
 }
 
 export default productQnAListSection

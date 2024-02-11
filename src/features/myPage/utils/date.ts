@@ -8,10 +8,10 @@ export const parseISOStringToDateTime = (inputISOString: string) => {
   const dateObject = new Date(inputISOString)
 
   const year = dateObject.getFullYear()
-  const month = dateObject.getMonth() + 1
-  const date = dateObject.getDate()
-  const hours = dateObject.getHours()
-  const minutes = dateObject.getMinutes()
+  const month = String(dateObject.getMonth() + 1).padStart(2, "0")
+  const date = String(dateObject.getDate()).padStart(2, "0")
+  const hours = String(dateObject.getHours()).padStart(2, "0")
+  const minutes = String(dateObject.getMinutes()).padStart(2, "0")
 
   return [year, month, date, hours, minutes]
 }

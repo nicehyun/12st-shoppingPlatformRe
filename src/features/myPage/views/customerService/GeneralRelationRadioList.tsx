@@ -13,7 +13,7 @@ interface IMyPageGeneralRelationRadioList {
   className?: string
 }
 
-const MyPageGeneralRelationRadioList = ({
+const GeneralRelationRadioList = ({
   className,
 }: IMyPageGeneralRelationRadioList) => {
   const dispatch = useAppDispatch()
@@ -79,4 +79,4 @@ const MyPageGeneralRelationRadioList = ({
   )
 }
 
-export default MyPageGeneralRelationRadioList
+export default GeneralRelationRadioList
