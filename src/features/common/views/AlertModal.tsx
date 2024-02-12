@@ -14,7 +14,7 @@ interface IAlertModal<T> {
   onAgreeFn: T
   onCancelFn: () => void
   isLoading?: boolean
-  children: ReactNode
+  children?: ReactNode
 }
 
 const Transition = forwardRef(function Transition(
