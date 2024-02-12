@@ -26,6 +26,7 @@ const HomeBasicProductList = ({
             <ProductCard
               key={`${sectionClassification}-product-${product.id}`}
               productInfo={product}
+              isPriority
             />
           )
         })

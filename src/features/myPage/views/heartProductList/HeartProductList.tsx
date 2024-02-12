@@ -31,6 +31,7 @@ const HeartProductList = () => {
           <ProductCard
             productInfo={product}
             key={`heart-product-${product.id}`}
+            isPriority
           />
         ))}
       </ThreeGridProductList>
