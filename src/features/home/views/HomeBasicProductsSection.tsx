@@ -1,19 +1,19 @@
-import RenderProductList from "./RenderProductList"
 import { ROUTE } from "@/features/common/hooks/useNavigations"
 import SectionMoreLink from "./SectionMoreLink"
 import SectionTitle from "./SectionTitle"
 import SectionSubTitle from "./SectionSubTitle"
-import { SectionClassification } from "../types/section"
+
+import { ReactNode } from "react"
 
 interface IHomeBasicProductsSection {
-  sectionClassification: SectionClassification
   sectionTitle: string
   sectionSubTitle: string
   route: ROUTE
+  children: ReactNode
 }
 
 const HomeBasicProductsSection = ({
-  sectionClassification,
+  children,
   sectionTitle,
   sectionSubTitle,
   route,
@@ -31,7 +31,7 @@ const HomeBasicProductsSection = ({
         <SectionMoreLink route={route} />
       </div>
 
-      <RenderProductList sectionClassification={sectionClassification} />
+      {children}
     </section>
   )
 }

@@ -8,6 +8,7 @@ interface ISectionMoreLink {
 const SectionMoreLink = ({ route }: ISectionMoreLink) => {
   return (
     <Link
+      rel="preload"
       href={`${process.env.NEXT_PUBLIC_BASE_URL}${route}`}
       className="absolute right-0 text-[14px] text-lightRed transition-3 font-bold"
     >

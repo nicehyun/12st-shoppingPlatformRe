@@ -3,7 +3,7 @@ import Header from "@/features/layout/views/Header"
 import Navigation from "@/features/layout/views/Navigation"
 import { ReactNode } from "react"
 
-const HomeLayout = async ({ children }: { children: ReactNode }) => {
+const HomeLayout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <Header isShowCart={true} />

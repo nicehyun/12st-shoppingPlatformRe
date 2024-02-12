@@ -42,6 +42,7 @@ const SecondCategories = ({ linkDefaultHref }: ISecondCategories) => {
   return (
     <div className="border-[1px] bg-white mt-[50px] px-[10px] py-[20px]">
       <Link
+        rel="preload"
         href={linkDefaultHref}
         className={`inline-block relative text-[14px] ml-[10px] mr-[20px] text-lightBlack ${
           !currentSecondCategory ? "text-lightRed font-semibold" : ""
