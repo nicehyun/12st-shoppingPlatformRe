@@ -77,6 +77,8 @@ const SignUpForm = () => {
   })
 
   const handleNextStepButtonClick = () => {
+    if (activeStep === 4) return
+
     setActiveStep((prev) => prev + 1)
   }
 
