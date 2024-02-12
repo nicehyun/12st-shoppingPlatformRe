@@ -1,16 +1,13 @@
 import { POSTResponse } from "../types/fetch"
+import { validateAuthorization } from "../utils/error"
 
 export const mileAPI = {
   getUserMile: async (
-    authorization: string | null | undefined
+    accessToken: string | null | undefined
   ): Promise<POSTResponse | number> => {
-    if (!authorization)
-      return {
-        status: 401,
-        error: "유효하지 않은 AccessToken입니다.",
-      }
-
     try {
+      const { authorization } = validateAuthorization(accessToken)
+
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/mile`,
         {

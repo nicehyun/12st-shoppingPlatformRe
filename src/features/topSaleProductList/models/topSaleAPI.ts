@@ -1,16 +1,8 @@
+import { validatePageParam } from "@/features/common/utils/error"
+
 export const topSaleAPI = {
   getTopSaleProductList: async (pageParam: number) => {
-    if (
-      pageParam === undefined ||
-      pageParam === null ||
-      typeof pageParam !== "number" ||
-      pageParam < 1
-    ) {
-      return {
-        productList: [],
-        totalCount: "0",
-      }
-    }
+    validatePageParam(pageParam)
 
     const fomattedPageParam = pageParam.toString()
 
@@ -24,8 +16,11 @@ export const topSaleAPI = {
       )
 
       return response.json()
-    } catch (error: any) {
-      throw new Error(error)
+    } catch (error) {
+      return {
+        productList: [],
+        totalCount: "0",
+      }
     }
   },
 }

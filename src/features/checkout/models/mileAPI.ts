@@ -1,19 +1,16 @@
 import { ProductsInCart } from "@/features/cart/types/cart"
 import { POSTResponse } from "@/features/common/types/fetch"
+import { validateAuthorization } from "@/features/common/utils/error"
 
 export const mileAPI = {
   updateMile: async (
-    authorization: string | null | undefined,
+    accessToken: string | null | undefined,
     checkoutProductList: ProductsInCart,
     useMile: number
   ): Promise<POSTResponse> => {
-    if (!authorization)
-      return {
-        status: 401,
-        error: "유효하지 않은 AccessToken입니다.",
-      }
-
     try {
+      const { authorization } = validateAuthorization(accessToken)
+
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/mile`,
         {

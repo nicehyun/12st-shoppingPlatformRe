@@ -1,4 +1,4 @@
-import { CheckoutClauseCheck } from "../features/checkoutSlice"
+import { CheckoutClauseCheck } from "@/features/checkout/types/checkout"
 
 type CheckoutState = {
   age: boolean

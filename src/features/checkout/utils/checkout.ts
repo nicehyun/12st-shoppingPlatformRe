@@ -1,4 +1,4 @@
-import { FormEvent, FormEventHandler } from "react"
+import { FormEvent } from "react"
 
 export const formatCheckoutNumber = (inputISOString: string) => {
   if (inputISOString === null || inputISOString === undefined) {

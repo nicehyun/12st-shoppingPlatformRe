@@ -1,7 +1,6 @@
 import { Payment } from "@/features/checkout/views/payment/PaymentButton"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { RootState } from "../types/store"
-import { checkToAllAgreeClauseByCheckout } from "../utils/clause"
 import { ProductsInCart } from "@/features/cart/types/cart"
 
 export type CheckoutPayment = {

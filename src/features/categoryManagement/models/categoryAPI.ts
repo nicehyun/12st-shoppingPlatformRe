@@ -1,4 +1,5 @@
 import { InfinityProductResponse } from "@/features/common/types/product"
+import { validatePageParam } from "@/features/common/utils/error"
 import { Categories } from "@/features/layout/types/category"
 
 export const categoryAPI = {
@@ -20,17 +21,7 @@ export const categoryAPI = {
     categoriesPath: string,
     pageParam: number
   ): Promise<InfinityProductResponse> => {
-    if (
-      pageParam === undefined ||
-      pageParam === null ||
-      typeof pageParam !== "number" ||
-      pageParam < 1
-    ) {
-      return {
-        productList: [],
-        totalCount: 0,
-      }
-    }
+    validatePageParam(pageParam)
 
     const fomattedPageParam = pageParam.toString()
 
@@ -44,8 +35,11 @@ export const categoryAPI = {
       )
 
       return response.json()
-    } catch (error: any) {
-      throw new Error(error)
+    } catch (error) {
+      return {
+        productList: [],
+        totalCount: "0",
+      }
     }
   },
 }

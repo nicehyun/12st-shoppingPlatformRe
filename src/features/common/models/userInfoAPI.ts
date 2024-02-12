@@ -1,17 +1,14 @@
 import { POSTResponse } from "../types/fetch"
 import { UserInfoWithMile } from "../types/user"
+import { validateAuthorization } from "../utils/error"
 
 export const userInfoAPI = {
   getUserInfo: async (
-    authorization: string | null | undefined
+    accessToken: string | null | undefined
   ): Promise<UserInfoWithMile | POSTResponse> => {
-    if (!authorization)
-      return {
-        status: 401,
-        error: "유효하지 않은 AccessToken입니다.",
-      }
-
     try {
+      const { authorization } = validateAuthorization(accessToken)
+
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/userInfo`,
         {

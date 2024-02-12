@@ -1,61 +1,58 @@
 import { POSTResponse } from "@/features/common/types/fetch"
 import { CustomerCounselingDetail } from "../types/myPage"
+import { validateAuthorization } from "@/features/common/utils/error"
 
 export const myPageAPI = {
   modificatieMarketingClause: async (
-    authorization: string | null | undefined,
+    accessToken: string | null | undefined,
     isChecked: boolean
   ): Promise<POSTResponse> => {
-    if (!authorization)
-      return {
-        status: 401,
-        error: "유효하지 않은 AccessToken입니다.",
-      }
+    try {
+      const { authorization } = validateAuthorization(accessToken)
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/userInfo`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json", authorization },
-        body: JSON.stringify({
-          isChecked,
-        }),
-      }
-    )
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/userInfo`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json", authorization },
+          body: JSON.stringify({
+            isChecked,
+          }),
+        }
+      )
 
-    return response.json()
+      return response.json()
+    } catch (error: any) {
+      throw new Error(error)
+    }
   },
 
   memberTermination: async (
-    authorization: string | null | undefined
+    accessToken: string | null | undefined
   ): Promise<POSTResponse> => {
-    if (!authorization)
-      return {
-        status: 401,
-        error: "유효하지 않은 AccessToken입니다.",
-      }
+    try {
+      const { authorization } = validateAuthorization(accessToken)
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/memberTermination`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json", authorization },
-      }
-    )
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/memberTermination`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json", authorization },
+        }
+      )
 
-    return response.json()
+      return response.json()
+    } catch (error: any) {
+      throw new Error(error)
+    }
   },
   writeCoustomerCounseling: async (
-    authorization: string | null | undefined,
+    accessToken: string | null | undefined,
     writeDetail: CustomerCounselingDetail
   ): Promise<POSTResponse> => {
-    if (!authorization)
-      return {
-        status: 401,
-        error: "유효하지 않은 AccessToken입니다.",
-      }
-
     try {
+      const { authorization } = validateAuthorization(accessToken)
+
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/myPage/customerCounseling`,
         {
@@ -73,15 +70,11 @@ export const myPageAPI = {
     }
   },
   getCoutomerCounselingList: async (
-    authorization: string | null | undefined
+    accessToken: string | null | undefined
   ): Promise<CustomerCounselingDetail[] | POSTResponse> => {
-    if (!authorization)
-      return {
-        status: 401,
-        error: "유효하지 않은 AccessToken입니다.",
-      }
-
     try {
+      const { authorization } = validateAuthorization(accessToken)
+
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/myPage/customerCounseling`,
         {

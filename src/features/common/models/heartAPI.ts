@@ -1,17 +1,14 @@
 import { POSTResponse } from "../types/fetch"
 import { Product, Products } from "../types/product"
+import { validateAuthorization } from "../utils/error"
 
 export const productHeartAPI = {
   getHeartList: async (
-    authorization: string | null | undefined
+    accessToken: string | null | undefined
   ): Promise<Products | POSTResponse> => {
-    if (!authorization)
-      return {
-        status: 401,
-        error: "유효하지 않은 AccessToken입니다.",
-      }
-
     try {
+      const { authorization } = validateAuthorization(accessToken)
+
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/heart`,
         {
@@ -29,51 +26,51 @@ export const productHeartAPI = {
     }
   },
   addProductInHeart: async (
-    authorization: string | null | undefined,
+    accessToken: string | null | undefined,
     productInfo: Product
   ): Promise<POSTResponse> => {
-    if (!authorization)
-      return {
-        status: 401,
-        error: "유효하지 않은 AccessToken입니다.",
-      }
+    try {
+      const { authorization } = validateAuthorization(accessToken)
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/heart/add`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization,
-        },
-        body: JSON.stringify({ productInfo }),
-      }
-    )
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/heart/add`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            authorization,
+          },
+          body: JSON.stringify({ productInfo }),
+        }
+      )
 
-    return response.json()
+      return response.json()
+    } catch (error: any) {
+      throw new Error(error)
+    }
   },
   removeProductInHeart: async (
-    authorization: string | null | undefined,
+    accessToken: string | null | undefined,
     productInfo: Product
   ): Promise<POSTResponse> => {
-    if (!authorization)
-      return {
-        status: 401,
-        error: "유효하지 않은 AccessToken입니다.",
-      }
+    try {
+      const { authorization } = validateAuthorization(accessToken)
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/heart/remove`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization,
-        },
-        body: JSON.stringify({ productInfo }),
-      }
-    )
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/heart/remove`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            authorization,
+          },
+          body: JSON.stringify({ productInfo }),
+        }
+      )
 
-    return response.json()
+      return response.json()
+    } catch (error: any) {
+      throw new Error(error)
+    }
   },
 }

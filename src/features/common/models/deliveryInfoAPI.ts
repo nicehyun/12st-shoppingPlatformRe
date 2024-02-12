@@ -1,17 +1,14 @@
 import { DeliveryInfo } from "@/features/common/types/deliveryInfo"
 import { POSTResponse } from "../types/fetch"
+import { validateAuthorization } from "../utils/error"
 
 export const deliveryInfoAPI = {
   getDeliveryInfo: async (
-    authorization: string | null | undefined
+    accessToken: string | null | undefined
   ): Promise<DeliveryInfo | null | POSTResponse> => {
-    if (!authorization)
-      return {
-        status: 401,
-        error: "유효하지 않은 AccessToken입니다.",
-      }
-
     try {
+      const { authorization } = validateAuthorization(accessToken)
+
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/deliveryInfo`,
         {
@@ -26,16 +23,12 @@ export const deliveryInfoAPI = {
     }
   },
   updateDeliveryInfo: async (
-    authorization: string | null | undefined,
+    accessToken: string | null | undefined,
     updateDeliveryInfo: DeliveryInfo
   ): Promise<POSTResponse> => {
-    if (!authorization)
-      return {
-        status: 401,
-        error: "유효하지 않은 AccessToken입니다.",
-      }
-
     try {
+      const { authorization } = validateAuthorization(accessToken)
+
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/deliveryInfo`,
         {

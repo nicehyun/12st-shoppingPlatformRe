@@ -1,20 +1,17 @@
 import { Product } from "@/features/common/types/product"
 import { ProductInCart, ProductsInCart } from "@/features/cart/types/cart"
 import { POSTResponse } from "@/features/common/types/fetch"
+import { validateAuthorization } from "@/features/common/utils/error"
 
 type CartAPIResponse = POSTResponse | ProductsInCart
 
 export const cartAPI = {
   getProductListInCart: async (
-    authorization: string | null | undefined
+    accessToken: string | null | undefined
   ): Promise<CartAPIResponse> => {
-    if (!authorization)
-      return {
-        status: 401,
-        error: "유효하지 않은 AccessToken입니다.",
-      }
-
     try {
+      const { authorization } = validateAuthorization(accessToken)
+
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart`,
         {
@@ -30,15 +27,11 @@ export const cartAPI = {
   },
   addProductInCart: async (
     productInfo: Product,
-    authorization: string | null | undefined
+    accessToken: string | null | undefined
   ): Promise<POSTResponse> => {
-    if (!authorization)
-      return {
-        status: 401,
-        error: "유효하지 않은 AccessToken입니다.",
-      }
-
     try {
+      const { authorization } = validateAuthorization(accessToken)
+
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart/add`,
         {
@@ -59,21 +52,11 @@ export const cartAPI = {
 
   increaseProductInCart: async (
     productInfo: ProductInCart,
-    authorization: string | null | undefined
+    accessToken: string | null | undefined
   ): Promise<POSTResponse> => {
-    if (!authorization)
-      return {
-        status: 401,
-        error: "유효하지 않은 AccessToken입니다.",
-      }
-
-    if (productInfo.amount >= 50)
-      return {
-        status: 401,
-        error: "최대 구매 가능 수량에 도달했습니다.",
-      }
-
     try {
+      const { authorization } = validateAuthorization(accessToken)
+
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart/increase`,
         {
@@ -94,14 +77,8 @@ export const cartAPI = {
 
   decreaseProductInCart: async (
     productInfo: ProductInCart,
-    authorization: string | null | undefined
+    accessToken: string | null | undefined
   ): Promise<POSTResponse> => {
-    if (!authorization)
-      return {
-        status: 401,
-        error: "유효하지 않은 AccessToken입니다.",
-      }
-
     if (productInfo.amount <= 1)
       return {
         status: 401,
@@ -110,6 +87,8 @@ export const cartAPI = {
       }
 
     try {
+      const { authorization } = validateAuthorization(accessToken)
+
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart/decrease`,
         {
@@ -130,14 +109,8 @@ export const cartAPI = {
 
   removeProductInCart: async (
     productInfo: Product | null,
-    authorization: string | null | undefined
+    accessToken: string | null | undefined
   ): Promise<POSTResponse> => {
-    if (!authorization)
-      return {
-        status: 401,
-        error: "유효하지 않은 AccessToken입니다.",
-      }
-
     if (!productInfo)
       return {
         status: 401,
@@ -145,6 +118,8 @@ export const cartAPI = {
       }
 
     try {
+      const { authorization } = validateAuthorization(accessToken)
+
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart/remove`,
         {
@@ -165,14 +140,8 @@ export const cartAPI = {
 
   removeCheckedProductListInCart: async (
     checkedProductList: ProductsInCart,
-    authorization: string | null | undefined
+    accessToken: string | null | undefined
   ): Promise<POSTResponse> => {
-    if (!authorization)
-      return {
-        status: 401,
-        error: "유효하지 않은 AccessToken입니다.",
-      }
-
     if (checkedProductList.length === 0) {
       return {
         status: 401,
@@ -182,6 +151,8 @@ export const cartAPI = {
     }
 
     try {
+      const { authorization } = validateAuthorization(accessToken)
+
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart/checkedRemove`,
         {
