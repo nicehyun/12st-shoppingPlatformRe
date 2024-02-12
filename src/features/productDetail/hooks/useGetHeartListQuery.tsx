@@ -26,5 +26,5 @@ export const useGetHeartListQuery = () => {
 
   const isInitialLoading = isLoading && isFetching
 
-  return { heartList, isInitialLoading }
+  return { heartList, isLoading: isInitialLoading }
 }

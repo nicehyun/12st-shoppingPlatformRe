@@ -11,7 +11,7 @@ interface IProductNameAndHeart {
 }
 
 const ProductNameAndHeart = ({ productDetail }: IProductNameAndHeart) => {
-  const { isInitialLoading } = useGetHeartListQuery()
+  const { isLoading } = useGetHeartListQuery()
 
   const {
     heartMutateAsync,
@@ -19,7 +19,7 @@ const ProductNameAndHeart = ({ productDetail }: IProductNameAndHeart) => {
     isExsitedHeartProduct,
   } = useHeartMutation(productDetail)
 
-  const isButtonLoading = isInitialLoading || isHeartMutateAsyncLoading
+  const isButtonLoading = isLoading || isHeartMutateAsyncLoading
 
   return (
     <div className="flex justify-between min-h-[100px]">
