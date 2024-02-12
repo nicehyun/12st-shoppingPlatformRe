@@ -21,8 +21,8 @@ export const productHeartAPI = {
       )
 
       return response.json()
-    } catch (error: any) {
-      throw new Error(error)
+    } catch (error: unknown) {
+      throw error
     }
   },
   addProductInHeart: async (
@@ -45,8 +45,8 @@ export const productHeartAPI = {
       )
 
       return response.json()
-    } catch (error: any) {
-      throw new Error(error)
+    } catch (error: unknown) {
+      throw error
     }
   },
   removeProductInHeart: async (
@@ -69,8 +69,8 @@ export const productHeartAPI = {
       )
 
       return response.json()
-    } catch (error: any) {
-      throw new Error(error)
+    } catch (error: unknown) {
+      throw error
     }
   },
 }

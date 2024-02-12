@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query"
 import { productDeatilAPI } from "../model/productDetailAPI"
 import { useFeedbackModal } from "@/features/common/hooks/useFeedbackModal"
 import { useFeedbackModalWithError } from "@/features/common/hooks/useFeedbackModalWithError"
+import { isFeedbackError } from "@/features/common/utils/error"
 
 export const useGetProductDetailQuery = (productId: string) => {
   const { showFeedbackModalWithContent } = useFeedbackModal()
@@ -12,9 +13,12 @@ export const useGetProductDetailQuery = (productId: string) => {
     () => productDeatilAPI.getProductInfo(productId),
     {
       onSuccess: (data) => {
-        if (data.status === 401) {
-          showFeedbackModalWithErrorMessage(data.error ?? "")
+        if (isFeedbackError(data)) {
+          if (data.status === 401) {
+            showFeedbackModalWithErrorMessage(data.error ?? "")
 
+            return
+          }
           return
         }
       },
@@ -28,7 +32,7 @@ export const useGetProductDetailQuery = (productId: string) => {
     }
   )
 
-  const productDetail = data.status === 401 ? undefined : data
+  const productDetail = !isFeedbackError(data) && data ? data : null
 
   return {
     productDetail,

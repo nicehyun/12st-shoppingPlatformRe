@@ -22,8 +22,8 @@ export const myPageAPI = {
       )
 
       return response.json()
-    } catch (error: any) {
-      throw new Error(error)
+    } catch (error: unknown) {
+      throw error
     }
   },
 
@@ -42,8 +42,8 @@ export const myPageAPI = {
       )
 
       return response.json()
-    } catch (error: any) {
-      throw new Error(error)
+    } catch (error: unknown) {
+      throw error
     }
   },
   writeCoustomerCounseling: async (
@@ -65,8 +65,8 @@ export const myPageAPI = {
       )
 
       return response.json()
-    } catch (error: any) {
-      throw new Error(error)
+    } catch (error: unknown) {
+      throw error
     }
   },
   getCoutomerCounselingList: async (
@@ -84,8 +84,8 @@ export const myPageAPI = {
       )
 
       return response.json()
-    } catch (error: any) {
-      throw new Error(error)
+    } catch (error: unknown) {
+      throw error
     }
   },
 }

@@ -32,8 +32,8 @@ export async function GET(request: Request) {
         status: 200,
       })
     }
-  } catch (error: any) {
-    throw new Error(error)
+  } catch (error: unknown) {
+    throw error
   }
 }
 
@@ -198,7 +198,7 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json({ status: 200 })
-  } catch (error: any) {
-    throw new Error(error)
+  } catch (error: unknown) {
+    throw error
   }
 }

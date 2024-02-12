@@ -26,7 +26,7 @@ export async function GET(request: Request) {
     } else {
       return NextResponse.json(response[0].productList, { status: 200 })
     }
-  } catch (error: any) {
-    throw new Error(error)
+  } catch (error: unknown) {
+    throw error
   }
 }

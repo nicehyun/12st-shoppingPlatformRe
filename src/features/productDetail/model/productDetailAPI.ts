@@ -20,8 +20,8 @@ export const productDeatilAPI = {
       )
 
       return response.json()
-    } catch (error: any) {
-      throw new Error(error)
+    } catch (error: unknown) {
+      throw error
     }
   },
 }

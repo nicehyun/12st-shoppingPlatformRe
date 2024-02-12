@@ -31,8 +31,8 @@ export async function GET(request: Request) {
     } else {
       return NextResponse.json(response[0].deliveryInfo, { status: 200 })
     }
-  } catch (error: any) {
-    throw new Error(error)
+  } catch (error: unknown) {
+    throw error
   }
 }
 
@@ -91,7 +91,7 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json({ status: 200 })
-  } catch (error: any) {
-    throw new Error(error)
+  } catch (error: unknown) {
+    throw error
   }
 }

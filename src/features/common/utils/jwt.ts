@@ -59,8 +59,8 @@ export const getRefreshAccessToken = async (
         refreshToken: response.refreshToken,
         expiresIn: response.expiresIn,
       }
-    } catch (error: any) {
-      throw new Error(error)
+    } catch (error: unknown) {
+      throw error
     }
   }
 }

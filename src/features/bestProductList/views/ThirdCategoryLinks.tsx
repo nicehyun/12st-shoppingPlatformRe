@@ -25,7 +25,7 @@ const ThirdCategoryLinks = ({
       "inline-block relative text-[14px] ml-[10px] mr-[20px] text-lightBlack"
     const activeClass = "text-lightRed font-semibold"
     const dividerClass = "before:vertical-divider before:-mx-[16px]"
-    let classes = [baseClass]
+    const classes = [baseClass]
 
     if (thirdCategory === currentThirdCategory) {
       classes.push(activeClass)

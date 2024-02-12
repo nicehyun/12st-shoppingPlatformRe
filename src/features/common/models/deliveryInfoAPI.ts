@@ -18,8 +18,8 @@ export const deliveryInfoAPI = {
       )
 
       return response.json()
-    } catch (error: any) {
-      throw new Error(error)
+    } catch (error: unknown) {
+      throw error
     }
   },
   updateDeliveryInfo: async (
@@ -43,8 +43,8 @@ export const deliveryInfoAPI = {
       )
 
       return response.json()
-    } catch (error: any) {
-      throw new Error(error)
+    } catch (error: unknown) {
+      throw error
     }
   },
 }

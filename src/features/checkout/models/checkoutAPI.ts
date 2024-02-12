@@ -25,8 +25,8 @@ export const checkoutAPI = {
       )
 
       return response.json()
-    } catch (error: any) {
-      throw new Error(error)
+    } catch (error: unknown) {
+      throw error
     }
   },
   checkout: async (
@@ -53,8 +53,8 @@ export const checkoutAPI = {
       )
 
       return response.json()
-    } catch (error: any) {
-      throw new Error(error)
+    } catch (error: unknown) {
+      throw error
     }
   },
 
@@ -74,8 +74,8 @@ export const checkoutAPI = {
       )
 
       return response.json()
-    } catch (error: any) {
-      throw new Error(error)
+    } catch (error: unknown) {
+      throw error
     }
   },
 }

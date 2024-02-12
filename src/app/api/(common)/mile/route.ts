@@ -25,7 +25,7 @@ export async function GET(request: Request) {
     const userMile = response[0].mile
 
     return NextResponse.json(userMile, { status: 200 })
-  } catch (error: any) {
-    throw new Error(error)
+  } catch (error: unknown) {
+    throw error
   }
 }

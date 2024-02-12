@@ -30,8 +30,8 @@ export async function GET(request: Request) {
     const { password, ...userInfoWithoutPassword } = userInfo
 
     return NextResponse.json(userInfoWithoutPassword, { status: 200 })
-  } catch (error: any) {
-    throw new Error(error)
+  } catch (error: unknown) {
+    throw error
   }
 }
 
@@ -62,7 +62,7 @@ export async function POST(request: Request) {
     })
 
     return NextResponse.json({ status: 200 })
-  } catch (error: any) {
-    throw new Error(error)
+  } catch (error: unknown) {
+    throw error
   }
 }

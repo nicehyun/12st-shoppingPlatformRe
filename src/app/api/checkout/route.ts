@@ -51,8 +51,8 @@ export async function GET(request: Request) {
     } else {
       return NextResponse.json(prevCheckoutList.checkoutList, { status: 200 })
     }
-  } catch (error: any) {
-    throw new Error(error)
+  } catch (error: unknown) {
+    throw error
   }
 }
 
@@ -146,8 +146,8 @@ export async function POST(request: NextRequest) {
           "사용하려는 마일리지가 보유 마일리지를 넘지 않는지 확인해 주세요.",
       })
     }
-  } catch (error: any) {
-    throw new Error(error)
+  } catch (error: unknown) {
+    throw error
   }
 
   const totalPrice = accumulationOfProductsPrice(checkoutInfo.productList)
@@ -203,8 +203,8 @@ export async function POST(request: NextRequest) {
           }),
         })
       }
-    } catch (error: any) {
-      throw new Error(error)
+    } catch (error: unknown) {
+      throw error
     }
   }
 
@@ -236,8 +236,8 @@ export async function POST(request: NextRequest) {
           productList: updatedProductInCart,
         }),
       })
-    } catch (error: any) {
-      throw new Error(error)
+    } catch (error: unknown) {
+      throw error
     }
   }
 
@@ -276,8 +276,8 @@ export async function POST(request: NextRequest) {
           }),
         }
       )
-    } catch (error: any) {
-      throw new Error(error)
+    } catch (error: unknown) {
+      throw error
     }
   }
 
@@ -293,7 +293,7 @@ export async function POST(request: NextRequest) {
     ])
 
     return NextResponse.json({ status: 200 })
-  } catch (error: any) {
-    throw new Error(error)
+  } catch (error: unknown) {
+    throw error
   }
 }

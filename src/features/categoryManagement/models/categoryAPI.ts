@@ -13,8 +13,8 @@ export const categoryAPI = {
       )
 
       return response.json()
-    } catch (error: any) {
-      throw new Error(error)
+    } catch (error: unknown) {
+      throw error
     }
   },
   getFiltedProductListWithCategory: async (

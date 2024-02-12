@@ -12,8 +12,8 @@ export const signUpAPI = {
       })
 
       return response.json()
-    } catch (error: any) {
-      throw new Error(error)
+    } catch (error: unknown) {
+      throw error
     }
   },
   emailDuplicateCheck: async (email: string) => {
@@ -27,8 +27,8 @@ export const signUpAPI = {
       })
 
       return response.json()
-    } catch (error: any) {
-      throw new Error(error)
+    } catch (error: unknown) {
+      throw error
     }
   },
 }

@@ -10,7 +10,7 @@ export async function GET() {
     ).then((res) => res.json())
 
     return NextResponse.json(response, { status: 200 })
-  } catch (error: any) {
-    throw new Error(error)
+  } catch (error: unknown) {
+    throw error
   }
 }
