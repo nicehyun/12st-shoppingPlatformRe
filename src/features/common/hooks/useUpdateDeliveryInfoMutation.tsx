@@ -26,10 +26,12 @@ export const useUpdateDeliveryInfoMutation = (
           return
         }
 
+        if (data.status === 200) {
+          queryClient.invalidateQueries(["deliveryInfo"])
+        }
+
         if (data.status === 200 && isShowSuccessFeedbackModal) {
           showFeedbackModalWithContent("배송지 정보가 수정되었습니다.")
-          queryClient.invalidateQueries(["deliveryInfo"])
-          return
         }
       },
       onError: () => {
