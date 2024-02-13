@@ -5,6 +5,7 @@ import { useReviewListTabs } from "../../hooks/useReviewListTabs"
 import CustomTabs from "@/features/common/views/CustomTabs"
 import CustomTabPanel from "@/features/common/views/CustomTabPanel"
 import MyPageListNoneContents from "../MyPageListNoneContents"
+import { Fragment } from "react"
 
 const ReviewListSection = () => {
   const { handleTabValueChange, tabValue, tabs } = useReviewListTabs()
@@ -32,11 +33,11 @@ const ReviewListSection = () => {
       />
 
       {reviewListComponents.map((reviewEl, index) => (
-        <>
+        <Fragment key={reviewEl.key}>
           <CustomTabPanel value={tabValue} index={index}>
             {reviewEl}
           </CustomTabPanel>
-        </>
+        </Fragment>
       ))}
     </section>
   )

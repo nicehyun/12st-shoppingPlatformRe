@@ -168,6 +168,7 @@ export async function POST(request: NextRequest) {
         },
         body: JSON.stringify({
           email,
+          id,
           customerCounselingList: [
             {
               ...updatedWriteDetail,

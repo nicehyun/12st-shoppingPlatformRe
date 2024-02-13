@@ -27,7 +27,7 @@ const GetMileListContents = () => {
     <>
       {renderGetMileList.map((useMileAndGetMileEl, index) => (
         <UseMileAndGetMileContentEl
-          key={`useMileAndGetMileInfo-get-${useMileAndGetMileEl.checkoutNumber}__${index}`}
+          key={`useMileAndGetMileInfo-get-${useMileAndGetMileEl.checkoutNumber}__${useMileAndGetMileEl.checkoutDate}__${index}`}
           checkoutDate={useMileAndGetMileEl.checkoutDate}
           checkoutNumber={useMileAndGetMileEl.checkoutNumber}
           mile={

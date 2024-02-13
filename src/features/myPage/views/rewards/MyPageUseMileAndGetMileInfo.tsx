@@ -6,6 +6,7 @@ import UseMileList from "./UseMileList"
 import CustomTabs from "@/features/common/views/CustomTabs"
 import CustomTabPanel from "@/features/common/views/CustomTabPanel"
 import GetMileList from "./GetMileList"
+import { Fragment } from "react"
 
 const MyPageUseMileAndGetMileInfo = () => {
   const { handleTabValueChange, tabValue, tabs } = useGetMileAndUseMileTabs()
@@ -28,11 +29,11 @@ const MyPageUseMileAndGetMileInfo = () => {
       />
 
       {useMileAndGetMileComponents.map((modificationEl, index) => (
-        <>
+        <Fragment key={`${modificationEl.key}`}>
           <CustomTabPanel value={tabValue} index={index}>
             {modificationEl}
           </CustomTabPanel>
-        </>
+        </Fragment>
       ))}
     </MyPageSectionSubTitle>
   )

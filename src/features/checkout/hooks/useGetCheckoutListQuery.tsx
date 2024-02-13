@@ -30,7 +30,7 @@ export const useGetCheckoutListQuery = () => {
         )
         queryClient.setQueryData(["checkoutList"], [])
       },
-
+      staleTime: 60 * 60 * 1000,
       enabled: !!session,
     }
   )

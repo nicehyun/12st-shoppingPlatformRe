@@ -9,6 +9,7 @@ import ClauseModification from "./ClauseModification"
 import CustomTabPanel from "@/features/common/views/CustomTabPanel"
 import UserInfo from "./UserInfo"
 import MemberTermination from "./MemberTermination"
+import { Fragment } from "react"
 
 const ModificationOfUserInfoSection = () => {
   const { handleTabValueChange, tabValue, tabs } =
@@ -33,11 +34,11 @@ const ModificationOfUserInfoSection = () => {
       />
 
       {modificationOfUserInfoComponents.map((modificationEl, index) => (
-        <>
+        <Fragment key={modificationEl.key}>
           <CustomTabPanel value={tabValue} index={index}>
             {modificationEl}
           </CustomTabPanel>
-        </>
+        </Fragment>
       ))}
     </section>
   )

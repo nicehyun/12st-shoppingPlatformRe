@@ -8,6 +8,7 @@ import ReturnList from "./ReturnList"
 import AllCancelList from "./AllCancelList"
 import ChangeList from "./ChangeList"
 import CustomTabs from "@/features/common/views/CustomTabs"
+import { Fragment } from "react"
 
 const CancelListSection = () => {
   const { handleTabValueChange, tabValue, tabs } = useCancelListTabs()
@@ -31,11 +32,11 @@ const CancelListSection = () => {
       />
 
       {cancelListComponents.map((cancelEl, index) => (
-        <>
+        <Fragment key={cancelEl.key}>
           <CustomTabPanel value={tabValue} index={index}>
             {cancelEl}
           </CustomTabPanel>
-        </>
+        </Fragment>
       ))}
     </section>
   )

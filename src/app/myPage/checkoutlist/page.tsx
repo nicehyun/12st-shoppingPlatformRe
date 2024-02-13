@@ -1,7 +1,7 @@
-import MyPageCheckoutList from "@/features/myPage/views/shoppingInfo/CheckoutListSection"
+import CheckoutListSection from "@/features/myPage/views/shoppingInfo/CheckoutListSection"
 
 const MyPageCheckoutListSection = () => {
-  return <MyPageCheckoutList />
+  return <CheckoutListSection />
 }
 
 export default MyPageCheckoutListSection
