@@ -1,3 +1,5 @@
+"use client"
+
 import Button from "@/features/common/views/Button"
 import { showBasicModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
