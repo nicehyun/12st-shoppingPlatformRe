@@ -30,15 +30,17 @@ export const useSignInMutaion = () => {
     const email = formData.get("email") as string
     const password = formData.get("password") as string
 
+    if (!email || !password) {
+      showFeedbackModalWithContent("이메일과 비밀번호를 입력해주세요.")
+
+      return
+    }
+
     const isEmailValid = emailValidator(email)
     const isPasswordValid = passwordValidator(password)
 
     if (!isEmailValid) {
-      dispatch(
-        showFeedbackModal({
-          modalContent: "유효한 이메일 형식이 아닙니다.",
-        })
-      )
+      showFeedbackModalWithContent("유효한 이메일 형식이 아닙니다.")
 
       return
     }
