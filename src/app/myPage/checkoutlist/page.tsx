@@ -1,7 +1,7 @@
-import CheckoutListSection from "@/features/myPage/views/shoppingInfo/CheckoutListSection"
+import CouponsSection from "@/features/myPage/views/rewards/Coupons"
 
-const MyPageCheckoutLisPage = () => {
-  return <CheckoutListSection />
+const MyPageCouponsSection = () => {
+  return <CouponsSection />
 }
 
-export default MyPageCheckoutLisPage
+export default MyPageCouponsSection
