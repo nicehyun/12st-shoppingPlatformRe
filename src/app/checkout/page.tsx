@@ -1,4 +1,4 @@
-import CheckoutForm from "@/features/checkout/views/CheckoutForm"
+import CheckoutLayout from "@/features/checkout/views/CheckoutLayout"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 }
 
 const CheckoutPage = () => {
-  return <CheckoutForm />
+  return <CheckoutLayout />
 }
 
 export default CheckoutPage

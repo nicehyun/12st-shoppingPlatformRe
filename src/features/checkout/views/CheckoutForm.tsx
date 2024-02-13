@@ -1,25 +1,20 @@
 "use client"
 
-import CheckoutClauseSection from "./checkoutClause/CheckoutClauseSection"
-import CouponAndMileSection from "./couponAndMile/CouponAndMileSection"
-import TotalPriceSection from "./priceInfo/TotalPriceSection"
-import DeliveryInfoSection from "./delivery/DeliveryInfoSection"
-import CheckoutButton from "./CheckoutButton"
-import PaymentSection from "./payment/PaymentSection"
 import { useCheckoutMutaion } from "../hooks/useCheckoutMutaion"
-import CheckoutPendingProductSection from "./productList/CheckoutPendingProductSection"
+import { ReactNode } from "react"
+import CheckoutButton from "./CheckoutButton"
 
-const CheckoutForm = () => {
+interface ICheckoutForm {
+  children: ReactNode
+}
+
+const CheckoutForm = ({ children }: ICheckoutForm) => {
   const { checkoutMutateAsync, isCheckoutLoading } = useCheckoutMutaion()
 
   return (
     <form onSubmit={checkoutMutateAsync} className="max-w-[800px] mx-auto">
-      <DeliveryInfoSection />
-      <CheckoutPendingProductSection />
-      <CouponAndMileSection />
-      <PaymentSection />
-      <TotalPriceSection />
-      <CheckoutClauseSection />
+      {children}
+
       <CheckoutButton isCheckoutLoading={isCheckoutLoading} />
     </form>
   )
