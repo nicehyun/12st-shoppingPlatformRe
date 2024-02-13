@@ -1,7 +1,7 @@
 import CheckoutListSection from "@/features/myPage/views/shoppingInfo/CheckoutListSection"
 
-const MyPageCheckoutListSection = () => {
+const MyPageCheckoutLisPage = () => {
   return <CheckoutListSection />
 }
 
-export default MyPageCheckoutListSection
+export default MyPageCheckoutLisPage
