@@ -1,13 +1,14 @@
 import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
 import { useFeedbackModal } from "./useFeedbackModal"
 import { useFeedbackModalWithError } from "./useFeedbackModalWithError"
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { deliveryInfoAPI } from "../models/deliveryInfoAPI"
 import { DeliveryInfo } from "../types/deliveryInfo"
 
 export const useUpdateDeliveryInfoMutation = (
   isShowSuccessFeedbackModal: boolean
 ) => {
+  const queryClient = useQueryClient()
   const { session } = useSessionQuery()
   const { showFeedbackModalWithContent } = useFeedbackModal()
   const { showFeedbackModalWithErrorMessage } = useFeedbackModalWithError()
@@ -27,7 +28,7 @@ export const useUpdateDeliveryInfoMutation = (
 
         if (data.status === 200 && isShowSuccessFeedbackModal) {
           showFeedbackModalWithContent("배송지 정보가 수정되었습니다.")
-
+          queryClient.invalidateQueries(["deliveryInfo"])
           return
         }
       },
