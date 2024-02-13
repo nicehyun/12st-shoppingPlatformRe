@@ -35,7 +35,7 @@ const DynamicSignUpPasswordInput = dynamic(
 const SignUpForm = () => {
   const dispatch = useAppDispatch()
 
-  const [activeStep, setActiveStep] = useState(5)
+  const [activeStep, setActiveStep] = useState(0)
   const { checkedClaseState, toggleClauseCheck, resetClauseCheck } =
     useSignUpClasue()
 
