@@ -2,8 +2,13 @@
 import CustomTabPanel from "@/features/common/views/CustomTabPanel"
 import { useDeliveryTabs } from "../../hooks/useDeliveryTabs"
 import CustomTabs from "@/features/common/views/CustomTabs"
-import DefalutDeliveryInfo from "./DefalutDeliveryInfo"
 import NewDeliveryInfo from "./NewDeliveryInfo"
+import dynamic from "next/dynamic"
+
+const DynamicDefalutDeliveryInfo = dynamic(
+  () => import("./DefalutDeliveryInfo"),
+  { ssr: false }
+)
 
 const DeliveryInfoTabs = () => {
   const { deliveryTabValue, handleDeliveryTabvalueChange, tabs } =
@@ -18,7 +23,7 @@ const DeliveryInfoTabs = () => {
       />
 
       <CustomTabPanel value={deliveryTabValue} index={0}>
-        <DefalutDeliveryInfo />
+        <DynamicDefalutDeliveryInfo />
       </CustomTabPanel>
       <CustomTabPanel value={deliveryTabValue} index={1}>
         <NewDeliveryInfo />

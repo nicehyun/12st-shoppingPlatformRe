@@ -42,7 +42,7 @@ const SignUpVerificationInput = ({
   timerExpireFn,
 }: ISignUpVerificationInput) => {
   return (
-    <div className={`${classNames} flex flex-grow`}>
+    <div className={`${classNames} relative  flex flex-grow`}>
       <Input
         name={id}
         id={id}
@@ -56,11 +56,7 @@ const SignUpVerificationInput = ({
         isReadOnly={isReadOnly}
       >
         {isNeedTimerComponent && (
-          <Timer
-            seconds={300}
-            onTimeExpire={timerExpireFn}
-            position={{ top: "top-[9px]", right: "right-[15px]" }}
-          />
+          <Timer seconds={300} onTimeExpire={timerExpireFn} />
         )}
       </Input>
 

@@ -13,6 +13,7 @@ import SignUpVerificationInput from "./SignUpVerificationInput"
 import { BsFileLock2 } from "react-icons/bs"
 import { useRequestVerificationMutation } from "../hooks/useRequestVerificationMutation"
 import { useSendVerificationCodeMutation } from "../hooks/useSendVerificationCodeMutation"
+
 export interface ISignUpPhoneVerificationInput {
   activeStep: number
   isVerificationChecked: boolean

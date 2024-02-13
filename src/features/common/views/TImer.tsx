@@ -6,24 +6,9 @@ import { formatTime } from "../utils/time"
 export interface ITimer {
   seconds: number
   onTimeExpire?: () => void
-  position?: {
-    right?: string
-    left?: string
-    top?: string
-    bottom?: string
-  }
 }
 
-const Timer = ({
-  seconds,
-  onTimeExpire,
-  position = {
-    right: "right-0",
-    left: "left-0",
-    top: "top-0",
-    bottom: "bottom-0",
-  },
-}: ITimer) => {
+const Timer = ({ seconds, onTimeExpire }: ITimer) => {
   const [time, setTime] = useState(seconds)
 
   useEffect(() => {
@@ -42,7 +27,7 @@ const Timer = ({
 
   return (
     <span
-      className={`absolute ${position.right} ${position.left} ${position.top} ${position.bottom} text-lightRed text-[14px]`}
+      className={`absolute right-[15px] top-1/2 -translate-y-1/2 text-lightRed text-[14px]`}
     >
       {formatTime(time)}
     </span>

@@ -10,18 +10,32 @@ import { useEffect, useState } from "react"
 import { useSignUpClasue } from "../hooks/useSignUpClasue"
 import useSignUpVerificationCheck from "../hooks/useSignUpVerificationCheck"
 import SignUpClause, { ISignUpClause } from "./SIgnUpClause"
-import SignUpEmailInput, { ISignUpEmailInput } from "./SignUpEmailInput"
-import SignUpNameInput from "./SignUpNameInput"
-import SignUpPasswordInput from "./SignUpPasswordInput"
-import SignUpPhoneVerificationInput, {
-  ISignUpPhoneVerificationInput,
-} from "./SignUpPhoneVerificationInput"
+import { ISignUpEmailInput } from "./SignUpEmailInput"
+import { ISignUpPhoneVerificationInput } from "./SignUpPhoneVerificationInput"
 import { useSignUpMutation } from "../hooks/useSignUpMutation"
+import dynamic from "next/dynamic"
+
+const DynamicSignUpPhoneVerificationInput = dynamic(
+  () => import("./SignUpPhoneVerificationInput"),
+  { ssr: false }
+)
+
+const DynamicSignUpEmailInput = dynamic(() => import("./SignUpEmailInput"), {
+  ssr: false,
+})
+
+const DynamicSignUpNameInput = dynamic(() => import("./SignUpNameInput"), {
+  ssr: false,
+})
+const DynamicSignUpPasswordInput = dynamic(
+  () => import("./SignUpPasswordInput"),
+  { ssr: false }
+)
 
 const SignUpForm = () => {
   const dispatch = useAppDispatch()
 
-  const [activeStep, setActiveStep] = useState(0)
+  const [activeStep, setActiveStep] = useState(5)
   const { checkedClaseState, toggleClauseCheck, resetClauseCheck } =
     useSignUpClasue()
 
@@ -105,10 +119,10 @@ const SignUpForm = () => {
     stages: ["약관동의", "이메일", "비밀번호", "이름", "본인인증"],
     stageContents: [
       <SignUpClause key="clause" {...signUpClauseProps} />,
-      <SignUpEmailInput key="email" {...signUpEmailInputProps} />,
-      <SignUpPasswordInput key="password" activeStep={activeStep} />,
-      <SignUpNameInput key="name" activeStep={activeStep} />,
-      <SignUpPhoneVerificationInput
+      <DynamicSignUpEmailInput key="email" {...signUpEmailInputProps} />,
+      <DynamicSignUpPasswordInput key="password" activeStep={activeStep} />,
+      <DynamicSignUpNameInput key="name" activeStep={activeStep} />,
+      <DynamicSignUpPhoneVerificationInput
         key="phone"
         {...signUpPhoneVerificationInputProps}
       />,
