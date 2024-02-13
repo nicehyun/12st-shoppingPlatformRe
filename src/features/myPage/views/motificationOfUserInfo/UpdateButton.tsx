@@ -10,7 +10,7 @@ const UpdateButton = ({ isLoading, type = "button" }: IUpdateButton) => {
       type={type}
       content="저장하기"
       isLoading={isLoading}
-      className="mt-[30px] h-[50px] w-full sm:h-[40px] md:h-[44px] border-[1px] border-lightRed dark:bg-lightRed text-lightRed dark:text-black text-[14px] font-semibold rounded-[5px]"
+      className="mt-[30px] h-[50px] w-full max-w-[600px] sm:h-[40px] md:h-[44px] border-[1px] border-lightRed dark:bg-lightRed text-lightRed dark:text-black text-[14px] font-semibold rounded-[5px]"
     />
   )
 }
