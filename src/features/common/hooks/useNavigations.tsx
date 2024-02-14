@@ -2,15 +2,13 @@ import { usePathname, useRouter } from "next/navigation"
 
 export enum ROUTE {
   CART = "/cart",
-  MYPAGE = "/myPage",
   HOME = "/",
-
   CHECKOUT = "/checkout",
   CHECKOUTCOMFIRMED = "/checkoutConfirmed",
   PRODUCTINFO = "/productInfo/:path*",
   CATEGORYMANAGEMENT = "/categoryManagement",
 
-  // myPage 관련 routes
+  MYPAGE = "/myPage",
   CHECKOUTLIST = "/myPage/checkoutList",
   CHECKOUTCANCELLIST = "/myPage/checkoutCancelList",
   CHECKOUTREVIEWLIST = "/myPage/reviewList",
@@ -22,11 +20,9 @@ export enum ROUTE {
   PRODUCTQNA = "/myPage/productQnAList",
   HEARTPRODUCTLIST = "/myPage/heartProductList",
 
-  // auth 관련 routes
   SIGNIN = "/signIn",
   SIGNUP = "/signUp",
 
-  // 상품 리스트 관련 routes
   BESTPRODUCTLIST = "/bestProductList",
   ARRIVALPRODUCTLIST = "/arrivalProductList",
   TOPSALEPRODUCTLIST = "/topSaleProductList",
