@@ -36,6 +36,7 @@ const MyPageCategoryEl = ({
             }  border-lightBorder text-[16px] sm:text-[18px] md:text-[18px] lg:text-[14px] font-normal lg:font-light xl:font-light hover:font-semibold text-black dark:text-border dark:text-lightborder dark:hover:text-border`}
           >
             <Link
+              rel="preload"
               href={`${categoryListRoutes[index]}`}
               className={`block link active:text-lightRed py-[20px] cursor-pointer ${
                 pathname === `${categoryListRoutes[index]}`
