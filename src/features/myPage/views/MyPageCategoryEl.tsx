@@ -22,8 +22,6 @@ const MyPageCategoryEl = ({
   const { categoryListRoutes, categoryListContents } = categoryList
   const { pathname } = useNavigations()
 
-  console.log(categoryListRoutes)
-
   return (
     <li className={`${className} list-none`}>
       <h3 className="pb-[14px] font-bold text-[24px] sm:text-[20px] md:text-[20px] lg:text-[22px] border-b-[4px]">
