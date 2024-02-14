@@ -1,12 +1,11 @@
-import { InfinityProductResponse } from "@/features/common/types/product"
+import { Products } from "@/features/common/types/product"
 import FourGridProductList from "@/features/common/views/FourGridProductList"
 import ProductCard from "@/features/common/views/ProductCard"
 import SkeletonProductList from "@/features/common/views/SkeletonProductList"
-import { InfiniteData } from "@tanstack/react-query"
 
 interface IHomeBasicProductList {
   isLoading: boolean
-  productList: InfiniteData<InfinityProductResponse> | undefined
+  productList: Products
   sectionClassification: string
 }
 
@@ -20,17 +19,13 @@ const HomeBasicProductList = ({
   }
   return (
     <FourGridProductList>
-      {productList?.pages.flatMap((group) =>
-        group.productList.map((product) => {
-          return (
-            <ProductCard
-              key={`${sectionClassification}-product-${product.id}`}
-              productInfo={product}
-              isPriority
-            />
-          )
-        })
-      )}
+      {productList.map((product) => (
+        <ProductCard
+          key={`${sectionClassification}-product-${product.id}`}
+          productInfo={product}
+          isPriority
+        />
+      ))}
     </FourGridProductList>
   )
 }

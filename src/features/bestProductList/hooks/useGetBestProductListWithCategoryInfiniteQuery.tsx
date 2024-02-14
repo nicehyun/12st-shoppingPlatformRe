@@ -1,24 +1,38 @@
 import { bestProductListAPI } from "../models/bestProductListAPI"
 import { useNavigations } from "@/features/common/hooks/useNavigations"
-import { getAfterEquals, parseSliceToAnd } from "@/features/common/utils/text"
+import {
+  getAfterEquals,
+  parseAndToSlice,
+  parseSliceToAnd,
+} from "@/features/common/utils/text"
 import { useProductListInfinityQuery } from "@/features/common/hooks/useProductListInfinityQuery"
+import { useQueryClient } from "@tanstack/react-query"
+import { InfinityProductResponse } from "@/features/common/types/product"
 
 export const useGetBestProductListWithCategoryInfiniteQuery = () => {
   const { pathname } = useNavigations()
 
+  const queryClient = useQueryClient()
+
   const [, , firstCategoryPath, secondCategoryPath, thirdCategoryPath] =
     pathname.split("/")
 
-  const categoriesPath =
-    "/" + firstCategoryPath + secondCategoryPath + thirdCategoryPath
+  const firstCategory = getAfterEquals(decodeURIComponent(firstCategoryPath))
 
-  const firstCategory = decodeURIComponent(getAfterEquals(firstCategoryPath))
-  const secondCategory = decodeURIComponent(
-    parseSliceToAnd(getAfterEquals(secondCategoryPath))
+  const secondCategory = parseSliceToAnd(
+    getAfterEquals(decodeURIComponent(secondCategoryPath))
   )
-  const thirdCategory = decodeURIComponent(
-    parseSliceToAnd(getAfterEquals(thirdCategoryPath))
+  const thirdCategory = parseSliceToAnd(
+    getAfterEquals(decodeURIComponent(thirdCategoryPath))
   )
+
+  const categoriesPath =
+    "/" +
+    parseAndToSlice(firstCategory) +
+    "/" +
+    parseAndToSlice(secondCategory) +
+    "/" +
+    parseAndToSlice(thirdCategory)
 
   const queryKey = [
     "bestProductListWithCategory",
@@ -26,6 +40,18 @@ export const useGetBestProductListWithCategoryInfiniteQuery = () => {
     secondCategory,
     thirdCategory,
   ]
+
+  const initialBestProductData: InfinityProductResponse =
+    queryClient.getQueryData([
+      "bestProductListWithCategory",
+      "initial",
+      firstCategory,
+      secondCategory,
+      thirdCategory,
+    ]) ?? {
+      productList: [],
+      totalCount: "0",
+    }
 
   const getBestProductListWithCategoryPromiseFn = (pageParam: number) => {
     return bestProductListAPI.getBestProductListWithCategory(
@@ -37,6 +63,7 @@ export const useGetBestProductListWithCategoryInfiniteQuery = () => {
   const infinityQueryProps = {
     queryKey,
     promiseFn: getBestProductListWithCategoryPromiseFn,
+    initialData: initialBestProductData,
   }
 
   const { data, isLoading, loadMoreRef, isLoadMoreFetching } =
@@ -45,6 +72,7 @@ export const useGetBestProductListWithCategoryInfiniteQuery = () => {
     })
 
   const bestProductList = data
+
   return {
     bestProductList,
     isLoading,

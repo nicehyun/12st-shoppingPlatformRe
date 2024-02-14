@@ -1,22 +1,16 @@
 "use client"
 
-import { useGetTopSaleProductListInfinityQuery } from "@/features/topSaleProductList/hooks/useGetTopSaleProductListInfinityQuery"
-import dynamic from "next/dynamic"
-import SkeletonProductList from "@/features/common/views/SkeletonProductList"
-
-const DynamicProductList = dynamic(() => import("./HomeBasicProductList"), {
-  loading: () => <SkeletonProductList className="mt-[50px]" />,
-})
+import HomeBasicProductList from "./HomeBasicProductList"
+import { useGetEachSectionProductList } from "../hooks/useGetEachSectionProductList"
 
 const TopSaleProductList = () => {
-  const { topSaleProductList, isLoading } =
-    useGetTopSaleProductListInfinityQuery()
+  const { topSaleProductList } = useGetEachSectionProductList()
 
   return (
-    <DynamicProductList
-      productList={topSaleProductList}
+    <HomeBasicProductList
+      productList={topSaleProductList.productList}
       sectionClassification="sale"
-      isLoading={isLoading}
+      isLoading={topSaleProductList.isLoading}
     />
   )
 }

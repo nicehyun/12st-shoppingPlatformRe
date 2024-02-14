@@ -8,6 +8,7 @@ interface ICustomInfinityQuery {
   promiseFn: (pageParam: number) => Promise<InfinityProductResponse>
   staleTime?: number
   cacheTime?: number
+  initialData?: InfinityProductResponse
 }
 
 export const useProductListInfinityQuery = ({
@@ -15,6 +16,7 @@ export const useProductListInfinityQuery = ({
   promiseFn,
   cacheTime = 60 * 60 * 1000,
   staleTime = 60 * 60 * 1000,
+  initialData,
 }: ICustomInfinityQuery) => {
   const { showFeedbackModalWithContent } = useFeedbackModal()
 
@@ -33,6 +35,17 @@ export const useProductListInfinityQuery = ({
       },
       staleTime,
       cacheTime,
+      initialData: !initialData
+        ? undefined
+        : {
+            pages: [
+              {
+                productList: initialData.productList,
+                totalCount: initialData.totalCount,
+              },
+            ],
+            pageParams: [undefined],
+          },
     })
 
   const { loadMoreRef } = useInfinityScrollIntersectionObserver({

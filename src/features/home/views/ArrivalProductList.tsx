@@ -1,21 +1,15 @@
 "use client"
 
-import dynamic from "next/dynamic"
-import SkeletonShadowProductCard from "./SkeletonShadowProductCard"
-import { useGetArrivalProductListInfinityQuery } from "@/features/arrivalProductList/hooks/useGetArrivalProductListInfinityQuery"
-
-const DynamicSwiperProductList = dynamic(() => import("./SwiperProductList"), {
-  loading: () => <SkeletonShadowProductCard />,
-})
+import SwiperProductList from "./SwiperProductList"
+import { useGetEachSectionProductList } from "../hooks/useGetEachSectionProductList"
 
 const ArrivalProductList = () => {
-  const { arrivalProductList, isLoading } =
-    useGetArrivalProductListInfinityQuery()
+  const { arrivalProductList } = useGetEachSectionProductList()
 
   return (
-    <DynamicSwiperProductList
-      productList={arrivalProductList}
-      isLoading={isLoading}
+    <SwiperProductList
+      productList={arrivalProductList.productList}
+      isLoading={arrivalProductList.isLoading}
     />
   )
 }

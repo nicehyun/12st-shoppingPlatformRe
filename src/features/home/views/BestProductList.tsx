@@ -1,22 +1,16 @@
 "use client"
 
-import { useGetBestProductListWithCategoryInfiniteQuery } from "@/features/bestProductList/hooks/useGetBestProductListWithCategoryInfiniteQuery"
-import dynamic from "next/dynamic"
-import SkeletonProductList from "@/features/common/views/SkeletonProductList"
-
-const DynamicProductList = dynamic(() => import("./HomeBasicProductList"), {
-  loading: () => <SkeletonProductList className="mt-[50px]" />,
-})
+import HomeBasicProductList from "./HomeBasicProductList"
+import { useGetEachSectionProductList } from "../hooks/useGetEachSectionProductList"
 
 const BestProductList = () => {
-  const { bestProductList, isLoading } =
-    useGetBestProductListWithCategoryInfiniteQuery()
+  const { bestProductList } = useGetEachSectionProductList()
 
   return (
-    <DynamicProductList
-      productList={bestProductList}
+    <HomeBasicProductList
+      productList={bestProductList.productList}
       sectionClassification="best"
-      isLoading={isLoading}
+      isLoading={bestProductList.isLoading}
     />
   )
 }

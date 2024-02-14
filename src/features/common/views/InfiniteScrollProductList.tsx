@@ -27,7 +27,7 @@ const InfiniteScrollProductList = ({
   return (
     <>
       <FourGridProductList className="mt-[50px]">
-        {productList?.pages.flatMap((group) =>
+        {productList?.pages?.flatMap((group) =>
           group.productList.map((product) => {
             return (
               <ProductCard
