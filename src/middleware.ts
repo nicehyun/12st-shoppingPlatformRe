@@ -48,7 +48,7 @@ export async function middleware(request: NextRequest) {
     "/myPage/inquiryCustomerCounseling/write",
     "/myPage/productQnAList",
     "/myPage/heartProductList",
-    "/myPage/WHOLECHECKOUTLIST",
+    "/myPage/wholeCheckoutList",
   ]
 
   if (
