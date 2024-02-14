@@ -9,8 +9,8 @@ const MyPageCategory = () => {
       categoryList: {
         categoryListContents: ["주문내역", "취소/교환/반품 내역", "상품리뷰"],
         categoryListRoutes: [
+          ROUTE.WHOLECHECKOUTLIST,
           ROUTE.CHECKOUTCANCELLIST,
-          "/myPage/checkoutList" as ROUTE,
           ROUTE.CHECKOUTREVIEWLIST,
         ],
       },

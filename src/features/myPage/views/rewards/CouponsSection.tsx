@@ -6,7 +6,7 @@ import Coupon from "./Coupon"
 import { useCouponQuery } from "@/features/checkout/hooks/useCouponQuery"
 import SkeletonCoupons from "./SkeletonCoupons"
 
-const Coupons = () => {
+const CouponsSection = () => {
   const { coupons, isLoading } = useCouponQuery()
 
   return (
@@ -27,4 +27,4 @@ const Coupons = () => {
   )
 }
 
-export default Coupons
+export default CouponsSection
