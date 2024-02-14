@@ -30,7 +30,6 @@ const SecondCategoryLinks = ({
   return Object.keys(secondCategories).map((secondCategory) => {
     return (
       <Link
-        rel="preload"
         key={`product-categories-second-${secondCategory}`}
         href={`${linkDefaultHref}/firstCategory=${firstCategory}/secondCategory=${parseAndToSlice(
           secondCategory

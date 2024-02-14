@@ -19,7 +19,6 @@ export enum ROUTE {
   COUNSELINGWRITE = "/myPage/inquiryCustomerCounseling/write",
   PRODUCTQNA = "/myPage/productQnAList",
   HEARTPRODUCTLIST = "/myPage/heartProductList",
-  WHOLECHECKOUTLIST = "/myPage/checkoutList",
 
   SIGNIN = "/signIn",
   SIGNUP = "/signUp",
