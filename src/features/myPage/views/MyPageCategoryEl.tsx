@@ -22,7 +22,7 @@ const MyPageCategoryEl = ({
   const { categoryListRoutes, categoryListContents } = categoryList
   const { pathname } = useNavigations()
 
-  console.log(categoryListContents)
+  console.log(categoryListRoutes)
 
   return (
     <li className={`${className} list-none`}>
