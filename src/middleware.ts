@@ -38,7 +38,6 @@ export async function middleware(request: NextRequest) {
     "/checkout",
     "/checkoutConfirmed",
     "/myPage",
-    "/myPage/checkoutList",
     "/myPage/checkoutCancelList",
     "/myPage/reviewList",
     "/myPage/userInfoOfModification",

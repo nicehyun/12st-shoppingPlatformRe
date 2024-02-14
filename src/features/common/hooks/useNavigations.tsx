@@ -9,7 +9,6 @@ export enum ROUTE {
   CATEGORYMANAGEMENT = "/categoryManagement",
 
   MYPAGE = "/myPage",
-  CHECKOUTLIST = "/myPage/checkoutList",
   CHECKOUTCANCELLIST = "/myPage/checkoutCancelList",
   CHECKOUTREVIEWLIST = "/myPage/reviewList",
   USERINFOOFMODIFICATION = "/myPage/userInfoOfModification",
