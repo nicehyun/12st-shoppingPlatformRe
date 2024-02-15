@@ -2,19 +2,13 @@
 
 ![readme-banner img 001](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/88f40055-9def-4b5e-b7ac-0d9e0b2b0d37)
 
-<br/><br/>
-
 - 배포 URL : <a href="https://12st-shopping-platform-re-git-main-ish1610.vercel.app" target="_blank">12st-shopping-platform-re-git-main-ish1610.vercel.app</a>
 
-### <u></u> | <a href="https://github.com/nicehyun/12st-shoppingMall" target="_blank">리팩토링 전 프로젝트 소스 코드</a>
-<br/>
-
-회원가입 단계를 건너뛰고 싶으시거나, 회원가입 본인인증 단계에서 사용되는 Firebase Authentication의 사용량을 초과하여 본인인증이 불가능한 경우 아래의 Email과 Password를 사용해주세요.
-
+- Test Email & Password
 ```
 Email : test@test.com
 Password : test123123!
-```
+``` 
 
 <br/><br/>
 
