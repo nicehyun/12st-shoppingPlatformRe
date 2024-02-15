@@ -2,7 +2,9 @@
 
 ![readme-banner img 001](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/88f40055-9def-4b5e-b7ac-0d9e0b2b0d37)
 
-- 배포 URL : <a href="https://12st-shopping-platform-re-git-main-ish1610.vercel.app" target="_blank">12st-shopping-platform-re-git-main-ish1610.vercel.app</a>
+- <a href="https://12st-shopping-platform-re-git-main-ish1610.vercel.app" target="_blank">배포 URL</a>
+
+- <a href="https://github.com/nicehyun/12st-shoppingMall" target="_blank">리팩토링 전 프로젝트 소스 코드</a>
 
 - Test Email & Password
 ```
