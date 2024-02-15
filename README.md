@@ -138,7 +138,6 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 <div>
   <img src="https://img.shields.io/badge/firebase 10.1.0-FFCA28?style=for-the-badge&logo=firebase&logoColor=white">
   <img src="https://img.shields.io/badge/firebase admin 11.10.1-FFCA28?style=for-the-badge&logo=firebase&logoColor=white">
-  <img src="https://img.shields.io/badge/json server 0.17.4-FF0000?style=for-the-badge">
 </div>
 </br>
 
@@ -151,7 +150,6 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 <img src="https://img.shields.io/badge/axios 1.4.0-5A29E4?style=for-the-badge&logo=axios&logoColor=white">
 <img src="https://img.shields.io/badge/jsonwebtokens 9.0.1-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white"> 
   <img src="https://img.shields.io/badge/bcrypt 5.1.1-EF2D5E?style=for-the-badge">
-   <img src="https://img.shields.io/badge/daum postcode 3.1.3-83B81A?style=for-the-badge"> 
 </div>
 </br></br>
   
