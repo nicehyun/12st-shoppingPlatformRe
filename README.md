@@ -31,6 +31,7 @@ Password : test123123!
 - 인기 상품에 대한 정보를 원하는 카테고리를 선택해서 원하는 상품만 확인할 수 있습니다.
 - 검색을 통해 검색어에 해당하는 상품과 브랜드를 확인할 수 있습니다.
 - 복잡하지 않은 문의 Form을 통해 간편하게 문의가 가능합니다.
+
 </br></br>
 
 ## <span id="install">설치 및 실행</span>
@@ -69,6 +70,7 @@ NEXT_PUBLIC_BASE_URL="http://localhost:3000"
 # Json Server 실행 Port 번호
 NEXT_PUBLIC_DB_URL="http://localhost:8080"
 ```
+
 ### Middleware 수정
 ```bash
 # middleware.ts 수정하기
@@ -93,6 +95,7 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 ```bash
 # 개발 환경에서 프로젝트 실행
 > npm run dev
+
 # json-server의 Port는 NEXT_PUBLIC_DB_URL와 일치
 > npx json-server --port 8080 --watch db.json
 ```
