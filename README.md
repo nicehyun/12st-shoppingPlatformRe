@@ -1,6 +1,7 @@
 # 🛒 E-Commerce Application README
 
-[readme-banner.pdf](https://github.com/nicehyun/12st-shoppingPlatformRe/files/14298999/readme-banner.pdf)
+![readme-banner img 001](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/88f40055-9def-4b5e-b7ac-0d9e0b2b0d37)
+
 <br/><br/>
 
 
