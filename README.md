@@ -14,7 +14,7 @@ Password : test123123!
 
 <br/><br/>
 
-## 목차
+## 🪜 목차
 
 1. [프로젝트 소개](#introduce)
 2. [설치 및 실행](#install)
@@ -34,7 +34,7 @@ Password : test123123!
 
 </br></br>
 
-## <span id="install">설치 및 실행</span>
+## <span id="install">👨🏻‍🔧 설치 및 실행</span>
 
 ### 설치
 
@@ -239,7 +239,7 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 ```
 </br></br>
 
-## <span id="feature">📍 주요 기능</span>
+## <span id="feature">🖥️ 주요 기능</span>
 
 <details>
   
