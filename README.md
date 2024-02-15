@@ -2,6 +2,15 @@
 <br/><br/>
 
 ### <u><a href="https://12st-shopping-platform-re-git-main-ish1610.vercel.app" target="_blank">🛒 프로젝트 데모</a></u> | <a href="https://github.com/nicehyun/12st-shoppingMall" target="_blank">리팩토링 전 프로젝트 소스 코드</a>
+<br/>
+
+회원가입 단계를 건너뛰고 싶으시거나, 회원가입 본인인증 단계에서 사용되는 Firebase Authentication의 사용량을 초과하여 본인인증이 불가능한 경우 아래의 Email과 Password를 사용해주세요.
+
+```
+Email : test@test.com
+Password : test123123!
+```
+
 <br/><br/>
 
 ## 목차
@@ -17,7 +26,7 @@
 
 - 기존 팀프로젝트를 리팩토링한 풀 스택 프로젝트입니다.
 - 다양한 브랜드의 상품을 구매할 수 있는 이커머스 웹 프로젝트입니다.
-- 해당 프로젝트는 다양한 디바이스 및 화면 크기에 대응하기 위해 다음과 같이 4가지의 미디어 쿼리를 적용하였습니다.
+- 다양한 디바이스 및 화면 크기에 대응하기 위해 다음과 같이 4가지의 미디어 쿼리를 적용하였습니다.
 
   1.  **479px 이하:**
 
@@ -79,8 +88,9 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID="Your_Firebase_Measurement_ID"
 # Middleware에서 Next-Auth Session-Token 인증에 사용하는 Secret Key
 NEXTAUTH_SECRET="Your_Next_Auth_Secret_Key"
 
-# JWT Token 생성과 인증에 사용하는 Key
-SECRET_KEY="Your_Token_Secret_Key"
+# JWT Token 생성과 인증에 사용하는 Key (Access Token, Refresh Token)
+TOKEN_SECRET_KEY="Your_Token_Secret_Key"
+REFRESH_TOKEN_SECRET_KEY="Your_Token_Secret_Key""
 
 # Application 실행 Port 번호
 NEXT_PUBLIC_BASE_URL="http://localhost:3000"
