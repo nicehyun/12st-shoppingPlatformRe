@@ -23,6 +23,8 @@ Password : test123123!
 5. [주요 기능](#feature)
 6. [Troubleshooting](#troubleshooting)
 
+<br/><br/>
+
 ## <span id="introduce">프로젝트 소개</span>
 
 - 기존 팀프로젝트를 리팩토링한 풀 스택 프로젝트입니다.
