@@ -105,16 +105,14 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 ## <span id="stack">⚙️ 기술스택</span>
 
 ### 프레임워크
-
 <img src="https://img.shields.io/badge/next.js 13.4.12-000000?style=for-the-badge&logo=nextdotjs&logoColor=white">
+</br>
 
 ### 언어
-
 <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
 </br>
 
 ### UI 라이브러리
-
 <div> 
   <img src="https://img.shields.io/badge/react 18.2.5-61DAFB?style=for-the-badge&logo=react&logoColor=white">
   <img src="https://img.shields.io/badge/mui 5.14.1-007FFF?style=for-the-badge&logo=mui&logoColor=white">
