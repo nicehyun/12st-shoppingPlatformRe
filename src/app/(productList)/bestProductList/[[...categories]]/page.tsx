@@ -1,10 +1,6 @@
 import { bestProductListAPI } from "@/features/bestProductList/models/bestProductListAPI"
 import BestProductListSection from "@/features/bestProductList/views/BestProductListSection"
-import {
-  getAfterEquals,
-  parseAndToSlice,
-  parseSliceToAnd,
-} from "@/features/common/utils/text"
+import { getAfterEquals, parseSliceToAnd } from "@/features/common/utils/text"
 import { getQueryClient } from "@/tanstackQuery/utils/getQueryClient"
 import Hydrate from "@/tanstackQuery/utils/hydrateOnClient"
 import { dehydrate } from "@tanstack/react-query"

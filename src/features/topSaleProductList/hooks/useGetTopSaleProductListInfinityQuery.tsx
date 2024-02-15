@@ -12,7 +12,7 @@ export const useGetTopSaleProductListInfinityQuery = () => {
   }
 
   const initialBestProductData: InfinityProductResponse =
-    queryClient.getQueryData(["bestProductListWithCategory", "initial"]) ?? {
+    queryClient.getQueryData(["topSale", "initial"]) ?? {
       productList: [],
       totalCount: "0",
     }

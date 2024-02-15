@@ -28,7 +28,6 @@ const ProductCard = ({
     discount,
     reviewCount,
     sellCount,
-    id,
   } = productInfo
 
   const productBrandInfo = brand || maker || mallName
