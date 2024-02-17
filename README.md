@@ -20,7 +20,7 @@ Password : test123123!
 2. [기술 스택](#stack)
 3. [설치 및 실행](#install)
 4. [디렉토리 구조](#directory)
-5. [주요 기능](#feature)
+5. [Page 별 View](#feature)
 6. [Troubleshooting](#troubleshooting)
 
 <br/><br/>
@@ -482,7 +482,10 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 
 </br></br>
 
-## <span id="feature">🖥️ 주요 기능</span>
+## <span id="feature">🖥️ Page 별 View</span>
+
+<details>
+<summary>Page 별 View 살펴보기</summary>
 
 <details>
   
@@ -767,3 +770,7 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 - 좌측 '상품 Q&A내역' 클릭 시 상품에 대한 문의 내역만 확인이 가능합니다.
 </br></br>
 </details>
+
+</details>
+
+
