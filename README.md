@@ -321,6 +321,10 @@ const ArrivalProductListPage = async () => {
 물론 TanStack Query를 사용하지 않고도 prefetching이 가능하지만, `prefetchQuery`를 사용하여 미리 데이터를 prefetch 해주었습니다.
 
 이 부분도 오랜 고민을 했지만, `invalidateQueries`와 query hook에서 `initialData`를 설정할 때 api 호출이 아닌 `getQueryData`로 간편하게 cache된 데이터를 가져올 수 있기 때문에 TanStack Query를 사용했습니다.
+</br>
+
+![image](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/37e0b0dd-c154-4396-8b83-3250d34640f8)
+
 
 </details>
 
