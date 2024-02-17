@@ -20,8 +20,9 @@ Password : test123123!
 2. [기술 스택](#stack)
 3. [설치 및 실행](#install)
 4. [디렉토리 구조](#directory)
-5. [Page 별 View](#feature)
-6. [Troubleshooting](#troubleshooting)
+5. [사용자 경험 개선] (#)
+6. [Page 별 View](#feature)
+
 
 <br/><br/>
 
