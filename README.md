@@ -17,8 +17,8 @@ Password : test123123!
 ## 🪜 목차
 
 1. [프로젝트 소개](#introduce)
-2. [설치 및 실행](#install)
-3. [기술 스택](#stack)
+2. [기술 스택](#stack)
+3. [설치 및 실행](#install)
 4. [디렉토리 구조](#directory)
 5. [주요 기능](#feature)
 6. [Troubleshooting](#troubleshooting)
@@ -31,74 +31,6 @@ Password : test123123!
 - 인기 상품에 대한 정보를 원하는 카테고리를 선택해서 원하는 상품만 확인할 수 있습니다.
 - 검색을 통해 검색어에 해당하는 상품과 브랜드를 확인할 수 있습니다.
 - 복잡하지 않은 문의 Form을 통해 간편하게 문의가 가능합니다.
-
-</br></br>
-
-## <span id="install">👨🏻‍🔧 설치 및 실행</span>
-
-### 설치
-
-```bash
-# 프로젝트 클론
-> git clone https://github.com/nicehyun/12st-shoppingPlatformRe.git
-
-# 의존성 패키지 설치
-> npm i
-```
-
-### 환경 변수 설정
-
-```bash
-# 회원가입 본인인증 시 Firebase Authentication을 사용
-NEXT_PUBLIC_FIREBASE_API_KEY="Your_Authentication_API_Key"
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN="Your_Firebase_App_Domain"
-NEXT_PUBLIC_FIREBASE_PROJECT_ID="Your_Firebase_Project_ID"
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET="Your_Firebase_Storage_Bucket"
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID="Your_Firebase_Messaging_Sender_ID"
-NEXT_PUBLIC_FIREBASE_APP_ID="Your_Firebase_App_ID"
-NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID="Your_Firebase_Measurement_ID"
-
-# Middleware에서 Next-Auth Session-Token 인증에 사용하는 Secret Key
-NEXTAUTH_SECRET="Your_Next_Auth_Secret_Key"
-
-# JWT Token 생성과 인증에 사용하는 Key (Access Token, Refresh Token)
-TOKEN_SECRET_KEY="Your_Token_Secret_Key"
-REFRESH_TOKEN_SECRET_KEY="Your_Token_Secret_Key""
-
-# Application 실행 Port 번호
-NEXT_PUBLIC_BASE_URL="http://localhost:3000"
-# Json Server 실행 Port 번호
-NEXT_PUBLIC_DB_URL="http://localhost:8080"
-```
-
-### Middleware 수정
-```bash
-# middleware.ts 수정하기
-
-# Product에서 Next-Auth Session에 저장된 Token의 cookieName은 __Secure-next-auth.session-token입니다.
- const token = await getToken({
-    req: request,
-    secret: secret,
-    cookieName: "__Secure-next-auth.session-token",
-  })
-
-# Development에서 사용 시 cookieName을 next-auth.session-token으로 수정해주세요.
-  const token = await getToken({
-    req: request,
-    secret: secret,
-    cookieName: "next-auth.session-token",
-  })
-```
-
-### 실행
-
-```bash
-# 개발 환경에서 프로젝트 실행
-> npm run dev
-
-# json-server의 Port는 NEXT_PUBLIC_DB_URL와 일치
-> npx json-server --port 8080 --watch db.json
-```
 
 </br></br>
 
@@ -381,9 +313,77 @@ Client 전역 상태 관리를 React에서 제공하는 Context API를 사용할
 
 </details>
 
+</br></br>
+
+## <span id="install">👨🏻‍🔧 설치 및 실행</span>
+
+### 설치
+
+```bash
+# 프로젝트 클론
+> git clone https://github.com/nicehyun/12st-shoppingPlatformRe.git
+
+# 의존성 패키지 설치
+> npm i
+```
+
+### 환경 변수 설정
+
+```bash
+# 회원가입 본인인증 시 Firebase Authentication을 사용
+NEXT_PUBLIC_FIREBASE_API_KEY="Your_Authentication_API_Key"
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN="Your_Firebase_App_Domain"
+NEXT_PUBLIC_FIREBASE_PROJECT_ID="Your_Firebase_Project_ID"
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET="Your_Firebase_Storage_Bucket"
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID="Your_Firebase_Messaging_Sender_ID"
+NEXT_PUBLIC_FIREBASE_APP_ID="Your_Firebase_App_ID"
+NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID="Your_Firebase_Measurement_ID"
+
+# Middleware에서 Next-Auth Session-Token 인증에 사용하는 Secret Key
+NEXTAUTH_SECRET="Your_Next_Auth_Secret_Key"
+
+# JWT Token 생성과 인증에 사용하는 Key (Access Token, Refresh Token)
+TOKEN_SECRET_KEY="Your_Token_Secret_Key"
+REFRESH_TOKEN_SECRET_KEY="Your_Token_Secret_Key""
+
+# Application 실행 Port 번호
+NEXT_PUBLIC_BASE_URL="http://localhost:3000"
+# Json Server 실행 Port 번호
+NEXT_PUBLIC_DB_URL="http://localhost:8080"
+```
+
+### Middleware 수정
+```bash
+# middleware.ts 수정하기
+
+# Product에서 Next-Auth Session에 저장된 Token의 cookieName은 __Secure-next-auth.session-token입니다.
+ const token = await getToken({
+    req: request,
+    secret: secret,
+    cookieName: "__Secure-next-auth.session-token",
+  })
+
+# Development에서 사용 시 cookieName을 next-auth.session-token으로 수정해주세요.
+  const token = await getToken({
+    req: request,
+    secret: secret,
+    cookieName: "next-auth.session-token",
+  })
+```
+
+### 실행
+
+```bash
+# 개발 환경에서 프로젝트 실행
+> npm run dev
+
+# json-server의 Port는 NEXT_PUBLIC_DB_URL와 일치
+> npx json-server --port 8080 --watch db.json
+```
 
 </br></br>
-  
+
+
 ## <span id="directory">📂 디렉토리 구조</span>
 ```plaintext
 ├── 📂 app ✅ App Directory
