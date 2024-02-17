@@ -150,7 +150,7 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 </br>
 
 <details>
-  <summary>### 프레임워크 및 라이브러리 선택 이유</summary>
+  <summary><h2>프레임워크 및 라이브러리 선택 이유</h2></summary>
 
  ![img](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/41a76c86-26dc-4a57-b620-bf6167b9d71a)
 
