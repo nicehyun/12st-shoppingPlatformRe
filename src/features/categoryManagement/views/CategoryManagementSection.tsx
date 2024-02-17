@@ -2,20 +2,21 @@ import SectionTitle from "@/features/myPage/views/SectionTitle"
 import SecondCategories from "@/features/bestProductList/views/SecondCategories"
 import ThirdCategories from "@/features/bestProductList/views/ThirdCategories"
 import FiltedProcutList from "./FiltedProcutList"
-import { decodedCategoriesWithPathArray } from "../utils/category"
+import { decodeCategoryPaths } from "@/features/common/utils/segment"
 
 interface ICategoryManagement {
   categoriesPath: string[]
 }
 
-const CategoryManagement = ({ categoriesPath }: ICategoryManagement) => {
-  const { decodedFirstCategory, decodedSecondCategory, decodedThirdCategory } =
-    decodedCategoriesWithPathArray(categoriesPath)
+const CategoryManagementSection = ({ categoriesPath }: ICategoryManagement) => {
+  const { firstCategory, secondCategory, thirdCategory } = decodeCategoryPaths({
+    categories: categoriesPath ?? [],
+  })
 
-  const sectionTitle = decodedFirstCategory
-    ? decodedThirdCategory
-      ? `${decodedFirstCategory} > ${decodedSecondCategory} > ${decodedThirdCategory}`
-      : `${decodedFirstCategory} > ${decodedSecondCategory}`
+  const sectionTitle = firstCategory
+    ? thirdCategory
+      ? `${firstCategory} > ${secondCategory} > ${thirdCategory}`
+      : `${firstCategory} > ${secondCategory}`
     : "CATEGORY"
 
   return (
@@ -31,4 +32,4 @@ const CategoryManagement = ({ categoriesPath }: ICategoryManagement) => {
   )
 }
 
-export default CategoryManagement
+export default CategoryManagementSection

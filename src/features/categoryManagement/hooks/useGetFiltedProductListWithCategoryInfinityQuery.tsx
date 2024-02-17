@@ -1,21 +1,32 @@
-import { getAfterEquals, parseSliceToAnd } from "@/features/common/utils/text"
 import { categoryAPI } from "../models/categoryAPI"
 import { useProductListInfinityQuery } from "@/features/common/hooks/useProductListInfinityQuery"
 import { useNavigations } from "@/features/common/hooks/useNavigations"
+import { useQueryClient } from "@tanstack/react-query"
+import { InfinityProductResponse } from "@/features/common/types/product"
+import { decodeCategoryPaths } from "@/features/common/utils/segment"
 
 export const useGetFiltedProductListWithCategoryInfinityQuery = () => {
   const { pathname } = useNavigations()
+  const queryClient = useQueryClient()
 
-  const [, , firstCategoryPath, secondCategoryPath, thirdCategoryPath] =
-    pathname.split("/")
+  const [, , ...categoryPath] = pathname.split("/")
 
-  const firstCategory = decodeURIComponent(getAfterEquals(firstCategoryPath))
-  const secondCategory = decodeURIComponent(
-    parseSliceToAnd(getAfterEquals(secondCategoryPath))
-  )
-  const thirdCategory = decodeURIComponent(
-    parseSliceToAnd(getAfterEquals(thirdCategoryPath))
-  )
+  const { categoriesPath, firstCategory, secondCategory, thirdCategory } =
+    decodeCategoryPaths({
+      categories: categoryPath ?? [],
+    })
+
+  const initialCategoryProductData: InfinityProductResponse =
+    queryClient.getQueryData([
+      "filtedProductListWithCategory",
+      "initial",
+      firstCategory,
+      secondCategory,
+      thirdCategory,
+    ]) ?? {
+      productList: [],
+      totalCount: "0",
+    }
 
   const queryKey = [
     "filtedProductListWithCategory",
@@ -25,12 +36,16 @@ export const useGetFiltedProductListWithCategoryInfinityQuery = () => {
   ]
 
   const getFiltedProductListWithCategoryPromiseFn = (pageParam: number) => {
-    return categoryAPI.getFiltedProductListWithCategory(pathname, pageParam)
+    return categoryAPI.getFiltedProductListWithCategory(
+      categoriesPath,
+      pageParam
+    )
   }
 
   const infinityQueryProps = {
     queryKey,
     promiseFn: getFiltedProductListWithCategoryPromiseFn,
+    initialData: initialCategoryProductData,
   }
 
   const { data, isLoading, loadMoreRef, isLoadMoreFetching } =

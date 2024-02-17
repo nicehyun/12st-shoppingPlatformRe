@@ -1,38 +1,20 @@
 import { bestProductListAPI } from "../models/bestProductListAPI"
 import { useNavigations } from "@/features/common/hooks/useNavigations"
-import {
-  getAfterEquals,
-  parseAndToSlice,
-  parseSliceToAnd,
-} from "@/features/common/utils/text"
 import { useProductListInfinityQuery } from "@/features/common/hooks/useProductListInfinityQuery"
 import { useQueryClient } from "@tanstack/react-query"
 import { InfinityProductResponse } from "@/features/common/types/product"
+import { decodeCategoryPaths } from "@/features/common/utils/segment"
 
 export const useGetBestProductListWithCategoryInfiniteQuery = () => {
   const { pathname } = useNavigations()
-
   const queryClient = useQueryClient()
 
-  const [, , firstCategoryPath, secondCategoryPath, thirdCategoryPath] =
-    pathname.split("/")
+  const [, , ...categoryPath] = pathname.split("/")
 
-  const firstCategory = getAfterEquals(decodeURIComponent(firstCategoryPath))
-
-  const secondCategory = parseSliceToAnd(
-    getAfterEquals(decodeURIComponent(secondCategoryPath))
-  )
-  const thirdCategory = parseSliceToAnd(
-    getAfterEquals(decodeURIComponent(thirdCategoryPath))
-  )
-
-  const categoriesPath =
-    "/" +
-    parseAndToSlice(firstCategory) +
-    "/" +
-    parseAndToSlice(secondCategory) +
-    "/" +
-    parseAndToSlice(thirdCategory)
+  const { categoriesPath, firstCategory, secondCategory, thirdCategory } =
+    decodeCategoryPaths({
+      categories: categoryPath ?? [],
+    })
 
   const queryKey = [
     "bestProductListWithCategory",

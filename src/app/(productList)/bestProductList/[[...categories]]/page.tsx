@@ -1,6 +1,7 @@
 import { bestProductListAPI } from "@/features/bestProductList/models/bestProductListAPI"
 import BestProductListSection from "@/features/bestProductList/views/BestProductListSection"
-import { getAfterEquals, parseSliceToAnd } from "@/features/common/utils/text"
+import { decodeCategoryPaths } from "@/features/common/utils/segment"
+
 import { getQueryClient } from "@/tanstackQuery/utils/getQueryClient"
 import Hydrate from "@/tanstackQuery/utils/hydrateOnClient"
 import { dehydrate } from "@tanstack/react-query"
@@ -16,24 +17,17 @@ const BastProductListPage = async ({
 }: {
   params: { categories: string[] | undefined }
 }) => {
-  const category = params.categories ?? []
-
-  const [firstCategoryPath, secondCategoryPath, thirdCategoryPath] = category
-
-  const firstCategory = getAfterEquals(decodeURIComponent(firstCategoryPath))
-
-  const secondCategory = getAfterEquals(decodeURIComponent(secondCategoryPath))
-  const thirdCategory = getAfterEquals(decodeURIComponent(thirdCategoryPath))
-
-  const categoriesPath =
-    "/" + firstCategory + "/" + secondCategory + "/" + thirdCategory
+  const { categoriesPath, firstCategory, secondCategory, thirdCategory } =
+    decodeCategoryPaths({
+      categories: params.categories ?? [],
+    })
 
   const queryKey = [
     "bestProductListWithCategory",
     "initial",
     firstCategory,
-    parseSliceToAnd(secondCategory),
-    parseSliceToAnd(thirdCategory),
+    secondCategory,
+    thirdCategory,
   ]
 
   const queryClient = getQueryClient()

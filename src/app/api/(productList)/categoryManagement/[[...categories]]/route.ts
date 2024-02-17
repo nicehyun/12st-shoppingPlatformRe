@@ -1,4 +1,4 @@
-import { getAfterEquals, parseSliceToAnd } from "@/features/common/utils/text"
+import { decodeCategoryPaths } from "@/features/common/utils/segment"
 import { NextRequest, NextResponse } from "next/server"
 
 export async function GET(
@@ -7,17 +7,14 @@ export async function GET(
 ) {
   const pageParam = request.headers.get("pageParam")
 
-  const [, firstCategoryPath, secondCategoryPath, thirdCategoryPath] =
-    params.categories
-
-  const firstCategory = getAfterEquals(firstCategoryPath)
-  const secondCategory = parseSliceToAnd(getAfterEquals(secondCategoryPath))
-  const thirdCategory = parseSliceToAnd(getAfterEquals(thirdCategoryPath))
+  const { firstCategory, secondCategory, thirdCategory } = decodeCategoryPaths({
+    categories: params.categories ?? [],
+  })
 
   try {
-    if (!firstCategory) {
+    if (thirdCategory) {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_DB_URL}/productList?_limit=12&_page=${pageParam}`,
+        `${process.env.NEXT_PUBLIC_DB_URL}/productList?category1=${firstCategory}&category2=${secondCategory}&category3=${thirdCategory}&_limit=12&_page=${pageParam}`,
         {
           next: { revalidate: 0 },
         }
@@ -34,7 +31,7 @@ export async function GET(
       })
     }
 
-    if (secondCategory && !thirdCategory) {
+    if (secondCategory) {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_DB_URL}/productList?category1=${firstCategory}&category2=${secondCategory}&_limit=12&_page=${pageParam}`,
         {
@@ -53,9 +50,9 @@ export async function GET(
       })
     }
 
-    if (secondCategory && thirdCategory) {
+    if (!firstCategory) {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_DB_URL}/productList?category1=${firstCategory}&category2=${secondCategory}&category3=${thirdCategory}&_limit=12&_page=${pageParam}`,
+        `${process.env.NEXT_PUBLIC_DB_URL}/productList?_limit=12&_page=${pageParam}`,
         {
           next: { revalidate: 0 },
         }

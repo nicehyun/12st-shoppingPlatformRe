@@ -16,10 +16,7 @@ export const metadata: Metadata = {
 const HomePage = async () => {
   const queryClient = getQueryClient()
   await queryClient.prefetchQuery(["bestProductList", "home"], () =>
-    bestProductListAPI.getBestProductListWithCategory(
-      "/undefined/undefined/undefined",
-      1
-    )
+    bestProductListAPI.getBestProductListWithCategory("", 1)
   )
 
   await queryClient.prefetchQuery(["arrivalProductList", "home"], () =>

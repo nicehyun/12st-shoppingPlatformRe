@@ -1,22 +1,20 @@
-import { parseSliceToAnd } from "@/features/common/utils/text"
+import { decodeCategoryPaths } from "@/features/common/utils/segment"
 import { NextRequest, NextResponse } from "next/server"
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { categories: string } }
+  { params }: { params: { categories: string[] } }
 ) {
   const pageParam = request.headers.get("pageParam")
 
-  const [firstCategory, secondCategory, thirdCategory] = params.categories
-
-  const parsedFirstCategory = parseSliceToAnd(firstCategory)
-  const parsedSecondCategory = parseSliceToAnd(secondCategory)
-  const parsedThirdCategory = parseSliceToAnd(thirdCategory)
+  const { firstCategory, secondCategory, thirdCategory } = decodeCategoryPaths({
+    categories: params.categories ?? [],
+  })
 
   try {
-    if (parsedThirdCategory !== "undefined") {
+    if (thirdCategory) {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_DB_URL}/productList?category1=${parsedFirstCategory}&category2=${parsedSecondCategory}&category3=${parsedThirdCategory}&_sort=sellCount&_order=desc&_limit=12&_page=${pageParam}`,
+        `${process.env.NEXT_PUBLIC_DB_URL}/productList?category1=${firstCategory}&category2=${secondCategory}&category3=${thirdCategory}&_sort=sellCount&_order=desc&_limit=12&_page=${pageParam}`,
         {
           next: { revalidate: 0 },
         }
@@ -33,9 +31,9 @@ export async function GET(
       })
     }
 
-    if (parsedSecondCategory !== "undefined") {
+    if (secondCategory) {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_DB_URL}/productList?category1=${parsedFirstCategory}&category2=${parsedSecondCategory}&_sort=sellCount&_order=desc&_limit=12&_page=${pageParam}`,
+        `${process.env.NEXT_PUBLIC_DB_URL}/productList?category1=${firstCategory}&category2=${secondCategory}&_sort=sellCount&_order=desc&_limit=12&_page=${pageParam}`,
         {
           next: { revalidate: 0 },
         }
@@ -52,9 +50,9 @@ export async function GET(
       })
     }
 
-    if (parsedFirstCategory !== "undefined") {
+    if (firstCategory) {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_DB_URL}/productList?category1=${parsedFirstCategory}&_sort=sellCount&_order=desc&_limit=12&_page=${pageParam}`,
+        `${process.env.NEXT_PUBLIC_DB_URL}/productList?category1=${firstCategory}&_sort=sellCount&_order=desc&_limit=12&_page=${pageParam}`,
         {
           next: { revalidate: 0 },
         }
@@ -71,7 +69,7 @@ export async function GET(
       })
     }
 
-    if (parsedFirstCategory === "undefined") {
+    if (!firstCategory) {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_DB_URL}/productList?_sort=sellCount&_order=desc&_limit=12&_page=${pageParam}`,
         {
