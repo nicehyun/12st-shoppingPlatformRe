@@ -1,20 +1,20 @@
-# 🛍️ E-Commerce Application README
-![12st](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/5fb5b2d6-b0a9-4dbd-aded-9e75a31c248f)
-<br/><br/>
+# 🛒 E-Commerce Application - 12st
 
-### <u><a href="https://12st-shopping-platform-re-git-main-ish1610.vercel.app" target="_blank">🛒 프로젝트 데모</a></u> | <a href="https://github.com/nicehyun/12st-shoppingMall" target="_blank">리팩토링 전 프로젝트 소스 코드</a>
-<br/>
+![readme-banner img 001](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/88f40055-9def-4b5e-b7ac-0d9e0b2b0d37)
 
-회원가입 단계를 건너뛰고 싶으시거나, 회원가입 본인인증 단계에서 사용되는 Firebase Authentication의 사용량을 초과하여 본인인증이 불가능한 경우 아래의 Email과 Password를 사용해주세요.
+- <a href="https://12st-shopping-platform-re-git-main-ish1610.vercel.app" target="_blank">배포 URL</a>
 
+- <a href="https://github.com/nicehyun/12st-shoppingMall" target="_blank">리팩토링 전 프로젝트 소스 코드</a>
+
+- Test Email & Password
 ```
 Email : test@test.com
 Password : test123123!
-```
+``` 
 
 <br/><br/>
 
-## 목차
+## 🪜 목차
 
 1. [프로젝트 소개](#introduce)
 2. [설치 및 실행](#install)
@@ -23,46 +23,18 @@ Password : test123123!
 5. [주요 기능](#feature)
 6. [Troubleshooting](#troubleshooting)
 
+<br/><br/>
+
 ## <span id="introduce">프로젝트 소개</span>
+- 12st는 다양한 Brand의 상품을 한 곳에 모아 놓은 E-Commerce Platform입니다.
+- 신상품, 할인율이 높은 상품, 인기 상품에 대한 정보를 간편하게 확인할 수 있습니다.
+- 인기 상품에 대한 정보를 원하는 카테고리를 선택해서 원하는 상품만 확인할 수 있습니다.
+- 검색을 통해 검색어에 해당하는 상품과 브랜드를 확인할 수 있습니다.
+- 복잡하지 않은 문의 Form을 통해 간편하게 문의가 가능합니다.
 
-- 기존 팀프로젝트를 리팩토링한 풀 스택 프로젝트입니다.
-- 다양한 브랜드의 상품을 구매할 수 있는 이커머스 웹 프로젝트입니다.
-- 다양한 디바이스 및 화면 크기에 대응하기 위해 다음과 같이 4가지의 미디어 쿼리를 적용하였습니다.
+</br></br>
 
-  1.  **479px 이하:**
-
-  - 기기의 가로 너비가 479px 이하일 때 적용되는 스타일을 지정합니다.
-
-  2.  **480px ~ 767px:**
-
-  - 기기의 가로 너비가 480px에서 767px 사이일 때 적용되는 스타일을 지정합니다.
-
-  3.  **768px ~ 1023px:**
-
-  - 기기의 가로 너비가 768px에서 1023px 사이일 때 적용되는 스타일을 지정합니다.
-
-  4.  **1024px 이상:**
-
-  - 기기의 가로 너비가 1024px 이상일 때 적용되는 스타일을 지정합니다.
-
-  위의 미디어 쿼리를 통해 사용자 경험을 최적화하고 다양한 디바이스에서 일관된 디자인을 제공합니다.</br>
-
-- 해당 프로젝트는 사용자가 선호하는 테마에 맞게 다크 모드와 라이트 모드를 제공합니다.
-
-  1.  **다크 모드:**
-
-  - 사용자가 다크 모드를 선호하는 경우, 프로젝트는 어두운 테마로 전환됩니다.
-
-  2.  **라이트 모드:**
-
-  - 사용자가 라이트 모드를 선호하는 경우, 프로젝트는 밝은 테마로 전환됩니다.
-
-  두 가지 테마 지원을 통해 사용자는 편안한 환경에서 애플리케이션을 경험할 수 있습니다.</br>
-
-- 사용자의 다양한 접근에 대해 Modal을 활용하여 피드백을 전달합니다. 모달을 통해 간편하게 메시지를 확인하고, 페이지 이동 등의 필요한 작업을 수행할 수 있습니다. 사용자 경험을 향상시키기 위해 명확하고 유용한 피드백이 제공되며, 모달 창을 통해 상호작용이 간단하게 이루어집니다.
-  </br></br>
-
-## <span id="install">🗣️ 설치 및 실행</span>
+## <span id="install">👨🏻‍🔧 설치 및 실행</span>
 
 ### 설치
 
@@ -98,6 +70,7 @@ NEXT_PUBLIC_BASE_URL="http://localhost:3000"
 # Json Server 실행 Port 번호
 NEXT_PUBLIC_DB_URL="http://localhost:8080"
 ```
+
 ### Middleware 수정
 ```bash
 # middleware.ts 수정하기
@@ -122,6 +95,7 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 ```bash
 # 개발 환경에서 프로젝트 실행
 > npm run dev
+
 # json-server의 Port는 NEXT_PUBLIC_DB_URL와 일치
 > npx json-server --port 8080 --watch db.json
 ```
@@ -131,16 +105,14 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 ## <span id="stack">⚙️ 기술스택</span>
 
 ### 프레임워크
-
 <img src="https://img.shields.io/badge/next.js 13.4.12-000000?style=for-the-badge&logo=nextdotjs&logoColor=white">
+</br>
 
 ### 언어
-
 <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
 </br>
 
 ### UI 라이브러리
-
 <div> 
   <img src="https://img.shields.io/badge/react 18.2.5-61DAFB?style=for-the-badge&logo=react&logoColor=white">
   <img src="https://img.shields.io/badge/mui 5.14.1-007FFF?style=for-the-badge&logo=mui&logoColor=white">
@@ -164,7 +136,6 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 <div>
   <img src="https://img.shields.io/badge/firebase 10.1.0-FFCA28?style=for-the-badge&logo=firebase&logoColor=white">
   <img src="https://img.shields.io/badge/firebase admin 11.10.1-FFCA28?style=for-the-badge&logo=firebase&logoColor=white">
-  <img src="https://img.shields.io/badge/json server 0.17.4-FF0000?style=for-the-badge">
 </div>
 </br>
 
@@ -173,11 +144,8 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 <div>
  <img src="https://img.shields.io/badge/eslint 8.45.0-4B32C3?style=for-the-badge&logo=eslint&logoColor=white">
 <img src="https://img.shields.io/badge/prettier 2.8.7-F7B93E?style=for-the-badge&logo=prettier&logoColor=white">
-<img src="https://img.shields.io/badge/lodash 4.17.21-06B6D4?style=for-the-badge&logo=lodash&logoColor=white">
-<img src="https://img.shields.io/badge/axios 1.4.0-5A29E4?style=for-the-badge&logo=axios&logoColor=white">
 <img src="https://img.shields.io/badge/jsonwebtokens 9.0.1-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white"> 
   <img src="https://img.shields.io/badge/bcrypt 5.1.1-EF2D5E?style=for-the-badge">
-   <img src="https://img.shields.io/badge/daum postcode 3.1.3-83B81A?style=for-the-badge"> 
 </div>
 </br></br>
   
@@ -271,7 +239,7 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 ```
 </br></br>
 
-## <span id="feature">📍 주요 기능</span>
+## <span id="feature">🖥️ 주요 기능</span>
 
 <details>
   
