@@ -181,6 +181,8 @@ Next.js의 File-Based-Routing을 통해 프로젝트 구조의 직관성을 개�
 Back-End 코드 또한 File-Based-Routing이 적용되기 때문에 유지보수가 용이했습니다.
  </br>
  </br>
+
+ ---
  
 ![제목을-입력해주세요_-001 (1)](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/b3c40d5a-7f7f-4d28-8965-256b7f529c14)
 
@@ -322,6 +324,9 @@ const ArrivalProductListPage = async () => {
 
 이 부분도 오랜 고민을 했지만, `invalidateQueries`와 query hook에서 `initialData`를 설정할 때 api 호출이 아닌 `getQueryData`로 간편하게 cache된 데이터를 가져올 수 있기 때문에 TanStack Query를 사용했습니다.
 </br>
+ </br>
+
+ ---
 
 
 ![제목을-입력해주세요_-001 (1)](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/94d9e730-a2a1-4419-bd7b-ea65d22cd080)
