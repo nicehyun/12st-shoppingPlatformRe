@@ -154,7 +154,6 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
   </br>
   </br>
 
-- Next.js
  ![img](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/41a76c86-26dc-4a57-b620-bf6167b9d71a)
 
 애플리케이션에 Next.js 프레임워크를 적용한 이유는 아래와 같습니다.
@@ -180,13 +179,147 @@ Next.js는 기본적으로 애플리케이션을 다양한 측면에서 효과�
 Next.js의 File-Based-Routing을 통해 프로젝트 구조의 직관성을 개선할 수 있었습니다.
 
 Back-End 코드 또한 File-Based-Routing이 적용되기 때문에 유지보수가 용이했습니다.
-</br>
+ </br>
+ </br>
+ 
+![다운로드](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/24a1f4bd-551b-4dc9-8f52-4abe8dc4ba9b)
+
+프로젝트 초반, `TanStack Query` 라이브러리 사용을 고민했습니다.
+
+Next 13에서 기존의 `fetch` api를 확장하여 서버가 각 요청에 대해 `caching`을 자동으로 해줍니다. 때문에  `TanStack Query`를 굳이 사용해야 될까라는 생각을 했습니다.
+
+하지만 확장된 `fetch` api는 설정한 `revalidate`이 지나지 않으면 cache된 데이터를 사용합니다. 때문에 사용자 Action에 대한 data 최신화 설정이 불가능합니다.
+
+Server State를 caching 하는 것 뿐 아니라 `TanStack Query`는 많은 이점을 가져올 수 있습니다.
+
+- Server State 관리 : server state를 client state에서 분리
+- 비지니스 로직 분리 : server 관련 비지니스 로직을 분리 (Mutataion에서 관리)
+- 무한 스크롤 : useInfiniteQuery hook을 사용해 간단한 무한 스크롤 구현
+- Hydration : data prefetch
+
+특히 가장 큰 이점으로 다가온 부분은 server 관련 `비지니스 로직 분리`와 `Hydration` 입니다.
+
+- 비지니스 로직을 분리
+
+```
+export const useCheckoutMutaion = () => {
+
+  // ... 코드 생략
+
+  const { isLoading: isCheckoutLoading, mutateAsync } = useMutation(
+    ({
+      checkoutInfo,
+      isClauseCheck,
+    }: {
+      checkoutInfo: CheckoutList
+      isClauseCheck: Omit<CheckoutClauseCheck, "all">
+    }) =>
+      checkoutAPI.checkout(
+        session?.user.accessToken,
+        checkoutInfo,
+        isClauseCheck
+      ),
+    {
+      onSuccess: (data) => {
+        if (data.status === 401) {
+          showFeedbackModalWithErrorMessage(data.error ?? "")
+          return
+        }
+
+        if (data.status === 200) {
+          queryClient.invalidateQueries(["productListInCart"])
+          queryClient.invalidateQueries(["checkoutList"])
+          queryClient.invalidateQueries(["deliveryInfo"])
+          queryClient.invalidateQueries(["userMile"])
+
+          routeTo(ROUTE.CHECKOUTCOMFIRMED)
+
+          return
+        }
+      },
+      onError: () => {
+        showFeedbackModalWithContent(
+          "상품 주문에 실패했습니다. 오류가 계속되면 고객센터에 문의해주세요."
+        )
+      },
+    }
+  )
+
+  const checkoutMutateAsync: FormEventHandler<HTMLFormElement> = async (
+    event
+  ) => {
+    event.preventDefault()
+
+    // ... checkout api form data
+
+    // ... checkout api 호출 전 validate 로직
 
 
+    mutateAsync({
+      checkoutInfo,
+      isClauseCheck: {
+        collectionOfUserInfo: !!collectionOfUserInfo,
+        provisionOfUserInfo: !!provisionOfUserInfo,
+        paymentAgency: !!paymentAgencyClause,
+      },
+    })
+  }
+
+  return {
+    isCheckoutLoading,
+    checkoutMutateAsync,
+  }
+}
+
+```
+리팩토링 전 프로젝트에서는 뷰 로직에서 비지니스를 관리를 했습니다. 
+
+때문에 재사용성은 물론, 코드의 가독성이 현저히 떨어졌습니다. 이로 인해 유지보수 측면에서도 불편함이 많았습니다.
+
+비지니스 로직과 뷰의 분리, 특히 form data를 사용한 비지니스 로직의 분리에 대해 고민했던 시기가 있었습니다. 그 고민에 대한 좋은 선택지 중 하나는 해당 로직을 `mutation`에서 관리하는 것이라 생각했습니다.
+
+```
+// view
+
+ const handleSignUpSubmit = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault()
+
+    // 비지니스 로직 분리
+    await signUpMuatateAsync(event)
+
+    // view 로직
+    dispatch(resetSignUpState())
+    setActiveStep(0)
+    resetClauseCheck()
+  }
+```
+이제 view에서는 `signUpMuatateAsync`에 `event` 객체만 전달하면 됩니다. 
 
 
+- Hydration
+  
+```
+const ArrivalProductListPage = async () => {
+  const queryClient = getQueryClient()
 
+  await queryClient.prefetchQuery(["arrival", "initial"], () =>
+    arrivalAPI.getArrivalProductList(1)
+  )
 
+  const dehydratedState = dehydrate(queryClient)
+
+  return (
+    <Hydrate state={dehydratedState}>
+      <ArrivalProductListSection />
+    </Hydrate>
+  )
+}
+```
+물론 TanStack Query를 사용하지 않고도 prefetching이 가능하지만, `prefetchQuery`를 사용하여 미리 데이터를 prefetch 해주었습니다.
+
+이 부분도 오랜 고민을 했지만, `invalidateQueries`와 query hook에서 `initialData`를 설정할 때 api 호출이 아닌 `getQueryData`로 간편하게 cache된 데이터를 가져올 수 있기 때문에 TanStack Query를 사용했습니다.
 
 </details>
 
