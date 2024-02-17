@@ -383,8 +383,11 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 
 </br></br>
 
-
 ## <span id="directory">📂 디렉토리 구조</span>
+
+<details>
+<summary>디렉토리 구조 보기</summary>
+
 ```plaintext
 ├── 📂 app ✅ App Directory
 │   		├── 📂 api ✅ Route Handler
@@ -472,6 +475,11 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 ├── 📂 redux ✅ Redux 설정, Feature 별 Slice
 └── 📂 types ✅ next-auth.d.ts
 ```
+
+</details>
+
+
+
 </br></br>
 
 ## <span id="feature">🖥️ 주요 기능</span>
