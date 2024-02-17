@@ -147,6 +147,17 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 <img src="https://img.shields.io/badge/jsonwebtokens 9.0.1-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white"> 
   <img src="https://img.shields.io/badge/bcrypt 5.1.1-EF2D5E?style=for-the-badge">
 </div>
+</br>
+
+<details>
+  <summary>### 프레임워크 및 라이브러리 선택 이유</summary>
+
+ ![img](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/41a76c86-26dc-4a57-b620-bf6167b9d71a)
+
+  내용
+</details>
+
+
 </br></br>
   
 ## <span id="directory">📂 디렉토리 구조</span>
