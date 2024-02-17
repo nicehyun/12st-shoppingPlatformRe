@@ -182,7 +182,8 @@ Back-End 코드 또한 File-Based-Routing이 적용되기 때문에 유지보수
  </br>
  </br>
  
-![다운로드](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/24a1f4bd-551b-4dc9-8f52-4abe8dc4ba9b)
+![제목을-입력해주세요_-001 (1)](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/b3c40d5a-7f7f-4d28-8965-256b7f529c14)
+
 
 프로젝트 초반, `TanStack Query` 라이브러리 사용을 고민했습니다.
 
