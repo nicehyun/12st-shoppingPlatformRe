@@ -601,6 +601,8 @@ TanStack Query의 `prefetchQuery`를 사용하지 않는 경우 Skeleton UI를 �
 
 </details>
 
+</br></br>
+
 ## <span id="authentication">🔐 인증 / 인가</span>
 
 <details>
