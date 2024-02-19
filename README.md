@@ -21,7 +21,8 @@ Password : test123123!
 3. [설치 및 실행](#install)
 4. [디렉토리 구조](#directory)
 5. [사용자 경험 개선](#ux)
-6. [Page 별 View](#feature)
+6. [성능 개선](#performance)
+7. [Page 별 View](#feature)
 
 
 <br/><br/>
@@ -583,16 +584,20 @@ TanStack Query의 `prefetchQuery`를 사용하지 않는 경우 Skeleton UI를 �
 
 4가지의 Media Query 적용을 통해 다양한 디바이스에서 웹 애플리케이션을 보다 편리하게 이용할 수 있도록 해주었습니다.
 
-
-
-
-
-
-
 </details>
 
+</br></br>
 
 
+## <span id="performance">🔧 성능 개선 및 최적화</span>
+
+<details>
+<summary>성능 개선 및 최적화 펼쳐보기</summary>
+
+
+[성능 개선 및 최적화 블로그](https://velog.io/@ish1610/Next-13-%EC%B5%9C%EC%A0%81%ED%99%94){:target="_blank"}
+
+</details>
 
 
 </br></br>
