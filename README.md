@@ -22,7 +22,8 @@ Password : test123123!
 4. [디렉토리 구조](#directory)
 5. [사용자 경험 개선](#ux)
 6. [성능 개선](#performance)
-7. [Page 별 View](#feature)
+7. [인증/인가](#authentication)
+8. [Page 별 View](#feature)
 
 
 <br/><br/>
@@ -596,7 +597,16 @@ TanStack Query의 `prefetchQuery`를 사용하지 않는 경우 Skeleton UI를 �
 <details>
 <summary>성능 개선 및 최적화 펼쳐보기</summary>
 
-<a href="https://velog.io/@ish1610/Next-13-%EC%B5%9C%EC%A0%81%ED%99%94" target="_blank">성능 개선 및 최적화 블로그</a>
+<a href="https://velog.io/@ish1610/Next-13-%EC%B5%9C%EC%A0%81%ED%99%94" target="_blank">성능 개선 및 최적화 블로그 게시글</a>
+
+</details>
+
+## <span id="authentication">🔐 인증 / 인가</span>
+
+<details>
+<summary>인증 / 인가 펼쳐보기</summary>
+
+<a href="https://velog.io/@ish1610/%EC%9D%B8%EC%A6%9D-%EC%9D%B8%EA%B0%80-With-Next.js" target="_blank">성능 개선 및 최적화 블로그 게시글</a>
 
 </details>
 
