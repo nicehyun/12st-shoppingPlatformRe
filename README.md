@@ -480,12 +480,15 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 ```
 
 </details>
+
+데이터의 지역성을 고려한 Feature별 구분을 하여 디렉토리 구조를 구성했습니다.
+
 </br></br>
 
 ## <span id="ux">🧑🏻‍💻 사용자 경험 개선</span>
 
 <details>
-<summary>사용자 경험 개선 평쳐보기</summary>
+<summary>사용자 경험 개선 펼쳐보기</summary>
 
 ### SSR Hydration
 
@@ -529,7 +532,7 @@ Loading UI가 아닌 상품들을 바로 확인할 수 있도록 하여 사용�
 
 사용자와 상호작용하는 `mutation`과 연결된 모든 액션들이 사용자에게 `mutation`에 대한 명확한 Feedback을 전달합니다. 
 
-프로젝트의 Feedback 유현은 아래와 같습니다.
+애플리케이션의 Feedback 유형은 아래와 같습니다.
 - `mutation`에 필요한 사용자 입력값에 대한 유효성이 미충족일 경우 상세 Feedback 전달
 - 특정 단계를 건너뛰고 URL을 통해 특정 기능에 접근 시 Feedback 전달 후 Route 모달 마운트
 - `mutation` 결과에 대한 Feedback 전달 ( Success - 200, Fail - 401, 404, 500  )
