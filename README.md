@@ -594,8 +594,12 @@ TanStack Query의 `prefetchQuery`를 사용하지 않는 경우 Skeleton UI를 �
 <details>
 <summary>성능 개선 및 최적화 펼쳐보기</summary>
 
+[링크이름](https://velog.io/@ish1610/Next-13-%EC%B5%9C%EC%A0%81%ED%99%94){: target="_blank"}
+<https://velog.io/@ish1610/Next-13-%EC%B5%9C%EC%A0%81%ED%99%94>{: target="_blank"}
+<a href="http://example.com/" target="_blank">example</a>
 
-<a href="https://velog.io/@ish1610/Next-13-%EC%B5%9C%EC%A0%81%ED%99%94" target="_blank">성능 개선 및 최적화 블로그]</a>
+
+<a href="https://velog.io/@ish1610/Next-13-%EC%B5%9C%EC%A0%81%ED%99%94" target="_blank">성능 개선 및 최적화 블로그</a>
 
 
 
