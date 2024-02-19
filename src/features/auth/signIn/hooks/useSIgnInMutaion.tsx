@@ -1,5 +1,3 @@
-import { showFeedbackModal } from "@/redux/features/modalSlice"
-import { useAppDispatch } from "@/redux/hooks"
 import { useMutation } from "@tanstack/react-query"
 import { signIn } from "next-auth/react"
 import {
@@ -8,11 +6,12 @@ import {
 } from "../../signUp/utils/validation"
 import { ROUTE, useNavigations } from "@/features/common/hooks/useNavigations"
 import { useFeedbackModal } from "@/features/common/hooks/useFeedbackModal"
+import { useFeedbackModalWithError } from "@/features/common/hooks/useFeedbackModalWithError"
 
 export const useSignInMutaion = () => {
-  const dispatch = useAppDispatch()
   const { routeTo } = useNavigations()
   const { showFeedbackModalWithContent } = useFeedbackModal()
+  const { showFeedbackModalWithErrorMessage } = useFeedbackModalWithError()
 
   const { isLoading, mutateAsync } = useMutation(
     (params: { email: string; password: string }) =>
@@ -56,11 +55,7 @@ export const useSignInMutaion = () => {
     const signInResponse = await mutateAsync({ email, password })
 
     if (signInResponse?.status === 401) {
-      showFeedbackModalWithContent(
-        signInResponse.error
-          ? signInResponse.error
-          : "로그인에 실패했습니다. 오류가 계속되면 고객센터에 문의해주세요."
-      )
+      showFeedbackModalWithErrorMessage(signInResponse.error ?? "")
     }
 
     if (signInResponse?.status === 200) {
