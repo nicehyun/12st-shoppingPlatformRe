@@ -552,6 +552,25 @@ TanStack Query의 `prefetchQuery`를 사용하지 않는 경우 Skeleton UI를 �
 
 </br></br>
 
+### Infinity Scroll
+
+![infinity](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/13bbc450-fb60-46e4-9154-491bad8e80e1)
+
+상품 리스트 페이지는 끊김 없는 상품 탐색을 위해 TanStack Query의 `useInfiniteQuery`와 `IntersectionObserver`를 사용하여 Infinity Scroll를 구현했습니다.
+
+
+</br></br>
+
+### Pagination / Pannel
+
+![pannel](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/a8339f0e-6cbd-4b79-87ed-817f337075ac)
+
+![스크린샷 2024-02-19 오후 5 17 54](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/55fb1f2e-4954-43f6-ab8c-166d6a716941)
+
+정보 밀도가 높은  Mypage의 경우 Pagination과 Pannel을 적용하여 한정된 공간에서 사용자의 사용 효율이 증가될 수 있도록 했습니다.
+
+</br></br>
+
 ### Media Query
 
 ![mediaquery](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/b68fbaab-444b-4104-813c-cb19d6ecc28c)
@@ -563,6 +582,12 @@ TanStack Query의 `prefetchQuery`를 사용하지 않는 경우 Skeleton UI를 �
 - 1024px 이상
 
 4가지의 Media Query 적용을 통해 다양한 디바이스에서 웹 애플리케이션을 보다 편리하게 이용할 수 있도록 해주었습니다.
+
+
+
+
+
+
 
 </details>
 
