@@ -17,7 +17,7 @@ Password : test123123!
 ## 🪜 목차
 
 1. [프로젝트 소개](#introduce)
-2. [기술 스택](#stack)
+2. [기술 스택 ( With 프레임워크 및 라이브러리 선택 이유 )](#stack)
 3. [설치 및 실행](#install)
 4. [디렉토리 구조](#directory)
 5. [사용자 경험 개선](#ux)
