@@ -384,6 +384,8 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 
 </br></br>
 
+
+
 ## <span id="directory">📂 디렉토리 구조</span>
 
 <details>
@@ -481,6 +483,18 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 </br></br>
 
 ## <span id="ux">🧑🏻‍💻 사용자 경험 개선</span>
+
+<details>
+<summary>사용자 경험 개선 평쳐보기</summary>
+
+### Feedback
+![feedback](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/fb27a367-6efa-4f93-a79a-e614ec669545)
+
+</details>
+
+
+
+
 
 </br></br>
 
