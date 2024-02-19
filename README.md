@@ -606,7 +606,7 @@ TanStack Query의 `prefetchQuery`를 사용하지 않는 경우 Skeleton UI를 �
 <details>
 <summary>인증 / 인가 펼쳐보기</summary>
 
-<a href="https://velog.io/@ish1610/%EC%9D%B8%EC%A6%9D-%EC%9D%B8%EA%B0%80-With-Next.js" target="_blank">성능 개선 및 최적화 블로그 게시글</a>
+<a href="https://velog.io/@ish1610/%EC%9D%B8%EC%A6%9D-%EC%9D%B8%EA%B0%80-With-Next.js" target="_blank">인증 / 인가 블로그 게시글</a>
 
 </details>
 
