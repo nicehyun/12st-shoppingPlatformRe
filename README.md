@@ -480,9 +480,11 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 └── 📂 types ✅ next-auth.d.ts
 ```
 
+데이터의 지역성을 고려한 Feature별 구분을 하여 디렉토리 구조를 구성했습니다.
+
 </details>
 
-데이터의 지역성을 고려한 Feature별 구분을 하여 디렉토리 구조를 구성했습니다.
+
 
 </br></br>
 
