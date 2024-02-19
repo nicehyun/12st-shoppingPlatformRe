@@ -487,8 +487,79 @@ NEXT_PUBLIC_DB_URL="http://localhost:8080"
 <details>
 <summary>사용자 경험 개선 평쳐보기</summary>
 
-### Feedback
-![feedback](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/fb27a367-6efa-4f93-a79a-e614ec669545)
+### SSR Hydration
+
+![SSR](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/e53835a6-3d9d-41bd-8bf7-763fc2608989)
+
+- home
+- bestProductList
+- arrivalProductList 
+- topSaleProductList 
+- categoryManagement
+
+```
+// prefetchQuery
+
+const ArrivalProductListPage = async () => {
+  const queryClient = getQueryClient()
+
+  await queryClient.prefetchQuery(["arrival", "initial"], () =>
+    arrivalAPI.getArrivalProductList(1)
+  )
+
+  const dehydratedState = dehydrate(queryClient)
+
+  return (
+    <Hydrate state={dehydratedState}>
+      <ArrivalProductListSection />
+    </Hydrate>
+  )
+}
+```
+
+위의 상품 리스트를 렌더링하는 페이지들에 TanStack Query의 `prefetchQuery`를 사용하여 상품의 데이터를 Pre-Fetching합니다.
+
+Loading UI가 아닌 상품들을 바로 확인할 수 있도록 하여 사용자 경험을 개선할 수 있도록 해주었습니다.
+
+</br></br>
+
+### 명확한 Feedback
+
+![feedback](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/58521ca2-0c6a-4a53-a038-e4ca92a9bf72)
+
+사용자와 상호작용하는 `mutation`과 연결된 모든 액션들이 사용자에게 `mutation`에 대한 명확한 Feedback을 전달합니다. 
+
+프로젝트의 Feedback 유현은 아래와 같습니다.
+- `mutation`에 필요한 사용자 입력값에 대한 유효성이 미충족일 경우 상세 Feedback 전달
+- 특정 단계를 건너뛰고 URL을 통해 특정 기능에 접근 시 Feedback 전달 후 Route 모달 마운트
+- `mutation` 결과에 대한 Feedback 전달 ( Success - 200, Fail - 401, 404, 500  )
+- `mutation`이 진행 중일 경우 Loading UI, Cursor-Not-Allowed, BackGround Color 변경 등을 이용
+
+![feedback2](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/3fdc463e-e29c-4c45-85f9-e79d4cbfda98)
+
+회원가입 페이지에서는 실시간 유효성 검사 및 피드백에 대한 결과를 확인할 수 있도록 하여 Placeholder 내용을 확인하지 않더라도 간편하게 입력값이 옳바른지 확인할 수 있도록 했습니다.
+
+</br></br>
+
+### Layout Shift 제거
+
+![layoutshift](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/3fc3e32a-69c4-4f8a-927f-98617b52a896)
+
+TanStack Query의 `prefetchQuery`를 사용하지 않는 경우 Skeleton UI를 통해 Layout Shift를 제거했습니다.
+
+</br></br>
+
+### Media Query
+
+![mediaquery](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/b68fbaab-444b-4104-813c-cb19d6ecc28c)
+
+
+- 479px 이하
+- 480px ~ 767px
+- 768px ~ 1023px
+- 1024px 이상
+
+4가지의 Media Query 적용을 통해 다양한 디바이스에서 웹 애플리케이션을 보다 편리하게 이용할 수 있도록 해주었습니다.
 
 </details>
 
