@@ -1,4 +1,4 @@
-import { parseISOString } from "@/features/checkout/utils/checkout"
+import { parseISOString } from "@/features/checkout/models/checkout"
 import { CustomerCounselingDetail } from "../../types/myPage"
 import MyPageListContentLayout from "../MyPageListContentLayout"
 import MyPageTableContentEl from "../MyPageTableContentEl"

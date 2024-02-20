@@ -2,9 +2,11 @@ import {
   CheckoutClauseCheck,
   CheckoutList,
 } from "@/features/checkout/types/checkout"
+import { AmountCoupon, RateCoupon } from "@/features/common/types/coupon"
 import { POSTResponse } from "@/features/common/types/fetch"
-import { Product } from "@/features/common/types/product"
+import { Product, Products } from "@/features/common/types/product"
 import { validateAuthorization } from "@/features/common/utils/error"
+import { FormEvent } from "react"
 
 export const checkoutAPI = {
   getCheckoutList: async (
@@ -31,8 +33,7 @@ export const checkoutAPI = {
   },
   checkout: async (
     accessToken: string | null | undefined,
-    checkoutInfo: CheckoutList,
-    isClauseCheck: Omit<CheckoutClauseCheck, "all">
+    formData: FormData
   ): Promise<POSTResponse> => {
     try {
       const { authorization } = validateAuthorization(accessToken)
@@ -42,13 +43,10 @@ export const checkoutAPI = {
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
             authorization,
           },
-          body: JSON.stringify({
-            checkoutInfo,
-            isClauseCheck,
-          }),
+
+          body: formData,
         }
       )
 

@@ -4,7 +4,7 @@ import MyPageTableContentEl from "../MyPageTableContentEl"
 import { CheckoutList } from "@/features/checkout/types/checkout"
 import { numberToLocaleString } from "@/features/common/utils/price"
 import { checkoutTotalPrice } from "../../utils/price"
-import { parseISOString } from "@/features/checkout/utils/checkout"
+import { parseISOString } from "@/features/checkout/models/checkout"
 
 interface ICheckoutListTableContent {
   checkoutList: CheckoutList

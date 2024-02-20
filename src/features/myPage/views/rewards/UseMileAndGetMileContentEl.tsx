@@ -1,6 +1,6 @@
 import MyPageTableContentEl from "../MyPageTableContentEl"
 import MyPageListContentLayout from "../MyPageListContentLayout"
-import { parseISOString } from "@/features/checkout/utils/checkout"
+import { parseISOString } from "@/features/checkout/models/checkout"
 
 interface IMyPageUseMileAndGetMileContentEl {
   checkoutDate: string

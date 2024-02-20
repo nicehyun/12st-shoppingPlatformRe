@@ -9,7 +9,7 @@ import { hideBasicModal } from "@/redux/features/modalSlice"
 import { ProductInCart } from "@/features/cart/types/cart"
 import { CheckoutPaymentInfo } from "@/features/checkout/types/checkout"
 import MyPageTableContentEl from "../MyPageTableContentEl"
-import { parseISOString } from "@/features/checkout/utils/checkout"
+import { parseISOString } from "@/features/checkout/models/checkout"
 
 interface ICheckoutNumberToCheckoutPairContent {
   checkoutNumberToCheckoutInfoPair: {

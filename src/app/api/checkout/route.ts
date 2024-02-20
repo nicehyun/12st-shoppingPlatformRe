@@ -1,28 +1,20 @@
 import {
-  CheckoutClauseCheck,
-  CheckoutList,
-} from "@/features/checkout/types/checkout"
-import {
   accumulationOfProductsPrice,
   junkOfNoMoreThanOneDigit,
 } from "@/features/common/utils/price"
-import {
-  additionalAddressValidator,
-  nameValidator,
-  phoneValidator,
-} from "@/features/auth/signUp/utils/validation"
-
 import { NextRequest, NextResponse } from "next/server"
 import { verifyAccessToken } from "@/features/common/utils/jwt"
-import { formatCheckoutNumber } from "@/features/checkout/utils/checkout"
+import { formatCheckoutNumber } from "@/features/checkout/models/checkout"
 import { ProductInCart } from "@/features/cart/types/cart"
 import { Product } from "@/features/common/types/product"
 import { UserInfoWithMile } from "@/features/common/types/user"
-
-interface RequestBody {
-  checkoutInfo: CheckoutList
-  isClauseCheck: Omit<CheckoutClauseCheck, "all">
-}
+import {
+  parseAddressFromCheckoutFormEvent,
+  parseMemoFromCheckoutFormEvent,
+  parseMileFromCheckoutFormEvent,
+  parsePaymentFromCheckoutFormEvent,
+  validCheckFromCheckoutFormEvent,
+} from "@/features/checkout/models/formData"
 
 export async function GET(request: Request) {
   const accessToken = request.headers.get("authorization")
@@ -69,64 +61,23 @@ export async function POST(request: NextRequest) {
   const email = verifyAccessToken(accessToken)?.email
   const id = verifyAccessToken(accessToken)?.id
 
-  const { checkoutInfo, isClauseCheck }: RequestBody = await request.json()
+  const formData = await request.formData()
+
+  const { isValid, message } = validCheckFromCheckoutFormEvent(formData)
+
+  if (!isValid) {
+    return NextResponse.json({
+      status: 401,
+      error: message,
+    })
+  }
+
+  const { useMile } = parseMileFromCheckoutFormEvent(formData)
+
+  const coupon = JSON.parse(formData.get("coupon") as string)
+  const productList = JSON.parse(formData.get("productList") as string)
 
   let userInfo: UserInfoWithMile
-
-  if (!nameValidator(checkoutInfo.recipient)) {
-    return NextResponse.json({
-      status: 401,
-      error: "올바른 수령인 이름을 입력해주세요.",
-    })
-  }
-
-  if (!checkoutInfo.zipcode) {
-    return NextResponse.json({
-      status: 401,
-      error: "우편번호를 입력해주세요.",
-    })
-  }
-  if (!checkoutInfo.address) {
-    return NextResponse.json({
-      status: 401,
-      error: "배송지 주소를 입력해주세요.",
-    })
-  }
-  if (!additionalAddressValidator(checkoutInfo.additionalAddress)) {
-    return NextResponse.json({
-      status: 401,
-      error: "올바른 배송지 상세 주소를 입력해주세요.",
-    })
-  }
-  if (!phoneValidator(checkoutInfo.phone1)) {
-    return NextResponse.json({
-      status: 401,
-      error: "올바른 연락처를 입력해주세요.",
-    })
-  }
-
-  if (
-    checkoutInfo.payment.selectedPayment === "credit" &&
-    !checkoutInfo.payment.creditName
-  ) {
-    return NextResponse.json({
-      status: 401,
-      error: "카드사를 선택해주세요.",
-    })
-  }
-
-  if (
-    !isClauseCheck.collectionOfUserInfo ||
-    !isClauseCheck.paymentAgency ||
-    !isClauseCheck.provisionOfUserInfo
-  ) {
-    return NextResponse.json({
-      status: 401,
-      error: "결제를 위해 필수사항에 모두 동의해주세요.",
-    })
-  }
-
-  const useMile = checkoutInfo.useMile
 
   // User Info fetch
   try {
@@ -139,7 +90,7 @@ export async function POST(request: NextRequest) {
 
     userInfo = response[0]
 
-    if (userInfo.mile < useMile) {
+    if (userInfo.mile < +useMile) {
       return NextResponse.json({
         status: 401,
         error:
@@ -150,20 +101,58 @@ export async function POST(request: NextRequest) {
     throw error
   }
 
-  const totalPrice = accumulationOfProductsPrice(checkoutInfo.productList)
-  const getMile = junkOfNoMoreThanOneDigit(
-    (totalPrice - checkoutInfo.useMile) * 0.01
-  )
+  const totalPrice = accumulationOfProductsPrice(productList)
+  const getMile = junkOfNoMoreThanOneDigit((totalPrice - +useMile) * 0.01)
 
   const checkoutDate = new Date().toISOString()
+
+  const {
+    additionalAddress,
+    address,
+    phone1,
+    recipient,
+    deliveryName,
+    phone2,
+    zipcode,
+  } = parseAddressFromCheckoutFormEvent(formData)
+
+  const { deliveryMemo } = parseMemoFromCheckoutFormEvent(formData)
+
+  const { creditName, payment, period } =
+    parsePaymentFromCheckoutFormEvent(formData)
+
+  const parsedPayment = JSON.parse(payment)
+
+  const checkoutPayment =
+    parsedPayment.value === "credit"
+      ? {
+          selectedPayment: parsedPayment.value,
+          creditName,
+          period,
+        }
+      : {
+          selectedPayment: parsedPayment,
+        }
+
   const updatedCheckoutList = {
-    ...checkoutInfo,
+    deliveryName,
+    recipient,
+    zipcode,
+    address,
+    additionalAddress,
+    phone1,
+    phone2,
+    deliveryMemo,
+    productList,
+    coupon,
+    useMile,
+    payment: checkoutPayment,
     getMile,
     checkoutDate,
     checkoutNumber: formatCheckoutNumber(checkoutDate),
   }
 
-  const updatedMile = userInfo.mile + getMile - useMile
+  const updatedMile = userInfo.mile + getMile - +useMile
 
   // Update Checkout fetch
   const checkoutPromise = async () => {
@@ -221,8 +210,8 @@ export async function POST(request: NextRequest) {
       const productListInCart = getCartResponse[0].productList
       const updatedProductInCart = productListInCart.filter(
         (cartProduct: ProductInCart) => {
-          return !checkoutInfo.productList.some(
-            (product) => product.id === cartProduct.id
+          return !productList.some(
+            (product: Product) => product.id === cartProduct.id
           )
         }
       )
@@ -287,9 +276,7 @@ export async function POST(request: NextRequest) {
     await Promise.all([
       updateCartPromise(),
       updateMilePromise(),
-      ...checkoutInfo.productList.map((product) =>
-        updateProductSellCount(product)
-      ),
+      ...productList.map((product: Product) => updateProductSellCount(product)),
     ])
 
     return NextResponse.json({ status: 200 })
