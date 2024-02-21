@@ -1,10 +1,6 @@
 "use client"
 
-import {
-  resetPasswordValid,
-  validatePassword,
-} from "@/redux/features/signUpSlice"
-import { useAppDispatch } from "@/redux/hooks"
+import { useAppSelector } from "@/redux/hooks"
 import { useEffect } from "react"
 import {
   useUserInput,
@@ -14,17 +10,15 @@ import {
   passwordLengthValidator,
   passwordValidator,
   specialCharacterValidator,
-} from "../utils/validation"
+} from "../models/validation"
 import SignUpFeedback from "../../../common/views/Feedback"
 import SignUpInput from "./SignUpInput"
 import SignUpInputLayout from "./SignUpInputLayout"
+import SignUpStepLayout from "./SignUpStepLayout"
+import { selectSignUpStepState } from "@/redux/features/signUpSlice"
 
-interface ISignUpPasswordInput {
-  activeStep: number
-}
-
-const SignUpPasswordInput = ({ activeStep }: ISignUpPasswordInput) => {
-  const dispatch = useAppDispatch()
+const SignUpPasswordInput = () => {
+  const signUpStep = useAppSelector(selectSignUpStepState)
 
   const {
     value: passwordInputValue,
@@ -48,48 +42,41 @@ const SignUpPasswordInput = ({ activeStep }: ISignUpPasswordInput) => {
   } = useUserInputWithRePassword(passwordInputValue)
 
   useEffect(() => {
-    dispatch(resetPasswordValid())
-
-    if (isPasswordValid && isRepasswordValid) {
-      dispatch(validatePassword())
-      return
-    }
-  }, [isPasswordValid, isRepasswordValid, dispatch])
-
-  useEffect(() => {
-    if (activeStep === 0) {
+    if (signUpStep === 0) {
       resetPassword()
       resetRepassword()
       return
     }
-  }, [activeStep])
+  }, [signUpStep])
 
   return (
-    <SignUpInputLayout headingText="로그인에 사용할 비밀번호를 입력해주세요">
-      <SignUpInput
-        id="signUp-password"
-        inputValue={passwordInputValue}
-        onChangeInputValue={handlePasswordInputValueChange}
-        onBlurInput={handlePasswordInputBlur}
-        isShowFeedback={hasErrorPassword}
-      />
+    <SignUpStepLayout isButtonDisabled={!isPasswordValid || !isRepasswordValid}>
+      <SignUpInputLayout headingText="로그인에 사용할 비밀번호를 입력해주세요">
+        <SignUpInput
+          id="signUp-password"
+          inputValue={passwordInputValue}
+          onChangeInputValue={handlePasswordInputValueChange}
+          onBlurInput={handlePasswordInputBlur}
+          isShowFeedback={hasErrorPassword}
+        />
 
-      <SignUpInput
-        id="signUp-repassword"
-        classNames="mt-[10px]"
-        inputValue={repasswordInputValue}
-        onChangeInputValue={handleRepasswordInputValueChange}
-        onBlurInput={handleRepasswordInputBlur}
-        isShowFeedback={hasErrorRepassword}
-      />
+        <SignUpInput
+          id="signUp-repassword"
+          classNames="mt-[10px]"
+          inputValue={repasswordInputValue}
+          onChangeInputValue={handleRepasswordInputValueChange}
+          onBlurInput={handleRepasswordInputBlur}
+          isShowFeedback={hasErrorRepassword}
+        />
 
-      <SignUpFeedback
-        isValid={isSpecialCharacterValid}
-        content="영문, 숫자, 공백을 제외한 특수문자 사용"
-      />
-      <SignUpFeedback isValid={isPasswordLengthValid} content="8~20자리" />
-      <SignUpFeedback isValid={isRepasswordValid} content="비밀번호 일치" />
-    </SignUpInputLayout>
+        <SignUpFeedback
+          isValid={isSpecialCharacterValid}
+          content="영문, 숫자, 공백을 제외한 특수문자 사용"
+        />
+        <SignUpFeedback isValid={isPasswordLengthValid} content="8~20자리" />
+        <SignUpFeedback isValid={isRepasswordValid} content="비밀번호 일치" />
+      </SignUpInputLayout>
+    </SignUpStepLayout>
   )
 }
 

@@ -9,7 +9,6 @@ interface ISignUpVerificationInput {
   id: string
   placeholder?: string
   maxLength?: number
-  isChecked?: boolean
   isLoading: boolean
   inputValue: string
   buttonContent: string

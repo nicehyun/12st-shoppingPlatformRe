@@ -1,12 +1,10 @@
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { signUpAPI } from "@/features/auth/signUp/models/signUpAPI"
 import { useFeedbackModal } from "@/features/common/hooks/useFeedbackModal"
 import { useFeedbackModalWithError } from "@/features/common/hooks/useFeedbackModalWithError"
 
-export const useEmailDuplicationCheckMutation = (
-  email: string,
-  onSuccessCb: () => void
-) => {
+export const useEmailDuplicationCheckMutation = (email: string) => {
+  const queryClient = useQueryClient()
   const { showFeedbackModalWithContent } = useFeedbackModal()
   const { showFeedbackModalWithErrorMessage } = useFeedbackModalWithError()
   const { isLoading, mutateAsync } = useMutation(
@@ -20,8 +18,11 @@ export const useEmailDuplicationCheckMutation = (
 
         if (data.status === 200) {
           showFeedbackModalWithContent("사용 가능한 이메일입니다.")
+          queryClient.setQueryData(
+            ["SignUpValidation", "emailDuplicationCheck"],
+            true
+          )
 
-          onSuccessCb()
           return
         }
       },
@@ -33,11 +34,12 @@ export const useEmailDuplicationCheckMutation = (
     }
   )
 
-  const emailDuplicationCheckMutateAsync = async () => {
-    if (isLoading) return
-
-    await mutateAsync()
+  const resetEmailDuplicationCheck = () => {
+    queryClient.setQueryData(
+      ["SignUpValidation", "emailDuplicationCheck"],
+      false
+    )
   }
 
-  return { emailDuplicationCheckMutateAsync, isLoading }
+  return { mutateAsync, isLoading, resetEmailDuplicationCheck }
 }

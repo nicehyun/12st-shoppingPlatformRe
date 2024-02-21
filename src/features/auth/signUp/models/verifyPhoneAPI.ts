@@ -6,7 +6,7 @@ import {
   signInWithCredential,
 } from "firebase/auth"
 import { get, getDatabase, ref, remove, set } from "firebase/database"
-import { phoneValidator } from "../utils/validation"
+import { phoneValidator } from "./validation"
 
 const auth = getAuth(firebaseApp)
 const database = getDatabase()

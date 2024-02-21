@@ -1,13 +1,13 @@
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useFeedbackModal } from "@/features/common/hooks/useFeedbackModal"
 import { useFeedbackModalWithError } from "@/features/common/hooks/useFeedbackModalWithError"
 import { verifyPhoneAPI } from "../models/verifyPhoneAPI"
 
 export const useSendVerificationCodeMutation = (
   phoneNumber: string,
-  verificationCode: string,
-  onSuccessCb: () => void
+  verificationCode: string
 ) => {
+  const queryClient = useQueryClient()
   const { showFeedbackModalWithContent } = useFeedbackModal()
   const { showFeedbackModalWithErrorMessage } = useFeedbackModalWithError()
   const { isLoading, mutateAsync } = useMutation(
@@ -21,7 +21,10 @@ export const useSendVerificationCodeMutation = (
 
         if (data.status === 200) {
           showFeedbackModalWithContent("본인인증이 완료되었습니다.")
-          onSuccessCb()
+          queryClient.setQueryData(
+            ["SignUpValidation", "phoneVerificationCheck"],
+            true
+          )
         }
       },
       onError: () => {
@@ -32,11 +35,12 @@ export const useSendVerificationCodeMutation = (
     }
   )
 
-  const sendVerificationCodeMutateAsync = async () => {
-    if (isLoading) return
-
-    await mutateAsync()
+  const resetPhoneVerificationCheck = () => {
+    queryClient.setQueryData(
+      ["SignUpValidation", "phoneVerificationCheck"],
+      false
+    )
   }
 
-  return { isLoading, sendVerificationCodeMutateAsync }
+  return { isLoading, mutateAsync, resetPhoneVerificationCheck }
 }

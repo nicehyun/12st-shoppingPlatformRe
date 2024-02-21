@@ -1,14 +1,11 @@
-import { ISignUpRequest } from "../types/signUp"
+import { POSTResponse } from "@/features/common/types/fetch"
 
 export const signUpAPI = {
-  signUp: async (signUpProps: ISignUpRequest) => {
+  signUp: async (formData: FormData): Promise<POSTResponse> => {
     try {
       const response = await fetch(`/api/auth/signUp`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(signUpProps),
+        body: formData,
       })
 
       return response.json()

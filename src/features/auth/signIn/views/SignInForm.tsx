@@ -5,15 +5,39 @@ import { FaRegArrowAltCircleLeft } from "react-icons/fa"
 import { useSignInMutaion } from "../hooks/useSIgnInMutaion"
 import Input from "@/features/common/views/Input"
 import LoadingButton from "@/features/common/views/LoadingButton"
+import { useFeedbackModal } from "@/features/common/hooks/useFeedbackModal"
+import { parsedEmailAndPasswordFromSignInFormData } from "../model/formData"
+import { validCheckOfSignIn } from "../model/validCheck"
 
 const SignInForm = () => {
   const { routeTo } = useNavigations()
 
-  const { isLoading, signInMutateAsync } = useSignInMutaion()
+  const { isLoading, mutateAsync } = useSignInMutaion()
+  const { showFeedbackModalWithContent } = useFeedbackModal()
+
+  const handleSignInSubmit = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault()
+    const formData = new FormData(event.currentTarget)
+
+    const { email, password } =
+      parsedEmailAndPasswordFromSignInFormData(formData)
+
+    const { isValid, message } = validCheckOfSignIn(email, password)
+
+    if (!isValid && message) {
+      showFeedbackModalWithContent(message)
+
+      return
+    }
+
+    await mutateAsync({ email, password })
+  }
 
   return (
     <form
-      onSubmit={signInMutateAsync}
+      onSubmit={handleSignInSubmit}
       className={`flexCenter flex-col mb-[50px]`}
     >
       <Button

@@ -2,25 +2,25 @@
 
 import { ChangeEvent, useEffect } from "react"
 import { useUserInput } from "../../../common/hooks/useUserInput"
-import { emailValidator } from "../utils/validation"
+import { emailValidator } from "../models/validation"
 import SignUpFeedback from "../../../common/views/Feedback"
 import SignUpInputLayout from "./SignUpInputLayout"
 import SignUpVerificationInput from "./SignUpVerificationInput"
 import { useEmailDuplicationCheckMutation } from "../hooks/useEmailDuplicationCheckMutaion"
+import { useAppSelector } from "@/redux/hooks"
+import { selectSignUpStepState } from "@/redux/features/signUpSlice"
+import SignUpStepLayout from "./SignUpStepLayout"
+import { useQueryClient } from "@tanstack/react-query"
 
-export interface ISignUpEmailInput {
-  activeStep: number
-  isVerificationChecked: boolean
-  checkEmailDuplication: () => void
-  resetEmailDuplicateCheck: () => void
-}
+const SignUpEmailInput = () => {
+  const signUpStep = useAppSelector(selectSignUpStepState)
 
-const SignUpEmailInput = ({
-  resetEmailDuplicateCheck,
-  checkEmailDuplication,
-  isVerificationChecked,
-  activeStep,
-}: ISignUpEmailInput) => {
+  const queryClient = useQueryClient()
+  const isEmailDuplicationCheck = (queryClient.getQueryData([
+    "SignUpValidation",
+    "emailDuplicationCheck",
+  ]) ?? false) as boolean
+
   const {
     value: emailInputValue,
     handleValueChange: handleEmailInputValueChange,
@@ -30,51 +30,56 @@ const SignUpEmailInput = ({
     reset,
   } = useUserInput(emailValidator)
 
-  const handleEmailAvailableCb = () => {
-    checkEmailDuplication()
-  }
-
-  const { emailDuplicationCheckMutateAsync, isLoading } =
-    useEmailDuplicationCheckMutation(emailInputValue, handleEmailAvailableCb)
+  const { mutateAsync, isLoading, resetEmailDuplicationCheck } =
+    useEmailDuplicationCheckMutation(emailInputValue)
 
   const handleEmailInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    resetEmailDuplicateCheck()
+    resetEmailDuplicationCheck()
     handleEmailInputValueChange(event)
   }
 
+  const handleEmailDuplicationCheck = async () => {
+    if (isLoading) return
+
+    await mutateAsync()
+  }
+
   useEffect(() => {
-    if (activeStep === 0) {
+    if (signUpStep === 0) {
       reset()
-      resetEmailDuplicateCheck()
+      resetEmailDuplicationCheck()
       return
     }
-  }, [activeStep])
+  }, [signUpStep])
 
   return (
-    <SignUpInputLayout headingText="로그인에 사용할 이메일을 입력해주세요">
-      <SignUpVerificationInput
-        placeholder="example@example.com"
-        id="signUp-email"
-        buttonContent={isVerificationChecked ? "확인완료" : "중복확인"}
-        isChecked={isVerificationChecked}
-        isDisabledButton={!isEmailValid || isVerificationChecked}
-        inputValue={emailInputValue}
-        onBlurInput={handleEmailInputBlur}
-        onChangeInputValue={handleEmailInputChange}
-        onClickVerificationButton={emailDuplicationCheckMutateAsync}
-        isShowFeedback={hasErrorEmail}
-        isLoading={isLoading}
-      />
+    <SignUpStepLayout
+      isButtonDisabled={!isEmailValid || !isEmailDuplicationCheck}
+    >
+      <SignUpInputLayout headingText="로그인에 사용할 이메일을 입력해주세요">
+        <SignUpVerificationInput
+          placeholder="example@example.com"
+          id="signUp-email"
+          buttonContent={isEmailDuplicationCheck ? "확인완료" : "중복확인"}
+          isDisabledButton={isEmailDuplicationCheck}
+          inputValue={emailInputValue}
+          onBlurInput={handleEmailInputBlur}
+          onChangeInputValue={handleEmailInputChange}
+          onClickVerificationButton={handleEmailDuplicationCheck}
+          isShowFeedback={hasErrorEmail}
+          isLoading={isLoading}
+        />
 
-      <SignUpFeedback
-        isValid={isEmailValid}
-        content="example@example.com 형식의 이메일"
-      />
-      <SignUpFeedback
-        isValid={isVerificationChecked}
-        content="이메일 중복 검사"
-      />
-    </SignUpInputLayout>
+        <SignUpFeedback
+          isValid={isEmailValid}
+          content="example@example.com 형식의 이메일"
+        />
+        <SignUpFeedback
+          isValid={isEmailDuplicationCheck}
+          content="이메일 중복 검사"
+        />
+      </SignUpInputLayout>
+    </SignUpStepLayout>
   )
 }
 

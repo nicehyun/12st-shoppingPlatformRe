@@ -24,10 +24,3 @@ export type CheckoutList = {
   checkoutDate: string
   checkoutNumber: string
 }
-
-export type CheckoutClauseCheck = {
-  all: boolean
-  collectionOfUserInfo: boolean
-  provisionOfUserInfo: boolean
-  paymentAgency: boolean
-}

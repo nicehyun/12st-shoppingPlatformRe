@@ -1,51 +1,32 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { RootState } from "../types/store"
 
-export type isValid = {
-  password: boolean
-  name: boolean
-}
-
 type InitialSignUpState = {
-  isValid: isValid
+  activeStep: number
 }
 
 const initialSignUpState: InitialSignUpState = {
-  isValid: { password: false, name: false },
+  activeStep: 0,
 }
 
 const signUpSlice = createSlice({
   name: "signUp",
   initialState: initialSignUpState,
   reducers: {
-    resetSignUpState(state) {
-      state.isValid.password = false
-      state.isValid.name = false
+    nextStep(state) {
+      if (state.activeStep === 4) return
+
+      state.activeStep = state.activeStep + 1
     },
-    validatePassword(state) {
-      state.isValid.password = true
-    },
-    validateName(state) {
-      state.isValid.name = true
-    },
-    resetNameValid(state) {
-      state.isValid.name = false
-    },
-    resetPasswordValid(state) {
-      state.isValid.password = false
+    resetStep(state) {
+      state.activeStep = 0
     },
   },
 })
 
-export const {
-  resetSignUpState,
-  validatePassword,
-  validateName,
-  resetPasswordValid,
-  resetNameValid,
-} = signUpSlice.actions
+export const { nextStep, resetStep } = signUpSlice.actions
 
-export const selectSignUpIsValidState = (state: RootState) =>
-  state.signUp.isValid
+export const selectSignUpStepState = (state: RootState) =>
+  state.signUp.activeStep
 
 export default signUpSlice.reducer

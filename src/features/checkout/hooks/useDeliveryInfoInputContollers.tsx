@@ -2,7 +2,7 @@ import {
   additionalAddressValidator,
   nameValidator,
   phoneValidator,
-} from "@/features/auth/signUp/utils/validation"
+} from "@/features/auth/signUp/models/validation"
 import { useGetDeliveryInfoQuery } from "@/features/common/hooks/useGetDeliveryInfoQuery"
 import { usePostCodeModal } from "@/features/common/hooks/usePostCodeModal"
 import { useUserInput } from "@/features/common/hooks/useUserInput"

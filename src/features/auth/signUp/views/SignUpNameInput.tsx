@@ -1,19 +1,15 @@
-import { resetNameValid, validateName } from "@/redux/features/signUpSlice"
-import { useAppDispatch } from "@/redux/hooks"
+import { selectSignUpStepState } from "@/redux/features/signUpSlice"
+import { useAppSelector } from "@/redux/hooks"
 import { useEffect } from "react"
 import { useUserInput } from "../../../common/hooks/useUserInput"
-import { nameValidator } from "../utils/validation"
+import { nameValidator } from "../models/validation"
 import SignUpFeedback from "../../../common/views/Feedback"
 import SignUpInput from "./SignUpInput"
 import SignUpInputLayout from "./SignUpInputLayout"
+import SignUpStepLayout from "./SignUpStepLayout"
 
-interface ISignUpNameInput {
-  activeStep: number
-}
-
-const SignUpNameInput = ({ activeStep }: ISignUpNameInput) => {
-  const dispatch = useAppDispatch()
-
+const SignUpNameInput = () => {
+  const signUpStep = useAppSelector(selectSignUpStepState)
   const {
     value: nameInputValue,
     handleValueChange: handleNameInputValueChange,
@@ -24,32 +20,26 @@ const SignUpNameInput = ({ activeStep }: ISignUpNameInput) => {
   } = useUserInput(nameValidator)
 
   useEffect(() => {
-    if (activeStep === 0) {
+    if (signUpStep === 0) {
       reset()
       return
     }
-  }, [activeStep])
+  }, [signUpStep])
 
-  useEffect(() => {
-    dispatch(resetNameValid())
-
-    if (isNameValid) {
-      dispatch(validateName())
-      return
-    }
-  }, [isNameValid, dispatch])
   return (
-    <SignUpInputLayout headingText="이름을 입력해주세요">
-      <SignUpInput
-        id="signUp-name"
-        classNames="mt-[10px]"
-        inputValue={nameInputValue}
-        onChangeInputValue={handleNameInputValueChange}
-        onBlurInput={handleNameInputBlur}
-        isShowFeedback={hasErrorName}
-      />
-      <SignUpFeedback isValid={isNameValid} content=" 2~4글자의 한글" />
-    </SignUpInputLayout>
+    <SignUpStepLayout isButtonDisabled={!isNameValid}>
+      <SignUpInputLayout headingText="이름을 입력해주세요">
+        <SignUpInput
+          id="signUp-name"
+          classNames="mt-[10px]"
+          inputValue={nameInputValue}
+          onChangeInputValue={handleNameInputValueChange}
+          onBlurInput={handleNameInputBlur}
+          isShowFeedback={hasErrorName}
+        />
+        <SignUpFeedback isValid={isNameValid} content=" 2~4글자의 한글" />
+      </SignUpInputLayout>
+    </SignUpStepLayout>
   )
 }
 

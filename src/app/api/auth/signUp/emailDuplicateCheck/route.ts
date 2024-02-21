@@ -1,4 +1,4 @@
-import { emailValidator } from "@/features/auth/signUp/utils/validation"
+import { emailValidator } from "@/features/auth/signUp/models/validation"
 import { NextResponse } from "next/server"
 
 interface RequestBody {

@@ -2,7 +2,7 @@ import {
   additionalAddressValidator,
   nameValidator,
   phoneValidator,
-} from "@/features/auth/signUp/utils/validation"
+} from "@/features/auth/signUp/models/validation"
 
 export const parseAddressFromCheckoutFormEvent = (formData: FormData) => {
   return {

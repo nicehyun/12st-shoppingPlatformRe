@@ -1,50 +1,39 @@
-import { UserInfo } from "@/features/common/types/user"
-import {
-  emailValidator,
-  nameValidator,
-  passwordValidator,
-  phoneValidator,
-} from "@/features/auth/signUp/utils/validation"
 import bcrypt from "bcrypt"
 import { NextResponse } from "next/server"
-import { ISignUpRequest } from "@/features/auth/signUp/types/signUp"
+import {
+  parseClauseCheckedFromSignUpFormData,
+  parseEmailFromSignUpFormData,
+  parseNameFromSignUpFormData,
+  parsePasswordFromSignUpFormData,
+  parsePhoneNumberFromSignUpFormData,
+  validCheckFromSignUpFormData,
+} from "@/features/auth/signUp/models/formData"
 
 export async function POST(request: Request) {
-  const signUpRequest: ISignUpRequest = await request.json()
-  const { userInfo, verification } = signUpRequest
+  const formData = await request.formData()
 
-  const { email, name, password, phone } = userInfo
-  const { isEmailChecked, isPhoneChecked } = verification
+  const { isValid, message } = validCheckFromSignUpFormData(formData)
 
-  if (
-    !phoneValidator(phone) ||
-    !nameValidator(name) ||
-    !emailValidator(email) ||
-    !passwordValidator(password)
-  ) {
+  if (!isValid) {
     return NextResponse.json({
       status: 401,
-      error: "올바른 회원가입 정보가 아닙니다. 다시 입력해주세요.",
+      error: message,
     })
   }
 
-  if (!isEmailChecked) {
-    return NextResponse.json({
-      status: 401,
-      error: "이메일 중복 검사를 해주세요.",
-    })
-  }
+  const { email } = parseEmailFromSignUpFormData(formData)
+  const { password } = parsePasswordFromSignUpFormData(formData)
+  const { isMarketingClauseCheck } =
+    parseClauseCheckedFromSignUpFormData(formData)
+  const { name } = parseNameFromSignUpFormData(formData)
+  const { phone } = parsePhoneNumberFromSignUpFormData(formData)
 
-  if (!isPhoneChecked) {
-    return NextResponse.json({
-      status: 401,
-      error: "휴대폰 본인인증을 해주세요.",
-    })
-  }
-
-  const userInfoWithBcryptedPassword: UserInfo = {
-    ...userInfo,
-    password: await bcrypt.hash(userInfo.password, 10),
+  const userInfoWithBcryptedPassword = {
+    marketingClause: isMarketingClauseCheck,
+    email,
+    name,
+    phone,
+    password: await bcrypt.hash(password, 10),
   }
 
   try {

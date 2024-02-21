@@ -3,12 +3,13 @@ import * as bcrypt from "bcrypt"
 import {
   emailValidator,
   passwordValidator,
-} from "@/features/auth/signUp/utils/validation"
+} from "@/features/auth/signUp/models/validation"
 import { NextRequest, NextResponse } from "next/server"
 import {
   generateAccessToken,
   generateRefreshToken,
 } from "@/features/common/utils/jwt"
+import { validCheckOfSignIn } from "@/features/auth/signIn/model/validCheck"
 
 interface RequestBody {
   email: string
@@ -21,8 +22,14 @@ export async function POST(request: NextRequest) {
   const email = body.email
   const requestPassword = body.password
 
-  if (!emailValidator(email)) return
-  if (!passwordValidator(requestPassword)) return
+  const { isValid, message } = validCheckOfSignIn(email, requestPassword)
+
+  if (!isValid && message) {
+    return NextResponse.json({
+      status: 401,
+      error: message,
+    })
+  }
 
   try {
     const response = await fetch(

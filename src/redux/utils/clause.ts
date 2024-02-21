@@ -1,10 +1,15 @@
-import { CheckoutClauseCheck } from "@/features/checkout/types/checkout"
-
 type CheckoutState = {
   age: boolean
   marketing: boolean
   privacy: boolean
   term: boolean
+}
+
+type CheckoutClauseCheck = {
+  all: boolean
+  collectionOfUserInfo: boolean
+  provisionOfUserInfo: boolean
+  paymentAgency: boolean
 }
 
 export const checkToAllAgreeClause = (clauseState: CheckoutState) => {

@@ -1,12 +1,7 @@
-import {
-  CheckoutClauseCheck,
-  CheckoutList,
-} from "@/features/checkout/types/checkout"
-import { AmountCoupon, RateCoupon } from "@/features/common/types/coupon"
+import { CheckoutList } from "@/features/checkout/types/checkout"
 import { POSTResponse } from "@/features/common/types/fetch"
-import { Product, Products } from "@/features/common/types/product"
+import { Product } from "@/features/common/types/product"
 import { validateAuthorization } from "@/features/common/utils/error"
-import { FormEvent } from "react"
 
 export const checkoutAPI = {
   getCheckoutList: async (

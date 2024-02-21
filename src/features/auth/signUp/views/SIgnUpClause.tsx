@@ -2,30 +2,27 @@
 
 import ClauseCheckbox from "@/features/common/views/ClauseCheckbox"
 import { showBasicModal } from "@/redux/features/modalSlice"
+import { nextStep, selectSignUpStepState } from "@/redux/features/signUpSlice"
 
-import { useAppDispatch } from "@/redux/hooks"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import SignUpStepButton from "./SignUpStepButton"
+import { useSignUpClasue } from "../hooks/useSignUpClasue"
+import { useEffect } from "react"
+import SignUpStepLayout from "./SignUpStepLayout"
 
-export interface ISignUpClause {
-  clause: {
-    all: boolean
-    age: boolean
-    term: boolean
-    privacy: boolean
-    marketing: boolean
-  }
-  toggleClauseCheck: {
-    toggleAllCheck: () => void
-    toggleAgeClauseCheck: () => void
-    toggleTermClauseCheck: () => void
-    togglePrivacyClauseCheck: () => void
-    toggleMarketingClauseCheck: () => void
-  }
-}
-
-const SignUpClause = ({ clause, toggleClauseCheck }: ISignUpClause) => {
+const SignUpClause = () => {
   const dispatch = useAppDispatch()
+  const signUpStep = useAppSelector(selectSignUpStepState)
 
-  const { all, age, marketing, privacy, term } = clause
+  const { checkedClaseState, toggleClauseCheck, resetClauseCheck } =
+    useSignUpClasue()
+
+  const {
+    age: isAgeClauseCheck,
+    term: isTermClauseCheck,
+    privacy: isPrivacyClauseCheck,
+    marketing: isMarketingClauseCheck,
+  } = checkedClaseState
 
   const {
     toggleAllCheck,
@@ -64,19 +61,30 @@ const SignUpClause = ({ clause, toggleClauseCheck }: ISignUpClause) => {
     )
   }
 
+  useEffect(() => {
+    if (signUpStep === 0) {
+      resetClauseCheck()
+    }
+  }, [signUpStep])
+
   return (
     <div className="flex flex-col px-[10px] py-[20px]">
       <h3 className="text-[16px] pt-[18px] font-bold tracking-[1.5px] mr-[80px] mb-[50px]">
         12st 이용약관 동의
       </h3>
 
-      <div className="flex-grow">
+      <SignUpStepLayout
+        isButtonDisabled={
+          !isAgeClauseCheck || !isPrivacyClauseCheck || !isTermClauseCheck
+        }
+        buttonContent="동의하고 가입하기"
+      >
         <ClauseCheckbox
           clauseType="signUp-clause-all"
           label="모두 동의 (선택 정보 포함)"
           isClause={false}
           classNames="border-b-[1px] border-lightBlack"
-          isChecked={all}
+          isChecked={isAgeClauseCheck}
           peer="peer/all"
           peerChecked={{
             borderColor: "peer-checked/all:after:border-lightRed",
@@ -88,7 +96,7 @@ const SignUpClause = ({ clause, toggleClauseCheck }: ISignUpClause) => {
           clauseType="age"
           label="만 14세 이상입니다"
           isClause={false}
-          isChecked={age}
+          isChecked={isAgeClauseCheck}
           isRequired={true}
           peer="peer/age"
           peerChecked={{
@@ -101,7 +109,7 @@ const SignUpClause = ({ clause, toggleClauseCheck }: ISignUpClause) => {
           clauseType="term"
           label="이용약관 동의"
           isClause={true}
-          isChecked={term}
+          isChecked={isTermClauseCheck}
           isRequired={true}
           peer="peer/term"
           peerChecked={{
@@ -115,7 +123,7 @@ const SignUpClause = ({ clause, toggleClauseCheck }: ISignUpClause) => {
           clauseType="privacy"
           label="개인정보 수집 및 이용 동의"
           isClause={true}
-          isChecked={privacy}
+          isChecked={isPrivacyClauseCheck}
           isRequired={true}
           peer="peer/privacy"
           peerChecked={{
@@ -129,7 +137,7 @@ const SignUpClause = ({ clause, toggleClauseCheck }: ISignUpClause) => {
           clauseType="marketing"
           label="광고성 정보 수신 및 마케팅 활용 동의"
           isClause={true}
-          isChecked={marketing}
+          isChecked={isMarketingClauseCheck}
           isRequired={false}
           peer="peer/marketing"
           peerChecked={{
@@ -138,7 +146,7 @@ const SignUpClause = ({ clause, toggleClauseCheck }: ISignUpClause) => {
           onClickClauseLabel={toggleMarketingClauseCheck}
           onClickDetailClause={handleMarketingClauseClick}
         />
-      </div>
+      </SignUpStepLayout>
     </div>
   )
 }

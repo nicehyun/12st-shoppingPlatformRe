@@ -1,151 +1,62 @@
 "use client"
 
-import Stage, { IStage } from "@/features/common/views/Stage"
-import {
-  resetSignUpState,
-  selectSignUpIsValidState,
-} from "@/redux/features/signUpSlice"
-import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { useEffect, useState } from "react"
-import { useSignUpClasue } from "../hooks/useSignUpClasue"
-import useSignUpVerificationCheck from "../hooks/useSignUpVerificationCheck"
-import SignUpClause, { ISignUpClause } from "./SIgnUpClause"
-import { ISignUpEmailInput } from "./SignUpEmailInput"
-import { ISignUpPhoneVerificationInput } from "./SignUpPhoneVerificationInput"
+import { resetStep } from "@/redux/features/signUpSlice"
+import { useAppDispatch } from "@/redux/hooks"
+import { useEffect } from "react"
+import SignUpStage from "./SignUpStage"
+import { validCheckFromSignUpFormData } from "../models/formData"
+
+import { useFeedbackModal } from "@/features/common/hooks/useFeedbackModal"
+import { useQueryClient } from "@tanstack/react-query"
 import { useSignUpMutation } from "../hooks/useSignUpMutation"
-import dynamic from "next/dynamic"
-
-const DynamicSignUpPhoneVerificationInput = dynamic(
-  () => import("./SignUpPhoneVerificationInput"),
-  { ssr: false }
-)
-
-const DynamicSignUpEmailInput = dynamic(() => import("./SignUpEmailInput"), {
-  ssr: false,
-})
-
-const DynamicSignUpNameInput = dynamic(() => import("./SignUpNameInput"), {
-  ssr: false,
-})
-const DynamicSignUpPasswordInput = dynamic(
-  () => import("./SignUpPasswordInput"),
-  { ssr: false }
-)
 
 const SignUpForm = () => {
+  const queryClient = useQueryClient()
   const dispatch = useAppDispatch()
-
-  const [activeStep, setActiveStep] = useState(0)
-  const { checkedClaseState, toggleClauseCheck, resetClauseCheck } =
-    useSignUpClasue()
-
-  const {
-    checkEmailDuplication,
-    checkPhoneVerification,
-    verificationCheckedState,
-    resetEmailDuplicateCheck,
-    resetPhoneVerificationCheck,
-  } = useSignUpVerificationCheck()
-
-  const signUpEmailInputProps: ISignUpEmailInput = {
-    activeStep,
-    isVerificationChecked: verificationCheckedState.email,
-    checkEmailDuplication,
-    resetEmailDuplicateCheck,
-  }
-
-  const signUpPhoneVerificationInputProps: ISignUpPhoneVerificationInput = {
-    activeStep,
-    isVerificationChecked: verificationCheckedState.phone,
-    checkPhoneVerification,
-    resetEmailDuplicateCheck,
-  }
-
-  const signUpClauseProps: ISignUpClause = {
-    clause: checkedClaseState,
-    toggleClauseCheck: toggleClauseCheck,
-  }
-
-  const {
-    age: isAgeClauseCheck,
-    term: isTermClauseCheck,
-    privacy: isPrivacyClauseCheck,
-    marketing: isMarketingClauseCheck,
-  } = checkedClaseState
-
-  const { password: isPasswordValid, name: isNameValid } = useAppSelector(
-    selectSignUpIsValidState
-  )
-
-  const { isLoading: isSignUpLoading, signUpMuatateAsync } = useSignUpMutation({
-    clause: {
-      isAgeClauseChecked: isAgeClauseCheck,
-      isMarketingClauseChecked: isMarketingClauseCheck,
-      isPrivacyClauseChecked: isPrivacyClauseCheck,
-      isTermClauseChecked: isTermClauseCheck,
-    },
-    verification: {
-      isEmailChecked: verificationCheckedState.email,
-      isPhoneChecked: verificationCheckedState.phone,
-    },
-  })
-
-  const handleNextStepButtonClick = () => {
-    if (activeStep === 4) return
-
-    setActiveStep((prev) => prev + 1)
-  }
-
-  const handleBackStepButtonClick = () => {
-    setActiveStep(0)
-    resetEmailDuplicateCheck()
-    resetPhoneVerificationCheck()
-    resetClauseCheck()
-  }
+  const { isLoading, mutateAsync } = useSignUpMutation()
+  const { showFeedbackModalWithContent } = useFeedbackModal()
 
   const handleSignUpSubmit = async (
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault()
 
-    await signUpMuatateAsync(event)
-    dispatch(resetSignUpState())
-    setActiveStep(0)
-    resetClauseCheck()
-  }
+    if (isLoading) return
 
-  const stageProps: IStage = {
-    activeStep: activeStep,
-    stages: ["약관동의", "이메일", "비밀번호", "이름", "본인인증"],
-    stageContents: [
-      <SignUpClause key="clause" {...signUpClauseProps} />,
-      <DynamicSignUpEmailInput key="email" {...signUpEmailInputProps} />,
-      <DynamicSignUpPasswordInput key="password" activeStep={activeStep} />,
-      <DynamicSignUpNameInput key="name" activeStep={activeStep} />,
-      <DynamicSignUpPhoneVerificationInput
-        key="phone"
-        {...signUpPhoneVerificationInputProps}
-      />,
-    ],
+    const formData = new FormData(event.currentTarget)
 
-    firstButtonText: "동의하고 가입하기",
-    finishButtonText: "회원가입",
-    disabledNextButton: [
-      !isAgeClauseCheck || !isPrivacyClauseCheck || !isTermClauseCheck,
-      !verificationCheckedState.email,
-      !isPasswordValid,
-      !isNameValid,
-      !verificationCheckedState.phone,
-      isSignUpLoading,
-    ],
-    onClickBackButton: handleBackStepButtonClick,
-    onClickNextButton: handleNextStepButtonClick,
-    isFinishLoading: isSignUpLoading,
+    const isEmailDuplicationCheck = (queryClient.getQueryData([
+      "SignUpValidation",
+      "emailDuplicationCheck",
+    ]) ?? false) as boolean
+
+    const isPhoneVerificationCheck = (queryClient.getQueryData([
+      "SignUpValidation",
+      "phoneVerificationCheck",
+    ]) ?? false) as boolean
+
+    formData.append(
+      "emailDuplicationCheck",
+      JSON.stringify(isEmailDuplicationCheck)
+    )
+    formData.append(
+      "phoneVerificationCheck",
+      JSON.stringify(isPhoneVerificationCheck)
+    )
+
+    const { isValid, message } = validCheckFromSignUpFormData(formData)
+
+    if (!isValid && message !== undefined) {
+      showFeedbackModalWithContent(message)
+      return
+    }
+
+    await mutateAsync(formData)
   }
 
   useEffect(() => {
     return () => {
-      dispatch(resetSignUpState())
+      dispatch(resetStep())
     }
   }, [dispatch])
 
@@ -154,9 +65,10 @@ const SignUpForm = () => {
       onSubmit={handleSignUpSubmit}
       className="sm:w-[400px] md:w-[400px] w-4/5 max-w-[800px] mx-auto h-[500px]"
     >
+      <button type="submit">test</button>
       <h2 className="mb-[20px] text-[20px] font-bold text-center">회원가입</h2>
 
-      <Stage {...stageProps} />
+      <SignUpStage isSignUpLoading={isLoading} />
     </form>
   )
 }
