@@ -32,15 +32,33 @@ export const parseProductInfoFromFormData = (formData: FormData) => {
 export const parsePaymentString = (paymentString: string) => {
   const [payment, credit, period] = paymentString.split(" - ")
 
+  const paymentList = [
+    { label: "신용/체크카드", value: "credit" },
+    { label: "토스페이", value: "tosspay" },
+    { label: "네이버페이", value: "naverpay" },
+    { label: "카카오페이", value: "kakaopay" },
+    { label: "삼성페이", value: "samsungpay" },
+    { label: "페이코", value: "payco" },
+    { label: "SSG 페이", value: "SSGpay" },
+    { label: "무통장입금", value: "deposit" },
+  ]
+
+  const findPaymentMethodByValue = (
+    paymentList: { label: string; value: string }[],
+    value: string
+  ) => {
+    return paymentList.find((paymentMethod) => paymentMethod.value === value)
+  }
+
   if (!credit && !period) {
     return {
-      selectedPayment: payment,
+      selectedPayment: findPaymentMethodByValue(paymentList, payment),
       creditName: credit,
       period,
     }
   }
 
-  return { selectedPayment: payment }
+  return { selectedPayment: findPaymentMethodByValue(paymentList, payment) }
 }
 
 export const parseCheckoutInfoFromFormData = (formData: FormData) => {

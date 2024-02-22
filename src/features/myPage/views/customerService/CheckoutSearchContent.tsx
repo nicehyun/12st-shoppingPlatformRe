@@ -19,7 +19,9 @@ const CheckoutSearchContent = () => {
     : null
 
   const selectedCheckoutPaymentList = [
-    getKoreanPaymentMethod(selectedCheckoutInfo.payment?.selectedPayment ?? ""),
+    getKoreanPaymentMethod(
+      selectedCheckoutInfo.payment?.selectedPayment.value ?? ""
+    ),
     selectedCheckoutInfo.payment?.creditName,
     selectedCheckoutInfo.payment?.period,
   ]
