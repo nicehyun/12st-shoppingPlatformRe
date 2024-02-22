@@ -1,4 +1,4 @@
-import { decodeCategoryPaths } from "@/features/common/utils/segment"
+import { decodeCategoryPaths } from "@/features/common/models/segment"
 import { NextRequest, NextResponse } from "next/server"
 
 export async function GET(

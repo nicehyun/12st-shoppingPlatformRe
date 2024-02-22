@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { formatTime } from "../utils/time"
+import { formatTime } from "../models/time"
 
 export interface ITimer {
   seconds: number

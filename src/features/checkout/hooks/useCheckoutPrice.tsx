@@ -23,9 +23,7 @@ const useCheckoutPrice = () => {
       : 0
 
   const totalDeliveryFee = checkoutPendingProductList.reduce(
-    (accumulator, product) => {
-      return accumulator + product.deliveryFree
-    },
+    (accumulator, product) => accumulator + product.deliveryFree,
     0
   )
 

@@ -1,4 +1,4 @@
-import { parseAndToSlice } from "@/features/common/utils/text"
+import { parseAndToSlice } from "@/features/common/models/text"
 import Link from "next/link"
 
 interface IThirdCategoryLinks {

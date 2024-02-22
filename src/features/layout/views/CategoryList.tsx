@@ -4,7 +4,7 @@ import { useGetCategoriesQuery } from "../../categoryManagement/hooks/useGetCate
 import { Fragment } from "react"
 import Link from "next/link"
 import { Categories } from "../types/category"
-import { parseAndToSlice } from "@/features/common/utils/text"
+import { parseAndToSlice } from "@/features/common/models/text"
 import { useAppDispatch } from "@/redux/hooks"
 import { hideCategory } from "@/redux/features/categorySlice"
 

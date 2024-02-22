@@ -1,4 +1,4 @@
-import { parseAndToSlice } from "@/features/common/utils/text"
+import { parseAndToSlice } from "@/features/common/models/text"
 import { Categories } from "@/features/layout/types/category"
 import Link from "next/link"
 

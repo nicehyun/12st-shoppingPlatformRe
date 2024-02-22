@@ -1,5 +1,3 @@
-import { CheckoutList } from "@/features/checkout/types/checkout"
-
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { checkoutAPI } from "../models/checkoutAPI"
 import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
@@ -35,11 +33,7 @@ export const useGetCheckoutListQuery = () => {
     }
   )
 
-  const checkoutList = (
-    !isFeedbackError(data) && data ? data : []
-  ) as CheckoutList[]
+  const checkoutList = !isFeedbackError(data) && data ? data : []
 
-  const currentCheckoutList = checkoutList[0]
-
-  return { checkoutList, currentCheckoutList, isLoading }
+  return { checkoutList, isLoading }
 }

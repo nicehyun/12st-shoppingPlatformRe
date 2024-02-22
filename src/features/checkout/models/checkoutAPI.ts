@@ -6,7 +6,7 @@ import { validateAuthorization } from "@/features/common/utils/error"
 export const checkoutAPI = {
   getCheckoutList: async (
     accessToken: string | null | undefined
-  ): Promise<CheckoutList | POSTResponse> => {
+  ): Promise<CheckoutList[] | POSTResponse> => {
     try {
       const { authorization } = validateAuthorization(accessToken)
 

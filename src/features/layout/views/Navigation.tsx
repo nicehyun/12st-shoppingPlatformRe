@@ -13,7 +13,7 @@ import {
   BiSolidUser,
 } from "react-icons/bi"
 import { ROUTE, useNavigations } from "@/features/common/hooks/useNavigations"
-import { removeSlashFromPath } from "@/features/common/utils/path"
+import { removeSlashFromPath } from "@/features/common/models/path"
 
 type NavigationActionContent = {
   icon: {

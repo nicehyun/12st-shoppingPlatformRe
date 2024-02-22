@@ -1,6 +1,3 @@
-import Loading from "@/features/common/views/Loading"
-
-import { Suspense } from "react"
 import CheckoutConfirmedController from "./CheckoutConfirmedController"
 import CheckoutConfirmedInfo from "./CheckoutConfirmedInfo"
 
@@ -14,17 +11,7 @@ const CheckoutConfirmed = () => {
         주문이 정상적으로 완료되었습니다
       </p>
 
-      <Suspense
-        fallback={
-          <Loading
-            spinnerSize={{ width: "w-[50px]", height: "h-[50px]" }}
-            height="h-[400px]"
-            isFrame={false}
-          />
-        }
-      >
-        <CheckoutConfirmedInfo />
-      </Suspense>
+      <CheckoutConfirmedInfo />
 
       <CheckoutConfirmedController />
     </div>

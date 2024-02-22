@@ -1,6 +1,6 @@
 import { bestProductListAPI } from "@/features/bestProductList/models/bestProductListAPI"
 import BestProductListSection from "@/features/bestProductList/views/BestProductListSection"
-import { decodeCategoryPaths } from "@/features/common/utils/segment"
+import { decodeCategoryPaths } from "@/features/common/models/segment"
 
 import { getQueryClient } from "@/tanstackQuery/utils/getQueryClient"
 import Hydrate from "@/tanstackQuery/utils/hydrateOnClient"

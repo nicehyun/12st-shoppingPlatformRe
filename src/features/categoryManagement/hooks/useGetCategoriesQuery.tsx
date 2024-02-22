@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query"
 import { useAppDispatch } from "@/redux/hooks"
 import { showFeedbackModal } from "@/redux/features/modalSlice"
 import { useNavigations } from "@/features/common/hooks/useNavigations"
-import { getAfterEquals, parseSliceToAnd } from "@/features/common/utils/text"
+import { getAfterEquals, parseSliceToAnd } from "@/features/common/models/text"
 import { categoryAPI } from "@/features/categoryManagement/models/categoryAPI"
 
 export const useGetCategoriesQuery = () => {

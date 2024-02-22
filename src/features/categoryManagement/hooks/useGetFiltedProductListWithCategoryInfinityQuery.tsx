@@ -3,7 +3,7 @@ import { useProductListInfinityQuery } from "@/features/common/hooks/useProductL
 import { useNavigations } from "@/features/common/hooks/useNavigations"
 import { useQueryClient } from "@tanstack/react-query"
 import { InfinityProductResponse } from "@/features/common/types/product"
-import { decodeCategoryPaths } from "@/features/common/utils/segment"
+import { decodeCategoryPaths } from "@/features/common/models/segment"
 
 export const useGetFiltedProductListWithCategoryInfinityQuery = () => {
   const { pathname } = useNavigations()

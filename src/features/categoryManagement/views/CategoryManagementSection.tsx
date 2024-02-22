@@ -2,7 +2,7 @@ import SectionTitle from "@/features/myPage/views/SectionTitle"
 import SecondCategories from "@/features/bestProductList/views/SecondCategories"
 import ThirdCategories from "@/features/bestProductList/views/ThirdCategories"
 import FiltedProcutList from "./FiltedProcutList"
-import { decodeCategoryPaths } from "@/features/common/utils/segment"
+import { decodeCategoryPaths } from "@/features/common/models/segment"
 
 interface ICategoryManagement {
   categoriesPath: string[]

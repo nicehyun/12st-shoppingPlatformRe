@@ -1,6 +1,6 @@
 import { categoryAPI } from "@/features/categoryManagement/models/categoryAPI"
 import CategoryManagementSection from "@/features/categoryManagement/views/CategoryManagementSection"
-import { decodeCategoryPaths } from "@/features/common/utils/segment"
+import { decodeCategoryPaths } from "@/features/common/models/segment"
 import { getQueryClient } from "@/tanstackQuery/utils/getQueryClient"
 import Hydrate from "@/tanstackQuery/utils/hydrateOnClient"
 import { dehydrate } from "@tanstack/react-query"
