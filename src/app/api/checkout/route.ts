@@ -121,17 +121,17 @@ export async function POST(request: NextRequest) {
   const { creditName, payment, period } =
     parsePaymentFromCheckoutFormEvent(formData)
 
-  const parsedPayment = JSON.parse(payment)
+  console.log(payment)
 
   const checkoutPayment =
-    parsedPayment.value === "credit"
+    payment.value === "credit"
       ? {
-          selectedPayment: parsedPayment.value,
+          selectedPayment: payment.value,
           creditName,
           period,
         }
       : {
-          selectedPayment: parsedPayment,
+          selectedPayment: payment,
         }
 
   const updatedCheckoutList = {

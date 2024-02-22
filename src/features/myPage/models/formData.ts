@@ -30,7 +30,6 @@ export const parseProductInfoFromFormData = (formData: FormData) => {
 }
 
 export const parsePaymentString = (paymentString: string) => {
-  console.log(paymentString)
   const [payment, credit, period] = paymentString.split(" - ")
 
   if (!credit && !period) {

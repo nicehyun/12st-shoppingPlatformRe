@@ -6,7 +6,6 @@ import Loading from "@/features/common/views/Loading"
 import { useEffect } from "react"
 import { useAppDispatch } from "@/redux/hooks"
 import { emptyCheckoutPendingProductList } from "@/redux/features/checkoutSlice"
-import { Payment } from "@/features/checkout/views/payment/PaymentButton"
 import { useRecentCheckoutInfo } from "../hooks/useRecentCheckoutInfo"
 import Empty from "@/features/common/views/Empty"
 import { ROUTE } from "@/features/common/hooks/useNavigations"
@@ -15,20 +14,6 @@ const CheckoutConfirmedInfo = () => {
   const dispatch = useAppDispatch()
 
   const { totalPrice, recentCheckoutInfo, isLoading } = useRecentCheckoutInfo()
-
-  const paymentMethods = {
-    tosspay: "토스페이",
-    naverpay: "네이버페이",
-    kakaopay: "카카오페이",
-    samsungpay: "삼성페이",
-    payco: "페이코",
-    SSGpay: "SSG 페이",
-    deposit: "무통장입금",
-  } as const
-
-  const getPaymentContent = (payment: Payment) => {
-    return paymentMethods[payment as keyof typeof paymentMethods]
-  }
 
   useEffect(() => {
     dispatch(emptyCheckoutPendingProductList())
@@ -55,7 +40,7 @@ const CheckoutConfirmedInfo = () => {
 
   const selectPayment =
     recentCheckoutInfo?.payment.creditName ??
-    getPaymentContent(recentCheckoutInfo?.payment.selectedPayment as Payment)
+    recentCheckoutInfo?.payment.selectedPayment.value
   return (
     <section className="border-[1px] border-border bg-white text-black rounded-[5px] shadow">
       <CheckoutConfirmedInfoEl title="결제정보">

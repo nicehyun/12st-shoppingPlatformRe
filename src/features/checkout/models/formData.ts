@@ -45,7 +45,7 @@ export const parseMileFromCheckoutFormEvent = (formData: FormData) => {
 
 export const parsePaymentFromCheckoutFormEvent = (formData: FormData) => {
   return {
-    payment: formData.get("payment") as string,
+    payment: JSON.parse(formData.get("payment") as string),
     creditName: formData.get("credit-select") as string,
     period: formData.get("period-select") as string,
   }

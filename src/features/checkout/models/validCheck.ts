@@ -112,7 +112,7 @@ export const validCheckFromCheckoutFormEvent = (formData: FormData) => {
     }
   }
 
-  if (JSON.parse(payment).value === "credit" && !creditName) {
+  if (payment.value === "credit" && !creditName) {
     return {
       isValid: false,
       message: "카드사를 선택해주세요.",

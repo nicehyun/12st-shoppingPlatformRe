@@ -2,7 +2,7 @@ import { ProductsInCart } from "@/features/cart/types/cart"
 import { AmountCoupon, RateCoupon } from "@/features/common/types/coupon"
 
 export type CheckoutPaymentInfo = {
-  selectedPayment: string
+  selectedPayment: { value: string; label: string }
   creditName?: string
   period?: string
 }

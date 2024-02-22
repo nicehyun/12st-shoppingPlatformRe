@@ -29,7 +29,6 @@ export const myPageAPI = {
     accessToken: string | null | undefined
   ): Promise<POSTResponse> => {
     try {
-      console.log("실행")
       const { authorization } = validateAuthorization(accessToken)
 
       const response = await fetch(
