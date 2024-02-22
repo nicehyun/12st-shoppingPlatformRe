@@ -12,16 +12,46 @@ import CustomerCounselingWriteUserInfoList from "./CustomerCounselingWriteUserIn
 import { useEffect } from "react"
 import { useCustomerCounselingWriteSubmitMutation } from "../../hooks/useCustomerCounselingWriteSubmitMutation"
 import LoadingButton from "@/features/common/views/LoadingButton"
+import { useFeedbackModal } from "@/features/common/hooks/useFeedbackModal"
+import { validCheckCounSelingWrite } from "../../models/validCheck"
 
 const InquiryCustomerCounselingWriteForm = () => {
-  const {
-    customerCounselingWriteSubmitMutateAsync,
-    isLoading,
-    checkoutRelationRadioValueList,
-  } = useCustomerCounselingWriteSubmitMutation()
+  const dispatch = useAppDispatch()
+
+  const { mutateAsync, isLoading } = useCustomerCounselingWriteSubmitMutation()
+
+  const checkoutRelationRadioValueList = [
+    "delivery",
+    "checkout",
+    "cancel",
+    "return",
+    "change",
+    "refund",
+    "deposit",
+  ]
 
   const selectedCsType = useAppSelector(selectSelectedCsType)
-  const dispatch = useAppDispatch()
+  const { showFeedbackModalWithContent } = useFeedbackModal()
+
+  const handleCounselingWriteSubmit = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault()
+    if (isLoading) return
+
+    const formData = new FormData(event.currentTarget)
+
+    formData.append("selectedCsType", selectedCsType as string)
+
+    const { valid, message } = validCheckCounSelingWrite(formData)
+
+    if (!valid && message !== undefined) {
+      showFeedbackModalWithContent(message)
+      return
+    }
+
+    await mutateAsync(formData)
+  }
 
   useEffect(() => {
     return () => {
@@ -31,7 +61,7 @@ const InquiryCustomerCounselingWriteForm = () => {
 
   return (
     <form
-      onSubmit={customerCounselingWriteSubmitMutateAsync}
+      onSubmit={handleCounselingWriteSubmit}
       className="mt-[50px] border-t-[1px] w-full"
     >
       <ul>

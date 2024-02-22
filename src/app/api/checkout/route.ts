@@ -58,9 +58,6 @@ export async function POST(request: NextRequest) {
     })
   }
 
-  const email = verifyAccessToken(accessToken)?.email
-  const id = verifyAccessToken(accessToken)?.id
-
   const formData = await request.formData()
 
   const { isValid, message } = validCheckFromCheckoutFormEvent(formData)
@@ -71,6 +68,9 @@ export async function POST(request: NextRequest) {
       error: message,
     })
   }
+
+  const email = verifyAccessToken(accessToken)?.email
+  const id = verifyAccessToken(accessToken)?.id
 
   const { useMile } = parseMileFromCheckoutFormEvent(formData)
 

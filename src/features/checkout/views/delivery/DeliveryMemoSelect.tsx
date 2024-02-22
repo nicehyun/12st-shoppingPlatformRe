@@ -22,8 +22,6 @@ const DeliveryMemoSelect = () => {
     "직접입력",
   ]
 
-  console.log(selectedValue)
-
   const deliveryMemoSelectProps = {
     id: "deliveryMemo",
     isSelectOpen,

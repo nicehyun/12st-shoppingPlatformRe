@@ -24,7 +24,7 @@ export const deliveryInfoAPI = {
   },
   updateDeliveryInfo: async (
     accessToken: string | null | undefined,
-    updateDeliveryInfo: DeliveryInfo
+    formData: FormData
   ): Promise<POSTResponse> => {
     try {
       const { authorization } = validateAuthorization(accessToken)
@@ -34,11 +34,9 @@ export const deliveryInfoAPI = {
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
             authorization,
           },
-          body: JSON.stringify({ updateDeliveryInfo }),
-          next: { revalidate: 0 },
+          body: formData,
         }
       )
 

@@ -1,15 +1,17 @@
 "use client"
 
 import MyPageSectionSubTitle from "../MyPageSectionSubTitle"
-import { useGetMileAndUseMileTabs } from "../../hooks/useGetMileAndUseMileTabs"
 import UseMileList from "./UseMileList"
 import CustomTabs from "@/features/common/views/CustomTabs"
 import CustomTabPanel from "@/features/common/views/CustomTabPanel"
 import GetMileList from "./GetMileList"
 import { Fragment } from "react"
+import { useTabValueHandler } from "@/features/common/hooks/useTabValueHandler"
 
 const MyPageUseMileAndGetMileInfo = () => {
-  const { handleTabValueChange, tabValue, tabs } = useGetMileAndUseMileTabs()
+  const tabs = ["적립 마일리지", "사용 마일리지"]
+
+  const { handleTabValueChange, tabValue } = useTabValueHandler()
 
   const useMileAndGetMileComponents = [
     <GetMileList key="mypage-mile-info__get" />,

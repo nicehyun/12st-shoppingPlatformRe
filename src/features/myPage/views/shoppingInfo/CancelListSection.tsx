@@ -1,7 +1,6 @@
 "use client"
 
 import SectionTitle from "../SectionTitle"
-import { useCancelListTabs } from "../../hooks/useCancelListTabs"
 import CustomTabPanel from "@/features/common/views/CustomTabPanel"
 import CancelList from "./CancelList"
 import ReturnList from "./ReturnList"
@@ -9,9 +8,11 @@ import AllCancelList from "./AllCancelList"
 import ChangeList from "./ChangeList"
 import CustomTabs from "@/features/common/views/CustomTabs"
 import { Fragment } from "react"
+import { useTabValueHandler } from "@/features/common/hooks/useTabValueHandler"
 
 const CancelListSection = () => {
-  const { handleTabValueChange, tabValue, tabs } = useCancelListTabs()
+  const { handleTabValueChange, tabValue } = useTabValueHandler()
+  const tabs = ["All", "취소", "반품", "교환"]
 
   const cancelListComponents = [
     <AllCancelList key="mypage-cancelList__all" />,

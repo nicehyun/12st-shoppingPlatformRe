@@ -3,19 +3,45 @@
 import ClauseCheckbox from "@/features/common/views/ClauseCheckbox"
 import { showBasicModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
-import { useEffect, useState } from "react"
-
+import { FormEvent, useEffect, useState } from "react"
 import { useGetUserInfoQuery } from "../../hooks/useGetUserInfoQuery"
 import UpdateButton from "./UpdateButton"
 import { useCheckMarketingClauseMutation } from "../../hooks/useCheckMarketingClauseMutation"
+import { validCheckMarketingClaustUpdate } from "../../models/validCheck"
+import { useFeedbackModal } from "@/features/common/hooks/useFeedbackModal"
 
 const ClauseModification = () => {
   const dispatch = useAppDispatch()
-  const { updateMaketingClauseMutateAsync, isLoading } =
-    useCheckMarketingClauseMutation()
-  const { userInfo } = useGetUserInfoQuery()
+  const { mutateAsync, isLoading } = useCheckMarketingClauseMutation()
+  const { userInfo, isLoading: isGetUserInfoLoading } = useGetUserInfoQuery()
   const [isCheckedMarketingClause, setIsCheckedMarketingClause] =
     useState(false)
+
+  const { showFeedbackModalWithContent } = useFeedbackModal()
+
+  const handleMarketingClauseSubmit = async (
+    event: FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault()
+
+    if (isLoading || isGetUserInfoLoading) return
+
+    const formData = new FormData(event.currentTarget)
+
+    formData.append(
+      "prevMarketingClause",
+      JSON.stringify(userInfo?.marketingClause)
+    )
+
+    const { valid, message } = validCheckMarketingClaustUpdate(formData)
+
+    if (!valid && message !== undefined) {
+      showFeedbackModalWithContent(message)
+      return
+    }
+
+    await mutateAsync(formData)
+  }
 
   const handleMarketingClauseClick = () => {
     dispatch(
@@ -36,7 +62,7 @@ const ClauseModification = () => {
   }, [userInfo?.marketingClause])
   return (
     <form
-      onSubmit={updateMaketingClauseMutateAsync}
+      onSubmit={handleMarketingClauseSubmit}
       className="pt-[30px] w-[400px] sm:w-full md:w-full"
     >
       <ClauseCheckbox

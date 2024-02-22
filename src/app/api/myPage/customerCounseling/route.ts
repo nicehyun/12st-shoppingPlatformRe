@@ -1,5 +1,17 @@
+import { validCheckFromCheckoutFormEvent } from "@/features/checkout/models/validCheck"
 import { verifyAccessToken } from "@/features/common/utils/jwt"
-import { CustomerCounselingDetail } from "@/features/myPage/types/myPage"
+import {
+  parseCSTypeFromFormData,
+  parseCheckoutInfoFromFormData,
+  parseCounselingContentFromFormData,
+  parsePaymentString,
+  parseProductInfoFromFormData,
+} from "@/features/myPage/models/formData"
+import { validCheckCounSelingWrite } from "@/features/myPage/models/validCheck"
+import {
+  CsType,
+  CustomerCounselingDetail,
+} from "@/features/myPage/types/myPage"
 import { NextRequest, NextResponse } from "next/server"
 
 interface RequestBody {
@@ -46,107 +58,68 @@ export async function POST(request: NextRequest) {
     })
   }
 
+  const formData = await request.formData()
+
+  const { valid, message } = validCheckCounSelingWrite(formData)
+
+  if (!valid) {
+    return NextResponse.json({
+      status: 401,
+      error: message,
+    })
+  }
+
   const email = verifyAccessToken(accessToken)?.email
   const id = verifyAccessToken(accessToken)?.id
 
   let updatedWriteDetail: CustomerCounselingDetail | undefined
 
-  const { writeDetail }: RequestBody = await request.json()
-
-  const {
-    counselingContent,
-    counselingTitle,
-    csType,
-    checkoutDate,
-    checkoutNumber,
-    checkoutPayment,
-    checkoutProductName,
-    productName,
-    productPrice,
-  } = writeDetail
-
-  const checkoutRelationRadioValueList = [
-    "delivery",
-    "checkout",
-    "cancel",
-    "return",
-    "change",
-    "refund",
-    "deposit",
-  ]
-
-  const genernalRelationRadioValueListWithoutProduct = [
-    "userInfo",
-    "payment",
-    "couponAndMile",
-  ]
-
-  const etcRelationRadioValueList = ["system", "etc"]
+  const { counselingContent, counselingTitle } =
+    parseCounselingContentFromFormData(formData)
+  const { productName, productPrice } = parseProductInfoFromFormData(formData)
+  const { checkoutDate, checkoutNumber, checkoutPayment, checkoutProductName } =
+    parseCheckoutInfoFromFormData(formData)
+  const { selectedCsType } = parseCSTypeFromFormData(formData)
 
   if (
-    ![!!counselingTitle, !!counselingContent].every(
-      (commonValidEl) => commonValidEl
-    )
+    [
+      "delivery",
+      "checkout",
+      "cancel",
+      "return",
+      "change",
+      "refund",
+      "deposit",
+    ].includes(selectedCsType)
   ) {
-    return NextResponse.json({
-      status: 401,
-      error: "문의 제목과 내용을 작성해주세요",
-    })
-  }
-
-  if (checkoutRelationRadioValueList.includes(csType)) {
-    if (
-      ![
-        !!checkoutNumber,
-        !!checkoutProductName,
-        !!checkoutDate,
-        !!checkoutPayment?.selectedPayment,
-      ].every((checkoutRelationCsValidEl) => checkoutRelationCsValidEl)
-    ) {
-      return NextResponse.json({
-        status: 401,
-        error: "구매 정보가 필요합니다.",
-      })
-    }
-
     updatedWriteDetail = {
-      csType,
+      csType: selectedCsType,
       counselingContent,
       counselingTitle,
       checkoutDate,
       checkoutNumber,
       checkoutProductName,
-      checkoutPayment,
+      checkoutPayment: parsePaymentString(checkoutPayment),
     } as CustomerCounselingDetail
   }
 
-  if (csType === "product") {
-    if (
-      ![!!productName, !!productPrice].every(
-        (productRelationCsValidEl) => productRelationCsValidEl
-      )
-    ) {
-      return NextResponse.json({
-        status: 401,
-        error: "상품번호를 조회해주세요.",
-      })
-    }
-
+  if (selectedCsType === "product") {
     updatedWriteDetail = {
-      csType,
+      csType: selectedCsType,
       counselingContent,
       counselingTitle,
       productName,
-      productPrice,
+      productPrice: +productPrice,
     } as CustomerCounselingDetail
   }
 
   if (
-    genernalRelationRadioValueListWithoutProduct.includes(csType) ||
-    etcRelationRadioValueList.includes(csType)
+    ["userInfo", "payment", "couponAndMile", "system", "etc"].includes(
+      selectedCsType
+    )
   ) {
     updatedWriteDetail = {
-      csType,
+      csType: selectedCsType,
       counselingContent,
       counselingTitle,
     } as CustomerCounselingDetail

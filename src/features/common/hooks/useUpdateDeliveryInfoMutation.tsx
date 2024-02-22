@@ -3,7 +3,6 @@ import { useFeedbackModal } from "./useFeedbackModal"
 import { useFeedbackModalWithError } from "./useFeedbackModalWithError"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { deliveryInfoAPI } from "../models/deliveryInfoAPI"
-import { DeliveryInfo } from "../types/deliveryInfo"
 
 export const useUpdateDeliveryInfoMutation = (
   isShowSuccessFeedbackModal: boolean
@@ -14,11 +13,8 @@ export const useUpdateDeliveryInfoMutation = (
   const { showFeedbackModalWithErrorMessage } = useFeedbackModalWithError()
 
   const { isLoading, mutateAsync } = useMutation(
-    (deliveryInfo: DeliveryInfo) =>
-      deliveryInfoAPI.updateDeliveryInfo(
-        session?.user.accessToken,
-        deliveryInfo
-      ),
+    (formData: FormData) =>
+      deliveryInfoAPI.updateDeliveryInfo(session?.user.accessToken, formData),
     {
       onSuccess: (data) => {
         if (data.status === 401) {
@@ -42,14 +38,8 @@ export const useUpdateDeliveryInfoMutation = (
     }
   )
 
-  const updateDeliveryInfoMutateAsync = async (deliveryInfo: DeliveryInfo) => {
-    if (isLoading) return
-
-    mutateAsync(deliveryInfo)
-  }
-
   return {
     isLoading,
-    updateDeliveryInfoMutateAsync,
+    mutateAsync,
   }
 }

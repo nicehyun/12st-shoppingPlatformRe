@@ -1,8 +1,6 @@
 "use client"
 
 import SectionTitle from "../SectionTitle"
-
-import { useModificationOfUserInfoTabs } from "../../hooks/useModificationOfUserInfoTabs"
 import CustomTabs from "@/features/common/views/CustomTabs"
 import DeliverInfoModification from "./DeliverInfoModification"
 import ClauseModification from "./ClauseModification"
@@ -10,10 +8,12 @@ import CustomTabPanel from "@/features/common/views/CustomTabPanel"
 import UserInfo from "./UserInfo"
 import MemberTermination from "./MemberTermination"
 import { Fragment } from "react"
+import { useTabValueHandler } from "@/features/common/hooks/useTabValueHandler"
 
 const ModificationOfUserInfoSection = () => {
-  const { handleTabValueChange, tabValue, tabs } =
-    useModificationOfUserInfoTabs()
+  const { handleTabValueChange, tabValue } = useTabValueHandler()
+
+  const tabs = ["회원정보", "기본배송지 수정", "약관동의", "회원탈퇴"]
 
   const modificationOfUserInfoComponents = [
     <UserInfo key="mypage-userInfo-modification__userInfo" />,

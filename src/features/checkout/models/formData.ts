@@ -1,9 +1,3 @@
-import {
-  additionalAddressValidator,
-  nameValidator,
-  phoneValidator,
-} from "@/features/auth/signUp/models/validation"
-
 export const parseAddressFromCheckoutFormEvent = (formData: FormData) => {
   return {
     deliveryName: formData.get("deliveryName") as string,

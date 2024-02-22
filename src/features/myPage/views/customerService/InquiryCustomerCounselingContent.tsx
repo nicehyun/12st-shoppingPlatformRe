@@ -3,7 +3,7 @@ import MyPageListContentLayout from "../MyPageListContentLayout"
 import MyPageTableContentEl from "../MyPageTableContentEl"
 import { parseISOString } from "@/features/checkout/models/checkout"
 import { CustomerCounselingDetail } from "../../types/myPage"
-import { getKoreanCsType } from "../../utils/csType"
+import { getKoreanCsType } from "../../models/csType"
 
 interface IInquiryCustomerCounselingContent {
   customerCounseling: CustomerCounselingDetail

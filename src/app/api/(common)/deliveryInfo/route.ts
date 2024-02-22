@@ -1,10 +1,10 @@
-import { DeliveryInfo } from "@/features/common/types/deliveryInfo"
-import { verifyAccessToken } from "@/features/common/utils/jwt"
-import { NextResponse } from "next/server"
+import { validCheckDeliveryInfo } from "@/features/checkout/models/validCheck"
+import { pasrseDeliveryInfoFromFormData } from "@/features/common/models/formData"
 
-interface RequestBody {
-  updateDeliveryInfo: DeliveryInfo
-}
+import { verifyAccessToken } from "@/features/common/utils/jwt"
+import { parsePrevDeliveryInfoFromFormData } from "@/features/myPage/models/formData"
+import { validCheckComparisonOfChangeDeliveryInfo } from "@/features/myPage/models/validCheck"
+import { NextResponse } from "next/server"
 
 export async function GET(request: Request) {
   const accessToken = request.headers.get("authorization")
@@ -46,13 +46,30 @@ export async function POST(request: Request) {
     })
   }
 
-  const body: RequestBody = await request.json()
-  const updateDeliveryInfo = body.updateDeliveryInfo
+  const formData = await request.formData()
 
-  if (!updateDeliveryInfo) {
+  const paddingUpdateDeliveryInfo = pasrseDeliveryInfoFromFormData(formData)
+
+  const { prevDeliveryInfo } = parsePrevDeliveryInfoFromFormData(formData)
+
+  if (prevDeliveryInfo) {
+    const { valid, message } =
+      validCheckComparisonOfChangeDeliveryInfo(formData)
+
+    if (!valid) {
+      return NextResponse.json({
+        status: 401,
+        error: message,
+      })
+    }
+  }
+
+  const { isValid, message } = validCheckDeliveryInfo(formData)
+
+  if (!isValid) {
     return NextResponse.json({
       status: 401,
-      error: "배송지 정보가 필요합니다.",
+      error: message,
     })
   }
 
@@ -76,7 +93,7 @@ export async function POST(request: Request) {
         body: JSON.stringify({
           id,
           email,
-          deliveryInfo: updateDeliveryInfo,
+          deliveryInfo: paddingUpdateDeliveryInfo,
         }),
       })
     } else {
@@ -86,7 +103,7 @@ export async function POST(request: Request) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          deliveryInfo: updateDeliveryInfo,
+          deliveryInfo: paddingUpdateDeliveryInfo,
         }),
       })
     }

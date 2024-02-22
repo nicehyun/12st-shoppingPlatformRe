@@ -28,7 +28,8 @@ const CheckoutForm = ({ children }: ICheckoutForm) => {
 
   const { selectedCoupon } = useSelectCoupon()
 
-  const { updateDeliveryInfoMutateAsync } = useUpdateDeliveryInfoMutation(false)
+  const { mutateAsync: upDateDeliveryInfoMutateAsync } =
+    useUpdateDeliveryInfoMutation(false)
   const { mutateAsync, isCheckoutLoading } = useCheckoutMutaion()
 
   const checkoutPaymentState = useAppSelector(selectCheckoutPaymentState)
@@ -59,31 +60,14 @@ const CheckoutForm = ({ children }: ICheckoutForm) => {
       formData.append("productList", JSON.stringify(checkoutPendingProductList))
 
       await mutateAsync(formData)
+      const { defalutAddressRegistration, ...paddingUpdateDeliveryInfo } =
+        parseAddressFromCheckoutFormEvent(formData)
+
+      if (defalutAddressRegistration === "on") {
+        await upDateDeliveryInfoMutateAsync(formData)
+      }
     } else {
       message && showFeedbackModalWithContent(message)
-    }
-
-    const {
-      defalutAddressRegistration,
-      additionalAddress,
-      address,
-      deliveryName,
-      phone1,
-      phone2,
-      recipient,
-      zipcode,
-    } = parseAddressFromCheckoutFormEvent(formData)
-
-    if (defalutAddressRegistration === "on") {
-      await updateDeliveryInfoMutateAsync({
-        additionalAddress,
-        address,
-        deliveryName,
-        phone1,
-        phone2,
-        recipient,
-        zipcode,
-      })
     }
   }
 

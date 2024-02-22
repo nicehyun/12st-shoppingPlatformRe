@@ -1,9 +1,7 @@
 import { verifyAccessToken } from "@/features/common/utils/jwt"
+import { parseMaketingClauseFromFormData } from "@/features/myPage/models/formData"
+import { validCheckMarketingClaustUpdate } from "@/features/myPage/models/validCheck"
 import { NextResponse } from "next/server"
-
-interface RequestBody {
-  isChecked: boolean
-}
 
 export async function GET(request: Request) {
   const accessToken = request.headers.get("authorization")
@@ -36,7 +34,6 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  const body: RequestBody = await request.json()
   const accessToken = request.headers.get("authorization")
 
   if (!accessToken || !verifyAccessToken(accessToken)) {
@@ -46,9 +43,20 @@ export async function POST(request: Request) {
     })
   }
 
+  const formData = await request.formData()
+
+  const { valid, message } = validCheckMarketingClaustUpdate(formData)
+
+  if (!valid) {
+    return NextResponse.json({
+      status: 401,
+      error: message,
+    })
+  }
+
   const id = verifyAccessToken(accessToken)?.id
 
-  const isMarketingClause = body.isChecked
+  const { isCheckedMarketingClause } = parseMaketingClauseFromFormData(formData)
 
   try {
     await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/users/${id}`, {
@@ -57,7 +65,7 @@ export async function POST(request: Request) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        marketingClause: isMarketingClause,
+        marketingClause: isCheckedMarketingClause,
       }),
     })
 

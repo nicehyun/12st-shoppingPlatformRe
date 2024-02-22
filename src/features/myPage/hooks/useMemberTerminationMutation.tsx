@@ -34,14 +34,8 @@ export const useMemberTerminationMutation = () => {
     }
   )
 
-  const memberTerminationMutateAsync = async () => {
-    if (isLoading) return
-
-    mutateAsync()
-  }
-
   return {
-    memberTerminationMutateAsync,
+    mutateAsync,
     isLoading,
   }
 }

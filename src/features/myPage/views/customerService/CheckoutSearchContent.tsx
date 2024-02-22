@@ -7,8 +7,8 @@ import {
   selectSelectedCheckoutInfo,
 } from "@/redux/features/myPageSlice"
 import { useEffect } from "react"
-import { getKoreanPaymentMethod } from "../../utils/payment"
-import { parseISOStringToDateTime } from "../../utils/date"
+import { getKoreanPaymentMethod } from "../../models/payment"
+import { parseISOStringToDateTime } from "../../models/date"
 
 const CheckoutSearchContent = () => {
   const dispatch = useAppDispatch()

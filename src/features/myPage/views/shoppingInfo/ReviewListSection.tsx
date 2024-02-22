@@ -1,14 +1,16 @@
 "use client"
 
 import SectionTitle from "../SectionTitle"
-import { useReviewListTabs } from "../../hooks/useReviewListTabs"
 import CustomTabs from "@/features/common/views/CustomTabs"
 import CustomTabPanel from "@/features/common/views/CustomTabPanel"
 import MyPageListNoneContents from "../MyPageListNoneContents"
 import { Fragment } from "react"
+import { useTabValueHandler } from "@/features/common/hooks/useTabValueHandler"
 
 const ReviewListSection = () => {
-  const { handleTabValueChange, tabValue, tabs } = useReviewListTabs()
+  const { handleTabValueChange, tabValue } = useTabValueHandler()
+
+  const tabs = ["작성 가능한 리뷰", "내 리뷰 (0)"]
 
   const reviewListComponents = [
     <MyPageListNoneContents

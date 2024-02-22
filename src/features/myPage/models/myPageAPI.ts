@@ -5,7 +5,7 @@ import { validateAuthorization } from "@/features/common/utils/error"
 export const myPageAPI = {
   modificatieMarketingClause: async (
     accessToken: string | null | undefined,
-    isChecked: boolean
+    formData: FormData
   ): Promise<POSTResponse> => {
     try {
       const { authorization } = validateAuthorization(accessToken)
@@ -14,10 +14,8 @@ export const myPageAPI = {
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/userInfo`,
         {
           method: "POST",
-          headers: { "Content-Type": "application/json", authorization },
-          body: JSON.stringify({
-            isChecked,
-          }),
+          headers: { authorization },
+          body: formData,
         }
       )
 
@@ -31,10 +29,11 @@ export const myPageAPI = {
     accessToken: string | null | undefined
   ): Promise<POSTResponse> => {
     try {
+      console.log("실행")
       const { authorization } = validateAuthorization(accessToken)
 
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/memberTermination`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/myPage/memberTermination`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json", authorization },
@@ -48,7 +47,7 @@ export const myPageAPI = {
   },
   writeCoustomerCounseling: async (
     accessToken: string | null | undefined,
-    writeDetail: CustomerCounselingDetail
+    formData: FormData
   ): Promise<POSTResponse> => {
     try {
       const { authorization } = validateAuthorization(accessToken)
@@ -57,10 +56,8 @@ export const myPageAPI = {
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/myPage/customerCounseling`,
         {
           method: "POST",
-          headers: { "Content-Type": "application/json", authorization },
-          body: JSON.stringify({
-            writeDetail,
-          }),
+          headers: { authorization },
+          body: formData,
         }
       )
 

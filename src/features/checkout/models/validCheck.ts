@@ -51,15 +51,9 @@ export const validCheckSelectCoupon = (totalPriceOfCheckedProduct: number) => {
   }
 }
 
-export const validCheckFromCheckoutFormEvent = (formData: FormData) => {
+export const validCheckDeliveryInfo = (formData: FormData) => {
   const { additionalAddress, address, phone1, recipient } =
     parseAddressFromCheckoutFormEvent(formData)
-  const { collectionOfUserInfo, paymentAgencyClause, provisionOfUserInfo } =
-    parseClauseFromCheckoutFormEvent(formData)
-  const { useMile } = parseMileFromCheckoutFormEvent(formData)
-  const { creditName, payment } = parsePaymentFromCheckoutFormEvent(formData)
-  const { discountedPriceWithCoupon, totalPriceOfCheckedProduct } =
-    parsePriceFromCheckoutFormEvent(formData)
 
   if (!nameValidator(recipient)) {
     return {
@@ -86,6 +80,28 @@ export const validCheckFromCheckoutFormEvent = (formData: FormData) => {
     return {
       isValid: false,
       message: "올바른 연락처를 입력해주세요.",
+    }
+  }
+
+  return {
+    isValid: true,
+  }
+}
+
+export const validCheckFromCheckoutFormEvent = (formData: FormData) => {
+  const { collectionOfUserInfo, paymentAgencyClause, provisionOfUserInfo } =
+    parseClauseFromCheckoutFormEvent(formData)
+  const { useMile } = parseMileFromCheckoutFormEvent(formData)
+  const { creditName, payment } = parsePaymentFromCheckoutFormEvent(formData)
+  const { discountedPriceWithCoupon, totalPriceOfCheckedProduct } =
+    parsePriceFromCheckoutFormEvent(formData)
+
+  const { isValid, message } = validCheckDeliveryInfo(formData)
+
+  if (!isValid && message !== undefined) {
+    return {
+      isValid,
+      message,
     }
   }
 

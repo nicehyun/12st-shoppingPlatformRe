@@ -12,8 +12,7 @@ const MemberTerminataionModal = () => {
   const { modalId, isShowModal, modalContent } =
     useAppSelector(selectAlertModal)
 
-  const { isLoading, memberTerminationMutateAsync } =
-    useMemberTerminationMutation()
+  const { isLoading, mutateAsync } = useMemberTerminationMutation()
 
   const handleAlertModalHide = () => {
     if (!isLoading) {
@@ -22,11 +21,11 @@ const MemberTerminataionModal = () => {
   }
 
   const handleAlertModalAgree = async () => {
-    await memberTerminationMutateAsync()
+    if (isLoading) return
 
-    if (!isLoading) {
-      handleAlertModalHide()
-    }
+    await mutateAsync()
+
+    handleAlertModalHide()
   }
 
   const alertModalProps = {

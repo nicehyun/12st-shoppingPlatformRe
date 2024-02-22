@@ -11,8 +11,6 @@ export async function POST(request: Request) {
     })
   }
 
-  const id = verifyAccessToken(accessToken)?.id
-
   try {
     return NextResponse.json({ status: 200 })
   } catch (error: unknown) {
