@@ -50,14 +50,9 @@ const CheckoutSearchContent = () => {
     },
     {
       id: "coustomweCounselingWrite-checkoutInfo__checkoutPayment",
-      value: selectedCheckoutPaymentList
-        .map(
-          (checkoutPaymentEl, index) =>
-            `${index === 0 || !checkoutPaymentEl ? "" : " - "}${
-              checkoutPaymentEl ?? ""
-            }`
-        )
-        .join(""),
+      value:
+        selectedCheckoutPaymentList[0] ??
+        `${selectedCheckoutPaymentList[1]} - ${selectedCheckoutPaymentList[2]}`,
       label: "결제방법",
     },
   ]
