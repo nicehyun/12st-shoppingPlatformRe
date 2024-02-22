@@ -7,13 +7,11 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { SelectChangeEvent } from "@mui/material"
 import { useCouponQuery } from "./useCouponQuery"
 import { useEffect } from "react"
-import useCheckoutPrice from "./useCheckoutPrice"
 import { useSelect } from "@/features/common/hooks/useSelect"
 
 export const useSelectCoupon = () => {
   const dispatch = useAppDispatch()
   const selectedCoupon = useAppSelector(selectSelectedCoupon)
-  const { totalPriceOfCheckedProduct } = useCheckoutPrice()
 
   const { handleSelectClose, handleSelectOpen, isSelectOpen } = useSelect()
 
@@ -35,8 +33,6 @@ export const useSelectCoupon = () => {
     handleSelectClose()
   }
 
-  const isAvaliableSelectCoupon = totalPriceOfCheckedProduct > 15000
-
   useEffect(() => {
     resetSelectedCoupon()
   }, [])
@@ -49,6 +45,5 @@ export const useSelectCoupon = () => {
     handleSelectOpen,
     handleSelectChange,
     isLoading,
-    isAvaliableSelectCoupon,
   }
 }

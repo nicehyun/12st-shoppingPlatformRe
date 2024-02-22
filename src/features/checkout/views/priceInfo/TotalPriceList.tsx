@@ -25,7 +25,7 @@ const TotalPriceList = () => {
       <TotalPriceEl
         individualTitle="총 상품금액"
         price={totalPriceOfCheckedProduct}
-        className="mt-[30px]"
+        className="pt-[30px]"
       />
       <TotalPriceEl
         individualTitle="쿠폰 사용"
@@ -46,7 +46,7 @@ const TotalPriceList = () => {
         individualTitle="총 결제금액"
         price={totalCheckoutPirce}
         isFinalPrice={true}
-        className="mb-[60px]"
+        className="pb-[30px]"
       />
     </>
   )

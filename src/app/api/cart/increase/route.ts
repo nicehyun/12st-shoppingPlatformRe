@@ -1,3 +1,7 @@
+import {
+  validCheckIncreaseProductAmountToCart,
+  validCheckProductInfo,
+} from "@/features/cart/models/validateCheck"
 import { GetCartResponse, ProductInCart } from "@/features/cart/types/cart"
 import { verifyAccessToken } from "@/features/common/utils/jwt"
 import { NextResponse } from "next/server"
@@ -19,17 +23,25 @@ export async function POST(request: Request) {
 
   const productInfo = body.productInfo
 
-  if (!productInfo) {
+  const { valid: productInfoValid, message: productInfoValidMessage } =
+    validCheckProductInfo(productInfo)
+
+  if (!productInfoValid) {
     return NextResponse.json({
       status: 401,
-      error: "상품 정보가 필요합니다.",
+      error: productInfoValidMessage,
     })
   }
 
-  if (productInfo.amount >= 50) {
+  const {
+    valid: IncraseProductAmountValid,
+    message: incraseProductAmountMessage,
+  } = validCheckIncreaseProductAmountToCart(productInfo)
+
+  if (!IncraseProductAmountValid) {
     return NextResponse.json({
       status: 401,
-      error: "최대 구매 가능 수량에 도달했습니다.",
+      error: incraseProductAmountMessage,
     })
   }
 

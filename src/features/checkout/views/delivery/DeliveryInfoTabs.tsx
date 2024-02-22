@@ -1,19 +1,41 @@
 "use client"
 import CustomTabPanel from "@/features/common/views/CustomTabPanel"
-import { useDeliveryTabs } from "../../hooks/useDeliveryTabs"
 import CustomTabs from "@/features/common/views/CustomTabs"
 import NewDeliveryInfo from "./NewDeliveryInfo"
 import DefalutDeliveryInfo from "./DefalutDeliveryInfo"
+import { useEffect } from "react"
+import { useGetDeliveryInfoQuery } from "@/features/common/hooks/useGetDeliveryInfoQuery"
+import { useAppSelector } from "@/redux/hooks"
+import {
+  deliveryTabValueChange,
+  selectDeliveryTabValueState,
+} from "@/redux/features/checkoutSlice"
+import { useDispatch } from "react-redux"
 
 const DeliveryInfoTabs = () => {
-  const { deliveryTabValue, handleDeliveryTabvalueChange, tabs } =
-    useDeliveryTabs()
+  const dispatch = useDispatch()
+  const { deliveryInfo } = useGetDeliveryInfoQuery()
+  const deliveryTabValue = useAppSelector(selectDeliveryTabValueState)
+
+  const handleDeliveryTabvalueChange = (
+    event: React.SyntheticEvent,
+    newValue: number
+  ) => {
+    dispatch(deliveryTabValueChange(newValue))
+  }
+
+  useEffect(() => {
+    if (deliveryInfo) {
+      dispatch(deliveryTabValueChange(0))
+    }
+  }, [deliveryInfo])
+
   return (
     <>
       <CustomTabs
         id="delivery"
         onChangeTabs={handleDeliveryTabvalueChange}
-        tabs={tabs}
+        tabs={["기존 배송지", "신규 입력"]}
         tabsValue={deliveryTabValue}
       />
 

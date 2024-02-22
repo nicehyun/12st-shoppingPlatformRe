@@ -3,10 +3,7 @@
 import { useCheckoutMutaion } from "../hooks/useCheckoutMutaion"
 import { FormEvent, ReactNode } from "react"
 import CheckoutButton from "./CheckoutButton"
-import {
-  parseAddressFromCheckoutFormEvent,
-  validCheckFromCheckoutFormEvent,
-} from "../models/formData"
+import { parseAddressFromCheckoutFormEvent } from "../models/formData"
 
 import { useAppSelector } from "@/redux/hooks"
 import {
@@ -17,6 +14,7 @@ import useCheckoutPrice from "../hooks/useCheckoutPrice"
 import { useFeedbackModal } from "@/features/common/hooks/useFeedbackModal"
 import { useSelectCoupon } from "../hooks/useSelectCoupon"
 import { useUpdateDeliveryInfoMutation } from "@/features/common/hooks/useUpdateDeliveryInfoMutation"
+import { validCheckFromCheckoutFormEvent } from "../models/validCheck"
 
 interface ICheckoutForm {
   children: ReactNode

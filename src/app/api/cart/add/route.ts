@@ -1,6 +1,10 @@
 import { GetCartResponse } from "@/features/cart/types/cart"
 import { Product } from "@/features/common/types/product"
 import { verifyAccessToken } from "@/features/common/utils/jwt"
+import {
+  validCheckAddProductToCart,
+  validCheckProductInfo,
+} from "@/features/cart/models/validateCheck"
 import { NextResponse } from "next/server"
 
 interface RequestBody {
@@ -15,14 +19,17 @@ export async function POST(request: Request) {
       error: "유효하지 않은 AccessToken입니다.",
     })
   }
+
   const body: RequestBody = await request.json()
 
   const productInfo = body.productInfo
 
-  if (!productInfo) {
+  const { valid, message } = validCheckProductInfo(productInfo)
+
+  if (!valid) {
     return NextResponse.json({
       status: 401,
-      error: "상품 정보가 필요합니다.",
+      error: message,
     })
   }
 
@@ -38,6 +45,18 @@ export async function POST(request: Request) {
         next: { revalidate: 0 },
       }
     ).then((res) => res.json())
+
+    const { valid, message } = validCheckAddProductToCart(
+      productInfo,
+      response[0].productList
+    )
+
+    if (!valid) {
+      return NextResponse.json({
+        status: 401,
+        error: message,
+      })
+    }
 
     if (response.length === 0) {
       await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/cart`, {

@@ -29,31 +29,39 @@ const useCheckoutPrice = () => {
     0
   )
 
-  const calculatingDiscountPerProduct = () => {
-    const discountPerProduct =
-      Math.floor(
-        discountedPriceWithCoupon / checkoutPendingProductList.length / 10
-      ) * 10
-
-    const remainingDiscount =
-      discountedPriceWithCoupon -
-      discountPerProduct * checkoutPendingProductList.length
-
-    const discountPerProductArr = []
-    for (let i = 0; i < checkoutPendingProductList.length; i++) {
-      const adjustedDiscount =
-        discountPerProduct + (i < remainingDiscount / 10 ? 10 : 0)
-      discountPerProductArr.push(adjustedDiscount)
-    }
-
-    return discountPerProductArr
+  const calculateRoundedPricePerProduct = (
+    price: number,
+    productLength: number
+  ) => {
+    return Math.floor(price / productLength / 10) * 10
   }
+
+  const checkoutPendingTotalAmout = checkoutPendingProductList.reduce(
+    (accumulator, product) => {
+      return accumulator + product.amount
+    },
+    0
+  )
+
+  const discountPerProduct = calculateRoundedPricePerProduct(
+    discountedPriceWithCoupon,
+    checkoutPendingTotalAmout
+  )
+
+  const remainingDiscount =
+    discountedPriceWithCoupon - discountPerProduct * checkoutPendingTotalAmout
+
+  const calculatingDiscountPerProduct = checkoutPendingProductList.map(
+    (product, index) =>
+      discountPerProduct * product.amount +
+      (index < remainingDiscount / 10 ? 10 : 0)
+  )
 
   return {
     totalPriceOfCheckedProduct,
     discountedPriceWithCoupon,
     totalDeliveryFee,
-    calculatedDiscountPerProductArr: calculatingDiscountPerProduct(),
+    calculatedDiscountPerProductArr: calculatingDiscountPerProduct,
   }
 }
 

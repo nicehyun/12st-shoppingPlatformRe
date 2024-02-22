@@ -1,3 +1,4 @@
+import { validCheckedProductRemove } from "@/features/cart/models/validateCheck"
 import { GetCartResponse, ProductsInCart } from "@/features/cart/types/cart"
 import { verifyAccessToken } from "@/features/common/utils/jwt"
 import { NextResponse } from "next/server"
@@ -21,10 +22,12 @@ export async function POST(request: Request) {
 
   const checkedProductList = body.checkedProductList
 
-  if (checkedProductList.length <= 0) {
+  const { valid, message } = validCheckedProductRemove(checkedProductList)
+
+  if (!valid) {
     return NextResponse.json({
       status: 401,
-      error: "체크된 상품이 없습니다. 삭제를 원하는 상품을 먼저 선택해주세요.",
+      error: message,
     })
   }
 

@@ -1,9 +1,8 @@
-import Button from "@/features/common/views/Button"
-import React, { ReactNode } from "react"
-import { BsQuestionCircle } from "react-icons/bs"
+import { ReactNode } from "react"
 import { useAppDispatch } from "@/redux/hooks"
 import { showBasicModal } from "@/redux/features/modalSlice"
 import CheckoutSectionHeader from "../CheckoutSectionHeader"
+import ExplanationButton from "../explanations/ExplanationButton"
 
 interface ICouponAndMileHeader {
   children: ReactNode
@@ -26,10 +25,9 @@ const CouponAndMileHeader = ({ children }: ICouponAndMileHeader) => {
     <CheckoutSectionHeader>
       <span className="flex">
         <h3>쿠폰 / 마일리지</h3>
-        <Button
-          onClick={showCouponExplanationModal}
-          classNames="ml-[5px] text-border"
-          content={<BsQuestionCircle />}
+
+        <ExplanationButton
+          onClickExplanationButton={showCouponExplanationModal}
         />
       </span>
 

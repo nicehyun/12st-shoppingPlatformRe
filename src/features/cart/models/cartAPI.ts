@@ -79,13 +79,6 @@ export const cartAPI = {
     productInfo: ProductInCart,
     accessToken: string | null | undefined
   ): Promise<POSTResponse> => {
-    if (productInfo.amount <= 1)
-      return {
-        status: 401,
-        error:
-          "최소 구매 가능 수량에 도달했습니다. 상품을 장바구니에서 제거하려면, 삭제 옵션을 사용해주세요.",
-      }
-
     try {
       const { authorization } = validateAuthorization(accessToken)
 
@@ -111,12 +104,6 @@ export const cartAPI = {
     productInfo: Product | null,
     accessToken: string | null | undefined
   ): Promise<POSTResponse> => {
-    if (!productInfo)
-      return {
-        status: 401,
-        error: "상품 정보가 필요합니다.",
-      }
-
     try {
       const { authorization } = validateAuthorization(accessToken)
 
@@ -142,14 +129,6 @@ export const cartAPI = {
     checkedProductList: ProductsInCart,
     accessToken: string | null | undefined
   ): Promise<POSTResponse> => {
-    if (checkedProductList.length === 0) {
-      return {
-        status: 401,
-        error:
-          "체크된 상품이 없습니다. 삭제를 원하는 상품을 먼저 선택해주세요.",
-      }
-    }
-
     try {
       const { authorization } = validateAuthorization(accessToken)
 

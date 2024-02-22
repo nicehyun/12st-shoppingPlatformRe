@@ -13,8 +13,8 @@ import {
   parseMemoFromCheckoutFormEvent,
   parseMileFromCheckoutFormEvent,
   parsePaymentFromCheckoutFormEvent,
-  validCheckFromCheckoutFormEvent,
 } from "@/features/checkout/models/formData"
+import { validCheckFromCheckoutFormEvent } from "@/features/checkout/models/validCheck"
 
 export async function GET(request: Request) {
   const accessToken = request.headers.get("authorization")

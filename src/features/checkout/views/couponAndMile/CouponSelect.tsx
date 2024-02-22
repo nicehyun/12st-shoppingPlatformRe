@@ -1,6 +1,8 @@
 import { useSelectCoupon } from "../../hooks/useSelectCoupon"
 import CutstomSelect from "@/features/common/views/CutstomSelect"
 import SpanSkeletonUI from "@/features/common/views/SpanSkeletonUI"
+import { validCheckSelectCoupon } from "../../models/validCheck"
+import useCheckoutPrice from "../../hooks/useCheckoutPrice"
 
 const CouponSelect = () => {
   const {
@@ -11,10 +13,11 @@ const CouponSelect = () => {
     handleSelectOpen,
     isSelectOpen,
     isLoading,
-    isAvaliableSelectCoupon,
   } = useSelectCoupon()
 
   const [coupon1, coupon2] = availableCoupons
+  const { totalPriceOfCheckedProduct } = useCheckoutPrice()
+  const { valid } = validCheckSelectCoupon(totalPriceOfCheckedProduct)
 
   const couponSelectProps = {
     id: "coupon",
@@ -24,7 +27,7 @@ const CouponSelect = () => {
     selectedValue: selectedCoupon ? selectedCoupon.name : "",
     onChangeSelect: handleSelectChange,
     noSelectedRenderValue: `사용 가능 쿠폰 ${availableCoupons?.length} 장`,
-    isDisabled: !isAvaliableSelectCoupon,
+    isDisabled: !valid,
     selectArray: [
       { ...coupon1, renderValue: coupon1 ? coupon1.name : "" },
       { ...coupon2, renderValue: coupon2 ? coupon2.name : "" },

@@ -1,7 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { cartAPI } from "../models/cartAPI"
 import { ProductInCart } from "../types/cart"
-import { useConditionalSignInRoute } from "@/features/common/hooks/useConditionalSignInRoute"
 import { useSessionQuery } from "@/features/auth/signIn/hooks/useSessionQuery"
 import { useFeedbackModal } from "@/features/common/hooks/useFeedbackModal"
 import { useFeedbackModalWithError } from "@/features/common/hooks/useFeedbackModalWithError"
@@ -9,11 +8,10 @@ import { useFeedbackModalWithError } from "@/features/common/hooks/useFeedbackMo
 export const useDecreaseAmountMutation = (productInCartInfo: ProductInCart) => {
   const { session } = useSessionQuery()
   const queryClient = useQueryClient()
-  const { shouldProceedWithRouting } = useConditionalSignInRoute()
   const { showFeedbackModalWithContent } = useFeedbackModal()
   const { showFeedbackModalWithErrorMessage } = useFeedbackModalWithError()
 
-  const { mutate, isLoading } = useMutation(
+  const { mutateAsync, isLoading } = useMutation(
     () =>
       cartAPI.decreaseProductInCart(
         productInCartInfo,
@@ -39,13 +37,5 @@ export const useDecreaseAmountMutation = (productInCartInfo: ProductInCart) => {
     }
   )
 
-  const decreaseMutate = async () => {
-    if (isLoading) return
-
-    if (shouldProceedWithRouting(!!session)) {
-      mutate()
-    }
-  }
-
-  return { decreaseMutate, isLoading }
+  return { mutateAsync, isLoading }
 }

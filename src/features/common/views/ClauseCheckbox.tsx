@@ -37,7 +37,7 @@ const ClauseCheckbox = ({
 
   return (
     <div
-      className={`${classNames} relative w-full mr-[10px] flex justify-between py-[8px]`}
+      className={`${classNames} relative w-full flex justify-between py-[8px]`}
     >
       <input
         type="checkbox"

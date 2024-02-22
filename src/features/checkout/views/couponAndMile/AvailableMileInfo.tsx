@@ -1,9 +1,8 @@
-import Button from "@/features/common/views/Button"
 import { showBasicModal } from "@/redux/features/modalSlice"
 import { useAppDispatch } from "@/redux/hooks"
 import { useUserMileQuery } from "../../hooks/useGetUserMileQuery"
-import { BsQuestionCircle } from "react-icons/bs"
 import SpanSkeletonUI from "@/features/common/views/SpanSkeletonUI"
+import ExplanationButton from "../explanations/ExplanationButton"
 
 const AvailableMileInfo = () => {
   const { userMile, availableMiles, isLoading } = useUserMileQuery()
@@ -28,11 +27,7 @@ const AvailableMileInfo = () => {
         사용 가능 {availableMiles}P /{" "}
         <span className="text-lightGray">보유 {userMile}P</span>
       </p>
-      <Button
-        onClick={showMileExplanationModal}
-        classNames="ml-[5px] text-border"
-        content={<BsQuestionCircle />}
-      />
+      <ExplanationButton onClickExplanationButton={showMileExplanationModal} />
     </div>
   )
 }

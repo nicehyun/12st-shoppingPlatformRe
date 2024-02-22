@@ -1,3 +1,7 @@
+import {
+  validCheckDecreaseProductAmountToCart,
+  validCheckProductInfo,
+} from "@/features/cart/models/validateCheck"
 import { GetCartResponse, ProductInCart } from "@/features/cart/types/cart"
 import { verifyAccessToken } from "@/features/common/utils/jwt"
 import { NextResponse } from "next/server"
@@ -19,18 +23,25 @@ export async function POST(request: Request) {
 
   const productInfo = body.productInfo
 
-  if (!productInfo) {
+  const { valid: productInfoValid, message: productInfoValidMessage } =
+    validCheckProductInfo(productInfo)
+
+  if (!productInfoValid) {
     return NextResponse.json({
       status: 401,
-      error: "상품 정보가 필요합니다.",
+      error: productInfoValidMessage,
     })
   }
 
-  if (productInfo.amount <= 1) {
+  const {
+    valid: decreaseProductAmountValid,
+    message: decreaseProductAmountMessage,
+  } = validCheckDecreaseProductAmountToCart(productInfo)
+
+  if (!decreaseProductAmountValid) {
     return NextResponse.json({
       status: 401,
-      error:
-        "최소 구매 가능 수량에 도달했습니다. 상품을 장바구니에서 제거하려면, 삭제 옵션을 사용해주세요.",
+      error: decreaseProductAmountMessage,
     })
   }
 
