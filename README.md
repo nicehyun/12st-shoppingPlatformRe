@@ -315,7 +315,8 @@ const response = await fetch(
 
 아래의 이미지는 `RTK Query`와 `TanStack-Query`을 비교하는 테이블입니다.
 
-// TODO : RTK vs TanStack 이미지 넣기
+<img width="397" alt="RTK vs TanStack" src="https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/a9eb20b9-2bc8-4499-b0b8-01b16d4aa8e9">
+
 
 두 라이브러리 모두 유사한 기능을 제공하지만, 차이점도 존재합니다.
 
@@ -473,7 +474,7 @@ SSR 관점에서 중요한 건 런타임에 스타일시트를 생성하지 않�
 │
 ├── 📂 firebase ✅ Firebase Config
 ├── 📃 middleware.ts ✅ Next Middleware 설정
-├── 📂 tanstackQuery ✅ Tnstack 설정
+├── 📂 tanstackQuery ✅ Tanstack 설정
 ├── 📂 redux ✅ Redux 설정, Feature 별 Slice
 └── 📂 types ✅ next-auth.d.ts
 ```
