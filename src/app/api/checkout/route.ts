@@ -121,8 +121,6 @@ export async function POST(request: NextRequest) {
   const { creditName, payment, period } =
     parsePaymentFromCheckoutFormEvent(formData)
 
-  console.log(payment)
-
   const checkoutPayment =
     payment.value === "credit"
       ? {

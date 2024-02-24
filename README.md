@@ -17,7 +17,23 @@ Password : test123123!
 
 ---
 
-# 👨🏻‍🔧 설치 및 실행
+# 🪜 목차
+
+## Table of Contents
+
+- [설치 및 실행](#install)
+- [프로젝트 소개](#introduce)
+- [기술스택](#stack)
+- [프레임워크 및 라이브러리 선택 이유](#reason)
+- [디렉토리 구조](#directory)
+- [유지보수성 개선](#maintainability-improvements)
+- [사용자 경험 개선](#ux)
+
+<br/><br/>
+
+---
+
+# <span id = "install">👨🏻‍🔧 설치 및 실행</span>
 
 ## 설치
 
@@ -63,7 +79,7 @@ Password : test123123!
 
 ---
 
-# 🪧 프로젝트 소개
+# <span id = "introduce">🪧 프로젝트 소개</span>
 
 - 12st는 다양한 Brand의 상품을 한 곳에 모아 놓은 E-Commerce Platform 웹 애플리케이션으로 기존의 팀 프로젝트를 리팩토링한 프로젝트입니다.
 - 프로젝트의 상품 데이터는 11번가의 상품 데이터 오픈 API를 가공하여 사용합니다.
@@ -80,7 +96,7 @@ Password : test123123!
 
 ---
 
-# ⚙️ 기술스택
+# <span id = "stack">⚙️ 기술스택</span>
 
 ## 프레임워크
 
@@ -129,7 +145,7 @@ Password : test123123!
 
 ---
 
-# 💁🏻‍♂️ 프레임워크 및 라이브러리 선택 이유
+# <span id = "reason">💁🏻‍♂️ 프레임워크 및 라이브러리 선택 이유</span>
 
 ## Next.js
 
@@ -317,7 +333,6 @@ const response = await fetch(
 
 <img width="397" alt="RTK vs TanStack" src="https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/a9eb20b9-2bc8-4499-b0b8-01b16d4aa8e9">
 
-
 두 라이브러리 모두 유사한 기능을 제공하지만, 차이점도 존재합니다.
 
 - `RTK Query`는 선언적 API 정의를 사용하는 반면, `TanStack-Query`는 사용시 선언적 또는 내부적으로 API를 정의합니다. 이는 `TanStack-Query`가 더 유연하게 API 호출을 구성할 수 있음을 의미합니다.
@@ -389,7 +404,7 @@ SSR 관점에서 중요한 건 런타임에 스타일시트를 생성하지 않�
 
 ---
 
-# 📂 디렉토리 구조
+# <span id = "directory">📂 디렉토리 구조</span>
 
 ```plaintext
 ├── 📂 app ✅ App Directory
@@ -487,20 +502,224 @@ SSR 관점에서 중요한 건 런타임에 스타일시트를 생성하지 않�
 
 ---
 
-## <span id="ux">🧑🏻‍💻 사용자 경험 개선</span>
+# <span id ="maintainability-improvements">🔧 유지보수성 개선</span>
 
-<details>
-<summary>사용자 경험 개선 펼쳐보기</summary>
+앞서 언급한 Next.js의 `File-Based Routing`과 지역성의 원칙을 고려한 디렉토리 구조와 `TypeScript` 적용 외에도 유지 보수성 개선을 위해 많은 고민을 했습니다.
 
-### SSR Hydration
+## `액션`과 `계산`을 분리하고 `SRP` 개념을 적용
 
-![SSR](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/e53835a6-3d9d-41bd-8bf7-763fc2608989)
+```
+🚀 주소 정보 가공
+export const parseAddressFromCheckoutFormEvent = (formData: FormData) => {
+  return {
+    deliveryName: formData.get("deliveryName") as string,
+    recipient: formData.get("recipient") as string,
+    zipcode: formData.get("zipcode") as string,
+    address: formData.get("address") as string,
+    additionalAddress: formData.get("additionalAddress") as string,
+    phone1: formData.get("phone1") as string,
+    phone2: formData.get("phone2") as string,
+    defalutAddressRegistration: formData.get("defalutAddressRegistration") as
+      | "on"
+      | null,
+  }
+}
 
-- home
-- bestProductList
-- arrivalProductList
-- topSaleProductList
-- categoryManagement
+🚀 배송 메모 정보 가공
+export const parseMemoFromCheckoutFormEvent = (formData: FormData) => {
+  const selectedDeliveryMemo = formData.get("deliveryMemo-select")
+
+  if (!selectedDeliveryMemo)
+    return {
+      deliveryMemo: null,
+    }
+
+  if (selectedDeliveryMemo === "직접입력")
+    return {
+      deliveryMemo: formData.get("deliveryMemo-direct") as string,
+    }
+
+  return {
+    deliveryMemo: selectedDeliveryMemo,
+  }
+}
+
+🚀 구매 약관 정보 가공
+export const parseClauseFromCheckoutFormEvent = (
+  event: FormEvent<HTMLFormElement>
+) => {
+  const formData = new FormData(event.currentTarget)
+
+  return {
+    collectionOfUserInfo: formData.get("collectionOfUserInfo") as string,
+    provisionOfUserInfo: formData.get("provisionOfUserInfo") as string,
+    paymentAgencyClause: formData.get("paymentAgencyClause") as string,
+  }
+}
+```
+
+`계산` 함수인 `formData` 가공 함수가 단일책임원칙에 부합하기 위해 한 번에 모든 `formData`를 가공하는 것이 아닌 주소 정보, 배송 메모 정보, 구매 약관 정보 등으로 각 관심사에 해당하는 데이터를 가공하도록 했습니다.
+
+```
+export const validCheckFromCheckoutFormEvent = (formData: FormData) => {
+  const { additionalAddress, address, phone1, recipient } =
+    parseAddressFromCheckoutFormEvent(formData)
+
+
+  if (!nameValidator(recipient)) {
+    return {
+      isValid: false,
+      message: "올바른 수령인 이름을 입력해주세요.",
+    }
+  }
+
+  if (!address) {
+    return {
+      isValid: false,
+      message: "배송지 주소를 입력해주세요.",
+    }
+  }
+
+  if (!additionalAddressValidator(additionalAddress)) {
+    return {
+      isValid: false,
+      message: "올바른 배송지 상세 주소를 입력해주세요.",
+    }
+  }
+
+  if (!phoneValidator(phone1)) {
+    return {
+      isValid: false,
+      message: "올바른 연락처를 입력해주세요.",
+    }
+  }
+
+  return {
+    isValid: true,
+  }
+}
+```
+
+`submit` 전 유효성 검사 함수를 통해 가공된 데이터의 유효성을 검사를 진행합니다.
+
+유효성 검사 함수도 `계산` 함수로 만들기 위해 유효성에 대한 결과를 반환합니다. 해당 함수를 통해 Client에서 유효성 검사 진행 후 Mutation 함수를 실행시킵니다.
+
+```
+const handleCheckoutSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    const { isValid, message } = handleCheckoutValidCheck(
+      event,
+      totalPriceOfCheckedProduct,
+      discountedPriceWithCoupon
+    )
+
+    if (!isValid && message !== undefind) {
+
+      🚀 isValid가 false 경우 Feedback modal
+      showFeedbackModalWithContent(message)
+
+      return
+    }
+
+  ... 🚀 isValid가 true일 경우 Mutation
+
+  }
+```
+
+앞서 생성한 `formData` 가공 함수는 유효성 검사 함수에서만 사용하는 것이 아닌 api route에서도 사용합니다. 또한 api route에서도 `formData`에 대한 유효성 검사를 한번 더 진행하기 때문에 유효성 검사 함수를 그대로 사용합니다.
+
+```
+// api route
+
+export async function POST(request: NextRequest) {
+
+  ... 생략
+
+  // 🚀 유효성 검사 함수
+  const { isValid, message } = validCheckFromCheckoutFormEvent(formData)
+
+  if (!isValid) {
+    return NextResponse.json({
+      status: 401,
+      error: message,
+    })
+  }
+
+  ... 🚀 form data 가공 함수
+
+  ... 생략
+}
+```
+
+이를 통해 많은 중복 코드가 제거되었습니다.
+
+만약 유효성 검사 로직이 추가되거나 수정된다면 유효성 검사 함수만 수정해주거나 갈아끼우면 되기때문에 유지보수성 측면에서 큰 개선이 되었습니다.
+
+무한 스크롤 기능에도 `SRP` 개념을 적용해주었습니다.
+
+```
+🚀 상품 리스트 무한 스크롤
+
+export const useProductListInfinityQuery = ({
+  queryKey,
+  promiseFn,
+  cacheTime = 60 * 60 * 1000,
+  staleTime = 60 * 60 * 1000,
+  initialData,
+}: ICustomInfinityQuery) => {
+  const { data, fetchNextPage, hasNextPage, isLoading, isFetching } =
+    useInfiniteQuery(queryKey, ({ pageParam = 1 }) => promiseFn(pageParam), {
+      getNextPageParam: (lastPage, pages) => {
+        if (lastPage.productList.length < 12) return false
+
+        return pages.length + 1
+      },
+      staleTime,
+      cacheTime,
+      initialData: !initialData
+        ? undefined
+        : {
+            pages: [
+              {
+                productList: initialData.productList,
+                totalCount: initialData.totalCount,
+              },
+            ],
+            pageParams: [undefined],
+          },
+    })
+
+  🚀 observer 관심사 분리
+  const { loadMoreRef } = useInfinityScrollIntersectionObserver({
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+  })
+
+  ...
+
+```
+
+상품 리스트 InfiniteQuery에서 `observer`를 관리하는 hook을 별도로 만들어 주어
+
+상품 리스트 InfiniteQuery는 api 호출과 응답만 관리하도록 해주어 `useProductListInfinityQuery` hook을 사용하지 않고 다른 InfiniteQuery에서도 재사용할 수 있도록 해주었습니다.
+
+</br></br>
+
+---
+
+# <span id ="ux">🧑🏻‍💻 사용자 경험 개선</span>
+
+## SSR Hydration
+
+기존 프로젝트의 경우 상품 리스트 페이지가 렌더링 될 때 아래의 단계를 거쳐야 했습니다.
+
+1. 첫 페이지 렌더링 Loading UI
+2. 데이터 fetch 시 Skeleton UI
+3. 상품 리스트 렌더링 완료
+
+이 과정에서 사용자는 2번의 Loading을 기다려야 하는 문제점으로 인해 사용자 경험이 감소되었습니다.
 
 ```
 // prefetchQuery
@@ -522,13 +741,13 @@ const ArrivalProductListPage = async () => {
 }
 ```
 
-위의 상품 리스트를 렌더링하는 페이지들에 TanStack Query의 `prefetchQuery`를 사용하여 상품의 데이터를 Pre-Fetching합니다.
+상품 리스트를 렌더링하는 페이지들에 TanStack-Query의 `prefetchQuery`를 사용하여 상품의 데이터를 Pre-Fetching합니다.
 
-Loading UI가 아닌 상품들을 바로 확인할 수 있도록 하여 사용자 경험을 개선할 수 있도록 해주었습니다.
+Skeleton UI가 아닌 상품들을 바로 확인할 수 있도록 하여 Loading을 기다려야하는 2번째 단계를 제거하여 첫 페이지 렌더링 이후 바로 상품 리스트를 확인할 수 있도록 해주었습니다.
 
 </br></br>
 
-### 명확한 Feedback
+## 명확한 Feedback
 
 ![feedback](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/58521ca2-0c6a-4a53-a038-e4ca92a9bf72)
 
@@ -536,41 +755,328 @@ Loading UI가 아닌 상품들을 바로 확인할 수 있도록 하여 사용�
 
 애플리케이션의 Feedback 유형은 아래와 같습니다.
 
-- `mutation`에 필요한 사용자 입력값에 대한 유효성이 미충족일 경우 상세 Feedback 전달
-- 특정 단계를 건너뛰고 URL을 통해 특정 기능에 접근 시 Feedback 전달 후 Route 모달 마운트
-- `mutation` 결과에 대한 Feedback 전달 ( Success - 200, Fail - 401, 404, 500 )
+</br>
+
+### `mutation`에 필요한 사용자 입력값에 대한 유효성이 미충족일 경우 상세 Feedback 전달
+
+```
+const handleCheckoutSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    const { isValid, message } = handleCheckoutValidCheck(
+      event,
+      totalPriceOfCheckedProduct,
+      discountedPriceWithCoupon
+    )
+
+    if (!isValid && message !== undefind) {
+
+      🚀 isValid가 false 경우 Feedback modal
+      showFeedbackModalWithContent(message)
+
+      return
+    }
+
+  ...
+
+  }
+```
+
+앞서 생성한 유효성 검사 함수를 이용해서 `valid`가 false일 경우 `message`를 Feedback Modal을 통해 사용자에게 보여줍니다.
+
+</br>
+
+### 특정 단계를 건너뛰고 URL을 통해 특정 기능에 접근 시 Feedback 전달 후 Route Modal 마운트
+
+```
+useEffect(() => {
+  if (checkoutPendingProductList.length === 0) {
+    showFeedbackModalWithContent(
+      "결제 상품이 존재하지 않아 장바구니로 이동합니다."
+    )
+    routeTo(ROUTE.CART)
+  }
+}, [checkoutPendingProductList])
+```
+
+만약 사용자가 장바구니 페이지나 상품 상세 페이지에서 결제하기 button을 클릭하고 결제 페이지로 이동한 것이 아닌 `URL`을 직접 입력해 결제 페이지도 이동한 경우 Feedback 전달 후 Route되도록 했습니다.
+
+</br>
+
+### `mutation` 결과에 대한 Feedback 전달 ( Success - 200, Fail - 401, 404, 500 )
+
+```
+export async function POST(request: Request) {
+
+  ...
+
+  if (!accessToken || !verifyAccessToken(accessToken)) {
+    return NextResponse.json({
+      status: 401,
+      error: "유효하지 않은 AccessToken입니다.",
+    })
+  }
+
+ ...
+
+  const { valid, message } = validCheckProductInfo(productInfo)
+
+  if (!valid) {
+    return NextResponse.json({
+      status: 401,
+      error: message,
+    })
+  }
+
+  ...
+
+    return NextResponse.json({
+      status: 200,
+    })
+  } catch (error: unknown) {
+    throw error
+  }
+}
+```
+
+api route의 Response 객체에 담긴 `error`에 포함된 상세 Feedback을 사용자에게 보여줍니다.
+
+</br>
+
 - `mutation`이 진행 중일 경우 Loading UI, Cursor-Not-Allowed, BackGround Color 변경 등을 이용
+
+```
+const LoadingButton = ({
+  className,
+  isLoading,
+  isDisabled,
+  onClick,
+  content,
+  spinnerSize = "md",
+  type = "button",
+}: ILoadingButton) => {
+  const loadingSpinnerSize =
+    spinnerSize === "sm"
+      ? { height: "h-[26px]", width: "w-[26px]" }
+      : { height: "h-[26px]", width: "w-[26px]" }
+
+  return (
+    <Button
+      type={type}
+      onClick={onClick}
+      isDisabled={isLoading || isDisabled}
+      content={
+        isLoading ? (
+          <Loading spinnerSize={loadingSpinnerSize} isFrame={false} />
+        ) : (
+          content
+        )
+      }
+      classNames={className}
+    />
+  )
+}
+```
+
+모든 submit button에 `mutation`의 `isLoading`이 true일 경우 spinner UI가 렌더링 되도록 해주었습니다.
+
+이를 통해 사용자가 자신의 Action의 진행 상태를 명확하게 알 수 있도록 해주었습니다.
+
+### 실시간 유효성 검사 결과 확인
 
 ![feedback2](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/3fdc463e-e29c-4c45-85f9-e79d4cbfda98)
 
-회원가입 페이지에서는 실시간 유효성 검사 및 피드백에 대한 결과를 확인할 수 있도록 하여 Placeholder 내용을 확인하지 않더라도 간편하게 입력값이 옳바른지 확인할 수 있도록 했습니다.
+사용자 입력값을 관리하는 `useUserInput` hook을 사용해 사용자에게 실시간 피드백을 전달합니다.
+
+```
+  const {
+    value: emailInputValue,
+    handleValueChange: handleEmailInputValueChange,
+    handleInputBlur: handleEmailInputBlur,
+    hasError: hasErrorEmail,
+    isValid: isEmailValid,
+    reset,
+  } = useUserInput(emailValidator)
+```
+
+유효성 검사 함수 `emailValidator`는 submit 전 유효성 검사에서 사용하는 함수와 동일하기 때문에 이를 이용해 사용자에게 `isValid`가 true가 되어 `mutation`이 가능하다고 실시간으로 피드백을 전달하도록 했습니다.
+
+```
+<SignUpFeedback
+  isValid={isEmailValid}
+  content="example@example.com 형식의 이메일"
+/>
+```
 
 </br></br>
 
-### Layout Shift 제거
+## Layout Shift 제거
 
-
 ![layoutshift](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/3fc3e32a-69c4-4f8a-927f-98617b52a896)
+
+```
+const { productListInCart, isLoading } = useGetProductListInCartQuery()
+
+🚀 isLoading이 true일 경우 Skeleton UI 렌더링
+if (isLoading) {
+  return <SkeletonProductListInCart />
+}
+```
 
 TanStack Query의 `prefetchQuery`를 사용하지 않는 경우 Skeleton UI를 통해 Layout Shift를 제거했습니다.
 
 </br></br>
 
-### Infinity Scroll
+## Infinity Scroll
 
 ![infinity](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/13bbc450-fb60-46e4-9154-491bad8e80e1)
 
 상품 리스트 페이지는 끊김 없는 상품 탐색을 위해 TanStack Query의 `useInfiniteQuery`와 `IntersectionObserver`를 사용하여 Infinity Scroll를 구현했습니다.
 
+```
+export const useProductListInfinityQuery = ({
+  queryKey,
+  promiseFn,
+  cacheTime = 60 * 60 * 1000,
+  staleTime = 60 * 60 * 1000,
+  initialData,
+}: ICustomInfinityQuery) => {
+  const { showFeedbackModalWithContent } = useFeedbackModal()
+
+  const { data, fetchNextPage, hasNextPage, isLoading, isFetching } =
+    useInfiniteQuery(queryKey, ({ pageParam = 1 }) => promiseFn(pageParam), {
+      getNextPageParam: (lastPage, pages) => {
+        if (lastPage.productList.length < 12) return false
+
+        return pages.length + 1
+      },
+
+      ... options
+
+      initialData: !initialData
+        ? undefined
+        : {
+            pages: [
+              {
+                productList: initialData.productList,
+                totalCount: initialData.totalCount,
+              },
+            ],
+            pageParams: [undefined],
+          },
+    })
+
+  const { loadMoreRef } = useInfinityScrollIntersectionObserver({
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+  })
+
+  const isLoadMoreFetching = isFetching && hasNextPage
+
+  return {
+    data,
+    isLoading,
+    isLoadMoreFetching,
+    loadMoreRef,
+  }
+}
+
+```
+
+`IntersectionObserver` API를 사용해 `loadMoreRef`의 가시성 변화를 감지하도록 해주었습니다.
+
+```
+  <FourGridProductList className="mt-[50px]">
+    {productList?.pages?.flatMap((group) =>
+      group.productList.map((product) => {
+        return (
+          <ProductCard
+            key={`${sectionClassification}-product-${product.id}`}
+            productInfo={product}
+            isPriority
+          />
+        )
+      })
+    )}
+
+    <div ref={loadMoreRef} />
+  </FourGridProductList>
+```
+
+`loadMoreRef`가 View Port에 나타날 경우 `useInfiniteQuery`의 함수 `fetchNextPage`가 실행되어 사용자는 끊임 없는 상품 탐색이 가능해집니다.
+
 </br></br>
 
-### Pagination / Pannel
+## Pannel
 
 ![pannel](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/a8339f0e-6cbd-4b79-87ed-817f337075ac)
 
-![스크린샷 2024-02-19 오후 5 17 54](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/55fb1f2e-4954-43f6-ab8c-166d6a716941)
+정보 밀도가 높은 Page의 경우 Pannel을 적용하여 한정된 공간에서 사용자의 사용 효율이 증가될 수 있도록 했습니다.
 
-정보 밀도가 높은 Mypage의 경우 Pagination과 Pannel을 적용하여 한정된 공간에서 사용자의 사용 효율이 증가될 수 있도록 했습니다.
+```
+// 회원 정보 수정 페이지
+
+const ModificationOfUserInfoSection = () => {
+  const { handleTabValueChange, tabValue } = useTabValueHandler()
+
+  const tabs = ["회원정보", "기본배송지 수정", "약관동의", "회원탈퇴"]
+
+  // 각 Tab Pannel 별 렌더링할 컴포넌트
+  const modificationOfUserInfoComponents = [
+    <UserInfo key="mypage-userInfo-modification__userInfo" />,
+    <DeliverInfoModification key="mypage-userInfo-modification__deliveryInfo" />,
+    <ClauseModification key="mypage-userInfo-modification__clause" />,
+    <MemberTermination key="mypage-userInfo-modification__memberTerminate" />,
+  ]
+
+  return (
+    <section>
+      <SectionTitle title="회원정보 수정" />
+
+      <CustomTabs
+        id="cancelList"
+        onChangeTabs={handleTabValueChange}
+        tabs={tabs}
+        tabsValue={tabValue}
+      />
+
+      {modificationOfUserInfoComponents.map((modificationEl, index) => (
+        <Fragment key={modificationEl.key}>
+          <CustomTabPanel value={tabValue} index={index}>
+            {modificationEl}
+          </CustomTabPanel>
+        </Fragment>
+      ))}
+    </section>
+  )
+}
+```
+
+사용자는 선택한 Tab에 해당하는 컴포넌트만 확인할 수 있도록 필요한 정보만 노출되도록 했습니다.
+
+위와 같이 Pannel을 사용하는 경우는 많은 데이터를 사용자에게 보여주어야 합니다. 때문에 페이지 로딩 시에도 비교적 긴 시간이 소요됩니다.
+
+```
+const DynamicSignUpPhoneVerificationInput = dynamic(
+  () => import("./SignUpPhoneVerificationInput"),
+  { ssr: false }
+)
+
+const DynamicSignUpEmailInput = dynamic(() => import("./SignUpEmailInput"), {
+  ssr: false,
+})
+
+const DynamicSignUpNameInput = dynamic(() => import("./SignUpNameInput"), {
+  ssr: false,
+})
+const DynamicSignUpPasswordInput = dynamic(
+  () => import("./SignUpPasswordInput"),
+  { ssr: false }
+)
+```
+
+첫 Tab을 제외한 나머지 Tab의 컴포넌트는 동적으로 렌더링되도록 해주어 페이지 로딩 시간이 개선되도록 해주었습니다.
 
 </br></br>
 
@@ -578,35 +1084,17 @@ TanStack Query의 `prefetchQuery`를 사용하지 않는 경우 Skeleton UI를 �
 
 ![mediaquery](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/b68fbaab-444b-4104-813c-cb19d6ecc28c)
 
-- 479px 이하
-- 480px ~ 767px
-- 768px ~ 1023px
-- 1024px 이상
+```
+// tailwin.config.js
+
+screens: {
+  sm: { max: "479px" },
+  md: { min: "480px", max: "767px" },
+  lg: { min: "768px", max: "1023px" },
+  xl: { min: "1024px" },
+},
+```
 
 4가지의 Media Query 적용을 통해 다양한 디바이스에서 웹 애플리케이션을 보다 편리하게 이용할 수 있도록 해주었습니다.
-
-</details>
-
-</br></br>
-
-## <span id="performance">🔧 성능 개선 및 최적화</span>
-
-<details>
-<summary>성능 개선 및 최적화 펼쳐보기</summary>
-
-<a href="https://velog.io/@ish1610/Next-13-%EC%B5%9C%EC%A0%81%ED%99%94" target="_blank">성능 개선 및 최적화 블로그 게시글</a>
-
-</details>
-
-</br></br>
-
-## <span id="authentication">🔐 인증 / 인가</span>
-
-<details>
-<summary>인증 / 인가 펼쳐보기</summary>
-
-<a href="https://velog.io/@ish1610/%EC%9D%B8%EC%A6%9D-%EC%9D%B8%EA%B0%80-With-Next.js" target="_blank">인증 / 인가 블로그 게시글</a>
-
-</details>
 
 </br></br>
