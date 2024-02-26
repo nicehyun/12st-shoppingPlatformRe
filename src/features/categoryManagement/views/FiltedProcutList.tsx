@@ -12,7 +12,7 @@ const FiltedProcutList = () => {
     isLoadMoreFetching,
     productList: filtedProductList,
     loadMoreRef,
-    sectionClassification: "topSale",
+    sectionClassification: "best",
   }
 
   return <InfiniteScrollProductList {...infiniteScrollProductListProps} />
