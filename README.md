@@ -245,6 +245,7 @@ Next.js의 File-Based-Routing을 통해 프로젝트 구조의 직관성을 개�
 
 필요한 상태만 Subscribe하여 불필요한 리렌더링을 방지한다는 이점은 `Redux`에서 충분히 가능하다고 생각했습니다.
 
+<span id = "useSelector"></span>
 ```
 export const selectIsAllChecked = (state: RootState) => state.cart.isAllChecked
 
@@ -373,7 +374,7 @@ const { data, error, isLoading } = useQuery('posts', () =>
 
 </br></br>
 
-## TailwindCSS
+## <span id = "TailwindCSS">TailwindCSS</span>
 
 ![제목을-입력해주세요_-001 (1)](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/94d9e730-a2a1-4419-bd7b-ea65d22cd080)
 
