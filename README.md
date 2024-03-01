@@ -65,7 +65,7 @@ Password : test123123!
 - 프로젝트의 상품 데이터는 11번가의 상품 데이터 오픈 API를 가공하여 사용합니다.
 - RESTful API를 빠르게 모킹하기 위해 JSON Server를 사용합니다.
 - 기존의 프로젝트는 `JavaScript`를 사용했기 때문에 런타임에서 오류가 발견되는 불편함이 있었습니다. 이로 인한 불안정성을 제거하기 위해 `TypeScript`를 사용했으며, 타입 단언과 `any`를 최대한 사용하지 않았습니다.
-- 초기 페이지 로딩 시간 개선을 위해 `CSR` 프로젝트를 `SSR`로 변경했으며, `CSR` 컴포넌트의 경우 <a href="https://velog.io/@ish1610/Next-13-%EC%B5%9C%EC%A0%81%ED%99%94#nextdynamic" target="_blank">First Load JS의 크기를 감소시키기 위해 `Next Dynamic Import`를 사용하여 초기 페이지 로딩 시간이 개선</a>되었습니다.
+- 초기 페이지 로딩 시간 개선을 위해 `CSR` 프로젝트를 `SSR`로 변경했으며, `CSR` 컴포넌트의 경우 <a href="https://velog.io/@ish1610/Next-13-optimization#nextdynamic" target="_blank">First Load JS의 크기를 감소시키기 위해 `Next Dynamic Import`를 사용하여 초기 페이지 로딩 시간이 개선</a>되었습니다.
 - <a href="https://velog.io/@ish1610/%ED%95%A8%EC%88%98%ED%98%95-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-Feat.-SRP" target="_blank">함수형 프로그래밍에 `SRP` 개념을 적용</a>하여 컴포넌트와 함수의 재사용성과 유지보수성이 향상되었습니다.
 - `Single source of truth`개념에 어긋나는 `Server State`를 가져와 `Client State`로 관리했던 문제를 해결하기 위해 `Client State`는 `Redux`로, `Server State`는 `TanStack Query`로 관리합니다.
 - 인증/인가 시 보안성 향상을 위해 <a href="https://velog.io/@ish1610/%EC%9D%B8%EC%A6%9D-%EC%9D%B8%EA%B0%80-With-Next.js" target="_blank">Refresh Token Rotation을 적용</a>했습니다.
@@ -127,7 +127,7 @@ Password : test123123!
 
 # <span id = "reason">💁🏻‍♂️ 프레임워크 및 라이브러리 선택 이유</span>
 
-<a href="https://velog.io/@ish1610/%ED%94%84%EB%A0%88%EC%9E%84%EC%9B%8C%ED%81%AC-%EB%B0%8F-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC-%EC%84%A0%ED%83%9D" target="_blank">프레임워크 및 라이브러리 선택 이유 게시글</a>
+<a href="https://velog.io/@ish1610/library-select-reason" target="_blank">프레임워크 및 라이브러리 선택 이유 게시글</a>
 
 </br></br>
 
