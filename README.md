@@ -45,26 +45,6 @@ Password : test123123!
 > npm i
 ```
 
-## Middleware 수정
-
-```bash
-# middleware.ts 수정하기
-
-# Product에서 Next-Auth Session에 저장된 Token의 cookieName은 __Secure-next-auth.session-token입니다.
- const token = await getToken({
-    req: request,
-    secret: secret,
-    cookieName: "__Secure-next-auth.session-token",
-  })
-
-# Development에서 사용 시 cookieName을 next-auth.session-token으로 수정해주세요.
-  const token = await getToken({
-    req: request,
-    secret: secret,
-    cookieName: "next-auth.session-token",
-  })
-```
-
 ## 실행
 
 ```bash
@@ -246,7 +226,8 @@ Next.js의 File-Based-Routing을 통해 프로젝트 구조의 직관성을 개�
 필요한 상태만 Subscribe하여 불필요한 리렌더링을 방지한다는 이점은 `Redux`에서 충분히 가능하다고 생각했습니다.
 
 <span id = "useSelector"></span>
-```
+
+```typescript
 export const selectIsAllChecked = (state: RootState) => state.cart.isAllChecked
 
 export const selectCheckedProductList = (state: RootState) =>
@@ -261,7 +242,7 @@ export const selectPendingRemovalProduct = (state: RootState) =>
 
 `Recoil`의 `Selctor`를 사용한 간단한 비동기 처리와 Cache 기능도 강력한 이점 중 하나라고 생각합니다.
 
-```
+```typescript
 // Next 13 fetch API
 
 const response = await fetch(
@@ -271,7 +252,7 @@ const response = await fetch(
       "Content-Type": "application/json",
       authorization,
     },
-    <!-- 🚀 Cache Time 설정 -->
+    // 🚀 Cache Time 설정
     next: { revalidate: 3600 },
   }
 )
@@ -297,7 +278,7 @@ const response = await fetch(
 
 앞서 언급했든 Next.js 13에서 제공하는 확장된 `fetch` API에서 응답을 보내는 api call에 대해서 Memoization 기능을 제공합니다.
 
-```
+```typescript
 // Next 13 fetch API
 
 const response = await fetch(
@@ -307,7 +288,7 @@ const response = await fetch(
       "Content-Type": "application/json",
       authorization,
     },
-    <!-- 🚀 Cache Time 설정 -->
+    // 🚀 Cache Time 설정
     next: { revalidate: 3600 },
   }
 )
@@ -345,27 +326,26 @@ const response = await fetch(
 
 하지만 `TanStack-Query` API의 유연성, 캐시 제어의 세밀함, 무한 스크롤링 지원 등의 이점 또한 매우 크게 느껴졌습니다.
 
-```
-🚀 RTK Query
+```typescript
+// 🚀 RTK Query
 
 const apiSlice = createApi({
-  reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: '/api' }),
+  reducerPath: "api",
+  baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
   endpoints: (builder) => ({
     getPosts: builder.query({
-      query: () => 'posts',
+      query: () => "posts",
     }),
   }),
-});
+})
 
-export const { useGetPostsQuery } = apiSlice;
+export const { useGetPostsQuery } = apiSlice
 
-🚀 TanStack-Query
+// 🚀 TanStack-Query
 
-const { data, error, isLoading } = useQuery('posts', () =>
-  fetch('/api/posts').then(res => res.json())
-);
-
+const { data, error, isLoading } = useQuery("posts", () =>
+  fetch("/api/posts").then((res) => res.json())
+)
 ```
 
 위의 간단한 예시 코드에서 알 수 있듯이 `TanStack-Query`는 `Server State` 관리를 위한 더 단순하고 직관적인 API를 제공하는 반면, `RTK Query`는 `Redux`의 전체적인 아키텍처 내에서 작동합니다. 때문에 개발자 경험 측면에서는 `TanStack-Query`가 더 이점이 있다 판단했습니다.
@@ -509,8 +489,8 @@ SSR 관점에서 중요한 건 런타임에 스타일시트를 생성하지 않�
 
 ## `액션`과 `계산`을 분리하고 `SRP` 개념을 적용
 
-```
-🚀 주소 정보 가공
+```typescript
+// 🚀 주소 정보 가공
 export const parseAddressFromCheckoutFormEvent = (formData: FormData) => {
   return {
     deliveryName: formData.get("deliveryName") as string,
@@ -526,7 +506,7 @@ export const parseAddressFromCheckoutFormEvent = (formData: FormData) => {
   }
 }
 
-🚀 배송 메모 정보 가공
+// 🚀 배송 메모 정보 가공
 export const parseMemoFromCheckoutFormEvent = (formData: FormData) => {
   const selectedDeliveryMemo = formData.get("deliveryMemo-select")
 
@@ -545,7 +525,7 @@ export const parseMemoFromCheckoutFormEvent = (formData: FormData) => {
   }
 }
 
-🚀 구매 약관 정보 가공
+// 🚀 구매 약관 정보 가공
 export const parseClauseFromCheckoutFormEvent = (
   event: FormEvent<HTMLFormElement>
 ) => {
@@ -561,11 +541,10 @@ export const parseClauseFromCheckoutFormEvent = (
 
 `계산` 함수인 `formData` 가공 함수가 단일책임원칙에 부합하기 위해 한 번에 모든 `formData`를 가공하는 것이 아닌 주소 정보, 배송 메모 정보, 구매 약관 정보 등으로 각 관심사에 해당하는 데이터를 가공하도록 했습니다.
 
-```
+```typescript
 export const validCheckFromCheckoutFormEvent = (formData: FormData) => {
   const { additionalAddress, address, phone1, recipient } =
     parseAddressFromCheckoutFormEvent(formData)
-
 
   if (!nameValidator(recipient)) {
     return {
@@ -605,37 +584,34 @@ export const validCheckFromCheckoutFormEvent = (formData: FormData) => {
 
 유효성 검사 함수도 `계산` 함수로 만들기 위해 유효성에 대한 결과를 반환합니다. 해당 함수를 통해 Client에서 유효성 검사 진행 후 Mutation 함수를 실행시킵니다.
 
-```
+```typescript
 const handleCheckoutSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
+  event.preventDefault()
 
-    const { isValid, message } = handleCheckoutValidCheck(
-      event,
-      totalPriceOfCheckedProduct,
-      discountedPriceWithCoupon
-    )
+  const { isValid, message } = handleCheckoutValidCheck(
+    event,
+    totalPriceOfCheckedProduct,
+    discountedPriceWithCoupon
+  )
 
-    if (!isValid && message !== undefind) {
+  if (!isValid && message !== undefind) {
+    // 🚀 isValid가 false 경우 Feedback modal
+    showFeedbackModalWithContent(message)
 
-      🚀 isValid가 false 경우 Feedback modal
-      showFeedbackModalWithContent(message)
-
-      return
-    }
-
-  ... 🚀 isValid가 true일 경우 Mutation
-
+    return
   }
+
+  // ... 🚀 isValid가 true일 경우 Mutation
+}
 ```
 
 앞서 생성한 `formData` 가공 함수는 유효성 검사 함수에서만 사용하는 것이 아닌 api route에서도 사용합니다. 또한 api route에서도 `formData`에 대한 유효성 검사를 한번 더 진행하기 때문에 유효성 검사 함수를 그대로 사용합니다.
 
-```
+```typescript
 // api route
 
 export async function POST(request: NextRequest) {
-
-  ... 생략
+  // ... 생략
 
   // 🚀 유효성 검사 함수
   const { isValid, message } = validCheckFromCheckoutFormEvent(formData)
@@ -647,9 +623,9 @@ export async function POST(request: NextRequest) {
     })
   }
 
-  ... 🚀 form data 가공 함수
+  // ... 🚀 form data 가공 함수
 
-  ... 생략
+  // ... 생략
 }
 ```
 
@@ -659,8 +635,8 @@ export async function POST(request: NextRequest) {
 
 무한 스크롤 기능에도 `SRP` 개념을 적용해주었습니다.
 
-```
-🚀 상품 리스트 무한 스크롤
+```typescript
+// 🚀 상품 리스트 무한 스크롤
 
 export const useProductListInfinityQuery = ({
   queryKey,
@@ -691,7 +667,7 @@ export const useProductListInfinityQuery = ({
           },
     })
 
-  🚀 observer 관심사 분리
+  // 🚀 observer 관심사 분리
   const { loadMoreRef } = useInfinityScrollIntersectionObserver({
     fetchNextPage,
     hasNextPage,
@@ -722,7 +698,7 @@ export const useProductListInfinityQuery = ({
 
 이 과정에서 사용자는 2번의 Loading을 기다려야 하는 문제점으로 인해 사용자 경험이 감소되었습니다.
 
-```
+```typescript
 // prefetchQuery
 
 const ArrivalProductListPage = async () => {
@@ -760,27 +736,25 @@ Skeleton UI가 아닌 상품들을 바로 확인할 수 있도록 하여 Loading
 
 ### `mutation`에 필요한 사용자 입력값에 대한 유효성이 미충족일 경우 상세 Feedback 전달
 
-```
+```typescript
 const handleCheckoutSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
+  event.preventDefault()
 
-    const { isValid, message } = handleCheckoutValidCheck(
-      event,
-      totalPriceOfCheckedProduct,
-      discountedPriceWithCoupon
-    )
+  const { isValid, message } = handleCheckoutValidCheck(
+    event,
+    totalPriceOfCheckedProduct,
+    discountedPriceWithCoupon
+  )
 
-    if (!isValid && message !== undefind) {
+  if (!isValid && message !== undefind) {
+    // 🚀 isValid가 false 경우 Feedback modal
+    showFeedbackModalWithContent(message)
 
-      🚀 isValid가 false 경우 Feedback modal
-      showFeedbackModalWithContent(message)
-
-      return
-    }
-
-  ...
-
+    return
   }
+
+  // ...
+}
 ```
 
 앞서 생성한 유효성 검사 함수를 이용해서 `valid`가 false일 경우 `message`를 Feedback Modal을 통해 사용자에게 보여줍니다.
@@ -789,7 +763,7 @@ const handleCheckoutSubmit = (event: FormEvent<HTMLFormElement>) => {
 
 ### 특정 단계를 건너뛰고 URL을 통해 특정 기능에 접근 시 Feedback 전달 후 Route Modal 마운트
 
-```
+```typescript
 useEffect(() => {
   if (checkoutPendingProductList.length === 0) {
     showFeedbackModalWithContent(
@@ -806,10 +780,10 @@ useEffect(() => {
 
 ### `mutation` 결과에 대한 Feedback 전달 ( Success - 200, Fail - 401, 404, 500 )
 
-```
+```typescript
 export async function POST(request: Request) {
 
-  ...
+  // ...
 
   if (!accessToken || !verifyAccessToken(accessToken)) {
     return NextResponse.json({
@@ -818,7 +792,7 @@ export async function POST(request: Request) {
     })
   }
 
- ...
+//  ...
 
   const { valid, message } = validCheckProductInfo(productInfo)
 
@@ -829,7 +803,7 @@ export async function POST(request: Request) {
     })
   }
 
-  ...
+  // ...
 
     return NextResponse.json({
       status: 200,
@@ -846,7 +820,7 @@ api route의 Response 객체에 담긴 `error`에 포함된 상세 Feedback을 �
 
 - `mutation`이 진행 중일 경우 Loading UI, Cursor-Not-Allowed, BackGround Color 변경 등을 이용
 
-```
+```typescript
 const LoadingButton = ({
   className,
   isLoading,
@@ -902,7 +876,7 @@ const LoadingButton = ({
 
 유효성 검사 함수 `emailValidator`는 submit 전 유효성 검사에서 사용하는 함수와 동일하기 때문에 이를 이용해 사용자에게 `isValid`가 true가 되어 `mutation`이 가능하다고 실시간으로 피드백을 전달하도록 했습니다.
 
-```
+```typescript
 <SignUpFeedback
   isValid={isEmailValid}
   content="example@example.com 형식의 이메일"
@@ -915,10 +889,10 @@ const LoadingButton = ({
 
 ![layoutshift](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/3fc3e32a-69c4-4f8a-927f-98617b52a896)
 
-```
+```typescript
 const { productListInCart, isLoading } = useGetProductListInCartQuery()
 
-🚀 isLoading이 true일 경우 Skeleton UI 렌더링
+// 🚀 isLoading이 true일 경우 Skeleton UI 렌더링
 if (isLoading) {
   return <SkeletonProductListInCart />
 }
@@ -934,7 +908,7 @@ TanStack Query의 `prefetchQuery`를 사용하지 않는 경우 Skeleton UI를 �
 
 상품 리스트 페이지는 끊김 없는 상품 탐색을 위해 TanStack Query의 `useInfiniteQuery`와 `IntersectionObserver`를 사용하여 Infinity Scroll를 구현했습니다.
 
-```
+```typescript
 export const useProductListInfinityQuery = ({
   queryKey,
   promiseFn,
@@ -987,22 +961,22 @@ export const useProductListInfinityQuery = ({
 
 `IntersectionObserver` API를 사용해 `loadMoreRef`의 가시성 변화를 감지하도록 해주었습니다.
 
-```
-  <FourGridProductList className="mt-[50px]">
-    {productList?.pages?.flatMap((group) =>
-      group.productList.map((product) => {
-        return (
-          <ProductCard
-            key={`${sectionClassification}-product-${product.id}`}
-            productInfo={product}
-            isPriority
-          />
-        )
-      })
-    )}
+```typescript
+<FourGridProductList className="mt-[50px]">
+  {productList?.pages?.flatMap((group) =>
+    group.productList.map((product) => {
+      return (
+        <ProductCard
+          key={`${sectionClassification}-product-${product.id}`}
+          productInfo={product}
+          isPriority
+        />
+      )
+    })
+  )}
 
-    <div ref={loadMoreRef} />
-  </FourGridProductList>
+  <div ref={loadMoreRef} />
+</FourGridProductList>
 ```
 
 `loadMoreRef`가 View Port에 나타날 경우 `useInfiniteQuery`의 함수 `fetchNextPage`가 실행되어 사용자는 끊임 없는 상품 탐색이 가능해집니다.
@@ -1015,7 +989,7 @@ export const useProductListInfinityQuery = ({
 
 정보 밀도가 높은 Page의 경우 Pannel을 적용하여 한정된 공간에서 사용자의 사용 효율이 증가될 수 있도록 했습니다.
 
-```
+```typescript
 // 회원 정보 수정 페이지
 
 const ModificationOfUserInfoSection = () => {
@@ -1058,7 +1032,7 @@ const ModificationOfUserInfoSection = () => {
 
 위와 같이 Pannel을 사용하는 경우는 많은 데이터를 사용자에게 보여주어야 합니다. 때문에 페이지 로딩 시에도 비교적 긴 시간이 소요됩니다.
 
-```
+```typescript
 const DynamicSignUpPhoneVerificationInput = dynamic(
   () => import("./SignUpPhoneVerificationInput"),
   { ssr: false }
@@ -1085,7 +1059,7 @@ const DynamicSignUpPasswordInput = dynamic(
 
 ![mediaquery](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/b68fbaab-444b-4104-813c-cb19d6ecc28c)
 
-```
+```typescript
 // tailwin.config.js
 
 screens: {
