@@ -1,8 +1,8 @@
 # 🛒 E-Commerce Application - 12st
 
-![readme-banner img 001](https://12st-shopping-platform-re-nine.vercel.app/)
+![readme-banner img 001](https://github.com/nicehyun/12st-shoppingPlatformRe/assets/85052351/88f40055-9def-4b5e-b7ac-0d9e0b2b0d37)
 
-- <a href="https://12st-shopping-platform-re-git-main-ish1610.vercel.app" target="_blank">배포 URL</a>
+- <a href="https://12st-shopping-platform-re-nine.vercel.app/" target="_blank">배포 URL</a>
 
 - <a href="https://github.com/nicehyun/12st-shoppingMall" target="_blank">리팩토링 전 프로젝트 소스 코드</a>
 
