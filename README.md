@@ -62,7 +62,7 @@ Password : test123123!
 # <span id = "introduce">🪧 프로젝트 소개</span>
 
 - 12st는 다양한 Brand의 상품을 한 곳에 모아 놓은 E-Commerce Platform 웹 애플리케이션으로 기존의 팀 프로젝트를 리팩토링한 프로젝트입니다.
-- React , Node , MySQL 로 구현한 팀 프로젝트(3인)를 리팩토링했습니다.
+- Naver Open API 상품 데이터를 활용한 E-commerce Platform입니다.
 - RESTful API를 빠르게 모킹하기 위해 JSON Server를 사용합니다.
 - 기존의 프로젝트는 `JavaScript`를 사용했기 때문에 런타임에서 오류가 발견되는 불편함이 있었습니다. 이로 인한 불안정성을 제거하기 위해 `TypeScript`를 사용했으며, 타입 단언과 `any`를 최대한 사용하지 않았습니다.
 - 초기 페이지 로딩 시간 개선을 위해 `CSR` 프로젝트를 `SSR`로 변경했으며, `CSR` 컴포넌트의 경우 <a href="https://velog.io/@ish1610/Next-13-optimization#nextdynamic" target="_blank">First Load JS의 크기를 감소시키기 위해 `Next Dynamic Import`를 사용하여 초기 페이지 로딩 시간이 개선</a>되었습니다.
